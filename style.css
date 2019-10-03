@@ -1,0 +1,634 @@
+/*########## Defaults ###############*/
+
+nav, 
+header, 
+footer { 
+    display:block;
+  }
+
+body {
+    line-height: 1;
+    margin:0;
+}
+
+label{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+p {
+    font-size:24px;
+    line-height: 1.2;
+}
+
+article p{
+    font-size:20px;
+    padding: 0px; /*we don't a margin, use padding. a margin would try to force space onto the adjacent column.*/
+}
+
+.container {
+    width: 100%;  /*ensure that the content fills up the entire page */
+    margin: auto; /*even distribution of space on the left and right side, keeping everything centered */
+    padding-top: 4%; /*creates space within the element */
+    padding-bottom: 4%;       
+}
+
+.row {
+    width:100%;
+    display:flex; /* latches onto all elements inside that have flex on it */
+    flex-wrap:wrap; /* as everything is flexing and getting smaller, wrap it all around underneath (only works when we have display flex)*/
+    align-items: center; /* takes all items in flex container and centers the content*/
+    
+}
+
+.row::after{
+    display:table; /* allows us to setup clear settings*/
+    clear:both; /* clears any floats to the right or the left*/
+    content: "";
+    
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+
+* {/*universal selector. this will control the columns so they don't become larger when the objects inside have margin*/  
+    box-sizing: border-box; /*removes the feature that additional padding and margin increases the size of an object*/
+}
+/*############# End Defaults ###########*/
+
+
+
+
+/*########### Nav Bar#################*/
+
+
+nav{
+    width:100%;
+    margin;0; 
+}
+
+nav ul {
+    background-color:#161f2e;
+    overflow: hidden; /* any elements too big to fit on screen, hide it. THis reduces the scroll bar */
+    margin:0;
+    padding:0;
+}
+
+ul.topnav li{
+    list-style:none; /*guarantees to remove the bullet points on the navbar list */
+    float:left;
+}
+
+
+ul.topnav li a{
+    display:block;
+    text-decoration: none;
+    min-height: 20px;
+    text-align: center;
+    padding: 14px;
+    text-transform: uppercase;
+    color: white;
+    font-weight:600;
+}
+
+
+ul.topnav li a:hover {
+    background-color:#ffffe6;
+    color:#161f2e;
+}
+
+ul.topnav li.dropdownIcon {
+    display:none;   
+}
+
+ul.topnav li:first-child a{
+    padding:0;
+    margin:0;
+    text-decoration:none;
+    display:block;
+    text-align:center;
+    max-height:44px; /*specify height to remove the 2pixel border underneatht he image */
+}
+
+
+ul.topnav li a img{   
+    height:44px;
+    margin:0;
+    padding:0;
+    border-style:none;
+    border-width:0;
+    border:0;
+}
+
+/*####### End Nav Bar ########*/
+
+/*########### Lecture Nav Bar#################*/
+
+i{
+    border:solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+   padding: 3px;
+    margin: 0 0 2px 0;
+}
+
+i:hover{
+    border:solid black;
+    border-width: 0 3px 3px 0;
+}
+.downArrow{
+    text-align:center;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.upArrow{
+    transform: rotate(-135deg);
+    -webkit-transform:rotate(-135deg);
+}
+
+ul.topnavLecture li.upArrowList{
+    margin:auto;
+    text-align:center;
+}
+hr.navline{
+    height:1px;
+    background-color:white;
+    padding:0;
+    margin:0;
+}
+
+ul.topnavLecture li{
+    list-style:none;
+    text-decoration:none;
+    color:white;
+    padding:3px 8px;
+}
+
+ul.topnavLecture li a{
+    display:block;
+    list-style:none;
+    text-decoration:none;
+    color:white;
+}
+
+
+ul.topnavLecture li:not(:nth-child(1)){
+        display:none;
+    }
+ul.topnavLecture li:(:nth-child(1)){
+    display:inline-block;
+    padding-bottom:3px;
+    padding-right:5px;
+}
+
+ul.topnavLecture li a:hover{
+    background-color:beige;
+    color:black;
+}
+
+ul.topnavLecture.responsive li{
+    display:block;
+}
+
+ul.topnavLecture.responsive li.upArrowList{
+    display:block;
+}
+/*########### End Lecture Nav Bar#################*/
+
+
+
+/*########### Start Article #################*/
+div.lectureWrap{
+    margin:5%;
+}
+
+div.lectureWrap h1{
+    font-size:30px;
+}
+
+div.lectureWrap p{
+    padding:0;
+}
+/*########### End Article#################*/
+
+
+
+
+
+/*####### Custom style ########*/
+
+article.aboutSection {
+    padding:10px;
+}
+
+#section-1-gradient {
+    background: grey; /*default color for browsers not supporting gradients */
+    background: -webkit-linear-gradient(#ffc61a,#ffffe6); /*safar*/
+    background: linear-gradient(#ffc61a,#ffffe6  ); /*typical*/
+    background: -o-linear-gradient(#ffc61a,#ffffe6 ); /*opera*/
+}
+
+div.leftSide-col {
+    margin-left: 30%; /* better to use a percentage than exact pixels because we have flex*/    
+}
+
+div.leftSide-col img{
+    mix-blend-mode:multiply;
+}
+div.rightSide-col {
+    margin-left: 15%; /* better to use a percentage than exact pixels because we have flex*/
+    
+}
+h1.large{ /* header tag has margins around it, paragrag and labels do not*/
+    color:grey;
+    font-size:56px;
+    margin:0;
+    line-height:70px; /* creates space between the text, better to do this than using margin with text*/
+}
+
+h1.section2Header{
+    font-size: 65px;
+    text-align:center;
+}
+
+form h2{
+    color:grey;
+    
+}
+
+input[type="text"]{ /* attribute selector*/
+    font-size:20px;
+    width: 400px; /* this sets the width of the box itself*/
+    min-width: 100px; /* no matter what, this is the min width of the input field*/
+    padding:5px;
+    border-radius:8px;
+}
+
+div.box {
+    text-align:center; /*centers not only the text, but everything in the dive box inlcluding the image*/
+    background-color: white;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 
+        0 2px 3px 0 rgba(0,0,0,.1);
+    border-radius:10px;
+    margin:20px;
+    padding: 36px 24px 40px 24px;
+    border-width: 10px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#666;
+}
+
+div.icon{
+    width:100%; /*safeguard so the image can flex with screensize if needed*/
+}
+
+div.icon img{
+    height:200px;
+    width:200px;
+    mix-blend-mode:multiply;
+}
+
+.box a{
+    font-size:32px;
+    font-weight: 700;
+    color: #161f2e;
+    background-color: #fcbf30;
+    border-radius:10px;
+    text-align:center;
+    padding:3px 10px;
+/*    min-width:100px;*/
+/*    margin: 5px auto;*/
+    text-decoration:none;
+    box-shadow: 2px 2px 2px grey, -1px -1px 1px lightgrey;
+    line-height:50px
+}
+
+.box a:hover {
+    background-color:darkgoldenrod;
+    color:white;
+}
+
+button.journey{
+    display:block;
+    margin:auto;
+}
+
+div.groupPhoto img{
+    display:block;
+    margin:auto;
+    max-height:200px;
+}
+
+div.groupPhoto p{
+    font-size:16px;
+    text-align:center;
+}
+
+footer.footingMain{
+    background-color:#666;
+    padding-left:10%;
+}
+
+footer.footingMain h1{
+    font-size:15px;
+    color: #fff;    
+}
+
+footer.footingMain ul{
+    list-style:none;
+    text-align:left;
+    padding-left:0;
+}
+
+footer.footingMain ul li{
+    color:#fff;
+    padding:0;
+    font-size: 15px;
+    line-height:1.2;
+}
+
+.videoContainer iframe{
+width:100%;
+max-width:560px;
+height:315px;
+margin:auto;
+padding-right:10px;
+;
+
+}
+
+/*####### Practice Questions #########*/
+
+div.questionBox{
+    text-align:center;
+    margin:10px auto;
+    max-width:700px;
+    box-shadow: 4px 4px 13px -1px rgba(214,210,214,1);
+    padding: 10px;
+}
+
+div.questionBox p{
+    font-size:18px;
+    text-align:left;
+}
+
+div.questionBox h1{
+    text-align:left;
+    font-size:20px;
+}
+
+div.questionBox ul{
+    padding:0;
+    margin:0;
+}
+
+div.questionBox ul li{
+    list-style:none;
+    background-color:white;
+    border-radius:5px;
+    margin:15px 0;
+    text-align:left;
+    padding:0 5px 0 0;
+    line-height:20px;
+}
+
+div.questionBox ul li a:hover{
+    background-color:#bef5f7;
+}
+
+div.questionBox ul li a{
+    border-radius:4px;
+    text-decoration:none;
+    color:black;
+    background-Color:aqua;
+    width:100%;
+    padding:3px;
+    
+    box-shadow: 2px 2px 2px -1px rgba(214,210,214,1), -1px -1px 2px -1px rgba(214,210,214,1);
+    
+}
+
+.questionSolutionButton{
+    font-size:15px;
+    border-style:solid;
+    border-width:0 0 1px 0;
+    border-color:grey;
+    border-radius:2px;
+    margin:0;
+    padding:0;
+    display:block;
+    cursor:pointer;
+    width:100%
+}
+
+.questionSolutionButton:hover{
+    background-color:aliceblue;
+}
+
+.questionSolution{
+    display:none;
+    font-size:15px;
+}
+
+.questionSolution.visible{
+    display:block;
+}
+/*####### End Practice Questions #########*/
+
+
+/*####### Mobile #########*/
+
+/*
+ @media screen and (max-width: 1200px){
+    
+    
+        .col-4, .col-7, .col-5{
+        width:100%;
+        margin:0; good practice to ensure the margin for a full desktop version doesn't get passed down to mobile
+}
+    
+    .col-6.introBanner{
+        width:100%;
+        margin:0;
+        text-align:center;
+    }
+    
+    .videoContainer{
+        text-align:center;
+        margin:20px;
+    }
+    
+    div.box{
+        text-align:center;
+        height:auto;
+        margin:20px 10%;
+        max-width:700px;
+    }
+    h1.large{
+        text-align:center;
+    }
+    
+}
+
+
+ul.topnavLecture.responsive li{
+    display:block;
+}
+*/
+
+@media screen and (max-width:1300px){
+    div.leftSide-col {
+    margin:auto; /* better to use a percentage than exact pixels because we have flex*/
+    padding-left:20px;
+    }
+}
+
+@media screen and (max-width: 1050px) { /*680 previously */
+    ul.topnav li:not(:nth-child(1)){
+        display:none;
+    }
+ul.topnav li a{
+    min-height:50px;
+    font-size:35px;
+}
+
+ul.topnav li:first-child a{
+    max-height:63px; /*specify height to remove the 2pixel border underneatht he image */
+}
+
+ul.topnav li a img{
+    height:63px
+    }
+    
+ul.topnav li.dropdownIcon {
+    display: block;
+    float: right;
+}
+
+    ul.topnav.responsive li.dropdownIcon { 
+    position: absolute;
+    top: 0;
+    right: 0;.
+    }
+
+ul.topnav.responsive {
+    position: relative; /*this makes it 100% sure the navbar doesn't shift around when it drops */
+}
+
+ul.topnav.responsive li {
+    
+    
+    display: inline; /*forces it to be in a row */
+    float: none; /*there was a previous assignment of left float, this turns it off so the blocks will be centered */
+}
+
+ul.topnav.responsive li a {
+    
+    
+    display:block; /*makes sure that everything will stack. this also forces it to show up instead of being hidden */
+    text-align: left; /*better to use this than using float since we just want to modify text */
+}
+
+    .col-6, .col-4, .col-7, .col-5{
+        width:100%;
+        margin:0; /*good practice to ensure the margin for a full desktop version doesn't get passed down to mobile*/
+}
+    
+    div.mobileStack{
+        width: 50%;
+        display:block;
+    }
+    
+    div.box {
+        padding: 5px; /*remove padding when we're on mobile*/
+        display:block: /*make sure the boxes stack*/
+    }
+
+div.leftSide-col,
+div.rightSide-col{
+        
+        margin: 15px; /*for mobile, put small amount of margin around all elements*/
+    text-align:center;
+    }
+    
+    input[type="text"] {
+        width:350px;
+        
+    }
+    .videoContainer{
+        margin:auto;
+    }
+    
+.videoContainer iframe{ /*specifying iframe adjust the video itself, not just the div tag*/
+   position:relative; /*need the mobile view to make it stay in the same spot, don't want ability to scroll sideways in mobile*/
+    width:100%;
+    margin:0; /*removers any extra margin created by the browser*/
+    overflow:hidden; /*some browsers puit a scroll bar, we don't want that, just hide the content instead*/
+    padding:0;
+}
+    
+    h1.section2Header{
+        font-size:50px;
+    }
+    
+    article p{
+        font-size:20px;
+    }
+    
+    div.pokeballIcon{
+        margin:20px;
+    }
+    div.pokeballIcon img{
+        width:100%;
+    }
+    
+    h1.large{
+        text-align:center;
+        padding:3px
+    }
+    
+    div.box{
+        text-align:center;
+        height:auto;
+        margin:20px 10%;
+        max-width:700px;
+    }
+    
+    div.questionBox{
+        margin: auto;
+    }
+    div.questionBoxWrapper{
+        margin:auto;
+        padding:10px;
+        text-align:center;
+    }
+} /* this bracket is at the end of media query. You need all of the resizing properties to be listed inside media query brackets*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
