@@ -495,21 +495,21 @@ ul.topnavLecture.responsive li{
     }
 }
 
-@media screen and (max-width: 1050px) { /*680 previously */
+@media screen and (max-width: 800px) { /*680 previously */
     ul.topnav li:not(:nth-child(1)){
         display:none;
     }
 ul.topnav li a{
-    min-height:50px;
-    font-size:35px;
+    min-height:40px;
+    font-size:18px;
 }
 
 ul.topnav li:first-child a{
-    max-height:63px; /*specify height to remove the 2pixel border underneatht he image */
+    max-height:40px; /*specify height to remove the 2pixel border underneatht he image */
 }
 
 ul.topnav li a img{
-    height:63px
+    height:45px
     }
     
 ul.topnav li.dropdownIcon {
@@ -552,14 +552,14 @@ ul.topnav.responsive li a {
     }
     
     div.box {
-        padding: 5px; /*remove padding when we're on mobile*/
+        padding: 2px; /*remove padding when we're on mobile*/
         display:block: /*make sure the boxes stack*/
     }
 
 div.leftSide-col,
 div.rightSide-col{
         
-        margin: 15px; /*for mobile, put small amount of margin around all elements*/
+        margin: 8px; /*for mobile, put small amount of margin around all elements*/
     text-align:center;
     }
     
@@ -587,22 +587,32 @@ div.rightSide-col{
         font-size:20px;
     }
     
-    div.pokeballIcon{
-        margin:20px;
+    div.groupPhoto{
+        text-align:center;
     }
-    div.pokeballIcon img{
+    
+    div.groupPhoto img{
+        max-height:150px;
         width:100%;
+        margin:auto; 
+    }
+    
+    div.leftSide-col img{
+        width:100%;
+        height:auto;
     }
     
     h1.large{
         text-align:center;
+        font-size:30px;
+        line-height:34px;
         padding:3px
     }
     
     div.box{
         text-align:center;
         height:auto;
-        margin:20px 10%;
+        margin:5px 3%;
         max-width:700px;
     }
     
