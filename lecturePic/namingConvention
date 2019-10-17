@@ -1,3 +1,2 @@
 Rules:
-Lecture picture naming convention: lec(lecture number)_(Short description of the picture)
-ex) Picture in lecture 1 showing a pie chart = lec1_pieChart
+Lecture pictures shall be placed in a folder corresponding to the lecture they are used in. Individual pictures should have a quick name only.
