@@ -19,6 +19,21 @@ label{
 p {
     font-size:24px;
     line-height: 1.2;
+    font-family:'PT Serif', serif; 
+}
+
+h1{
+    font-family:'PT Serif', serif; 
+}
+h2{
+    font-family:'PT Serif', serif; 
+}
+h3{
+    font-family:'PT Serif', serif; 
+}
+
+a{
+    font-family:'PT Serif', serif; 
 }
 
 article p{
@@ -212,6 +227,26 @@ ul.topnavLecture.responsive li.upArrowList{
 /*########### Start Article #################*/
 div.lectureWrap{
     margin:5%;
+    max-width:900px;
+}
+
+.lectureWrap img{
+    margin:auto;
+    display:block;
+    max-width:100%;
+    max-height: 100%;
+    width:auto;
+    height:auto;
+}
+
+div.lectureWrap iframe{
+    display:block;
+    margin:auto;
+}
+
+div.lectureWrap ul li{
+    list-style:none;
+    font-size:18px;
 }
 
 div.lectureWrap h1{
