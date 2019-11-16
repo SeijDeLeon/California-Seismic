@@ -2,100 +2,80 @@
 <html lang = "en">
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title> California Seismic </title>
-<link rel="stylesheet" href="style.css" >
-<script src="javascriptStyle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> California Seismic </title>
+    <link rel="stylesheet" href="style.css" >
+    <script src="javascriptStyle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav> 
     <ul class="topnav" id="dropdownClick"> 
-        <li><a href="#home"><img src="CA_Seismic_Logo_Navbar.jpg"></a></li>
+        <li><a href="#home" class="logo"><img src="/indexPic/seismic_small_navbar.png"></a></li>
         <li><a href="Lectures.html">Lectures</a></li>
         <li><a href="Practice_Questions.html">Practice Questions</a></li>
-        <li><a href="ExamInfo.html">Exam Info</a></li>
+        <li><a href="ExamGuide.html">Exam Guide</a></li>
+        <li><a href="Contribute.html">Contribute</a></li>
+        
         <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
         </ul>
     
     </nav>
-    
-    <div class = "container" id="section-1-gradient"> 
-        <div class = "row">
-            <div class="col-6 introBanner">  <!-- we need some margin on the left, need to call that out somehow -->
-               <div class ="leftSide-col"> <!-- create a new div for this title because at some point we may want to style the header, so it needs to be wrapped in a div first-->
-                   <img src="CA_Logo.png">
-                    <h1 class="large">Free Preparation for the Seismic Principles Exam</h1>
-                </div>
-            </div>
-            <div class="col-6 introBanner">
-                <div class="rightSide-col">
-                    <div class="videoContainer"> <!-- to adjust the media as mobile resizes it -->
-                    <iframe src="https://www.youtube.com/embed/TzCWtjhPE_4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>        
+<section>
+    <div class="hero">
+        <img src="indexPic/heroComputerDesk.jpg">
+        <div class="heroText">
+            <h1>Study For Free</h1>
+            <p>You can pass the Seismic Exam. Everything needed is right here.</p>
         </div>
-    
     </div>
-    
-    <header> <!-- contains introductory content, can put multiple headers inside, can put logo -->
-       <!-- <h1 class="section2Header">Get Started</h1> -->
-    </header>
-    
+</section>  
+<section>
     <div class="container">
+        <div class="resources"> 
+            <h2>Resources</h2>
+            <div class = "gridWrapper">
+                <a href = "Lectures.html">
+                    <div class = "cardBox">
+                        <img src="indexPic/classroomCard.jpg">
+                        <p>Lectures & Articles</p>
+                    </div>
+                </a>
+                <a href="Practice_Questions.html">
+                    <div class = "cardBox">
+                    <img src="indexPic/questionsCard.jpg">
+                        <p>Practice Questions</p>
+                    </div>
+                </a>
+                <a href="ExamInfo.html">
+                    <div class = "cardBox">
+                    <img src="indexPic/guideCard.jpg">
+                        <p>Exam Guide</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</section>  
+    
+<section>
+    <div class="aboutSection">
+        <h2> Who We Are</h2>
         <div class="row">
-            <div class="col-4">
-                <div class="box">
-                    <div class="icon">
-                        <img src="lecture.jpg">
-                    </div>
-                    <a href="Lectures.html">Free Online Lectures</a>
-                    <p>View our lecture videos that go over everything on the exam from start to finish. No previous seismic design experience required, this is geared towards those who have no formal experience using ASCE 7 or the CBC.</p>
-                </div>
-            </div>
-            
-             <div class="col-4">
-                <div class="box">
-                    <div class="icon">
-                        <img src="questions.jpg">
-                    </div>
-                    <a href="Practice_Questions.html">Practice Questions</a>
-                    <p> Work through the growing library of sample questions. The best way to prepare is to practice what you'll do in the exam.  These questions cover the basics of what are on the exam, and should be the primary focus.</p>
-                </div>
-            </div>
-            
-             <div class="col-4">
-                <div class="box">
-                    <div class="icon">
-                        <img src="examInfo.jpg">
-                    </div>
-                    <a href="ExamInfo.html">Exam Information</a>
-                    <p> How do I apply to the Board of Professional Engineers? How long until I get approved after sending my forms in? What should I put for my experience? All these questions and more are answered here in detail.</p>
-                </div>
-            </div>
+        <div class="col-6">
+            <img src="/indexPic/doeLibrary.jpg">
+            <p> Pictured: Doe Library, University of California, Berkeley</p>
         </div>
+        <div class="col-6">
+            <p>California Seismic is curated by a group of young professionals who want to make structural engineering a better profession. Our friendship began at UC Berkeley, where we learned that people succeed through open collaboration. In the spirit of collaboration, resources have been created and freely provided to make the Seismic Principles Exam easier.</p> 
+            <p>There currently exist no free comprehensive resource for the Seismic Principles Exam. There are many expensive alternatives, but putting a price on culminated knowledge is not in the spirit of structural engineering.</p> 
+            <p>We hope you find these resources helpful, and wish you good luck on your studies.</p>
+        </div>
+            </div>
     </div>
-    <hr>
-    <div class="container">
-        <div class="row"> 
-        <div class="col-7">
-            <article class="aboutSection">
-                <h3>About Us</h3>
-            <p> We are a group of friends working to make structural engineering a better profession. Progress is made in our industry when information is freely shared, so we wanted to extend our structural engineering knowledge to anyone who is studying for seismic exam. There exists numerous costly resources for the seismic exam, but that is not the spirit of the structural engineering profession. Our hope is by making these resources freely available to engineers of all background, that they will pass the exam cheaper and faster, giving them more time to give back to their own profession.</p>
-                
-                <p>Our mission: To provide EIT's with all necessary study materials to successfuly pass the CA Seismic Exam, earn their PE license, and contribute to a great profession.</p>
-            </article>
-        </div>
-        <div class="col-5">
-            <div class="groupPhoto">
-            <img src="Group_Photo_TRYS.jpg">
-                <p> Pictured left to right: Ruying Liu, Toan Nguyen, Seij De Leon, Yin Yin</p>
-                </div>
-        </div>
-         </div>
-    </div>
-    
+</section>    
     <footer class="footingMain">
         <div class = "row">
             <div class = "col-3 mobileStack">

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Questions</title>
+<link rel="stylesheet" href="style.css">
+<script src="javascriptStyle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+    </head>
+<body>
+<nav> 
+    <ul class="topnav" id="dropdownClick"> 
+        <li><a href="index.html"><img src="/indexPic/seismic_small_navbar.png"></a></li>
+        <li><a href="Lectures.html" >Lectures</a></li>
+        <li><a href="Practice_Questions.html" class="currentLink">Practice Questions</a></li>
+        <li><a href="ExamInfo.html">Exam Info</a></li>
+        <li><a href="Contribute.html">Contribute</a></li>
+        <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+    </ul>
+</nav>
+   
+<section class="practiceQuestionBody">  
+    <h1> Sample Practice Questions: In Progress</h1>
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#1</h1>
+<p>What importance factor should be used for the design of a hospital?</p>
+<ul class="questionList">
+<li ><a id = "q1A" onclick = "questionCheck('FALSE', 'q1A')" href="javascript:void(0)"; > A: 0.5</a></li>
+<li ><a id = "q1B" onclick = "questionCheck('FALSE', 'q1B')" href="javascript:void(0)"; > B: 1</a></li>
+<li ><a id = "q1C" onclick = "questionCheck('FALSE', 'q1C')" href="javascript:void(0)"; > C: 1.25</a></li>
+<li ><a id = "q1D" onclick = "questionCheck('TRUE', 'q1D')" href="javascript:void(0)"; > D: 1.5</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s1')">Solution:</button>
+<div class="questionSolution" id="s1"> <p>The Seismic Importance Factor or 'Ie' is determined in chapter 1 of ASCE 7. First the risk category of the proposed structure is assessed, and then the risk category is used to determine the Seismic Importance Factor. Start by evaluating the structure (hospital) in table 1.5-1, a hospital is typically considered an essential facility. This qualifies the structure as Risk Category IV. Now enter table 1.5-2, for a Risk Category IV structure the Seismic Importance Factor is listed as 1.5</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#2</h1>
+<p>What redundancy factor should be used for the design of a structure with a single bay of steel moment frame on each side? Assume seismic design category D.</p>
+<ul class="questionList">
+<li ><a id = "q2A" onclick = "questionCheck('FALSE', 'q2A')" href="javascript:void(0)"; > A: 1</a></li>
+<li ><a id = "q2B" onclick = "questionCheck('FALSE', 'q2B')" href="javascript:void(0)"; > B: 1.1</a></li>
+<li ><a id = "q2C" onclick = "questionCheck('FALSE', 'q2C')" href="javascript:void(0)"; > C: 1.2</a></li>
+<li ><a id = "q2D" onclick = "questionCheck('TRUE', 'q2D')" href="javascript:void(0)"; > D: 1.3</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s2')">Solution:</button>
+<div class="questionSolution" id="s2"> <p>Per ASCE 7 12.3.4.2, we evaluate a structure with a single bay of lateral resistance at each perimeter side. A structure should use a ro = 1.3 unless condition (a) or (b) is met. Condition (a) is not met because losing moment resistance at the beam-to-column connection of a single beam would create a %50 loss in story strength for the listed structure. Condition (b) is not met because it would require 2 bays on each perimeter side, in our case there is only 1 on each side. Therefore if neither condition (a) or (b) is met, the redundancy factor shall be taken as 1.3</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#3</h1>
+<p>What building is most likely to require consideration of accidental moment due to torsion?</p>
+<ul class="questionList">
+<li ><a id = "q3A" onclick = "questionCheck('FALSE', 'q3A')" href="javascript:void(0)"; > A: A single story carport with untopped metal deck roof</a></li>
+<li ><a id = "q3B" onclick = "questionCheck('FALSE', 'q3B')" href="javascript:void(0)"; > B: A 4 story house framed with light framed wood construction</a></li>
+<li ><a id = "q3C" onclick = "questionCheck('TRUE', 'q3C')" href="javascript:void(0)"; > C: A 3 story office building with concrete floors</a></li>
+<li ><a id = "q3D" onclick = "questionCheck('FALSE', 'q3D')" href="javascript:void(0)"; > D: A single story warehouse with a timber framed roof with wood roof sheathing.</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s3')">Solution:</button>
+<div class="questionSolution" id="s3"> <p>Per ASCE 7 12.8.4.2, we evaluate if torsional moment is required to be included in the analysis. Torsional moment is only required for rigid diaphragms. Then checking ASCE 7 12.3.1.1, a flexible diaphragm is typically allowed for untopped steel decking or wood structural panels (sheathing). Per ASCE 7 12.3.1.2, concrete slab or concrete filled metal deck may be rigid. Note that more information would be needed to qualify the diaphragms, but the most likely structure to have a rigid diaphragm is the one with the most rigid diaphragm, therefore the concrete floor.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#4</h1>
+<p>Which of the following requires continuous special inspection:</p>
+<ul class="questionList">
+<li ><a id = "q4A" onclick = "questionCheck('FALSE', 'q4A')" href="javascript:void(0)"; > A: Installation of open-web steel joists</a></li>
+<li ><a id = "q4B" onclick = "questionCheck('TRUE', 'q4B')" href="javascript:void(0)"; > B: Expansion anchor post installed into the underside of a concrete floor slab</a></li>
+<li ><a id = "q4C" onclick = "questionCheck('FALSE', 'q4C')" href="javascript:void(0)"; > C: Erection of precast concrete members</a></li>
+<li ><a id = "q4D" onclick = "questionCheck('FALSE', 'q4D')" href="javascript:void(0)"; > D: All of the above</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s4')">Solution:</button>
+<div class="questionSolution" id="s4"> <p>Per the 2016 CBC Table 1705.2.3, open-web steel joists do not require special inspection. Per 2016 CBC 1705.3, anchors that are post installed into hardened concrete require special inspection depending on their installation. Because (B) states the anchor is installed onto the underside of a concrete floor slab, we can infer it will resist sustained tension loads. Table 1705.3 notes that erection of precast concrete members only requires periodic inspection. Thus the answer is (B).</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#5</h1>
+<p>Who must the registered civil engineer submit a statement of special inspections to?</p>
+<ul class="questionList">
+<li ><a id = "q5A" onclick = "questionCheck('FALSE', 'q5A')" href="javascript:void(0)"; > A: The project architect</a></li>
+<li ><a id = "q5B" onclick = "questionCheck('FALSE', 'q5B')" href="javascript:void(0)"; > B: The project contractor</a></li>
+<li ><a id = "q5C" onclick = "questionCheck('TRUE', 'q5C')" href="javascript:void(0)"; > C: The local jurisdiction having authority</a></li>
+<li ><a id = "q5D" onclick = "questionCheck('FALSE', 'q5D')" href="javascript:void(0)"; > D: The state government</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s5')">Solution:</button>
+<div class="questionSolution" id="s5"> <p>The local jurisdiction having authority is the most appropriate answer. Per 2017 CBC Section 1704.1, "Special inspections and tests, statements of special inspections, responsibilities of contractors, submittals to the building official and structural observations shall meet the applicable requirements of this section." Typically this is a county or city building department which has jurisdiction over the location of the proposed job. Local jurisdictions will have their own set of requirements for issuance of a permit, and typically have a personalized statement of special inspections that the Engineer of Record signs.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#6</h1>
+<p>Which of these lateral resisting systems is the most ductile?</p>
+<ul class="questionList">
+<li ><a id = "q6A" onclick = "questionCheck('FALSE', 'q6A')" href="javascript:void(0)"; > A: Ordinary Reinforced Concrete Shear Wall</a></li>
+<li ><a id = "q6B" onclick = "questionCheck('FALSE', 'q6B')" href="javascript:void(0)"; > B: Special Reinforced Masonry Shearwall</a></li>
+<li ><a id = "q6C" onclick = "questionCheck('TRUE', 'q6C')" href="javascript:void(0)"; > C: Steel Special Moment Frame</a></li>
+<li ><a id = "q6D" onclick = "questionCheck('FALSE', 'q6D')" href="javascript:void(0)"; > D: Steel Special Cantilever column system</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s6')">Solution:</button>
+<div class="questionSolution" id="s6"> <p>ASCE 7 Tabe 12.2-1 gives a list of building lateral systems and the corresponding R values, which represent ductility. A larger R value indicates more capability to undergo inelastic deformation, meaning a more ductile system. Therefore a Special Steel Moment Frame is most ductile with R = 8</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#7</h1>
+<p>What seismic importance factor should be used for the design of a prison?</p>
+<ul class="questionList">
+<li ><a id = "q7A" onclick = "questionCheck('FALSE', 'q7A')" href="javascript:void(0)"; > A: 1</a></li>
+<li ><a id = "q7B" onclick = "questionCheck('FALSE', 'q7B')" href="javascript:void(0)"; > B: 1.15</a></li>
+<li ><a id = "q7C" onclick = "questionCheck('TRUE', 'q7C')" href="javascript:void(0)"; > C: 1.25</a></li>
+<li ><a id = "q7D" onclick = "questionCheck('FALSE', 'q7D')" href="javascript:void(0)"; > D: 1.5</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s7')">Solution:</button>
+<div class="questionSolution" id="s7"> <p>The Seismic Importance Factor or 'Ie' is determined in chapter 1 of ASCE 7. First the risk category of the proposed structure is assessed, and then the risk category is used to determine the Seismic Importance Factor. Start by evaluating the structure (prison) in table 1.5-1, because of the potentially large amount of people that are always in the prison, it is appropriate to be category III. Now using table 1.5-2, for a Risk Category III structure the Seismic Importance Factor is listed as 1.25 (Note that some prison systems in California override this typical categorization and require an automatic Risk Category IV, however for the seismic exam the most typical answer will be correct)</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#8</h1>
+<p>What ASCE 7 seismic load combination will typically produce the largest overturning moment?</p>
+<ul class="questionList">
+<li ><a id = "q8A" onclick = "questionCheck('FALSE', 'q8A')" href="javascript:void(0)"; > A: 1.2D + 1.0E</a></li>
+<li ><a id = "q8B" onclick = "questionCheck('TRUE', 'q8B')" href="javascript:void(0)"; > B: 0.9D + 1.0E</a></li>
+<li ><a id = "q8C" onclick = "questionCheck('FALSE', 'q8C')" href="javascript:void(0)"; > C: 1.2D + 1.6L</a></li>
+<li ><a id = "q8D" onclick = "questionCheck('FALSE', 'q8D')" href="javascript:void(0)"; > D: 1.4D</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s8')">Solution:</button>
+<div class="questionSolution" id="s8"> <p>Only those combinations with the 'E' term are seismic loads, so (1.2D + 1.6L) and (1.4D) do not apply. Since (1.2D + 1.0E) and (0.9D + 1.0E) both have a mutiplier of 1.0E, the only difference is the dead load. The smaller dead load will have the least overturning resistance, therefore 0.9D + 1.0E is the appropriate answer. Other questions on the exam may require you to solve for tension uplift forces on a structure or component, so it is valuable to be familiar with the relevant combinations.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#9</h1>
+<p>What ASCE 7 seismic load combination would be expected to produce the largest compression force in a column of a single bay lateral resisting frame?</p>
+<ul class="questionList">
+<li ><a id = "q9A" onclick = "questionCheck('TRUE', 'q9A')" href="javascript:void(0)"; > A: 1.2D + 1.0E</a></li>
+<li ><a id = "q9B" onclick = "questionCheck('FALSE', 'q9B')" href="javascript:void(0)"; > B: 0.9D + 1.0E</a></li>
+<li ><a id = "q9C" onclick = "questionCheck('FALSE', 'q9C')" href="javascript:void(0)"; > C: 1.2D + 1.6L</a></li>
+<li ><a id = "q9D" onclick = "questionCheck('FALSE', 'q9D')" href="javascript:void(0)"; > D: 1.4D</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s9')">Solution:</button>
+<div class="questionSolution" id="s9"> <p>Only two of the answers have a seismic component 'E.' Of those two, that with greater dead load would be expected to produce the greater compression force. Therefore (1.2D + 1.0E) is correct. Some other questions on the seismic exam may require solving for maximum compression forces without being told which load combinations to use, so it is valuable to be familiar with the relevant combinations.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#10</h1>
+<p>What factor for a lateral resisting system represents its inherent ductility?</p>
+<ul class="questionList">
+<li ><a id = "q10A" onclick = "questionCheck('FALSE', 'q10A')" href="javascript:void(0)"; > A: Cd</a></li>
+<li ><a id = "q10B" onclick = "questionCheck('FALSE', 'q10B')" href="javascript:void(0)"; > B: Ie</a></li>
+<li ><a id = "q10C" onclick = "questionCheck('FALSE', 'q10C')" href="javascript:void(0)"; > C: E</a></li>
+<li ><a id = "q10D" onclick = "questionCheck('TRUE', 'q10D')" href="javascript:void(0)"; > D: R</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s10')">Solution:</button>
+<div class="questionSolution" id="s10"> <p>The 'R' factor or 'Response Modification Coefficient' represents the ability of a structural system to undergo inelastic deformations.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#11</h1>
+<p>What analytical procedure is not permitted for a structure with extreme torsional irregularity?</p>
+<ul class="questionList">
+<li ><a id = "q11A" onclick = "questionCheck('TRUE', 'q11A')" href="javascript:void(0)"; > A: Equivalent Lateral Force Procedure</a></li>
+<li ><a id = "q11B" onclick = "questionCheck('FALSE', 'q11B')" href="javascript:void(0)"; > B: Modal Response Spectrum Analysis</a></li>
+<li ><a id = "q11C" onclick = "questionCheck('FALSE', 'q11C')" href="javascript:void(0)"; > C: Linear Response History Analysis</a></li>
+<li ><a id = "q11D" onclick = "questionCheck('FALSE', 'q11D')" href="javascript:void(0)"; > D: Nonlinear Response History Procedure</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s11')">Solution:</button>
+<div class="questionSolution" id="s11"> <p>Per ASCE 7 Table 12.5-1, the Equivalent Lateral Force Procedure may only be used with structures that have certain irregularities. An extreme torsional irregularity is a horizontal irregularity of Type 1b in Table 12.3-1. Only Type 2, 3, 4 or 5 is allowed for ELFP. Therefore a type 1 horizontal irregularity is not permitted for ELFP. All other analytical procedures are allowed for this irregularity because they can more accurately capture the effects.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#12</h1>
+<p>The reason for using the Importance Factor in building design is to:</p>
+<ul class="questionList">
+<li ><a id = "q12A" onclick = "questionCheck('TRUE', 'q12A')" href="javascript:void(0)"; > A: Add a higher factor of safety for more important structures</a></li>
+<li ><a id = "q12B" onclick = "questionCheck('FALSE', 'q12B')" href="javascript:void(0)"; > B: Scale the seismic design forces to a more accurate level</a></li>
+<li ><a id = "q12C" onclick = "questionCheck('FALSE', 'q12C')" href="javascript:void(0)"; > C: Account for the inherent ductility in a structure</a></li>
+<li ><a id = "q12D" onclick = "questionCheck('FALSE', 'q12D')" href="javascript:void(0)"; > D: Force engineers to consider using seismic systems with greater ductility</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s12')">Solution:</button>
+<div class="questionSolution" id="s12"> <p>The importance factor is a man-made adjustment factor that amplifies seismic demand, therefore increasing the required strength of a structure. It does not make the seismic demand more accurate, or account for ducility, or force engineers to use a better seismic system.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#13</h1>
+<p>What is the minimum base shear for a nonbuilding structure not similar to a building? Assume S1 = 0.5g, T = 2s.</p>
+<ul class="questionList">
+<li ><a id = "q13A" onclick = "questionCheck('TRUE', 'q13A')" href="javascript:void(0)"; > A: V = 0.044SdsIeW</a></li>
+<li ><a id = "q13B" onclick = "questionCheck('FALSE', 'q13B')" href="javascript:void(0)"; > B: V = 0.8S1/(R/Ie)</a></li>
+<li ><a id = "q13C" onclick = "questionCheck('FALSE', 'q13C')" href="javascript:void(0)"; > C: V = 0.5S1/(R/Ie)</a></li>
+<li ><a id = "q13D" onclick = "questionCheck('FALSE', 'q13D')" href="javascript:void(0)"; > D: V = 0.30SdsWIe</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s13')">Solution:</button>
+<div class="questionSolution" id="s13"> <p>ASCE 7 eqn 15.4-1, section 15.4.1 specifies a minimum Cs of 0.044SdsIe. Because S1 < 0.6g eqn 15.4-2 is not applicable</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#14</h1>
+<p>When can the upper limit on the period of a steel moment frame building be ignored?</p>
+<ul class="questionList">
+<li ><a id = "q14A" onclick = "questionCheck('FALSE', 'q14A')" href="javascript:void(0)"; > A: When determining the seismic base shear</a></li>
+<li ><a id = "q14B" onclick = "questionCheck('TRUE', 'q14B')" href="javascript:void(0)"; > B: When determining the drift</a></li>
+<li ><a id = "q14C" onclick = "questionCheck('FALSE', 'q14C')" href="javascript:void(0)"; > C: When an extreme horizontal irregularity exists</a></li>
+<li ><a id = "q14D" onclick = "questionCheck('FALSE', 'q14D')" href="javascript:void(0)"; > D: When a 3D model of the building structure is used for analysis</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s14')">Solution:</button>
+<div class="questionSolution" id="s14"> <p>The correct answer is when performing drift calculations. The intent of the drift limit is to prevent an unreasonably small base shear for strength design, but when calculating drift is more relevant to have an accurate drift.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#15</h1>
+<p>A 30'x30' single story barn is proposed at a site with soft clay in the upper 100ft of the site profile. What is the approriate seismic design category for this structure? Ss = 0.5, S1 = 0.3</p>
+<ul class="questionList">
+<li ><a id = "q15A" onclick = "questionCheck('FALSE', 'q15A')" href="javascript:void(0)"; > A: E</a></li>
+<li ><a id = "q15B" onclick = "questionCheck('FALSE', 'q15B')" href="javascript:void(0)"; > B: B</a></li>
+<li ><a id = "q15C" onclick = "questionCheck('FALSE', 'q15C')" href="javascript:void(0)"; > C: C</a></li>
+<li ><a id = "q15D" onclick = "questionCheck('TRUE', 'q15D')" href="javascript:void(0)"; > D: D</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s15')">Solution:</button>
+<div class="questionSolution" id="s15"> <p>Per ASCE 7 Table 20.3-1, a site with soft clay soil is considered site class E. Per section 20.3.1, note 4, a site with thick soft stiff clay layers of depth greater than 120 ft may be established as site class F. However the problem statement only suggests a soft clay characterization, and only in the upper 100ft. Using site class E, we check Table 11.4-1 to determine Fa = 1.7, Sms = FaSs = 1.7 x 0.5 = 0.85. Sds = 2/3Sms = 2/3x0.85 = 0.567. Per table 11.6-1 a site with Sds > 0.50 for a risk Category I structure is Seismic Design Category D. There is no need to check Table 11.6-2 because S1 < 0.7 </p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#16</h1>
+<p>A 10 story building with single bays of special steel moment resisting frames on each side is being checked for drift. What is the appropriate ro factor? Assume seismic diesgn category D.</p>
+<ul class="questionList">
+<li ><a id = "q16A" onclick = "questionCheck('FALSE', 'q16A')" href="javascript:void(0)"; > A: 0</a></li>
+<li ><a id = "q16B" onclick = "questionCheck('FALSE', 'q16B')" href="javascript:void(0)"; > B: 0.5</a></li>
+<li ><a id = "q16C" onclick = "questionCheck('TRUE', 'q16C')" href="javascript:void(0)"; > C: 1</a></li>
+<li ><a id = "q16D" onclick = "questionCheck('FALSE', 'q16D')" href="javascript:void(0)"; > D: 1.3</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s16')">Solution:</button>
+<div class="questionSolution" id="s16"> <p>Per ASCE 12.3.4.1 note 2, ro is equal to 1.0 for drift calculations. It is often valuable to know the expected deflections for various reasons, so using an additional safety factor on drift calculations is not required.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#17</h1>
+<p>For which of the following scenarios is ro = 1.0</p>
+<ul class="questionList">
+<li ><a id = "q17A" onclick = "questionCheck('FALSE', 'q17A')" href="javascript:void(0)"; > A: Designing a beam as a drag strut with an applied overstrength factor.</a></li>
+<li ><a id = "q17B" onclick = "questionCheck('FALSE', 'q17B')" href="javascript:void(0)"; > B: Designing the anchorage of a 700 lb gas generator attached to the floor slab</a></li>
+<li ><a id = "q17C" onclick = "questionCheck('FALSE', 'q17C')" href="javascript:void(0)"; > C: Designing telecommunication towers</a></li>
+<li ><a id = "q17D" onclick = "questionCheck('TRUE', 'q17D')" href="javascript:void(0)"; > D: All of the above</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s17')">Solution:</button>
+<div class="questionSolution" id="s17"> <p>All of the above conditions are allowed to have ro=1.0 per ASCE 12.3.4.1. A drag strut is a common name for a collector (condition 2). Anchorage for a gas generator is a nonstructural component (condition 3). A telecommunication tower is a nonbuilding structure not similar to buildings (condition 4).</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#18</h1>
+<p>A single story masonry wall warehouse is being designed for mixed use. One half is to become a new fire station, the other half will be used for storage of a local farmer's hay stock. The fire station and hay storage will be separate by a single masonry wall that is used for the lateral system. Which of the following statements is correct:</p>
+<ul class="questionList">
+<li ><a id = "q18A" onclick = "questionCheck('TRUE', 'q18A')" href="javascript:void(0)"; > A: The entire warehouse should be designed as importance factor 1.50</a></li>
+<li ><a id = "q18B" onclick = "questionCheck('FALSE', 'q18B')" href="javascript:void(0)"; > B: The fire station should be designed as Importance factor 1.50, the warehouse should be designed as Importance Factor 1.00</a></li>
+<li ><a id = "q18C" onclick = "questionCheck('FALSE', 'q18C')" href="javascript:void(0)"; > C: The entire warehouse should be designed as importance factor 1.25</a></li>
+<li ><a id = "q18D" onclick = "questionCheck('FALSE', 'q18D')" href="javascript:void(0)"; > D: The walls closest to the fire station should be designed importance factor 1.50, the walls closest to the hay storage should be designed with importance factor 1.00</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s18')">Solution:</button>
+<div class="questionSolution" id="s18"> <p>Using ASCE Table 1.5-1, a fire station can be categorized as an essential facility for Risk Category IV. An agriculture storage structure would pose a small threat to human life because there would be no permanent occupants, so it is Risk Category I. Reading section 1.5.1, "each building or other structure shall be assigned to the HIGHEST applicable risk cateogyr or categories." This informs us to use Risk Cateogry IV for the entire warehouse. Section 1.5.2 notes that the use of separate risk categories is appropriate only if the structures have independent structural systems. A single story masonry wall warehouse is its own structural system, even if there's a wall separating the two occupant types.</p> </div>
+</div>
+</div>
+
+<div class="questionBoxWrapper">
+<div class="questionBox">
+<h1>#19</h1>
+<p>A large movie theatre complex is being designed with the following site conditions: Ss = 0.9, S1 = 0.8. What is the Seismic Design Category?</p>
+<ul class="questionList">
+<li ><a id = "q19A" onclick = "questionCheck('TRUE', 'q19A')" href="javascript:void(0)"; > A: E</a></li>
+<li ><a id = "q19B" onclick = "questionCheck('FALSE', 'q19B')" href="javascript:void(0)"; > B: B</a></li>
+<li ><a id = "q19C" onclick = "questionCheck('FALSE', 'q19C')" href="javascript:void(0)"; > C: C</a></li>
+<li ><a id = "q19D" onclick = "questionCheck('FALSE', 'q19D')" href="javascript:void(0)"; > D: D</a></li>
+</ul>
+<button class="questionSolutionButton" onclick="showSolution('s19')">Solution:</button>
+<div class="questionSolution" id="s19"> <p>Per ASCE 7, the large occupancy of a movie theatre will qualify the structure as Risk Category III. When unsure of Risk Categories, check CBC Table 1604.5 for more verbose descriptions of the same categores. Per ASCE 7 Section 11.6, a risk Category III structure with S1 > 0.75 shall be automatically assigned to Seismic Design Category E.</p> </div>
+</div>
+</div> 
+   </section>   
+</body>
+
+<footer class="footingMain">
+        <div class = "row">
+            <div class = "col-3 mobileStack">
+                <h1>About</h1>
+                <ul>  
+                    <li> Team Members</li>
+                    <li> Contact Us</li>
+                </ul>
+            </div>
+            <div class = "col-3 mobileStack">
+            <h1>Downloads</h1>
+                <ul> 
+                    <li> Lectures</li>
+                    <li> Practice Problems</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</html>
