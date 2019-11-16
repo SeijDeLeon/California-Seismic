@@ -1,4 +1,10 @@
 /*########## Defaults ###############*/
+html, body {
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 nav, 
 header, 
@@ -11,30 +17,15 @@ body {
     margin:0;
 }
 
-label{
-    font-size: 20px;
-    font-weight: 800;
-}
 
 p {
-    font-size:24px;
-    line-height: 1.2;
-    font-family:'PT Serif', serif; 
+    font-family:'Montserrat', serif; 
 }
 
-h1{
-    font-family:'PT Serif', serif; 
-}
-h2{
-    font-family:'PT Serif', serif; 
-}
-h3{
-    font-family:'PT Serif', serif; 
+h1, h2, h3, h4, a, p, li{
+    font-family:'Montserrat', serif; 
 }
 
-a{
-    font-family:'PT Serif', serif; 
-}
 
 article p{
     font-size:20px;
@@ -44,8 +35,7 @@ article p{
 .container {
     width: 100%;  /*ensure that the content fills up the entire page */
     margin: auto; /*even distribution of space on the left and right side, keeping everything centered */
-    padding-top: 4%; /*creates space within the element */
-    padding-bottom: 4%;       
+      
 }
 
 .row {
@@ -77,49 +67,251 @@ article p{
 .col-12 {width: 100%;}
 
 
-* {/*universal selector. this will control the columns so they don't become larger when the objects inside have margin*/  
+* {/*universal selector*/  
     box-sizing: border-box; /*removes the feature that additional padding and margin increases the size of an object*/
 }
 /*############# End Defaults ###########*/
 
+/*######## Hero section for index ########*/
+div.hero{
+    height:90vh;
+    position:relative;
+    background-blend-mode:multiply;
+    mix-blend-mode:multiply;
+    color:black;
+}
+
+div.hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+div.hero .heroText{
+    z-index:999;
+    position:absolute;
+    margin:4% 0 0 10%;
+}
+
+div.hero .heroText h1{
+    font-weight:700;
+    font-size:40px;
+}
+
+div.hero .heroText p{
+    font-size:15px;
+    padding-right:0;
+    padding-left:0;
+}
+/*########### End Hero#################*/
+
+/*########### Resources Index ########*/
+div.resources{
+    height:auto;
+    background-color:rgba(123, 153, 163, 0.31);
+    padding-top:20px;
+    padding-bottom:40px;
+    text-align:center;
+    margin:auto;
+}
+
+div.gridWrapper{
+    margin:0 5%;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    grid-template-rows:auto;
+    grid-gap:5%;
+    justify-items:center;
+}
+div.gridWrapper a{
+    transition-duration:0.2s;
+    text-decoration:none;
+    color:inherit;
+    background-color:white;
+}
+
+div.gridWrapper a:hover{
+    background-color:#fcf1d7;
+    box-shadow:inset 0 0 60px #c7bea9;
+}
+
+div.cardBox{
+    mix-blend-mode:multiply;
+    height:100%;
+    text-decoration: none;
+    background-color:white;
+    border-radius:2px;
+    box-shadow:4px 4px 6px #aebfbd, -1px -1px 3px #aebfbd;
+}
+
+div.cardBox img{
+    width:100%;
+}
+
+div.cardBox p{
+    font-size:1em;
+}
+
+/*########### About Us Section #######*/
+div.aboutSection{
+    background-color:#e1e7e6;
+    margin:0;
+    padding:4vh 4vh;
+    width:100%;
+}
+
+div.aboutSection h2{
+    padding-left:7%;
+}
+
+div.aboutSection img{
+    height:auto;
+    width:75%;
+}
+
+div.aboutSection p{
+    font-size:1.2em;
+    text-align:left;
+    line-height:1em;
+    color:#333;
+    letter-spacing:0.01em;
+}
+
+div.aboutSection .row .col-6:nth-child(1){
+    text-align:center;
+}
+
+div.aboutSection .row .col-6:nth-child(1) p{
+    text-align:center;
+}
+
+div.aboutSection .row .col-6:nth-child(2) p{
+    padding:1% 15%;
+    
+}
 
 
+/*########### Lecture homepage#######*/
+div.lectureIntroWrap{
+    background-color:#6291a5;
+    padding:0;
+    margin:0;
+    width:100%;
+    padding:0 4% 4% 10%;
+    color:white;
+}
+
+div.lectureIntroWrap img{
+    filter:blur(0.04rem) opacity(0.8);
+    border-radius:10px;
+    width:85%;
+    height:auto;
+    text-align:center;
+    box-shadow:2px 2px 5px #798a8f;
+}
+
+div.lectureIntroWrap p{
+    padding-right:20%;
+    font-size:20px;
+}
+
+div.lectureCardWrap{
+    padding:5% 5% 5% 5%;
+    background-color:#f1f1f1;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-template-rows:0.75fr;
+    grid-gap:2%;
+    text-align:center;
+    text-decoration:none;
+}
+
+div.lectureCard{
+    background-color:#6291a5;
+    mix-blend-mode:multiply;
+    background-blend-mode:multiply;
+    filter:grayscale(80%);
+    transition-duration:0.2s;
+    box-shadow:5px 5px 10px #dedede;
+}
+
+div.lectureCard.orange{
+    background-color:#fc9968;
+}
+
+div.lectureCard:hover{
+    filter:grayscale(0);
+}
+
+div.lectureCard a{
+    text-decoration: none;
+    color:white;
+}
+
+div.lectureCard img{
+    width:100%;
+}
+
+div.lectureCard h4,p{
+    padding:4% 2%;
+    margin: 1% 0;
+}
 
 /*########### Nav Bar#################*/
 
+.currentLink{
+    border-bottom: solid 1px;
+}
 
 nav{
     width:100%;
-    margin;0; 
+    margin:0; 
+    background-color:white;
 }
 
+.topnav{
+    margin:auto;
+    max-width:1300px;
+    width:100%;
+}
 nav ul {
-    background-color:#161f2e;
+    background-color:inherit;
     overflow: hidden; /* any elements too big to fit on screen, hide it. THis reduces the scroll bar */
     margin:0;
     padding:0;
+    display:flex;
 }
+
 
 ul.topnav li{
     list-style:none; /*guarantees to remove the bullet points on the navbar list */
-    float:left;
+    
+}
+
+ul.topnav li:nth-child(1){
+    margin-right:auto;
+    
 }
 
 
 ul.topnav li a{
     display:block;
+    font-size:14px;
     text-decoration: none;
     min-height: 20px;
     text-align: center;
     padding: 14px;
     text-transform: uppercase;
-    color: white;
+    color: black;
     font-weight:600;
 }
 
 
 ul.topnav li a:hover {
-    background-color:#ffffe6;
+    background-color:#cdf1ed;
     color:#161f2e;
 }
 
@@ -226,8 +418,10 @@ ul.topnavLecture.responsive li.upArrowList{
 
 /*########### Start Article #################*/
 div.lectureWrap{
-    margin:5%;
+    margin:1% auto;
     max-width:900px;
+    background-color:white;
+    padding:2% 5% 0 5%;
 }
 
 .lectureWrap img{
@@ -247,6 +441,8 @@ div.lectureWrap iframe{
 div.lectureWrap ul li{
     list-style:none;
     font-size:18px;
+    padding:10px;
+    line-height:1.5em;
 }
 
 div.lectureWrap h1{
@@ -254,25 +450,64 @@ div.lectureWrap h1{
 }
 
 div.lectureWrap p{
-    padding:0;
+    color:#777;
+    padding:1em 0;
+    line-height:1.5;
+    font-weight:600;
+    font-size:19px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    text-rendering: optimizelegibility !important;
+    letter-spacing: .03em;
 }
+
+article.lectureBackground{
+    background-color:#dae0e6;
+    width:100%;
+    margin:0;
+    padding:1% 0;
+}
+
 /*########### End Article#################*/
 
+/*##### Contribute Section ########*/
+section.contributeWrapper{
+    text-align:center;
+}
 
+section.contributeWrapper p{
+    width:50%;
+    margin:5px auto;
+    text-align:left;
+    padding:0;
+}
 
+section.contributeWrapper h1{
+    padding:20px 0;
+    margin:0;
+}
+
+.teal{
+    background-color:rgba(123, 153, 163, 0.31);
+}
+
+.lightblue{
+    background-color:#e1e7e6;
+}
 
 
 /*####### Custom style ########*/
 
 article.aboutSection {
-    padding:10px;
+    padding:15px;
 }
 
 #section-1-gradient {
-    background: grey; /*default color for browsers not supporting gradients */
-    background: -webkit-linear-gradient(#ffc61a,#ffffe6); /*safar*/
-    background: linear-gradient(#ffc61a,#ffffe6  ); /*typical*/
-    background: -o-linear-gradient(#ffc61a,#ffffe6 ); /*opera*/
+    background: white; /*default color for browsers not supporting gradients */
+    /*background: -webkit-linear-gradient(#C0B283,white); safar*/
+    /*background: linear-gradient(#6D7993,white  ); typical*/
+    /*background: -o-linear-gradient(#ffc61a,white ); opera*/
 }
 
 div.leftSide-col {
@@ -287,10 +522,10 @@ div.rightSide-col {
     
 }
 h1.large{ /* header tag has margins around it, paragrag and labels do not*/
-    color:grey;
-    font-size:56px;
+    color:BLACK;
+    font-size:45px;
     margin:0;
-    line-height:70px; /* creates space between the text, better to do this than using margin with text*/
+    line-height:60px; /* creates space between the text, better to do this than using margin with text*/
 }
 
 h1.section2Header{
@@ -303,67 +538,21 @@ form h2{
     
 }
 
-input[type="text"]{ /* attribute selector*/
-    font-size:20px;
-    width: 400px; /* this sets the width of the box itself*/
-    min-width: 100px; /* no matter what, this is the min width of the input field*/
-    padding:5px;
-    border-radius:8px;
-}
-
-div.box {
-    text-align:center; /*centers not only the text, but everything in the dive box inlcluding the image*/
-    background-color: white;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 
-        0 2px 3px 0 rgba(0,0,0,.1);
-    border-radius:10px;
-    margin:20px;
-    padding: 36px 24px 40px 24px;
-    border-width: 10px;
-    border-style:solid;
-    border-width:1px;
-    border-color:#666;
-}
-
-div.icon{
-    width:100%; /*safeguard so the image can flex with screensize if needed*/
-}
-
-div.icon img{
-    height:200px;
-    width:200px;
-    mix-blend-mode:multiply;
-}
-
-.box a{
-    font-size:32px;
-    font-weight: 700;
-    color: #161f2e;
-    background-color: #fcbf30;
-    border-radius:10px;
-    text-align:center;
-    padding:3px 10px;
-/*    min-width:100px;*/
-/*    margin: 5px auto;*/
-    text-decoration:none;
-    box-shadow: 2px 2px 2px grey, -1px -1px 1px lightgrey;
-    line-height:50px
-}
-
-.box a:hover {
-    background-color:darkgoldenrod;
-    color:white;
-}
-
 button.journey{
     display:block;
     margin:auto;
 }
-
+.container.bottom{
+    background-color:#96858f;
+}
 div.groupPhoto img{
+    max-width:100%;
+    max-height: 100%;
+    width:auto;
+    height:auto;
     display:block;
     margin:auto;
-    max-height:200px;
+    padding:0 5px;
 }
 
 div.groupPhoto p{
@@ -405,8 +594,19 @@ padding-right:10px;
 }
 
 /*####### Practice Questions #########*/
+section.practiceQuestionBody{
+    background-color:#dae0e6;
+    padding-top:1%;
+}
 
+section.practiceQuestionBody h1{
+    text-align:center;
+}
+
+div.questionBoxWrapper{
+}
 div.questionBox{
+    background-color:white;
     text-align:center;
     margin:10px auto;
     max-width:700px;
@@ -523,15 +723,49 @@ ul.topnavLecture.responsive li{
 }
 */
 
-@media screen and (max-width:1300px){
-    div.leftSide-col {
-    margin:auto; /* better to use a percentage than exact pixels because we have flex*/
-    padding-left:20px;
+@media screen and (max-width:1100px){
+    div.hero{
+        height:65vh;
+    }
+    
+    div.hero div.heroText {
+        margin-left:2%;
+    }
+    
+    div.hero div.heroText h1{
+        font-size:5em;
+    }
+    
+    div.hero div.heroText p{
+        font-size:1.5em;
     }
 }
 
-@media screen and (max-width: 800px) { /*680 previously */
-    ul.topnav li:not(:nth-child(1)){
+
+@media screen and (max-width:1000px){
+    div.hero{
+        height:60vh;
+    }
+    
+    div.hero img{
+        height:100%;
+        width:100%; 
+    }
+    
+    /*div.leftSide-col {
+    margin:auto; 
+    padding-left:20px;
+    }*/
+    
+    
+}
+
+@media screen and (max-width: 760px) { /*680 previously */
+
+ul.topnav{
+    width:100%;
+}
+ul.topnav li:not(:nth-child(1)){
         display:none;
     }
 ul.topnav li a{
@@ -539,12 +773,20 @@ ul.topnav li a{
     font-size:18px;
 }
 
+ul.topnav li:first-child a:hover{
+        background-color:inherit;
+    }   
+    
 ul.topnav li:first-child a{
-    max-height:40px; /*specify height to remove the 2pixel border underneatht he image */
+    max-height:40px; /*specify height to remove the 2pixel border underneatht he image*/
 }
+    
+    ul.topnav li::after{
+        clear:both;
+    }
 
 ul.topnav li a img{
-    height:45px
+    height:40px
     }
     
 ul.topnav li.dropdownIcon {
@@ -552,33 +794,156 @@ ul.topnav li.dropdownIcon {
     float: right;
 }
 
-    ul.topnav.responsive li.dropdownIcon { 
+ul.topnav.responsive li.dropdownIcon { 
     position: absolute;
     top: 0;
     right: 0;.
-    }
+}
 
 ul.topnav.responsive {
-    position: relative; /*this makes it 100% sure the navbar doesn't shift around when it drops */
+    flex:none;
+    display:block;
+    position: relative;
 }
 
 ul.topnav.responsive li {
+    flex:none;
+    display:block; /*forces it to be in a row */
+    float:none;
     
-    
-    display: inline; /*forces it to be in a row */
-    float: none; /*there was a previous assignment of left float, this turns it off so the blocks will be centered */
 }
-
+    
+ ul.topnav.responsive li:nth-child(1){
+        display:block;
+    }
+    
 ul.topnav.responsive li a {
-    
-    
-    display:block; /*makes sure that everything will stack. this also forces it to show up instead of being hidden */
-    text-align: left; /*better to use this than using float since we just want to modify text */
+    flex:none;
+    margin:auto;
+    text-align:center;
 }
 
+ul.topnav.responsive li a.logo {
+    text-align:left;
+}    
+    
+    div.resources{
+        height:auto;
+        padding:2% 0 30% 0;
+    }
+div.hero{
+        height:50vh;
+    }
+    
+    div.hero img{
+        height:100%;
+        width:100%;        
+    }
+    
+    div.hero div.heroText h1{
+        font-size:2em;
+    }
+    
+    div.hero div.heroText p{
+        font-size:1em;
+        padding-right:30%;
+    }
+    
+    div.gridWrapper{
+        grid-template-columns:auto;
+    grid-template-rows:auto;
+    grid-gap:5%;
+    justify-items:center;
+    }
+    
+    div.aboutSection{
+    text-align:center;
+    margin:0;
+    padding:2%;
+    width:100%;
+}
+
+div.aboutSection h2{
+    padding:1em 0;
+    margin:0;
+}
+
+div.aboutSection img{
+    height:auto;
+    width:100%;
+}
+    
+    div.aboutSection .row .col-6:nth-child(2) p{
+        padding: 2% 0;
+        margin:0;
+    }
+    
+div.lectureIntroWrap{
+   padding:4% 1%;
+    margin:auto;
+    text-align:center;
+    
+}
+    
+    div.lectureIntroWrap .row .col-6 p{
+        text-align:left;
+        padding:0;
+    }
+    
+div.lectureCardWrap{
+    padding:5%;
+    grid-template-columns:1fr;
+    grid-template-rows:;
+    grid-gap:2%;
+    margin-bottom:10px;
+}
+
+    div.lectureCard a img{
+        background-color:white;
+        width:100%;
+        padding:0 20%;
+    }
+    
+    div.lectureCard{
+        filter:grayscale(0);
+    }
+    
+    div.lectureCard:nth-child(n){
+        margin-bottom:15px;
+    }
+    div.lectureCard h4,p{
+        padding:0;
+    }
+    
+    div.lectureWrap{
+        padding:0 2%;
+        margin: 0 2%;
+    }
+    
+    div.lectureWrap h1,h2,h3,h4{
+        text-align:center;
+    }
+    div.lectureWrap p{
+        padding:5% 3%;
+        font-size:18px;
+        font-weight:500;
+    }
+    
+    section.contributeWrapper p{
+    width:90%;
+}
+    section.contributeWrapper iframe{
+        width:100%;
+        height:75vh;
+    }
+    
+    section.contributeWrapper{
+        padding-bottom:10%;
+    }
+    
     .col-6, .col-4, .col-7, .col-5{
         width:100%;
-        margin:0; /*good practice to ensure the margin for a full desktop version doesn't get passed down to mobile*/
+        margin:0; 
 }
     
     div.mobileStack{
@@ -587,7 +952,7 @@ ul.topnav.responsive li a {
     }
     
     div.box {
-        padding: 2px; /*remove padding when we're on mobile*/
+        padding: 2px; /*reduce padding when we're on mobile*/
         display:block: /*make sure the boxes stack*/
     }
 
@@ -627,8 +992,10 @@ div.rightSide-col{
     }
     
     div.groupPhoto img{
-        max-height:150px;
-        width:100%;
+        max-height:100%;
+        max-width:100%;
+        width:auto;
+        height:auto;
         margin:auto; 
     }
     
@@ -647,7 +1014,7 @@ div.rightSide-col{
     div.box{
         text-align:center;
         height:auto;
-        margin:5px 3%;
+        margin:5px 2%;
         max-width:700px;
     }
     
@@ -659,7 +1026,7 @@ div.rightSide-col{
         padding:10px;
         text-align:center;
     }
-} /* this bracket is at the end of media query. You need all of the resizing properties to be listed inside media query brackets*/
+} /* end of media query*/
 
 
 
