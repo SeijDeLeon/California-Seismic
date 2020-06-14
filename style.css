@@ -74,7 +74,7 @@ article p{
 
 /*######## Hero section for index ########*/
 div.hero{
-    height:90vh;
+    height:96vh;
     position:relative;
     background-blend-mode:multiply;
     mix-blend-mode:multiply;
@@ -153,6 +153,8 @@ div.cardBox img{
 
 div.cardBox p{
     font-size:1em;
+    margin:0;
+    padding:5% 0;
 }
 
 /*########### About Us Section #######*/
@@ -255,7 +257,7 @@ div.lectureCard img{
     width:100%;
 }
 
-div.lectureCard h4,p{
+div.lectureCard h4, div.lectureCard p{
     padding:4% 2%;
     margin: 1% 0;
 }
@@ -275,6 +277,7 @@ nav{
 .topnav{
     margin:auto;
     max-width:1300px;
+    max-width:80vw;
     width:100%;
 }
 nav ul {
@@ -433,6 +436,15 @@ div.lectureWrap{
     height:auto;
 }
 
+.lectureWrap .imgLink p{
+    margin:auto;
+    text-align:center;
+    margin:inherit;
+    padding:inherit;
+    font-style:inherit;
+    font-size:inherit;
+}
+
 div.lectureWrap iframe{
     display:block;
     margin:auto;
@@ -469,6 +481,45 @@ article.lectureBackground{
     padding:1% 0;
 }
 
+div.lectureSkip{
+    height:5vh;
+}
+
+div.lectureSkip p{
+    display:inline;
+    color:black;
+}
+
+div.lectureSkip a{
+    border-radius:9%;
+    float:left;
+    margin:0;
+    padding:0 1%;
+    width:auto;
+}
+
+div.lectureSkip a:hover{
+    background-color:grey;
+}
+div.lectureSkip a:nth-child(2){
+    float:right;
+}
+
+.arrow{
+    border:solid black;
+    border-width:0 3px 3px 0;
+    display:inline-block;
+    padding:3px;
+}
+.rightArrow{
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg):
+}
+
+.leftArrow{
+    transform:rotate(135deg);
+    -webkit-transform:rotate(135deg):
+}
 /*########### End Article#################*/
 
 /*##### Contribute Section ########*/
@@ -738,6 +789,10 @@ ul.topnavLecture.responsive li{
     
     div.hero div.heroText p{
         font-size:1.5em;
+    }
+    
+    .topnav{
+        max-width:1300px;
     }
 }
 
