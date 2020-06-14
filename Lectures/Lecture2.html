@@ -2,7 +2,7 @@
 <html lang = "en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Lectures</title>
     <link rel="stylesheet" href="../style.css">
     <script src="../javascriptStyle.js"></script>
@@ -56,7 +56,7 @@
 </ul>
 
 <img src="lecturePic/mantle.png" width="500px"> </img>
-<a href="https://en.wikipedia.org/wiki/Mantle_convection">Image via Wikipedia </a> 
+<a class="imgLink" href="https://en.wikipedia.org/wiki/Mantle_convection"><p>Image via Wikipedia</p></a> 
 
 <p> The most relevant source in California would be those earthquakes occurring from tectonic plate movement. The lithospheric plates (the outermost part of the earth) are in motion. So why do they move? Because they are resting on top of a plastic mantle layer that is also in motion. Convection currents form in the mantle because the center of the earth is hotter than the outter layer, so heat difference creates a current that drives the mantle, and subsequently moves the lithospheric plates. You can imagine these giant masses of land pushing around each other in various ways, there must be some impacts from this. One is that plates get stuck against each other, but really want to move! This creates a build up of strain energy, that once released creates a large wave of energy known as an earthquake. </p>
 
@@ -64,7 +64,7 @@
 <p> Faults are a physical record of earth movements. They can be seen at the earth&#8217s surface when different layers/levels of land appear offset. It&#8217s worth noting that these movements along the earth can happen without surface rupture, so there are still many faults below the earth’s surface that may not be known. The displacement event of faults can be slow and timid, or fast and violent. Faults are also classified by their geometry. </p>
    
 <img src="lecturePic/fault_types.jpg"> </img>
-<a href="https://www.britannica.com/science/strike-slip-fault">Image via Britannica </a>
+<a class="imgLink" href="https://www.britannica.com/science/strike-slip-fault"> <p>Image via Britannica</p></a>
 
 <ul>
 <li> Strike-Slip Fault </li>
@@ -75,13 +75,13 @@
 <p>Other terminology for describing faults includes strike and dip. The dip of a fault is the angle the fault surface makes with the horizontal. Strike is the angle between the fault line and North </p>
 
 <img src="lecturePic/fault_dip.jpg" width="500px"></img>
-<a href="https://www.britannica.com/science/strike-slip-fault">Image via Britannica</a>
+<a class="imgLink" href="https://www.britannica.com/science/strike-slip-fault"><p>Image via Britannica</p></a>
 
 <h3> Ride the Wave</h3>
 <p> During an earthquake, seismic waves radiate outwards from the focus point. The focus point is considered the origin point of the waves, and is usually some depth below the earth&#8217s surface. Shallow-focus earthquakes are defined as having a focus depth less than 70 km, which are the predominant type of earthquakes in California. The closer the focus is to the surface, the more violent and destructive the earthquake can be. The other common terminology is epicenter, which is the point on the ground surface directly above the focus.</p>
 
 <img src="lecturePic/wave_types.jpg"> </img>
-<a href="https://www.iris.edu/gallery3/general/posters/exploring_earth/WaveIllustration"> Image via IRIS edu </a>
+<a class="imgLink" href="https://www.iris.edu/gallery3/general/posters/exploring_earth/WaveIllustration"> <p>Image via IRIS edu</p></a>
 
 <p> There are multiple waves that occur from a seismic event. They are classified as either Body Waves or Surface Waves. Body waves can move through the interior of the earth, Surface Waves only occur on the surface of the earth. </p>
 
@@ -118,17 +118,24 @@
 
 <p>To give background on the equations used to determine peak accelerations, the equation for a SDOF mass subjected to an acceleration is shown below.</p>
 
+<h3>SDOF Equation of Motion</h3>
 <p>ü + 2ζw<sub>n</sub>u̇ + w<sub>n</sub><sup>2</sup>u = -ü<sub>g</sub>(t)</p>
 
 <p> w = Undamped Natural Frequency</p>
 <p> ζ = Damping Ratio </p>
+<p> u = Displacement </p>
+<p> u̇ = Displacement/time = Velocity</p>
+<p> ü = Velocity/time = Acceleration</p>
 <p> Period = 2π / w </p>
 
 <p> The above equation is used to solve for the acceleration, displacement, and velocity of a SDOF system. It is used in step 3 below. Everything on the left hand side represents the SDOF system, while the right hand side would be acceleration from a ground motion at time ‘t’.</p>
 
-<p> Ground motions consist of many waves with different frequencies and intensities. In order to get this information into a usable format, there are several steps required. These steps are heavily simplified and summarized below. </p>
+<p> The damping ratio ζ is a percentage representation of the energy that is lost due to various forms of energy dissipation when an object is vibrated. This is a catch-all for the many different forms of energy loss that can occur in a building unrelated to specific lateral elements deforming. An exact value for dampening is hard to evaluate, so it is usually taken as 5 percent conservatively. If damping didn't exist in our universe, then things could vibrate continuously without additional energy input. For example, when you pluck a guitar string it eventually stops making noise. This is because the input energy is converted over time to noise and friction heat. Similarly a building under acceleration will dissipate some energy through friction of connected parts and material deformations.</p>
+
 
 <h3>Creation of Response Spectra </h3>
+<p> Ground motions consist of many waves with different frequencies and intensities. In order to get this information into a usable format, there are several steps required. These steps are heavily simplified and summarized below. </p>
+
 <ul>
 <li>1. Obtain a ground motion history. This is a graph of time vs acceleration from an actual seismic event</li>
 <li>2. Select an appropriate damping percentage (typically 5%). </li>
@@ -151,13 +158,14 @@
 <li><a href="https://earthquake.usgs.gov/hazards/hazmaps/">USGS Hazard Tools </a> </li>
 <li><a href="https://www.comsol.com/multiphysics/response-spectrum-analysis">Creation of Response Spectra </a></li>
 </ul>
-  
+ 
+<div class="lectureSkip">
+    <a href="californiaseismic.com/Lectures/Lecture1.html"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
+    <a href="californiaseismic.com/Lectures/Lecture3.html"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
     </div>
+
 </article>
         
-    
-
-
 </body>
 
 
