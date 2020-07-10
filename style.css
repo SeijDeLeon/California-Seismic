@@ -525,19 +525,17 @@ div.lectureSkip a:nth-child(2){
 /*##### Contribute Section ########*/
 section.contributeWrapper{
     text-align:center;
+    padding: 20px 20px 20px 20px;
 }
 
+/*
 section.contributeWrapper p{
     width:50%;
     margin:5px auto;
     text-align:left;
     padding:0;
 }
-
-section.contributeWrapper h1{
-    padding:20px 0;
-    margin:0;
-}
+*/
 
 .teal{
     background-color:rgba(123, 153, 163, 0.31);
@@ -547,6 +545,93 @@ section.contributeWrapper h1{
     background-color:#e1e7e6;
 }
 
+.contributorContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.mainPeople {
+    width: 55%;
+    text-align: center;
+    margin: auto;
+
+}
+
+.otherPeople {
+    width: 75%;
+    text-align: center;
+    margin: auto;
+}
+
+.contributorItem {
+    margin: 0 25px 75px 25px;
+}
+
+.contributorItem:hover > .contributorText h2 {
+    text-decoration: underline wavy #6291a5;
+}
+
+.contributorItem div{
+    text-align: center;
+    margin: auto;
+}
+
+.mainPeople .contributorItem {
+    flex: 0 0 33.33%;
+}
+
+.otherPeople .contributorItem{
+    flex: 0 0 25%;
+}
+
+div.contributorHeadshot {
+    width: 200px;
+    height: 200px;
+    mix-blend-mode:multiply;
+    background-blend-mode:multiply;
+    filter:grayscale(80%);
+    transition-duration:0.2s;
+}
+
+div.contributorHeadshot:hover{
+    filter:grayscale(0);
+}
+
+.contributorHeadshot img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.contributeTitle h1 {
+    font-size: 45px;
+    text-decoration: underline #fc9968;
+}
+
+.contributorHeading {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+    text-decoration: underline wavy #fc9968;
+}
+
+.contributorText h2 {
+    text-decoration: underline #6291a5;
+}
+
+.contributorText p {
+    text-align: center;
+    font-size: 14px;
+}
+
+.contributorText h4 {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
 
 /*####### Custom style ########*/
 
