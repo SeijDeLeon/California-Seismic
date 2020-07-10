@@ -422,9 +422,10 @@ ul.topnavLecture.responsive li.upArrowList{
 /*########### Start Article #################*/
 div.lectureWrap{
     margin:1% auto;
+    width: 75%;
     max-width:900px;
     background-color:white;
-    padding:2% 5% 0 5%;
+    padding:20px 60px 20px 60px;
 }
 
 .lectureWrap img{
@@ -1056,8 +1057,7 @@ div.lectureCardWrap{
     }
     
     div.lectureWrap{
-        padding:0 2%;
-        margin: 0 2%;
+        padding:2% 2%;
     }
     
     div.lectureWrap h1,h2,h3,h4{
