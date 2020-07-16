@@ -272,6 +272,7 @@ nav{
     width:100%;
     margin:0; 
     background-color:white;
+    display: flex;
 }
 
 .topnav{
@@ -349,7 +350,7 @@ i{
     border:solid white;
     border-width: 0 3px 3px 0;
     display: inline-block;
-   padding: 3px;
+    padding: 3px;
     margin: 0 0 2px 0;
 }
 
@@ -393,12 +394,12 @@ ul.topnavLecture li a{
     color:white;
 }
 
-
 ul.topnavLecture li:not(:nth-child(1)){
-        display:none;
-    }
+    display:none;
+}
+
 ul.topnavLecture li:(:nth-child(1)){
-    display:inline-block;
+    display:block;
     padding-bottom:3px;
     padding-right:5px;
 }
@@ -415,6 +416,81 @@ ul.topnavLecture.responsive li{
 ul.topnavLecture.responsive li.upArrowList{
     display:block;
 }
+
+.topnavLectureContainer ul.topnav {
+    margin-left: 0px;
+}
+
+/* sidebar from w3schools.com */
+/* The sidebar menu */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s; /* If you want a transition effect */
+/*    padding: 20px;*/
+}
+
+#lectureSidebarCollapsed {
+    visibility: visible;
+/*    opacity: 0;*/
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+/* End sidebar code from w3schools.com */
+
+
+
+
 /*########### End Lecture Nav Bar#################*/
 
 
@@ -422,9 +498,12 @@ ul.topnavLecture.responsive li.upArrowList{
 /*########### Start Article #################*/
 div.lectureWrap{
     margin:1% auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 75%;
     max-width:900px;
     background-color:white;
-    padding:2% 5% 0 5%;
+    padding:20px 60px 20px 60px;
 }
 
 .lectureWrap img{
@@ -525,19 +604,17 @@ div.lectureSkip a:nth-child(2){
 /*##### Contribute Section ########*/
 section.contributeWrapper{
     text-align:center;
+    padding: 20px 20px 20px 20px;
 }
 
+/*
 section.contributeWrapper p{
     width:50%;
     margin:5px auto;
     text-align:left;
     padding:0;
 }
-
-section.contributeWrapper h1{
-    padding:20px 0;
-    margin:0;
-}
+*/
 
 .teal{
     background-color:rgba(123, 153, 163, 0.31);
@@ -547,6 +624,93 @@ section.contributeWrapper h1{
     background-color:#e1e7e6;
 }
 
+.contributorContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.mainPeople {
+    width: 55%;
+    text-align: center;
+    margin: auto;
+
+}
+
+.otherPeople {
+    width: 75%;
+    text-align: center;
+    margin: auto;
+}
+
+.contributorItem {
+    margin: 0 25px 75px 25px;
+}
+
+.contributorItem:hover > .contributorText h2 {
+    text-decoration: underline wavy #6291a5;
+}
+
+.contributorItem div{
+    text-align: center;
+    margin: auto;
+}
+
+.mainPeople .contributorItem {
+    flex: 0 0 33.33%;
+}
+
+.otherPeople .contributorItem{
+    flex: 0 0 25%;
+}
+
+div.contributorHeadshot {
+    width: 200px;
+    height: 200px;
+    mix-blend-mode:multiply;
+    background-blend-mode:multiply;
+    filter:grayscale(80%);
+    transition-duration:0.2s;
+}
+
+div.contributorHeadshot:hover{
+    filter:grayscale(0);
+}
+
+.contributorHeadshot img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.contributeTitle h1 {
+    font-size: 45px;
+    text-decoration: underline #fc9968;
+}
+
+.contributorHeading {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+    text-decoration: underline wavy #fc9968;
+}
+
+.contributorText h2 {
+    text-decoration: underline #6291a5;
+}
+
+.contributorText p {
+    text-align: center;
+    font-size: 14px;
+}
+
+.contributorText h4 {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
 
 /*####### Custom style ########*/
 
@@ -971,8 +1135,7 @@ div.lectureCardWrap{
     }
     
     div.lectureWrap{
-        padding:0 2%;
-        margin: 0 2%;
+        padding:2% 2%;
     }
     
     div.lectureWrap h1,h2,h3,h4{
