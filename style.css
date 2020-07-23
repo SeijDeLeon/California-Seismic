@@ -634,6 +634,10 @@ section.contributeWrapper p{
     margin-bottom: 20px;
 }
 
+div.contributorContainer {
+    justify-content: space-between;
+}
+
 .mainPeople {
     width: 55%;
     text-align: center;
@@ -687,17 +691,24 @@ div.contributorHeadshot:hover{
 }
 
 .contributeTitle h1 {
-    font-size: 45px;
+    font-size: 48px;
     text-decoration: underline #fc9968;
 }
 
 .contributorHeading {
     flex: 0 0 100%;
-    margin-bottom: 20px;
+/*    margin-bottom: 20px;*/
     text-decoration: underline wavy #fc9968;
+    text-align: left;
+    font-size: 18px;
 }
 
-.contributorText h2 {
+.contributorBlurb {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.contributorName {
     text-decoration: underline #6291a5;
 }
 
@@ -710,6 +721,10 @@ div.contributorHeadshot:hover{
     text-align: center;
     font-size: 14px;
     margin-bottom: 0px;
+}
+
+.section-2 div.contributorItem {
+    margin-top: 75px;
 }
 
 /*####### Custom style ########*/
