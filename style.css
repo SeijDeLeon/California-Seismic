@@ -624,31 +624,30 @@ section.contributeWrapper p{
     background-color:#e1e7e6;
 }
 
+.internsHeading {
+    width: 100%;
+    padding: 0 8%;
+}
+
+.internsContainer {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
 .contributorContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
 }
 
-div.contributorContainer {
-    justify-content: space-between;
-}
-
-.mainPeople {
-    width: 55%;
-    text-align: center;
-    margin: auto;
-
-}
-
-.otherPeople {
-    width: 75%;
-    text-align: center;
-    margin: auto;
+.contributorItem.pmPeople {
+    margin: 75px 25px;
 }
 
 .contributorItem {
@@ -664,12 +663,46 @@ div.contributorContainer {
     margin: auto;
 }
 
+.mainPeople {
+/*    width: 55%;*/
+    text-align: center;
+    margin: auto;
+}
+
+.otherPeople {
+/*    width: 60%;*/
+    text-align: center;
+    margin: auto;
+}
+
+.pmPeople {
+/*    width: 15%;*/
+    text-align: center;
+    margin: auto;
+}
+
+.internsContainer .contributorContainer.pmPeople {
+    flex: 0 0 20%;
+}
+
+.internsContainer .contributorContainer.otherPeople {
+    flex: 0 0 75%;
+}
+
 .mainPeople .contributorItem {
     flex: 0 0 33.33%;
 }
 
 .otherPeople .contributorItem{
-    flex: 0 0 25%;
+    flex: 0 0 20%;
+}
+
+.pmPeople .contributorItem{
+    flex: 0 0 90%;
+}
+
+.section-2 div.contributorItem {
+    margin-top: 75px;
 }
 
 div.contributorHeadshot {
@@ -677,12 +710,12 @@ div.contributorHeadshot {
     height: 200px;
     mix-blend-mode:multiply;
     background-blend-mode:multiply;
-    filter:grayscale(80%);
+    filter:grayscale(90%);
     transition-duration:0.2s;
 }
 
-div.contributorHeadshot:hover{
-    filter:grayscale(0);
+.contributorItem:hover > div.contributorHeadshot {
+    filter:grayscale(20%);
 }
 
 .contributorHeadshot img {
@@ -710,21 +743,92 @@ div.contributorHeadshot:hover{
 
 .contributorName {
     text-decoration: underline #6291a5;
+    line-height: 30px;
 }
 
 .contributorText p {
-    text-align: center;
+    text-align: justify;
     font-size: 14px;
 }
 
 .contributorText h4 {
     text-align: center;
     font-size: 14px;
-    margin-bottom: 0px;
+    margin: 0;
 }
 
-.section-2 div.contributorItem {
-    margin-top: 75px;
+div.contributorLinks {
+    margin-top: 10px;
+}
+
+.contributorLinks a {
+    text-align: center;
+    color: black;
+    text-decoration: underline black;
+    font-size: 12px;
+    font-weight: bold;
+/*    margin-top: 100px;*/
+    margin: 0 2px;
+}
+
+.contributorLinks a:active,
+.contributorLinks a:link,
+.contributorLinks a:visited,
+.contributorLinks a:hover {
+    color: black;
+}
+
+.contributorLinks img {
+    width: 20px;
+    /* 50px is pixel perfect size */
+    /* change size of icon in CSS to preserve quality */
+}
+
+.contributorName img {
+    width: 20px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.section-2 {
+/*    align-items: center;*/
+/*    margin: xauto 20%;*/
+    width: 90%;
+    text-align: center;
+    margin: auto;
+}
+
+.section-2 div{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.section-2 .contributorItem .contributorText {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-2 .contributorItem div.contributorHeadshot {
+    flex: 0 0 20%;
+    margin: 0;
+    width: 200px;
+    height: 200px;
+}
+
+.section-2 .contributorItem .contributorHeadshot img {
+    width: 200px;
+    height: 200px;
+}
+
+.section-2 .contributorItem div.contributorText {
+    flex: 0 0 25%;
+    margin: 0;
+}
+
+.section-2 .contributorItem .contributorText h2, 
+.section-2 .contributorItem .contributorText h4 {
+    text-align: left;
 }
 
 /*####### Custom style ########*/
