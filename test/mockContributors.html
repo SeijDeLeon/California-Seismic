@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>Contributors</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="mockStyle.css">
     <script src="../javascriptStyle.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,38 +15,25 @@
     </style>
 </head>
 <body>
-<nav> 
-    <ul class="topnav" id="dropdownClick"> 
-        <li><a href="../index.html"><img src="../indexPic/seismic_small_navbar.png"></a></li>
-        <li><a href="../Lectures">Lectures</a></li>
-        <li><a href="../PracticeQuestions">Practice Questions</a></li>
-        <li><a href="../ExamInfo" >Exam Info</a></li>
-        <li><a href="../Contributors" class="currentLink">Contribute</a></li>
-        <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
-    </ul>
-</nav>
+    <div class="mock-header">
+        <div class="home-logo">
+            <a href="../index.html" rel="home" class="logo"><img src="../indexPic/seismic_small_navbar.png"></a>
+        </div>
+        <nav class="mock-main-nav">
+            <div class="mock-main-menu-container">
+                <ul class="mock-menu-nav">
+                    <li class="mock-menu-item"><a href="../Lectures.html">Lectures</a></li>
+                    <li class="mock-menu-item"><a href="../Practice_Questions.html">Practice Questions</a></li>
+                    <li class="mock-menu-item"><a href="../ExamInfo.html">Exam Guide</a></li>
+                    <li class="mock-menu-item"><a href="../Contribute.html">Contribute</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="">
     <section class="contributeWrapper">
         <div class="contributeTitle"><h1>Meet the Team</h1></div>
-        
-<!--
-        <div class="contributorContainer mainPeople">
-            <div class="contributorHeading"><h2>Founders</h2></div>
-            <div class="contributorItem">
-                <div class="contributorHeadshot"><img src="placeholder_headshot.png"/></div>
-                <div class="contributorText">
-                    <h2>Real Person</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet felis id orci efficitur auctor. In eu elementum ex. Morbi ultrices facilisis diam, quis suscipit justo ullamcorper vitae.</p>
-                </div>
-            </div>
-            <div class="contributorItem">
-                <div class="contributorHeadshot"><img src="headshot_placeholder.svg"/></div>                <div class="contributorText">
-                    <h2>Real Person</h2>
-                    <h4>Director of People</h4>
-                    <p>realperson@email.com</p>
-                </div>
-            </div>
-        </div>
--->     <div class="internsHeading">
+        <div class="internsHeading">
             <div class="contributorHeading"><h2>Summer 2020</h2></div>
             <div class="contributorBlurb"><p>California Seismic is brought to you by a group of determined students and recent graduates who believe in the mission of promoting access to education and giving back to the civil engineering society. Our members represent the diversity and strength of civil engineering, and their work has enabled future engineers to study without barriers.</p></div>
         </div>
@@ -58,8 +45,8 @@
                         <h2 class="contributorName">Ann Do</h2>
                         <h4 class="contributorPosition">Project Manager</h4>
                         <div class="contributorLinks">
-                            <a href="mailto:ann.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
-                            <a href="https://www.linkedin.com/in/ann-do/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
+                            <a href="mailto:ann.californiaseismic@gmail.com">Email</a>
+                            <a href="https://www.linkedin.com/in/ann-do/">LinkedIn</a>
                         </div>
                         <p>Favorite building structure: bay windows</p>
                     </div>
@@ -83,9 +70,8 @@
                     <div class="contributorText">
                         <h2 class="contributorName">Ramneet K. Sidhu</h2>                     <h4>Intern</h4>
                         <div class="contributorLinks">
-                            <a href="mailto:ramneet.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
-                            <a href="https://www.linkedin.com/in/ramneet-kaur-sidhu-eit-leed%C2%AE-green-associate%E2%84%A2-779076162/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
-                        </div>    
+                            <a href="https://www.linkedin.com/in/ramneet-kaur-sidhu-eit-leed%C2%AE-green-associate%E2%84%A2-779076162/">LinkedIn</a>
+                        </div>                        
                         <p>I love to sing Sikh religious hymns and play the harmonium. I have studied 4 years of Indian Classical Music.</p><p>
                         I love reading novels, and have since 3rd grade. If i could, I would stay at the library all day every day.</p>
                     </div>
@@ -95,7 +81,6 @@
                     <div class="contributorText">
                         <h2 class="contributorName">Mayur Patil</h2>                     <h4>Intern</h4>
                         <div class="contributorLinks">
-                            <a href="mailto:mayur.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
                             <a href="https://www.linkedin.com/in/mayur-patil-9a3a19182/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
                         </div>
                         <p>I love sports, I like playing basketball, soccer and so on.</p><p>I love travelling, exploring new places.</p><p>I like watching movies, my favorite types are comedy and sci-fi.</p><p>I'm a history lover. </p><p>I'm a foodie person.</p>
@@ -104,25 +89,21 @@
                 <div class="contributorItem">
                     <div class="contributorHeadshot"><img src="brandon_xu.jpeg"/></div>       
                     <div class="contributorText">
-                        <h2 class="contributorName">Brandon Xu</h2>
+                        <h2 class="contributorName">
+                            Brandon Xu<a href="https://www.linkedin.com/in/brandonxu9719/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
+                        </h2>
                         <h4>Intern</h4>
-                        <div class="contributorLinks">
-                            <a href="mailto:brandon.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
-                            <a href="https://www.linkedin.com/in/brandonxu9719/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
-                        </div>
                         <p><b>Why I joined CS:</b> As an engineer in California, I realize that seismic hazard is critical in every project, so a complete understanding of this topic will be crucial in the future. Hence, my goal is to understand the mechanics behind seismic design to create practical and innovative structures.</p>
                         <p><b>Favorite building structure:</b> High rise</p>
                     </div>
                 </div>
                 <div class="contributorItem">
-                    <div class="contributorHeadshot"><img src="jose_hernandez.jpg"/></div>
+                    <div class="contributorHeadshot"><img src="headshot_placeholder.svg"/></div>
                     <div class="contributorText">
-                        <h2 class="contributorName">Jose Hernandez</h2>
+                        <h2 class="contributorName">
+                            Jose Hernandez<a href="mailto:jose.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a><a href="https://www.linkedin.com/in/jose-hernandez-1ab6601b0/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
+                        </h2>                     
                         <h4>Intern</h4>
-                        <div class="contributorLinks">
-                            <a href="mailto:jose.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
-                            <a href="https://www.linkedin.com/in/jose-hernandez-1ab6601b0/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
-                        </div>
                         <p>Big soccer fan.</p><p>My favorite video game is Ocarina of Time. </p><p>I cry every time a dog dies in a movie.</p><p>My favorite writer is Juan Rulfo.</p><p>I love to cook.</p>
                     </div>
                 </div>
@@ -130,24 +111,22 @@
                     <div class="contributorHeadshot"><img src="kaier_lao.jpeg"/></div>
                     <div class="contributorText">
                         <h2 class="contributorName">Kaier Lao</h2>
-                        <h4>Intern</h4>
                         <div class="contributorLinks">
                             <a href="mailto:kaier.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
                             <a href="https://www.linkedin.com/in/kaierlao/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
                         </div>
+                        <h4>Intern</h4>
                         <p><b>Why I joined CS:</b> I wanted to educate myself on applications of seismic principles and work on a project that will be beneficial to civil engineering community</p>
                         <p><b>Favorite Building Structure:</b> Towers</p>
                     </div>
                 </div>
                 <div class="contributorItem">
-                    <div class="contributorHeadshot"><img src="sophie_huang.jpg"/></div>
+                    <div class="contributorHeadshot"><img src="headshot_placeholder.svg"/></div>
                     <div class="contributorText">
-                        <h2 class="contributorName">Sophie Huang</h2>
+                        <h2 class="contributorName">
+                            Sophie Huang<a href="mailto:sophie.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a><a href="https://www.linkedin.com/in/sophie-h-1a061a123/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
+                        </h2>                     
                         <h4>Intern</h4>
-                        <div class="contributorLinks">
-                            <a href="mailto:sophie.californiaseismic@gmail.com"><img src="https://img.icons8.com/ios-filled/50/000000/new-post.png"/></a>
-                            <a href="https://www.linkedin.com/in/sophie-h-1a061a123/"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"/></a>
-                        </div>
                         <p></p>
                     </div>
                 </div>
@@ -172,6 +151,30 @@
             </div>
         </div>
     </section>
-
+    </div>
+    <footer class="footingMain">
+        <div class="row">
+            <div class = "mobileStack footerLogo">
+                <h1 class="row-heading">California Seismic</h1>
+                <a href=""><img src="mockAssets/seismic_small_white.png"/></a>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">Learn</h1>
+                <ul>
+                    <li><a href="Lectures">Lectures</a></li>
+                    <li><a href="PracticeQuestions">Practice Questions</a></li>
+                    <li><a href="ExamInfo">Exam Guide</a></li>
+                </ul>
+            </div>
+            <div class = "mobileStack">
+                
+                <h1 class="row-heading">About Us</h1>
+                <ul>
+<!--                    <li><a href="index.html">Home</a></li>-->
+                    <li><a href="Contributors">Our Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
