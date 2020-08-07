@@ -65,6 +65,7 @@ article p{
 /*############# End Defaults ###########*/
 
 /*######## Hero section for index ########*/
+/*
 div.hero{
     height:96vh;
     position:relative;
@@ -72,7 +73,9 @@ div.hero{
     mix-blend-mode:multiply;
     color:black;
 }
+*/
 
+/*
 div.hero img{
     width:100%;
     height:100%;
@@ -81,7 +84,9 @@ div.hero img{
     top:0;
     left:0;
 }
+*/
 
+/*
 div.hero .heroText{
     z-index:999;
     position:absolute;
@@ -98,6 +103,7 @@ div.hero .heroText p{
     padding-right:0;
     padding-left:0;
 }
+*/
 /*########### End Hero#################*/
 
 /*########### Resources Index ########*/
@@ -259,7 +265,7 @@ div.lectureCard h4, div.lectureCard p{
     border-bottom: solid 1px;
 }
 
-nav{
+nav.topnav
     width:100%;
     margin:0; 
     background-color:white;
@@ -1057,6 +1063,7 @@ div.groupPhoto p{
     text-align:center;
 }
 
+/*
 footer.footingMain{
     background-color:#666;
     padding-left:10%;
@@ -1091,6 +1098,7 @@ footer.footingMain ul li a{
 .footerLogo img {
     height: 44px;
 }
+*/
 
 .videoContainer iframe{
     width:100%;
@@ -1646,7 +1654,267 @@ div.rightSide-col{
 /* END PQ LANDING PAGE */
 
 
+/* START NEW FRONT PAGE */
+html.front-page {
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+body.front-page {
+    font-family: 'PT Serif', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(70,150,182,1) 0%, rgba(211,237,244,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.top-nav-container, .mock-main {
+    flex: 1 0 auto;
+}
+.mock-hero-title,.mock-hero-subtitle {
+    color: white;
+}
+h2.mock-hero-title {
+    font-weight: 600;
+}
 
+
+/* NAV BAR */
+.top-nav-container {
+    margin: 5px 40px;
+    align-items: center;
+    -webkit-box-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+.home-logo {
+/*    text-align: left;*/
+}
+.home-logo img {
+    max-height: 60px;
+}
+.main-nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+}
+.top-nav-container a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.menu-nav {
+    padding: 0;
+    align-items: center;
+    -webkit-box-align: center;
+    display: flex;
+}
+.menu-nav .menu-item{
+    display: inline-block;
+    font-size: 18px;
+    padding: 0 12px;
+}
+.menu-nav .menu-item a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+.menu-nav .menu-item a:hover {
+    text-decoration: underline;
+}
+ul {
+    list-style: disc;
+}
+
+/* CONTENT */
+
+.main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.main h1, .main h2, .main h3 {
+    font-family: 'Merriweather', serif;
+}
+.hero-content {
+    isolation: isolate;
+    padding: 10px 100px;
+    overflow: hidden;
+}
+.hero-items {
+    overflow: hidden;
+}
+.hero-items img {
+    margin: 0;
+}
+div.hero{
+    height:100vh;
+    position:relative;
+    background-blend-mode:multiply;
+    mix-blend-mode:multiply;
+    color:black;
+}
+div.hero img{
+    width:30%;
+    height:auto;
+    object-fit:cover;
+    position:absolute;
+    top:10%;
+    right:10%;
+}
+@media only screen and (max-width: 1000px) {
+    .hero {
+        display: flex;
+        flex-direction: column;
+    }
+    .mock-hero-items {
+       position: relative;
+    }
+}
+div.hero .heroText{
+    z-index:999;
+    position:absolute;
+    margin:10% 0 0 10%;
+    text-shadow: 2px 2px 2px #69AACE;
+}
+div.hero .heroText h1{
+    font-weight:700;
+    font-size:72px;
+    color:white;
+}
+div.hero .heroText p{
+    font-size:30px;
+    font-weight:500;
+    padding:0;
+    color:white;
+}
+
+/* Front Page start Options */
+.start-options-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 80px 180px;
+}
+.start-options-container h1 {
+    text-align: center;
+    font-size: 48px;
+    color: black;
+    text-shadow: 2px 2px 2px #7698AF;
+}
+.start-option-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.start-option-col {
+    background-color: white;
+    margin: 10px 40px;
+    flex: 1 50%;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+.start-option-col-text {
+    box-shadow: 3px 5px 10px #7698AF;
+}
+.start-option-col h3 {
+    font-size: 36px;
+}
+.start-option-col button {
+    font-family: 'Merriweather';
+    font-size: 15px;
+    padding: 18px;
+    border-radius: 5px;
+    border-style: none;
+    transition: 0.3s;
+    color: white;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px gray;
+    background-color: rgb(240,190,25);
+    transition: 0.3s;
+}
+.start-option-col button:hover {
+    background-color: rgb(59,111,206);
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.start-option-col img {
+    width: 200px;
+}
+
+/* ###### FOOTER ###### */
+footer.footingMain{
+    background-color: rgb(20,33,64);
+    padding-left: 10%;
+    width: 100;
+    flex-shrink: 0;
+}
+footer.footingMain .row  div  h1{
+    font-size: 36px;
+    color: #fff;    
+}
+.footingMain .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.row .mobileStack {
+    flex: 0 0 33%;
+    width: 400px;
+    height: 200px;
+}
+footer.footingMain ul{
+    list-style:none;
+    text-align:left;
+    padding-left:0;
+}
+footer.footingMain ul li a{
+    color:#fff;
+    padding:0;
+    font-size: 18px;
+    line-height: 1.8;
+    text-decoration: underline;
+    font-weight: 500;
+}
+footer.footingMain .row div p a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+.copyright {
+    margin-top: 40px;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+}
+.footerLogo svg {
+    margin-right: 20px;
+}
+/* Footer main */
+.footingMain {
+    padding: 1.25rem 1.875rem;
+    margin: 0;
+}
+@media only screen and (min-width: 29.8125rem /* 477px */) {
+    .footingMain {
+        justify-content: space-evenly;
+    }
+}
+@media only screen and (min-width: 77.5rem /* 1240px */) {
+    .footingMain {
+        justify-content: space-evenly;
+    }
+}
 
 
 
