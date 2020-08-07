@@ -6,26 +6,21 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-nav, 
-header, 
-footer { 
-    display:block;
-  }
+nav, header, footer { 
+    display: block;
+}
 
 body {
     line-height: 1;
-    margin:0;
+    margin: 0;
 }
 
-
-p {
-    font-family:'Montserrat', serif; 
+p, a, li {
+    font-family: 'PT Serif', serif;
 }
-
-h1, h2, h3, h4, a, p, li{
-    font-family:'Montserrat', serif; 
+h1, h2, h3, h4 {
+    font-family: 'Merriweather', serif;
 }
-
 
 article p{
     font-size:20px;
@@ -35,7 +30,6 @@ article p{
 .container {
     width: 100%;  /*ensure that the content fills up the entire page */
     margin: auto; /*even distribution of space on the left and right side, keeping everything centered */
-      
 }
 
 .row {
@@ -43,14 +37,12 @@ article p{
     display:flex; /* latches onto all elements inside that have flex on it */
     flex-wrap:wrap; /* as everything is flexing and getting smaller, wrap it all around underneath (only works when we have display flex)*/
     align-items: center; /* takes all items in flex container and centers the content*/
-    
 }
 
 .row::after{
     display:table; /* allows us to setup clear settings*/
     clear:both; /* clears any floats to the right or the left*/
     content: "";
-    
 }
 
 .col-1 {width: 8.33%;}
@@ -192,7 +184,6 @@ div.aboutSection .row .col-6:nth-child(1) p{
 
 div.aboutSection .row .col-6:nth-child(2) p{
     padding:1% 15%;
-    
 }
 
 
@@ -281,6 +272,9 @@ nav{
     max-width:80vw;
     width:100%;
 }
+.topnav a {
+    font-family: 'Montserrat', sans-serif;
+}
 nav ul {
     background-color:inherit;
     overflow: hidden; /* any elements too big to fit on screen, hide it. THis reduces the scroll bar */
@@ -289,17 +283,13 @@ nav ul {
     display:flex;
 }
 
-
 ul.topnav li{
     list-style:none; /*guarantees to remove the bullet points on the navbar list */
-    
 }
 
 ul.topnav li:nth-child(1){
     margin-right:auto;
-    
 }
-
 
 ul.topnav li a{
     display:block;
@@ -312,7 +302,6 @@ ul.topnav li a{
     color: black;
     font-weight:600;
 }
-
 
 ul.topnav li a:hover {
     background-color:#cdf1ed;
@@ -331,7 +320,6 @@ ul.topnav li:first-child a{
     text-align:center;
     max-height:44px; /*specify height to remove the 2pixel border underneatht he image */
 }
-
 
 ul.topnav li a img{   
     height:44px;
@@ -423,7 +411,7 @@ ul.topnavLecture.responsive li.upArrowList{
 
 /* sidebar from w3schools.com */
 /* The sidebar menu */
-.sidebar {
+.SideBar {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -437,7 +425,7 @@ ul.topnavLecture.responsive li.upArrowList{
 }
 
 /* The sidebar links */
-.sidebar a {
+.SideBar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -447,12 +435,12 @@ ul.topnavLecture.responsive li.upArrowList{
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
+.SideBar a:hover {
     color: #f1f1f1;
 }
 
 /* Position and style the close button (top right corner) */
-.sidebar .closebtn {
+.SideBar .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
@@ -476,7 +464,7 @@ ul.topnavLecture.responsive li.upArrowList{
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-    transition: margin-left .5s; /* If you want a transition effect */
+    transition: margin-left .5s;/* If you want a transition effect */
 /*    padding: 20px;*/
 }
 
@@ -488,7 +476,41 @@ ul.topnavLecture.responsive li.upArrowList{
 
 /* End sidebar code from w3schools.com */
 
-
+/* Static sidebar */
+.lectureBackground {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.lectureSidebar {
+    width: 240px;
+    position: fixed;
+    z-index: 1; /* Stay on top */
+    top: 50px; /* Stay below navbar */
+    left: 0;
+    background-color: #FFF;  
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding: 20px 40px;
+    margin-top: 20px; /* to match article margin */
+    margin-left: 20px;
+    box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
+    font-family: 'PT Serif', serif;
+}
+.lectureSidebar p {
+    font-size: 0.9375rem;
+    margin-bottom: 20px;
+    line-height: 1.225rem;
+}
+.lectureSidebar a:link, .lectureSidebar a:visited {
+    color: black;
+    transition: .3s;
+    font-weight: bolder;
+}
+.lectureSidebar a:hover {
+    background-color: #dae0e6;
+    transition: .3s;
+}
+/* End static sidebar */
 
 
 /*########### End Lecture Nav Bar#################*/
@@ -496,6 +518,11 @@ ul.topnavLecture.responsive li.upArrowList{
 
 
 /*########### Start Article #################*/
+.main-content {
+    margin-left: 200px;
+    width: 100%;
+}
+
 div.lectureWrap{
     margin:1% auto;
     margin-top: 10px;
@@ -504,6 +531,26 @@ div.lectureWrap{
     max-width:900px;
     background-color:white;
     padding:20px 60px 20px 60px;
+}
+
+.lectureWrap {
+    font-family: 'PT Serif', 'Lora', serif;
+    box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
+}
+
+.lectureHeader h1 {
+/*    text-align: center;*/
+    margin-bottom: 60px;
+}
+
+.lectureHeader, .lectureWrap h1, .lectureWrap h2, .lectureWrap h3 {
+    font-family: 'Merriweather', serif;
+    text-transform: uppercase;
+}
+
+.lectureWrap a:visited, .lectureWrap a:link {
+    color: black;
+    text-decoration: underline blue;
 }
 
 .lectureWrap img{
@@ -531,21 +578,30 @@ div.lectureWrap iframe{
 
 div.lectureWrap ul li{
     list-style:none;
-    font-size:18px;
     padding:10px;
     line-height:1.5em;
 }
 
 div.lectureWrap h1{
-    font-size:30px;
+    margin-top: 60px;
+    font-size: 2em;
+}
+
+.lectureWrap p, .lectureWrap li {
+/*    font-size: .9375rem;*/
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.lectureWrap h3 {
+/*    margin-t*/
 }
 
 div.lectureWrap p{
-    color:#777;
+/*    color:#777;*/
     padding:1em 0;
     line-height:1.5;
-    font-weight:600;
-    font-size:19px;
+    font-weight:400;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased !important;
     -moz-font-smoothing: antialiased !important;
@@ -605,6 +661,7 @@ div.lectureSkip a:nth-child(2){
 section.contributeWrapper{
     text-align:center;
     padding: 20px 20px 20px 20px;
+/*    font-family: 'PT Serif', serif;*/
 }
 
 /*
@@ -655,7 +712,7 @@ section.contributeWrapper p{
 }
 
 .contributorItem:hover > .contributorText h2 {
-    text-decoration: underline wavy #6291a5;
+/*    text-decoration: underline wavy #6291a5;*/
 }
 
 .contributorItem div{
@@ -701,13 +758,9 @@ section.contributeWrapper p{
     flex: 0 0 90%;
 }
 
-.section-2 div.contributorItem {
-    margin-top: 75px;
-}
-
 div.contributorHeadshot {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     mix-blend-mode:multiply;
     background-blend-mode:multiply;
     filter:grayscale(90%);
@@ -715,6 +768,11 @@ div.contributorHeadshot {
 }
 
 .contributorItem:hover > div.contributorHeadshot {
+    filter:grayscale(20%);
+}
+.contributor-profile:hover > div.contributorHeadshot {
+    filter:grayscale(20%);
+}.contributor-profile:hover > .contributor-profile-left > div.contributorHeadshot {
     filter:grayscale(20%);
 }
 
@@ -725,13 +783,13 @@ div.contributorHeadshot {
 
 .contributeTitle h1 {
     font-size: 48px;
-    text-decoration: underline #fc9968;
+/*    text-decoration: underline #fc9968;*/
 }
 
 .contributorHeading {
     flex: 0 0 100%;
 /*    margin-bottom: 20px;*/
-    text-decoration: underline wavy #fc9968;
+/*    text-decoration: underline wavy #fc9968;*/
     text-align: left;
     font-size: 18px;
 }
@@ -747,8 +805,9 @@ div.contributorHeadshot {
 }
 
 .contributorText p {
-    text-align: justify;
+    text-align: left;
     font-size: 14px;
+    font-weight: 300;
 }
 
 .contributorText h4 {
@@ -766,7 +825,7 @@ div.contributorLinks {
     color: black;
     text-decoration: underline black;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 600;
 /*    margin-top: 100px;*/
     margin: 0 2px;
 }
@@ -790,16 +849,65 @@ div.contributorLinks {
     margin-left: 10px;
 }
 
+.contributor-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px 120px;
+}
+.contributor-row {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.contributor-profile {
+    flex: 0 0 46%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0px 0 60px;
+/*    border-radius: 30px;*/
+/*    box-shadow: 2px 2px 4px lightgray;*/
+    padding: 20px;
+}
+.contributor-profile-left {
+    flex: 0 0 20%;
+}
+.contributor-profile-right {
+    flex: 0 0 65%;
+    margin-left: 20px;
+}
+.contributor-profile-right p {
+    text-align: justify;
+    font-size: 0.875rem;
+    line-height: 1.05;
+    text-indent: 1.5rem;
+}
+.contributor-row.single {
+    justify-content: flex-start; 
+}
+
+/*
 .section-2 {
-/*    align-items: center;*/
-/*    margin: xauto 20%;*/
     width: 90%;
-    text-align: center;
+    text-align: left;
     margin: auto;
     padding: 0 25px;
+    flex-wrap: wrap;
 }
 
 .section-2 div{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.section-2 .contributorItem div{
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -827,10 +935,64 @@ div.contributorLinks {
     margin: 0;
 }
 
+
+*/
+
+.section-2 {
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fill, 50%);*/
+/*    grid-template-columns: 50% 50%;*/
+/*    grid-gap: 1rem;*/
+/*    margin: 40px;*/
+/*    align-items: flex-start;*/
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.section-2 .contributorItem  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    margin: 0 100px;
+    flex: 0 0 50%;
+}
+
+.section-2 div.contributorItem {
+/*    margin-top: 75px;*/
+}
+
+.section-2 .contributorItem .contributorHeadshot,
+.section-2 .contributorItem .contributorText {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.section-2 .contributorItem .contributorHeadshot img {
+    width: 200px;
+    height: 200px;
+}
+
 .section-2 .contributorItem .contributorText h2, 
 .section-2 .contributorItem .contributorText h4 {
     text-align: left;
 }
+
+.section-2 .contributorItem .contributorHeadshot {
+    flex: 0 0 20%;
+}
+
+.section-2 .contributorItem .contributorText {
+    flex: 0 0 70%;
+}
+
+
 
 /*####### Custom style ########*/
 
@@ -898,6 +1060,12 @@ div.groupPhoto p{
 footer.footingMain{
     background-color:#666;
     padding-left:10%;
+    width: 100%;
+}
+
+.footingMain .row {
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
 }
 
 footer.footingMain h1{
@@ -905,33 +1073,38 @@ footer.footingMain h1{
     color: #fff;    
 }
 
-footer.footingMain ul{
+footer.footingMain ul {
     list-style:none;
     text-align:left;
     padding-left:0;
 }
 
-footer.footingMain ul li{
+footer.footingMain ul li a{
     color:#fff;
     padding:0;
     font-size: 15px;
-    line-height:1.2;
+    line-height: 1.8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footerLogo img {
+    height: 44px;
 }
 
 .videoContainer iframe{
-width:100%;
-max-width:560px;
-height:315px;
-margin:auto;
-padding-right:10px;
-;
-
+    width:100%;
+    max-width:560px;
+    height:315px;
+    margin:auto;
+    padding-right:10px;
 }
 
 /*####### Practice Questions #########*/
 section.practiceQuestionBody{
     background-color:#dae0e6;
     padding-top:1%;
+    font-family: 'PT Serif', serif;
 }
 
 section.practiceQuestionBody h1{
@@ -1015,6 +1188,59 @@ div.questionBox ul li a{
 .questionSolution.visible{
     display:block;
 }
+
+/* Styling radio buttons */
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #000;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: rgb(59,111,206);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
 /*####### End Practice Questions #########*/
 
 
@@ -1366,7 +1592,58 @@ div.rightSide-col{
     }
 } /* end of media query*/
 
-
+/* PRACTICE QUESTION LANDING PAGE */
+.pq-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+.pq-heading {
+    text-align: center;
+    margin: 0 auto 60px;
+    max-width: 800px;
+}
+.pq-heading h1 {
+    font-size: 5rem;
+}
+.pq-heading p {
+    font-size: 1.5rem;
+}
+.pq-options-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.pq-option-col {
+    background-color: #4266a8;
+    color: white;
+    width: 350px;
+    padding: 20px 40px 30px;
+    text-align: center;
+    border-radius: 25px;
+/*    box-shadow: 2px 2px 5px #879dc4;*/
+}
+.pq-lectures {
+    display: flex;
+    flex-direction: column;
+}
+.pq-options-container button {
+    border-radius: 5px;
+    border-width: 0;
+    cursor: pointer;
+    width: 50%;
+    height: 2rem;
+}
+.pq-lectures button {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.pq-options-container a, .pq-options-container a:visited {
+    text-decoration: none;
+    color: black;
+}
+/* END PQ LANDING PAGE */
 
 
 
