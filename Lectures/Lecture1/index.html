@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<html lang = "en">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
@@ -7,226 +7,122 @@
     <link rel="stylesheet" href="../../style.css">
     <script src="../../javascriptStyle.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
-    <!-- Mathscribe -->
-    <link rel="stylesheet" href="../../assets/mathscribe/jqmath-0.4.3.css">
-    <script src="../../assets/mathscribe/jquery-1.4.3.min.js"></script>
-    <script src="../../assets/mathscribe/jqmath-etc-0.4.6.min.js" charset="utf-8"></script>
 </head>
 <body>
-<nav> 
-    <ul class="topnav" id="dropdownClick"> 
-        <li><a href="../../index.html"><img src="../../indexPic/seismic_small_navbar.png"></a></li>
-        <li><a href="../../Lectures" class="currentLink">Lectures</a></li>
-        <li><a href="../../PracticeQuestions">Practice Questions</a></li>
-        <li><a href="../../ExamInfo">Exam Info</a></li>
-        <li><a href="../../Contributors">Contribute</a></li>
-        <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+    <nav class="topnavLectureContainer"> 
+<!--
+        <ul class="topnavLecture" id="dropdownClickLecture">
+            <li><a href="javascript:void(0);" onclick=dropdownMenuLecture()> Lecture List <i class="downArrow"></i></a></li>
+            <li><a href=#Lecture1>1:  Intro</a> </li>
+            <li><a href=#Lecture2>2:  Seismicity</a> </li>
+            <li><a href=#Lecture3>3:  Site Conditions</a> </li>
+            <li><a href=#Lecture4>4:  Structural Systems</a> </li>
+            <li><a href=#Lecture5>5:  Seismic Demand</a> </li>
+            <li><a href=#Lecture6>6:  Vertical Force Distribution</a> </li>
+            <li><a href=#Lecture7>7:  Horizontal Force Distribution</a> </li>
+            <li><a href=#Lecture8>8:  Forces on Elements</a> </li>
+            <li><a href=#Lecture9>9:  Nonstructural Components</a> </li>
+            <li><a href=#Lecture10>10: Detailing</a> </li>
+            <li class="upArrowList">  <a href="javascript:void(0);" onclick=dropdownMenuLecture()><i class = "upArrow"></i></a> </li>
         </ul>
-    </nav>  
-   
-        <article class="lectureBackground">
+-->
+        <div class="topnavLecture">
+            <div id="lectureSidebarExpanded" class="SideBar">
+                <a href="javascript:void(0);" class="closebtn" onclick="closeNav()"><i class = "upArrow"></i></a>
+                <a href="../Lecture1">1:  Intro</a>
+                <a href="../Lecture2">2:  Seismicity</a>
+                <a href="../Lecture3">3:  Site Conditions</a>
+                <a href="../Lecture4">4:  Structural Systems</a>
+                <a href="../Lecture5">5:  Seismic Demand</a>
+                <a href="../Lecture6">6:  Vertical Force Distribution</a>
+                <a href="../Lecture7">7:  Horizontal Force Distribution</a>
+                <a href="../Lecture8">8:  Forces on Elements</a>
+                <a href="../Lecture9">9:  Nonstructural Components</a>
+                <a href="../Lecture10">10: Detailing</a>
+            </div>
+            <div id="lectureSidebarCollapsed">
+                <button class="openbtn" onclick="openNav()"> Lecture List <i class="downArrow"></i></button>
+            </div>
+        </div>
+
+        <ul class="topnav" id="dropdownClick"> 
+            <li id="homeIcon"><a href="../../index.html"><img src="../../indexPic/seismic_small_navbar.png"></a></li>
+            <li><a href="../../Lectures" class="currentLink">Lectures</a></li>
+            <li><a href="../../PracticeQuestions">Practice Questions</a></li>
+            <li><a href="../../ExamInfo">Exam Info</a></li>
+            <li><a href="../../Contributors">Contribute</a></li>
+            <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+        </ul>
+    </nav>    
+    <div id="main">
+    <article class="lectureBackground">
     <div class="lectureWrap">
     
-        <div class="centerText">
-<h1> Lecture 1 </h1>
-<h1> The Official Unofficial Earthquake Primer </h1>
-            </div>
-<p> The Seismic Exam doesn’t require advanced knowledge about earthquakes, so you only need to study specific background information on the topic to pass. This lecture will provide you the knowledge needed to set the stage for ASCE 7, but it won’t cover the topic extensively. The relevance here is to provide enough context about earthquakes so that seismic engineering can be trusted. The biggest takeaway is the Response Spectrum, explained towards the end.</p>
+        <h1>Lecture 1: Intro to the Seismic Exam</h1>
 
-<h3> Causes of Earthquakes </h3>
-<p> There are several sources of earthquakes. These include: </p>
-<ul>
-<li> Tectonic Plate Movement </li>
-<li> Explosions (Chemical/Nuclear) </li>
-<li> Volcanic Eruptions </li>
-<li> Mine Bursts / Cave Collapse </li>
-</ul>
+<h2> What is the Seismic Principles Exam?</h2>
 
-<img src="mantle.png" width="500px">
-<a class="imgLink" href="https://en.wikipedia.org/wiki/Mantle_convection"><p>Image via Wikipedia</p></a> 
+        <p> The California Seismic Principles Exam is one of two state-specific exams required by California that must be passed before an engineer-in-training (EIT) may be issued an official PE license. This license will grant the title of <q>Professional Engineer,</q> and will allow a person to legally use a variety of <q>Engineer</q> titles that are protected in California. A PE license also allows a person to stamp drawings and calculations that are typically required by building jurisdictions for the issuance of a construction permit. But if you&#8217re reading this, you probably know all that. For most EIT&#8217s, the seismic exam is just the next hoop to jump through before they get their license. <mark>55 questions, 150 minutes, and sub 50% pass rate.</mark> </p>
 
-<p> The most relevant cause of earthquakes in California comes from tectonic plate movements. Tectonic plates are  a series of very large pieces of the planet’s lithosphere which constitutes the outermost shell of the earth (i.e. the crust) and the upper part of the mantle. So what causes tectonic plate movement? The center of the earth is hotter than the outer layer, so the tremendous heat difference and pressure causes the hot magma in the mantle to flow in convection currents, resulting in lithospheric plates’ movements. You can imagine them as plates stuck against each other that really want to move due to the accumulation of stresses and strains! This creates a release of kinetic energy from years of built up strain in the tectonic plates. Ground shaking and other earthquake effects are caused by this phenomenon.</p>
+<h2> Never Tell Me the Odds </h2>
 
-<h3> Whose Fault Is It? </h3>
-<p>Faults are zones of weakness in the earth's crust where previous earthquakes have occurred. They are a physical record of earth movements, and can be seen on the earth's surface where different layers of land appear offset. It’s worth noting that these movements along the earth can happen without surface rupture, so there are still many faults below the earth’s surface that may have not been discovered. The displacement event of faults can be slow and timid, or fast and violent. </p>
-
-<p>Faults are classified by their geometry. The different types of faults are <b>Strike-Slip</b>, <b>Reverse</b>, and <b>Dip-Slip</b>. A Strike-Slip Fault is caused by shear stress and involves lateral displacement in the XY direction. A Reverse Fault is caused by compression that results in the upward displacement of the fault plane (hanging wall block) in the Z direction. The Dip-Slip Fault is caused by tension, which results in the downward displacement of the fault plane (hanging wall block) in the Z direction.  </p>
-        
-<img src="faultTypes.jpg">
-<a class="imgLink" href="https://www.britannica.com/science/strike-slip-fault"> <p>Image via Britannica</p></a>
-
-<ul>
-<li> Strike-Slip Fault </li>
-<li> Dip-Slip Fault </li>
-<li> Reverse Fault </li>
-</ul>
-
-<p>Other terminology for describing faults includes strike and dip. Strike is the angle between the fault line and North. Dip is the angle the fault surface makes with the horizontal. </p>
-
-<img src="faultDip.jpg" width="500px">
-<a class="imgLink" href="https://www.britannica.com/science/strike-slip-fault"><p>Image via Britannica</p></a>
-
-<h3> Ride the Wave</h3>
-        
-<img src='eqFault.jpeg'>
-<a class="imgLink" href="http://scienceovereverything.com/2018/08/01/earthquakes/"><p>Image via Science Over Everything</p></a>
-
-<p> Before proceeding, the focus point should be defined for understanding. The focus point is considered the origin point of the waves, and is usually some depth below the earth’s surface. During an earthquake, seismic waves radiate outwards from the focus point.  Shallow-focus earthquakes are defined as having a focus depth less than 70 km, which are the predominant type of earthquakes in California. The closer the focus is to the surface, the more violent and destructive the earthquake can be. The other common terminology is epicenter, which is the point on the ground surface directly above the focus.</p>
-
-<img src="waveTypes.jpg">
-<a class="imgLink" href="https://www.sciencelearn.org.nz/images/353-earth-waves"><p> Image via ScienceLearn</p></a>        
-        
-<p> There are multiple waves that occur from a seismic event. They are classified as either Body Waves (p-waves and s-waves) or Surface Waves (Rayleigh-wave and love-wave). Body Waves can move through the interior of the earth, while Surface Waves only occur on the surface of the earth. </p>
-
-<p>P-waves (compression waves) are the fastest, and move similar to sound waves by spreading outwards. They can travel through both liquids and solids, and  alternatively push and pull the surrounding material. P-waves are typically felt first during an earthquake.</p>
-
-<p> S-waves (shear waves) are slower than P-waves. As they propagate, they shear the rock sideways at right angles to the direction of travel. S-waves cannot move through liquids. The motion of S-waves at the ground surface produces both a horizontal and vertical motion. It is important to realize that there is a vertical motion to earthquakes, not just side to side. S-waves are the most effective in damaging structures, and usually come second after the P-waves. Both P-waves and S-waves can occur below and at the earth’s surface</p>
+<p> Often of interest, the pass rate is something that we as test takers fixate on. Maybe when deciding how much effort to put in, or after the exam when tallying up the questions we knew were correct. Luckily the Board has some historical information available.</p>
+<img src="testTakerGraph.png"> </img>
 
 
-<p> The last category of waves are known as surface waves, these include Love-waves and Rayleigh-waves. Love-waves are similar to S-waves; however, they do not produce vertical displacements. Rayleigh-waves move similar to a rolling ocean wave - both vertically and horizontally in a vertical plane at the direction of travel. </p>
+<p>Around three to four thousand people are taking the Seismic Exam each year. The actual amount of people getting a license each year will obviously be less though, because there are repeat test takers.</p>
+<img src="graphPassing.png"> </img>
 
-<p>If you’d like to learn more about seismic waves and see an example,here is a demonstration to help visualize P and S waves: 
-https://www.youtube.com/watch?v=gjRGIpP-Qfw </p>
-
-<h3>Attention: Attenuation! </h3>
-        <p> Earthquakes occur when pent up energy is released during tectonic activities. This energy spreads in the form of waves. While propagating, the energy in these waves are reduced non-uniformly in different directions based on the type of rock that they travel through, known as seismic attenuation. Body waves, such as Compressional waves (P waves) and shear waves (S waves), are the primary waves generated during an earthquake, and can cause significant damage. The attenuation of S waves is greater than that of P waves, but for both types of waves, attenuation increases as wave frequency increases. S waves cannot pass through fluids, so it attenuates faster in the case of saturated or weathered rocks. </p>
+<p>The typical pass rate appears to be around 45-50% in the past few years, with a slight upwards trend. </p>
     
-    <p>Quite often, attenuation from an earthquake is underestimated due to the insufficient ground-motion data available in the world. Various mathematical formulas have been developed to predict strong ground motions through attenuation principles as a function of magnitude and distance. Understanding the attenuation of different waves is very important in seismic hazard analysis because they can tell a lot about the makeup of the Earth. </p>
-<h3> Forward Rupture Directivity </h3>
-
-<img src='directivity.png'> 
-<a class = "imgLink" href="https://www.researchgate.net/figure/Forward-and-backward-directivity-effects-modified-from-Chioccarelli-2010_fig4_289103111"><p>Image via ResearchGate</p></a>
-
-        <p> Now that we have gone over the focus point, different types of faults and waves, let’s look at what forward rupture directivity is and why we should know it.  When ruptures of earthquakes produce large and quick pulses of near-fault ground motion indicated by velocity time histories, it can be potentially detrimental to structures that have long-periods. At periods longer than 0.5 seconds, ground motions are strongly influenced by several factors: orientation and direction of slip on the fault, location of earthquake’s hypocenter, and location of recording station in relation to the fault. </p>
-        
-        <p>These determinants allow us to understand that rupture directivity creates a large-period pulse of motion in the horizontal direction normal to the strike of the fault. The interaction of slipping and locked parts of a fault during an earthquake propagates toward the site, and the direction of slip in alignment with the site causes a phenomenon to occur - forward rupture directivity.</p> 
-        
-        <p> The physical explanation may be complex, but the result is simple: A large pulse motion creates a large hazard. This hazard is not easily dealt with in typical design procedures. The conditions for rupture directivity effects are commonly seen in strike-slip and dip slip, but also, reverse and normal faults as well. Inclusion of directivity during analysis accounts for higher hazards, which can be underestimated and overlooked leading to errors in ground motion selection for design. The Seismic Exam will not test this, but it can be important for real structural design.</p>
-
-<h3> Measuring Earthquakes </h3>
-<p> Earthquake measurements were first done based on human perception. As modern technology and standards have changed, more scientific methods of measuring earthquakes have become available. The first intensity scale used to qualitatively describe earthquakes was created by de Rossi of Italy and Forel of Switzerland, and has been used in intensity reports of the 1906 San Francisco earthquake. It was based on a scale from 1 to 10, with 10 being the highest level of damage to structures. In 1931, Waditi from Japan developed a strictly quantitative scale for earthquakes that was further defined by Charles Richter in 1935. The Richter magnitude was defined by the log<sub>10</sub> of the maximum wave amplitude in microns recorded by a specific Wood-Anderson seismograph, which had to be located 100 km from the earthquake epicenter. At the time this was a great improvement in scientific measurements of intensity scale for earthquakes, however it has a drawback in that it is based on a specific seismograph instrument that has its own physical period. The Wood-Anderson seismograph amplifies seismic waves within a period range of 0.1 to 2 seconds, so there is some bias in how an earthquake was measured. Another drawback is magnitude saturation, where extremely large earthquakes were under-estimated because the basis of measurement  relies on a physical device that does not accurately capture accelerations exceeding 7-8 magnitude.</p>
-
-
-<p>Today, a more fundamental approach for earthquake measurement is accepted, called Moment Magnitude. Originally defined in the 1970’s by Hiroo Kanamori and Thomas Hanks, the moment magnitude scale derives intensity from the area of fault rupture and distance moved. This effectively measures the work done by the earthquake (known as Seismic Moment), which is a more fundamental measurement of the earthquake energy. This scale is extremely valuable because it is the only magnitude scale that doesn’t suffer from saturation problems and can accurately characterize any size earthquake. Similar to the Richter scale, the final magnitude is reported between 1 and 10 via a logarithmic function.</p>
-
-<p>M<sub>o</sub> = DAμ = Moment Magnitude</p>
-<p>D = fault slip</p>
-<p>A = area of rupture</p>
-<p>μ = strength of rock</p>
+<img src="graphCutrate.png"> </img>
 
 
 
-<img src='magnitudeMap.png'>
-<a class = 'imgLink' href="https://www.livescience.com/30312-japan-earthquakes-top-10-110408.html"><p>Image via Live Science</p></a>
+<p>The info we all want, how many questions do I need to get right to pass? It turns out the Board only has public historical data from 2009 and backwards for the question cutrate. Since it&#8217s over a decade old, this information is more of an interesting fact rather than a solid predictor. So instead of predicting, <mark>we might speculate that a passing score is 50% of questions correct.</mark></p>
+
+<p>Just remember that this isn&#8217t true chance, we can improve our probability of passing by studying more, increasing our familiarity with common questions, and getting a good night’s rest.</p>
+
+    <h2> What am I Actually Being Tested On? </h2>
+<p> My friend in college once eloquently rejected a question about why he wasn’t going to work as a structural engineer, after all he seemed to have a knack for structural classes. His response was that there was no way he&#8217d be a <q>code monkey</q>. A code monkey?? This is offensive to monkeys. Structural engineering is not just about reading through codes and following the rules created by code committees. There&#8217s real challenges requiring engineering judgement, time management, and liability. But I wouldn&#8217t use the Seismic Exam to defend this comment... The Seismic Exam will test your ability to follow the currently legal code book that defines design parameters for most building structures. It’s like setting the dinner table at Thanksgiving, yes it&#8217s important for the meal but it&#8217s not the end game. So if you&#8217re feeling anxious about what you need to learn, remember that it is relatively confined exam. Questions don&#8217t require extensive knowledge beyond <mark>ASCE 7, basic statics, and maybe some rigid diaphragm analysis.</mark></p>
 
 
-<h3>Earthquake Response Spectra </h3>
-<p>We’ve introduced some basic geological principles and history about earthquakes, but what information is used on a daily basis for practicing engineers? What do we need to understand for the Seismic Exam? One of the most important topics of seismic design is a site specific plot of period vs acceleration, which is known as a response spectrum as shown in figure below. Period vs acceleration plots are used in determining the seismic force for a structure. The underlying idea is that we pick out a peak ground acceleration from the response spectrum by using the period of our structure as the input. It is important to note that a response spectrum is for a site specific location, and depends on a variety of factors. </p>
-    
-   <p> The construction of a response spectrum is done through a series of steps that goes well beyond any practical use for the seismic exam, so it is sufficient to say that historical data, numerical integration, and statistical probability are used in their creation. If needed, the plots will be given on the exam with the questions. <b>At least one Response Spectrum will almost certainly show up on the Seismic Principles Exam!</b></p>
+<h2> What Code Books Do I Need? </h2>
 
+<p> A list of recommended resources is available at <a href=”https://www.bpelsg.ca.gov/applicants/cerefs.shtml”>the engineering board&#8217s website. </a>  There&#8217s 6 books/codes listed. The most important code reference is ASCE 7-16 (The 7 stands for which ASCE code book, the 16 stands for the year it came out. Future references to this book will use the shorthand of ASCE 7). The most common types of questions on the seismic exam will require direct use of ASCE 7 to answer them. From one test-taker&#8217s perspective, you can get by with that single code book (and any accumulated notes). However to nab some additional potential questions, it won&#8217t hurt to have a copy of the SDPWS and TMS. There are also some worthwhile sections in the CBC to have at least printed and put into a binder. This topic is best explained in its own section though, so the materials you bring to the exam are listed more clearly under the <q>Exam Info</q> tab.</p>
 
-<img src = 'responseSpectra.png'>
-<ul>
-<li> Frequency = Cycles per Second = 1 / Period = speed/wavelength</li>
-<li> Period = Time to complete a cycle = 1 / Frequency </li>
-</ul>
-<p> The first step in understanding the response spectra is knowing the significance of the  building's many periods (T). A typical building structure has several periods. Based on the geometry, mass and stiffness of a structure, it can naturally vibrate at specific frequencies that correspond to unique motions (known as modal shapes). When we say naturally vibrate, this can be thought of by a simple example. </p> 
-
-<p>Imagine your friend is in a swing set. You pull them back as far as you can, then let go. They start to swing forward and backwards. Eventually because of friction they will stop swinging and return to the center of the swing set. But if you had recorded how long it took them to do a full forward and backwards swing, on average, that would be a measurement of a period.  A period is just the amount of time an object takes to repeat a motion. Let’s now put this swing set and friend onto a giant shake table (some mechanical device capacible of shaking something at a specific period). If you were tasked with setting the shaking speed to get your friend moving, how would you know what to set it as? Well, you’d recall your earlier measurement of the period of your friend’s motion, then set the table to that speed. The period, or frequency of the shake table would cause resonance with the swing set.</p> 
-        
-<p> In essence, the shaking of the floor would match how the swing naturally wants to move. If the shake table was vibrating at a random frequency with no mathematical relationship to the swingset period, then the motion of the swingset would be significantly less. The effect of resonance can be extremely detrimental to building safety, as it would cause greater shaking and the potential for failure of critical structural systems. </p>
-
-<p> This concept is best illustrated visually. So check out the video below, it shows a great example of how vibrations at a structure’s fundamental period cause resonance motion! The video demonstrates three different single degrees of freedom systems with three different fundamental periods. The shaking table starts getting faster and faster, moving back and forth at higher frequencies. As the frequency of the table matches a system’s natural period, that system starts moving sideways. (Sidenote: The word fundamental in this context is kind of redundant, since a single degree of freedom system has only one natural period!)</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LV_UuzEznHs?start=75" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<p> Determining the first period of a structure is approximated in ASCE 7, but can also be computed exactly for idealized systems. The first three (longest) periods of a typical square building include two side to side motions, and one twisting motion. For many simple buildings, only the fundamental period needs to be calculated because of the design procedure. The fundamental period is also known as the first period, and it is by definition the longest period of the structure. We can reasonably say that the most damaging earthquake vibrations are those that match the building’s fundamental period. Determination of a building’s period will be covered in later lectures.</p>
-
-<p> To see some examples of buildings oscillating at their natural period, check out <a href="https://blogs.agu.org/tremblingearth/2011/05/05/swaying-high-rises-and-resonance-frequencies/"> this external blog post </a> </p>
-
-<h3>Single Degree of Freedom Structures </h3>
+<p>A sample breakdown of question types is presented below. Note that there is a <a href="https://www.bpelsg.ca.gov/applicants/plan_civseism.pdf">list by the Board</a> for the exact question types, but it&#8217s kind of hard to relate that in a quick, meaningful way. Below is an attempt to visualize exactly what knowledge is required to answer the questions, just note the percentages are a rough approximation by feeling, not real data.</p>
+<img src="pieQuestionType.png"> </img>
 
 
 
-<img src='SDOFCantilever.png'>
+<h2>How Much Should I Study?</h2>
+<p> Your background and ability to solve sample questions is the best indicator of additional study time required to pass the exam. This will vary based on a large variety of factors, from classes in college to current professional experience. Some people on popular engineer forums report studying for literally hundreds of hours, while others just start a couple weeks before the exam. Depending on your free time outside of work, you’ll have to gauge the time required. Starting a couple months before the exam date certainly seems reasonable for most people however.</p>
+
+<p>The below pie chart displays some info on the breakdown of national exam types. The second half of the PE national exam is in a chosen discipline, and the Seismic Exam is most aligned with structural engineering. So we could argue that around 20% of people taking the Seismic Exam are inherently familiar with the exam material. This means there&#8217s likely a group of 80% test takers that will need to do more serious studying for the exam, while 20% can focus more on review.</p>
+<img src="pieDisciplineType.png"> </img>
 
 
 
-<p>Structural systems can be simplified for analysis purposes. When analyzing the vibration and displacement of structures, the concept of degrees of freedom is utilised. Degrees of freedom describes the type(s) of movement that can be experienced by the structure in an earthquake setting. A Single Degree of Freedom (SDOF) structure is the simplest form, and can be characterized by a concentrated mass sitting on a cantilevered column. The ball of mass is permitted to move in only one direction or plane, hence the name “Single Degree of Freedom”.</p> 
-        
-<p> Multi-Degrees of Freedom (MDOF) structures have additional nodes and are allowed to move in more than one plane. For every degree of freedom, there is a period. So an SDOF has only one period, while MDOF systems have multiple. SDOF are particularly useful for the construction of response spectra because they have only one output motion that we can easily follow. For the purpose of the seismic exam, further understanding of MDOF structures is not required.</p> 
-
-<p> We’ve established that structural systems are more impacted by waves that match their natural period. So what does that have to do with earthquakes? Earthquakes are not an analog signal with a perfectly defined, uniform period. Earthquakes are a song, with multiple kinds of waves happening at once. We can hear a song and point out the different instruments and what they’re doing, even though the sound waves are all happening at once. Similarly, we can isolate the accelerations of an earthquake for a specific period of interest. This is a very important concept, and serves as the fundamentals for determining peak accelerations at specific periods.</p>
 
 
-<p>To give background on the equations used to determine peak accelerations, the equation for a SDOF mass subjected to an acceleration is shown below.</p>
 
-<p>$$ü+2ζω_nu̇+ω_n^2=-ü_g(t)$$</p>
-<p>$ω$ = Undamped Natural Frequency<br>
-    $ζ$ = Damping Ratio<br>
-    $u$ = Displacement<br>
-    $u̇$ = Displacement/time = Velocity<br>
-    $ü$ = Velocity/time = Acceleration<br>
-    Period$=2π\/ω$ </p>
+<h2> A Warning </h2>
+<p>At this point, you know how study. This isn’t your first exam. One last thought is about practice exams, specifically when to utilize them. The average test taker will undoubtedly have found some practice exams (legally or not) for their studies. If at all possible, consider leaving a full practice exam towards the end of your studies. A week before the exam, try taking the test in a timed setting with minimal distraction. Put yourself into the mode of not using any resources outside of the ones you’re bringing to the exam. The results from a strict self-imposed exam can give great insight to your current preparation level, but <b>it doesn’t work if you’ve already done that exam!</b> Doing a full timed practice exam that you&#8217ve been using to study off of is a great way to solidify some false confidence. So if you can, <mark>consider leaving a practice exam untouched until you want to verify your preparation level.</mark></p>
 
-
-<p> The above equation is used to solve for the acceleration, displacement, and velocity of a SDOF system. It is used in step 3 below.The displacement, velocity and acceleration  on the left hand side represents the SDOF system, while the right hand side would be acceleration from a ground motion at time ‘t’.</p>
-
-<p> Ground motions consist of many waves with different frequencies and intensities. In order to get this information into a usable format, there are several steps required. These steps are simplified and summarized below. </p>
-
-<h3>Creation of Response Spectra </h3>
-<ul>
-<li>1. Obtain a ground motion history. This is a graph of time vs acceleration from an actual seismic event. 
-<img src='seismicTimeGraph.jpg'> </li>
-<li>2. Select an appropriate damping percentage (typically 5%). </li>
-<li>3. Set up the equations of motion for a single degree of freedom system (SDOF). An SDOF can only assume motion in one direction, it also has only one period.</li>
-<li>4. Assume a specific period of the SDOF.</li>
-<li>5. Solve the equations of motion in Step 3 using the assumed period and damping ratio. This involves solving the equations for each time step! The inputs would consist of various time increments, and the solution to each equation would be the corresponding acceleration, velocity, or displacement at that point in time. This data can then be plotted as a function of time. 
-<img src='responseSpectra1.jpg'> 
-</li>
-<li>6. Record the value of the maximum acceleration across time from Step 5. (We can also record the maximum velocity and displacement too!)
-<img src='responseSpectra2.jpg'> 
-</li>
-
-<li>7. Repeat Steps 4 through 6 until a sufficient number of periods and corresponding max values are recorded.
-<img src='accelerationTable.jpg'> 
-</li>
-<li>8. Graph the recorded period and acceleration values to create the Response Spectra!
-<img src='responseSpectra3.png'> 
-</li>
-<li>9. The final step is to clean up the graph so there are well defined regions with equations for each part of the graph. The original response spectrum from Step 8 is not very easy to use, so engineers will approximate this with a well defined graph that actually increases the accelerations in some areas. Below is the final graph per ASCE 7. <img src = 'responseSpectra.png'>
-</li>
-</ul>
-
-<p> In summary, we analyze a SDOF system with a chosen period & damping ratio subjected to a ground motion. The analysis finds a maximum acceleration for the single SDOF system. This gives us a single data point in our response spectra graph (a single period and a single acceleration). Repeat this for enough systems with different periods and we eventually create a full response spectra! We could get into more detail about an elastic versus inelastic response spectra, but suffice to say everything used for the seismic exam and in our studies will be an elastic response spectra (this just means the SDOF system used to determine peak acceleration was assumed to never yield).</p>
-
-<h3> Additional Links </h3>
-<p> If you’re interested in learning a little bit more about the background of some of the things mentioned above, check out these links: </p>
-<ul>
-<li><a href = "https://www.physicsclassroom.com/class/sound/Lesson-4/Natural-Frequency"> Period and frequency </a></li>
-<li><a href = "https://blogs.agu.org/tremblingearth/2011/05/05/swaying-high-rises-and-resonance-frequencies/" > Building Period Examples </a></li>
-<li><a href="https://seismo.berkeley.edu/outreach/faq.html">General Seismology Information </a></li>
-<li><a href="https://earthquake.usgs.gov/hazards/hazmaps/">USGS Hazard Tools </a> </li>
-<li><a href="https://www.comsol.com/multiphysics/response-spectrum-analysis">Creation of Response Spectra </a></li>
-
-        
-<li><a href = "http://www.geo.brown.edu/research/Dalton/seismic-attenuation.html"> Seismic Attenuation </a></li>
-<li><a href = "rosap.ntl.bts.gov › view › dot › dot_17238_DS1"> Forward Rupture Directivity </a></li>
-<li><a href = “https://earthquake.usgs.gov/data/rupture/directivity.php”> Directivity</a></li>
-<li><a href = “http://www.ce.memphis.edu/7137/PDFs/attenuations/Tavakoli_Pezeshk.pdf”> Attenuation</a></li>
-    </ul>
-
-            </div>
-            <br>
- 
-<div class="lectureSkip">
-    <a href="../Lecture1"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
-    <a href="../Lecture3"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
+    <div class="lectureSkip">
+    <a href="../../Lectures"><i class="arrow leftArrow"></i><p> All Lectures</p></a>
+    <a href="../Lecture2"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
     </div>
 
+  
+</div>
 </article>
+</div>
         
+    
+
+
 </body>
 
 
