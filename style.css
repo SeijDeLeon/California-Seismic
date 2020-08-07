@@ -1756,8 +1756,6 @@ ul {
 div.hero{
     height:100vh;
     position:relative;
-    background-blend-mode:multiply;
-    mix-blend-mode:multiply;
     color:black;
 }
 div.hero img{
