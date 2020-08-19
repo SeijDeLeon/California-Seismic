@@ -1,0 +1,139 @@
+/*########### Start Article #################*/
+.main-content {
+    margin-left: 200px;
+    width: 100%;
+}
+
+div.lectureWrap{
+    margin:1% auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 75%;
+    max-width:900px;
+    background-color:white;
+    padding:20px 60px 20px 60px;
+}
+
+.lectureWrap {
+    font-family: 'PT Serif', 'Lora', serif;
+    box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
+}
+
+.lectureHeader h1 {
+/*    text-align: center;*/
+    margin-bottom: 60px;
+}
+
+.lectureHeader, .lectureWrap h1, .lectureWrap h2, .lectureWrap h3 {
+    font-family: 'Merriweather', serif;
+    text-transform: uppercase;
+}
+
+.lectureWrap a:visited, .lectureWrap a:link {
+    color: black;
+    text-decoration: underline blue;
+}
+
+.lectureWrap img{
+    margin:auto;
+    display:block;
+    max-width:100%;
+    max-height: 100%;
+    width:auto;
+    height:auto;
+}
+
+.lectureWrap .imgLink p{
+    margin:auto;
+    text-align:center;
+    margin:inherit;
+    padding:inherit;
+    font-style:inherit;
+    font-size:inherit;
+}
+
+div.lectureWrap iframe{
+    display:block;
+    margin:auto;
+}
+
+div.lectureWrap ul li{
+    list-style:none;
+    padding:10px;
+    line-height:1.5em;
+}
+
+div.lectureWrap h1{
+    margin-top: 60px;
+    font-size: 2em;
+}
+
+.lectureWrap p, .lectureWrap li {
+/*    font-size: .9375rem;*/
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.lectureWrap h3 {
+/*    margin-t*/
+}
+
+div.lectureWrap p{
+/*    color:#777;*/
+    padding:1em 0;
+    line-height:1.5;
+    font-weight:400;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    text-rendering: optimizelegibility !important;
+    letter-spacing: .03em;
+}
+
+article.lectureBackground{
+    background-color:#dae0e6;
+    width:100%;
+    margin:0;
+    padding:1% 0;
+}
+
+div.lectureSkip{
+    height:5vh;
+}
+
+div.lectureSkip p{
+    display:inline;
+    color:black;
+}
+
+div.lectureSkip a{
+    border-radius:9%;
+    float:left;
+    margin:0;
+    padding:0 1%;
+    width:auto;
+}
+
+div.lectureSkip a:hover{
+    background-color:grey;
+}
+div.lectureSkip a:nth-child(2){
+    float:right;
+}
+
+.arrow{
+    border:solid black;
+    border-width:0 3px 3px 0;
+    display:inline-block;
+    padding:3px;
+}
+.rightArrow{
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg):
+}
+
+.leftArrow{
+    transform:rotate(135deg);
+    -webkit-transform:rotate(135deg):
+}
+/*########### End Article#################*/

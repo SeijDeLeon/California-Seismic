@@ -1,0 +1,334 @@
+/*##### Contribute Section ########*/
+section.contributeWrapper{
+    text-align:center;
+    padding: 20px 20px 20px 20px;
+/*    font-family: 'PT Serif', serif;*/
+}
+
+/*
+section.contributeWrapper p{
+    width:50%;
+    margin:5px auto;
+    text-align:left;
+    padding:0;
+}
+*/
+
+.teal{
+    background-color:rgba(123, 153, 163, 0.31);
+}
+
+.lightblue{
+    background-color:#e1e7e6;
+}
+
+.internsHeading {
+    width: 100%;
+    padding: 0 8%;
+}
+
+.internsContainer {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.contributorContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.contributorItem.pmPeople {
+    margin: 75px 25px;
+}
+
+.contributorItem {
+    margin: 0 25px 75px 25px;
+}
+
+.contributorItem:hover > .contributorText h2 {
+/*    text-decoration: underline wavy #6291a5;*/
+}
+
+.contributorItem div{
+    text-align: center;
+    margin: auto;
+}
+
+.mainPeople {
+/*    width: 55%;*/
+    text-align: center;
+    margin: auto;
+}
+
+.otherPeople {
+/*    width: 60%;*/
+    text-align: center;
+    margin: auto;
+}
+
+.pmPeople {
+/*    width: 15%;*/
+    text-align: center;
+    margin: auto;
+}
+
+.internsContainer .contributorContainer.pmPeople {
+    flex: 0 0 20%;
+}
+
+.internsContainer .contributorContainer.otherPeople {
+    flex: 0 0 75%;
+}
+
+.mainPeople .contributorItem {
+    flex: 0 0 33.33%;
+}
+
+.otherPeople .contributorItem{
+    flex: 0 0 20%;
+}
+
+.pmPeople .contributorItem{
+    flex: 0 0 90%;
+}
+
+div.contributorHeadshot {
+    width: 150px;
+    height: 150px;
+    mix-blend-mode:multiply;
+    background-blend-mode:multiply;
+    filter:grayscale(90%);
+    transition-duration:0.2s;
+}
+
+.contributorItem:hover > div.contributorHeadshot {
+    filter:grayscale(20%);
+}
+.contributor-profile:hover > div.contributorHeadshot {
+    filter:grayscale(20%);
+}.contributor-profile:hover > .contributor-profile-left > div.contributorHeadshot {
+    filter:grayscale(20%);
+}
+
+.contributorHeadshot img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.contributeTitle h1 {
+    font-size: 48px;
+/*    text-decoration: underline #fc9968;*/
+}
+
+.contributorHeading {
+    flex: 0 0 100%;
+/*    margin-bottom: 20px;*/
+/*    text-decoration: underline wavy #fc9968;*/
+    text-align: left;
+    font-size: 18px;
+}
+
+.contributorBlurb {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.contributorName {
+    text-decoration: underline #6291a5;
+    line-height: 30px;
+}
+
+.contributorText p {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.contributorText h4 {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+}
+
+div.contributorLinks {
+    margin-top: 10px;
+}
+
+.contributorLinks a {
+    text-align: center;
+    color: black;
+    text-decoration: underline black;
+    font-size: 12px;
+    font-weight: 600;
+/*    margin-top: 100px;*/
+    margin: 0 2px;
+}
+
+.contributorLinks a:active,
+.contributorLinks a:link,
+.contributorLinks a:visited,
+.contributorLinks a:hover {
+    color: black;
+}
+
+.contributorLinks img {
+    width: 20px;
+    /* 50px is pixel perfect size */
+    /* change size of icon in CSS to preserve quality */
+}
+
+.contributorName img {
+    width: 20px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.contributor-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px 120px;
+}
+.contributor-row {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.contributor-profile {
+    flex: 0 0 46%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0px 0 60px;
+/*    border-radius: 30px;*/
+/*    box-shadow: 2px 2px 4px lightgray;*/
+    padding: 20px;
+}
+.contributor-profile-left {
+    flex: 0 0 20%;
+}
+.contributor-profile-right {
+    flex: 0 0 65%;
+    margin-left: 20px;
+}
+.contributor-profile-right p {
+    text-align: justify;
+    font-size: 0.875rem;
+    line-height: 1.05;
+    text-indent: 1.5rem;
+}
+.contributor-row.single {
+    justify-content: flex-start; 
+}
+
+/*
+.section-2 {
+    width: 90%;
+    text-align: left;
+    margin: auto;
+    padding: 0 25px;
+    flex-wrap: wrap;
+}
+
+.section-2 div{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.section-2 .contributorItem div{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.section-2 .contributorItem .contributorText {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-2 .contributorItem div.contributorHeadshot {
+    flex: 0 0 20%;
+    margin: 0;
+    width: 200px;
+    height: 200px;
+}
+
+.section-2 .contributorItem .contributorHeadshot img {
+    width: 200px;
+    height: 200px;
+}
+
+.section-2 .contributorItem div.contributorText {
+    flex: 0 0 25%;
+    margin: 0;
+}
+
+
+*/
+
+.section-2 {
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fill, 50%);*/
+/*    grid-template-columns: 50% 50%;*/
+/*    grid-gap: 1rem;*/
+/*    margin: 40px;*/
+/*    align-items: flex-start;*/
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.section-2 .contributorItem  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    margin: 0 100px;
+    flex: 0 0 50%;
+}
+
+.section-2 div.contributorItem {
+/*    margin-top: 75px;*/
+}
+
+.section-2 .contributorItem .contributorHeadshot,
+.section-2 .contributorItem .contributorText {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.section-2 .contributorItem .contributorHeadshot img {
+    width: 200px;
+    height: 200px;
+}
+
+.section-2 .contributorItem .contributorText h2, 
+.section-2 .contributorItem .contributorText h4 {
+    text-align: left;
+}
+
+.section-2 .contributorItem .contributorHeadshot {
+    flex: 0 0 20%;
+}
+
+.section-2 .contributorItem .contributorText {
+    flex: 0 0 70%;
+}
