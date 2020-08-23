@@ -1,18 +1,9 @@
 /*##### Contribute Section ########*/
 section.contributeWrapper{
     text-align:center;
-    padding: 20px 20px 20px 20px;
+    padding: 20px 90px;
 /*    font-family: 'PT Serif', serif;*/
 }
-
-/*
-section.contributeWrapper p{
-    width:50%;
-    margin:5px auto;
-    text-align:left;
-    padding:0;
-}
-*/
 
 .teal{
     background-color:rgba(123, 153, 163, 0.31);
@@ -27,78 +18,6 @@ section.contributeWrapper p{
     padding: 0 8%;
 }
 
-.internsContainer {
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-}
-
-.contributorContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.contributorItem.pmPeople {
-    margin: 75px 25px;
-}
-
-.contributorItem {
-    margin: 0 25px 75px 25px;
-}
-
-.contributorItem:hover > .contributorText h2 {
-/*    text-decoration: underline wavy #6291a5;*/
-}
-
-.contributorItem div{
-    text-align: center;
-    margin: auto;
-}
-
-.mainPeople {
-/*    width: 55%;*/
-    text-align: center;
-    margin: auto;
-}
-
-.otherPeople {
-/*    width: 60%;*/
-    text-align: center;
-    margin: auto;
-}
-
-.pmPeople {
-/*    width: 15%;*/
-    text-align: center;
-    margin: auto;
-}
-
-.internsContainer .contributorContainer.pmPeople {
-    flex: 0 0 20%;
-}
-
-.internsContainer .contributorContainer.otherPeople {
-    flex: 0 0 75%;
-}
-
-.mainPeople .contributorItem {
-    flex: 0 0 33.33%;
-}
-
-.otherPeople .contributorItem{
-    flex: 0 0 20%;
-}
-
-.pmPeople .contributorItem{
-    flex: 0 0 90%;
-}
-
 div.contributorHeadshot {
     width: 150px;
     height: 150px;
@@ -108,12 +27,13 @@ div.contributorHeadshot {
     transition-duration:0.2s;
 }
 
-.contributorItem:hover > div.contributorHeadshot {
+.contributor-item:hover > div.contributorHeadshot {
     filter:grayscale(20%);
 }
 .contributor-profile:hover > div.contributorHeadshot {
     filter:grayscale(20%);
-}.contributor-profile:hover > .contributor-profile-left > div.contributorHeadshot {
+}
+.contributor-item:hover > .contributor-item-info > div.contributorHeadshot {
     filter:grayscale(20%);
 }
 
@@ -129,8 +49,6 @@ div.contributorHeadshot {
 
 .contributorHeading {
     flex: 0 0 100%;
-/*    margin-bottom: 20px;*/
-/*    text-decoration: underline wavy #fc9968;*/
     text-align: left;
     font-size: 18px;
 }
@@ -143,6 +61,7 @@ div.contributorHeadshot {
 .contributorName {
     text-decoration: underline #6291a5;
     line-height: 30px;
+    margin-bottom: 0.5rem;
 }
 
 .contributorText p {
@@ -167,7 +86,6 @@ div.contributorLinks {
     text-decoration: underline black;
     font-size: 12px;
     font-weight: 600;
-/*    margin-top: 100px;*/
     margin: 0 2px;
 }
 
@@ -212,8 +130,6 @@ div.contributorLinks {
     flex-wrap: wrap;
     justify-content: space-around;
     margin: 0px 0 60px;
-/*    border-radius: 30px;*/
-/*    box-shadow: 2px 2px 4px lightgray;*/
     padding: 20px;
 }
 .contributor-profile-left {
@@ -233,102 +149,68 @@ div.contributorLinks {
     justify-content: flex-start; 
 }
 
-/*
-.section-2 {
-    width: 90%;
-    text-align: left;
-    margin: auto;
-    padding: 0 25px;
-    flex-wrap: wrap;
-}
-
-.section-2 div{
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.section-2 .contributorItem div{
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.section-2 .contributorItem .contributorText {
-    display: flex;
-    flex-direction: column;
-}
-
-.section-2 .contributorItem div.contributorHeadshot {
-    flex: 0 0 20%;
-    margin: 0;
-    width: 200px;
-    height: 200px;
-}
-
-.section-2 .contributorItem .contributorHeadshot img {
-    width: 200px;
-    height: 200px;
-}
-
-.section-2 .contributorItem div.contributorText {
-    flex: 0 0 25%;
-    margin: 0;
-}
-
-
-*/
-
-.section-2 {
-/*    display: grid;*/
-/*    grid-template-columns: repeat(auto-fill, 50%);*/
-/*    grid-template-columns: 50% 50%;*/
-/*    grid-gap: 1rem;*/
-/*    margin: 40px;*/
-/*    align-items: flex-start;*/
-    
+/* new */
+.contributor-group {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-between;
-    align-items: center;
+    margin-bottom: 40px;
+}
+.contributor-container {
+    padding: 40px;
+    margin: 20px;
+}
+.contributor-container.pm {
+    flex: 0 0 30%;
+}
+.contributor-container.interns {
+    background: #DDD;
+    display: flex;
+    flex: 0 0 65%;
+}
+.contributor-container.engineers {
+    display: flex;
+    flex: 0 0 60%;
+}
+.container-description {
     margin: auto;
 }
-
-.section-2 .contributorItem  {
+.container-description h2 {
+    font-size: 2rem;
+}
+.container-description p{
+    font-size: 1rem;
+    text-align: justify;
+}
+.contributor-item {
     display: flex;
+    margin: 40px auto 20px;
+    justify-content: space-between;
+}
+.contributor-item.type-1 {
+    flex-direction: column;
+}
+.contributor-item.type-2 {
     flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0;
-    margin: 0 100px;
-    flex: 0 0 50%;
+    align-items: flex-start;
 }
-
-.section-2 div.contributorItem {
-/*    margin-top: 75px;*/
+.type-2 > .contributor-item-info{
+    flex: 0 0 25%;
 }
-
-.section-2 .contributorItem .contributorHeadshot,
-.section-2 .contributorItem .contributorText {
+.type-2 > .contributor-item-bio {
+    flex: 0 0 70%;
+}
+.contributor-item-info{
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    align-items: center;
 }
-
-.section-2 .contributorItem .contributorHeadshot img {
-    width: 200px;
-    height: 200px;
+.contributor-item-bio {
+    text-align: justify;
+    text-indent: 2em;
+    font-size: 0.9rem;
 }
-
-.section-2 .contributorItem .contributorText h2, 
-.section-2 .contributorItem .contributorText h4 {
-    text-align: left;
-}
-
-.section-2 .contributorItem .contributorHeadshot {
-    flex: 0 0 20%;
-}
-
-.section-2 .contributorItem .contributorText {
-    flex: 0 0 70%;
+.contributor-item.placeholder {
+    color: #666;
 }

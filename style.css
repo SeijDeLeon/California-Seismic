@@ -209,43 +209,6 @@ div.groupPhoto p{
     text-align:center;
 }
 
-/*
-footer.footingMain{
-    background-color:#666;
-    padding-left:10%;
-    width: 100%;
-}
-
-.footingMain .row {
-    display: grid;
-    grid-template-columns: 25% 25% 25%;
-}
-
-footer.footingMain h1{
-    font-size:15px;
-    color: #fff;    
-}
-
-footer.footingMain ul {
-    list-style:none;
-    text-align:left;
-    padding-left:0;
-}
-
-footer.footingMain ul li a{
-    color:#fff;
-    padding:0;
-    font-size: 15px;
-    line-height: 1.8;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.footerLogo img {
-    height: 44px;
-}
-*/
-
 .videoContainer iframe{
     width:100%;
     max-width:560px;
@@ -706,6 +669,7 @@ footer.footingMain .row div p a {
     padding: 1.25rem 1.875rem;
     margin: 0;
 }
+
 @media only screen and (min-width: 29.8125rem /* 477px */) {
     .footingMain {
         justify-content: space-evenly;
