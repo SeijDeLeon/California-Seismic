@@ -282,40 +282,39 @@ div.groupPhoto p{
         width:100%;
     }
 
-div.aboutSection h2{
-    padding:1em 0;
-    margin:0;
-}
+    div.aboutSection h2{
+        padding:1em 0;
+        margin:0;
+    }
 
-div.aboutSection img{
-    height:auto;
-    width:100%;
-}
+    div.aboutSection img{
+        height:auto;
+        width:100%;
+    }
     
     div.aboutSection .row .col-6:nth-child(2) p{
         padding: 2% 0;
         margin:0;
     }
     
-div.lectureIntroWrap{
-   padding:4% 2%;
-    margin:auto;
-    text-align:center;
-    
-}
+    div.lectureIntroWrap{
+        padding:4% 2%;
+        margin:auto;
+        text-align:center;
+    }
     
     div.lectureIntroWrap .row .col-6 p{
         text-align:left;
         padding:0;
     }
     
-div.lectureCardWrap{
-    padding:5%;
-    grid-template-columns:1fr;
-    grid-template-rows:;
-    grid-gap:2%;
-    margin-bottom:10px;
-}
+    div.lectureCardWrap{
+        padding:5%;
+        grid-template-columns:1fr;
+        grid-template-rows:;
+        grid-gap:2%;
+        margin-bottom:10px;
+    }
 
     div.lectureCard a img{
         background-color:white;
@@ -348,8 +347,8 @@ div.lectureCardWrap{
     }
     
     section.contributeWrapper p{
-    width:90%;
-}
+        width:90%;
+    }
     section.contributeWrapper iframe{
         width:100%;
         height:75vh;
@@ -362,7 +361,7 @@ div.lectureCardWrap{
     .col-6, .col-4, .col-7, .col-5{
         width:100%;
         margin:0; 
-}
+    }
     
     div.mobileStack{
         width: 50%;
@@ -374,28 +373,26 @@ div.lectureCardWrap{
         display:block: /*make sure the boxes stack*/
     }
 
-div.leftSide-col,
-div.rightSide-col{
-        
+    div.leftSide-col,
+    div.rightSide-col{ 
         margin: 8px; /*for mobile, put small amount of margin around all elements*/
-    text-align:center;
+        text-align:center;
     }
     
     input[type="text"] {
         width:350px;
-        
     }
     .videoContainer{
         margin:auto;
     }
     
-.videoContainer iframe{ /*specifying iframe adjust the video itself, not just the div tag*/
-   position:relative; /*need the mobile view to make it stay in the same spot, don't want ability to scroll sideways in mobile*/
-    width:100%;
-    margin:0; /*removers any extra margin created by the browser*/
-    overflow:hidden; /*some browsers puit a scroll bar, we don't want that, just hide the content instead*/
-    padding:0;
-}
+    .videoContainer iframe{ /*specifying iframe adjust the video itself, not just the div tag*/
+        position:relative; /*need the mobile view to make it stay in the same spot, don't want ability to scroll sideways in mobile*/
+        width:100%;
+        margin:0; /*removers any extra margin created by the browser*/
+        overflow:hidden; /*some browsers puit a scroll bar, we don't want that, just hide the content instead*/
+        padding:0;
+    }
     
     h1.section2Header{
         font-size:50px;
