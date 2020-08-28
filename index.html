@@ -17,16 +17,15 @@
         <div class="home-logo">
             <a href="../index.html" rel="home" class="logo"><img src="indexPic/cs_logowithtext.png"></a>
         </div>
-        <nav class="main-nav">
-            <div class="main-menu-container">
-                <ul class="menu-nav">
-                    <li class="menu-item"><a href="Lectures">Lectures</a></li>
-                    <li class="menu-item"><a href="PracticeQuestions">Practice Questions</a></li>
-                    <li class="menu-item"><a href="ExamInfo">Exam Guide</a></li>
-                    <li class="menu-item"><a href="Contributors">Contributors</a></li>
-                </ul>
-            </div>
-        </nav>
+        <div class="main-menu-container">
+            <ul class="menu-nav" id="dropdownClick">
+                <li class="menu-item"><a class="nav-link" href="Lectures">Lectures</a></li>
+                <li class="menu-item"><a class="nav-link" href="PracticeQuestions">Practice Questions</a></li>
+                <li class="menu-item"><a class="nav-link" href="ExamInfo">Exam Guide</a></li>
+                <li class="menu-item"><a class="nav-link" href="Contributors">Contributors</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776</a></li>
+            </ul>
+        </div>
     </div>
     <div class="main">
         <div class="hero hero-content">
@@ -73,7 +72,7 @@
         </div>
     </div>
     <footer class="footingMain">
-        <div class="row">
+        <div class="footer-row">
             <div class = "mobileStack footerLogo">
                 <h1 class="row-heading">California<br>Seismic</h1>
                 <a href="mailto:californiaseismic@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M0,24.08v9.89l86,68.2625l86,-67.4025v-10.75zM0,42.6775v105.2425h172v-104.3825l-83.85,65.79c-0.61812,0.48375 -1.3975,0.7525 -2.15,0.7525c-0.7525,0 -1.51844,-0.25531 -2.15,-0.7525z"></path></g></g></svg></a>
