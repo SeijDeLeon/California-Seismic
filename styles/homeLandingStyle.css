@@ -91,9 +91,55 @@ div.hero .heroText p{
     color:white;
 }
 
+/* Onboarding screen */
+.onboarding-container {
+    background: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+.onboarding-container h1,
+.onboarding-container h2,
+.onboarding-container h3,
+.onboarding-container p {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.yellow-text {
+    color: #f7c233;
+}
+.onboarding-container h2 {
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: 40px;
+}
+.onboarding-container h3 {
+    font-size: 24px;
+}
+.onboarding-container p {
+    font-size: 16px;
+    font-weight: 300;
+}
+.onboarding-header {
+    max-width: 800px;
+/*    text-align: center;*/
+    margin: 0 auto;
+/*    margin: 0 140px;*/
+}
+.onboarding-group {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+.onboarding-item {
+    padding: 30px;
+/*    border-style: dotted;*/
+}
+.onboarding-item img {
+    max-width: 80%;
+    height: 200px;
+}
+
 /* Front Page start Options */
 .start-options-container {
-    background-color: white;
+/*    background-color: white;*/
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
