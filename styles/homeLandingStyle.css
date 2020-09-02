@@ -41,14 +41,6 @@ h2.mock-hero-title {
     isolation: isolate;
     padding: 10px 100px;
     overflow: hidden;
-}
-.hero-items {
-    overflow: hidden;
-}
-.hero-items img {
-    margin: 0;
-}
-div.hero{
     width:100%;
     height:92vh;
     position:relative;
@@ -56,7 +48,11 @@ div.hero{
     mix-blend-mode:normal;
     color:black;
 }
-div.hero img{
+.hero-items {
+    overflow: hidden;
+}
+.hero-items img {
+    margin: 0;
     width:30%;
     height:auto;
     object-fit:cover;
@@ -64,31 +60,77 @@ div.hero img{
     top:10%;
     right:10%;
 }
-@media only screen and (max-width: 1000px) {
-    .hero {
-        display: flex;
-        flex-direction: column;
-    }
-    .mock-hero-items {
-       position: relative;
-    }
-}
-div.hero .heroText{
+div.heroText{
     z-index:999;
     position:absolute;
     margin:10% 0 0 10%;
     text-shadow: 2px 2px 2px #69AACE;
 }
-div.hero .heroText h1{
+div.heroText h1{
     font-weight:700;
     font-size:72px;
     color:white;
 }
-div.hero .heroText p{
+div.heroText p{
     font-size:30px;
     font-weight:500;
     padding:0;
     color:white;
+}
+
+@media screen and (min-width: 1001px) and (max-width:1200px) {
+    div.hero {
+        height: calc(100vh - 62px);
+    }
+    div.hero div.heroText {
+        margin-left: 2%;
+    }
+    div.hero div.heroText h1{
+        font-size: 68px;
+    }
+    div.hero div.heroText p{
+        font-size: 28px;
+    }
+    .menu-nav{
+        max-width: 1300px;
+    }
+}
+@media screen and (min-width: 0px) and (max-width:1000px){
+    div.hero {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0 10%;
+        padding-bottom: 10%;
+    }
+    div.heroText {
+        position: relative;
+        text-align: center;
+        margin: 0px 20px 40px;
+    }
+    div.hero-items {
+        display: block;
+        text-align: center;
+        margin: 0 auto;
+    }
+    div.hero-items img{
+        width: 80%;
+        display: block;
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 0 auto;
+    }
+}
+@media screen and (max-width: 768px) {
+    div.heroText h1 {
+        font-size: 64px;
+    }
+    div.heroText p {
+        font-size: 24px;
+    }
 }
 
 /* Onboarding screen */

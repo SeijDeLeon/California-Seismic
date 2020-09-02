@@ -216,34 +216,6 @@ div.groupPhoto p{
 
 /*####### Mobile #########*/
 
-@media screen and (max-width:1200px){
-    div.hero{
-        height:65vh;
-    }
-    div.hero div.heroText {
-        margin-left:2%;
-    }
-    div.hero div.heroText h1{
-        font-size:5em;
-    }
-    div.hero div.heroText p{
-        font-size:1.5em;
-    }
-    .menu-nav{
-        max-width:1300px;
-    }
-}
-
-@media screen and (max-width:1000px){
-    div.hero{
-        height:60vh;
-    }
-    div.hero img{
-        height:100%;
-        width:100%;
-    }
-}
-
 @media screen and (max-width: 760px) { /*680 previously */
 /*
     div.resources{
