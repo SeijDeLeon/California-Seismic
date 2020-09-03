@@ -3,41 +3,28 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>Lectures</title>
+    <title>Lecture 0</title>
     <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../styles/lecturePageStyle.css">
     <script src="../../javascriptStyle.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"></head>
 <body>
-    <nav class="topnavLectureContainer"> 
-        <div class="topnavLecture">
-            <div id="lectureSidebarExpanded" class="sidebar">
-                <a href="javascript:void(0);" class="closebtn" onclick="closeNav()"><i class = "upArrow"></i></a>
-                <a href=#Lecture1>1:  Intro</a>
-                <a href=#Lecture2>2:  Seismicity</a>
-                <a href=#Lecture3>3:  Site Conditions</a>
-                <a href=#Lecture4>4:  Structural Systems</a>
-                <a href=#Lecture5>5:  Seismic Demand</a>
-                <a href=#Lecture6>6:  Vertical Force Distribution</a>
-                <a href=#Lecture7>7:  Horizontal Force Distribution</a>
-                <a href=#Lecture8>8:  Forces on Elements</a>
-                <a href=#Lecture9>9:  Nonstructural Components</a>
-                <a href=#Lecture10>10: Detailing</a>
-            </div>
-            <div id="lectureSidebarCollapsed">
-                <button class="openbtn" onclick="openNav()"> Lecture List <i class="downArrow"></i></button>
-            </div>
+    <div class="top-nav-container" id="dropdownContainer">
+        <div class="home-logo">
+            <a href="../../index.html" rel="home" class="logo"><img src="../../indexPic/cs_logowithtext.png"></a>
         </div>
-
-        <ul class="topnav" id="dropdownClick"> 
-            <li id="homeIcon"><a href="../../index.html"><img src="../../indexPic/seismic_small_navbar.png"></a></li>
-            <li><a href="../../Lectures" class="currentLink">Lectures</a></li>
-            <li><a href="../../PracticeQuestions">Practice Questions</a></li>
-            <li><a href="../../ExamInfo">Exam Info</a></li>
-            <li><a href="../../Contributors">Contribute</a></li>
-            <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
-        </ul>
-    </nav>    
+        <div class="main-menu-container">
+            <ul class="menu-nav" id="dropdownClick">
+                <li class="menu-item"><a class="nav-link currentLink" href="../../Lectures">Lectures</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../PracticeQuestions">Practice Questions</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../ExamInfo">Exam Guide</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../Contributors">Contributors</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776</a></li>
+            </ul>
+        </div>
+    </div>
     <div id="main">
     <article class="lectureBackground">
     <div class="lectureWrap">

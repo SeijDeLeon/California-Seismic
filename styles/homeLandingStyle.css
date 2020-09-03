@@ -132,6 +132,14 @@ div.heroText p{
         font-size: 24px;
     }
 }
+@media screen and (max-width: 550px) {
+    div.heroText h1 {
+        font-size: 48px;
+    }
+    div.heroText p {
+        font-size: 20px;
+    }
+}
 
 /* Onboarding screen */
 .onboarding-container {

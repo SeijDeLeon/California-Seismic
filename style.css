@@ -459,13 +459,13 @@ ul.menu-nav {
     font-weight: bold;
 }
 @media screen and (max-width: 899px) {
-    .top-nav-container {
-        display: block;
-    }
     .top-nav-container.responsive {
+        display: block;
         background: white;
         width: 100%;
-        height: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: 1;
         margin: 0;
         padding: 5px;
     }
