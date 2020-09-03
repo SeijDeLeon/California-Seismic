@@ -1,0 +1,52 @@
+/* PRACTICE QUESTION LANDING PAGE */
+.pq-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+.pq-heading {
+    text-align: center;
+    margin: 0 auto 60px;
+    max-width: 800px;
+}
+.pq-heading h1 {
+    font-size: 5rem;
+}
+.pq-heading p {
+    font-size: 1.5rem;
+}
+.pq-options-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.pq-option-col {
+    background-color: #4266a8;
+    color: white;
+    width: 350px;
+    padding: 20px 40px 30px;
+    text-align: center;
+    border-radius: 25px;
+/*    box-shadow: 2px 2px 5px #879dc4;*/
+}
+.pq-lectures {
+    display: flex;
+    flex-direction: column;
+}
+.pq-options-container button {
+    border-radius: 5px;
+    border-width: 0;
+    cursor: pointer;
+    width: 50%;
+    height: 2rem;
+}
+.pq-lectures button {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.pq-options-container a, .pq-options-container a:visited {
+    text-decoration: none;
+    color: black;
+}
+/* END PQ LANDING PAGE */

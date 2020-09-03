@@ -1,12 +1,21 @@
 /*eslint no-undef: "error"*/
 /*eslint-env browser*/
 
-function dropdownMenu() {
+function toggleDropdown() {
     var x = document.getElementById("dropdownClick");
-    if (x.className == "topnav") {
+    var y = document.getElementById("dropdownContainer");
+    var z = document.getElementsByClassName("dropdownIcon");
+    if (x.className == "menu-nav") {
         x.className += " responsive";
+        z[0].getElementsByTagName("A")[0].innerHTML = "&#9587";
     } else {
-        x.className = "topnav";
+        x.className = "menu-nav";
+        z[0].getElementsByTagName("A")[0].innerHTML = "&#9776";
+    }
+    if (y.className == "top-nav-container") {
+        y.className += " responsive";
+    } else {
+        y.className = "top-nav-container";
     }
 }
         
