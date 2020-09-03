@@ -162,9 +162,7 @@ div.heroText p{
 }
 .onboarding-header {
     max-width: 800px;
-/*    text-align: center;*/
     margin: 0 auto;
-/*    margin: 0 140px;*/
 }
 .onboarding-group {
     display: grid;
@@ -172,11 +170,27 @@ div.heroText p{
 }
 .onboarding-item {
     padding: 30px;
-/*    border-style: dotted;*/
 }
 .onboarding-item img {
     max-width: 80%;
     height: 200px;
+}
+@media screen and (max-width: 900px) {
+    .onboarding-container {
+        padding: 40px;
+    }   
+}
+@media screen and (max-width: 700px) {
+    .onboarding-group {
+        grid-template-columns: 100%;
+    }
+    .onboarding-item {
+        margin: 0;
+        padding: 10px;
+    }
+    .onboarding-item img {
+        height: 33vh;
+    }
 }
 
 /* Front Page start Options */
@@ -247,6 +261,7 @@ div.heroText p{
     }
     div.start-option-row {
         flex-direction: column;
+        align-items: center;
     }
     div.start-option-col {
         width: 100%;
