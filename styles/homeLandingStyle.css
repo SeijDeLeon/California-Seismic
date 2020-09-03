@@ -180,8 +180,10 @@ div.heroText p{
 }
 
 /* Front Page start Options */
+.start-options-container.compressed {
+    display: none;
+}
 .start-options-container {
-/*    background-color: white;*/
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -200,13 +202,11 @@ div.heroText p{
 }
 .start-option-col {
     background-color: white;
-    margin: 10px 40px;
+    margin: 10px 40px 40px;
     flex: 1 50%;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
-}
-.start-option-col-text {
     box-shadow: 3px 5px 10px #7698AF;
 }
 .start-option-col h3 {
@@ -233,4 +233,33 @@ div.heroText p{
 }
 .start-option-col img {
     width: 200px;
+}
+@media screen and (min-width: 0px) and (max-width: 749px) {
+    div.start-options-container {
+        display: none;
+    }
+    div.start-options-container.compressed {
+        display: block;
+        padding: 40px 10%;
+    }
+    div.start-options-container.compressed h3 {
+        margin-top: 10px;
+    }
+    div.start-option-row {
+        flex-direction: column;
+    }
+    div.start-option-col {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+@media screen and (min-width: 750px) and (max-width: 849px) {
+    div.start-options-container {
+        padding: 40px 5%;
+    }
+}
+@media screen and (min-width: 850px) and (max-width: 1028px) {
+    div.start-options-container {
+        padding: 60px 10%;
+    }
 }
