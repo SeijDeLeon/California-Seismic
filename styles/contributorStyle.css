@@ -174,13 +174,25 @@ div.contributorLinks {
 }
 @media screen and (max-width: 430px) {
     section.contributeWrapper {
-/*        padding: 20px 0%;*/
+        padding: 20px 0%;
         margin: 0;
+    }
+    .contributeTitle h1 {
+        font-size: 32px;
+        margin-bottom: 0;
+    }
+    .contributor-container {
+        padding-top: 0;
+        padding-bottom: 0;
     }
 }
 @media screen and (min-width: 431px) and (max-width: 899px) {
     section.contributeWrapper {
         padding: 20px 5%;
+    }
+    .contributor-item-bio {
+        text-align: left;
+        text-indent: 0;
     }
 }
 @media screen and (max-width: 899px) {
