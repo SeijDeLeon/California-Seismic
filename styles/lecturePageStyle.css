@@ -5,9 +5,7 @@
 }
 
 div.lectureWrap{
-    margin:1% auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 0 auto;
     width: 75%;
     max-width:900px;
     background-color:white;
@@ -94,7 +92,7 @@ article.lectureBackground{
     background-color:#dae0e6;
     width:100%;
     margin:0;
-    padding:1% 0;
+    padding: 20px;
 }
 
 div.lectureSkip{

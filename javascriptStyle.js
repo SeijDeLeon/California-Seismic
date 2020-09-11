@@ -80,3 +80,38 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 }
 /* End sidebar code from w3schools.com */
+
+//$(document).ready(function() {
+//        var $sidebar   = $("#lectureSidebar"), 
+//            $window    = $(window),
+//            offset     = $sidebar.offset(),
+//            topPadding = 73;
+//
+//        $window.scroll(function() {
+//            if ($window.scrollTop() > offset.top) {
+//                $sidebar.stop().animate({
+//                    marginTop: $window.scrollTop() - offset.top + topPadding
+//                });
+//            } else {
+//                $sidebar.stop().animate({
+//                    marginTop: 0
+//                });
+//            }
+//        });
+//});
+
+$(document).ready(function () {
+    var top = $('#lectureSidebar').offset().top - parseFloat($('#lectureSidebar').css('marginTop').replace(/auto/, 0)) - 20;
+    $(window).scroll(function (event) {
+        // what the y position of the scroll is
+        var y = $(this).scrollTop();
+        // whether that's below the form
+        if (y >= top) {
+            // if so, ad the fixed class
+            $('#lectureSidebar').addClass('fixed');
+        } else {
+            // otherwise remove it
+            $('#lectureSidebar').removeClass('fixed');
+        }
+    });
+});

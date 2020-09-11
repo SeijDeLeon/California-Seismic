@@ -148,19 +148,28 @@ ul.topnavLecture.responsive li.upArrowList{
     flex-direction: row;
     justify-content: space-between;
 }
+.lectureSidebarWrapper {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 900px;
+    width: 280px;
+}
 .lectureSidebar {
     width: 280px;
-    position: fixed;
+    position: absolute;
     z-index: 1; /* Stay on top */
-    top: 50px; /* Stay below navbar */
-    left: 0;
+    top: 93px;
+    left: 20px;
     background-color: #FFF;  
     overflow-x: hidden; /* Disable horizontal scroll */
     padding: 20px 40px;
-    margin-top: 20px; /* to match article margin */
-    margin-left: 20px;
-    box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
+    box-shadow: rgba(106,136,145,0.15) 0 6px 0px;
     font-family: 'PT Serif', serif;
+}
+.lectureSidebar.fixed {
+    position: fixed;
+    top: 20px;
 }
 .lectureSidebar p {
     font-size: 0.9375rem;
@@ -177,6 +186,5 @@ ul.topnavLecture.responsive li.upArrowList{
     transition: .3s;
 }
 /* End static sidebar */
-
 
 /*########### End Lecture Nav Bar#################*/
