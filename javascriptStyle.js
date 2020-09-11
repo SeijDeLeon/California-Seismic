@@ -102,16 +102,56 @@ function closeNav() {
 
 $(document).ready(function () {
     var top = $('#lectureSidebar').offset().top - parseFloat($('#lectureSidebar').css('marginTop').replace(/auto/, 0)) - 20;
+    
+    var footer = $('.footingMain');
+    var sidebar = $('.lectureSidebar');
+    var body = document.body,
+    html = document.documentElement;
+    var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    
     $(window).scroll(function (event) {
         // what the y position of the scroll is
         var y = $(this).scrollTop();
         // whether that's below the form
         if (y >= top) {
             // if so, ad the fixed class
+            $('#lectureSidebar').css('top', 20 + 'px');
             $('#lectureSidebar').addClass('fixed');
         } else {
             // otherwise remove it
+            $('#lectureSidebar').css('top', 93 + 'px');
             $('#lectureSidebar').removeClass('fixed');
+        }     
+        if (y+$(sidebar).height()+100 >= docHeight-$(footer).height()-40    ) {
+            let endHeight = docHeight-y-$(window).height()-$(footer).height()+40;
+            $('#lectureSidebar').css('top', endHeight + 'px');
         }
     });
+    
+//    $(function() {
+////        const sidebar = $('.sidebar-container');
+//        const widget = $('.lectureSidebar');
+//        const footer = $('.footingMain');
+//        const space = 10; // arbitrary value to create space between the window and widget
+//        const startTop = 60; // arbitrary start top position
+//        const endTop = footer.offset().top - widget.height() - space;
+//        widget.css('top', startTop);         $(window).scroll(function() {
+//            let windowTop = $(this).scrollTop();
+//            let widgetTop = widget.offset().top;
+//            let newTop = startTop;
+//
+//            if (widgetTop >= startTop && widgetTop <= endTop) {
+//                if (windowTop > startTop - space && windowTop < endTop - space) {
+//                    newTop = windowTop + space;
+//                } else if (windowTop > endTop - space) {
+//                   newTop = endTop;
+//                }
+//                widget.stop().animate({
+//                   'top': newTop
+//                });
+//            }
+//        });
+//    });
 });
+
+
