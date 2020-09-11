@@ -189,6 +189,7 @@ div.heroText p{
     }   
 }
 @media screen and (max-width: 700px) {
+/*
     .onboarding-group {
         grid-template-columns: 100%;
     }
@@ -199,6 +200,58 @@ div.heroText p{
     .onboarding-item img {
         height: 33vh;
     }
+*/
+    .onboarding-container {
+        display: none;
+    }
+    #onboarding-carousel.carousel {
+        display: block;
+    }
+}
+@media screen and (max-width: 400px) {
+    .carousel-item img {
+        max-width: 200px;
+    }
+}
+
+/* Onboarding Carousel */
+#onboarding-carousel {
+    background: white;
+    display: none;
+    padding: 40px 40px 0;
+}
+#onboarding-carousel h1,
+#onboarding-carousel h2,
+#onboarding-carousel h3,
+#onboarding-carousel p {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+#onboarding-carousel p {
+    font-weight: 300;
+}
+#onboarding-carousel h2 {
+    text-transform: uppercase;
+}
+#onboarding-carousel .onboarding-header {
+    margin-bottom: 40px;
+}
+#onboarding-carousel .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #999;
+/*    background-color: rgba(70, 70, 70, 0.25);*/
+}
+.carousel-indicators .active {
+    background-color: #444;
+}
+.carousel-item img {
+    max-height: 200px;
+}
+.carousel-item {
+    text-align: center;
+    margin: 0 auto;
+    min-height: 400px;
 }
 
 /* Front Page start Options */
