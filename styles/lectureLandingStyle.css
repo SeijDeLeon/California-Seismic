@@ -27,8 +27,8 @@ div.lectureCardWrap{
     background-color:#f1f1f1;
     display:grid;
     grid-template-columns:1fr 1fr 1fr 1fr;
-    grid-template-rows:0.75fr;
-    grid-gap:2%;
+    grid-template-rows: 0.75fr;
+    grid-gap: 2em;
     text-align:center;
     text-decoration:none;
 }
@@ -62,4 +62,20 @@ div.lectureCard img{
 div.lectureCard h4, div.lectureCard p{
     padding:4% 2%;
     margin: 1% 0;
+}
+
+@media screen and (max-width: 499px) {
+    div.lectureCardWrap {
+       grid-template-columns: 1fr; 
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 699px) {
+    div.lectureCardWrap {
+       grid-template-columns: 1fr 1fr; 
+    }
+}
+@media screen and (min-width:700px) and (max-width: 999px) {
+    div.lectureCardWrap {
+       grid-template-columns: 1fr 1fr 1fr; 
+    }
 }
