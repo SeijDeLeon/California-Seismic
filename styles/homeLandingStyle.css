@@ -275,6 +275,9 @@ div.heroText p{
     flex-direction: row;
     justify-content: space-evenly;
 }
+.start-option-row div {
+    height: 300px;
+}
 .start-option-col {
     background-color: white;
     margin: 10px 40px 40px;
@@ -283,6 +286,10 @@ div.heroText p{
     padding: 20px;
     border-radius: 10px;
     box-shadow: 3px 5px 10px #7698AF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .start-option-col h3 {
     font-size: 36px;
@@ -307,7 +314,8 @@ div.heroText p{
     cursor: pointer;
 }
 .start-option-col img {
-    width: 200px;
+/*    width: 200px;*/
+    max-height: 200px;
 }
 @media screen and (min-width: 0px) and (max-width: 749px) {
     div.start-options-container {
