@@ -16,15 +16,14 @@
     font-size: 1.5rem;
 }
 .pq-options-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 50px;
+    text-align: center;
 }
 .pq-option-col {
     background-color: #4266a8;
     color: white;
-    width: 350px;
     padding: 20px 40px 30px;
     text-align: center;
     border-radius: 25px;
@@ -38,7 +37,7 @@
     border-radius: 5px;
     border-width: 0;
     cursor: pointer;
-    width: 50%;
+    width: 100px;
     height: 2rem;
 }
 .pq-lectures button {
@@ -49,4 +48,13 @@
     text-decoration: none;
     color: black;
 }
-/* END PQ LANDING PAGE */
+
+@media screen and (max-width: 899px) {
+    .pq-options-container {
+/*        width: 80%;*/
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 50px;
+        text-align: center;
+    }
+}

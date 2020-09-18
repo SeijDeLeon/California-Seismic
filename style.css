@@ -217,29 +217,6 @@ div.groupPhoto p{
 /*####### Mobile #########*/
 
 @media screen and (max-width: 760px) { /*680 previously */
-/*
-    div.resources{
-        height:auto;
-        padding:2% 0 30% 0;
-    }
-    div.hero{
-        height:50vh;
-    }
-    
-    div.hero img{
-        height:100%;
-        width:100%;        
-    }
-    
-    div.hero div.heroText h1{
-        font-size:2em;
-    }
-    
-    div.hero div.heroText p{
-        font-size:1em;
-        padding-right:30%;
-    }*/
-    
     div.gridWrapper{
         grid-template-columns:auto;
         grid-template-rows:auto;
@@ -458,6 +435,15 @@ ul.menu-nav {
     font-size: 24px;
     font-weight: bold;
 }
+@media screen and (max-width: 499px) {
+    .home-logo img {
+        max-height: 40px;
+        margin: 20px;
+    }
+    .dropdownIcon {
+        margin-top: 10px;
+    }
+}
 @media screen and (max-width: 899px) {
     .top-nav-container.responsive {
         display: block;
@@ -496,6 +482,9 @@ ul.menu-nav {
         font-size: 24px;
         line-height: 80px;
     }
+    ul.menu-nav.responsive > div.main-menu-container {
+        margin-top: 50%;
+    }
 }
 
 /* ###### FOOTER ###### */
@@ -532,6 +521,7 @@ footer.footingMain ul li a{
 }
 footer.footingMain h1{
     font-size: 36px;
+    font-weight: 600;
 }
 .copyright {
     margin-top: 40px;

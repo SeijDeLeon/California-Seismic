@@ -127,7 +127,7 @@ $(document).ready(function () {
             $('#lectureSidebar').css('top', endHeight + 'px');
         }
     });
-    
+});
 //    $(function() {
 ////        const sidebar = $('.sidebar-container');
 //        const widget = $('.lectureSidebar');
