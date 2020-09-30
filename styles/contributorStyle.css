@@ -1,64 +1,54 @@
 /*##### Contribute Section ########*/
 section.contributeWrapper{
     text-align:center;
-    padding: 20px 90px;
-/*    font-family: 'PT Serif', serif;*/
-}
-div.contributorHeadshot {
-    width: 150px;
-    height: 150px;
-    mix-blend-mode:multiply;
-    background-blend-mode:multiply;
-    filter:grayscale(90%);
-    transition-duration:0.2s;
-}
-
-.contributor-item:hover > div.contributorHeadshot {
-    filter:grayscale(20%);
-}
-.contributor-profile:hover > div.contributorHeadshot {
-    filter:grayscale(20%);
-}
-.contributor-item:hover > .contributor-item-info > div.contributorHeadshot {
-    filter:grayscale(20%);
+    padding: 20px 120px;
 }
 .contributorHeadshot img {
     width: 100%;
     border-radius: 50%;
 }
-
+.contributeWrapper p, .contributeWrapper a {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.15;
+}
+.contributeWrapper h1, .contributeWrapper h2, .contributeWrapper h3, .contributeWrapper h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
 .contributeTitle h1 {
-    font-size: 48px;
+    font-size: 72px;
 }
-.group-heading {
-    margin: 0 60px;
-    width: 65%;
-    margin: 0 auto;
-    margin-top: 60px;
-    text-align: center;
+.container-description h2 {
+    font-size: 36px;
+    margin-top: 0;
+    text-decoration: underline 3px #7ca4c2;
 }
-.group-heading h2 {
-    font-size: 32px;
-    text-align: center;
-}
-.group-heading p {
+.container-description p {
     font-size: 16px;
+    text-align: justify;
+    text-align-last: center;
+/*    color: #505457;*/
+    color: #76818a;
+    font-weight: 400;
 }
-
 .contributorName {
-    text-decoration: underline #6291a5;
-    line-height: 30px;
+/*    text-decoration: underline #6291a5;*/
+    text-decoration: underline 3px #7ca4c2;
+    font-size: 28px;
+/*    line-height: 30px;*/
     margin-bottom: 0.5rem;
-}
-.contributorText p {
-    text-align: left;
-    font-size: 14px;
-    font-weight: 300;
+    margin: 0.75rem auto 0.5rem;
 }
 .contributorText h4 {
-    text-align: center;
-    font-size: 14px;
+/*    text-align: center;*/
+    font-size: 16px;
     margin: 0;
+}
+.contributor-item-bio {
+    text-align: justify;
+/*    text-indent: 1.5em;*/
+    font-size: 18px;
+    font-weight: 300;
 }
 div.contributorLinks {
     margin-top: 10px;
@@ -77,42 +67,46 @@ div.contributorLinks {
 .contributorLinks a:hover {
     color: black;
 }
-
+div.contributorHeadshot {
+    width: 150px;
+    height: 150px;
+}
 .contributorLinks img {
     width: 20px;
     /* 50px is pixel perfect size */
     /* change size of icon in CSS to preserve quality */
 }
-
 .contributorName img {
     width: 20px;
     vertical-align: middle;
     margin-left: 10px;
 }
-
 .contributor-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 40px;
-    margin: 20px;
 }
-
 .contributor-group {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 80px;
 }
+/*
 .contributor-container.pm {
     flex: 0 0 30%;
+    padding: 20px;
 }
+*/
 .contributor-container.interns {
-    background: #DDD;
+/*    background: #e1e5e8;*/
+/*    background: #e8ebed;*/
+/*    background: #f0f1f2;*/
     display: flex;
-    flex: 0 0 65%;
+    flex: 0 0 100%;
 }
 .contributor-container.engineers {
     display: flex;
@@ -127,28 +121,24 @@ div.contributorLinks {
 }
 .container-description {
     margin: auto;
-}
-.container-description h2 {
-    font-size: 32px;
-}
-.container-description p{
-    font-size: 16px;
-    text-align: justify;
+    max-width: 90%;
 }
 .contributor-item {
     display: flex;
-    margin: 40px auto 20px;
-    justify-content: space-between;
+    margin: 20px auto 20px;
+    justify-content: space-evenly;
+    padding: 40px;
+    background: #f0f1f2;
 }
 .contributor-item.type-1 {
     flex-direction: column;
 }
 .contributor-item.type-2 {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
 }
 .type-2 > .contributor-item-info {
-    flex: 0 0 25%;
+    flex: 0 0 20%;
 }
 .type-2 > .contributor-item-bio {
     flex: 0 0 70%;
@@ -159,16 +149,13 @@ div.contributorLinks {
 .type-3 > .contributor-item-bio {
     flex: 0 0 65%;
 }
-.contributor-item-info{
+.contributor-item-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
+    text-align: left;
 }
-.contributor-item-bio {
-    text-align: justify;
-    text-indent: 2em;
-    font-size: 0.9rem;
-}
+/*.contributor-item-info h2,*/
 .contributor-item.placeholder {
     color: #666;
 }
@@ -182,17 +169,25 @@ div.contributorLinks {
         margin-bottom: 0;
     }
     .contributor-container {
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0 20px;
+    }
+    .contributor-item-bio p {
+        font-size: 12px;
+    }
+    .container-description h2 {
+        font-size: 32px;
+    }
+    .container-description p {
+        font-size: 14px;
     }
 }
 @media screen and (min-width: 431px) and (max-width: 899px) {
     section.contributeWrapper {
-        padding: 20px 5%;
+        padding: 20px 0%;
+/*        margin: 0;*/
     }
-    .contributor-item-bio {
-        text-align: left;
-        text-indent: 0;
+    .contributor-container {
+        padding: 0 30px;
     }
 }
 @media screen and (max-width: 899px) {
@@ -209,6 +204,27 @@ div.contributorLinks {
     }
     .contributor-item.type-3 {
         flex: 0 0 100%;
+    }
+    .contributor-item-bio {
+        text-align: left;
+        text-indent: 0;
+    }
+}
+@media screen and (min-width: 900px) {
+    .contributor-item:hover > div.contributorHeadshot {
+        filter:grayscale(10%);
+    }
+    .contributor-profile:hover > div.contributorHeadshot {
+        filter:grayscale(10%);
+    }
+    .contributor-item:hover > .contributor-item-info > div.contributorHeadshot {
+        filter:grayscale(10%);
+    }
+    div.contributorHeadshot {
+        mix-blend-mode:multiply;
+        background-blend-mode:multiply;
+        filter:grayscale(95%);
+        transition-duration:0.2s;
     }
 }
 @media screen and (min-width: 900px) and (max-width: 1168px) {
@@ -237,5 +253,10 @@ div.contributorLinks {
     .contributor-container.pm, 
     .contributor-container.engineers {
         padding-top: 0;
+    }
+}
+@media screen and (max-width: 1168px) {
+    .container-description {
+        max-width: 80vw;
     }
 }

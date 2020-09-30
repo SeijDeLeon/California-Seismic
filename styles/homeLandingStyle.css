@@ -14,8 +14,11 @@ body.front-page {
     flex-direction: column;
     background: rgb(154,188,213);
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 100%);
+/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 70%);*/
+/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(133,171,209,1) 100%);*/
     background-repeat: no-repeat;
-    background-attachment: fixed;
+/*    background-attachment: fixed;*/
+    background-attachment: scroll;
     background-size: cover;
 }
 h1, h2, h3 , p, a, li, button {
@@ -58,7 +61,7 @@ h1, h2, h3 , p, a, li, button {
 .heroText{
     z-index:999;
     position:absolute;
-    text-shadow: 1px 1px 5px rgb(124,164,194,1);
+/*    text-shadow: 1px 1px 5px rgb(124,164,194,1);*/
 }
 .heroText h1{
     font-weight:700;
@@ -107,7 +110,7 @@ h1, h2, h3 , p, a, li, button {
     div.heroText {
         position: relative;
         text-align: center;
-/*        margin: 20px 20px 40px;*/
+        margin: 20px 20px 40px;
     }
     div.hero-items {
         display: block;
@@ -153,6 +156,7 @@ h1, h2, h3 , p, a, li, button {
     background: white;
     text-align: center;
     padding: 80px 20px;
+    min-height: 100vh;
 }
 .yellow-text {
     color: #f7c233;
@@ -211,6 +215,8 @@ h1, h2, h3 , p, a, li, button {
     background: white;
     display: none;
     padding: 40px 40px 0;
+    min-height: 100vh;
+    padding: 10%;
 }
 #onboarding-carousel .onboarding-header {
     margin-bottom: 40px;
