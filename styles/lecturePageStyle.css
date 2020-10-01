@@ -73,15 +73,7 @@ div.lectureWrap h1{
     font-size: 2em;
 }
 
-.lectureWrap p, .lectureWrap li {
-/*    font-size: .9375rem;*/
-/*    font-size: 1.1rem;*/
-/*    font-size: 16px;*/
-/*    font-weight: 400;*/
-}
-
 div.lectureWrap p{
-/*    color:#777;*/
     padding:1em 0;
     line-height:1.5;
     font-weight:400;
