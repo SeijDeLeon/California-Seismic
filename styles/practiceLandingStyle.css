@@ -1,4 +1,7 @@
 /* PRACTICE QUESTION LANDING PAGE */
+.pq-content h1, .pq-content h2, .pq-content h3, .pq-content h4, .pq-content p, .pq-content a {
+    font-family: 'Montserrat', sans-serif;
+}
 .pq-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -10,7 +13,7 @@
     max-width: 800px;
 }
 .pq-heading h1 {
-    font-size: 5rem;
+    font-size: 72px;
 }
 .pq-heading p {
     font-size: 1.5rem;
