@@ -4,13 +4,22 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title> California Seismic </title>
-    <link rel="stylesheet" href="style.css" >
-    <link rel="stylesheet" href="styles/homeLandingStyle.css" >
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/homeLandingStyle.css">
     <script src="javascriptStyle.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body class="front-page">
@@ -24,7 +33,7 @@
                 <li class="menu-item"><a class="nav-link" href="PracticeQuestions">Practice Questions</a></li>
                 <li class="menu-item"><a class="nav-link" href="ExamInfo">Exam Guide</a></li>
                 <li class="menu-item"><a class="nav-link" href="Contributors">Contributors</a></li>
-                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776;</a></li>
             </ul>
         </div>
     </div>
@@ -41,7 +50,7 @@
     </div>
     <div class="onboarding-container">
         <div class="onboarding-header">
-            <h2>What makes <span class="yellow-text">California Seismic</span> the best learning tool for the Seismic Exam?</h2>
+            <h2>Why <span class="yellow-text">California Seismic</span>?</h2>
         </div>
         <div class="onboarding-group">
             <div class="onboarding-item">
@@ -61,63 +70,106 @@
             </div>
         </div>
     </div>
+    <!--Carousel Wrapper-->
+    <div id="onboarding-carousel" class="carousel slide" data-ride="carousel">
+        <div class="onboarding-header">
+            <h2>Why <span class="yellow-text">California Seismic</span>?</h2>
+        </div>
+        <ol class="carousel-indicators">
+            <li data-target="#onboarding-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#onboarding-carousel" data-slide-to="1"></li>
+            <li data-target="#onboarding-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <img src="indexPic/onboarding_01.svg"/>
+                <div class="carousel-text">
+                    <h3><span class="yellow-text">FREE</span> Access</h3>
+                    <p>No subscription fees, no restrictions. Read, view, and practice for free.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="indexPic/onboarding_02.svg"/>
+                <div class="carousel-text">
+                    <h3>All in One Place</h3>
+                    <p>Comprehensive learning materials and exam guides. Everything you need to be prepared is right here.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="indexPic/onboarding_03.svg"/>
+                <div class="carousel-text">
+                    <h3>Made by Engineers</h3>
+                    <p>All the materials you see are created by dedicated and passionate engineers in the civil engineering community.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#onboarding-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#onboarding-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    
     <div class="start-options-container">
-        <h1>Take the next step.</h1>
+        <h2>Take the next step.</h2>
         <div class="start-option-row">
             <div class="start-option-col start-option-col-text">
-                <h3>Learn</h3>
+                <h3>Lectures</h3>
                 <p>Start your studying here.</p>
-                <a href="Lectures"><button>Lectures</button></a>
+                <a href="Lectures"><button>See All Lectures</button></a>
             </div>
             <div class="start-option-col">
-                <img src="indexPic/mainLectureCard.jpg"/>
+                <img src="indexPic/start_01.png"/>
             </div>
         </div>
         <div class="start-option-row">
             <div class="start-option-col">
-                <img src="indexPic/mainQuestionsCard.jpg"/>
+                <img src="indexPic/start_02.png"/>
             </div>
             <div class="start-option-col start-option-col-text">
-                <h3>Practice</h3>
+                <h3>Practice Questions</h3>
                 <p>Test your seismic knowledge with exam style questions.</p>
-                <a href="Lectures"><button>Practice Questions</button></a>
+                <a href="Lectures"><button>See All Practice Questions</button></a>
             </div>
         </div>
         <div class="start-option-row">
             <div class="start-option-col start-option-col-text">
-                <h3>Prepare</h3>
+                <h3>Exam Resources</h3>
                 <p>Be ready for the Seismic Principles Exam.</p>
-                <a href="ExamInfo"><button>Exam Info</button></a>
+                <a href="ExamInfo"><button>See All Exam Resources</button></a>
             </div>
             <div class="start-option-col">
-                <img src="indexPic/mainExamInfoCard.jpg"/>
+                <img src="indexPic/start_03.png"/>
             </div>
         </div>
     </div>
     <div class="start-options-container compressed">
-        <h1>Take the next step.</h1>
+        <h2>Take the next step.</h2>
         <div class="start-option-row">
             <div class="start-option-col start-option-col-text">
-                <img src="indexPic/mainLectureCard.jpg"/>
-                <h3>Learn</h3>
+                <img src="indexPic/start_01.png"/>
+                <h3>Lectures</h3>
                 <p>Start your studying here.</p>
-                <a href="Lectures"><button>Lectures</button></a>
+                <a href="Lectures"><button>See All Lectures</button></a>
             </div>
         </div>
         <div class="start-option-row">
             <div class="start-option-col start-option-col-text">
-                <img src="indexPic/mainQuestionsCard.jpg"/>
-                <h3>Practice</h3>
+                <img src="indexPic/start_02.png"/>
+                <h3>Practice Questions</h3>
                 <p>Test your seismic knowledge with exam style questions.</p>
-                <a href="Lectures"><button>Practice Questions</button></a>
+                <a href="Lectures"><button>See All Practice Questions</button></a>
             </div>
         </div>
         <div class="start-option-row">
             <div class="start-option-col start-option-col-text">
-                <img src="indexPic/mainExamInfoCard.jpg"/>
-                <h3>Prepare</h3>
+                <img src="indexPic/start_03.png"/>
+                <h3>Exam Resources</h3>
                 <p>Be ready for the Seismic Principles Exam.</p>
-                <a href="ExamInfo"><button>Exam Info</button></a>
+                <a href="ExamInfo"><button>See All Exam Resources</button></a>
             </div>
         </div>
     </div>

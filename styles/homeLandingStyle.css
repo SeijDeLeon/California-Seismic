@@ -5,37 +5,35 @@ html.front-page {
     overflow-x: hidden;
 }
 body.front-page {
-    font-family: 'PT Serif', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, rgba(70,150,182,1) 0%, rgba(211,237,244,1) 100%);
+    background: rgb(154,188,213);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 100%);
+/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 70%);*/
+/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(133,171,209,1) 100%);*/
     background-repeat: no-repeat;
-    background-attachment: fixed;
+/*    background-attachment: fixed;*/
+    background-attachment: scroll;
     background-size: cover;
 }
-.top-nav-container, .mock-main {
+h1, h2, h3 , p, a, li, button {
+    font-family: 'Montserrat', sans-serif;
+}
+.top-nav-container {
     flex: 1 0 auto;
 }
-.mock-hero-title,.mock-hero-subtitle {
-    color: white;
-}
-h2.mock-hero-title {
-    font-weight: 600;
-}
 
-/* CONTENT */
+/* START CONTENT */
 
 .main {
     margin: 0;
     padding: 0;
     width: 100%;
-}
-.main h1, .main h2, .main h3 {
-    font-family: 'Merriweather', serif;
 }
 .hero-content {
     isolation: isolate;
@@ -60,30 +58,34 @@ h2.mock-hero-title {
     top:10%;
     right:10%;
 }
-div.heroText{
+.heroText{
     z-index:999;
     position:absolute;
-    margin:10% 0 0 10%;
-    text-shadow: 2px 2px 2px #69AACE;
+/*    text-shadow: 1px 1px 5px rgb(124,164,194,1);*/
 }
-div.heroText h1{
+.heroText h1{
     font-weight:700;
     font-size:72px;
     color:white;
 }
-div.heroText p{
+.heroText p{
     font-size:30px;
     font-weight:500;
     padding:0;
     color:white;
 }
-
+@media screen and (min-width: 1001px) {
+    .heroText {
+        top: 25%;
+        left: 10%;
+    }
+}
 @media screen and (min-width: 1001px) and (max-width:1200px) {
     div.hero {
         height: calc(100vh - 62px);
     }
     div.hero div.heroText {
-        margin-left: 2%;
+        left: 8%;
     }
     div.hero div.heroText h1{
         font-size: 68px;
@@ -108,7 +110,7 @@ div.heroText p{
     div.heroText {
         position: relative;
         text-align: center;
-        margin: 0px 20px 40px;
+        margin: 20px 20px 40px;
     }
     div.hero-items {
         display: block;
@@ -140,36 +142,42 @@ div.heroText p{
         font-size: 20px;
     }
 }
+@media screen and (max-width: 400px) {
+    div.heroText h1 {
+        font-size: 36px;
+    }
+    div.heroText p {
+        font-size: 14px;
+    }
+}
 
 /* Onboarding screen */
 .onboarding-container {
     background: white;
     text-align: center;
     padding: 80px 20px;
-}
-.onboarding-container h1,
-.onboarding-container h2,
-.onboarding-container h3,
-.onboarding-container p {
-    font-family: 'Merriweather Sans', sans-serif;
+    min-height: 100vh;
 }
 .yellow-text {
     color: #f7c233;
 }
-.onboarding-container h2 {
+.onboarding-container h2, #onboarding-carousel h2 {
     text-transform: uppercase;
     font-size: 32px;
+    font-weight: 600;
     line-height: 40px;
 }
-.onboarding-container h3 {
+.onboarding-container h3, #onboarding-carousel h3 {
     font-size: 24px;
+    font-weight: 600;
 }
-.onboarding-container p {
+.onboarding-container p, #onboarding-carousel p {
     font-size: 16px;
     font-weight: 300;
 }
 .onboarding-header {
     max-width: 800px;
+    text-align: center;
     margin: 0 auto;
 }
 .onboarding-group {
@@ -188,20 +196,53 @@ div.heroText p{
         padding: 40px;
     }   
 }
-@media screen and (max-width: 700px) {
-    .onboarding-group {
-        grid-template-columns: 100%;
+@media screen and (max-width: 869px) {
+    .onboarding-container {
+        display: none;
     }
-    .onboarding-item {
-        margin: 0;
-        padding: 10px;
+    #onboarding-carousel.carousel {
+        display: block;
     }
-    .onboarding-item img {
-        height: 33vh;
+}
+@media screen and (max-width: 400px) {
+    .carousel-item img {
+        max-width: 200px;
     }
 }
 
+/* Onboarding Carousel */
+#onboarding-carousel {
+    background: white;
+    display: none;
+    padding: 40px 40px 0;
+    min-height: 100vh;
+    padding: 10%;
+}
+#onboarding-carousel .onboarding-header {
+    margin-bottom: 40px;
+}
+#onboarding-carousel .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #999;
+}
+.carousel-indicators .active {
+    background-color: #444;
+}
+.carousel-item img {
+    max-height: 200px;
+}
+.carousel-item {
+    text-align: center;
+    margin: 0 auto;
+    min-height: 400px;
+}
+
 /* Front Page start Options */
+.start-options-container, .start-options-container.compressed {
+    background: rgba(146,179,204,1);    
+}
 .start-options-container.compressed {
     display: none;
 }
@@ -211,10 +252,11 @@ div.heroText p{
     justify-content: space-evenly;
     padding: 80px 180px;
 }
-.start-options-container h1 {
+.start-options-container h2 {
     text-align: center;
     font-size: 48px;
-    color: black;
+    font-weight: 600;
+    color: #FFF;
     text-shadow: 2px 2px 2px #7698AF;
 }
 .start-option-row {
@@ -222,20 +264,27 @@ div.heroText p{
     flex-direction: row;
     justify-content: space-evenly;
 }
+.start-option-row div {
+    height: 300px;
+}
 .start-option-col {
     background-color: white;
     margin: 10px 40px 40px;
     flex: 1 50%;
     text-align: center;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 3px 5px 10px #7698AF;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #7698AF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .start-option-col h3 {
     font-size: 36px;
+    font-weight: 600;
 }
 .start-option-col button {
-    font-family: 'Merriweather';
     font-size: 15px;
     padding: 18px;
     border-radius: 5px;
@@ -243,20 +292,21 @@ div.heroText p{
     transition: 0.3s;
     color: white;
     font-weight: 700;
-    text-shadow: 1px 1px 1px gray;
+    text-shadow: 1px 1px 2px rgb(184, 160, 81, 0.5);
     background-color: rgb(240,190,25);
     transition: 0.3s;
 }
 .start-option-col button:hover {
+    text-shadow: 1px 1px 2px rgb(52, 80, 133, 0.5);
     background-color: rgb(59,111,206);
     color: white;
     transition: 0.3s;
     cursor: pointer;
 }
 .start-option-col img {
-    width: 200px;
+    max-height: 200px;
 }
-@media screen and (min-width: 0px) and (max-width: 749px) {
+@media screen and (min-width: 0px) and (max-width: 869px) {
     div.start-options-container {
         display: none;
     }
@@ -276,13 +326,30 @@ div.heroText p{
         max-width: 400px;
     }
 }
-@media screen and (min-width: 750px) and (max-width: 849px) {
+@media screen and (min-width: 870px) and (max-width: 959px) {
     div.start-options-container {
         padding: 40px 5%;
     }
 }
-@media screen and (min-width: 850px) and (max-width: 1028px) {
+@media screen and (min-width: 960px) and (max-width: 1029px) {
+    div.start-options-container {
+        padding: 50px 10%;
+    }
+}
+@media screen and (min-width: 1030px) and (max-width: 1149px) {
     div.start-options-container {
         padding: 60px 10%;
+    }
+}
+@media screen and (min-width: 1150px) {
+    div.start-options-container {
+        padding: 100px 5%;
+    }
+    div.start-option-col {
+        width: 500px;
+    }
+    div.start-option-row {
+        max-width: 1500px;
+        margin: 0 auto;
     }
 }

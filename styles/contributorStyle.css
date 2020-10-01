@@ -1,186 +1,147 @@
 /*##### Contribute Section ########*/
 section.contributeWrapper{
     text-align:center;
-    padding: 20px 90px;
-/*    font-family: 'PT Serif', serif;*/
-}
-div.contributorHeadshot {
-    width: 150px;
-    height: 150px;
-    mix-blend-mode:multiply;
-    background-blend-mode:multiply;
-    filter:grayscale(90%);
-    transition-duration:0.2s;
-}
-
-.contributor-item:hover > div.contributorHeadshot {
-    filter:grayscale(20%);
-}
-.contributor-profile:hover > div.contributorHeadshot {
-    filter:grayscale(20%);
-}
-.contributor-item:hover > .contributor-item-info > div.contributorHeadshot {
-    filter:grayscale(20%);
+    padding: 20px 140px;
 }
 .contributorHeadshot img {
     width: 100%;
     border-radius: 50%;
 }
-
+.contributeWrapper p, .contributeWrapper a {
+    font-family: 'Rubik', sans-serif;
+    line-height: 1.2;
+    font-weight: 400;
+}
+.contributeWrapper h1, .contributeWrapper h2, .contributeWrapper h3, .contributeWrapper h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
 .contributeTitle h1 {
-    font-size: 48px;
+    font-size: 72px;
 }
-.group-heading {
-    margin: 0 60px;
-    width: 65%;
+.container-description h2 {
+    font-size: 40px;
     margin: 0 auto;
-    margin-top: 60px;
-    text-align: center;
+    text-decoration: underline 5px #f0be19;
 }
-.group-heading h2 {
-    font-size: 32px;
-    text-align: center;
+.container-description p {
+    font-size: 20px;
+    text-align: justify;
+    text-align-last: center;
+    color: #76818a;
 }
-.group-heading p {
-    font-size: 16px;
-}
-
 .contributorName {
-    text-decoration: underline #6291a5;
-    line-height: 30px;
+    text-decoration: underline 3px #f0be19;
+    font-size: 26px;
     margin-bottom: 0.5rem;
-}
-.contributorText p {
-    text-align: left;
-    font-size: 14px;
-    font-weight: 300;
+    margin: 0.75rem auto 0.5rem;
 }
 .contributorText h4 {
-    text-align: center;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.2;
     margin: 0;
+}
+.contributor-item-bio {
+    text-align: justify;
+/*    text-indent: 1.5em;*/
+    font-size: 16px;
 }
 div.contributorLinks {
     margin-top: 10px;
 }
 .contributorLinks a {
-    text-align: center;
     color: black;
-    text-decoration: underline black;
-    font-size: 12px;
-    font-weight: 600;
     margin: 0 2px;
 }
-.contributorLinks a:active,
-.contributorLinks a:link,
-.contributorLinks a:visited,
-.contributorLinks a:hover {
-    color: black;
+div.contributorHeadshot {
+    width: 150px;
+    height: 150px;
 }
-
 .contributorLinks img {
     width: 20px;
-    /* 50px is pixel perfect size */
-    /* change size of icon in CSS to preserve quality */
 }
-
 .contributorName img {
     width: 20px;
     vertical-align: middle;
     margin-left: 10px;
 }
-
 .contributor-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding: 40px;
-    margin: 20px;
+    justify-content: space-between;
+    padding: 20px;
 }
-
 .contributor-group {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 40px;
-}
-.contributor-container.pm {
-    flex: 0 0 30%;
-}
-.contributor-container.interns {
-    background: #DDD;
-    display: flex;
-    flex: 0 0 65%;
-}
-.contributor-container.engineers {
-    display: flex;
-    flex-direction: row;
-    flex: 0 0 100%;
-    justify-content: space-between;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-.contributor-item.type-3 {
-    flex: 0 0 45%;
+    margin: 0 auto 60px;
 }
 .container-description {
     margin: auto;
-}
-.container-description h2 {
-    font-size: 32px;
-}
-.container-description p{
-    font-size: 16px;
-    text-align: justify;
+    max-width: 90%;
 }
 .contributor-item {
     display: flex;
-    margin: 40px auto 20px;
-    justify-content: space-between;
-}
-.contributor-item.type-1 {
-    flex-direction: column;
-}
-.contributor-item.type-2 {
+    margin: 20px auto 20px;
+    justify-content: space-evenly;
+    padding: 40px;
+    background: #f0f1f2;
     flex-direction: row;
-    align-items: flex-start;
-}
-.type-2 > .contributor-item-info {
-    flex: 0 0 25%;
-}
-.type-2 > .contributor-item-bio {
-    flex: 0 0 70%;
-}
-.type-3 > .contributor-item-info {
-    flex: 0 0 25%;
-}
-.type-3 > .contributor-item-bio {
-    flex: 0 0 65%;
-}
-.contributor-item-info{
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
 .contributor-item-bio {
-    text-align: justify;
-    text-indent: 2em;
-    font-size: 0.9rem;
+    flex: 0 0 70%;
+}
+.contributor-item-info {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
 }
 .contributor-item.placeholder {
     color: #666;
 }
 @media screen and (max-width: 430px) {
     section.contributeWrapper {
-/*        padding: 20px 0%;*/
+        padding: 20px 0%;
         margin: 0;
+    }
+    .contributeTitle h1 {
+        font-size: 32px;
+    }
+    .contributor-container {
+        padding: 0 20px;
+    }
+    .contributor-item-bio p {
+        font-size: 12px;
+    }
+    .container-description h2 {
+        font-size: 24px;
+    }
+    .container-description p {
+        font-size: 12px;
+    }
+    .contributor-item-info h2 {
+        font-size: 20px;
+    }
+    .contributor-item-info h4 {
+        font-size: 14px;
+    }
+    .contributor-item-bio p {
+        font-size: 12px;
     }
 }
 @media screen and (min-width: 431px) and (max-width: 899px) {
     section.contributeWrapper {
-        padding: 20px 5%;
+        padding: 20px 0%;
+/*        margin: 0;*/
+    }
+    .contributor-container {
+        padding: 0 30px;
     }
 }
 @media screen and (max-width: 899px) {
@@ -190,40 +151,85 @@ div.contributorLinks {
     .contributor-group {
         flex-direction: column;
     }
-    .contributor-item.type-2,
-    .contributor-item.type-3 {
+    .contributor-item {
         flex-direction: column;
         align-items: center;
+        padding: 30px 20px 20px;
     }
-    .contributor-item.type-3 {
-        flex: 0 0 100%;
+    .contributor-item-info {
+        align-items: center;
+        align-content: center;
+        text-align: center;
     }
 }
-@media screen and (min-width: 900px) and (max-width: 1168px) {
+@media screen and (min-width: 900px) {
+    .contributor-item:hover > div.contributorHeadshot {
+        filter:grayscale(10%);
+    }
+    .contributor-profile:hover > div.contributorHeadshot {
+        filter:grayscale(10%);
+    }
+    .contributor-item:hover > .contributor-item-info > div.contributorHeadshot {
+        filter:grayscale(10%);
+    }
+    div.contributorHeadshot {
+        mix-blend-mode:multiply;
+        background-blend-mode:multiply;
+        filter:grayscale(95%);
+        transition-duration:0.2s;
+    }
+}
+@media screen and (min-width: 900px) and (max-width: 1199px) {
+    section.contributeWrapper {
+        padding: 20px 80px;
+    }
     .contributor-group {
         flex-direction: column;
     }
-    .contributor-item.type-1 {
+    .contributor-item {
         flex-direction: row;
         align-items: flex-start;
     }
     .contributor-item.type-3 {
         flex: 0 0 100%;
     }
-    .type-1 > .contributor-item-info,
-    .type-3 > .contributor-item-info {
+    .contributor-item-info {
         flex: 0 0 25%;
     }
-    .type-1 > .contributor-item-bio,
-    .type-3 > .contributor-item-bio {
-        flex: 0 0 70%;
+    .contributor-item-bio {
+        flex: 0 0 65%;
     }
     .contributor-container {
         margin-top: 0;
         margin-bottom: 0;
     }
-    .contributor-container.pm, 
-    .contributor-container.engineers {
+    .contributor-container {
+        padding-top: 0;
+    }
+}
+@media screen and (max-width: 1199px) {
+    .container-description {
+        max-width: 80vw;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1299px) {
+    section.contributeWrapper {
+        padding: 20px 100px;
+    }
+    .contributor-group {
+        flex-direction: column;
+    }
+    .contributor-item-info {
+        flex: 0 0 30%;
+    }
+    .contributor-item-bio {
+        flex: 0 0 65%;
+    }
+    .contributor-container {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .contributor-container {
         padding-top: 0;
     }
 }

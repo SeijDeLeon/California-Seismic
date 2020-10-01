@@ -71,6 +71,7 @@ article p{
     border-bottom: solid 1px;
 }
 
+/*
 nav.topnav
     width:100%;
     margin:0; 
@@ -87,16 +88,17 @@ nav.topnav
 .topnav a {
     font-family: 'Montserrat', sans-serif;
 }
+*/
 nav ul {
     background-color:inherit;
-    overflow: hidden; /* any elements too big to fit on screen, hide it. THis reduces the scroll bar */
+    overflow: hidden;
     margin:0;
     padding:0;
     display:flex;
 }
-
+/*
 ul.topnav li{
-    list-style:none; /*guarantees to remove the bullet points on the navbar list */
+    list-style:none;
 }
 
 ul.topnav li:nth-child(1){
@@ -127,7 +129,7 @@ ul.topnav li:first-child a{
     text-decoration:none;
     display:block;
     text-align:center;
-    max-height:44px; /*specify height to remove the 2pixel border underneatht he image */
+    max-height:44px;
 }
 
 ul.topnav li a img{   
@@ -138,6 +140,7 @@ ul.topnav li a img{
     border-width:0;
     border:0;
 }
+*/
 
 /*####### End Nav Bar ########*/
 
@@ -181,7 +184,6 @@ h1.section2Header{
 
 form h2{
     color:grey;
-    
 }
 
 button.journey{
@@ -217,29 +219,6 @@ div.groupPhoto p{
 /*####### Mobile #########*/
 
 @media screen and (max-width: 760px) { /*680 previously */
-/*
-    div.resources{
-        height:auto;
-        padding:2% 0 30% 0;
-    }
-    div.hero{
-        height:50vh;
-    }
-    
-    div.hero img{
-        height:100%;
-        width:100%;        
-    }
-    
-    div.hero div.heroText h1{
-        font-size:2em;
-    }
-    
-    div.hero div.heroText p{
-        font-size:1em;
-        padding-right:30%;
-    }*/
-    
     div.gridWrapper{
         grid-template-columns:auto;
         grid-template-rows:auto;
@@ -428,17 +407,13 @@ div.groupPhoto p{
 .home-logo img {
     max-height: 60px;
 }
-ul.menu-nav a:link,
-ul.menu-nav a:visited {
+ul.menu-nav li a:link, ul.menu-nav a:visited {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 14px;
     text-decoration: none;
     color: #000;
-}
-ul.menu-nav .menu-item a:hover {
-    text-decoration: underline;
 }
 ul.menu-nav {
     padding: 0;
@@ -457,6 +432,23 @@ ul.menu-nav {
     display: none;
     font-size: 24px;
     font-weight: bold;
+}
+ul.menu-nav li a:hover {
+    background-color:#cdf1ed;
+    color:#161f2e;
+    text-decoration: none;
+}
+ul.menu-nav li a:visited, ul.menu-nav li a:link {
+/*    text-decoration: none;*/
+}
+@media screen and (max-width: 499px) {
+    .home-logo img {
+        max-height: 40px;
+        margin: 20px;
+    }
+    .dropdownIcon {
+        margin-top: 10px;
+    }
 }
 @media screen and (max-width: 899px) {
     .top-nav-container.responsive {
@@ -496,6 +488,9 @@ ul.menu-nav {
         font-size: 24px;
         line-height: 80px;
     }
+    ul.menu-nav.responsive > div.main-menu-container {
+        margin-top: 50%;
+    }
 }
 
 /* ###### FOOTER ###### */
@@ -504,6 +499,9 @@ footer.footingMain{
     padding: 20px 10%;
     text-align: center;
     color: #fff;
+}
+.footingMain h1, .footingMain h2, .footingMain h3, .footingMain p, .footingMain a, .footingMain li {
+    font-family: 'Montserrat', sans-serif;
 }
 footer.footingMain .footer-row {
     display: flex;
@@ -532,6 +530,7 @@ footer.footingMain ul li a{
 }
 footer.footingMain h1{
     font-size: 36px;
+    font-weight: 700;
 }
 .copyright {
     margin-top: 40px;
