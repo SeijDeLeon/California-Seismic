@@ -16,7 +16,7 @@
     font-size: 72px;
 }
 .pq-heading p {
-    font-size: 1.5rem;
+    font-size: 20px;
 }
 .pq-options-container {
     display: grid;
@@ -29,35 +29,118 @@
     color: white;
     padding: 20px 40px 30px;
     text-align: center;
-    border-radius: 25px;
-/*    box-shadow: 2px 2px 5px #879dc4;*/
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.pq-option-col p {
+    font-size: 20px;
+    line-height: 1.2;
 }
 .pq-lectures {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.pq-lectures-col {
     display: flex;
     flex-direction: column;
 }
 .pq-options-container button {
-    border-radius: 5px;
+    border-radius: 3px;
     border-width: 0;
     cursor: pointer;
-    width: 100px;
-    height: 2rem;
+    width: 180px;
+    height: 60px;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 .pq-lectures button {
-    margin: 0 auto;
-    margin-bottom: 10px;
+    width: 120px;
+    height: 40px;
 }
 .pq-options-container a, .pq-options-container a:visited {
     text-decoration: none;
     color: black;
 }
-
-@media screen and (max-width: 899px) {
+@media screen and (max-width: 1299px) {
+    .pq-option-col {
+        padding: 20px;        
+    }
+}
+@media screen and (max-width: 1149px) {
+    .pq-option-col p {
+        font-size: 16px;
+        line-height: 1.2;
+    }
+    .pq-options-container button {
+        border-radius: 3px;
+        border-width: 0;
+        cursor: pointer;
+        width: 150px;
+        height: 40px;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    .pq-lectures button {
+        width: 90px;
+        height: 30px;
+    }
+}
+@media screen and (max-width: 949px) {
     .pq-options-container {
-/*        width: 80%;*/
+        max-width: 500px;
         display: grid;
         grid-template-columns: 1fr;
         grid-row-gap: 50px;
-        text-align: center;
+        margin: 0 auto;
+    }
+}
+@media screen and (max-width: 799px) {
+    .pq-content {
+        padding-top: 0px;
+    }
+    .pq-options-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 30px;
+        margin: 0 auto;
+    }
+    .pq-heading h1 {
+        font-size: 56px;
+    }
+    .pq-heading p {
+        font-size: 18px;
+    }
+    .pq-option-col h1 {
+        font-size: 24px;
+    }
+    .pq-option-col p {
+        font-size: 14px;
+    }
+    .pq-options-container button {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 499px) {
+    .pq-heading {
+/*        text-align: center;*/
+        margin: 0px auto 40px;
+/*        max-width: 800px;*/
+    }
+    .pq-heading h1 {
+        font-size: 44px;
+    }
+    .pq-heading p {
+        font-size: 14px;
+    }
+    .pq-option-col p {
+        font-size: 12px;
+    }
+    .pq-options-container button {
+        font-size: 12px;
     }
 }
