@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Lecture 7</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../styles/lecturePageStyle.css">
+    <link rel="stylesheet" href="../../styles/lectureNavStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="../../javascriptStyle.js"></script>
+    
+    <!-- Mathscribe -->
+    <link rel="stylesheet" href="../../assets/mathscribe/jqmath-0.4.3.css">
+    <script src="../../assets/mathscribe/jquery-1.4.3.min.js"></script>
+    <script src="../../assets/mathscribe/jqmath-etc-0.4.6.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <div class="top-nav-container" id="dropdownContainer">
+        <div class="home-logo">
+            <a href="../../index.html" rel="home" class="logo"><img src="../../indexPic/cs_logowithtext.png"></a>
+        </div>
+        <div class="main-menu-container">
+            <ul class="menu-nav" id="dropdownClick">
+                <li class="menu-item"><a class="nav-link currentLink" href="../../Lectures">Lectures</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../PracticeQuestions">Practice Questions</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../ExamInfo">Exam Guide</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../Contributors">Contributors</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776</a></li>
+            </ul>
+        </div>
+    </div>
+
+<article class="lectureBackground">
+<div class="main-content">
+    <div class="lectureSidebar">
+            <h3><a href="../">All Lectures</a></h3>
+            <p><a href="../Lecture0">0:  Seismic Exam Intro</a></p>
+            <p><a href="../Lecture1">1:  Seismicity / Earthquakes</a></p>
+            <p><a href="../Lecture2">2:  Code Provisions</a></p>
+            <p><a href="../Lecture3">3:  Site Conditions</a></p>
+            <p><a href="../Lecture4">4:  Risk Categories</a></p>
+            <p><a href="../Lecture5">5:  Building Systems</a></p>
+            <p><a href="../Lecture6">6:  Ductility</a></p>
+            <p><a href="../Lecture7">7:  Base Shear</a></p>
+            <p><a href="../Lecture8">8:  Force Distribution</a></p>
+            <p><a href="../Lecture9">9:  Building Drift</a></p>
+            <p><a href="../Lecture10">10: Diaphragms</a></p>
+            <p><a href="../Lecture11">11: Irregularities / Redundancy</a></p>
+            <p><a href="../Lecture12">12: Nonstructural Components</a></p>
+            <p><a href="../Lecture10">13: Seismic Detailing</a></p>
+    </div>
+    <div class="lectureWrap">
+    <div class="lectureHeader">
+        <h1> Lecture 7: Base Shear </h1>
+    </div>
+    
+<!--Begin contents pasted from Google Docs-->
+  <p>From the previous lecture, we learned about the importance of ductility and the expected inelastic performance of buildings. Considering the expected inelastic performance of a structure, this lecture will cover the theory behind the analysis procedure used to determine the seismic forces in a building and the corresponding coefficients used for analysis. The next lecture goes hand-in-hand to explain the analysis procedure in more detail and its application to structures. So, let’s get into it!</p>
+<p>This lecture covers the following topics from the exam requirements:
+<ul>
+     <li> Mass and Stiffness  </li>
+     <li> Methods to Determine the Structure’s Fundamental Period </li>
+     <li> Selection of Seismic Factors and Coefficients Required for Design </li>
+     <li> Static Force Procedures and Formulas </li>
+     <li> Structural System Seismic Coefficient Application </li>
+     <li> Design Base Shear </li>
+</ul><p></p>
+
+<h3> Weight for it…! </h3> 
+<p>To be able to determine the seismic forces in a structure, we have to first learn about the different types of loads that can act on a building. Structures are designed for a variety of loads acting on them, depending on their intended contents and building use. Loads are defined as per Section 1.2.1 of ASCE 7-16.</p>
+
+<img src= "loads.png" alt=”Loads”>
+
+        
+<p>These loads can be written as mass or weights. We must not get confused between the two. To clarify what this means, recall the following equation:</p>
+
+<p>Force = mass x acceleration.</p> 
+
+<p>Newton would be so proud!</p>
+
+<p>To begin, consider the equation for the weight of a human’s body as:</p>
+
+<p>Body Weight (force in pounds) = Mass x Earth’s Gravity (g) </p> 
+
+<p>Our body weight on earth depends on the earth’s gravity. Similarly, if we were standing on the moon, our body weight would be affected by the moon’s gravity. In other words, if you weighed 100 pounds on Earth, you would weigh a mere 16.5 pounds on the Moon. Our weight (force) changed, even though our mass did not. Fascinating, isn’t it?!</p>
+
+<p>Relating this to a seismic event, let us consider a 4-story building that weighs 10 kips. An earthquake strikes with a ground acceleration of 0.4 g. We need to find the lateral forces induced in the structure.</p>
+
+<p> Seismic Lateral Force = (% of) Earth’s Gravity x Weight of the building  = 0.4 x 10 = 4 kips </p>
+
+<p>Note: The earthquake (EQ) ground motion is given as a ratio of the earth’s gravity. Here 0.4 g means 40% of earth’s gravity. We must NOT multiply it with the actual value of earth’s gravity. Say, we are given S<sub>DS</sub> = 1.8 g. Just concentrate on the numerical value. DO NOT MULTIPLY with the actual value of earth’s gravity. </p>
+
+
+
+<img src = "seismicForce.png" alt=”seismic_Force” >
+
+
+
+<p>At this point, mass and weight are interchangeable terms. As per Section 12.7.2 of ASCE 7, the nomenclature for weight used in seismic force is Effective Seismic Weight, W. It is further explained in the next section. </p>
+
+<h3> It’s ALIVE </h3>
+<p>Various loads act on the structure which generally includes dead, live, earthquake, soil, wind, snow, rain, and flood loads. Chapters 2-8 of ASCE 7-16 are dedicated to these different types of loads. Other than dead and live loads, the rest of the loads are self-explanatory and do not always contribute towards the Effective Seismic Weight of the structure unless above a certain maximum threshold. Dead loads and some exceptions of live loads contribute to the Effective Seismic Weight of the structure.  </p>
+
+<img src = "deadAndLiveLoads.png" alt="dead_And_Live_Loads">
+        
+        <a class="imgLink"  href="https://qph.fs.quoracdn.net/main-qimg-efe86383971343bd5ad302b15e08c967"><p>Image via quora</p></a>
+
+<p>So, what are dead loads and live loads?</p>
+
+<p>As per Chapter 3 of ASCE 7-16, dead loads are permanent loads. This includes the parts of a structure that are fixed in place, and not shifted around once the building is fit for occupancy. Examples of dead loads include the actual structural framing, the architectural facade / framing, and the mechanical / electrical systems. Dead loads can also include variable items such as light fixtures, plumbing, and other miscellaneous fixed building pieces that an engineer doesn’t know the exact location of during design, but will contribute to the seismic weight. To account for these variables, there may be a small uniform dead load applied over the entire building floor / wall surface. Dead loads contribute to the lateral forces in the structure due to an earthquake.</p>
+
+
+<img src = "deadLoads.png" alt="dead_Loads">
+
+<p> Now, imagine you had to paint over the floors and walls of the room you’re currently in. Anything you’d remove to do the job is probably a live load. As per Chapter 4 of ASCE 7-16, live loads are transient loads that can be moved around, which means that their exact position is unknown and not permanent. Because they are not rigidly attached to the structure (which is securely stuck to the earth), the acceleration of the ground is not able to ‘accelerate’ the live load. In that case, there is no force (∵ F = ma)! So, live loads are generally not included in the effective seismic weight of the structure.</p>
+
+
+
+
+<img src =  "liveLoads.png" alt="live_Loads">
+
+<p>As per Section 12.7.2 of ASCE 7-16, dead loads and some exceptions for live loads are included when calculating the Effective Seismic Weight of the structure.</p>
+
+
+<img src =  "effectiveSeismicWeight.png" alt="effective_Seismic_Weight">
+
+<p>The triggers for the inclusion of live loads are large roof snow loads, storage loads, roof gardens, and partitions, which is summarized below:</p>
+
+<p>Conditions where Live Loads are added to the seismic weight:
+1: 25% of all storage loads (Live Loads greater than 125 psf)
+2: 20% of roof snow loads greater than 30 psf (exact load given on Exam)
+3: Roof Gardens (Soil weight would have to be given on Exam)
+4: Partitions (10 psf)
+</p>
+
+<p>The above loads can either be rigidly attached to the structure, or are uniform/heavy enough to <q>stick</q> to the structure. In one way or another, they would contribute to the inertial mass of an earthquake. Expect this to be on the seismic exam.</p>
+
+<p>Where do I find the storage loads?</p>
+
+<p>Storage loads (and other live loads) come from the expected use of a building or even a single room. They are approximations of the anticipated transient loads defined by the use of the specific area. Each floor could have different rooms with different uses, so the live loads can vary down to the square foot. Architects usually decide the use of the floor or area, then the structural engineer will translate that information into something that best matches an option within the CBC Table 1607.1. For the Seismic Exam, it will be enough to know the following (from CBC Table 1607.1)</p>
+
+<p>Light Storage = 125 psf</p>
+<p>Heavy Storage = 250 psf</p>
+
+<p> The CBC Table 1607.1 for live loads can be found at 
+<a href = "https://up.codes/viewer/california/ibc-2018/chapter/16/structural-design#16">
+https://up.codes/viewer/california/ibc-2018/chapter/16/structural-design#16 </a> </p>
+
+<p>Considering the different types of loads acting on a structure, ASCE 7-16 has load combinations as per Sections 2.3 and 2.4 that factor these loads used to determine the final force on a structural member. An example of load combinations is given in the following figure. </p>
+
+<img src = "loadCombinations.png" alt="load_Combinations">
+
+<p> where;
+D = dead load
+L = Live load
+L<sub>r</sub> = Roof live load
+S = Snow load
+R = rain load
+W = Wind load </p>
+
+
+<p> These load combinations will be discussed in further detail in the upcoming chapters. For now, it can be noted that the earthquake loads that we determine are at strength level (1.0E), commonly known as LRFD. Therefore, we do not need to do any load combination factoring when determining seismic loads. </p>
+
+
+<h4> Example:</h4>
+
+<p>Let’s go through an example for calculating the effective seismic weight, W, of a single floor. Normally, seismic weight includes the walls and roof, but for now we’ll go through the motions with a smaller subset of an overall building.</p>
+
+<p> Example 1: What is the effective seismic weight of a floor with the following characteristics:</p>
+ <ul>
+ <li>Dimensions: 40ft x 20ft </li>
+ <li>Structural Floor surface: 6” thick normal weight concrete one-way slab</li>
+ <li>Architectural Floor Finish: Carpet & Misc (3 psf)</li>
+ <li>Mechanical / Electrical: 5 psf </li>
+ <li>Use: Office Space (with consideration for partitions)</li>
+ </ul>
+
+
+<p>Strategy: We’re looking for the total seismic weight i.e. a single number. We have the floor dimensions, and some information about the weights (psf) of the floor. We also know the anticipated structure use, so we can check if the live load needs to be included. We should determine the total area of the floor, then determine the total seismic weight per square foot, and finally multiply them to get the answer.</p>
+
+<p> Step 1: Overall area. 40ft x 20ft = 800 square ft</p>
+<p>Step 2: Dead Loads. 6” concrete = (6/12)’ x 120pcf = 60psf.</p> 
+                 <p> Dead Load = 60psf (concrete) + 4psf (carpet) + 5psf (mech/electric) = 68 psf</p>
+<p>Step 3: Live Loads. Office Space use requires 50 psf live loading per CBC Table 1607.1. This 50 psf live load is not included in the effective seismic weight. However, there are partitions! We need to include 10 psf of loading to account for the partitions per ASCE 7 12.7.2</p>
+<p>Step 4: Effective Seismic Calculation. 800 sq ft x (68 psf + 10 psf)= 62,400 lb = 62.4 k </p>
+
+<p> Answer: The effective seismic weight for the floor is 62.4 kips.</p> 
+
+<p>(Note: 1,000 lb = 1 kip. Kips are a common unit in building design because the loads often greatly exceed 1000 lbs. Kips are sometimes spelled out as ‘kips’ , ‘kip’, or even just ‘k’). </p>
+
+<p>Now that we are capable of calculating the effective seismic weight of a structure, the question arises - What do we do with it? The answer is, we multiply the determined W by a coefficient, Cs, to determine the actual seismic force, V, as shall be discussed in later sections.</p> 
+
+
+
+<h3>Equivalent Lateral Force Procedure (ELFP)</h3>
+
+<p>Now that we have learned about the different loads that can be exerted on a structure and the different structural systems, let’s learn about what types of analysis procedures we can use to determine these forces. For these lectures, we will be focusing on the analysis of seismic forces.</p> 
+
+<p>For seismic analysis, there are different methods that can be used. There are a couple of different approved analysis procedures that can be used for the analysis and design of a structure depending on the Seismic Design Category (SDC) and Risk Categorization, or other structural characteristics of the building. The code permitted analytical procedures for use are as follows:</p> 
+ <ul>
+     <li> Equivalent Lateral Force Procedure (ELFP) </li>
+     <li> Linear Dynamic Analysis </li>
+     <li> Nonlinear Response History </li>
+     <li> Simplified Design </li>
+</ul>
+
+<p>The objective of seismic design is to design structures to perform in an acceptable manner during earthquake events to prevent loss of life. For review, the maximum considered earthquake ground motion (MCE<sub>r</sub>) corresponds to the acceleration experienced at the 84th percentile of earthquakes. Since the MCE<sub>r</sub> is too large of an acceleration for design, a ⅔ factor is used to scale down this acceleration. Relating it back to this chapter, this means that structures are required to be designed for forces corresponding to ⅔ of the MCEr to ensure that buildings do not collapse during these earthquake events. </p> 
+        
+<p>The Equivalent Lateral Force Procedure (ELFP) is a method permitted by code that can be used to calculate the seismic forces acting on the structure and determine the force distributions. ASCE 7-16 Section 12.8 highlights the ELFP, with the corresponding design provisions and equations. ELFP is usually used for the analysis and design of typical structures that do not have a lot of irregularities or complexities. This means that this method can be completed by hand. Shown below is Table 12.6-1 from ASCE 7-16, which lists out the different methodologies and when each method can be used (permitted). The letter “P” represents permitted, while “NP” stands for not permitted. The table does not show the last procedure listed above: Simplified Design, because that method can only be used for simple structures. Since most structures in engineering practice are not simple, it is not listed in the table from ASCE 7-16 for practical relevance. Section 12.14 goes into more detail about the Simplified Design Procedure.</p> 
+<img src = "table12.6-1_ASCE7.PNG"  alt="table_12.6-1_ASCE_7">
+
+<p>Now you may be wondering, do I have to know all of these methods for the exam? The answer is no. Since the response history analysis and the modal analysis both require computer softwares, and the simplified method is not commonly used, the Seismic Exam will only test on the ELFP. Nonetheless, it is still a good idea to make sure to familiarize yourself with the table above to understand when each method can be used. This will not only be helpful for the exam, but also for your engineering practice in general. With that in mind, only the ELFP will be covered in the lecture.</p>
+
+<p>Speaking of the ELFP, you have already been using procedures from this method. Remember the approximate fundamental period calculated in Lecture 5? That was actually part of this analytical procedure! To recap, the fundamental period is the ‘longest’ period of a structure. Since the determination of the actual building period is complicated, ASCE 7-16 has a code-permitted method to approximate the building period T<sub>a</sub>. </p>
+
+<p>The ELFP uses the approximate fundamental period T<sub>a</sub> to determine the seismic response coefficient C<sub>s</sub>. Remember that structures are designed to behave inelastically if an earthquake occurs. To account for the inelastic performance of buildings in these events, the C<sub>s</sub> value is defined as a spectral acceleration that is tied together with the response modification factor R and the importance factor I<sub>e</sub>. The C<sub>s</sub> factor represents the inelastic design response spectrum, which is used for seismic analysis. This will be discussed in further detail in the following sections. </p>
+
+
+<h3>Base Shear - ELFP</h3>
+<p>If there’s one section to be sure of, it’s this one. If you can become an expert at determining the seismic demand, otherwise known as the base shear, you will feel comfortable with at least half the exam. We’ll evaluate the specific nuances of base shear throughout this section. So, for right now just remember that base shear is the total horizontal force resisted through a structure’s lateral resisting system as the mass of the building accelerates due to ground shaking.</p>
+
+<img src =  "baseShear.png"  alt="base_Shear">
+
+
+
+<p>To start, let’s review the components of base shear, and then locate those components in ASCE 7-16.</p> 
+
+
+<img src =  "equation12.8-1ASCE7.png"  alt="equation_12.8-1_ASCE_7"> 
+
+<p>We’ve got an equation to determine the seismic base shear. It’s the weight of the building multiplied by acceleration to determine the force, but C<sub>s</sub> is not purely just acceleration. There are a few components that are worked into it. In the C<sub>s</sub> factor, we have acceleration divided by the response modification factor R (ductility), and multiplied by the seismic importance factor, I<sub>e</sub>. For very important structures, we want to lower the chance of collapse and be operational afterward. For instance, if I<sub>e</sub> is 1.5 for a hospital, this will increase the forces and thus improve the performance of the structure for a design level earthquake as well as a maximum considered earthquake. Then, we have the R-value to reduce the seismic loads by taking fictitious elastic force that won't be seen and converting it into inelastic force to account for the realistic behavior of a structure.</p>  
+
+<p>When you look into ASCE 7-16, you’ll see many equations for the acceleration. Let’s take a look at the graph and break down the meaning behind each equation. </p>
+
+
+<img src = "csGraph.png" alt="cs_Graph">
+
+
+
+<p>The above graph is a plot of maximum accelerations experienced on different SDOF (single degree of freedom) systems that were subjected to a multitude of ground motions. Luckily, the structural response results (acceleration, velocity, displacement) tend to follow certain patterns due to the physical nature of SDOF systems. Even if a SDOF is a simple system, it is not a straight line. Thus, we see different “regions” in the graph. We will explore these regions and see how they are tied to seismic design. </p>
+
+<p>As a recap, T is our fundamental period of a structure where we can determine an approximate method or through a computer for an exact value. But why are there so many methods to determine T? If I can enter this graph at a higher period, what would happen? This would mean that the accelerations and design forces are lower; thus, it is more beneficial as a designer if we can demonstrate that the period of our structure is long. Hence, material and cost can be reduced significantly.</p>
+
+<p> Notice there are values on the x-axis that effectively separate the acceleration, displacement, and velocity constant regions. These values are divider lines for which part of the graph your specific building period fits into. T<sub>0</sub> represents the short period ground motion, which is also the start of maximum amplification plateau. T<sub>S</sub> is the characteristic period of ground motion, which is a function of seismicity and the site. T<sub>L</sub> is the long period transition period. Each of these values can be calculated as follows:   </p>
+
+<ul>
+	<li> $$ T_0 = \ 0.2 S_D_1/ \S_D_S $$ </li>
+	<li> $$ T_S = \S_D_1/ \S_D_S $$ </li>
+	<li> T<sub>L</sub> can be determined from ASCE 7-16 Figure 22-14 to Figure 22-19 </li>
+
+</ul>
+ 
+<p>Now, let's look at the C<sub>s</sub> equations. </p>
+
+
+<img src =  "equation12.8-2ASCE7.png" alt="equation_12.8-2_ASCE_7">
+
+
+<p>As we can see, the constant acceleration part of the spectrum controls where 0 &lt; T &lt; T<sub>s</sub>. Note, there is no explicit C<sub>s</sub> equation for the period &lt; T<sub>o</sub> because of the R-value. We covered in the previous lecture that if a building behaves inelastically, the period will increase.  Since it was determined that the inelastic response will be exaggerated in this range, there is no need to determine the C<sub>s</sub> for this range. As a result, there is no C<sub>s</sub> equation for periods &lt; T<sub>o</sub>.</p>
+
+
+<img src =  "equation12.8-3ASCE7.png" alt="equation_12.8-3_ASCE_7">
+
+<p>Equation 12.8-3 represents the constant velocity, where T<sub>s</sub> &lt; T &lt; T<sub> L </sub>. T<sub>L</sub> is the long period transition period, which is provided in ASCE 7-16 from figures 22-14 through 22-19. T<sub> L </sub> ranges from 4 to 16 seconds in various regions in the United States.</p> 
+
+
+<img src =  "equation12.8-4ASCE7.png" alt="equation_12.8-4_ASCE_7">
+
+
+<p>Equation 12.8-4 represents the constant displacement of the spectrum, where T>T<sub> L </sub>. Based on the values given in ASCE 7-16 for T<sub>L</sub>, this equation is more commonly applied to tall and flexible structures. </p>
+
+<p>Note, we still have minimums for all accelerations values for C<sub>s</sub> minimum to check which controls. </p>
+
+
+<img src =  "equation12.8-5ASCE7.png" alt="equation_12.8-5_ASCE_7">
+
+<p>Equation 12.8-5 is the minimum base shear that provides an allowable strength based on the approximate weight of the structure. This equation is considered in all cases for the minimum to check whether C<sub>s</sub> shall be greater than 0.044S<sub>DS</sub>I<sub>e</sub>. In the case where Cs is less than 0.044S<sub>DS</sub>I<sub>e</sub>, then you shall use the value from 0.044S<sub>DS</sub>I<sub>e</sub>. </p>
+
+
+<img src =   "equation12.8-6ASCE7.png" alt="equation_12.8-6_ASCE_7">
+
+<p>Equation 12.8-6 takes into consideration potential earthquakes that can elongate the period of a building, which is known as pulse effects. This causes a building to absorb a large amount of energy in a short amount of time, which can increase long periods. For example, on a seismograph, you would see a great deal of amplitude in a short-range. You can only use equation 12.8-6 when S<sub>1</sub> is equal to or greater than 0.6g.  </p>
+
+<h3> Maximum S<sub>DS</sub> Value for C<sub>s</sub> </h3>
+<p>In addition, there is one section to be aware of because it can be helpful in practice. ASCE 7-16 section 12.8.1.3 introduces the “maximum S<sub>DS</sub> value in the determination of C<sub>s</sub> and E<sub>v</sub>”, where if all of the required criteria are met, then you can use S<sub>DS</sub> = 1.0. The structure of interest must: </p>
+ <ul>
+<li>not have irregularity</li>
+<li>Not exceed five stories</li>
+<li>Not have a fundamental period that is greater than 0.5s</li>
+<li>Have a redundancy factor of 1.0</li>
+<li>Be site class of E or F</li>
+<li>Be risk category of I or II</li>
+</ul>
+
+<p>Note that this only applies to buildings with very short periods. Two new concepts will be covered in further detail in later lectures: irregularity and redundancy factor.</p>
+
+<h4> Practice Problems </h4>
+<p><i>Question:</i> What is the seismic response coefficient (C<sub>s</sub>) of the following structure? A seismic engineer wants to design a 45 ft residential house in Pleasant Hill, CA, where site class = D. S<sub>S</sub> = 1.777, S<sub>1</sub> = 0.6, R = 6.5. </p> 
+
+<p>Solution:</p>
+<p>Step 1: Determine S<sub>DS</sub>and S<sub>D1</sub>. Start by determining the site class. Check ASCE 7 Table 20.3-1.  In the problem statement, it states that the site class D. With our site class determined, we can determine acceleration parameters. Refer to ASCE 7 section Tables 11.4-1 and 11.4-2. Plugging in Site Class D with the given S<sub>1</sub> , S<sub>S</sub> values, we get F<sub>a</sub> = 1.0, F<sub>v</sub> = 1.7. Use eqn 11.4-1 and 11.4-2, to determine MCE level accelerations.</p>
+<p>S<sub>MS</sub> =  F<sub>a</sub> S<sub>S</sub> = (1.0) x (1.777) = 1.777</p>
+<p>S<sub>M1</sub> = F<sub>v</sub> S<sub>1</sub> = (1.7) x (0.6) = 1.02 </p>
+<p>Using ASCE 7-16 eqn 11.4-3 and 11.4-4, we determine S<sub>DS</sub> and S<sub>D1</sub>.</p>
+<p>S<sub>DS</sub> = (⅔)(S<sub>MS</sub>) = (⅔) x (1.777) = 1.184g</p>
+<p>S<sub>D1</sub> = (⅔)(S<sub>M1</sub>) = (⅔) x (1.02) = 0.68g</p>
+
+<p>Step 2: Determine the Risk Category. Check CBC Table 1604.5 for the risk category. Again, we should always check CBC Chapter 3 when we are unsure what category a residential home applies to. So for this problem, let’s check out section 310.1 to see additional definitions for occupancy categories. CBC Section 310.1 notes that residential homes shall be classified as Group R. Referencing back to Table 1604.5, Group R shall be categorized under Risk Category II.</p>
+
+<p>Step 3: Determine seismic importance factor, I<sub>e</sub></p>
+<p>Now that we know our risk category, refer to ASCE 7-16 Table 1.5-2,  I<sub>e</sub> = 1.0 for risk category II structures. </p>
+
+<p>Step 4: Determine the seismic response coefficient, C<sub>s</sub></p>
+<p>$$\C_s = \S_D_S / (R/I_e) = \ 1.184 / (6.5/1.0) = 0.182$$</p>
+
+<p>$$\C_s_m_a_x = \S_D_1 / (T(R/I_e))$$ per ASCE 7-16 Eqn. 12.8-3</p>
+<p>$$T = T_a = C_t h_n^x$$ per ASCE 7-16 Equation 12.8-7 and Table 12.8-2</p>
+	<p>Where C<sub>t</sub> = 0.02</p>
+		<p>X = 0.75</p>
+<p>$$T_a = (0.02)(45)^0.75 = 0.347$$</p>
+
+<p>$$\C_s_m_a_x = \S_D_1 / (T(R/I_e)) = \ 0.68 / (0.347(6.5/1.0)) = 0.301$$</p>
+
+<p>$$\C_s_m_i_n = 0.044S_D_SI_e = (0.044)(1.184)(1.0) = 0.052$$</p>
+
+<p>So let’s check whether:</p>
+<ul>
+	<li> $$ C_s ≤ \S_D_1 / (T(R/I_e)) $$<p>0.182 ≤ 0.301 &#10004;</p> </li>
+	<li> $$ C_s ≥ 0.044S_D_SI_e $$<p>0.182 ≥ 0.052 &#10004;</p> </li>
+</ul>
+
+
+
+<p>Answer: Since 0.182 controls, you will use this value for the seismic response coefficient when calculating base shear if asked. </p>
+
+
+
+<p><i>Question:</i> What is the seismic response coefficient (C<sub>s</sub>) of the following structure? A seismic engineer wants to design a 40 ft wood framed assisted living facility in New Madrid, MO. S<sub>S</sub> = 3.153, S<sub>1</sub> = 1.246, R = 6.5. </p>
+
+<p>Solution:</p>
+<p>Step 1: Determine S<sub>DS</sub>and S<sub>D1</sub>. Start by determining the site class. Check ASCE 7 Table 20.3-1.  In the problem statement, no information is given on site class, so it is safe to assume site class D . With our site class determined, we can determine acceleration parameters. Refer to ASCE 7 section Tables 11.4-1 and 11.4-2. Plugging in Site Class D with the given S<sub>1</sub> , S<sub>S</sub> values, we get F<sub>a</sub> = 1.0, F<sub>v</sub> = 1.7. Use eqn 11.4-1 and 11.4-2, to determine MCE level accelerations.</p>
+
+<p>S<sub>MS</sub> =  F<sub>a</sub> S<sub>S</sub> = (1.0) x (3.153) = 3.153</p>
+<p>S<sub>M1</sub> = F<sub>v</sub> S<sub>1</sub> = (1.7) x (1.246) = 2.12 </p>
+<p>Using ASCE 7-16 eqn 11.4-3 and 11.4-4, we determine S<sub>DS</sub> and S<sub>D1</sub>.</p>
+<p>S<sub>DS</sub> = (⅔)(S<sub>MS</sub>) = (⅔) x (3.153) = 2.102g</p>
+<p>S<sub>D1</sub> = (⅔)(S<sub>M1</sub>) = (⅔) x (2.12) = 1.41g</p>
+
+<p>Step 2:  Determine the Risk Category. Check CBC Table 1604.5 for the risk category. We should always check CBC Chapter 3 when we are unsure what category the given structure is! So for this problem, let’s check out section 308 to see additional definitions for occupancy categories. CBC Section 308.3 notes that assisted living facilities shall be classified as Group I-1. Referencing back to Table 1604.5, Group I-1 shall be categorized under Risk Category III.</p>
+
+<p>Step 3: Determine seismic importance factor, I<sub>e</sub></p>
+<p>Now that we know our risk category, refer to ASCE 7-16 Table 1.5-2, I<sub>e</sub> = 1.25 for risk category III structures. </p>
+
+<p>Step 4: Determine the seismic response coefficient, C<sub>s</sub></p>
+<p>$$\C_s = \S_D_S / (R/I_e) = \ 2.102 / (6.5/1.25) = 0.404$$</p>
+
+<p>$$\C_s_,_m_a_x = \S_D_1 / (T(R/I_e))$$ per ASCE 7-16 Eqn. 12.8-3</p>
+<p>$$T = T_a = C_t h_n^x$$ per ASCE 7-16 Equation 12.8-7 and Table 12.8-2</p>
+	<p>Where C<sub>t</sub> = 0.02</p>
+		<p>X = 0.75</p>
+<p>$$T_a = (0.02)(40)^0.75 = 0.318$$</p>
+
+<p>$$\C_s_m_a_x = \S_D_1 / (T(R/I_e)) = \ 1.41 / (0.318(6.5/1.25)) = 0.85$$</p>
+
+<p>$$\C_s_m_i_n = 0.044S_D_SI_e = (0.044)(2.102)(1.25) = 0.116$$</p>
+
+<p>But also note, the problem statement mentions S<sub>1</sub> = 1.246. ASCE 7-16 Eqn 12.8-6 states that when S<sub>1</sub> is greater than or equal to 0.6; then, we must check this equation as well. </p>
+
+<p>$$\C_s_m_i_n  = \ 0.5S_1 / \(R/I_e) = \ 0.5(1.41) / \(6.5/1.25) = 0.135$$</p>
+
+<p>So let’s check whether:</p>
+<ul>
+	<li> $$ C_s ≤ \S_D_1 / (T(R/I_e)) $$ <p>0.404 ≤ 0. 85 &#10004;</p></li>
+	<li> $$ C_s ≥ 0.44S_D_SI_e $$ <p>0.404 ≥ 0.116 &#10004;</p></li>
+	<li> $$ C_s ≥ \ 0.5S_1 / \(R/I_e) $$ <p>0.404 ≥ 0.135 &#10004;</p></li>
+</ul>
+
+
+
+
+
+<p>Answer: Since 0.404 check out with each criteria, you will use this value for the seismic response coefficient when calculating base shear.</p>
+
+
+<p><i>Question:</i> What is the seismic response coefficient (C<sub>s</sub>) of the following structure? The city of Minneapolis noticed that the Wells Fargo Center was sinking 30” into the ground and decided to demolish the building as it is too hazardous for human safety. However, Wells Fargo wants to establish a taller building than the previous, so they want you, as the seismic engineer, to design an office building that can meet their expectations. Wells Fargo wants a 800 ft tall steel moment resisting frame. S<sub>S</sub> = 0.048, S<sub>1</sub>= 0.029, T<sub>L</sub> = 4 s.</p>
+
+<p>Solution:</p>
+<p>Step 1: Determine S<sub>DS</sub>and S<sub>D1</sub>. Start by determining the site class. Check ASCE 7 Table 20.3-1.  In the problem statement, no information is given on the site class, so assume site class D for demonstration purposes, but refer to a geotechnical report for an accurate soil profile. With our site class determined, we can determine acceleration parameters. Refer to ASCE 7 section Tables 11.4-1 and 11.4-2. Plugging in Site Class D with the given S<sub>1</sub> , S<sub>S</sub> values, we get F<sub>a</sub> = 1.6, F<sub>v</sub> = 2.4. Use eqn 11.4-1 and 11.4-2, to determine MCE level accelerations.</p>
+<p>S<sub>MS</sub> =  F<sub>a</sub> S<sub>S</sub> = (1.6) x (0.048) = 0.076</p>
+<p>S<sub>M1</sub> = F<sub>v</sub> S<sub>1</sub> = (2.4) x (0.029) = 0.07</p>
+<p>Using ASCE 7-16 eqn 11.4-3 and 11.4-4, we determine S<sub>DS</sub> and S<sub>D1</sub>.</p>
+<p>S<sub>DS</sub> = (⅔)(S<sub>MS</sub>) = (⅔) x (0.076) = 0.051g</p>
+<p>S<sub>D1</sub> = (⅔)(S<sub>M1</sub>) = (⅔) x (0.07) = 0.05g</p>
+
+<p>Step 2:  Determine the Risk Category. Check IBC Table 1604.5 for the risk category. Let’s check IBC Chapter 3 which category Wells Fargo center falls under. So for this problem, let’s check out section 304 to see additional definitions for occupancy categories. IBC Section 304.1 notes that office buildings shall be classified as Group B. Referencing back to Table 1604.5, Group B shall be categorized under Risk Category II. Note that IBC is used instead of CBC since the problem states that the location is in Minneapolis. </p>
+
+<p>Step 3: Determine seismic importance factor, I<sub>e</sub> and Response modification factor R.</p> 
+<p>Now that we know our risk category, refer to ASCE 7-16 Table 1.5-2, I<sub>e</sub> = 1.0 for risk category II structures. In the problem statement, it states that the office building should be a steel moment resisting frame, so refer to ASCE 7-16 Table 12.2-1 where R = 8.</p>
+
+<p>Step 4: Determine the seismic response coefficient, C<sub>s</sub></p>
+<p>$$\C_s = \S_D_S / (R/I_e) = \ 0.051 / (8/1.0) = 0.006375$$</p>
+
+<p>Notice that T<sub>L</sub> = 4. Refer to equations 12.8-3 and 12.8-4. We will need to determine the approximate fundamental period to compare.</p>
+<p>$$T = T_a = C_t h_n^x$$ per ASCE 7-16 Equation 12.8-7 and Table 12.8-2</p>
+	<p>Where C<sub>t</sub> = 0.028</p>
+		<p>X = 0.8</p>
+<p>$$T = (0.028)(800)^0.8 = 5.88 seconds$$</p>
+
+<p>Since 5.88 s > 4s, we will use only equation 12.8-4. </p>
+
+<p>$$\C_s_,_m_a_x  = \ S_D_1T_L / \(T^2(R/I_e)) = \C_s_,_m_a_x  = \ 0.05 4 / \(5.88^2(8/1.0)) = 0.00072$$</p>
+
+<p>$$\C_s_,_m_i_n = 0.044S_D_SI_e = (0.044)(0.051)(1.0) = 0.002244$$</p>
+
+<p>Let’s check whether:</p>
+<ul>
+	<li> $$\C_s ≤ \ S_D_1T_L / \(T^2(R/I_e)) $$<p>0.006375 ≤ 0.00072 &#10006;</p> </li>
+	<li> $$ C_s ≥ 0.44S_D_SI_e $$<p>0.006375 ≥ 0.002244 &#10004;</p> </li>
+</ul>
+
+
+
+
+<p>Answer: Since C<sub>s</sub> is not less than or equal to $$ \ S_D_1T_L / \(T^2(R/I_e)) $$, the governing value to use is 0.00072 for the seismic response coefficient. </p>
+
+
+<p><i>Question:</i> What the minimum C<sub>s</sub> of the following structure? The University of Wisconsin wants to design more parking garages on campus so more space is viable for those with cars. A 4-story parking structure shall be designed as special reinforced concrete shear walls with a height of 40 ft, where site class = E. S<sub>S</sub> = 3.0, S<sub>1</sub> = 0.05. </p>
+
+<p>Solution:</p>
+<p>Step 1: Determine the approximate fundamental period</p>
+<p>$$T = T_a = C_t h_n^x$$ per ASCE 7-16 Equation 12.8-7 and Table 12.8-2</p>
+	<p>Where C<sub>t</sub> = 0.02</p>
+		<p>X = 0.75</p>
+<p>$$T = (0.02)(40)^0.75$$ = 0.318 seconds</p>
+
+<p>Step 2: Determine S<sub>DS</sub>and S<sub>D1</sub>. Start by determining the site class. Check ASCE 7 Table 20.3-1.  In the problem statement, it states that the site class = E. With our site class known, we can determine acceleration parameters. Refer to ASCE 7 section Tables 11.4-1 and 11.4-2. Plugging in Site Class E with the given S<sub>1</sub> , S<sub>S</sub> values, we get F<sub>a</sub> = 2.4, F<sub>v</sub> = 4.2. Use eqn 11.4-1 and 11.4-2, to determine MCE level accelerations. </p>
+
+<p>But remember, in ASCE 7-16 section 12.8.1.3 notes that if you have met these requirements, we can take a reduction in our S<sub>DS</sub> if the structure of interest does:</p>
+<ul>
+<li>not have irregularity</li>
+<li>Not exceed five stories</li>
+<li>Not have a fundamental period that is greater than 0.5s</li>
+<li>Have a redundancy factor of 1.0</li>
+<li>Have site class of E or F</li>
+<li>Have risk category of I or II</li>
+</ul> 
+
+<p>So let’s check whether we meet these requirements. We know that our structure does not exceed 5 stories. Also, the site class is F with risk category II, and the calculated fundamental period is less than 0.5 s. If the problem does not state anything about irregularity or redundancy, it is OK to assume that the building does not have irregularity and meets the redundancy factor of 1.0. Now that we meet all the requirements, we can use S<sub>DS</sub> = 1.0!</p>
+
+<p>S<sub>M1</sub> = F<sub>v</sub> S<sub>1</sub> = (4.2) x (0.05) = 0.21</p>
+<p>Using ASCE 7-16 eqn 11.4-4, we determine S<sub>DS</sub> and S<sub>D1</sub>.</p>
+<p>S<sub>DS</sub> = 1.0 </p>
+<p>S<sub>D1</sub> = (⅔)(S<sub>M1</sub>) = (⅔) x (0.21) = 0.14g</p>
+
+<p>Step 3: Determine the Risk Category. Check CBC Table 1604.5 for the risk category. Checking CBC Chapter 3 when we are unsure what category a parking garage falls under. So for this problem, let’s check out section 311 to see additional definitions for occupancy categories. CBC Section 311.3 notes that parking garages shall be classified as Group S-2. Referencing back to Table 1604.5, Group S-2 shall be categorized under Risk Category II.</p>
+
+<p>Step 4: Determine seismic importance factor, I<sub>e</sub> and Response modification factor R. </p>
+<p>Now that we know our risk category, refer to ASCE 7-16 Table 1.5-2 = 1.0 for risk category II structures. In the problem statement, it states that the office building should be a special reinforced concrete shear walls system, so refer to ASCE 7-16 Table 12.2-1 where R = 6.</p>
+
+<p>Step 4: Determine the seismic response coefficient, C<sub>s</sub></p>
+<p>$$\C_s = \S_D_S / (R/I_e) = \ 1.0 / (6/1.0) = 0.166$$</p>
+
+<p>$$\C_s_,_m_a_x = \S_D_1 / (T(R/I_e)) = \ 0.14 / (0.318(6/1.0)) = 0.073$$</p>
+
+<p>$$\C_s_,_m_i_n = 0.044S_D_SI_e = (0.044)(1.0)(1.0) = 0.044$$</p>
+
+<p>So let’s check whether:</p>
+<ul>
+	<li> $$ C_s ≤ \S_D_1 / (T(R/I_e)) $$<p>0.166 ≤ 0. 073 &#10006;</p> </li>
+	<li> $$ C_s ≥ 0.44S_D_SI_e $$<p>0.166 ≥ 0.044 &#10004;</p> </li>
+</ul>
+
+
+
+
+<p>Answer: Since C<sub>s</sub> is not less than or equal to $$ C_s ≤ \S_D_1 / (T(R/I_e)) $$, the governing value to use is 0.073 for the seismic response coefficient. </p>
+      
+  
+<!--End of contents pasted from Google Docs-->        
+        
+        
+<div class="lectureSkip">
+    <a href="../Lecture6"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
+    <a href="../Lecture8"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
+</div>
+    </div>
+<br>
+</div>
+</article> 
+    <footer class="footingMain">
+        <div class="footer-row">
+            <div class = "mobileStack footerLogo">
+                <h1 class="row-heading">California<br>Seismic</h1>
+                <a href="mailto:californiaseismic@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M0,24.08v9.89l86,68.2625l86,-67.4025v-10.75zM0,42.6775v105.2425h172v-104.3825l-83.85,65.79c-0.61812,0.48375 -1.3975,0.7525 -2.15,0.7525c-0.7525,0 -1.51844,-0.25531 -2.15,-0.7525z"></path></g></g></svg></a>
+                <a href="https://www.linkedin.com/company/californiaseismic/">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M156.23893,0h-140.47786c-8.5944,0 -15.76107,7.16667 -15.76107,15.76107v140.47786c0,8.5944 7.16667,15.76107 15.76107,15.76107h140.47786c8.5944,0 15.76107,-7.16667 15.76107,-15.76107v-140.47786c0,-8.5944 -7.16667,-15.76107 -15.76107,-15.76107zM50.16667,143.33333h-28.66667v-78.83333h28.66667zM35.83333,55.17774c-8.5944,0 -14.33333,-5.73893 -14.33333,-12.9056c0,-7.86654 5.73893,-13.60547 14.33333,-13.60547c8.5944,0 14.33333,5.73893 14.33333,12.9056c0,7.86654 -5.73893,13.60547 -14.33333,13.60547zM150.5,143.33333h-28.66667v-43c0,-11.47786 -7.89453,-14.33333 -10.02213,-14.33333c-2.1556,0 -11.47787,1.42774 -11.47787,14.33333c0,1.42774 0,43 0,43h-28.66667v-78.83333h28.66667v11.47787c4.3112,-6.4668 11.47787,-11.47787 25.08333,-11.47787c13.60547,0 25.08333,10.75 25.08333,35.83333z"></path></g></g></svg></a>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">Learn</h1>
+                <ul>
+                    <li><a href="Lectures">Lectures</a></li>
+                    <li><a href="PracticeQuestions">Practice Questions</a></li>
+                    <li><a href="ExamInfo">Exam Guide</a></li>
+                </ul>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">About Us</h1>
+                <ul>
+                    <li><a href="Contributors">Our Team</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">Copyright 2020 © California Seismic</p>
+    </footer>
+</body>
+</html> 
