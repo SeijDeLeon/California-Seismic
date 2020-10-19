@@ -1,0 +1,63 @@
+.exam-landing-wrapper h1, .exam-landing-wrapper h2, .exam-landing-wrapper h3, .exam-landing-wrapper h4 {
+    font-family: 'Montserrat', sans-serif;
+}
+.exam-landing-wrapper p, .exam-landing-wrapper a, .exam-landing-wrapper li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+.exam-landing-wrapper h1 {
+    font-size: 48px;
+}
+.exam-landing-wrapper h2 {
+    font-size: 36px;
+}
+.exam-landing-wrapper h3 {
+    font-size: 30px;
+}
+.exam-landing-wrapper h4 {
+    font-size: 24px;
+}
+.exam-landing-heading {
+    text-align: center;
+}
+.exam-landing-wrapper {
+    height: calc(100vh - 72px);
+}
+.exam-landing-group {
+    display: grid;
+    grid-template-columns: 46% 46%;
+    grid-column-gap: 8%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.exam-landing-option {
+    border-radius: 10px;
+    border: 1px solid #4266a8;
+    text-align: center;
+    height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.exam-landing-option p {
+    text-align: justify;
+    text-align-last: center;
+}
+.exam-landing-option a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+}
+.exam-landing-option button {
+    cursor: pointer;
+    width: 160px;
+    height: 40px;
+    padding: 7px 8px;
+    border-radius: 5px;
+    background-color: #4266a8;
+    border: none;
+}
+

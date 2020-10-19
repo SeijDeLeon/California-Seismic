@@ -65,30 +65,10 @@ article p{
 /*############# End Defaults ###########*/
 
 
-/*########### Nav Bar#################*/
-
+/*########### OG Nav Bar Style #################*/
 .currentLink{
     border-bottom: solid 1px;
 }
-
-/*
-nav.topnav
-    width:100%;
-    margin:0; 
-    background-color:white;
-    display: flex;
-}
-
-.topnav{
-    margin:auto;
-    max-width:1300px;
-    max-width:80vw;
-    width:100%;
-}
-.topnav a {
-    font-family: 'Montserrat', sans-serif;
-}
-*/
 nav ul {
     background-color:inherit;
     overflow: hidden;
@@ -96,53 +76,7 @@ nav ul {
     padding:0;
     display:flex;
 }
-/*
-ul.topnav li{
-    list-style:none;
-}
-
-ul.topnav li:nth-child(1){
-    margin-right:auto;
-}
-
-ul.topnav li a{
-    display:block;
-    font-size:14px;
-    text-decoration: none;
-    min-height: 20px;
-    text-align: center;
-    padding: 14px;
-    text-transform: uppercase;
-    color: black;
-    font-weight:600;
-}
-
-ul.topnav li a:hover {
-    background-color:#cdf1ed;
-    color:#161f2e;
-}
-
-
-ul.topnav li:first-child a{
-    padding:0;
-    margin:0;
-    text-decoration:none;
-    display:block;
-    text-align:center;
-    max-height:44px;
-}
-
-ul.topnav li a img{   
-    height:44px;
-    margin:0;
-    padding:0;
-    border-style:none;
-    border-width:0;
-    border:0;
-}
-*/
-
-/*####### End Nav Bar ########*/
+/*####### End OG Nav Bar Style ########*/
 
 
 
@@ -176,16 +110,13 @@ h1.large{ /* header tag has margins around it, paragrag and labels do not*/
     margin:0;
     line-height:60px; /* creates space between the text, better to do this than using margin with text*/
 }
-
 h1.section2Header{
     font-size: 65px;
     text-align:center;
 }
-
 form h2{
     color:grey;
 }
-
 button.journey{
     display:block;
     margin:auto;
@@ -202,12 +133,10 @@ div.groupPhoto img{
     margin:auto;
     padding:0 5px;
 }
-
 div.groupPhoto p{
     font-size:16px;
     text-align:center;
 }
-
 .videoContainer iframe{
     width:100%;
     max-width:560px;
@@ -413,7 +342,8 @@ ul.menu-nav li a:link, ul.menu-nav a:visited {
     text-transform: uppercase;
     font-size: 14px;
     text-decoration: none;
-    color: #000;
+    color: black;
+    padding: 2px 4px;
 }
 ul.menu-nav {
     padding: 0;
@@ -434,13 +364,44 @@ ul.menu-nav {
     font-weight: bold;
 }
 ul.menu-nav li a:hover {
-    background-color:#cdf1ed;
-    color:#161f2e;
+/*    background-color:#cdf1ed;*/
+    background-color:#dae0e6;
+/*    color:#161f2e;*/
     text-decoration: none;
+    border-bottom: solid 1px;
+    transition: .3s;
 }
-ul.menu-nav li a:visited, ul.menu-nav li a:link {
-/*    text-decoration: none;*/
+/* Start Lecture Dropdown */
+
+/* The container <div> - needed to position the dropdown content */
+.lecture-dropdown {
+    position: relative;
+    display: inline-block;
 }
+/* Dropdown Content (Hidden by Default) */
+.lecture-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+/* Links inside the dropdown */
+.lecture-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+/* Change color of dropdown links on hover */
+.lecture-dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.lecture-dropdown:hover .lecture-dropdown-content {
+    display: block;
+}
+/* End Lecture Dropdown */
+
 @media screen and (max-width: 499px) {
     .home-logo img {
         max-height: 40px;

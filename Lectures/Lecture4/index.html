@@ -103,8 +103,10 @@
                                 <li>Any other occupancy with an occupant load greater than 5,000.</li>
                                 <li>Power-generating stations, water treatment facilities for potable water, wastewater treatment facilities and other public utility facilities not included in Risk Category IV.</li>
                                 <li>Buildings and other structures not included in Risk Category IV containing quantities of toxic or explosive materials that:
-                                    <ul><li>Exceed maximum allowable quantities per control area as given in Table 307.1(1) or 307.1(2) or per outdoor control area in accordance with the International Fire Code; and</li>
-                                        <li>Are sufficient to pose a threat to the public if released.</li> </ul>
+                                    <ul>
+                                        <li>Exceed maximum allowable quantities per control area as given in Table 307.1(1) or 307.1(2) or per outdoor control area in accordance with the International Fire Code; and</li>
+                                        <li>Are sufficient to pose a threat to the public if released.</li>
+                                    </ul>
                                 </li>
                             </ul>
                         </td>
@@ -189,9 +191,7 @@
                         <td>1.50</td>
                     </tr>
                 </table>
-
-
-
+                <br>
                 <h2> Example </h2>
                 <p> What is the risk category and seismic importance factor for a chicken coop? </p>
                 <p> Answer: We determine the risk category based on occupancy. Therefore, based on ASCE 7 Section 1.5.1, this structure will fall under Risk Category I. Refer to ASCE 7 Section 1.5.2 to determine the seismic importance factor. Do not panic! We are simply showing where you can obtain Ip for now. In later lectures, we will show you how I<sub>e</sub> is used to increase design forces. </p>
@@ -218,14 +218,12 @@
                 <p><u>Step 01</u>: Determine the site classification and risk category of the structure: </p>
                 <p>The site soil classification is done in accordance with ASCE 7-16, Table 20.3-1 (as shown below) and Section 20.3 based on the upper 100 ft (30 m) of the site profile. Site Class D is the default classification if the soil properties are not known in sufficient detail to determine the site class.</p>
 
-                <img src = "asce7Table20.3-1
-                            .png" alt="asce7_Table20.3-1">
+                <img src = "asce7Table20.3-1.png" alt="asce7_Table20.3-1">
                 <p>ASCE 7-16 Table 20.3-1 </p>
                 <p>The risk category for a building is determined according to ASCE 7-16, Table 1.5-1 (as shown below) based on the risk to human life, health, and welfare associated with their damage or failure by nature of their occupancy or use. The highest applicable risk category or categories is finally assigned to the structure.</p>
 
 
-                <img src = "asce7Table1.5-1
-                            .png" alt="asce7_Table1.5-1">
+                <img src = "asce7Table1.5-1.png" alt="asce7_Table1.5-1">
                 <p>ASCE 7-16 Table 1.5-1</p>
 
 
@@ -234,8 +232,7 @@
 
 
 
-                <img src = "siteCoefficientsASCE7Tables
-                            .png" alt="siteCoefficientsASCE7Tables">
+                <img src = "siteCoefficientsASCE7Tables.png" alt="siteCoefficientsASCE7Tables">
                 <p>ASCE 7-16 Tables 11.4-1 &amp; 11.4-2</p>
 
                 <p>Note that where Site Class D is selected as the default site class per ASCE 7-16, Section 11.4.3, the value of F<sub>a</sub> shall not be less than 1.2.</p>
@@ -244,13 +241,11 @@
                 <p>The Risk - Targeted Maximum Considered Earthquake (MCE<sub>R</sub>) Ground Motion Response Acceleration Parameters for short periods (S<sub>MS</sub>) and at 1-second (S<sub>M1</sub>), can be determined from ASCE 7-16, Eqs. (11.4-1) and (11.4-2), as shown below:</p>
 
 
-                <img src = "mcerSpectralResponseAccelerationEqns
-                            .png" alt="mcer_Spectral_Response_Acceleration_Eqns">
+                <img src = "mcerSpectralResponseAccelerationEqns.png" alt="mcer_Spectral_Response_Acceleration_Eqns">
 
                 <p>From S<sub>MS</sub> and S<sub>M1</sub>, the Design Spectral Acceleration Parameters at short periods, S<sub>DS</sub>, and 1-s periods, S<sub>D1</sub>, can be determined from ASCE 7-16, Eqs. (11.4-3) and (11.4-4) as given below:</p>
 
-                <img src = "designSpectralResponseAccelerationEqns
-                            .png" alt="design_Spectral_Response_Acceleration_Eqns">
+                <img src = "designSpectralResponseAccelerationEqns.png" alt="design_Spectral_Response_Acceleration_Eqns">
 
                 <p><u>Step 04</u>: Finally, determine the Seismic Design Category (SDC):</p>
 
@@ -263,8 +258,7 @@
                 <p>For structures that do not fit into these categories, they are assigned based on their Risk Category and design spectral response acceleration parameters, S<sub>DS</sub> and S<sub>D1</sub>, in accordance with ASCE 7-16, Table 11.6-1 and Table 11.6-2 (as shown below). The most important thing to remember is that the Seismic Design Category (SDC) assigned to the structure is the more severe SDC assigned from both the tables!</p>
 
 
-                <img src = "sdcResponseAccelerationParameters
-                            .png" alt="sdc_Response_Acceleration_Eqns">
+                <img src = "sdcResponseAccelerationParameters.png" alt="sdc_Response_Acceleration_Eqns">
                 <p>ASCE 7-16 Tables 11.6-1 &amp; 11.6-2</p>
 
                 <p>For structures with S<sub>1</sub> &lt; 0.75, the Seismic Design Category can be determined from Table 11.6-1 if the following four conditions are met:</p>

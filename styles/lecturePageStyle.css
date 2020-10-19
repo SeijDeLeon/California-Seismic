@@ -1,9 +1,11 @@
 /*########### Start Article #################*/
+.home-logo {
+    z-index: 999;
+}
 .main-content {
     margin-left: 200px;
     width: 100%;
 }
-
 div.lectureWrap{
     margin: 0 auto;
     width: 75%;
@@ -11,34 +13,29 @@ div.lectureWrap{
     background-color:white;
     padding:20px 60px 20px 60px;
 }
-
 .lectureWrap {
 /*    font-family: 'PT Serif', serif;*/
     box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
 }
-
 .lectureHeader h1 {
 /*    text-align: center;*/
     margin-bottom: 60px;
 }
-
-.lectureHeader, .lectureWrap h1, .lectureWrap h2, .lectureWrap h3 {
+.lectureHeader, .lectureWrap h1, .lectureWrap h2, .lectureWrap h3, .lectureWrap th {
 /*    font-family: 'Merriweather', serif;*/
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
 }
-
-.lectureWrap p, .lectureWrap a, .lectureWrap li {
+.lectureWrap p, .lectureWrap a, .lectureWrap li, .lectureWrap td {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
+    line-height: 1.2;
 }
-
 .lectureWrap a:visited, .lectureWrap a:link {
     color: black;
     text-decoration: underline blue;
 }
-
 .lectureWrap img{
     margin:auto;
     display:block;
@@ -47,7 +44,6 @@ div.lectureWrap{
     width:auto;
     height:auto;
 }
-
 .lectureWrap .imgLink p{
     margin:auto;
     text-align:center;
@@ -56,32 +52,42 @@ div.lectureWrap{
     font-style:inherit;
     font-size:inherit;
 }
-
 div.lectureWrap iframe{
     display:block;
     margin:auto;
 }
-
 div.lectureWrap ul li{
     list-style:none;
     padding:10px;
-    line-height:1.5em;
+/*    line-height:1.5em;*/
 }
-
 div.lectureWrap h1{
     margin-top: 60px;
     font-size: 2em;
 }
-
 div.lectureWrap p{
-    padding:1em 0;
-    line-height:1.5;
+    padding: 10px 0;
+    line-height: 1.5;
     font-weight:400;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased !important;
     -moz-font-smoothing: antialiased !important;
     text-rendering: optimizelegibility !important;
-    letter-spacing: .03em;
+/*    letter-spacing: .03em;*/
+}
+.lectureWrap table ul li {
+    list-style: disc;
+    margin: 0;
+    line-height: 1.2;
+    padding: 2px;
+}
+.lectureWrap table ul ul li {
+    list-style: circle;
+}
+.lectureWrap table, .lectureWrap th, .lectureWrap td {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 10px;
 }
 
 article.lectureBackground{
@@ -101,7 +107,6 @@ div.lectureSkip p{
 }
 
 div.lectureSkip a{
-    border-radius:9%;
     float:left;
     margin:0;
     padding:0 1%;
@@ -109,7 +114,8 @@ div.lectureSkip a{
 }
 
 div.lectureSkip a:hover{
-    background-color:grey;
+/*    background-color:grey;*/
+    background-color: #dae0e6;
 }
 div.lectureSkip a:nth-child(2){
     float:right;
