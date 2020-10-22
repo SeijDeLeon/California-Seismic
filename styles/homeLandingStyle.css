@@ -5,7 +5,6 @@ html.front-page {
     overflow-x: hidden;
 }
 body.front-page {
-    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -14,11 +13,8 @@ body.front-page {
     flex-direction: column;
     background: rgb(154,188,213);
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 100%);
-/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 70%);*/
-/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(133,171,209,1) 100%);*/
     background-repeat: no-repeat;
 /*    background-attachment: fixed;*/
-    background-attachment: scroll;
     background-size: cover;
 }
 h1, h2, h3 , p, a, li, button {
@@ -26,6 +22,7 @@ h1, h2, h3 , p, a, li, button {
 }
 .top-nav-container {
     flex: 1 0 auto;
+    box-shadow: none;
 }
 
 /* START CONTENT */

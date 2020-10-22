@@ -1,7 +1,4 @@
 /* PRACTICE QUESTION LANDING PAGE */
-.pq-content h1, .pq-content h2, .pq-content h3, .pq-content h4, .pq-content p, .pq-content a {
-    font-family: 'Montserrat', sans-serif;
-}
 .pq-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -11,12 +8,6 @@
     text-align: center;
     margin: 0 auto 60px;
     max-width: 800px;
-}
-.pq-heading h1 {
-    font-size: 48px;
-}
-.pq-heading p {
-    font-size: 20px;
 }
 .pq-options-container {
     display: grid;
@@ -71,26 +62,7 @@
         padding: 20px;        
     }
 }
-@media screen and (max-width: 1149px) {
-    .pq-option-col p {
-        font-size: 16px;
-        line-height: 1.2;
-    }
-    .pq-options-container button {
-        border-radius: 3px;
-        border-width: 0;
-        cursor: pointer;
-        width: 150px;
-        height: 40px;
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-    .pq-lectures button {
-        width: 90px;
-        height: 30px;
-    }
-}
-@media screen and (max-width: 949px) {
+@media screen and (max-width: 1099px) {
     .pq-options-container {
         max-width: 500px;
         display: grid;
@@ -98,49 +70,30 @@
         grid-row-gap: 50px;
         margin: 0 auto;
     }
+    .pq-option-col p {
+        font-size: 16px;
+        line-height: 1.2;
+    }
+    .pq-options-container button {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
 }
 @media screen and (max-width: 799px) {
-    .pq-content {
-        padding-top: 0px;
-    }
     .pq-options-container {
         display: grid;
         grid-template-columns: 1fr;
         grid-row-gap: 30px;
         margin: 0 auto;
     }
-    .pq-heading h1 {
-        font-size: 56px;
-    }
-    .pq-heading p {
-        font-size: 18px;
-    }
-    .pq-option-col h1 {
-        font-size: 24px;
-    }
-    .pq-option-col p {
-        font-size: 14px;
-    }
-    .pq-options-container button {
-        font-size: 14px;
-    }
 }
 @media screen and (max-width: 499px) {
     .pq-heading {
-/*        text-align: center;*/
         margin: 0px auto 40px;
-/*        max-width: 800px;*/
     }
-    .pq-heading h1 {
-        font-size: 44px;
-    }
-    .pq-heading p {
-        font-size: 14px;
-    }
-    .pq-option-col p {
-        font-size: 12px;
-    }
-    .pq-options-container button {
-        font-size: 12px;
-    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 18px; }
+    h4 { font-size: 14px; }
+    p, a, li, button { font-size: 14px; }
 }
