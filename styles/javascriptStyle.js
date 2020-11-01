@@ -105,25 +105,24 @@ $(document).ready(function () {
     
     var footer = $('.footingMain');
     var sidebar = $('.lectureSidebar');
-    var body = document.body,
-    html = document.documentElement;
+    var body = document.body;
+    var html = document.documentElement;
+//    var docHeight = Math.max( $(body).scrollHeight, $(body).offsetHeight, $(html).clientHeight, $(html).scrollHeight, $(html).offsetHeight );
     var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+//    var docHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );
+    var sidebarHeight = $('#lectureSidebar').height();
+    var footerHeight = $('#footingMain').height();
     
     $(window).scroll(function (event) {
-        // what the y position of the scroll is
+        // Lecture Sidebar Sticky
         var y = $(this).scrollTop();
-        // whether that's below the form
         if (y >= top) {
-            // if so, ad the fixed class
-            $('#lectureSidebar').css('top', 20 + 'px');
-            $('#lectureSidebar').addClass('fixed');
+            $('#lectureSidebarWrapper').css('top', 20 + 'px');
         } else {
-            // otherwise remove it
-            $('#lectureSidebar').css('top', 93 + 'px');
-            $('#lectureSidebar').removeClass('fixed');
+            $('#lectureSidebarWrapper').css('top', 93 - y + 'px');
         }     
-        if (y+$(sidebar).height()+100 >= docHeight-$(footer).height()-40    ) {
-            let endHeight = docHeight-y-$(window).height()-$(footer).height()+40;
+        if (y+sidebarHeight+40 >= docHeight-footerHeight) {
+            var endHeight = docHeight - y - footerHeight - sidebarHeight;
             $('#lectureSidebar').css('top', endHeight + 'px');
         }
     });

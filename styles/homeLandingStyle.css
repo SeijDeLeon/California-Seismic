@@ -5,7 +5,6 @@ html.front-page {
     overflow-x: hidden;
 }
 body.front-page {
-    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -14,11 +13,8 @@ body.front-page {
     flex-direction: column;
     background: rgb(154,188,213);
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 100%);
-/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(124,164,194,1) 70%);*/
-/*    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(133,171,209,1) 100%);*/
     background-repeat: no-repeat;
 /*    background-attachment: fixed;*/
-    background-attachment: scroll;
     background-size: cover;
 }
 h1, h2, h3 , p, a, li, button {
@@ -26,6 +22,7 @@ h1, h2, h3 , p, a, li, button {
 }
 .top-nav-container {
     flex: 1 0 auto;
+    box-shadow: none;
 }
 
 /* START CONTENT */
@@ -307,48 +304,51 @@ h1, h2, h3 , p, a, li, button {
     max-height: 200px;
 }
 @media screen and (min-width: 0px) and (max-width: 869px) {
-    div.start-options-container {
+    .start-options-container {
         display: none;
     }
-    div.start-options-container.compressed {
+    .start-options-container.compressed {
         display: block;
         padding: 40px 10%;
     }
-    div.start-options-container.compressed h3 {
+    .start-options-container.compressed h3 {
         margin-top: 10px;
     }
-    div.start-option-row {
+    .start-option-row {
         flex-direction: column;
         align-items: center;
     }
-    div.start-option-col {
+    .start-option-col {
         width: 100%;
         max-width: 400px;
     }
+    .start-option-col img {
+        max-height: 150px;
+    }
 }
 @media screen and (min-width: 870px) and (max-width: 959px) {
-    div.start-options-container {
+    .start-options-container {
         padding: 40px 5%;
     }
 }
 @media screen and (min-width: 960px) and (max-width: 1029px) {
-    div.start-options-container {
+    .start-options-container {
         padding: 50px 10%;
     }
 }
 @media screen and (min-width: 1030px) and (max-width: 1149px) {
-    div.start-options-container {
+    .start-options-container {
         padding: 60px 10%;
     }
 }
 @media screen and (min-width: 1150px) {
-    div.start-options-container {
+    .start-options-container {
         padding: 100px 5%;
     }
-    div.start-option-col {
+    .start-option-col {
         width: 500px;
     }
-    div.start-option-row {
+    .start-option-row {
         max-width: 1500px;
         margin: 0 auto;
     }

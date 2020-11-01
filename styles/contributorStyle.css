@@ -8,24 +8,22 @@ section.contributeWrapper{
     border-radius: 50%;
 }
 .contributeWrapper p, .contributeWrapper a {
-    font-family: 'Rubik', sans-serif;
+/*    font-famsily: 'Rubik', sans-serif;*/
     line-height: 1.2;
     font-weight: 400;
 }
-.contributeWrapper h1, .contributeWrapper h2, .contributeWrapper h3, .contributeWrapper h4 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
+.contributeTitle {
+    padding: 60px;
 }
-.contributeTitle h1 {
-    font-size: 72px;
+.contributeTitle p {
+    text-align: justify;
+    text-align-last: center;
 }
 .container-description h2 {
-    font-size: 40px;
     margin: 0 auto;
     text-decoration: underline 5px #f0be19;
 }
 .container-description p {
-    font-size: 20px;
     text-align: justify;
     text-align-last: center;
     color: #76818a;
@@ -43,7 +41,8 @@ section.contributeWrapper{
 }
 .contributor-item-bio {
     text-align: justify;
-/*    text-indent: 1.5em;*/
+}
+.contributor-item-bio p {
     font-size: 16px;
 }
 div.contributorLinks {
@@ -110,38 +109,37 @@ div.contributorHeadshot {
         padding: 20px 0%;
         margin: 0;
     }
+    .contributeTitle {
+        padding: 60px 30px 30px;
+    }
     .contributeTitle h1 {
         font-size: 32px;
     }
     .contributor-container {
         padding: 0 20px;
     }
-    .contributor-item-bio p {
-        font-size: 12px;
-    }
     .container-description h2 {
         font-size: 24px;
-    }
-    .container-description p {
-        font-size: 12px;
     }
     .contributor-item-info h2 {
         font-size: 20px;
     }
-    .contributor-item-info h4 {
+    .contributeTitle p, .container-description p, .contributor-item-bio p {
         font-size: 14px;
     }
-    .contributor-item-bio p {
-        font-size: 12px;
+    .contributor-item-info h4 {
+        font-size: 14px;
     }
 }
 @media screen and (min-width: 431px) and (max-width: 899px) {
     section.contributeWrapper {
         padding: 20px 0%;
-/*        margin: 0;*/
     }
     .contributor-container {
         padding: 0 30px;
+    }
+    .contributeTitle {
+        padding: 50px;
     }
 }
 @media screen and (max-width: 899px) {

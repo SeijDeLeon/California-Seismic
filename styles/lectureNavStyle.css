@@ -23,125 +23,6 @@ i:hover{
     -webkit-transform:rotate(-135deg);
 }
 
-ul.topnavLecture li.upArrowList{
-    margin:auto;
-    text-align:center;
-}
-hr.navline{
-    height:1px;
-    background-color:white;
-    padding:0;
-    margin:0;
-}
-
-ul.topnavLecture li{
-    list-style:none;
-    text-decoration:none;
-    color:white;
-    padding:3px 8px;
-}
-
-ul.topnavLecture li a{
-    display:block;
-    list-style:none;
-    text-decoration:none;
-    color:white;
-}
-
-ul.topnavLecture li:not(:nth-child(1)){
-    display:none;
-}
-
-ul.topnavLecture li:(:nth-child(1)){
-    display:block;
-    padding-bottom:3px;
-    padding-right:5px;
-}
-
-ul.topnavLecture li a:hover{
-    background-color:beige;
-    color:black;
-}
-
-ul.topnavLecture.responsive li{
-    display:block;
-}
-
-ul.topnavLecture.responsive li.upArrowList{
-    display:block;
-}
-
-.topnavLectureContainer ul.topnav {
-    margin-left: 0px;
-}
-
-/* sidebar from w3schools.com */
-/* The sidebar menu */
-.SideBar {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-}
-
-/* The sidebar links */
-.SideBar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.SideBar a:hover {
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.SideBar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* The button used to open the sidebar */
-.openbtn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #111;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-}
-
-.openbtn:hover {
-    background-color: #444;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;/* If you want a transition effect */
-/*    padding: 20px;*/
-}
-
-#lectureSidebarCollapsed {
-    visibility: visible;
-/*    opacity: 0;*/
-    transition: visibility 0s, opacity 0.5s linear;
-}
-
-/* End sidebar code from w3schools.com */
-
 /* Static sidebar */
 .lectureBackground {
     display: flex;
@@ -149,40 +30,42 @@ ul.topnavLecture.responsive li.upArrowList{
     justify-content: space-between;
 }
 .lectureSidebarWrapper {
-    top: 0;
-    left: 0;
-    position: absolute;
-    height: 900px;
-    width: 280px;
-}
-.lectureSidebar {
-    width: 280px;
-    position: absolute;
-    z-index: 1; /* Stay on top */
     top: 93px;
     left: 20px;
+    position: fixed;
+}
+.lectureSidebar {
+    top: 93px;
+    left: 20px;
+    width: 280px;
+    height: 620px;
+    z-index: 1000; /* Stay on top */
     background-color: #FFF;  
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding: 20px 40px;
-    box-shadow: rgba(106,136,145,0.15) 0 6px 0px;
-    font-family: 'PT Serif', serif;
+    padding: 20px 30px;
+    border-radius: 10px; 
+    box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
+    position: sticky;
+    position: -webkit-sticky;
 }
-.lectureSidebar.fixed {
-    position: fixed;
-    top: 20px;
+.lectureSidebar h3, .lectureSidebar p, .lectureSidebar a {
+    font-family: 'Montserrat', sans-serif;
+    padding: 2px;
+    margin-top: 0;
 }
-.lectureSidebar p {
-    font-size: 0.9375rem;
-    margin-bottom: 0.9375rem;
-    line-height: 1.225rem;
+.lectureSidebar p, a, li {
+    font-size: 14px;
+    margin-bottom: 14px;
+    line-height: 1.3;
 }
 .lectureSidebar a:link, .lectureSidebar a:visited {
     color: black;
     transition: .3s;
-    font-weight: bolder;
+    text-decoration: underline 1px;
 }
 .lectureSidebar a:hover {
     background-color: #dae0e6;
+    cursor: pointer;
     transition: .3s;
 }
 /* End static sidebar */

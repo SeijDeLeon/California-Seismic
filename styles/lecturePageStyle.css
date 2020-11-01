@@ -1,9 +1,20 @@
 /*########### Start Article #################*/
+.home-logo {
+    z-index: 999;
+}
+body {
+    overflow-x: hidden;
+    display: flex;
+}
+.lectureBackground {
+    width: 100%;
+    margin: 0;
+    min-height: calc(100vh - 93px);
+}
 .main-content {
     margin-left: 200px;
     width: 100%;
 }
-
 div.lectureWrap{
     margin: 0 auto;
     width: 75%;
@@ -11,34 +22,23 @@ div.lectureWrap{
     background-color:white;
     padding:20px 60px 20px 60px;
 }
-
 .lectureWrap {
-/*    font-family: 'PT Serif', serif;*/
     box-shadow: rgba(106,136,145,0.15) 0 6px 24px;
 }
-
 .lectureHeader h1 {
-/*    text-align: center;*/
     margin-bottom: 60px;
 }
-
-.lectureHeader, .lectureWrap h1, .lectureWrap h2, .lectureWrap h3 {
-/*    font-family: 'Merriweather', serif;*/
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
+.lectureHeader, .lectureWrap h1, .lectureWrap h2, .lectureWrap h3, .lectureWrap th {
     text-transform: uppercase;
 }
-
-.lectureWrap p, .lectureWrap a, .lectureWrap li {
-    font-family: 'Montserrat', sans-serif;
+.lectureWrap p, .lectureWrap a, .lectureWrap li, .lectureWrap td {
     font-size: 16px;
+    line-height: 1.2;
 }
-
 .lectureWrap a:visited, .lectureWrap a:link {
     color: black;
     text-decoration: underline blue;
 }
-
 .lectureWrap img{
     margin:auto;
     display:block;
@@ -47,7 +47,6 @@ div.lectureWrap{
     width:auto;
     height:auto;
 }
-
 .lectureWrap .imgLink p{
     margin:auto;
     text-align:center;
@@ -56,73 +55,68 @@ div.lectureWrap{
     font-style:inherit;
     font-size:inherit;
 }
-
 div.lectureWrap iframe{
     display:block;
     margin:auto;
+    max-width: 100%;
 }
-
 div.lectureWrap ul li{
     list-style:none;
     padding:10px;
-    line-height:1.5em;
 }
-
 div.lectureWrap h1{
     margin-top: 60px;
     font-size: 2em;
 }
-
-.lectureWrap p, .lectureWrap li {
-/*    font-size: .9375rem;*/
-/*    font-size: 1.1rem;*/
-/*    font-size: 16px;*/
-/*    font-weight: 400;*/
-}
-
 div.lectureWrap p{
-/*    color:#777;*/
-    padding:1em 0;
-    line-height:1.5;
+    padding: 10px 0;
+    line-height: 1.5;
     font-weight:400;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased !important;
     -moz-font-smoothing: antialiased !important;
     text-rendering: optimizelegibility !important;
-    letter-spacing: .03em;
+}
+.lectureWrap table ul li {
+    list-style: disc;
+    margin: 0;
+    line-height: 1.2;
+    padding: 2px;
+}
+.lectureWrap table ul ul li {
+    list-style: circle;
+}
+.lectureWrap table, .lectureWrap th, .lectureWrap td {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 10px;
 }
 
 article.lectureBackground{
     background-color:#dae0e6;
-    width:100%;
+    width:100vw;
     margin:0;
     padding: 20px;
 }
-
 div.lectureSkip{
     height:5vh;
 }
-
 div.lectureSkip p{
     display:inline;
     color:black;
 }
-
 div.lectureSkip a{
-    border-radius:9%;
     float:left;
     margin:0;
     padding:0 1%;
     width:auto;
 }
-
 div.lectureSkip a:hover{
-    background-color:grey;
+    background-color: #dae0e6;
 }
 div.lectureSkip a:nth-child(2){
     float:right;
 }
-
 .arrow{
     border:solid black;
     border-width:0 3px 3px 0;
@@ -133,24 +127,30 @@ div.lectureSkip a:nth-child(2){
     transform:rotate(-45deg);
     -webkit-transform:rotate(-45deg):
 }
-
 .leftArrow{
     transform:rotate(135deg);
     -webkit-transform:rotate(135deg):
 }
 /*########### End Article#################*/
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 949px) {
+    article.lectureBackground {
+        width: 100vw;
+        margin: 0;
+    }
+    div.main-content {
+        width: 100%;
+        margin-left: 0;
+    }
     div.lectureWrap {
-        width: 85%;
+        width: 100%;
         transition: 0.3s;
+    }
+    .lectureSidebarWrapper, .lectureSidebar {
+        display: none;
     }
 }
 @media screen and (max-width: 750px) {
-    div.lectureWrap {
-        width: 95%;
-        transition: 0.3s;
-    }
     div.lectureWrap h1 {
         font-size: 30px;
     }
@@ -166,7 +166,6 @@ div.lectureSkip a:nth-child(2){
 }
 @media screen and (max-width: 600px) {
     div.lectureWrap {
-        width: 100%;
         transition: 0.3s;
         padding: 20px 40px 20px 40px;
     }
