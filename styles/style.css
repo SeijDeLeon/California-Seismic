@@ -545,6 +545,9 @@ footer.footingMain h1{
     margin: 0 10px;
 }
 @media screen and (max-width: 899px) {
+    footer.footingMain{
+        height:auto;
+    }
     footer.footingMain .footer-row {
         flex-direction: column;
     }

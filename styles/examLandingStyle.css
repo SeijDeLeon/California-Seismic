@@ -73,3 +73,82 @@
         padding: 20px;
     }
 }
+
+.faq-header{
+    width:100%;
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+.faq-wrapper{
+    max-width:1000px;
+    overflow:hidden;
+    margin:auto;
+}
+
+.faq-box{
+    margin:2% 3%;
+    padding:2% 1%;
+    overflow:hidden;
+    border-top:1px solid #d6ebff;
+}
+
+
+.faq-box h3{
+    font-size:1.5rem;
+    padding-right:3%;
+    width:50%;
+    float:left;
+}
+
+.faq-box p{
+    width:100%;
+    line-height:1.5rem;
+    display:inline-block;
+}
+
+.faq-box p:nth-child(2){
+    width:50%;
+    float:right;
+    
+}
+
+.faq-box img{
+    max-width:80%;
+    text-align:center;
+    margin:auto;
+    background-blend-mode:multiply;
+    mix-blend-mode:multiply;
+    
+}
+
+@media screen and (max-width: 649px) {
+    .faq-box h3{
+        font-size:120%;
+        font-size:1rem;
+        margin-top:3%;
+        width:100%;
+        float:none;
+    }
+    
+    .faq-box p{
+        width:100%;
+        float:none;
+        display:block;
+    }
+    
+    .faq-box p:nth-child(2){
+        width:100%;
+    }
+}
+
+
+
+
+
+.center-image{
+    text-align:center;
+}
+
+
+
