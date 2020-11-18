@@ -65,6 +65,59 @@ article p{
 /*############# End Defaults ###########*/
 
 
+/*############# Start Hero ###########*/
+@-webkit-keyframes blink { 
+    0% { border-color: black; bottom:0%;} 
+    25% { border-color: black; bottom:0%;} 
+   50% { border-color: gold; bottom:2%;} 
+    75% { border-color: black; bottom:0%;}
+    100% { border-color: black; bottom:0%;} 
+}
+
+.bottom-row{
+        text-align:center;
+        width:100%;
+        height:3em;
+        position:absolute;
+        bottom:0%;
+        background-color:white;
+        animation: blink 2s ease infinite 0s;
+        -webkit-animation: blink 2s ease infinite 0s;
+        -webkit-transition: all 1s linear;
+        -moz-transition: all 1s linear;
+        -o-transition: all 1s linear;
+        transition: all 1s linear;
+    z-index:1;
+    }
+
+.bottom-row.stop{
+        text-align:center;
+        width:100%;
+        height:3em;
+        position:absolute;
+        background-color:white;
+        border-color:white;
+        animation: none;
+        -webkit-animation: none;
+    }
+
+
+
+.down-arrow-hero{ 
+    border-right:0.2em solid;
+    border-bottom:0.2em solid;
+    border-color:inherit;
+    height:2em;
+    width:2em;
+    transform:rotate(45deg);
+    display:inline-block;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+
+
 /*########### OG Nav Bar Style #################*/
 .currentLink{
     border-bottom: solid 1px;
@@ -88,9 +141,6 @@ article.aboutSection {
 
 #section-1-gradient {
     background: white; /*default color for browsers not supporting gradients */
-    /*background: -webkit-linear-gradient(#C0B283,white); safar*/
-    /*background: linear-gradient(#6D7993,white  ); typical*/
-    /*background: -o-linear-gradient(#ffc61a,white ); opera*/
 }
 
 div.leftSide-col {
@@ -369,13 +419,32 @@ ul.menu-nav li a:hover {
     text-decoration: none;
     border-bottom: solid 1px;
     transition: .3s;
+    border-right-color:white;
+    border-left-color:white;
 }
 .front-page .menu-item a:hover {
     background: none;
     color:#f9f9f9;
+    border-right-color:white;
+    border-left-color:white;
 }
 
 /* Start Lecture Dropdown */
+.down-arrow{
+    border-right:2px solid black;
+    border-bottom:2px solid black;
+    height:0.8em;
+    width:0.8em;
+    transform:rotate(45deg);
+    display:inline-block;
+    position:absolute;
+    bottom:30%;
+    left:90%;
+    border-right-color:inherit;
+    border-bottom-color:inherit;
+}
+
+
 .lecture-dropdown {
     position: relative;
     display: inline-block;
@@ -385,13 +454,14 @@ ul.menu-nav li a:hover {
 .lecture-dropdown-container {
     display: none;
     position: absolute;
-    min-width: 160px;
+    min-width: 11em;
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     top: 20px;
     left: -25px;
     transition: .3s;
 }
+
 .front-page .lecture-dropdown-container {
     top: auto;
 }
@@ -446,6 +516,7 @@ ul.lecture-dropdown-content li a:hover {
     .hero, .main-content {
         margin-top: 73px;
     }
+    
     .top-nav-container.responsive {
         display: block;
         background: white;

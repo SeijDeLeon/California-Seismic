@@ -212,7 +212,7 @@ h1, h2, h3 , p, a, li, button {
     background: white;
     display: none;
     padding: 40px 40px 0;
-    min-height: 100vh;
+    min-height: 90vh;
     padding: 10%;
 }
 #onboarding-carousel .onboarding-header {

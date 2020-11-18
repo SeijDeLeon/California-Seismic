@@ -1,6 +1,20 @@
 /*eslint no-undef: "error"*/
 /*eslint-env browser*/
 
+/*Prevent the hero animation from occuring once the page is scrolled down */
+window.addEventListener('scroll',function() {
+    var currentScroll = window.pageYOffset;
+    var heroArrow = document.getElementsByClassName("bottom-row");
+    const height = window.innerHeight|| document.documentElement.clientHeight|| 
+document.body.clientHeight;
+    if (currentScroll > 0.8*height){
+        if(heroArrow[0].className == "bottom-row"){
+           heroArrow[0].className += " stop";
+           }
+    }
+});
+
+
 function toggleDropdown() {
     var x = document.getElementById("dropdownClick");
     var y = document.getElementById("dropdownContainer");
