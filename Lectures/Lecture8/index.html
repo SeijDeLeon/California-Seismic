@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Lecture 8</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/lecturePageStyle.css">
+    <link rel="stylesheet" href="../../styles/lectureNavStyle.css">
+    <script src="../../styles/javascriptStyle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Mathscribe -->
+    <link rel="stylesheet" href="../../assets/mathscribe/jqmath-0.4.3.css">
+    <script src="../../assets/mathscribe/jquery-1.4.3.min.js"></script>
+    <script src="../../assets/mathscribe/jqmath-etc-0.4.6.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <div class="top-nav-container" id="dropdownContainer">
+        <div class="home-logo">
+            <a href="../../index.html" rel="home" class="logo"><img src="../../indexPic/cs_logowithtext.png"></a>
+        </div>
+        <div class="main-menu-container">
+            <ul class="menu-nav" id="dropdownClick">
+                <li class="menu-item"><a class="nav-link currentLink" href="../../Lectures">Lectures</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../PracticeQuestions">Practice Questions</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../ExamInfo">Exam Guide</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../Contributors">Contributors</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776</a></li>
+            </ul>
+        </div>
+    </div>
+
+<article class="lectureBackground">
+<div class="main-content">
+    <div class="lectureSidebarWrapper" id="lectureSidebarWrapper">
+        <div class="lectureSidebar" id="lectureSidebar">
+            <h3><a href="../">&#8592; All Lectures</a></h3>
+            <p><a href="../Lecture0">0:  Seismic Exam Intro</a></p>
+            <p><a href="../Lecture1">1:  Seismicity / Earthquakes</a></p>
+            <p><a href="../Lecture2">2:  Code Provisions</a></p>
+            <p><a href="../Lecture3">3:  Site Conditions</a></p>
+            <p><a href="../Lecture4">4:  Risk Categories</a></p>
+            <p><a href="../Lecture5">5:  Building Systems</a></p>
+            <p><a href="../Lecture6">6:  Ductility</a></p>
+            <p><a href="../Lecture7">7:  Base Shear</a></p>
+            <p><a href="../Lecture8">8:  Force Distribution</a></p>
+            <p><a href="../Lecture9">9:  Building Drift</a></p>
+            <p><a href="../Lecture10">10: Diaphragms</a></p>
+            <p><a href="../Lecture11">11: Irregularities / Redundancy</a></p>
+            <p><a href="../Lecture12">12: Nonstructural Components</a></p>
+            <p><a href="../Lecture10">13: Seismic Detailing</a></p>
+        </div>
+    </div>
+    <div class="lectureWrap">
+    <div class="lectureHeader">
+        <h1> Lecture 8: Force Distribution </h1>
+    </div>
+    
+<!--Begin contents pasted from Google Docs-->
+  <p>Building on the material covered in Lecture 7 on the theory behind the analytical procedures used to analyze seismic forces in a building, this lecture will continue with the analysis of loads using the Equivalent Lateral Force Procedure (ELFP). Lecture 8 will begin with how mass in a building is accounted for and then move on to cover the procedures for determining how vertical and horizontal forces are distributed in a building. An example that incorporates the entirety of material that has been covered so far will be provided at the end of this lecture for practice. The image below provides a visual summary of the material that has been covered to this point. </p> 
+
+
+
+
+<img src = "visualSummaryMaterial.png" alt="visual_Summary_Material">
+
+
+<p>Exam Requirements:</p>
+  <ul>
+     <li> Vertical Force Distribution  </li>
+     <li> Horizontal Force Distribution  </li>
+</ul>
+
+<h3> Mass Distribution </h3> 
+<p>As we have learned from the previous lecture, there are different types of loads that can act on a structure. While all of the different load types can be applied to the structure for analysis, only some of them are related to the effective seismic weight (and therefore seismic force). To recap, dead loads are included in the determination of the effective seismic weight because they are permanent and contribute to the effective seismic weight of a structure. On the other hand, most live loads are not included in the effective seismic weight of a structure because they are transient and do not <q>accelerate</q> with the building. The exceptions apply to storage loads, partitions, or really heavy live loads (such as roof gardens or snow loads on the roof). Imagine a 3-story building with floors and walls. There are dead loads everywhere, from the floors to the walls, that contribute to the effective seismic weight of the structure. </p>
+
+<p>Now, you are probably wondering: how do I account for all of the dead loads in a complex 3D structure? How do I add it all up? Is this going to take me forever to do? Don’t worry, there is a very convenient method. In this method, the dead loads from <b>each</b> diaphragm level (from the floor and the walls) are <q>lumped</q> into one mass at one common location: the diaphragm level. As a result, we treat the <q>lumped mass</q> per level as representative of all of the dead loads spread out all over that particular diaphragm level. The end result looks similar to a single degree of freedom (SDOF) system for a single story structure, and stacked SDOFs for the multiple stories. This method allows us to account for the fact that there is mass in the structure. Remember Newton’s Second Law of Motion F=ma? That equation can be tied into this method because mass contributes to force, which means that where there is mass, there is also force. This means that a complex 3D structure can be simplified by identifying the mass locations, also known as the locations of the applied force. </p>
+<img src = "lumpedMassBuilding.png" alt="lumped_Mass_Building">
+
+<p>From the image above, you are probably wondering why are diaphragms chosen as the location along a building’s height to lump the mass? Why don’t we lump the mass at the floors and then the walls separately? This is because diaphragms break up the spans of the lateral force resisting system (LFRS), which allows for the mass at each diaphragm level to be transmitted to the top of the LFRS directly below. This is not only true, but also analytically convenient because it is easier to analyze the forces at each floor level. This method also allows you to analyze the mass at the very top of a LRFS, the roof, as a lumped mass. For analysis, this would mean that you will need to know the mass at each floor level. (The roof is treated as the <q>highest</q> floor level.) You can determine the mass at each level by adding up all of the dead loads and any permitted live loads (see ASCE 7-16 Section 12.7.2) at that floor level. Now, the only thing that is not already part of the mass at each diaphragm level is the set of walls. The addition of the wall mass to the <q>lumped mass</q> will be discussed in the next section.</p> 
+
+
+<h3> Simply Supported</h3> 
+<p>The mass at each level of a building is made up of the floor mass and the wall mass. Now that we have learned how to account for the floor mass at each level of a structure, let’s move on to learn how to include the wall mass. The method that we will be using is called <q>The Tributary Area Method</q>. By using this method, you are able to divide sections of the building walls to be included in the mass at each floor level using <q>tributary area</q>. This is the area of interest that contributes load to a certain building component (e.g. beam), and is defined by <b>half</b> of the area on both sides of the building component to the adjacent building components. This means that the building component is responsible for carrying the load in that region called the <q>tributary area</q>. For example, the framing plan below shows the tributary area of the center beam by the red region.<p>
+
+
+
+
+
+<img src = "floorFramingPlanView.png" alt="floor_Framing_Plan_View">
+
+
+<img src = "tributaryAreaMethod.png" alt="tributary_Area_Method">
+
+<p>Let’s look at an example of a simply supported beam to see how the Tributary Area Method is applied. </p>
+
+<h4> Example 1: What are the support reactions of a simply supported beam with a uniform load? </h4> 
+
+<img src = "simplySupportedBeam.png" alt="simply_Supported_Beam">
+
+<p>Strategy: We will be using the Tributary Area Method to determine the support reactions of a simply supported beam with a uniform load. We will be dividing the length of the beam in half because each support reaction is responsible for carrying the load at half the distance of the beam. </p>
+
+<p><u>Step 1</u>: Determine the load. 250 plf x 40 ft = 10,000 lbs = 10 k. </p>
+<p><u>Step 2</u>: Divide by half to determine each support reaction. 10 k / 2 = 5 k per reaction. </p>
+
+
+<p>Answer: The reaction at each support is 5 k. Shown below is a diagram of the support reactions. </p>
+
+<img src = "reactionsSimplySupportedBeam.png" alt="reactions_Simply_Supported_Beam">
+
+<h4>Example 2: What are the support reactions of a beam with 3 support points? To make this example correct for the tributary method, there is a moment release in the beam at support B. (We don't need to learn about releases for the Seismic Exam). </h4>
+
+<img src = "threeSupportsBeam.png" alt="three_Supports_Beam">
+
+<p>Strategy: We will look at each span of the beam (between two supports) separately by dividing the beam into two equidistant simply supported beams. The process for the Tributary Method will be repeated for each span (simply supported beam). Since there is a support at the middle of the original beam, you will add up the reactions for the pin support in the middle from the two simply supported beams. It is helpful to name the reactions to keep track of them. </p> 
+
+<img src = "twoSimplySupportedBeams.png" alt="two_Simply_Supported_Beams">
+
+<p><u>Step 1</u>: Determine the load. 250 plf x 20 ft = 5,000 lbs = 5 k. </p>
+<p><u>Step 2</u>: Divide by half to determine each support reaction. 5 k / 2 = 2.5 k per reaction. </p>
+
+<img src = "reactionsTwoSimplySupportedBeams.png" alt="reactions_Two_Simply_Supported_Beams">
+
+<p> <u>Step 3</u>: Add up the reactions for Support B. 2.5 k + 2.5 k = 5 k. </p>
+
+<p>Answer: The reaction at each support is as follows: R<sub>A</sub> = 2.5 k, R<sub>B</sub> = 5 k, and R<sub>C</sub> = 2.5 k. Shown below is a diagram of the support reactions. </p>
+
+<img src = "reactionsThreeSupportsBeam.png" alt="reactions_Three_Supports_Beam">
+
+<p>Now that we have learned how the Tributary Area Method is used to analyze beams, let’s look at how the method is used for buildings. Imagine that you have a three-story building with wall heights h. Per the Tributary Area Method, a particular floor level (diaphragm) is responsible for carrying the load at half of the wall area of the story above and below that particular diaphragm level. To account for half of the wall area, you will be dividing the height of the building walls per floor level in half: h/2. This means that you will be using half of the wall area at the floor level above and below to account for the mass at the diaphragm between the two stories. </p>
+
+
+<img src = "elevationViewBldg.png" alt="elevation_View_Bldg"> 
+
+<p> Let’s start at the top (fourth) level of a three-story building: only the top half of the fourth level wall mass will be included in the mass at the roof level. This is because there is no level above the roof, which means that the wall height used to determine the wall mass at the roof level will be h/2.  </p> 
+
+<img src = "roofLevelTributaryMethodBuilding.png" alt="roof_Level_Tributary_Method_Building"> 
+
+<p> Next, let’s move on to the third floor level: the bottom half of the fourth level wall mass and the top half of the third level wall mass will be included in the mass at the third level. This means that there are two halves of wall h: h/2, which can be added together to get the full wall height h. You will be using the wall height h to determine the wall mass for the third diaphragm level.  </p> 
+
+<img src = "thirdLevelTributaryMethodBuilding.png" alt="third_Level_Tributary_Method_Building">
+    
+<p> Do the same for the second floor level, but take note that the bottom half of the first level wall mass will NOT be accounted for in the mass at the second floor level. This bottom half wall mass of the first floor level will be transferred to the ground and foundation, which means that we do not need to worry about it! </p> 
+
+
+<img src = "tributaryMethodBuilding.png" alt="tributary_Method_Building">
+
+
+
+<p> Example 3: What is the mass at each level of a two-story concrete office building?</p>  
+ <ul>
+     <li>Typical plan dimensions: 60ft x 40ft</li>
+     <li> Typical story height: 14ft </li>
+     <li> Typical floor self weight: 100 psf </li>
+     <li> Typical wall self weight: 20 psf </li>
+     <li> Partitions: 10 psf </li>
+</ul>
+
+<img src = "example3SimplySupported.png" alt="example_3_Simply_Supported">
+ 
+ 
+<p> Strategy: Similar to determining the total seismic weight, the mass at each floor level will be a single number. Since we are given the floor dimensions and the corresponding weights of the walls and floor, we can use this information to determine the mass of each floor level. Notice that partitions are given in the problem statement. This will not always be the case, so make sure to take notice of the intended use of the building and check ASCE 7-16 Section 4.3.2 to see if partitions should be included in the analysis. To simplify the calculations, we will be grouping the <q>typical</q> floor and wall mass for a particular story, and allocating it to the corresponding floor level if the <q>typical</q> tributary dimensions are satisfied.  </p> 
+
+<p> <u>Step 1</u>: Typical floor area. 60ft x 40ft = 2400 square ft. </p> 
+<p> <u>Step 2</u>: Typical floor weight. 2400 square ft x 100 psf = 240,000 lbs = 240 k.</p> 
+<p> <u>Step 3</u>: Typical wall area. (60ft x 14ft x 2) + (40ft x 14ft x 2)= 2800 square ft. </p> 
+<p> Be careful when calculating the wall area for each diaphragm level! Remember that there are four walls total, or two sets of different dimensioned walls, which means that you will need to multiply by 2 for each set of walls to account for all four walls of a floor level. </p> 
+<p> <u>Step 4</u>: Typical wall weight per story. 2800 square ft x (20 psf + 10 psf) = 84,000 lbs = 84 k. </p> 
+	 <p> Note that partitions are to be included for office buildings per ASCE 7-16 Section 12.7.2. </p> 
+<p> <u>Step 5</u>: 3rd level/Roof. 240 k + (84k/2) = 282 k. </p> 
+<p> Don’t forget that for the Tributary Area Method, only half of the wall weight is added to the roof weight for the roof (3rd) level. </p> 
+<p> <u>Step 6</u>: 2nd level. 240 k + 84 k = 324 k. </p> 
+<p> To determine the mass at the 2nd diaphragm level, add the full wall weight to the floor weight. Remember that we do not need to account for the bottom half of the mass at the 1st floor level because it will be transferred to the ground and foundation, so don’t worry about it. </p> 
+
+<p> Answer: The weight at each floor is as follows: </p> 
+ <ul>
+     <li> 3rd level/Roof: 282 k </li>
+     <li> 2nd level: 324 k </li>
+</ul>
+
+<p> Note that the effective seismic weight W is not equal to the total weight of the structure. The effective seismic weight W only includes the dead loads and additional loads listed in ASCE 7-16 Section 12.7.2 (heavy live loads, storage loads, snow loads). The effective seismic weight of the concrete office building is 606 k (282 k + 324 k = 606 k).</p> 
+
+
+<h3>Vertical Force Distribution</h3> 
+<p> Recall, we had a brief understanding of what base shear is in the previous lecture. We defined seismic base shear as the total horizontal force resisted through a structure’s lateral resisting system as the mass of the building accelerates due to ground shaking. Now, we are looking at how the forces from the base shear are distributed throughout a structure. </p> 
+
+
+<img src = "verticalForceDistribution.png" alt="vertical_Force_Distribution">
+
+
+
+
+<img src = "verticalForceEqn.png" alt="vertical_Force_Eqn">
+
+<p> First of all, what is F<sub>x</sub> and what does it pertain to? It means the weight of the floor times the acceleration experienced. It is dominated by the first mode shape. However, the deformed shape is controlled by the k factor because there might be higher mode effects that contribute to the behavior of the deformed shape. You will see that it is not linear. </p> 
+
+
+<img src = "cvxComponent.png" alt="cvx_Component">
+
+<p> ASCE 7-16 provides specific formulas to distribute the base shear throughout a structure. Vertical distribution is a function of C<sub>vx</sub> and base shear. C<sub>vx</sub> equates to the weight at a single story multiplied by the height of that story from the ground raised to the power of k; all of this is divided by the summation of multiplication of weight and height for all stories. C<sub>vx</sub> is essentially a percentage that is multiplied by the base shear to determine a seismic force at each level. This sounds confusing, so let’s break down each component and understand its properties. </p> 
+
+<p> What is ‘k’?</p> 
+
+
+<a class="imgLink"  href="http://www.ce.memphis.edu/7119/PDFs/FEAM_Notes/Topic09-SeismicLoadAnalysis.pdf"><p>Image via FEMA</p> </a>
+<img src = "kWithPeriodT.png" alt="k_With_Period_T">
+
+
+<img src = "beamVsBuilding.png" alt="beam_Vs_Building">
+
+
+
+
+<p> We can see the comparison between a beam and a building. By examining the modal results through various tests, engineers concluded that correlating k=1 for the first modal shape is reasonable for buildings with a regular distribution of mass and stiffness (e.g. - short buildings). The greater amount of force applied to the beam will cause it to deflect more; similarly, if we applied more force towards a building, it will try to oscillate more. On the other hand, we can apply the same concept towards the k factor. If the building fundamental period is less than or equal to 0.5s, there is no scaling of vertical forces from k, and the forces match first mode vibration. If the building period is greater or equal to 2.5s, then k is equal to 2. A k-factor of 2 will scale the vertical forces to better match a higher mode shape. </p> 
+ 
+
+
+<img src = "kEffect.png" alt="k_Effect">
+
+
+<p> The vertical distribution factor, C<sub>vx</sub> will apply a greater acceleration the higher the floor is on a building. Whether the k value is equal to 1 or greater, the C<sub>vx</sub> equation is going to still distribute more seismic force to the top of a structure than the bottom. Imagine a lollipop that wants to sway back and forth after being pulled back while held in place; the top part is going to move faster than the bottom part. This is acceptable and known because we assume that a typical building will move and accelerate in its fundamental period similar to an SDOF, where the top part is moving the most from the acceleration.</p>  
+
+<p> Let’s again consider <u>example 3</u> from <b>Simply Supported</b> for you to really understand how these calculations work.</p> 
+
+<p> Strategy: Based on the figure in the previous section, we can now determine the vertical force distribution at each level. For simplicity, the period is given as T = 0.24s; hence k = 1. Remember, C<sub>vx</sub> is equal to 1 because it is a percentage multiplier to distribute the seismic base shear that is assigned at each floor level! It is a good way to check whether you are on the right track since C<sub>vx</sub> must equal 1. In the case that it does not equal 1, it means that you have a calculation error because it would indicate that the applied forces are larger than the actual forces. In addition, F<sub>x</sub> is another way to check you are calculating the correct vertical force at each level since the summation of F<sub>x</sub> must equal the seismic base shear.</p>   
+
+<table border="1">
+    <caption>Vertical Force Distibution </caption>
+    <tr><!-- row 1  --> 
+        <td>level</td> 
+        <td>h(ft)</td>
+        <td>W<sub>x</sub> (k)</td>
+        <td>k </td>
+        <td> W<sub>x</sub>  h<sub>x</sub></td>
+        <td>C<sub>vx</sub></td>
+        <td>V (k)</td>
+        <td>F<sub>x</sub></td>
+    </tr>
+    <tr>
+        <td>3/roof</td>
+        <td>28</td>
+        <td>282</td>
+        <td>1</td>
+        <td>7896</td>
+        <td>0.64</td>
+        <td>101</td>
+        <td>64.4</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>14</td>
+        <td>324</td>
+        <td>1</td>
+        <td>4536</td>
+        <td>0.36</td>
+        <td>101</td>
+        <td>36.2</td>  
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td>606</td>
+        <td></td>
+        <td>12432</td>
+        <td>1</td>
+        <td></td>
+        <td>101</td>
+    </tr>
+</table> 
+
+<p> What about the ground floor/level 1? There’s actually no need to check tributary forces to the ground floor. We could go through and calculate the loads to the ground, but those forces will just be resisted by our very strong foundation elements and then to the earth itself. That load path is direct and doesn’t require explicit lateral design. So in structural engineering, the effective weight that would go to the ‘base’ level is essentially ignored in calculations. Things can become more confusing when there’s an underground parking garage, or when the structure extends below the ground surface. Here’s a few figures of structures that can extend below the ground surface. These types of structures can make analysis complicated, but for the seismic exam, you are dealing with the structures where the base level is usually at a flat earth’s surface.</p>  
+
+
+
+<img src = "slopedSurfaces.png" alt="sloped_surfaces">
+
+
+
+
+<img src = "structuresBelowGround.png" alt="structures_Below_Ground">
+
+
+
+
+<p> Answer: We can see that the seismic base shear is divided as 36.2 kips at 2nd level and 64.4 kips at the 3rd level. This is the seismic shear at each level, NOT the story shear which is an envelope of the seismic forces. You will see the difference in the following section. </p> 
+
+<img src = "example3VerticalForceDistribution.png" alt="example_3_Vertical_Force_Distribution"> 
+
+<h3>Horizontal Force Distribution</h3> 
+
+<p> As seen in the previous section, the vertical distribution of forces allowed us to find the <q>external</q> forces acting at each floor level as a fraction of the total external base shear acting at the support of the structure. The horizontal distribution of forces helps us to find the <q>internal</q> forces in the structural elements induced due to the external forces at each floor. This tells us the design shear in each story of the building i.e. how much lateral load is acting per story. </p> 
+
+<img src = "verticalVsHorizontalForceDistribution.png" alt="vertical_Vs_Horizontal_Force_Distribution"> 
+
+
+
+<p> Finding the design story shear in a structure is similar to the calculation of shear in a cantilever beam that has several point loads acting along its length. In the cantilevered beam shown below, the point loads are similar to the vertical distribution of forces in a building and the load acting at the fixed end is similar to the total external base shear. For the given values, it is possible to find the shear force diagram by adding the forces acting in the same direction.</p> 
+
+<img src = "shearForceForCantileveredBeam.png" alt="shear_Force_For_Cantilevered_Beam">
+
+<p> Similarly for a structure, once we have determined the vertical distribution of forces, F<sub>i</sub>, it is possible to determine the horizontal distribution of forces as per Equation 12.8-13 in Section 12.8.4 of ASCE 7-16. </p> 
+
+<img src = "equation12.8-13OfASCE7-16.png" alt="equation_12.8-13_Of_ASCE_7-16">
+
+<p> where, 
+V<sub>x</sub> (kips or kN) is the seismic design story shear in any story of the structure, and
+F<sub>i</sub> (kips or kN) is the fraction of external base shear induced in the story level <q>i</q>. </p>  
+
+<p> It is important to note that just like the shear in the given cantilever beam, the seismic design story shear is also ADDITIVE because it is the sum of the design shear in that story plus the stories above it. So, the lower you go in the structure, the greater the story shear becomes!</p> 
+
+<p> Let us again consider example 3 from the <b>Simply Supported</b> section with the two-story building having a story height of 14 feet. As seen previously in the <b>Vertical Force Distribution</b> section, we found the vertical distribution of forces in the given structure. Now, we can find the horizontal distribution of forces in the structure using equation 12.8-13 from ASCE 7-16. The calculations are shown in the table below. </p> 
+
+<table border="1">
+    <caption>Vertical Force Distibution </caption>
+    <tr><!-- row 1  --> 
+        <td>level</td> 
+        <td>h(ft)</td>
+        <td>F<sub>x</sub></td>
+        <td>V<sub>x</sub></td>
+    </tr>
+    <tr>
+        <td>3/roof</td>
+        <td>28</td>
+        <td>64.4</td>
+        <td>64.4</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>14</td>
+        <td>36.2</td>
+        <td>101</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>101</td>
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td>101</td>
+        <td></td>
+    
+    </tr>
+</table> 
+
+<p> Finally, we can conclude the forces at each level and the design shear forces at each story as shown in the figure below.</p> 
+
+
+<img src = "example3ForceDistribution.png" alt="example_3_Force_Distibution">
+
+
+
+
+<h3>Everything So Far</h3>
+
+
+<h4><i>Question:</i> What is the vertical and horizontal force distribution of the following structure?</h4>
+        
+        <h4>A developer wants to create a laboratory for vaccines to be tested. They discussed with the seismic engineer that it has to be designed as a special reinforced concrete shear wall with an overall height of 58 ft, where site class = C. S<sub>S</sub> = 1.709, S<sub>1</sub> = 0.62. The laboratory has the following dimensions: 4 stories tall. Typical story height is 14 ft, except the first story lobby is 20ft tall and the fourth story is 10 ft tall. Each floor has overall dimensions of 20ft x 25 ft. Typical floor weight is 50 psf, typical roof weight is 30 psf, and the typical wall weight is 30 psf. </h4> 
+
+<p> Strategy: The question is simply asking for the seismic weight at each floor. The dimensions and dead loads were all given in the question statement. Since there is no information about live loading, there is no requirement to check if that should apply. Draw out the problem to help visualize the structure and its dimensions. When determining loads at each floor, it is usually best to set up a table to keep the information clean.</p> 
+
+
+<img src = "example4TributaryMethod.png" alt=
+"example_4_Tributary_Method">
+
+<p>Step 1: Set Up the Mass Distribution Table. </p>
+
+<table border="1">
+    <tr><!-- row 1  --> 
+        <td>level</td> 
+        <td>Tributary Height(ft)</td>
+        <td>Surface</td>
+        <td>Floor Area (ft^2)</td>
+        <td>Wall Area (ft^2)</td>
+        <td>Floor Dead (k) </td>
+        <td>Wall Dead (k)</td>
+        <td>Roof Dead (k) </td>
+        <td>Total</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>10</td>
+        <td>Roof + Wall</td>
+        <td>500</td>
+        <td> (10*20*2)+(10*25*2) = 900</td>
+        <td>0</td>
+        <td>27</td>
+        <td>(500)(30) = 15</td>
+        <td>42</td>
+    </tr>
+      <tr>
+        <td>4</td>
+        <td>12</td>
+        <td>Floor + Wall</td>
+        <td>500</td>
+        <td> 1080 </td>
+        <td>25 </td>
+        <td>32.4</td>
+        <td>0</td>
+        <td>57.4</td>
+    </tr>
+      <tr>
+        <td>3</td>
+        <td>14</td>
+        <td>Floor + Wall</td>
+        <td>500</td>
+        <td> 1260 </td>
+        <td>25 </td>
+        <td>37.8</td>
+        <td>0</td>
+        <td>62.8</td>
+    </tr>
+       <tr>
+        <td>2</td>
+        <td>17</td>
+        <td>Floor + Wall</td>
+        <td>500</td>
+        <td> 1530 </td>
+        <td>25 </td>
+        <td>45.9</td>
+        <td>0</td>
+        <td>70.9</td>
+    </tr>
+</table> 
+
+<p> The weight at each floor is as follows: </p> 
+ <ul>
+<li> 5th level/Roof: 42 k </li>
+<li> 4th level: 57.4 k </li>
+<li> 3rd level: 62.8 k </li>
+<li> 2nd level: 70.9 k </li>
+<li>Total weight: 233.1 k ~ 233 k </li>
+</ul>
+
+<p> The effective seismic weight of the concrete office building is 233 k (42 k + 57.4 k + 62.8k + 70.9k )</p> 
+
+<p> Step 2: Determine the approximate fundamental period.</p> 
+<p> $$T = T_a = C_t h_n^x$$ per ASCE 7-16 Equation 12.8-7 and Table 12.8-2 </p> 
+	<p> Where C<sub>t</sub> = 0.02</p> 
+		<p> X = 0.75</p> 
+<p> $$T = (0.02)(58)^0.75 = 0.42 s $$</p> 
+
+<p> Step 3: Determine S<sub>DS</sub>and S<sub>D1</sub>. Start by determining the site class. Check ASCE 7-16 Table 20.3-1.  In the problem statement, it states that the site class = C. With our site class known, we can determine the acceleration parameters. Refer to ASCE 7-16 section Tables 11.4-1 and 11.4-2. Plugging in Site Class C with the given S<sub>1</sub> , S<sub>S</sub> values, we get F<sub>a</sub> = 1.2, F<sub>v</sub> = 1.4. Use eqns 11.4-1 and 11.4-2, to determine the MCE level accelerations. </p> 
+
+<p> S<sub>MS</sub> =  F<sub>a</sub> S<sub>S</sub> = (1.0) x (1.709) = 1.709</p> 
+<p> S<sub>M1</sub> = F<sub>v</sub> S<sub>1</sub> = (1.7) x (0.62) = 1.05 </p> 
+
+<p> Using ASCE 7-16 eqns 11.4-3 and 11.4-4, we determine S<sub>DS</sub> and S<sub>D1</sub>.</p> 
+<p> S<sub>DS</sub> = (⅔)(S<sub>MS</sub>) = (⅔) x (1.709) = 1.139g</p> 
+<p> S<sub>D1</sub> = (⅔)(S<sub>M1</sub>) = (⅔) x (1.02) = 0.68g</p> 
+
+<p> Step 4: Determine the Risk Category. Let’s check IBC Chapter 3  to determine which occupancy category a laboratory falls under. For this problem,  use section 304 to check for additional definitions of occupancy categories. IBC Section 304.1 notes that laboratories shall be classified as Group B. Check IBC Table 1604.5 for the Risk Category. Referencing back to Table 1604.5, Group B shall be categorized under Risk Category II.</p> 
+
+<p> Step 5: Determine the seismic importance factor, I<sub>e</sub> and Response Modification Factor R. Now that we know our risk category, refer to ASCE 7-16 Table 1.5-2 . I<sub>e</sub> = 1.0 for Risk Category II structures. Since the problem statement states that the laboratory is to be designed as a special reinforced concrete shear walls system, refer to ASCE 7-16 Table 12.2-1 where R = 6.</p> 
+
+<p> Step 6: Determine the seismic response coefficient, C<sub>s</sub>.</p> 
+<p> $$\C_s = \S_D_S / (R/I_e) = \ 1.0 / (6/1.0) = 0.166 $$</p> 
+
+<p> $$\C_s_,_m_a_x = \S_D_1 / (T(R/I_e)) = \ 0.68 / (0.42(6/1.0)) = 0.27 $$</p> 
+
+<p> $$\C_s_,_m_i_n = 0.044S_D_SI_e = (0.044)(1.0)(1.0) = 0.044 $$</p> 
+
+<p> So let’s check whether:</p> 
+<ul>
+	<li> $$ C_s ≤ \S_D_1 / (T(R/I_e)) → 0.166 ≤ 0.27 &#10004; $$ </li>
+	<li> $$ C_s ≥ 0.44S_D_SI_e →  0.166 ≥ 0.044 &#10004; $$  </li>
+</ul>
+
+<p> Since C<sub>s</sub> satisfies both criteria, the governing value to use is 0.166 for the seismic response coefficient. </p> 
+
+<p> Step 5: Determine seismic base shear. </p> 
+
+<p> $$V = C_sW$$ We have our C<sub>s</sub> and effective seismic weight from the previous section, which is 0.166 and 38.68 k, respectively. Multiply these two values and you’ll have the seismic base shear. </p> 
+
+<p> $$V = C_sW = (0.166)(233) = 38.68k $$ </p> 
+
+<p> Step 7: Determine the vertical and horizontal force distribution. </p> 
+
+<table border="1">
+    <caption>Equivalent Lateral Forces </caption>
+    <tr><!-- row 1  --> 
+        <td>level</td> 
+        <td>h(ft)</td>
+        <td>W<sub>x</sub> (k)</td>
+        <td>k </td>
+        <td> W<sub>x</sub>  h<sub>x</sub></td>
+        <td>C<sub>vx</sub></td>
+        <td>V (k)</td>
+        <td>F<sub>x</sub></td>
+        <td>V<sub>x</sub></td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>58</td>
+        <td>42</td>
+        <td>1</td>
+        <td>2436</td>
+        <td>0.28</td>
+        <td>38.7</td>
+        <td>10.78</td>
+        <td>10.78</td>
+    </tr>
+     <tr>
+        <td>4</td>
+        <td>48</td>
+        <td>57.4</td>
+        <td>1</td>
+        <td>2755</td>
+        <td>0.32</td>
+        <td>38.7</td>
+        <td>12.19</td>
+        <td>22.96</td>
+    </tr>
+     <tr>
+        <td>3</td>
+        <td>34</td>
+        <td>62.8</td>
+        <td>1</td>
+        <td>2135</td>
+        <td>0.24</td>
+        <td>38.7</td>
+        <td>9.44</td>
+        <td>32.41</td>
+    </tr>
+     <tr>
+        <td>2</td>
+        <td>20</td>
+        <td>70.9</td>
+        <td>1</td>
+        <td>1418</td>
+        <td>0.16</td>
+        <td>38.7</td>
+        <td>6.27</td>
+        <td> 38.7</td>
+    </tr>
+     <tr>
+        <td>Total</td>
+        <td></td>
+        <td>233</td>
+        <td>8744</td>
+        <td></td>
+        <td>1</td>
+        <td></td>
+        <td>38.7</td>
+        <td></td>
+    </tr>
+    
+</table> 
+
+      
+  
+<!--End of contents pasted from Google Docs-->        
+        
+        
+<div class="lectureSkip">
+    <a href="../Lecture7"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
+    <a href="../Lecture9"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
+</div>
+    </div>
+<br>
+</div>
+</article> 
+    <footer class="footingMain" id="footingMain">
+        <div class="footer-row">
+            <div class = "mobileStack footerLogo">
+                <h1 class="row-heading">California<br>Seismic</h1>
+                <a href="mailto:californiaseismic@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M0,24.08v9.89l86,68.2625l86,-67.4025v-10.75zM0,42.6775v105.2425h172v-104.3825l-83.85,65.79c-0.61812,0.48375 -1.3975,0.7525 -2.15,0.7525c-0.7525,0 -1.51844,-0.25531 -2.15,-0.7525z"></path></g></g></svg></a>
+                <a href="https://www.linkedin.com/company/californiaseismic/">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M156.23893,0h-140.47786c-8.5944,0 -15.76107,7.16667 -15.76107,15.76107v140.47786c0,8.5944 7.16667,15.76107 15.76107,15.76107h140.47786c8.5944,0 15.76107,-7.16667 15.76107,-15.76107v-140.47786c0,-8.5944 -7.16667,-15.76107 -15.76107,-15.76107zM50.16667,143.33333h-28.66667v-78.83333h28.66667zM35.83333,55.17774c-8.5944,0 -14.33333,-5.73893 -14.33333,-12.9056c0,-7.86654 5.73893,-13.60547 14.33333,-13.60547c8.5944,0 14.33333,5.73893 14.33333,12.9056c0,7.86654 -5.73893,13.60547 -14.33333,13.60547zM150.5,143.33333h-28.66667v-43c0,-11.47786 -7.89453,-14.33333 -10.02213,-14.33333c-2.1556,0 -11.47787,1.42774 -11.47787,14.33333c0,1.42774 0,43 0,43h-28.66667v-78.83333h28.66667v11.47787c4.3112,-6.4668 11.47787,-11.47787 25.08333,-11.47787c13.60547,0 25.08333,10.75 25.08333,35.83333z"></path></g></g></svg></a>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">Learn</h1>
+                <ul>
+                    <li><a href="Lectures">Lectures</a></li>
+                    <li><a href="PracticeQuestions">Practice Questions</a></li>
+                    <li><a href="ExamInfo">Exam Guide</a></li>
+                </ul>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">About Us</h1>
+                <ul>
+                    <li><a href="Contributors">Our Team</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">Copyright 2020 © California Seismic</p>
+    </footer>
+</body>
+</html> 

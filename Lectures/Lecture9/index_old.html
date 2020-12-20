@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Lectures</title>
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../javascriptStyle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+
+    <!-- Mathscribe -->
+    <link rel="stylesheet" href="../../assets/mathscribe/jqmath-0.4.3.css">
+    <script src="../../assets/mathscribe/jquery-1.4.3.min.js"></script>
+    <script src="../../assets/mathscribe/jqmath-etc-0.4.6.min.js" charset="utf-8"></script>
+    
+    <!-- Sticky Sidebar -->
+    <script src="../../assets/sticky-sidebar-master/dist/sticky-sidebar.js"></script>
+</head>
+<body>
+<nav> 
+<ul class="topnav" id="dropdownClick"> 
+    <li><a href="../../index.html"><img src="../../indexPic/seismic_small_navbar.png"></a></li>
+    <li><a href="../../Lectures" class="currentLink">Lectures</a></li>
+    <li><a href="../../PracticeQuestions">Practice Questions</a></li>
+    <li><a href="../../ExamInfo">Exam Info</a></li>
+    <li><a href="../../Contributors">Contribute</a></li>
+    <li class ="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+    </ul>
+</nav>
+
+<article class="lectureBackground">
+<div class="main-content">
+    <div class="lectureSidebar">
+            <h3><a href="../">All Lectures</a></h3>
+            <p><a href="../Lecture0">0:  Seismic Exam Intro</a></p>
+            <p><a href="../Lecture1">1:  Seismicity / Earthquakes</a></p>
+            <p><a href="../Lecture2">2:  Code Provisions</a></p>
+            <p><a href="../Lecture3">3:  Site Conditions</a></p>
+            <p><a href="../Lecture4">4:  Risk Categories</a></p>
+            <p><a href="../Lecture5">5:  Building Systems</a></p>
+            <p><a href="../Lecture6">6:  Ductility</a></p>
+            <p><a href="../Lecture7">7:  Base Shear</a></p>
+            <p><a href="../Lecture8">8:  Force Distribution</a></p>
+            <p><a href="../Lecture9">9:  Building Drift</a></p>
+            <p><a href="../Lecture10">10: Diaphragms</a></p>
+            <p><a href="../Lecture11">11: Irregularities / Redundancy</a></p>
+            <p><a href="../Lecture12">12: Nonstructural Components</a></p>
+            <p><a href="../Lecture13">13: Seismic Detailing</a></p>
+    </div>
+    <div class="lectureWrap">
+    <div class="lectureHeader">
+        <h1> Lecture 9: Drift </h1>
+    </div>
+    
+<!--Begin contents pasted from Google Docs-->
+<h3>Lecture 9 - Building Drift </h3>
+<p> Moving on from Lecture 8, where building mass and force distributions were covered, let’s now learn about how a building moves, or <q>deflects</q>, due to earthquake forces and how we account for it in design. This section will focus on building drift, the application of deflection and drift requirements, and P-Delta effects. There will be several examples throughout this lecture to help incorporate and reinforce the material. The image below provides a visual summary of the material that has been covered up to this point. </p>
+<p> Is this description better ? </p>  
+        
+<img src = "materialCoveredUpToNow.png" alt="material_Covered_Up_To_Now">         
+        
+        
+        
+<p> Exam Requirements: </p>
+  <ul>
+     <li> Drift and P-Delta effects  </li>
+     <li> Application of deflection and drift requirements </li>
+     <li> Deformation compatibility requirements for structural and non-structural elements </li>
+     <li> Required building separation and setback </li>
+</ul> 
+
+<h3>Building Drift</h3> 
+<p> Building story drift is the sideways deflection of the upper floor relative to the sideways deflection of the bottom floor for a given story. It can also be defined as the sideways or lateral deflection between two adjacent stories. The figure shown below depicts the story drift for a single-story building. </p>
+ 
+<img src = "buildingDrift.png" alt="building_Drift"> 
+
+<p> In the event of an earthquake, large lateral forces may be imposed on the structure which will result in story drifts. These deformations of the structure can negatively affect both the structural and non-structural elements of the structure and may also adversely affect any adjacent structures. Therefore, the story drifts must be properly assessed according to the CBC building code and ASCE 7 - 16 standard to avoid any casualties. We will understand this in more detail in the upcoming sections. </p>
+
+<h3>Cracked Walls </h3>
+<p> What is the significance of building drift? What happens when a building moves sideways due to the lateral forces acting on the building? To understand this, let us consider the aftermath when an earthquake struck at Nepal on April 25, 2015. Below are some pictures of the damage to the buildings due to the earthquake: </p>
+
+ 
+<p> Fourteen-story reinforced concrete structure damaged after the Gorkha earthquake: (a) distribution of the damages from the first to the seventh story; (b) detachment of the walls from the envelope frame; (c) diagonal cracking with slight out-of-plane detachment of the wall. </p>
+
+<img src = "fourteenStoryReinforcedConcreteStructureDamagedAfterTheGorkhaEarthquake.png" alt= "fourteen_Story_Reinforced_Concrete_Structure_Damaged_After_The_Gorkha_Earthquake">
+        
+<a class = "imgLink" href = "https://www.mdpi.com/2075-5309/9/2/39/htm"><p>Image via mdpi</p> </a>
+
+ 
+<img src = "poundingDamageDueToBuildingDrift.png" alt= "pounding_Damage_Due_To_Building_Drift"> <a class = "imgLink" href = "https://www.researchgate.net/publication/318292956_The_Structural_Damages_After_Nepal_Earthquakes"><p>Image via researchgate</p> </a>
+
+<p> The first figure above shows that the earthquake forces caused the building to drift which resulted in the formation of cracks in the exterior walls. The second figure shows the pounding damage to structures that occur due to the out-of-phase vibration of structures that are constructed next to each other with insufficient building separation. </p>
+
+<p> The mechanism of building drift can be better understood by considering the building before the earthquake to be rectangular in shape, as seen in the figure below. When an earthquake strikes, the lateral forces induce lateral deflections in the building which cause it to move sideways. This results in the building to deform into a parallelogram, producing various strains in the building components (e.g. walls and diaphragms). As a result, cracks form in the walls and glass breakage may occur.
+</p>
+ 
+
+<img src = "imposedDeformation.png" alt="imposed_Deformation"> 
+<a class="imgLink"  href="https://www.fema.gov/media-library-data/20130726-1721-25045-8384/fema_74_3rd_ed.pdf"><p>Image via fema</p> </a>
+
+<p> Another factor that contributes to the significance of building drift is building separation. The seismic waves produced during an earthquake can cause drift in buildings, moving them sideways in various directions. Consider two buildings constructed next to each other, as shown in the figure below, such that one building moves to the left and the other building moves to the right. This will lead to a collision between the two buildings. Keep in mind that buildings are not designed for impact loads. So, such collisions between buildings are not allowed and must be avoided at all costs.     </p>
+
+ 
+<img src = "buildingSeparation.png" alt="building_Separation"> 
+<a class="imgLink"  href="https://www.fema.gov/media-library-data/20130726-1721-25045-8384/fema_74_3rd_ed.pdf"><p>Image via fema</p> </a>
+
+<p> Also, keep in mind that there could be breakage of piping or ducts that lie between these structures due to their different lateral displacements. </p>
+
+<p> To avoid such a scenario, we must provide a significant distance between the two buildings such that during an earthquake, there is no collision due to the building drifts in each structure. This method is also known as <q>Building Separation</q>. </p>
+
+<h3>Deflection Ratio </h3>
+<p> To ensure the safety and functionality of any building component, the code limits the allowable deflection. Most of the time, the allowable deflection for any member or structure is given in terms of the deflection ratio. Let us consider a cantilever beam as shown below: </p>
+
+ 
+<img src = "deflectionOfCantilever.png" alt="deflection_Of_Cantilever"> 
+
+<p> Deflection = movement along the direction of applied force</p>
+<p> Deflection Ratio = Transverse deflection / Length of Member</p>
+
+<p> <q>Transverse deflection</q> is the movement along the direction of force, which is acting perpendicular to the longitudinal axis of the member.</p>
+
+<p> Deflection is a general term. It can occur in any direction when a force is applied to an object. When we talk about <q>the sideways or lateral deflection of a building</q>, we are particularly referring to the <q>building drift</q>. For this lecture, we are interested in the building drift. Whereas for design purposes and in regard to the code, structural engineers pay more attention to the drift ratio. </p>
+
+<h4>What is the drift ratio? </h4>
+<p> The drift ratio, similar to deflection ratio, is given as: </p>
+
+<p> Drift Ratio = Transverse deflection of the story / Height of the story </p>
+
+<p> To understand drift ratio, consider the figure below of a single story building having a height of 12 feet such that the roof shifts 3 inches sideways: </p>
+ 
+<img src = "driftVsDriftRatio.png" alt="drift_Vs_Drift_Ratio"> 
+
+<p> The drift of the building is 3 inches, whereas the drift ratio is 0.021. Clearly, the drift is given in units of length, whereas the drift ratio is unitless. </p>
+
+<h4>What is the significance of drift ratio?</h4> 
+<p> Imagine that a structural engineer mentions that one of the buildings she designed in San Francisco, California has a drift of 8 inches. So, you use your imagination and think of a 10-story building with a 15 feet story height. 10 inches drift for a 150 feet tall building doesn’t sound too bad, does it? The building will still look very straight and tall. But the engineer then mentions that she is talking about a one-story building with a 15 feet height. Now, the coin has flipped. 10-inch drift for a 15 feet tall building is too large and dangerous. It would look like the building is about to fall over and you wouldn’t want to go inside. Clearly just knowing the drift isn't enough to evaluate if the deflection is acceptable, it depends also on the story height. </p>
+
+<p> With many buildings being built around the world with different numbers of stories and different story heights, it is not possible to limit the allowable story drift for all case scenarios. Therefore, the concept of drift ratio is introduced. </p>
+
+<p> Drift ratio is a single number that tells the amount of story drift per story height, or the slope. If the slope is too steep, then the drift ratio is too small, and the drift is too large for the given story height. Such steep slopes need to be avoided.    </p>
+
+<p> So, to maintain consistency and reduce confusion for structural engineers, the structural codes limit the allowable story drift <i>ratios</i> instead of the story drift. This makes the job for us structural engineers so much easier because the allowable story drift ratio is a unitless number irrespective of the story height of a building, and simpler to apply to any sort of structure. </p>
+
+<h3>Restrictions </h3>
+<p> As mentioned in the previous section, there are restrictions on the allowable deflections for walls, roofs, floors, and other building components to ensure safety and functionality. These restrictions are given in Table 1604.3 of Chapter 16 in the 2019 edition of CBC, as shown below. </p>
+  
+<img src = "table1604.3OfCBC.png" alt="table_1604.3_Of_CBC"> 
+
+<p> These deflection limits apply to any deflection that occurs in any direction for any purpose. They are given in terms of Length/# where this number # is dependent upon: </p>
+<ul>
+
+<li> 1. Cracking the architectural finish that is affixed to the structural element </li>
+<li>2. Deflections that can be noticed by humans when walking on the structural element (like a floor) </li>
+</ul>
+
+
+<p> The deflection limits are tied to different construction types, and different load types (Live, Dead, Snow, and Wind) as shown in table 1604.3 of CBC above. </p>
+
+<p> These deflection limits per CBC are for the <q>deflections</q>, not drift. These would commonly be used in the design of structural members that are resisting gravity loads. In this lecture, we are primarily covering drift requirements. So, for drift limits applicable to earthquake loading, the CBC points to ASCE 7-16, Chapters 12, 13, 15 or 16 as applicable. These drift limits are described as the <q>in plane deflection</q> from a lateral load in the direction of the applied seismic force. </p>
+<p> What is the difference between in plane and out of plane deflection? </p>
+
+<h4> In Plane vs Out of Plane Deflection</h4>
+<p> Let’s consider a single-story structure with a load acting on it, as shown in the picture below. </p>
+ 
+<img src = "loadActingOnSingleStoryStructure.png" alt="load_Acting_On_Single_Story_Structure"> 
+
+<p> When the forces act along the longer dimension i.e. the length of the wall, it deflects as an in-plane deflection, as shown in the figure below. </p>
+ 
+<img src = "inPlaneDeflection.png" alt="in_Plane_Deflection"> 
+
+<p> Now, if the force acts along the shorter dimension i.e. thickness of the wall, it is said to undergo out of plane deflection, as shown in the figure below. </p>
+ 
+
+<img src = "outOfPlaneDeflection.png" alt="out_Of_Plane_Deflection">  
+
+<p> If we consider the moment of inertia, stiffness, and deflection for the two cases: </p>
+<p> Moment of inertia, I = (wall thickness) (length)<sup>3</sup>/12; (for in plane forces) </p>
+		     <p>  I = (length) (wall thickness)<sup>3</sup>/12; (for out of plane forces) </p>
+
+<p> Stiffness, K = 3EI/L<sup>3</sup></p>
+<p> Deflection = PL<sup>3</sup>/3EI</p>
+ 
+<p> Based on the geometry for in plane loads acting on the structure, the force is aligned with the longest direction of the wall which contributes to the moment of inertia by a cubic factor. This results in the moment of inertia of the wall to be large, leading to higher stiffness and small in plane defections in the structure. Whereas for out of plane forces, the moment of inertia is much smaller considering that the force is aligned with the smaller direction of the wall. This geometry leads to lower stiffness and large out of plane deflections in the structure.  </p>
+
+<p> So, depending upon the lateral forces and their direction of application we can have in plane deflections or out of plane deflections, and the structure elements may or may not have enough stiffness to resist these deformations. </p>
+
+<h3>Inelastic vs elastic deflection </h3>
+<p> Let’s recap what has been covered so far. When an earthquake strikes a structure, the design level accelerations will accelerate the masses that are spread across the vertical height of the building. The building will resist the acceleration of these masses, which will be felt as force. That force will add up all the way to the base of the structure (as internal shear force). </p>
+
+<p> For whatever lateral system we choose, during an EQ, forces will develop in the structure. And if these forces exceed the maximum limit for that lateral system to yield, then it will lead to inelastic deflections in the structure. On estimating the inelastic deflections, we can then calculate the story drift. </p>
+
+<p> It is important to note that the deflections calculated in the stories using the design level base shear, V, are not the expected inelastic deflections. To understand this, consider the ductility graph again, as shown below in the figure.  </p>
+
+ 
+<img src = "ductilityGraph.png" alt="ductility_Graph">
+
+<p> The graph lets us calculate the deflection at a point due to the design level base shear, V, in the elastic range. This elastic deflection is reduced using the response modification factor, R, because of the ductility of the structure. But, the expected deflection corresponds to the inelastic behavior and must be computed corresponding to the maximum base shear, V<sub>max</sub>.</p>
+ 
+<img src = "ductilityGraphElasticDeflection.png" alt="ductility_Graph_Elastic_Deflection"> 
+
+<p> Performing inelastic analysis for large structures can be quite complex. So, the easiest way to compute the expected deflection at any point in the structure is by first calculating the deflection from the elastic analysis and then amplifying it by a factor to bring it to the inelastic range. This factor is known as the Deflection Amplification Factor, C<sub>d</sub>.  </p>
+ 
+<img src = "ductilityGraphInelasticDeflection.png" alt="ductility_Graph_Inelastic_Deflection"> 
+
+<p> (Under-conservative deflection) x C<sub>d</sub> = Accurate deflection</p>
+
+<p> In other words (using the ASCE 7-16 terminology): </p>
+<p> Elastic Deflection x C<sub>d</sub> = Inelastic Deflection</p>
+
+<p> C<sub>d</sub> factor increases the design level force (used for elastic design) to match the expected INELASTIC deflection. And finally, these inelastic deflections are used to calculate the story drift for the structure. </p>
+
+<p> Now that we have discussed the different factors that are applied to find the story drift, let’s also consider the factors that are <q>not</q> applied to the story drift. Factors of safety are not considered with drift though they are very important in terms of loadings acting on the structure. </p>
+
+<p> For structural design, failures can be life-threatening. To avoid such failures, we design the structure for loads larger than the anticipated loads. This way we can ensure that the structure has enough capacity to resist the anticipated loads, and some more. This has been incorporated in the code using two methods - by either factoring up the loads and lowering the resistance capacity (LRFD method), or just using a safety factor on the capacities (ASD method). Either way, some factor of safety is applied to the structural design because if the load on the structure exceeds the design load, it will lead to life-threatening structural failure. </p>
+
+<p> When it comes to the drift check, we do not apply any factors of safety to the drift limits or drift capacity. This is because walls and other architectural components typically have a known deflection limit. So, we want to know the actual anticipated deflection of the structure to make the comparison. Even if the story drift in the structure exceeds its limit, it is less likely to be life-threatening. Yes, it will lead to some damage to structural and non-structural elements of the structure such as cracks in walls and breakage of glass, but such damages can be repaired. So, such failure will lead to monetary loss which will NOT endanger lives like a structural element failure. </p>
+
+<p> Keeping these factors in mind, let’s learn how to determine the story drift. </p>
+
+<h3> Story Drift Determination </h3> 
+<p> Now that we have defined drift and deflection, let’s move on to learn how to determine the actual story drift. Story drift is the difference between the deflections at the <b>centers of mass</b> at the top and bottom of a particular story. For structures with no torsional irregularities, story drift is computed based on the centers of mass, which align vertically with each other. If they don’t align vertically, a vertical projection of the center of mass at the top of the story is used as the center of mass at the bottom of the story to determine the story drift. The design story drift is computed using the Equivalent Lateral Force Procedure, as specified in ASCE 7-16 Section 12.8, where allowable stress design is used. No reductions are used with this method. </p>
+
+ 
+<img src = "deflectionVsDrift.png" alt="deflection_Vs_Drift">
+ 
+<img src = "storyDriftDetermination.png" alt="story_Drift_Determination">
+<p>ASCE 7-16 Figure 12.8-2 </p>
+
+<p> Figure 12.8-2 shows the determination of story drift for the first and second stories of a 2-story frame. There are a lot of different variables, so let’s start on the left of the figure. The stories have heights L<sub>1</sub> and L<sub>2</sub> (highlighted in yellow below) for stories 1 and 2, respectively. The δ represents displacement. Like the story heights, the numerical value next to delta represents the particular story. For example, δ<sub>1</sub>, highlighted in green below, represents the displacement of the first story. δ<sub>1</sub>, the letter <q>e</q> stands for elastic analysis, in other words, δ<sub>1e</sub> (highlighted in orange below) represents the elastic displacement of the first story.  </p>
+ 
+<img src = "partOneStoryDriftDetermination.png" alt="part_One_Story_Drift_Determination">
+<p>ASCE 7-16 Figure 12.8-2 </p>
+
+<p> Remember that the elastic behavior of the structure is amplified to better represent the inelastic behavior, which is then used to determine the building drift. This is shown by the two deflected versions of the frame: one dotted and one bolded. The dotted frame represents the elastic behavior of the structure, while the bolded frame illustrates the inelastic behavior of the structure. Similarly, δ<sub>1e</sub> and δ<sub>2e</sub> represents the total elastic displacements of the first and second stories, while δ<sub>1</sub> and δ<sub>2</sub> represents the inelastic (amplified) displacements for the corresponding stories. </p>
+
+<p> $$δ_1_e = Total Elastic Displacement @ Level 1$$</p>
+<p> $$δ_2_e = Total Elastic Displacement @ Level 2$$</p>
+ 
+<img src = "partTwoStoryDriftDetermination.png" alt="part_Two_Story_Drift_Determination">
+<p>ASCE 7-16 Figure 12.8-2 </p>
+
+<p> Moving on to the right side of the figure, you will see two small triangles with the numbers 1 and 2: $$Δ$$ (highlighted in yellow below). They are the story drift for the first and second stories. Using the previously defined definition of story drift, the story drift of the first story is the difference between the inelastic (amplified) displacement at the top and bottom of the first story. Since there is no displacement at the bottom of the first story, the story drift at the first story is just the inelastic displacement experienced at the top of the first story. This is different for the story drift of the second story. Since you can see that there is inelastic displacement at the top and bottom of the second story, you can determine the design story drift for the second story by finding the difference between the two displacements. </p>
+
+<p> Story Drift @ Second Story = “Inelastic Displacement @ Second Story” - Inelastic Displacement @ First Story</p>
+
+$$Δ_2 = “δ_2” - δ_1$$
+ 
+<img src = "partThreeStoryDriftDetermination.png" alt="part_Three_Story_Drift_Determination">
+<p>ASCE 7-16 Figure 12.8-2 </p>
+
+<p> For structures that are assigned to Seismic Design Category C, D, E, or F with torsional irregularities (as specified in Table 12.3-1), the centers of mass are not used to compute the design story drift. Instead, the difference between the deflections at vertically aligned points between the top and bottom of a story are used to calculate the design story drift. The specific edge of the structure doesn’t matter. This difference in computation is not likely to be tested on the seismic exam, it will be obvious how to read any given deflections for drift calculations. </p>
+ 
+
+<img src = "torsionalIrregularitiesDesignStoryDrift.png" alt= "torsional_Irregularities_Design_Story_Drift"> <a class = "imgLink" href = "https://pdfs.semanticscholar.org/a9e8/bd86f1394aef52a0e9312222c606801f2787.pdf"><p>Image via IOSR</p> </a>
+
+<p>Determination of DesignStory Drift with Torsional Irregularities </p>
+
+<p> <u>ASCE 7-16 Equation 12.8-15</u>: $$δ_x = (C_dδ _\text"xe")/I_e$$</p>
+
+<p> The design story drift, $$δ_x$$, otherwise known as <q>delta x</q>, is computed using ASCE 7-16 Equation 12.8-15. The C<sub>d</sub> factor amplifies the design level elastic force to better match that of the expected inelastic behavior of the structure, which undergoes inelastic deflection. The elastic deflection at level x, $$δ_xe$$, is computed based on the base shear, and used to determine the inelastic displacement (or the design drift) at level x. The Importance Factor, I<sub>e</sub>, is in the denominator to cancel the Importance Factor used in the base shear computation. This exclusion removes the exaggeration influence of the I<sub>e</sub> factor and shows the correlation between the drift requirements and the risk categories. As a result, the <q>seismic design philosophy</q> is still present in the determination of the actual deflection. </p>
+
+<p> For the determination of the base shear for drift, there are two reductions that are included. The first reduction comes from ASCE 7-16 Section 12.8.6.1. The elastic displacement in Equation 12.8-15 comes from the minimum base shear computed as specified in ASCE 7-16 Section 12.8. From Lecture 7, the base shear is the product of the seismic response coefficient, C<sub>s</sub>, and the effective seismic weight, W. Remember that there were several limits for the C<sub>s</sub> factor? For determining drift, you have one less limitation to worry about. You don’t need to adhere to ASCE 7-16 Equation 12.8-5 because drift is more cost-based, which means that additional safety limits are not required to provide for reasonable building safety. </p> 
+
+<p> <u>ASCE 7-16 Equation 12.8-5</u>: $$C_s = 0.044S_\text"DS"I_e≥0.01$$</p>
+
+ 
+<img src = "section12.8.6.2ASCE7.png" alt="section_12.8.6.2_ASCE7">
+
+<p> The second reduction comes from ASCE 7-16 Section 12.8.6.2. To determine the base shear for drift, the actual computed period can be used in the calculations. This means that there is no upper limit for the period T, which essentially implies that the product of C<sub>u</sub> and the approximated period, T<sub>a</sub> does not need to be checked for as the limit in the analysis. Lateral forces that have a limiting period can overestimate lateral displacements. This can result in higher costs. From the acceleration response spectrum, longer periods correlates to lower accelerations, which is beneficial for tall buildings. </p>
+
+<h3> Story Drift Limit </h3> 
+<p> After learning about the significance of building drift, the restrictions, and deflections, let’s learn about the limitations of story drift and how we apply them for different structural systems. Story drift is the difference in deflection between a particular diaphragm and the diaphragm level below. The limitations of story drift for any type of structure are outlined in ASCE 7-16 Section 12.12. </p>
+ 
+<img src = "firstSection12.12ASCE7.png" alt="first_Section_12.12_ASCE7">
+ 
+<img src = "secondSection12.12ASCE7.png" alt="second_Section_12.12_ASCE7">
+<p>ASCE 7-16 Section 12.12 </p>
+
+<p> Section 12.12.1 introduces Table 12.12-1 of ASCE 7-16, which lists the allowable story drift based on the structural system and risk category. Allowable story drift can only be applied for earthquakes and building structures as a whole. This means that individual building components cannot be analyzed for drift using Table 12.12-1 or allowable story drift because it is not applicable. </p>
+
+ 
+<img src = "allowableStoryDriftTable.png" alt="allowable_Story_Drift_Table"> 
+<p>ASCE 7-16 Table 12.2-1 </p>
+
+<p> Note that there are a couple of footnotes tied to Table 12.12-1. The first footnote dictates the allowable story drift equation for moment frames assigned to Seismic Design Categories D, E, or F, which can be found in ASCE 7-16 Section 12.12.1.1. </p>
+
+ 
+<img src = "section12.12.1ASCE7.png" alt="section_12.12.1_ASCE7">
+<p>ASCE 7-16 Section 12.12.1 </p>
+
+<p> The second footnote states that single-story structures designed for story drifts are not required to follow the limitations of story drift as outlined in Table 12.12-1; however, structural separation is still required. This design provision is allowed for single-story structures as long as it can be proven that these simple structures have sufficient connections that are able to experience drift and provide a reasonable amount of building safety. </p>
+
+<p> Moving on from the story drift limits, Section 12.12.2 details the restriction regarding diaphragm deflections. The allowable diaphragm deflection can’t be greater than what will cause the connections to fail (or become unattached and unable to support loads). </p>
+ 
+<img src = "section12.12.2ASCE7.png" alt="section_12.12.2_ASCE7">
+<p>ASCE 7-16 Section 12.12.2 </p>
+
+<p> To provide for building safety, structural separations are permitted and explained in Section 12.12.3. Section 12.12.4 provides design provisions on members that span two or more structures. Even though you should expect to be tested on the requirements listed above on the Seismic Exam, you will not be expected to determine the actual drift on a structure. This would require more sophisticated approximations of the building lateral system that are dependent on the specific material. </p>
+
+
+
+<h3> Structural Separation </h3> 
+ 
+<img src = "structuralSeparation.png" alt="structural_Separation"> 
+<p>ASCE 7-16 Section 12.12.3 </p>
+
+<p> When you think of a building, you usually imagine the structure moving as one unit, right? If the building were to move as anything else, you would normally think that would not be safe because the building can experience breakage and not provide building safety. Even though that is true, a structural system is actually also permitted to have structural separations to provide for additional building safety. These structural separations allow for the maximum inelastic response displacement of a structural system to avoid contact with any surrounding buildings that could cause damage. Equation 12.12-1 provides the calculation for the inelastic response displacement. This prevents buildings from colliding or crashing into one another in the event of an earthquake and causing additional damage. Structural separations are usually designed at critical locations in the structure to account for torsional and translational displacements. </p>
+
+<p> Generally, there is a minimum distance required for buildings to be <q>setback</q> from the property line in land development. This provides for spacing separation between different land uses. For buildings that are next to each other on the same property, there is a minimum distance of separation required between these structures. For buildings that are on properties not next to a public right-of-way, there is a minimum required distance for the buildings to be <q>setback</q> from the property line. There is an exception for smaller separation distances allowed where there is rational analytical justification based on the inelastic response to design ground motions. Note that this question is relatively easy to ask on the Seismic Exam, so understand that structural separations are allowed in a building and for buildings located on the same property to provide for building safety. </p>
+
+<h4> Practice Problem </h4>
+<p>Determine the minimum code-required structural separation for two buildings located next to each other on the same property. Building 1 has a C<sub>d</sub> factor of 1.5 and a maximum elastic displacement of 4 inches. Building 2 has a C<sub>d</sub> factor of 4 and a maximum elastic displacement of 2 inches. The Importance Factor I<sub>e</sub> is 1.0 for both buildings. </p>
+
+<p>Solution:</p>
+<p><u>Step 1</u>: Determine the maximum inelastic displacement for each building. </p>
+<p> Building 1: $$δ_1 = (C_dδ_x_e)/I_e = (1.5*4)/1 = 6.0 inches$$</p>
+<p> Building 2: $$δ_2 = (C_dδ_x_e)/I_e = (4*2)/1 = 8 inches$$</p>
+<p><u>Step 2</u>: Determine the difference between the maximum inelastic displacements for each building. </p>
+<p> $$δ_M_T =\[√{δ_M_1^2+δ_M_2^2}\] = \[√{6.0^2+8.0^2}\] = 10 inches $$ </p>
+
+<p> Answer: The minimum code-required structural separation for the two buildings is 10 inches. </p>
+
+<h3> P-Delta ASCE 7 </h3> 
+<p> So far, we have covered building drift, design story drift determination, and the respective restrictions outlined in the CBC and ASCE 7-16. For review, a deflection is the displacement of a building component from its original position, with at least one side restrained. This can be the bottom remaining in place for a deflected wall or diaphragm. We have previously gone over deflections that result from lateral loads. Now, let’s move on to learn about deflections that can occur due to eccentric axial loads. We usually don’t think of axial loads causing lateral deflections because they are centric. If an axial load acting on a building component is not centric (eccentric), this can result in secondary stresses and, consequently, excessive deflections. The P-Delta effect describes how eccentric axial loads can cause additional stresses and deflections. </p>
+
+<p> To better understand the P-Delta effect, let’s look at an example where there is a gravity load P and a lateral load L acting on a vertical post with a length L. In the undeflected scenario, the lateral load creates a moment M<sub>1</sub>, which can be determined by finding the sum of the moments from the base. </p>
+
+<p> Before moving on, just a clarification on the variables used in the images below. Several variables have been used to depict the undeflected and deflected scenarios for a vertical post. The table below lists out each variable and their descriptions. </p>
+
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+}
+
+table, td, th {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+
+
+<table>
+  <tr>
+    <th>Variable</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>P</td>
+    <td>Gravity Load</td>
+  </tr>
+  <tr>
+    <td>F</td>
+    <td>Tranverse Load</td>
+  </tr>
+  <tr>
+  	<td>L</td>
+    <td>Length of Vertical Post</td>
+  </tr>
+  <tr>
+  	<td>V</td>
+    <td>Shear</td>
+  </tr>
+  <tr>
+  	<td>C</td>
+    <td>Compression</td>
+  </tr>
+  <tr>
+  	<td>M<sub>1</sub></td>
+    <td>Moment in the Undeflected Scenario</td>
+  </tr>
+  <tr>
+  	<td>M<sub>2</sub></td>
+    <td>Moment in the Deflected Scenario</td>
+  </tr>
+</table>
+
+
+
+</body>
+</html>
+
+ 
+<img src = "undeflectedScenario.png" alt="Undeflected_Scenario">
+
+<p> For the undeflected scenario: M<sub>1</sub> = Transverse Load F x Length of the Vertical Post L. </p>
+
+<p> In the deflected scenario, or when a lateral system deflects too much (excessively), additional stresses will be created in the lateral system as it tries to resist the eccentric axial load. As a result, there is another moment created. By determining the sum of the moments from the base again, you will find that the product of the axial load and the deflection creates a <q>secondary</q> moment force: the P-Delta effect. In other words, the P-Delta effect causes an increase in the deflections and stresses experienced in a building component or structure, which is not good for building safety. As a result, we need a simple way to deal with it. ASCE 7-16 allows us to do so through the stability coefficient. This will be explained later. </p>
+
+<img src = "deflectedScenario.png" alt="deflected_Scenario">  
+
+<p> For the deflected scenario, M<sub>2</sub> is different from M<sub>1</sub>. Since the vertical post has deflected, the gravity load P must also be accounted for in the moment in this situation, along with the moment already included in the undeflected scenario. As a result, this creates a secondary moment force, which is the product of the gravity load P and delta Δ. </p>
+
+<p> For the deflected scenario: M<sub>2</sub> =  (Transverse Load F x Length of the Vertical Post L) + (Gravity Load P x Delta Δ). </p>
+
+<p> ASCE 7-16 Section 12.8.7 denotes when to consider the P-Delta effect for analysis and the maximum allowable stability coefficient θ. Equation 12.8-16 provides the stability coefficient, θ, used to determine whether the P-Delta effect should be used for analysis. The maximum stability coefficient, θ<sub>max</sub>, is given by ASCE 7-16 Equation 12.8-17. Beta is the demand capacity ratio for a particular story. A demand capacity ratio is the relationship between the amount of load that a building component or system is expected to support/resist and how much load it can actually support/resist (capacity). </p>
+
+<p> <u>ASCE 7-16 Equation 12.8-16</u>: $$θ=(P_xΔI_e)/(V_xh_s_xC_d)$$ </p>
+
+<p> <u>ASCE 7-16 Equation 12.8-17</u>: $$θ_\text"max"=0.5/(βC_d)≤0.25$$</p>
+
+<p> To see whether the P-Delta effect should be included for design, you have to check against the stability coefficient value of 0.10. If the stability coefficient is less than or equal to 0.10, then P-Delta is not included in the analysis. On the other hand, if the stability coefficient is greater than 0.10, then the forces are to be increased by a factor specified in Section 12.8-7 or based on rational analysis. If the stability coefficient of a structure is greater than the maximum allowed stability coefficient, redesign is required because of instability in the structural system. </p>
+
+<p> Nowadays, computer software programs are used more commonly for analysis and design. These programs account for the P-Delta effect, which means that if you use ASCE 7-16 Equation 12.8-16 with values from the software, you can divide theta by (1+theta) to avoid accounting for P-Delta twice. ASCE 7-16 Equation 12.8-17 must still be checked, nonetheless. </p>
+
+<p> This wraps up the chapter on building drift. We have covered deflection, drift, the application of deflection and drift requirements, required building separation and setback, and P-Delta effects. To help reinforce the content that you have learned, below are a few sample questions that you can practice on. Additional links to more resources are at the bottom of the page. </p>
+
+<h4>Sample Questions </h4>
+
+<h4> <i>Question</i> - Determine the story drift and story drift ratio based on the following figure:
+
+ 
+
+<img src = "driftFig.png" alt="drift_Fig"> 
+
+<p> Solution: </p>
+<p>For story drift, you take the difference between the deflections of each level.  </p>
+<p> $$ ∆ = 2.06” - 0.74” = 1.32” $$ </p>
+
+ <p>For story drift ratio, it is the drift divided by L<sub>i</sub> is the level under consideration. </p>
+<p>$$ ∆_i/L_i =  (\ 1.32^" /12^") /14^' = 0.0079 $$ </p>
+
+
+
+<h4><i>Question:</i> What is the seismic base shear of the following structure? The city of Minneapolis noticed that the Wells Fargo Center was sinking 30” into the ground and decided to demolish the building as it is too hazardous for human safety. However, Wells Fargo wants to establish a taller building than the previous somewhere else, so they want you, as the seismic engineer, to design an office building that can meet their expectations. Wells Fargo wants a 800 ft tall steel moment resisting frame and for the effective seismic weight to be no more than 8000 kips, where site class = C. S<sub>S</sub> = 1.039, S<sub>1</sub>= 0.372, T<sub>L</sub> = 4.</h4>
+
+<p>Solution:</p>
+<p>Step 1: Determine S<sub>DS</sub>and S<sub>D1</sub>. Start by determining the site class. Check ASCE 7 Table 20.3-1.  In the problem statement, the site class = C. Refer to ASCE 7 section Tables 11.4-1 and 11.4-2. Plugging in Site Class C with the given S<sub>1</sub>, S<sub>S</sub> values, we get F<sub>a</sub> = 1.2, F<sub>v</sub> = 1.5. Use eqn 11.4-1 and 11.4-2, to determine MCE level accelerations.</p>
+
+<p>S<sub>MS</sub> =  F<sub>a</sub> S<sub>S</sub> = (1.2) x (1.039) = 1.24</p>
+<p>S<sub>M1</sub> = F<sub>v</sub> S<sub>1</sub> = (1.5) x (0.372) = 0.558</p>
+<p>Using ASCE 7-16 eqn 11.4-3 and 11.4-4, we determine S<sub>DS</sub> and S<sub>D1</sub>.</p>
+<p>S<sub>DS</sub> = (⅔)(S<sub>MS</sub>) = (⅔) x (1.24) = 0.833g</p>
+<p>S<sub>D1</sub> = (⅔)(S<sub>M1</sub>) = (⅔) x (0.558) = 0.372g</p>
+
+<p>Step 2:  Determine the Risk Category. Check IBC Table 1604.5 for the risk category. Let’s check IBC Chapter 3 which category Wells Fargo center falls under. So for this problem, let’s check out section 304 to see additional definitions for occupancy categories. IBC Section 304.1 notes that office buildings shall be classified as Group B. Referencing back to Table 1604.5, Group B shall be categorized under Risk Category II. Note that IBC is used instead of CBC since the problem states that the location is in Minneapolis. </p>
+
+<p>Step 3: Determine the seismic importance factor, I<sub>e</sub> and response modification factor R.</p> 
+<p>Now that we know our risk category, refer to ASCE 7-16 Table 1.5-2, I<sub>e</sub> = 1.0 for risk category II structures. In the problem statement, it states that the office building should be a steel moment resisting frame, so refer to ASCE 7-16 Table 12.2-1 where R = 8.</p>
+
+<p>Step 4: Determine the seismic response coefficient, C<sub>s</sub></p>
+<p>$$\C_s = \S_D_S / (R/I_e)= \ 0.833 / (8/1.0) = 0.104 $$</p>
+
+<p>Notice that T<sub>L</sub> = 4. Refer to equations 12.8-3 and 12.8-4. We will need to determine the approximate fundamental period to compare.</p>
+<p>$$T = T_a = C_t h_n^x$$ per ASCE 7-16 Equation 12.8-7 and Table 12.8-2</p>
+	<p>Where C<sub>t</sub> = 0.028</p>
+		<p>X = 0.8</p>
+<p>$$T_a = (0.028)(155)^0.8 = 1.58 seconds$$ </p>
+
+<p> Since T<sub>a</sub> = 1.58 < 4, we will use equation 12.8-3 </p>
+
+<p> However, we still need to check the upper limit from Table 12.8-1: <p>
+
+<p> T = C<sub>u</sub>T<sub>a</sub> = 1.4(1.58) = 2.212 s </p>
+
+<p>$$\C_s_,_m_a_x  = \ S_D_1 / \(T(R/I_e))  =  \C_s_,_m_a_x  = \ 0.372 / \(2.212(8/1.0))  = 0.021 $$</p>
+
+<p>$$\C_s_,_m_i_n = 0.044S_D_SI_e = (0.044)(0.833)(1.50) = 0.036 $$</p>
+
+<p>Let’s check whether:</p>
+<ul>
+	<li> $$\C_s ≤ \ S_D_1/ \(T(R/I_e)) $$ </li>
+	<li> $$ C_s ≥ 0.44S_D_SI_e $$ </li>
+</ul>
+
+<p>0.104 ≤ 0.021 &#10006;</p>
+<p>0.104 ≥ 0.036 &#10004;</p>
+
+<p>Since C<sub>s</sub> is not less than or equal to $$ \ S_D_1 / \(T(R/I_e)) $$, the governing value to use is 0.021 for the seismic response coefficient. </p>
+
+<p>Step 5: Determine the minimum base shear for drift.</p>
+<p> Before we determine the base shear, ASCE 7-16 section 12.8.6.2 states that if we are finding a period for drift, then we do not need to consider the upper limit (C<sub>u</sub>T<sub>a</sub>). Hence, we need to recalculate our C<sub>s</sub> calculation since it was based on T. </p>
+
+<p> Now we will use the T<sub>a</sub> for the period when determining which C<sub>s</sub> governs.</p>
+
+<p>$$\C_s_,_m_a_x  = \ S_D_1T_L / \(T(R/I_e)) = \ 0.372 / \(1.58(8/1.0))  = 0.029 $$</p>
+
+<p>$$\C_s_,_m_i_n = 0.044S_D_SI_e = (0.044)(0.833)(1.50) = 0.036$$</p>
+
+<p>Let’s check whether:</p>
+<ul>
+	<li> $$\C_s ≤ \ S_D_1T_L / \(T(R/I_e)) $$ </li>
+	<li> $$ C_s ≥ 0.44S_D_SI_e $$ </li>
+</ul>
+
+<p>0.104 ≤ 0.029&#10006;</p>
+<p>0.104 ≥ 0.036 &#10004;</p>
+
+<p>Since C<sub>s</sub> is not less than or equal to $$ \ S_D_1T_L / \(T(R/I_e)) $$, the governing value to use is 0.029 for the seismic response coefficient. </p>
+
+Answer: The base shear will be calculated as follows:
+
+$$ V  = C_sW = 0.029(8000) = 232 k $$
+
+<h4> Based on the following figure: Determine whether the drift ratio of this steel ordinary moment frame structure is acceptable? Assume risk category II. Given that the inelastic deflection at the roof level is 5” and the 2nd level is 3”. 
+ 
+
+<img src = "storyDriftRatioFig.png" alt="story_drift_Ratio_Fig"> 
+
+<p> Solution: </p>
+<p> Step 1: Determine the allowable drift equation</p>
+<p>Allowable story drift is based on two components: risk category and type of structure. In the problem statement, both are given such that the risk category is II and the type of structure is steel ordinary frame. So let’s refer to ASCE 7-16 Table 12.12-1. These components fall under the first column where the allowable drift equation we’ll use is $$ 0.020h_s_x $$.  </p>
+
+<p> Step 2: Determine allowable drift ratio for roof. </p>
+<p> Since we know our equation is $$ 0.020h_s_x $$, let’s determine what h<sub>sx</sub>. H<sub>sx</sub> is the height between the level of interest and the floor below it. In this case, for the roof level, it is 10 ft.  </p>
+
+<p> $$ 0.020h_s_x = 0.020(120”) = 2.4” $$</p>
+
+<p> Let’s proceed with the same procedure for the 2nd level. </p>
+
+<p> $$ 0.020h_s_x = 0.020(144”) = 2.88” $$</p>
+
+<p> Step 3: Determine drift and compare. </p>
+<p> Drift is the difference between the deflection at each level. </p>
+<p> The deflection for the roof and 2nd level is 5” and 3”, respectively. </p>
+<p> Let’s take the difference and compare the drift between the allowable drift ratio at each level. </p>
+
+<p> 5” -3” = 2” </p>
+
+<p> Answer: </p> 
+<p> Roof: $$ ∆_r_o_o_f = 2" &lt; ∆_a = 2.4"  &#10004; $$</p>
+<p> 2nd Level: $$ ∆_2_n_d = 3" > ∆_a = 2.4"  &#10006; $$</p>
+
+<h4><i>Question:</i> What is the allowable story drift ratio for the following structure? The University of Wisconsin wants to design more parking garages on campus so more space is viable for those with cars. A 4-story parking structure shall be designed as special reinforced concrete shear walls with a height of 40 ft, where site class = E. S<sub>S</sub> = 3.0, S<sub>1</sub> = 0.05. </h4>
+
+<p>Step 1: Determine the Risk Category. Check CBC Table 1604.5 for the risk category. Checking CBC Chapter 3 when we are unsure what category a parking garage falls under. So for this problem, let’s check out section 311 to see additional definitions for occupancy categories. CBC Section 311.3 notes that parking garages shall be classified as Group S-2. Referencing back to Table 1604.5, Group S-2 shall be categorized under Risk Category II.</p>
+
+<p>Step 2: Determine allowable story drift ratio </p>
+<p> Since we determined the risk category and the type of structure for this problem, refer to ASCE 7-16 Table 12.12-1. Since our structure is special reinforced concrete shear walls, it would fall under “All other Structures”. </p>
+
+<p> Answer: The allowable story drift ratio would be 0.020. </p>
+
+
+
+
+
+
+
+    <h4><i>Question:</i> What is the required minimum structural separation of the following structures? Structure 1 shall be designed as a building frame system of ordinary reinforced concrete shear walls and structure 2 as ordinary plain masonry shear wall. Assume I<sub>e</sub> is 1 for both structures. </h4> 
+
+ 
+<img src = "structuralSeparationExTable.png" alt="structural_Separation_Ex_Table"> 
+
+              
+
+<img src = "structuralSeparationExFig.png" alt="structural_Separation_Ex_Fig">
+
+<p> Solution: </p>
+<p> Refer to ASCE 7-16 Equation 12.12-1, $$ δ_M = (\C_d δ_m_a_x) / \I_e $$. </p>
+<p> Let’s find the corresponding C<sub>d</sub> for each of the structures by referring to ASCE 7-16 Table 12.2-1. </p>
+
+
+<p> Since structure 1 is ordinary reinforced concrete shear walls, C<sub>d</sub> = 4.5
+For structure 2 - ordinary plain masonry shear wall - C<sub>d</sub> = 1.25</p>
+
+<p> Step 2: Determine the maximum inelastic response displacement δ<sub>M </sub>
+<p> Structure 1: </p>
+ <p> $$ δ_M = (\C_d δ_m_a_x) / \I_e = (\4.5*0.57) / \1 = 2.57^”$$ </p>
+
+<p> Structure 2: </p>
+<p> $$ δ_M = (\C_d δ_m_a_x) / \I_e = (\1.25*0.28) / \1 = 0.35^”$$ </p>
+
+<p> Note that if both structures were to collide, it would happen at level 1. Hence our focus for determining the separation is at level 1. </p>
+<p> Step 3: Determine the minimum separation, δ<sub>MT</sub> </p>
+<p> $$ δ_M_T = √((δ_M_1)^2 + (δ_M_2)^2) = √((2.57^2) + (0.35^2)) = 2.59^" $$</p>
+
+<p> Answer: Now that we have determined the minimum separation between the two structures; however, we might not want the buildings to be exactly 2.59” apart. Hence, we can be conservative and round up to 3”. </p>
+
+
+<h3> Additional Links </h3> 
+Links to add at the end:
+<li><a href = "https://www.structuremag.org/?p=14696"> Drift Determination </a></li>
+<li><a href = "http://www.newsteelconstruction.com/wp/wp-content/uploads/TechPaper/NSCJan03_P-Delta.pdf"> P-Delta </a></li>
+<li><a href = "https://www.youtube.com/watch?v=sp5ZAVojyU4"> P-Delta Analysis</a></li>.
+<li><a href = "https://www.youtube.com/watch?v=rNTHejrhvt4"> P-Delta Effect </a></li>
+<li><a href = "https://www.iitk.ac.in/nicee/wcee/article/13_3292.pdf"> Design drift requirements for long-period structures </a></li>
+
+
+<!--End of contents pasted from Google Docs-->        
+        
+        
+<div class="lectureSkip">
+    <a href="../Lecture8"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
+    <a href="../Lecture10"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
+</div>
+    </div>
+<br>
+</div>
+</article>       
+</body>
+</html> 

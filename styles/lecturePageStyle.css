@@ -131,6 +131,12 @@ div.lectureSkip a:nth-child(2){
     transform:rotate(135deg);
     -webkit-transform:rotate(135deg):
 }
+
+
+table, td, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
 /*########### End Article#################*/
 
 @media screen and (max-width: 949px) {
