@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:m="http://www.w3.org/1998/Math/MathML">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Lecture 9</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="../../styles/lecturePageStyle.css">
+    <link rel="stylesheet" href="../../styles/lectureNavStyle.css">
+    <script src="../../styles/javascriptStyle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Mathscribe -->
+    <link rel="stylesheet" href="../../assets/mathscribe/jqmath-0.4.3.css">
+    <script src="../../assets/mathscribe/jquery-1.4.3.min.js"></script>
+    <script src="../../assets/mathscribe/jqmath-etc-0.4.6.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <div class="top-nav-container" id="dropdownContainer">
+        <div class="home-logo">
+            <a href="../../index.html" rel="home" class="logo"><img src="../../indexPic/cs_logowithtext.png"></a>
+        </div>
+        <div class="main-menu-container">
+            <ul class="menu-nav" id="dropdownClick">
+                <li class="menu-item"><a class="nav-link currentLink" href="../../Lectures">Lectures</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../PracticeQuestions">Practice Questions</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../ExamInfo">Exam Guide</a></li>
+                <li class="menu-item"><a class="nav-link" href="../../Contributors">Contributors</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776;</a></li>
+            </ul>
+        </div>
+    </div>
+
+<article class="lectureBackground">
+<div class="main-content">
+    <div class="lectureSidebarWrapper" id="lectureSidebarWrapper">
+        <div class="lectureSidebar" id="lectureSidebar">
+            <h3><a href="../">&#8592; All Lectures</a></h3>
+            <p><a href="../Lecture0">0:  Seismic Exam Intro</a></p>
+            <p><a href="../Lecture1">1:  Seismicity / Earthquakes</a></p>
+            <p><a href="../Lecture2">2:  Code Provisions</a></p>
+            <p><a href="../Lecture3">3:  Site Conditions</a></p>
+            <p><a href="../Lecture4">4:  Risk Categories</a></p>
+            <p><a href="../Lecture5">5:  Building Systems</a></p>
+            <p><a href="../Lecture6">6:  Ductility</a></p>
+            <p><a href="../Lecture7">7:  Base Shear</a></p>
+            <p><a href="../Lecture8">8:  Force Distribution</a></p>
+            <p><a href="../Lecture9">9:  Building Drift</a></p>
+            <p><a href="../Lecture10A">10A: Flexible Diaphragms</a></p>
+            <p><a href="../Lecture10B">10B: Rigid Diaphragms</a></p>
+            <p><a href="../Lecture11">11: Irregularities / Redundancy</a></p>
+            <p><a href="../Lecture12">12: Nonstructural Components</a></p>
+            <p><a href="../Lecture10">13: Seismic Detailing</a></p>
+        </div>
+    </div>
+    <div class="lectureWrap">
+    <div class="lectureHeader">
+        <h1> Lecture  10A: Flexible Diaphragms </h1>
+    </div>
+    
+<!--Begin contents pasted from Google Docs-->
+<h3>Diaphragm Introduction: perseverance</h3>
+  <p>We’ve made it far in our journey to pass the seismic exam. At this point we can evaluate several aspects of a building structure to ultimately determine its seismic demand. The provisions within ASCE 7 and the CBC provide enough clarity to determine this demand, without any other background knowledge. This section will be a departure from what we’ve previously learned because the content <i>will</i> require background knowledge outside of ASCE 7. Don’t fear, because that knowledge is presented throughout this section.</p>      
+
+   <p>This section will cover the identification of diaphragms, analyzing code-prescribed forces through diaphragms, and various other aspects of diaphragms you’ll need to know to pass the seismic exam. There is a bit more statics and equation solving in this section than previous ones. Because of the analysis required to solve diaphragm problems, it is important to understand that you won’t be able to rely solely on ASCE 7 or the CBC to answer all diaphragm related questions on the exam. It is in your best interest to go through this section, complete some practice problems, and create a one-page note summary on all the solving procedures for diaphragms.</p> 
+        
+<p>With that, let’s get started on identifying what exactly <i>is</i> a diaphragm.</p>
+        
+<h3>To be, or not to be?</h3>        
+        <p>The definition of a diaphragm is a little complex, depending on how nit-picky you are. Generally speaking, any floor (off the ground) or roof attached rigidly to the walls of a building is a diaphragm. A diaphragm could be made of wood, concrete, or metal. The material is not important, but its final shape and connection to other structural elements does matter. A floor or roof system can only be considered a diaphragm when it is sufficiently connected to be able to transfer in-plane forces across itself, and to transfer shear and tension at the boundaries. A diaphragm does not only resist these in-plane (lateral) forces, but also perpendicular (gravity) forces. You may think of a diaphragm as the floor or roof system that effectively transfers lateral forces to a lateral force resisting system. We’ll get into the specifics of the forces that move through a diaphragm later in this section.</p>
+   
+   <p>This video does a great job of showing a diaphragm made out of paper:
+<a href="https://www.youtube.com/watch?v=_NsdRhF2qww">https://www.youtube.com/watch?v=_NsdRhF2qww</a></p>
+        
+<p>When is a floor <b>not</b> a diaphragm? Can there ever be some sort of surface that you could walk on, but not rely on to resist lateral loads? The answer is best seen from a quick sketch:</p>     
+        
+ <img src = "singleStoryBuildingSectionView.png" alt="Single_Story_Building_Section_View">
+       
+ <img src = "roofFrame.png" alt="Roof_Framing_at_Concrete_Wall">
+        
+ <p>The above section shows how a wood framed roof could be resting on top of a concrete wall. You could certainly walk on top of this roof, the gravity load would transfer downwards through the sheathing, to the joists, and then to the concrete wall.</p>       
+
+        
+ <img src = "roofFramingWithoutConnections.png" alt="Roof_Framing_Without_Connections"> 
+        
+  <p>If we applied a lateral or in-plane load to the roof, then the lack of adequate connections would become clear. Without connections at all elements, there would be nothing keeping the roof system tied together and it could just separate entirely when subjected to in-plane loads. Therefore this is NOT an effective diaphragm.</p>      
+
+ <p>This roof system could still resist gravity loads, but not in-plane (lateral) loads. To address the lack of diaphragm action, we could make the following changes:</p>       
+        
+
+ <img src = "roofFramingWithConnections.png" alt="Roof_Framing_With_Connections">        
+
+        
+ <p>By providing positive connections between all of the structural elements of the roof system we create a means for shear transfer to occur between elements. This will allow for in plane forces to transfer across the roof effectively, making it an effective diaphragm. Also note that if the connections are not adequately sized or detailed for the lateral loads, the diaphragm may still appear to be properly connected until it experiences a design level lateral load (and fails!).</p>       
+
+        
+<h3><u>Diaphragms: A discussion</u></h3>      
+
+
+        
+<p>If you live in a two story house and walk upstairs onto the second floor, your weight would be supported by a diaphragm. But how would you describe the second floor? Would you say it is a carpet floor? Most of us are probably used to describing houses or parts of a building by what covers the surface (which could be known as the facade or furnishing). As a soon-to-be licensed engineer, you’re definitely thinking of that structural system...</p>
+        
+        
+<p>Thinking about gravity loads, how could we describe a typical second floor of a house in California? Likely the floor is a wood framed system, with wood joists spaced 16” on center that are supported on each end by either a load bearing wall or additional beam framing. There is then some plywood sheathing attached via nails to the top of the joists that provide a flat walking surface. Above this thin sheathing could go the carpet, tile, or any other more comfortable and aesthetic covering. </p>
+        
+        
+
+<p>But as long as the floor system has some sort of vertical support at each end to carry the gravity loads further down to the foundation, it can work as intended. This system will be regularly tested every time someone or something puts weight onto the floor, so the ability of the floor to perform adequately can be easily assured. If during construction a worker feels the floor deflect unexpectedly or a supporting wall starts leaning, then a fix will be implemented. The same cannot be said of a diaphragm.</p>
+
+<p>Many structural failures have occurred in buildings that seemed to have acceptable floor systems, but had improper connections that resulted in the floor not behaving as a good diaphragm. This is simply because a diaphragm is designed to resist lateral loads which are not imposed casually from humans or typical building use. Only during an extreme seismic or wind event will a diaphragm see <q>diaphragm</q> loads that effectively tie the building together. To ensure that a diaphragm acts as intended when the time comes, there are many specific requirements within ASCE 7 to ensure the connections and loads are adequate. </p>
+
+ <p>The point of this lengthy discussion has been to give some weight to the numerous provisions in ASCE 7 so they don’t seem arbitrary or undue. After all, it could be easy to confuse a diaphragm as being just a surface that you walk on.</p>       
+        
+<h3><u>Diaphragm Types</u></h3>      
+        
+<h4><u>Wood sheathing</u></h4>
+<p>Wood sheathed diaphragms are a common system used with conventional wood framed buildings (residential houses and smaller buildings). The main component is a 4ft by 8ft sheet of wood that is typically around ½” thick. This wood sheet is laid flat onto wood joists or wood trusses to serve as a primary walking surface. The sheet is nailed to the supporting wood elements, effectively creating the diaphragm system.</p>      
+        
+<a class="imgLink"  href="https://www.fema.gov/media-library-data/1393891642635-c071850c3050c34da135376baa478a1b/P-752_Unit11.pdf"><p>Image via FEMA</p> </a>
+<img src = "diaphragmTerminology.png" alt="Diaphragm_Breakdown"> 
+        
+        
+ <p>To complete the diaphragm system, the outermost sheathing next to the wall will be nailed to a wood element that is securely fastened to the wall system.</p>       
+        
+        
+<a class="imgLink"  href="https://www.structuremag.org/wp-content/uploads/0413-ps-2.gif"><p>Image via Structure Magazine</p> </a>
+<img src = "anchorageOfWalls.png" alt="Anchorage_Of_Wood_Structural_Walls">        
+        
+        
+<h5><u>Concrete Slab</u></h5>        
+ <p>An all-concrete floor system will typically have a concrete floor slab as the diaphragm element. The slab itself is a solid flat portion of concrete that could range anywhere from 6” to a foot deep and functions as the direct walking surface. It may be designed to support the gravity loads, or concrete beams may be used below the slab for support. Steel rebar reinforcement is used throughout the slab and is also provided at connections to the wall elements. This reinforcement allows for the diaphragm forces to be fully resisted.</p>       
+        
+        
+<a class="imgLink"  href="https://www.structuremag.org/wp-content/uploads/0413-ps-2.gif"><p>Image via Structure Magazine</p> </a>
+<img src = "concreteSlab.png" alt="Concrete_Slab">
+
+
+<a class="imgLink"  href="http://precast.org/wp-content/uploads/2018/03/CP3-Post-tensioning-vs.-Prestressing-Miroslav-Vejvoda_FINAL.pdf"><p>Image via Structure Magazine</p> </a>
+<img src = "precastConcrete.png" alt="Precast_Concrete">
+        
+        
+        
+<h4><u>Concrete fill over metal deck</u></h4>        
+<p>Another variety of concrete diaphragm is concrete fill over metal deck. This is a composite diaphragm that consists of a metal deck that is securely fastened to a steel joist or beam below, with a concrete slab poured directly on top of the metal deck. Reinforcement is provided throughout the concrete slab, and the slab is even more rigidly attached to the framing below via shear studs that are welded before the concrete is poured. This type of construction is very typical for commercial structures and larger buildings.</p>        
+        
+        
+<a class="imgLink"  href="https://openlab.citytech.cuny.edu/tctbc/2018/03/20/steel-column-concrete-slab-detail/"><p>Image via Open Lab</p> </a>
+<img src = "steelColumnConcreteSlabDetail.png" alt="Steel_Column_Concrete_Slab_Detail">        
+
+
+<img src = "metalDeck.png" alt="Metal_Deck">
+<a href = https://www.youtube.com/watch?v=_BEyZL-CpCU>https://www.youtube.com/watch?v=_BEyZL-CpCU </a>        
+        
+<h4><u>Metal deck</u></h4>        
+<p>A metal deck diagram is also sometimes called an “untopped” deck because there is no concrete fill. This type of diaphragm is often used on top of steel truss joists or beams at the roof level. The top of the metal deck may be left bare; or on more commercial structures, will be filled with insulation/membrane/roof covering that provides the needed protection against water intrusion, and functions as a level walking surface.</p>
+
+<p>The metal deck may be fastened to the steel framing below via welds, screws, or studs that allow shear transfer. Even though a metal deck by itself is much less stiff than a deck filled with concrete, it can still provide in-plane stiffness to act as a diaphragm.</p>
+
+<img src = "metalDeckRoof.png" alt="Metal_Deck_Roof">
+
+<a class="imgLink"  href="https://vercodeck.com/#roofdeck"><p>Image via Vercodeck</p> </a>
+<img src = "roofDeck.png" alt="Roof_Deck">
+
+
+<h3><u>Flexible vs Rigid</u></h3>
+
+<p>The rigidity or stiffness of a diaphragm dictate how forces are distributed throughout it. Very flexible diaphragms distribute force similar to simply supported beams (where the beam is the diaphragm, and the pins are the Lateral Force Resisting System). Very stiff diaphragms distribute forces based on the relative stiffness of the supporting LFRS. This creates a simple classification system for diaphragms: Rigid, Semi-Rigid, or Flexible. The question then becomes: how do we determine the classification of a diaphragm?</p>
+
+
+<p>Provisions within ASCE 7-16 provide clear methods for determining the type of diaphragm as it relates to its stiffness. These methods are presented below.</p>
+
+<p>Flexible Diaphragms: The diaphragm has very little stiffness so it cannot effectively tie the LFRS together. Each line of resistance (frame or shearwall) can move independently of adjacent lines.</p>
+
+
+<img src = "asce7Section12.3.1.1.png" alt ="ASCE_7-16_Flexible_Diaphragms">
+
+<p>Rigid Diaphragms: The diaphragm is so stiff that it effectively ties the LFRS together, meaning the LFRS must move with this diaphragm. This creates interaction between the elements.</p>
+
+<img src = "asce7Section12.3.1.2.png" alt ="ASCE_7-16_Rigid_Diaphragms">
+
+<p>Check out the following website for a good description of rigid vs flexible diaphragms:</p>
+
+<a href = "https://learnwithseu.com/flexible-vs-semi-rigid-vs-rigid-diaphragms/" > https://learnwithseu.com/flexible-vs-semi-rigid-vs-rigid-diaphragms/ </a>        
+
+
+<p>This LinkedIn article also provides a good description of rigid diaphragms using software analysis:</p>
+<a href = "https://www.linkedin.com/pulse/classifying-rigid-diaphragms-allen-adams/" > https://www.linkedin.com/pulse/classifying-rigid-diaphragms-allen-adams// </a>  
+
+
+<p>Clearly the only way to determine diaphragm flexibility is using the ASCE-7 provisions, but we can categorize the different diaphragm types from the previous sections as follows:</p>
+
+
+<h4>Flexible Diaphragms:</h4>
+<ul>
+<li>Wood Sheathing</li>
+<li>Untopped Metal Deck</li>
+<li> Concrete fill over metal deck (sometimes)</li>
+</ul>
+
+
+<h4>Rigid Diaphragms:</h4>
+
+<ul>
+<li> Concrete Slab</li>
+<li> Concrete fill over metal deck (sometimes)</li>
+</ul>
+
+
+<h3><u>Who’s that diaphragm?</u></h3>
+
+<p>Let’s do a couple quick examples for determining diaphragm flexibility. Let’s start off with an example on a flexible diaphragm. </p>
+
+<h4>Diaphragm Flexibility Example #1:</h4>
+
+<img src = "diaphragmFlexibleEx1.png" alt = "Diaphragm_Flexible_Example_1" >
+<p>Given:</p>
+<ul>
+<li>Distributed Load: 5 k/ft</li>
+<li>Maximum Diaphragm Deflection: 3 in </li>
+<li>Average Drift: 1 in </li>
+<li>Diaphragm: wood panels </li>
+<li>No horizontal irregularities </li>
+</ul>
+
+<h4>Determine if the diaphragm is flexible or rigid:</h4>
+
+<p>Solution: Refer to Section 12.3.1.1 of ASCE 7-16 for the code provisions on flexible diaphragms. Note that if any of the criteria in this section is satisfied, the diaphragm can  be idealized as flexible. Since there is not enough information provided to check if any of the criteria is satisfied in Section 12.3.1.1, the next step is to use the criteria outlined in Section 12.3.1.3. Additionally, since the maximum diaphragm deflection and the average drift are provided in the problem statement, Section 12.3.1.3 can be used to determine if the diaphragm is flexible. </p>
+
+<p>$$δ_(MDD) = 3 in$$</p>
+<p>$$Δ_(ADVE) = 1 in$$</p>
+
+
+<p>Use Equation 12.3-1 to determine the ratio of the maximum diaphragm deflection $$δ_(MDD)$$ and the average drift $$Δ_(ADVE)$$. If the ratio is greater than 2, the diaphragm can be considered flexible. Otherwise, the diaphragm will be considered as a rigid diaphragm. </p>
+
+
+<p>$$δ_(MDD) / Δ_(ADVE) = (3 in) / (1 in) = 3$$</p>
+
+<p>Since the ratio is greater than 2, this means that the maximum diaphragm deflection is greater than twice the average drift. (Note that even though the diaphragm material is provided, that is not sufficient for determining the diaphragm rigidity.) As a result, this diaphragm can be idealized as a flexible diaphragm. </p>
+
+
+<p>Now, let’s move onto an example with a rigid diaphragm. </p>
+
+<h4>Diaphragm Flexibility Example #2:</h4>
+
+<img src = "diaphragmFlexibleEx2.png" alt = "Diaphragm_Flexible_Example_2" >
+<p>Given:</p>
+<ul>
+<li>Distributed Load: 6 k/ft</li>
+<li>Maximum Diaphragm Deflection: 2.5 in </li>
+<li>Average Drift: 1.25 in </li>
+<li>Diaphragm: concrete slabs </li>
+<li>No horizontal irregularities </li>
+</ul>
+
+
+<h4>Determine if the diaphragm is flexible or rigid:</h4>
+
+<p>Solution: Refer to Section 12.3.1.2 of ASCE 7-16 for the code provisions on rigid diaphragms.</p>
+
+<p>$$δ_(MDD) = 2.5 in$$</p>
+<p>$$Δ_(ADVE) = 1.25 in$$</p>
+
+<p>Using Equation 12.3-1, determine the ratio of the maximum diaphragm deflection $$δ_(MDD)$$ and the average drift $$Δ_(ADVE)$$. If the ratio is less than or equal to 3, the diaphragm can be considered rigid. </p>
+
+<p>$$δ_(MDD) / Δ_(ADVE) = (2.5 in) / (1.25 in) = 2$$</p>
+
+<p>Since the ratio is less than 3, this means that the maximum diaphragm deflection is less  than three times the average drift. Note that since the diaphragm has concrete slabs, and the calculated ratio is less than or equal to 3, the diaphragm can be idealized as a rigid diaphragm.</p>
+
+<p>A question on classifying the rigidity of a diaphragm may come up on the exam, but it would be enough to know how to use the ASCE 7 provisions and where they’re located to adequately answer the question. More importantly, questions relating to analyzing forces on diaphragms are guaranteed on the exam. Material on this topic is covered in the next section</p>
+
+<p>If you want to see the exact equations for how to calculate diaphragm deflection, you can check out pg 22 of the following pdf:</p> <a href = "https://www.osbpanel.org/pdf/L350.pdf" > https://www.osbpanel.org/pdf/L350.pdf </a>
+
+
+<h3><u>Diaphragm Design Level Forces</u></h3>
+
+<p>Forces on a diaphragm are not exactly the same as those determined on the LFRS. We previously learned how to solve for the seismic base shear, and design force at each level of the building. These forces were intended specifically to be resisted by the LFRS. Recall that the LFRS forces have been divided by an ‘R’ value specific to that structural system, and that all of the seismic force must be resisted by the LFRS. Diaphragms don’t resist seismic force cumulatively towards the base like a LFRS, and the tributary mass is also different.</p>
+
+
+<p>These differences require another set of equations for determining the forces in a diaphragm. See below for the ASCE 7 provisions:</p>
+
+
+<img src = "asce7Section12.10.1.1.png" alt = "Diaphragm_Design_Force">
+
+<p>Section 12.10.1.1 lists the appropriate equation (Equation 12.10-1) used to determine the diaphragm design forces at any particular level x. These forces are what the diaphragm must be able to resist at a minimum at level x. Let’s break down the components of Equation 12.10-1. Notice that the diaphragm design force F<sub>px</sub> is the product of a ratio and w<sub>px</sub>, the weight tributary to the diaphragm at level x. The ratio corresponds to the summation of the forces at and the weights tributary to level <i>i</i>. Level x corresponds to the level of interest, while level <i>i</i> relates to each of the levels above level x, including the level of interest (level x). In other words, the ratio portion of Equation 12.10-1 incorporates the design forces applied to the levels above level x and the weights of the floors above level x, in addition to the design force and weight of level x. For example, for a building with 3 floors, we are asked to determine the diaphragm design force for level 1. This means that the ratio component of Equation 12.10-1 will include the summation of the design forces for levels 1, 2, and 3, as well as the corresponding weights of the three levels. If we are asked to determine the diaphragm design force for level 2, the ratio component will only include the design forces and weights tributary to levels 2 and 3. For the analysis at level 3, the diaphragm design force will equate the design force at level 3 because level 3 is the highest level in the building that we are looking at. If this still sounds confusing, don’t worry. There will be a few examples up ahead that can be  used for practice.</p>
+
+<p>In addition, there are two restrictions imposed on this equation. Equation 12.10-1 must result in values that are between the minimum set by Equation 12.10-2 and the maximum by Equation 12.10-3. Notice that there are three common factors shared between these two equations: the design spectral acceleration S<sub>DS</sub>, the importance factor I<sub>e</sub>, and the seismic weight of level x w<sub>px</sub>. The minimum diaphragm design force is governed by the constant acceleration portion of the response spectrum (S<sub>DS</sub>). The importance factor I<sub>e</sub> determines whether the design loads should be changed (increased or decreased) based on the occupancy category. </p>
+
+
+<p>Equation 12.10-2: Minimum: $$F_(px)≥0.2*S_(DS)*I_e*w_(px)$$</p>
+<p>Equation 12-10.3: Maximum: $$F_(px)≤0.4*S_(DS)*I_e*w_(px)$$</p>
+
+<p>Every diaphragm should be designed for the design level forces, determined from the above equations, and additional transfer forces to safely allow for force transfer in a building. In addition, depending on the structural irregularity categorized by the engineer, the overstrength factor omega may also need to be incorporated into the vertical force distribution analysis to allow for forces to be transferred via the diaphragm. </p>
+
+<p>There is another important aspect of this equation, and that is the mass. The only forces resisted by a diaphragm are the tributary mass to that diaphragm’s floor level, and this mass does NOT include parallel walls that can transfer their inertial seismic force directly downwards (to the foundation, bypassing the diaphragm entirely). </p>
+
+
+<img src = "tributarySeismicWeight.png" alt = "Tributary_Seismic_Weight_Of_Lateral_System">
+
+<img src = "tributarySeismicWeightOfRoofDiaphragm.png" alt = "Tributary_Seismic_Weight_Of_Roof_Diaphragm">
+
+<p>You can see in the above figures that the seismic forces of perpendicular walls (which are being loaded out of plane) will be resisted via the diaphragm, but walls parallel to the seismic force do not contribute to the diaphragm load. The arrows on the second figure are just a simple way to think of where the tributary mass is moving, it does not necessarily represent the true movement of force throughout the lateral system.</p>
+
+
+<p>For structures with very heavy walls, not having to include the mass of a parallel wall when tallying up the seismic mass tributary to a diaphragm will have a significant effect. The tributary seismic mass to a diaphragm will therefore be less than that for the LFRS at the same level. You will need to know how to account for this on the seismic exam.</p>
+
+<p>To understand how the seismic mass adds up at the roof level diaphragm, let us consider a single story structure with masonry walls.</p>
+
+<img src = "singleStoryEx.png" alt= "Single_Story_Example">
+
+
+<p>The weight of the roof and the weight of the walls perpendicular to the seismic forces contribute to the diaphragm forces and therefore are used to find the seismic mass of the structure. The walls parallel to the seismic forces do not contribute to the seismic mass of the structure that is resisted by the diaphragm, because their weight is transferred directly downwards in the structure.</p>
+
+<p>&#8756; Total Seismic Mass resisted by the diaphragm(lbs or kips) = Total weight of roof (lbs or kips) + Total weight of walls perpendicular to the seismic forces (lbs or kips) </p>
+
+
+<p>Total weight of roof (lbs or kips) = <br>=Effective Seismic Weight of roof (includes dead load and others loads*) (psf) x Plan area (sf)</p>
+<ul>where, Plan area (sf) = Length (ft) x Width (ft) of structure</ul>
+
+<img src = "loadDistributionToRoof.png" alt = "Load_Distribution_To_Roof_Diaphragm">
+
+<p>*Note: The Effective Seismic Weight is calculated in accordance to Section 12.7.2 of ASCE 7:</p>
+
+<img src = "asce7Section12.7.2.png" alt = "Effective_Seismic_Weight">
+
+<p>Weight of walls perpendicular to the seismic forces (lbs or kips) = No. of walls x Wall Load (Wall self weight) (psf) x  Tributary Wall Area (sf)</p>
+<ul>where, the Tributary Wall Area (sf) = wall length (ft) x tributary wall height (ft)</ul>
+
+<img src = "tributaryWall.png" alt = "Tributary_Wall_Method">
+
+<p>To conclude, Total Seismic Mass resisted by the Diaphragm (lbs or kips) = <br> = Total weight of roof + Total weight of walls perpendicular to the seismic forces.</p>
+
+
+<p>Questions on the seismic exam may already give you the seismic diaphragm force, or the diaphragm’s seismic mass, but if not then be sure to remember this method of adding up the weights.</p>
+
+
+<p>Let’s now solve an example to determine the diaphragm design level forces.</p>
+<p>Given:</p>
+<DL>
+<DT>2-story wood frame building with flexible roof diaphragm </DT>
+<DT>Risk Category II, I<sub>e</sub> = 1.0</DT>
+<DT>S<sub>DS</sub> = 1.0, S<sub>D1</sub> = 0.50</DT>  
+<DT>Seismic base shear, V = 180 k </DT>
+<DT>Structure Period, T = 0.80 s</DT>
+<DT>Effective seismic weights:</DT> 
+<DD>w<sub>2</sub> = 250 k </DD>
+<DD>w<sub>1</sub> = 350 k </DD>
+<DT>Story heights: </DT>
+<DD>h<sub>2</sub> = 10’</DD>
+<DD>h<sub>1</sub> = 12’</DD>
+
+</DL>
+
+<p>Determine the diaphragm design level forces.</p>
+
+<p>To start off, the lateral force at each level, F<sub>x</sub> has to be calculated. This is the product of the virtual distribution coefficient and the seismic base shear provided. </p>
+
+<p>F<sub>x</sub> = C<sub>vx</sub> * V  </p>
+<p>$$C_(vx)=(W_k*h^k_x)/∑(w_i*h^k_i)$$</p>
+
+<p>Let’s start off by dissecting the different components of the C<sub>vx</sub> equation. In the numerator, the W<sub>k</sub> represents the weight of the current floor level of interest, while h<sub>x</sub> denotes the height of the current floor level from the base of the building (where 0 feet begins). Notice that there is a variable <q>k</q> in the exponent of h<sub>x</sub>. This <q>k</q> factor relates to the period of the structure. </p>
+
+<p>The vertical force distribution factor of a building is a proportion of the total weights and heights of each floor level in the structure. This means that the denominator would contain the summation of all of the weights and heights of each floor in the building. The W<sub>i</sub> represents the weight of the i<sup>th</sup> floor level, while h<sub>i</sub> indicates the height of the i<sup>th</sup> floor level from the base of the building (where 0 feet begins).</p>
+
+<p>The first step in determining the C<sub>vx</sub> factor is to compute the k factor. For periods that are above 2.5 seconds and below 0.5 seconds, k = 2 and 1, respectively. Since the period provided in the problem statement is between the two limits, linear interpolation is used to determine the corresponding k value. </p>
+
+<p>For T = 0.80 s, k = 1 + 0.3*0.5 = 1.15 </p>
+
+<p>$$∑(w_i*h^1.15_i)=$$</p>
+<p>$$(350 k)*(12’)^1.15+ (250 k)*(22’)^1.15 = 14,841 k-ft$$</p>
+
+
+<p>$$C_v_1 = (350k*(12')^1.15)/ (14841 k-ft) =0.411$$</p>
+<p>$$F_v_1 = C_v_1 *V = 0.411*180k = 73.9k$$</p>
+
+<p>$$C_v_2 = (250k*(1=22')^1.15)/ (14841 k-ft) =0.589$$</p>
+<p>$$F_v_2 = C_v_2 *V = 0.589*180k = 106.1k$$</p>
+
+
+<p>A good check that should always be performed is to add up the lateral forces at each level and compare it with the seismic base shear. The sum of the lateral forces should be equal to the seismic base shear.</p>
+
+
+<p>F<sub>v1</sub> + F<sub>v2</sub> = V</p>
+<p>73.9 k + 106.1 k = 180 k  </p>
+
+<img src = "baseShearFigure.png" alt = "Base_Shear_Calculation">
+
+
+<p>Next, the diaphragm design force at each level, F<sub>px</sub> can be determined from the lateral forces. The calculated diaphragm design force should also be checked against the minimum and maximum design level forces allowed by the code. </p>
+
+
+<p>$$F_p_x = (∑F_i)/(∑w_i)*w_(px)$$</p>
+
+<p>Minimum: $$F_(px)≥0.2*S_(DS)*I_e*w_(px)$$</p>
+<p>Maximum: $$F_(px)≤0.4*S_(DS)*I_e*w_(px)$$</p>
+
+<p>Computed for Level 1: $$F_(p1) = ((F_1+F_2)/(w_1+w_2))*w_p1$$ </p>
+
+<p>Minimum for Level 1: $$F_(px)≥0.2*(1.0)*(1.0)*(350 k) = 70 k$$</p>
+<p>Maximum for Level 1: $$F_(px)≤0.4*(1.0)*(1.0)*(350 k) = 140 k$$</p>
+
+
+<p>$$F_(p1) = ((73.9 k+106.1 k)/(350+250))*350  = 105 k$$ </p>
+
+<p>Compare: Maximum for Level 1: F<sub>px</sub> = 140 k > F<sub>p1</sub> = 105 k > Minimum for Level 1: F<sub>px</sub> = 70 k</p>
+
+<p>Since the calculated diaphragm design force is between the minimum and maximum allowed by the code, F<sub>p1</sub> = <b>105 k</b>. </p>
+
+<p>Minimum For Level 2: $$F_(px)≥0.2*(1.0)*(1.0)*(250 k) = 50 k$$</p>
+<p>Maximum for Level 2: $$F_(px)≤0.4*(1.0)*(1.0)*(250 k) = 100 k$$</p>
+
+<p>Computed for Level 2: $$F_(p2) = ((F_2)/(w_2))*w_p2$$</p>  
+<p>$$F_(p2) = (106.1 k)/(250)*250  = 106.1 k$$ </p>
+
+<p>Compare: F<sub>p2</sub> = 106.1 k > Maximum for Level 2: F<sub>px</sub> = 100 k. </p>
+
+<p>Since the diaphragm design force computed for Level 2 is greater than the maximum allowed by the code, the design force that will be used for design at this level will be the maximum allowed by the code.</p>
+
+<p>Maximum for Level 2: F<sub>p2</sub> = <b>100k</b>.</p>
+
+<table style="width:95%">
+<caption>Summary of Results:</caption>
+  <tr>
+    <th>Floor Level</th>
+    <th>Minimum Diaphragm Force (k)</th>
+    <th>Computed Diaphragm Force (k)</th>
+    <th>Maximum Diaphragm Force (k)</th>
+    <th>Final Diaphragm Force (k)</th>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>50</td>
+    <td><del>106.1</del></td>
+    <td>100</td>
+    <td><b>100</b></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>70</td>
+    <td>105</td>
+    <td>140</td>
+    <td><b>105</b></td>
+  </tr>
+</table>
+
+
+
+<h3><u>Beam Analogy</u></h3>
+
+<p>Understanding how to determine diaphragm forces is the first stage of diaphragm design. We then need to perform the analysis procedure by applying the loads to the diaphragm itself. This will tell us the relevant forces that our diaphragm should be able to resist to perform as intended.</p>
+
+<p>The analysis of a diaphragm can be compared to the procedures for a simple beam. If you’ve ever calculated shear and moment forces on a beam, the analysis for a diaphragm will look familiar. Just like a beam, a diaphragm will have internal shear forces, internal bending forces, and deflection. We’ll need to know how to calculate the moment and shear for a simple flexible diaphragm. </p>
+
+<p>These forces actually vary along the length of the diaphragm, however there are known equations for the maximum shear and maximum moment at specific locations.</p> 
+<p>For a simply supported beam with a uniform load applied:</p>
+
+<img src = "udlBeam.png" alt = "Uniform_Distributed_Load_Beam">
+
+<li>Maximum Shear Force = V<sub>max</sub> = wL/2 (Occurs at the end of the beam)</li>
+<li>Maximum Moment Force = M<sub>max</sub> = wL<sup>2</sup> / 8 (Occurs at the middle of the beam)</li>
+
+
+<p>The above equations are the shorthand formulas you should know by heart for the exam, but for the sake of completeness we will go over how to determine these forces.
+To determine the reactions at each end (the load at the supports), we will use the simple tributary method. Each support is going to get half of the total uniformly applied load. Thus the reaction at the supports are:</p>
+        
+<ul>
+<li>RxnA = wL/2</li>
+<li>RxnB = wL/2</li>
+</ul>
+
+
+<img src = "reactionDiagram.png" alt ="Reaction_Forces_On_Beam">
+
+<p>With the reaction forces solved, we can start graphing the shear diagram. This is done by graphing the applied loads and reaction forces in the beam. This graph will tell us the internal shear in the beam along its length. Remember that the beam has a length, so when you have to graph a load with units of (lb / ft) we can plot this based on the distance along the beam.</p>
+
+<img src = "shearDiagram.png" alt = "Shear_Forces">
+
+<p>These forces represent the total internal shear force in the beam. When we look at diaphragm forces later, we will make a distinction between the total internal shear force V (lb) and the uniform shear force v (plf).</p>
+
+<p>Now let’s graph the bending moment along the beam. The bending moment (lb*ft) can be integrated directly from the shear diagram (lb) with respect to length. We use our knowledge of boundary conditions to get a starting value, then add up the areas under the shear diagram. The moment force at a pin or roller support is always 0 lb*ft, so with this knowledge we can create the diagram very simply. </p>
+
+<p>By plotting the area under the shear diagram, we will have to multiply the values by the distance (ft) which will result in units of distance*length (lb*ft), corresponding to the units for a bending moment.</p>
+
+
+<img src = "momentDiagram.png" alt = "Moment_Diagram">
+
+<p>We can see that the bending moment increases up until a point at the midsection, equal to wL<sup>2</sup>/8.</p>
+
+
+<p>There's one other thing to note here: what a bending moment actually does to a beam. By cutting a section in the beam, we can see the bending moment and shear forces.</p>
+
+<img src = "sectionCut.png" alt = "Section_Cut_Of_Beam">
+
+
+<p>What does the bending moment M actually do inside the beam? Unlike the way it’s drawn, the bending moment doesn’t exactly create circular stresses in the beam. Instead the moment is actually felt as a set of opposing forces mirrored about a ‘neutral’ axis. Without breaking any laws of statics, we can show this more accurate portrayal here:</p>
+
+
+<img src = "sectionCutMoment.png" alt = "Section_Cut_Moment">
+
+<p>Notice that the bending moment M is gone, and now there are opposing forces at the upper and lower half of the beam. These forces represent compression at the top and tension along the beam. There is also a distance between the forces, so if we did a sum of moments about the neutral axis there would be a moment in the equation. This moment would of course be equal to the M shown in the first figure.</p>
+
+
+<p>All of this to say, a beam’s internal moment is actually resisted by internal tension and compression forces. Depending on the type of beam we could actually solve for the tension and compression forces with one simple equation. The beam shown below would have its primary tension/compression resistance at the very top and bottom of its section, and the distance (lever arm) between those distances would essentially be the depth of the beam.</p>
+
+<img src = "sectionCutBeam.png" alt = "Section_Cut_I_Beam">
+
+<p>Max internal Tension or Compression force from a bending Moment: <br> T<sub>max</sub> = C<sub>max</sub> = M / d</p>
+
+<p>And that’s it on background beam knowledge! It seems like a lot at first, but it will be simple after a few example problems. The analysis of flexible diaphragms will follow this same procedure.</p>
+
+<p>Direct comparison of beams to diaphragm:</p>
+
+<ul>
+<li>Pin supports = Lines of resistance = Frame or Shearwall. <br>The supports for a diaphragm are the lateral system directly below it (not above it!).</li>
+<li>Depth of a beam = span of diaphragm parallel to applied seismic force. <br>The ‘depth’ of a diaphragm is simply its span along the direction of applied force. We’ll use the ‘depth’ to determine the max tension force resulting from bending. </li>
+</ul>
+
+
+<p>Other definitions:</p>
+<ul>
+<li>Diaphragm Chord = the part of the diaphragm at the outermost edge that resists tension or compression</li>
+</ul>
+
+<p>When the diaphragm bends, the bending stress creates a tension/compression resultant at the extreme edges (edge furthest from the neutral axis). This tension or compression is commonly known as a ‘chord force,’ therefore the part of the diaphragm that resists this force can be called the ‘chord.’ The ‘chord’ of the diaphragm is the specific element at the extreme edge that will resist this tension/compression. Since this force is very large, it usually can’t be resisted just from the typical diaphragm material. There will need to be supplemental reinforcement dependent on the diaphragm type. This chord could be a perpendicular wall top plate, a line of beams supporting the diaphragm, or even additional steel in a concrete slab. It all depends on the diaphragm type, but you don’t need to know the exact material type for the seismic exam, just how to calculate the chord force.</p>
+
+<p>Diaphragm Chord Force = (wL<sup>2</sup>/8) / d</p>
+<ul>Where ‘d’ is the length of the diaphragm that is parallel to the applied force (similar to the depth of a beam!).
+</ul>
+
+
+<h3><u>May the Force (in a Flexible Diaphragm) be with you...</u></h3>
+<p>With our solid understanding of beams, let’s do a quick example for a uniform seismic load.</p>
+
+<img src = "floorPlanView.png" alt = "Floor_Plan_View">
+
+
+<p>Let’s use our understanding of beams to solve for the forces in the above pictured diaphragm. We should solve for the following quantities:</p>
+
+<ul>
+<li>Maximum unit diaphragm shear
+</li>
+<li>Maximum unit wall shear
+</li>
+<li>Maximum chord force
+</li>
+
+</ul>
+
+
+<p>We’re only considering loading in the N-S direction. We will also assume this to be a flexible diaphragm condition. You’ll be told on the exam if you’re dealing with a flexible or rigid diaphragm.</p>
+
+
+<p>The other thing to note is that there are solid thick lines around the perimeter. These solid lines denote a structural shear wall. It is typical for diaphragm problems to show a thick line to represent the LFRS below the diaphragm. In this case the entire perimeter is a shear wall (so the length of the shear walls in the N-S direction are 20ft, and the length of shear walls in the E-W direction are 40ft).</p>
+
+<p>Let’s start by identifying the components of this typical drawing.</p>
+
+<img src = "identifyingWallTypicalDrawing.png" alt = "Identifying_Components_On_Typical_Drawing">
+
+<p>The walls parallel to the seismic force (walls highlighted in blue) will resist the force, they act as the supports bracing the diaphragm.</p>
+
+
+<img src = "equivalentBeamModel.png" alt = "Equivalent_Beam_Model">
+
+
+
+<p>It’s easy to think of the diaphragm as a beam for analysis. With this in our minds we can proceed with determining the desired forces.</p>
+
+
+<h3><u>Maximum Unit Diaphragm Shear:</u></h3>
+<p>The unit diaphragm shear is the internal shear force of the diaphragm at any point divided by the depth of the diaphragm at that location (where depth is the distance of diaphragm parallel to the force). We solve for internal shear by determining the reactions at the supports (shearwalls or frames) and then graphing the shear diagram.</p>
+
+
+<img src = "reactionsDiaphragm.png" alt = "Reactions_Diaphragm">
+
+<p>Reactions at the support are simply the uniform load multiplied by the tributary width. Tributary width is the span to an adjacent support divided by two. </p>
+
+<p>The maximum internal shear is equal to the reaction force (lb). Therefore the maximum unit diaphragm shear is this reaction force divided by the diaphragm depth in that direction.</p>
+
+
+<p>Shear Force = lb = Total Shear Force</p>
+
+<p>Unit Shear = lb / ft = Total Shear Force / Depth</p>
+
+<p>Diaphragm depth is NOT the same as the shearwall length! They may sometimes be equal, sometimes not. The below picture shows the diaphragm separated from the shearwall to illustrate the difference.</p>
+
+<img src = "shearwallLength.png" alt = "Shearwall_Length">
+
+<p>The <i>maximum diaphragm shear</i> is the max shear (equal to the reaction force) divided by the <i>diaphragm depth</i> of 30ft. </p>
+
+<p>The below image shows the shears in the diaphragm versus the wall.</p>
+
+
+<img src = "wallShear.png" alt = "Wall_Shear_Visualization">
+
+<img src = "shearwallVsDiaphragm.png" alt = "Shearwall_Versus_Diaphragm">
+
+<p>The above 3D view shows the diaphragm separated from the shearwall. Since the diaphragm and shearwall are of equal length, the unit shear for both of them is the exact same. Although we haven’t covered the exact method for transferring the diaphragm shear to the shearwall (again this depends on the material type) you should at least feel comfortable with this level of abstraction before continuing. Remember that lengths of the shearwall and diaphragm are important.</p>
+
+<p>To continue our original example, we are trying to determine the max unit diaphragm shear. This would be the black arrows in the above 3D drawing.</p>
+
+<p>First solve for the maximum diaphragm shear force, for example purposes we will show the graph.</p>
+
+<img src = "appliedLoadsReactions.png" alt = "Applied_Loads_And_Reactions">
+
+<img src = "shearDiagramForDiaphragm.png"  alt = "Shear_Diagram_For_Diaphragm" > 
+
+<p>The maximum shear force in the diaphragm occurs at the shearwall locations. The above graph shows the shear force at any point along the width of the diaphragm. The shear diagram is determined from graphing the loads applied to the diagram.</p>
+        <ul>Unit diaphragm shear = Maximum Shear Force / Depth of Diaphragm Parallel to Force</ul>
+        <ul>Unit diaphragm shear = 400 lb / 30 ft = 12.1 lb / ft = 12.1 plf</ul>
+
+<p>Finally, we can solve for the maximum chord force.</p>
+
+<p>To solve the chord force at any location we would need a graph of the moment force along the width of the diaphragm, presented below.</p>
+
+
+<img src = "chordForceForShearMoment.png" alt = "Chord_Force_For_Shear_And_Moment_Diagrams">
+
+<p>The bending moment is integrated directly from the shear diagram. Basic integration rules tell us where maximums can occur. The maximum moment will occur at the location where shear force is equal to zero (representing a positive to negative slope change in the moment diagram). Since the shear diagram is zero in the middle of the span (true for all simple beams with a uniform load), then the middle of the span is also the location of maximum moment.</p>
+
+
+<p>M<sub>max</sub> = V<sub>max</sub> x L/2 / 2 </p>
+<p>M<sub>max</sub> = 20 plf x (40 ft)<sup>2</sup> / 8 = 4000 lb*ft</p>
+
+<p>This doesn’t look like the formula presented on the moment diagram, but if we substitute the actual value of V<sub>max</sub>...</p>
+        <ul>V<sub>max</sub> = w x L/2</ul>
+        <ul>M<sub>max</sub> = w x L/2 x L/2 / 2 = w x L<sup>2</sup> / 8 =wL<sup>2</sup>/8</ul>
+
+<p>The above equation should be memorized for the exam, you can expect a question that requires this calculation.</p>
+
+<p>Now the max chord force is simply the max moment divided by diaphragm depth:</p>
+
+<img src = "sectionCutDiaphragm.png" alt = "Section_Cut_Diaphragm">
+
+<p>By cutting a section through the center of the diaphragm, this will coincide with the location of maximum moment, and also zero shear. </p>
+
+<p>C<sub>max</sub> (compression) and T<sub>max</sub> (tension) represent the chord forces that are balancing the bending moment. To reiterate, these chord forces are resisted by some element of the diaphragm (specific to each type of diaphragm).</p>
+
+<ul>C<sub>max</sub> = M<sub>max</sub> / D = 4000 lb*ft / 30 ft = 133 lb</ul>
+<ul>T<sub>max</sub> = M<sub>max</sub> / D = 4000 lb*ft / 30 ft = 133 lb</ul>
+
+<p>The derivation of the above equation is simply done by taking a sum of moments at either the compression or tension side. The bending moment is always there no matter where you choose the origin for the summation. Also remember that all of our analysis is assuming static equilibrium, so the sum of any forces will by definition be equal to zero.</p>
+
+<p>Sum of moments at T<sub>max</sub> = 0 = M<sub>max</sub> - C<sub>max</sub> x D</p>
+
+<p>Subtracting M<sub>max</sub> to the other side and dividing both terms by D gives us the simplified equation of C = M/D.</p>
+
+<p>So now that we know the maximum moment force, can we also determine the moment force at any location along the diaphragm? What if a question asks to determine the chord force at a specific distance along the diaphragm, instead of the maximum?</p>
+
+<p>To determine moment force (and therefore the chord force) at any point along the diaphragm, we simply integrate the total shear force from the edge of the diaphragm span to the location of interest. This is a skill that may be tested on the exam.</p>
+
+
+<p>Example) Determine the chord force 5 ft along wall line B measured from the left end:</p>
+
+<img src = "chordForceEx.png" alt = "Chord_Force_Example">
+
+<p>For a quick check, we know the maximum chord force is located at the center of the wall:
+Cmax = M<sub>max</sub> / D = w x L<sup>2</sup> / 8 / D =(60 plf)(40 ft)<sup>2</sup>/8 / (20 ft) = 600 lb</p>
+
+<p>The chord force located at any point <q>x</q>along wall line B (starting from the left side) is the moment force at that point in the diaphragm divided by the depth.</p>
+
+
+<img src = "chordForceRxn.png" alt = "Chord_Force_Example_Reactions">
+
+<p>To determine the moment force at any point, we just need to integrate the shear diagram from either side up to the point of interest (shown where the dotted red line intersects the graph).</p>
+
+<img src = "chordForceShear.png" alt = "Chord_Force_Shear">
+
+<p>Highlighting the desired area of shear in red, we solve for this area using basic geometry:
+Area = 1200 lb x 5ft - ([60 plf x 5ft] x 5ft / 2) = 6000 lb*ft - 750 lb*ft = 5250 lb*ft</p>
+
+<img src = "chordForceShearExplanation.png" alt = "Further_Detailing_Of_Shear">
+
+
+<p>We could also turn this into a generic formula if that makes more sense:<br>
+M(a) = R1* a - (w * a^2 / 2) = w x L / 2 x a - (w x a^2 /2)<br>
+C(a) = M(a) / D</p>
+
+<p>Although we said area, the result is in units of lb*ft. This is correct because we are trying to solve for the moment force at 5ft from the edge. Our units aren’t actually going to be in terms of square inches or feet, we refer to it as area because of the mathematical solution using areas of the graph.</p>
+
+<p>With the moment determined, now we simply divide by the depth of the diaphragm at that location.</p>
+<p>Chord force = 5250 lb*ft / (diaphragm depth) = 5250 lb*ft / 40 ft = 131 lb</p>
+
+<img src = "sectionCutDiaphragmEdge.png" alt = "Section_Cut_Of_Diaphragm">
+
+<p>Compared to our earlier result of 600 lb for the maximum chord force at the center of the diaphragm, our current answer of 131 lb for the chord force at 5 ft from the edge is acceptable.</p>
+
+<p>Determining the maximum chord force and the chord force at a location along a diaphragm span are two possible (and likely) questions on the seismic exam.</p>
+
+<h3><u>Collectors</u></h3>
+<p>To recap, diaphragms are horizontal elements in a structure that transfer the lateral forces acting on the structure to the vertical elements, such as shear walls.</p>
+
+
+<a class="imgLink"  href="https://www.awc.org/codes-standards/calculators-software/connectioncalc/diaphragmfactor"><p>Image via AWC</p> </a>
+<img src = "collectorsFig1.png" alt = "Figure1_Collectors">
+
+<p>The shear walls then transfer the desired shear load and possible overturning moment to the foundation using holdowns and anchor bolts. These shear walls must be designed properly and should have the desired stiffness to resist the applied diaphragm reaction. </p>
+
+<a class = "imgLink" href = "https://www.nishkian.com/how-do-multi-family-buildings-withstand-earthquakes-and-wind-loading/"><p>Image via Nishkian</p></a>
+<img src = "collectorsFig2.png" alt = "Collectors_Figure2">
+
+<p>So the question arises, how does the diaphragm transfer the loads onto the shear walls? Here, we introduce collectors, commonly known as struts. Collectors are one of the boundary elements of the diaphragm, included along the perimeter of shear walls as shown in the figure below. When there is not a full-length shear wall, a collector will be needed. This means that collectors can also occur along the interior of a structure.</p>
+
+
+<a class = "imgLink" href = "https://csengineermag.com/analysis-of-irregular-shaped-diaphragms/"><p>Image via Nishkian</p></a>
+<img src = "collectorsFig3.png" alt = "Collectors_Figure3">
+
+
+<p>The role of collectors is to collect the transverse diaphragm shear reactions and transfer it to the shear walls as shown in the figure below.</p>
+
+
+<a class = "imgLink" href="https://classes.mst.edu/civeng5260/concept/09/02/index.html"><p>Image via Missouri University of Science and Technology</p></a>
+<img src = "collectorsShear.png" alt = "Shear_Reactions_From_Collectors">
+
+<p>We can have full-length shear walls or partial-length shear walls with openings for windows or re-entrant corners. For full-length shear walls, the diaphragm shear is transferred equally along the full length in terms of unit shear. The following figure shows the variation of the shear force diagram and the collector force diagram for a full length shear wall. </p>
+
+<img src = "collectorsFig4.png" alt = "Shear_Force_At_Diaphragm">
+
+<p>We can see that the shear is transferred equally along the full length of the shear wall and the collector force along the shear wall length is zero. So, there is no need to provide collectors for a full length shear wall.</p>
+
+<p>For partial lengths of the shear wall, the diaphragm shear in the non-shear wall portion is collected into the collector. The collector then transfers this force and concentrates it into the in-plane shear wall using connections such as steel straps as shown in the figure below.</p>
+
+<a class = "imgLink" href="https://curee.org/projects/nehrp-jv/publications/nistgcr14-917-32.pdf"><p>Image via NEHRP</p></a>
+<img src = "detailingFloorDiaphragm.png" alt = "Detailing_Of_Floor_Diaphragm">
+
+<p>The following figure shows the variation of the shear force diagram and the collector force diagram for a partial length shear wall that has headers and collectors over the openings.</p>
+
+<img src = "collectorForceDiagram.png" alt ="Collector_Force_Diagram">
+
+<p>It can be seen that the shear is not transferred through the openings in the shear wall. This leads to large collector forces in the shear wall around the openings. So, collectors are provided here to collect the diaphragm shear from the openings and transfer it to the in-plane shear wall with the use of steel straps and other connections.</p>
+
+
+<p>The ASCE 7 standard section 12.10.2 refers to collectors as shown in the figure below.</p>
+
+
+<img src = "asce7Section12.10.2.png" alt = "ASCE7-16_Section_12.10.2">
+
+<img src = "asce7Section12.10.2Part2.png" alt = "ASCE7-16_Section_12.10.2_Continued">
+
+<p>ASCE 7 section 12.10.2.1 notes that the design of collectors requires load combinations with the Earthquake force multiplied by the overstrength factor. So what is overstrength and why is it required for collector design?</p>
+
+<p>Recalling from Lecture 6, the concept of ductility relates to the ability of a lateral system to perform in the inelastic range, which lowers the design seismic force. There is a crucial part of the determination of seismic forces, where the mass and acceleration products are divided by the ductility of the LFRS ‘R’. This means that the seismic design loads are always tied to a specific LFRS and its corresponding ductility.</p>
+
+<p>Collectors are used to transfer seismic forces from the diaphragm into the LFRS. Should a collector be assumed to have the same ductility (and therefore the seismic force reduction) as the LFRS? The short answer is no. The energy dissipation available in the collector element may not be as ‘good’ as the LFRS, so the collector design force should be amplified to ensure that it does not fail before it can transfer the force into the LFRS.</p>
+
+<p>The overstrength factor or ‘Omega’ represents the ratio of the maximum force in a lateral system to the design level force. Using this factor in load combinations for collectors will ensure that the collector doesn’t yield or fail unexpectedly. We want our ductility and inelastic response to occur in the lateral system, not in a single collector element.</p>
+
+
+<p>Thomas Heausler does a great job of summarizing omega and its use as follows: <q>Omega zero is an amplification to the forces in certain elements in the seismic load path. It is required so as to prevent a weak link form occurring prior to the full energy dissipation and ductility potential of the primary feature of the lateral system. For example, in a steel braced frame system, in order for the diagonal brace to yield and dissipate energy in a controlled and reliable manner, all other portions of the load path (e.g. connections, bolts, welds, gusset plates, anchor bolts, columns and collectors) need to be stronger than the maximum anticipated strength, or force, in the brace. Therefore, Omega zero amplification and load combinations are specifically triggered in the sections mentioned above and in Material Standards such as AISC and ACI. </q></p>
+
+<a href = https://seaoo.org/downloads/NCSEA_Conf_Info/2014_ncsea_common_errors_in_seismic_design___how_to_avoid_them._t._heausler.pdf > https://seaoo.org/downloads/NCSEA_Conf_Info/2014_ncsea_common_errors_in_seismic_design___how_to_avoid_them._t._heausler.pdf </a>  
+
+
+<p>There is also an exception to this requirement: For buildings that have a lateral system consisting of only wood shear walls, the Omega factor is not required in collector design. On the other hand, a masonry warehouse requires incorporating the overstrength factor. This allowance for wood shear walls is due to available historical data and overall redundancy in these types of lateral systems.</p>
+
+
+<p>Actual collector design is outside the scope of the seismic exam. Just being able to identify what a collector element is, the collector force, and when to use omega is enough for the exam.</p>
+
+
+
+<img src = "wallElevation.png" alt = "Wall_Elevation">
+
+<p>What elements of the above elevation would require omega? The LFRS (shear wall) does not require omega, our code based forces are already suited for that element. The connection from the diaphragm to the LFRS (shear wall) does not require omega either because that is considered a part of the typical lateral system. </p>
+
+
+<p>The beam and connecting element from the beam to the shear wall should be designed with omega. Even though they are not a part of the lateral system, they are required to transfer all of the diaphragm shears into the LRFS.  They are not a part of the lateral system but are required to transfer all of the diaphragm shears into the LFRS.</p>
+
+
+
+<h4><u>Sample Problem: Flexible Diaphragm #1</u></h4>
+
+
+<p>Given:</p>
+
+<ul>
+<li>Single-story wood frame building with flexible roof diaphragm</li> 
+<li>Wood-structural panel (WSP) horizontal diaphragm</li>
+<li>Wood-structural panel (WSP) shear walls </li>
+<li>N-S Direction:</li>
+<li>Diaphragm span L = 130 feet </li>
+<li>d = 55 ft</li>
+<li>Seismic base shear V = 36,000 lbs </li>
+<li>E-W Direction: </li>
+<li>Diaphragm span L = 55 ft</li>
+<li>d = 130 ft</li>
+<li>Assume uniform load on the diaphragm: w_s = V/L </li>
+<li>Redundancy factor = 1.0 </li>
+</ul>
+
+<img src = "sampleFlexibleDiaphragmEx1.png" alt = "Flexible_Diaphragm_Example_1">
+
+<p>N-S Direction: Analyze the diaphragm forces for Lines 1&amp;3.</p>
+
+
+<ol>
+<li>Maximum unit (roof) diaphragm shear V<sub>r</sub></li>
+<li>Maximum unit wall shear V<sub>w</sub></li>
+<li>Maximum chord force on lines A &amp; B, CF</li>
+<li>Maximum drag force F<sub>d</sub></li>
+</ol>
+
+<h4><u>Solution: 
+</u></h4>
+
+<p>a) First, determine the design seismic force for the direction of interest (N-S direction) by dividing the base shear by the length of the side of the diaphragm facing the direction of interest (diaphragm span L). Note the direction of interest is also known as the direction of the force. </p>
+
+<p>w<sub>s</sub> = V/L = (36,000 lbs) / 130 ft = 277 plf </p>
+
+
+<p>Next, find the shear acting on Wall Lines 1 and 3. Since there are two lines of action that are of interest, divide the design seismic force determined in the previous step by 2. </p>
+
+<p>V<sub>1</sub> = V<sub>3</sub> = w<sub>s</sub> * L / 2</p>
+<p>V<sub>1</sub> = V<sub>3</sub> = (277 plf) * (130 ft) / 2 = 18,005 lbs </p>
+
+<p>Finally, determine the unit roof diaphragm shear by dividing the shear over the length of the side of the diaphragm (d) oriented in the direction of interest (N-S direction). </p>
+
+<p>  Roof  v<sub>1</sub> = v<sub>3</sub> = v<sub>1</sub> / d = (18,005 lbs) / 55 ft = <b>327plf</b></p>
+
+<p>b> Begin by determining the length of the shear wall for the N-S direction. Subtract the length of the wall with no shear wall from the total length of the wall. Sketches of the corresponding calculations for the shear walls along Wall Lines 1 and 3 are shown below. Determine the unit wall shear by dividing the wall shear over the length of the shear wall. </p>
+
+<ul>Wall Line 1: Length of shear wall = Total length of wall - length of wall with no shear wall </ul>
+<ul>Wall Line 1: Length of shear wall = 55 ft - 20 ft = 35 ft </ul>
+<ul>Wall V<sub>1</sub> = V<sub>1</sub> / shear wall length = (18,005 lbs) / 35 ft = 514 plf </ul>
+
+<img src = "wallLine1.png" alt = "Wall_Line_Explanation">
+
+<p>Repeat the same steps for Wall Line 3. </p>
+<ul>Wall Line 3: Length of shear wall = Total length of wall - length of wall with no shear wall </ul>
+<ul>Wall Line 3: Length of shear wall = 55 ft - 25 ft = 30 ft </ul>
+<ul>Wall Line 3: Length of shear wall = 30 ft </ul>
+<ul>Wall V<sub>3</sub> = V<sub>3</sub> / shear wall length = (18005 lbs) / 30 ft = 600 plf </ul>
+
+
+<img src = "wallLength1.png" alt = "Wall_Line_1_Continued">
+
+<p>The largest unit wall shear governs because that denotes the worst case for analysis and design. In this case, the maximum unit wall shear is <b>600 plf</b>.</p>
+
+
+
+
+<p>c) First, determine the moment induced by the unit shear. </p>
+<ul>Moment Induced by the Unit Shear = w<sub>s</sub> * L^2 / 8</ul>
+<ul>Moment Induced by the Unit Shear = (277 plf) * (130 ft)^2 / 8 = 585,162.5 lb-ft</ul>
+
+<p>Next, divide the moment induced by the unit shear by the length of the walls in the direction of the force (N-S direction). </p>
+<ul>Maximum Chord Force = Moment Induced by the Unit Shear / d</ul>
+<ul>Maximum Chord Force = 585,162.5 k-ft / 55 ft = <b>10,639 lbs</b></ul>
+
+<p>d) Determine the unit roof diaphragm shear for each line of action. </p>
+<ul>Wall Line 1: Roof  v<sub>1</sub> = 327 plf </ul>
+
+
+<p>Determine the drag force by multiplying the unit roof diaphragm shear by the length of the wall that is not a shear wall. </p>
+<ul>F<sub>d</sub> = v<sub>1</sub> * (non-shear wall length)</ul>
+<ul>F<sub>d</sub> = (327 plf) * (10 ft) = 3270 lbs </ul>
+
+<img src = "unitRoofDiaphragm1.png" alt = "Unit_Roof_Diaphragm">
+
+<p>Repeat the steps to determine the maximum drag force for Wall Line 3. </p>
+
+<ul>Wall Line 3: Roof  v<sub>3</sub> = 327 plf </ul>
+<ul>F<sub>d</sub> = v<sub>3</sub> * (non-shear wall length)</ul>
+<ul>F<sub>d</sub> = (327 plf) * (25 ft) = 8175 lbs</ul>
+
+
+<p>The largest drag force governs because that denotes the worst case for analysis and design. In this case, the maximum drag force is <b>8175 lbs</b>.</p>
+
+<img src = "wallLine3Ex1.png" alt = "Wall_Line_3_Example_1">
+
+<p>Now let’s try a similar example, but this time with three wall lines. Be sure to pay specific attention to how the forces are calculated around the middle line of resistance (Wall Line 2).</p>
+
+<h4><u>Sample Problem: Flexible Diaphragm #2</u></h4>
+
+<img src = "sampleFlexibleDiaphragmEx2.png" alt = "Sample_Example_2">
+
+<p>N-S Direction: Analyze the diaphragm forces for Lines 1, 2 &amp; 3. </p>
+<ol>
+<li>Maximum unit (roof) diaphragm shear V<sub>r</sub>, &amp; reduction of maximum unit (roof) diaphragm shear </li>
+<li>Maximum unit wall shear V<sub>w</sub>, &amp; reduction of maximum unit wall shear </li>
+<li>Maximum chord force on lines A &amp; B, CF &amp; reduction of maximum chord force</li> 
+<li>Maximum drag force F<sub>d</sub>, &amp; reduction of maximum drag force</li>
+</ol>
+
+<h4><u>Solution:</u></h4>
+
+
+<p>a) First, determine the design seismic force for the direction of interest by dividing the base shear by the length of the side of the diaphragm facing the direction of interest. This will be the design seismic force over the entire length of the diaphragm for the direction of interest. </p>
+
+<ul>w<sub>s</sub> = V/L = (36,000 lbs) / 130 ft = 277 plf </ul>
+
+<p>Next, distribute the design seismic force of the side of the diaphragm facing the direction of interest to that in the direction of interest. Since there is a line of action added into the center (line 2), it will create two diaphragms that span equally.  Hence L<sub>1</sub> = L<sub>2</sub> = L / 2. Now, there are two lines of action that are of interest for determining the unit roof diaphragm shear, divide the design seismic force determined in the previous step by 2. </p>
+
+<ul>V<sub>1</sub> = V<sub>3</sub> = w<sub>s</sub> * L1</ul>
+<ul>V<sub>1</sub> = V<sub>3</sub> = (277 plf) * (65 ft) / 2 = 9003 lbs </ul>
+
+<p>Finally, determine the unit roof diaphragm shear by dividing the design seismic force over the length of the side of the diaphragm oriented in the direction of interest. </p>
+
+<p> Roof  v<sub>1</sub> = v<sub>3</sub> = v<sub>1</sub> / d = (9003 lbs) / 55 ft = <b>164 plf</b> </p>
+
+<p>b) Begin by determining the length of the shear wall for the line of interest. Subtract the length of the wall with no shear wall from the total length of the wall. Determine the unit wall shear by dividing the wall shear over the length of the shear wall. </p>
+
+
+<img src = "shearwallLengthEx2.png" alt = "Determining_Shearwall_Length_Example_2">
+
+<ul>Wall Line 1: Length of shear wall = Total length of wall - length of the wall with no shear wall </ul>
+<ul>Wall Line 1: Length of shear wall = 55 ft - 20 ft = 35 ft </ul>
+<ul>Wall V<sub>1</sub> = V<sub>1</sub> / shear wall length = (9000 lbs) / 35 ft = 257 plf </ul>
+
+
+<p>Repeat the same steps for determining the unit wall shear of Wall Line 1. </p>
+
+<ul>Wall Line 2: Length of shear wall = 55 ft </ul>
+<ul>Wall V<sub>3</sub> = V<sub>1</sub> / shear wall length = (18000 lbs) / 55 ft = 327 plf 
+</ul>
+
+<p>Repeat the same steps for determining the unit wall shear. </p>
+
+<ul>Wall Line 3: Length of shear wall = 55 - 25 = 30 ft </ul>
+<ul>Wall V<sub>3</sub> = V<sub>1</sub> / shear wall length = (9000 lbs) / 30 ft = 300 plf </ul>
+
+<img src = "unitWallShear.png" alt = "Unit_Wall_Shear">
+
+<p>The largest unit wall shear governs because that denotes the worst case for analysis and design. In this case, the maximum unit wall shear is <b>327 plf. </b></p>
+
+<p>First, determine the moment induced by the unit shear. </p>
+<ul>Moment Induced by the Unit Shear = w<sub>s</sub> * L^2 / 8</ul>
+<ul>Moment Induced by the Unit Shear = (277 plf) * (65 ft)^2 / 8 = 146,291 k-ft</ul>
+
+
+<p>Next, divide the moment induced by the unit shear by the length of the walls in the direction of interest.</p>
+
+
+<ul>Maximum Chord Force = Moment Induced by the Unit Shear / d</ul>
+<ul>Maximum Chord Force = 146,291 k-ft / 55 ft = <b>2660 lbs</b> </ul>
+
+<p>d) Determine the unit roof diaphragm shear for each line of action. </p>
+<ul>Wall Line 1: Roof  v<sub>1</sub> = 164 plf </ul>
+
+<p>Determine drag force by multiplying the unit roof diaphragm shear by the length of the wall that is not a shear wall. </p>
+<ul>F<sub>d</sub> = v<sub>1</sub> * (length of wall that is not a shear wall)</ul>
+<ul>F<sub>d</sub> = (164 plf) * (10 ft) = 1640 lbs </ul>
+
+<img src = "dragForceEx2Fig1.png" alt = "Drag_Force_Figure_1">
+
+
+<p>Repeat the steps to determine the maximum drag force for Wall Line 2.  </p>
+<ul>F<sub>d</sub> = v<sub>2</sub> * (length of wall that is not a shear wall)</ul>
+*We can see that the entirety of wall line 2 is a shear wall so F<sub>d</sub> = 0.
+
+<img src = "dragForceEx2Fig2.png" alt = "Drag_Force_Figure_2">
+
+
+<p>Repeat the steps to determine the maximum drag force for Wall Line 3.</p>
+
+
+<ul>F<sub>d</sub> = v<sub>3</sub> * (length of wall that is not a shear wall)</ul>
+<ul>F<sub>d</sub> = (164 plf) * (25 ft) = 4100 lbs </ul>
+
+
+
+<p>The largest drag force governs because that denotes the worst case for analysis and design. In this case, the maximum drag force is <b>4100 lbs</b>.</p>
+
+
+<img src = "dragForceEx2Fig3.png" alt = "Drag_Force_Figure_3" width="10" height="10"style="vertical-align:middle;margin:50px 0px">
+
+<h4>Sample Problem: Flexible Diaphragm #3 with Parapet  </h4>
+<u><b>Consider the following diaphragm:</b></u>
+
+
+<img src = "flexibleDiaphragmEx3.png" alt = "Flexible_Diagphragm_Example_3">
+<img src = "flexibleDiaphragmEx3Detailing.png" alt = "Flexible_Diaphragm_Example_3_Detailing">
+
+
+<u><b>Given:</b></u> 
+<li>Single-story Office Building</li> 
+<li>S<sub>DS</sub> = 0.95</li>
+<li>Seismic Design Category D</li>
+<li>Building Frame System</li>
+<ul>Wood shear walls</ul>
+<ul>Flexible roof diaphragm </ul>
+<li>Roof dead load, D = 22 psf </li>
+<li>Roof snow load, S = 100 psf  </li>
+<li>Typical 2x4 wood stud wall, Dead Load = W<sub>w</sub> = 12 psf  </li>
+
+<u><b>Find:</b></u>
+<p>A. <u>Seismic Force in N-S DIRECTION</u></p>
+<ol>
+  <li>Design seismic force to diaphragm, w<sub>s</sub></li>
+  <li>Unit roof shear on lines 1 and 2, v<sub>r</sub></li>
+  <li>Maximum chord force on lines A and B, CF</li>
+  <li>Drag force diagram on lines 1 and 2, F<sub>d</sub></li>
+</ol>
+
+<p>B.<u>Seismic Force in E-W DIRECTION</u></p>
+<ol>
+  <li>Design seismic force to diaphragm, w<sub>s</sub></li>
+  <li>Unit roof shear on lines A and B, v<sub>r</sub></li>
+  <li>Maximum chord force on lines 1 and 2, CF</li>
+  <li>Drag force diagram on lines A and B, F<sub>d</sub></li>
+</ol>
+
+<b><u>Solution:</u></b>
+
+<p>The first step for a diaphragm problem is to decide the seismic coefficients for the given structure based on the data provided:</p>
+
+<li>S<sub>DS</sub> = 0.95 (Given)</li>
+<li>Seismic Design Category D (Given)</li>
+<li>Risk Category II</li>
+        <ul>For Office Building - Based on CBC Table 1604.5</ul>
+<li>Seismic Importance Factor, I<sub>e</sub> = 1.0 </li>
+        <ul>Based on ASCE 7-16 Table 1.5-2 and Risk Category II</ul>
+<li>R = 7</li>
+        <ul>Based on ASCE 7-16 Table 12.2-1 item B.22: Light frame (wood) walls sheathed with wood structural panels rated for shear resistance (NOTE: The question statement specifically notes the building frame system, so that is why we use section B of the table).</ul>
+
+<p>Next, determine the total diaphragm design force acting at the roof level using the following steps:</p>
+
+
+<li>Seismic Response Coefficient, Cs: (ASCE 7-16 12.8-2)</li>
+
+<ul>Note: For a single-story building, by observation, T = T<sub>s</sub>. Therefore, ASCE 7-16 eq. 12.8-2 <b>will govern</b> C<sub>s</sub>:</ul>
+
+<ul>C<sub>s</sub> = S<sub>DS</sub>/(R/I<sub>e</sub>) = 0.95/(7/1.0) = 0.136</ul>
+
+
+<li>Seismic Base Shear, V: (ASCE 7-16 12.8-1)</li>
+<ul>V = C<sub>s</sub> x W = 0.136W </ul>
+
+<li>Diaphragm Design Force at Roof, F<sub>px</sub>: (ASCE 7-16 12.10-1)</li>
+
+<p>$$ F_px = {∑↙{i=x}↖n F_i / ∑↙{i=x}↖n w_i} *w_px$$</p>
+
+<p>For a single story building, F<sub>1</sub> = V </p>
+
+<img src = "oneStoryShear.png" alt = "One_Story_Shear_Figure">
+
+<p>&#8756; F<sub>p1</sub> = C<sub>s</sub> x W x w<sub>p1</sub> / W </p>
+<ul>= 0.136 w<sub>p1</sub> </ul>
+
+<p>Applying checks for maximum and minimum F<sub>p1</sub>: </p>
+
+<p>	&#8594; Maximum: </p>
+<p>F<sub>p1</sub> &lt;= 0.4 x S<sub>SD</sub> x I<sub>e</sub> x w<sub>p1</sub></p>
+<ul> = 0.4(0.95)(1.0) x w<sub>p1</sub></ul>
+<ul>= 0.380 w<sub>p1</sub> … <b>OK</b> </ul>
+
+
+<p>	&#8594; Minimum: </p>
+<p>F<sub>p1</sub> &lt;= 0.2 x S<sub>SD</sub> x I<sub>e</sub> x w<sub>p1</sub></p>
+<ul> = 0.2(0.95)(1.0) x w<sub>p1</sub></ul>
+<ul>= 0190 w<sub>p1</sub> … <b>NOT OK</b> </ul>
+
+&#8756; For <u>roof diaphragm</u> design, the minimum diaphragm force controls, F<sub>p1</sub> = 0.190 w<sub>p1</sub>  
+
+<p><b>Now, let’s move on to the actual solution:</b></p>
+<b><u>Part A:</u>  North - South Direction: L = 110 ft, b = 62 ft</b>
+
+<p><u>Design seismic force to Diaphragm, w<sub>s</sub>:</u> </p>
+<ul>w<sub>s</sub> = f<sub>p1</sub> = F<sub>p1</sub>/L</ul>
+
+<p>Where, F<sub>p1</sub> = 0.190 w<sub>p1</sub>, and <br>w<sub>p1</sub>= total weight of the roof diaphragm taken into consideration</p>
+<ul>=(roof DL+20% Snow)xPlan area + weight of N-S Exterior walls</ul>
+<ul>=(22 psf + (0.2)100 psf)(110 ft)(62 ft) + (12 psf)(12 ft*)(2 walls)(110 ft)</ul>
+<ul>  = <b>318,120 lbs</b> </ul>
+
+<p>*Note: For roof with parapets, the effective tributary width of the exterior walls = (roof height/2) + parapet height = (18 ft /2) + 3 ft = 12 ft</p>
+
+
+<img src = "effectiveTributaryWidth.png" alt = "Effective_Tributary_Width"width="10" height="10"style="vertical-align:middle;margin:50px 0px">
+<p>Now, F<sub>p1</sub> = 0.190 w<sub>p1</sub></p>
+
+<ul>  = 0.190 (318,120 lbs)</ul>
+<ul>  = <b>60,443 lbs</b></ul>
+
+
+<p>Finally, w<sub>s</sub> = f<sub>p1</sub> = F<sub>p1</sub> / L</p>
+
+<ul> = 60,443 lbs / 110 ft = <b>549.5 plf</b></ul>
+
+<p>2. <u>Unit Roof Shear on lines 1 and 2, v<sub>r</sub>:</u></p>
+<p>Consider the walls along the N-S direction to act as supports that resist the in-plane shear, and the diaphragm to act as a simply supported beam:</p>
+
+<img src = "unitRoofShear.png" alt = "Unit_Shear_Reactions_Diagragms">
+
+
+
+<p>&#8756; Total roof shear on lines 1 and 2:</p>
+<ul>= V<sub>1</sub> = V<sub>2</sub> = w<sub>s</sub> x L / 2</ul>
+<ul>= 549.5 plf x 110 ft / 2 = <b>30,223 lbs</b></ul>
+
+<p>Unit roof shear on lines 1 and 2: </p>
+<ul>= v<sub>1</sub> = v<sub>2</sub> = V<sub>1</sub> / b</ul>
+<ul>= 30,222.5 lbs / 62 ft = <b>487.5 plf</b> 	(SD/LRFD force level)</ul>
+
+<p>3. <u>Maximum Chord forces on lines A and B, CF:</u></p>
+
+<p>Again, consider the walls along the N-S direction to act as supports and the diaphragms to act as a simply supported beam. We know that for a simply supported beam, Maximum moment = w x L<sup>2</sup> / 8. </p>
+
+<p>&#8756; Maximum Moment, M = w<sub>s</sub> x L<sup>2</sup> / 8 </p>
+<ul>= 549.5 plf x 110 ft<sup>2</sup> / 8 = <b>831,119 lb-ft</b></ul>
+
+<p>Maximum Chord Force, CF = M / b </p>
+<ul>  = 831,120 lb-ft / 62 ft = <b>13,205 lb</b> 	(SD/LRFD force level</ul>
+
+<p>4. <u>Drag Force Diagrams on Lines 1 and 2:</u></p>
+
+<u>For wall line 1:</u>
+<li>V<sub>1</sub> = 30,223 lbs </li>
+<li>v<sub>1</sub> = 487.5 plf</li>
+<li>Unit Shear force into shear wall = V<sub>1</sub>/Shear wall length</li>
+
+<ul> = 30,223 lbs / 40 ft = <b>756 plf</b>
+</ul>
+
+<li>Collector force, F<sub>d</sub> = v<sub>1</sub> x length of non-shear wall</li>
+
+<ul>= 487.5 plf x 22 ft = <b>10,725 lbs</b></ul>
+
+<p>Alternatively, F<sub>d</sub> = V<sub>1</sub> - (v<sub>1</sub> x length of shear wall)
+</p>
+
+<ul>= 30,223 lbs - (487.5 plf x 40 ft) = <b>10,725 lbs</b> (approx.)</ul>
+
+
+<img src = "dragForceLine1.png" alt = "Drag_Force_Line_1">
+
+<u>For wall line 2:</u>
+<p>The wall line 02 has a full-length shear wall. Thus, the entire diaphragm shear is distributed to the full length of the shear wall. In this case, there is no collector element and so the collector force is zero. </p>
+
+<p>The mathematics for the problem is shown below:  </p>
+<li>V<sub>2</sub> = 30,223 lbs </li>
+<li>v<sub>2</sub> = 487.5 plf</li>
+<li>Unit Shear force into shear wall = V<sub>2</sub>/Shear wall length</li>
+<ul>  = 30,223 lbs / 62 ft = <b>487.5 plf</b></ul>
+
+<li>Collector force, F<sub>d</sub> = v<sub>2</sub> x length of non-shear wall </li>
+<ul> = <b>0 lbs</b></ul>
+
+<p>Alternatively, F<sub>d</sub> = V<sub>2</sub> - (v<sub>2</sub> x length of shear wall)</p>
+<ul>= 30,223 lbs - (487.5 plf x 62 ft) = <b>0 lbs</b> (approx.)</ul>
+
+
+<img src = "dragForceLine2.png" alt = "Drag_Force_Line_2">
+
+<b><u>Part B:</u>  East - West Direction: L = 62 ft, b = 110 ft</b>
+
+<p>1.<u>Design seismic force to Diaphragm, w<sub>s</sub>:</u> </p>
+
+<p>w<sub>s</sub> = f<sub>p1</sub> = F<sub>p1</sub>/L</p>
+
+<p>Where, F<sub>p1</sub> = 0.190 w<sub>p1</sub>, and
+	w<sub>p1</sub> = total weight of the roof diaphragm taken into consideration</p>
+
+<ul>=(roof DL +20% Snow) x plan area + weight of E-W Exterior walls</ul>
+<ul>= (22 psf + (0.2)100 psf)(110 ft)(62 ft) + (12 psf)(12 ft*)(2 walls)(62 ft)</ul>
+<ul>= <b>304,296 lbs</b> </ul>
+
+<p>*Note: For roof with parapets, the effective tributary width of the exterior walls is:</p>
+
+<ul>= (roof height/2) + parapet height</ul>
+<ul>= (18 ft /2) + 3 ft = 12 ft</ul>
+
+<p>Now, F<sub>p1</sub> = 0.190 w<sub>p1</sub></p>
+
+ <ul>= 0.190 (304,296 lbs)</ul>
+ <ul>= <b>57,816 lbs</b></ul>
+
+<p>Finally, w<sub>s</sub> = f<sub>p1</sub> = F<sub>p1</sub> / L</p>
+<ul>   = 57,816 lbs / 62 ft= <b>932.5 plf</b></ul>
+
+<p>2. <u>Unit Roof Shear on lines A and B, v<sub>r</sub>:</u></p>
+
+<p>Consider the walls along the E-W direction to act as supports and the diaphragm between them to act as a simply supported beam:</p>
+
+<img src = "unitRoofShearAB.png">
+
+<p>&#8756; Total roof shear on lines A and B:</p>
+<ul>= V<sub>A</sub> = V<sub>B</sub> = w<sub>s</sub> x L / 2</ul>
+<ul>= 932.5 plf x 62 ft / 2 = <b>28,908 lbs</b></ul>
+
+
+<p>Unit roof shear on lines A and B:</p>
+<ul>= v<sub>A</sub> = v<sub>B</sub> = V<sub>A</sub> / b</ul>
+<ul>= 28,908 lbs / 110 ft = <b>263 plf</b> 	(SD/LRFD force level)</ul>
+
+<p>3. <u>Maximum Chord forces on lines 1 and 2, CF:</u>
+</p>
+<p>Again, consider the walls in the E-W direction to act as supports and the diaphragm between them to act as a simply supported beam. We know that for a simply supported beam, Maximum moment = w x L<sup>2</sup> / 8</p>
+
+<p>&#8756; Maximum Moment, M = w<sub>s</sub> x L<sup>2</sup> / 8 </p>
+<ul> = 932.5 plf x 62 ft <sup>2</sup> / 8 = <b>448,066 lb-ft</b></ul>
+
+
+
+<p>Maximum Chord Force, CF = M / b </p>
+<ul>   = 448,066 lb-ft / 110 ft = <b>4073 lbs</b>	(SD/LRFD force level)</ul>
+
+<p>4. <u>Drag Force Diagrams on Lines A and B:</u></p>
+<u>For wall line A:</u>
+
+<li>V<sub>A</sub> = 28,908 lbs </li>
+<li>v<sub>A</sub> = 263 plf is the total unit shear </li>
+<li>Unit Shear force into shear wall = V<sub>A</sub>/Shear wall length</li>
+<ul> = 28,908 lbs / 66 ft = <b>438 plf</b></ul>
+
+<li>Collector force, F<sub>d</sub>:</li>
+<ul>At 22 ft: F<sub>d</sub> = 263 plf x 22 ft = 5786 lbs </ul>
+<ul>At 88 ft: F<sub>d</sub> = (263 plf x 88 ft) - 28,908 lbs = -5764 lbs </ul>
+<ul>At 110 ft: F<sub>d</sub> = 0 lbs </ul>
+<ul>Alternatively, F<sub>d</sub> = (263 plf x 110 ft) - 28,908 lbs = 0 lbs</ul>
+
+<img src = "dragForceLineA.png" alt = "Drag_Force_Line_A">
+
+<u>For wall line B:</u>
+<p>V<sub>B</sub> = <b>28,908 lbs</b></p>
+
+<p>This roof shear is concentrated in a single shear-wall in a wall line. But, if we have multiple shear walls in the wall line, we can distribute the roof shear in the different shear wall segments using the following method:  </p>
+
+<p>For multiple shear-walls in a single wall line, we can find the unit shear in each shear-wall segment as follows:</p>
+<li>Total shear wall length = 27.5 ft + 22.5 ft = 50 ft </li>
+<li>Therefore, unit shear in each wall length = Total Shear/ Shear-wall length</li> 
+<ul>Total shear wall length = 27.5 ft + 22.5 ft = 50 ft </ul>
+<ul>Therefore, unit shear in each wall length = Total Shear/ Shear-wall length </ul>
+Total shear wall length = 27.5 ft + 22.5 ft = 50 ft 
+<ul>Therefore, unit shear in each wall length = Total Shear/ Shear-wall length </ul>
+
+<p>So, the unit shear for each shear-wall in a wall line is the same i.e. 578 plf. </p>
+
+<p>Therefore;</p>
+<li>For the shear-wall with length as 27.5 ft,   </li>
+<ul>Shear force = 578 plf x 27.5 ft = <b>15,900 lbs</b></ul>
+<li>For the shear-wall with length as 22.5 ft, </li>
+<ul>Shear force = 578 plf x 22.5 ft = <b>13,008 lbs</b></ul>
+
+<p>v<sub>B</sub> = <b>263 plf</b> </p>
+
+<p>Collector force, F<sub>d</sub>: </p>
+
+<li>At 15 ft: F<sub>d</sub> = 263 plf x 15 ft = <b>3,945 lbs</b> </li>
+
+<li>At 42.5 ft: F<sub>d</sub> = (263 plf x 42.5 ft) - 15900 lbs </li>
+<ul> = <b>- 4,723 lbs</b> </ul>
+
+
+<li>At 87.5 ft: F<sub>d</sub> = (263 plf x 87.5 ft) - 15,900 lbs </li>
+
+<ul>= <b>7,113 lbs</b> </ul>
+
+<li>At 110 ft: F<sub>d</sub> = (263 plf x 110 ft) - (15,900 lbs +13,008 lbs) </li>
+
+<ul>=  28,908 lbs - 28,908 lbs = <b>0 lbs</b> </ul>
+
+<img src = "dragForceLineB.png" alt = "Drag_Force_Line_B">
+
+
+<p>This concludes the final problem for flexible diaphragms. </p>
+
+
+
+<h4>Additional resources:</h4>
+<ul>
+<li><a href = "http://www.ce.memphis.edu/7119/PDFs/Fema310/45.pdf"> CE Memphis</a></li>
+<li><a href = "https://www.structuremag.org/?p=577"> Structure Magazine</a></li>
+<li><a href = "https://cssbi.ca/assets/resources/Design_Manuals/CSSBI-B-13-06-PDF.pdf"> Design Manuals</a></li>
+<li><a href = "https://www.youtube.com/watch?app=desktop&v=0AzCCafdS1c"> Diaphragm Design Example</a></li>
+</ul>
+
+       
+<!--End of contents pasted from Google Docs-->        
+        
+        
+<div class="lectureSkip">
+    <a href="../Lecture9/"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
+    <a href="../Lecture11"><p>Next Lecture</p> <i class="arrow rightArrow"> </i></a>
+</div>
+    </div>
+<br>
+</div>
+</article>
+<footer class="footingMain" id="footingMain">
+        <div class="footer-row">
+            <div class = "mobileStack footerLogo">
+                <h1 class="row-heading">California<br>Seismic</h1>
+                <a href="mailto:californiaseismic@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M0,24.08v9.89l86,68.2625l86,-67.4025v-10.75zM0,42.6775v105.2425h172v-104.3825l-83.85,65.79c-0.61812,0.48375 -1.3975,0.7525 -2.15,0.7525c-0.7525,0 -1.51844,-0.25531 -2.15,-0.7525z"></path></g></g></svg></a>
+                <a href="https://www.linkedin.com/company/californiaseismic/">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M156.23893,0h-140.47786c-8.5944,0 -15.76107,7.16667 -15.76107,15.76107v140.47786c0,8.5944 7.16667,15.76107 15.76107,15.76107h140.47786c8.5944,0 15.76107,-7.16667 15.76107,-15.76107v-140.47786c0,-8.5944 -7.16667,-15.76107 -15.76107,-15.76107zM50.16667,143.33333h-28.66667v-78.83333h28.66667zM35.83333,55.17774c-8.5944,0 -14.33333,-5.73893 -14.33333,-12.9056c0,-7.86654 5.73893,-13.60547 14.33333,-13.60547c8.5944,0 14.33333,5.73893 14.33333,12.9056c0,7.86654 -5.73893,13.60547 -14.33333,13.60547zM150.5,143.33333h-28.66667v-43c0,-11.47786 -7.89453,-14.33333 -10.02213,-14.33333c-2.1556,0 -11.47787,1.42774 -11.47787,14.33333c0,1.42774 0,43 0,43h-28.66667v-78.83333h28.66667v11.47787c4.3112,-6.4668 11.47787,-11.47787 25.08333,-11.47787c13.60547,0 25.08333,10.75 25.08333,35.83333z"></path></g></g></svg></a>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">Learn</h1>
+                <ul>
+                    <li><a href="Lectures">Lectures</a></li>
+                    <li><a href="PracticeQuestions">Practice Questions</a></li>
+                    <li><a href="ExamInfo">Exam Guide</a></li>
+                </ul>
+            </div>
+            <div class = "mobileStack">
+                <h1 class="row-heading">About Us</h1>
+                <ul>
+                    <li><a href="Contributors">Our Team</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">Copyright 2020 © California Seismic</p>
+    </footer>
+</body>
+</html> 

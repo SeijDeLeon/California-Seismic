@@ -14,9 +14,9 @@ body {
     display: flex;
     flex-direction: column;
 }
-p, a, li, button {
+p, a, li, button, dt, dl, ul {
     font-family: 'Lato', 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
 }
 h1, h2, h3, h4 {
     font-family: 'Montserrat', sans-serif;
@@ -569,12 +569,12 @@ ul.lecture-dropdown-content li a:hover {
 /* ###### FOOTER ###### */
 footer.footingMain{
     background-color: rgb(20,33,64);
-    padding: 20px 10%;
+    padding: 15px 10%;
     text-align: center;
     color: #fff;
     display: block;
     flex: 1 0 auto;
-    height: 350px;
+    height: 200px;
 }
 .footingMain h1, .footingMain h2, .footingMain h3, .footingMain p, .footingMain a, .footingMain li {
     font-family: 'Montserrat', sans-serif;
@@ -586,7 +586,7 @@ footer.footingMain .footer-row {
 }
 .footer-row .mobileStack {
     min-width: 200px;
-    min-height: 200px;
+    min-height: 150px;
 }
 footer.footingMain ul{
     list-style:none;
@@ -609,7 +609,9 @@ footer.footingMain h1{
     font-weight: 700;
 }
 .copyright {
-    margin-top: 40px;
+    margin-top: 0px;
+    margin-bottom:0px;
+    padding-bottom:0px;
     font-size: 12px;
 }
 .footerLogo svg {
@@ -625,21 +627,21 @@ footer.footingMain h1{
     .footer-row .mobileStack {
         min-width: 100%;
         min-height: auto;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
     h1.row-heading {
         margin: 0;
     }
     .footerLogo h1 {
-        margin-bottom: 20px;
+        margin-bottom: 5px;
     }
     .footerLogo a {
         margin-bottom: 20px;
     }
     .footerLogo {
-        padding: 10px 0 20px;
+        padding: 10px 0 5px;
     }
     .copyright {
-        margin-top: 20px;
+        margin-top: 0px;
     }
 }
