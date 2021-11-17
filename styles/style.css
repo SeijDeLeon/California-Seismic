@@ -227,54 +227,7 @@ div.groupPhoto p{
         margin:0;
     }
     
-    div.lectureIntroWrap{
-        padding:4% 2%;
-        margin:auto;
-        text-align:center;
-    }
     
-    div.lectureIntroWrap .row .col-6 p{
-        text-align:left;
-        padding:0;
-    }
-    
-    div.lectureCardWrap{
-        padding:5%;
-        grid-template-columns:1fr;
-        grid-template-rows:;
-        grid-gap:2%;
-        margin-bottom:10px;
-    }
-
-    div.lectureCard a img{
-        background-color:white;
-        width:100%;
-        padding:0 20%;
-    }
-    
-    div.lectureCard{
-        filter:grayscale(0);
-    }
-    
-    div.lectureCard:nth-child(n){
-        margin-bottom:15px;
-    }
-    div.lectureCard h4,p{
-        padding:0;
-    }
-    
-    div.lectureWrap{
-        padding:2% 2%;
-    }
-    
-    div.lectureWrap h1,h2,h3,h4{
-        text-align:center;
-    }
-    div.lectureWrap p{
-        padding:5% 3%;
-        font-size:18px;
-        font-weight:500;
-    }
     
     section.contributeWrapper p{
         width:90%;
@@ -411,6 +364,10 @@ ul.menu-nav .menu-item{
     display: none;
     font-size: 24px;
     font-weight: bold;
+}
+
+.dropdownIcon a{
+    font-size:inherit;
 }
 ul.menu-nav li a:hover {
 /*    background-color:#cdf1ed;*/
