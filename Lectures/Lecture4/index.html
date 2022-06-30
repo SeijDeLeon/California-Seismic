@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<html lang = "en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
@@ -22,7 +22,7 @@
 <body>
     <div class="top-nav-container" id="dropdownContainer">
         <div class="home-logo">
-            <a href="../../index.html" rel="home" class="logo"><img src="../../indexPic/cs_logowithtext.png"></a>
+            <a href="../../index.html" rel="home" class="logo"><img src="../../indexPic/cs_logowithtext.png" alt="Home Logo"></a>
         </div>
         <div class="main-menu-container">
             <ul class="menu-nav" id="dropdownClick">
@@ -30,7 +30,7 @@
                 <li class="menu-item"><a class="nav-link" href="../../PracticeQuestions">Practice Questions</a></li>
                 <li class="menu-item"><a class="nav-link" href="../../ExamInfo">Exam Guide</a></li>
                 <li class="menu-item"><a class="nav-link" href="../../Contributors">Contributors</a></li>
-                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776</a></li>
+                <li class="dropdownIcon"><a onclick="toggleDropdown()">&#9776;</a></li>
             </ul>
         </div>
     </div>
@@ -72,7 +72,7 @@
 
                 <h2>Importance Factor Scales Forces With Structure Type</h2>
 
-                <img src = "buildingRiskCategorization.png" alt="building_Risk_Categorization">
+                <img src = "/Lectures/Lecture4/buildingRiskCategorization.PNG" alt="building_Risk_Categorization">
 
                 <p>Structures that pose a greater threat to human life upon collapse have their seismic design forces artificially increased by the seismic importance factor. This helps to create a system by which important structures have a lower probability of collapse (not to mention the more stringent certifications through OSHPD for hospitals!). So, how do we measure and define importance? The answer starts with defining the intended role of a structure, then categorizing that role as it relates to the resilience of human life.</p>
 
@@ -145,7 +145,7 @@
                 <p> Note that the CBC also provides guidance on how to handle buildings that contain multiple occupancy types. </p>
 
 
-                <img src = "multipleOccupancies.png" alt="multiple_Occupancies">
+                <img src = "/Lectures/Lecture4/multipleOccupancies.png" alt="multiple_Occupancies">
 
                 <p> The takeaway for a building with multiple risk categories is that you should design the entire building for the more severe risk category. The only time you can utilize different risk categories for the same building is if the portions with different risk categories are structurally separated. It is plausible to ask a question concerning this on the Seismic Exam.</p>
 
@@ -202,7 +202,7 @@
                 <p> What is the risk category and seismic importance factor for a chicken coop? </p>
                 <p> Answer: We determine the risk category based on occupancy. Therefore, based on ASCE 7 Section 1.5.1, this structure will fall under Risk Category I. Refer to ASCE 7 Section 1.5.2 to determine the seismic importance factor. Do not panic! We are simply showing where you can obtain Ip for now. In later lectures, we will show you how I<sub>e</sub> is used to increase design forces. </p>
 
-                <img src = "figureC11.5-1.png" alt="figure_C11.5-1">
+                <img src = "/Lectures/Lecture4/figureC11.5-1.png" alt="figure_C11.5-1">
 
                 <h3>Seismic Design Category</h3>
                 <p>Seismic Design categories (SDC) help identify the seismic risk of a building by nature of their geographic location and occupancy, regardless of their design and construction. SEI/AISC 7 identifies buildings within six different Seismic Design Categories labeled as A, B, C, D, E, and F in the fashion of increasing seismic risk.</p>
@@ -224,12 +224,12 @@
                 <p><u>Step 01</u>: Determine the site classification and risk category of the structure: </p>
                 <p>The site soil classification is done in accordance with ASCE 7-16, Table 20.3-1 (as shown below) and Section 20.3 based on the upper 100 ft (30 m) of the site profile. Site Class D is the default classification if the soil properties are not known in sufficient detail to determine the site class.</p>
 
-                <img src = "asce7Table20.3-1.png" alt="asce7_Table20.3-1">
+                <img src = "/Lectures/Lecture4/asce7Table20.3-1.png" alt="asce7_Table20.3-1">
                 <p>ASCE 7-16 Table 20.3-1 </p>
                 <p>The risk category for a building is determined according to ASCE 7-16, Table 1.5-1 (as shown below) based on the risk to human life, health, and welfare associated with their damage or failure by nature of their occupancy or use. The highest applicable risk category or categories is finally assigned to the structure.</p>
 
 
-                <img src = "asce7Table1.5-1.png" alt="asce7_Table1.5-1">
+                <img src = "/Lectures/Lecture4/asce7Table1.5-1.png" alt="asce7_Table1.5-1">
                 <p>ASCE 7-16 Table 1.5-1</p>
 
 
@@ -238,7 +238,7 @@
 
 
 
-                <img src = "siteCoefficientsASCE7Tables.png" alt="siteCoefficientsASCE7Tables">
+                <img src = "/Lectures/Lecture4/siteCoefficientsASCE7Tables.png" alt="siteCoefficientsASCE7Tables">
                 <p>ASCE 7-16 Tables 11.4-1 &amp; 11.4-2</p>
 
                 <p>Note that where Site Class D is selected as the default site class per ASCE 7-16, Section 11.4.3, the value of F<sub>a</sub> shall not be less than 1.2.</p>
@@ -247,11 +247,11 @@
                 <p>The Risk - Targeted Maximum Considered Earthquake (MCE<sub>R</sub>) Ground Motion Response Acceleration Parameters for short periods (S<sub>MS</sub>) and at 1-second (S<sub>M1</sub>), can be determined from ASCE 7-16, Eqs. (11.4-1) and (11.4-2), as shown below:</p>
 
 
-                <img src = "mcerSpectralResponseAccelerationEqns.png" alt="mcer_Spectral_Response_Acceleration_Eqns">
+                <img src = "/Lectures/Lecture4/mcerSpectralResponseAccelerationEqns.png" alt="mcer_Spectral_Response_Acceleration_Eqns">
 
                 <p>From S<sub>MS</sub> and S<sub>M1</sub>, the Design Spectral Acceleration Parameters at short periods, S<sub>DS</sub>, and 1-s periods, S<sub>D1</sub>, can be determined from ASCE 7-16, Eqs. (11.4-3) and (11.4-4) as given below:</p>
 
-                <img src = "designSpectralResponseAccelerationEqns.png" alt="design_Spectral_Response_Acceleration_Eqns">
+                <img src = "/Lectures/Lecture4/designSpectralResponseAccelerationEqns.png" alt="design_Spectral_Response_Acceleration_Eqns">
 
                 <p><u>Step 04</u>: Finally, determine the Seismic Design Category (SDC):</p>
 
@@ -264,7 +264,7 @@
                 <p>For structures that do not fit into these categories, they are assigned based on their Risk Category and design spectral response acceleration parameters, S<sub>DS</sub> and S<sub>D1</sub>, in accordance with ASCE 7-16, Table 11.6-1 and Table 11.6-2 (as shown below). The most important thing to remember is that the Seismic Design Category (SDC) assigned to the structure is the more severe SDC assigned from both the tables!</p>
 
 
-                <img src = "sdcResponseAccelerationParameters.png" alt="sdc_Response_Acceleration_Eqns">
+                <img src = "/Lectures/Lecture4/sdcResponseAccelerationParameters.png" alt="sdc_Response_Acceleration_Eqns">
                 <p>ASCE 7-16 Tables 11.6-1 &amp; 11.6-2</p>
 
                 <p>For structures with S<sub>1</sub> &lt; 0.75, the Seismic Design Category can be determined from Table 11.6-1 if the following four conditions are met:</p>
@@ -343,9 +343,9 @@
         <div class="footer-row">
             <div class = "mobileStack footerLogo">
                 <h1 class="row-heading">California<br>Seismic</h1>
-                <a href="mailto:californiaseismic@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M0,24.08v9.89l86,68.2625l86,-67.4025v-10.75zM0,42.6775v105.2425h172v-104.3825l-83.85,65.79c-0.61812,0.48375 -1.3975,0.7525 -2.15,0.7525c-0.7525,0 -1.51844,-0.25531 -2.15,-0.7525z"></path></g></g></svg></a>
+                <a href="mailto:californiaseismic@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight=400 font-size="none" text-anchor="middle" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M0,24.08v9.89l86,68.2625l86,-67.4025v-10.75zM0,42.6775v105.2425h172v-104.3825l-83.85,65.79c-0.61812,0.48375 -1.3975,0.7525 -2.15,0.7525c-0.7525,0 -1.51844,-0.25531 -2.15,-0.7525z"></path></g></g></svg></a>
                 <a href="https://www.linkedin.com/company/californiaseismic/">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M156.23893,0h-140.47786c-8.5944,0 -15.76107,7.16667 -15.76107,15.76107v140.47786c0,8.5944 7.16667,15.76107 15.76107,15.76107h140.47786c8.5944,0 15.76107,-7.16667 15.76107,-15.76107v-140.47786c0,-8.5944 -7.16667,-15.76107 -15.76107,-15.76107zM50.16667,143.33333h-28.66667v-78.83333h28.66667zM35.83333,55.17774c-8.5944,0 -14.33333,-5.73893 -14.33333,-12.9056c0,-7.86654 5.73893,-13.60547 14.33333,-13.60547c8.5944,0 14.33333,5.73893 14.33333,12.9056c0,7.86654 -5.73893,13.60547 -14.33333,13.60547zM150.5,143.33333h-28.66667v-43c0,-11.47786 -7.89453,-14.33333 -10.02213,-14.33333c-2.1556,0 -11.47787,1.42774 -11.47787,14.33333c0,1.42774 0,43 0,43h-28.66667v-78.83333h28.66667v11.47787c4.3112,-6.4668 11.47787,-11.47787 25.08333,-11.47787c13.60547,0 25.08333,10.75 25.08333,35.83333z"></path></g></g></svg></a>
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight=400 font-size="none" text-anchor="middle" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M156.23893,0h-140.47786c-8.5944,0 -15.76107,7.16667 -15.76107,15.76107v140.47786c0,8.5944 7.16667,15.76107 15.76107,15.76107h140.47786c8.5944,0 15.76107,-7.16667 15.76107,-15.76107v-140.47786c0,-8.5944 -7.16667,-15.76107 -15.76107,-15.76107zM50.16667,143.33333h-28.66667v-78.83333h28.66667zM35.83333,55.17774c-8.5944,0 -14.33333,-5.73893 -14.33333,-12.9056c0,-7.86654 5.73893,-13.60547 14.33333,-13.60547c8.5944,0 14.33333,5.73893 14.33333,12.9056c0,7.86654 -5.73893,13.60547 -14.33333,13.60547zM150.5,143.33333h-28.66667v-43c0,-11.47786 -7.89453,-14.33333 -10.02213,-14.33333c-2.1556,0 -11.47787,1.42774 -11.47787,14.33333c0,1.42774 0,43 0,43h-28.66667v-78.83333h28.66667v11.47787c4.3112,-6.4668 11.47787,-11.47787 25.08333,-11.47787c13.60547,0 25.08333,10.75 25.08333,35.83333z"></path></g></g></svg></a>
             </div>
             <div class = "mobileStack">
                 <h1 class="row-heading">Learn</h1>
