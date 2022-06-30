@@ -349,6 +349,19 @@
                 <div class="questionSolution" id="s19"> <p>Per ASCE 7, the large occupancy of a movie theatre will qualify the structure as Risk Category III. When unsure of Risk Categories, check CBC Table 1604.5 for more verbose descriptions of the same categores. Per ASCE 7 Section 11.6, a risk Category III structure with S1 > 0.75 shall be automatically assigned to Seismic Design Category E.</p> </div>
             </div>
         </div> 
+
+           <div class="questionBoxWrapper">
+            <div class="questionBox">
+                <h1>#20</h1>
+                <p>What does a larger R value, the seismic response modification factor, mean for the ductility of a structure and its seismic base shear?</p>
+                <ul class="questionList">
+                    <li ><a id = "q20A" onclick = "questionCheck('TRUE', 'q20A')" href="javascript:void(0)"; > A: Greater ductility and greater reduction to seismic base shear</a></li>
+                    <li ><a id = "q20B" onclick = "questionCheck('FALSE', 'q20B')" href="javascript:void(0)"; > B: Greater ductility and smaller reduction to seismic base shear</a></li>
+                    <li ><a id = "q20C" onclick = "questionCheck('FALSE', 'q20C')" href="javascript:void(0)"; > C: Smaller ductility and smaller reduction to seismic base shear</a></li>
+                    <li ><a id = "q20D" onclick = "questionCheck('FALSE', 'q20D')" href="javascript:void(0)"; > D: Smaller ductility and greater reduction to seismic base shear</a></li>
+                </ul>
+                <button class="questionSolutionButton" onclick="showSolution('s20')">Solution:</button>
+                <div class="questionSolution" id="s20"> <p>As there is greater ductility, it will also lead to a greater R value since the R value is determined from the ductility. It will also have a greater reduction to the seismic base shear if we look at ASCE 7-16 equation 12.8-1 V=CsW. Notice how the seismic base shear is linear to the Cs value. Although there are multiple ways to calculate the Cs value, the R value is always in the denominator and therefore a larger R value means smaller Cs value which leads to a greater reduction to the seismic base shear.</p> </div>
         <div class="questionBoxWrapper">
             <div class="questionBox">
                 <h1>#20</h1>
