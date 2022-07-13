@@ -59,12 +59,601 @@
     </div>
     <div class="lectureWrap">
     <div class="lectureHeader">
-        <h1> Lecture  10B: Rigid Diaphragms (Coming Soon!) </h1>
+        <h1> Lecture  10B: Rigid Diaphragms</h1>
     </div>
     
 <!--End of contents pasted from Google Docs--> 
 <!--End of contents pasted from Google Docs-->        
-        
+      <p><span style="text-decoration: underline;"><strong>Rigid Diaphragm Introduction:</strong></span></p>
+<p>This lecture will cover the code provisions and analysis procedures for rigid diaphragms. Similar to flexible diaphragms, the analysis procedure for rigid diaphragms is not outlined in ASCE 7. The main question related to rigid diaphragms on the seismic exam is determining the forces to each shear wall, which requires a bit of calculation effort.</p>
+<p>Before starting, let&rsquo;s recap some definitions:</p>
+<p>Diaphragm = A structural element that can transmit in plane shear forces to the LFRS of a structure.&nbsp;</p>
+<p>LFRS = Lateral Force Resisting System, this is the chosen system that resists lateral earthquake forces. The LFRS transfers forces from the diaphragm to the level below. The typical LFRS used in diaphragm analysis for the seismic exam will be shearwalls.</p>
+<p>Vertical Resisting Element = A single lateral resisting element of the LFRS, so a single continuous shearwall or a single braced frame or a single moment frame.</p>
+<img src="concrete_slab_diagram.png">
+<p>Let&rsquo;s put our terminology to the test. In the above floor plan, the LFRS is comprised of shearwalls in the E-W direction and braced frames in the N-S direction. The diaphragm is a concrete slab spanning over the steel beams. There are multiple vertical resisting elements, including multiple shearwalls and multiple braced frames.</p>
+<p><span style="text-decoration: underline;"><strong>Rigid vs Flexible</strong></span></p>
+<p>What&rsquo;s the difference between a rigid diaphragm and a flexible diaphragm? We learned in the previous section that you can check the rigidity of a diaphragm using ASCE 7 based off relative deflections of the diaphragm vs lateral resisting elements. But what is the fundamental difference?</p>
+<p>Put simply, a flexible diaphragm is one that can be analyzed as being infinitely more flexible than the lateral resisting system. A rigid diaphragm on the other hand can be analyzed as being infinitely more stiff than the lateral resisting system. When you classify either the diaphragm or the LFRS as being &lt;q&gt;infinitely more stiff&lt;/q&gt;than the other, you are effectively creating boundary conditions in the analytical model. These boundary conditions make the mathematics significantly easier than if you were to try to realistically account for the relative stiffness of each. This simplified mathematics can be solved by hand (very convenient for the seismic exam).</p>
+<p>We previously analyzed flexible diaphragms where the stiffness of the LFRS was infinitely higher than the diaphragm, meaning we could treat the diaphragm as a beam and the LFRS as pin supports. Pin supports are fixed and will not move at all.</p>
+<p>For a rigid diaphragm system, the diaphragm is &lt;q&gt;fixed&lt;/q&gt; and the LFRS will have some level of deflection. We can&rsquo;t solve this type of system as a simply supported beam system. Because the connection between the diaphragm and LFRS is more &lt;q&gt;fixed&lt;/q&gt;, the deciding factor for how forces are proportioned to each lateral element will depend on the relative stiffness and location of each vertical resisting element.</p>
+<p>Relative Stiffness: The ratio of forces distributed between the lateral elements depend in part on how stiff each element is to the others. Therefore the most stiff elements will receive more force. Less stiff elements receive less force</p>
+<p>Location: The other component of how forces are proportioned to lateral elements is the distance between any lateral element and the applied force. Lateral elements closer to the applied force will receive more force, elements further away will receive less.</p>
+<p><span style="text-decoration: underline;"><strong>Semi Rigid</strong></span></p>
+<p>What happens if the diaphragm doesn&rsquo;t meet the requirements of flexible or rigid? A diaphragm that should not be analyzed as being infinitely stiff or infinitely flexible is categorized as &lt;q&gt;Semi Rigid&lt;/q&gt;. As the name implies, this diaphragm is not completely flexibly nor completely rigid. The force flow through a semi rigid diaphragm is therefore more complex because the mathematical simplifications used previously do not apply. This type of analysis procedure is best suited for a computer software where the exact stiffness of both the diaphragm and lateral system is modeled. Semi Rigid diaphragm analysis is NOT covered in the seismic exam.</p>
+<p><span style="text-decoration: underline;"><strong>ASCE 7 Rigid Diaphragm Requirements:</strong></span></p>
+<p>ASCE 7 section 12.8.4 states &lt;q&gt;The seismic design story shear (Vx) [kip (kN)] shall be distributed to the various vertical elements of the seismic force-resisting system in the story under consideration based on the relative lateral stiffness of the vertical resisting elements and the diaphragm. &lt;/q&gt; Put simply, the relative stiffness of the diaphragm compared to the LFRS determines the analysis procedure. There are three basic diaphragm analysis types: flexible, rigid, and sem rigid.</p>
+<p>A &lt;q&gt; rigid &lt;/q&gt; diaphragm is not flexible. Neither is a &lt;q&gt;semi rigid&lt;/q&gt; diaphragm.</p>
+<p>ASCE 7 section 12.8.4.1 states: &lt;q&gt;Inherent Torsion: For diaphragms that are &lt;b&gt;not flexible&lt;/b&gt;, the distribution of lateral forces at each level shall consider the effect of the inherent torsional moment, Mt, resulting from eccentricity between the locations of the &lt;b&gt;&lt;u&gt;center of mass and the center of rigidity&lt;/u&gt;&lt;/b&gt;. For flexible diaphragms, the distribution of forces to the vertical elements shall account for the position and distribution of the masses supported. &lt;/q&gt;</p>
+<p>When analyzing forces through a flexible diaphragm, we will need to determine the center of mass of the level under consideration, as well as the center of rigidity.&nbsp;</p>
+<p><span style="text-decoration: underline;"><strong>Center of Mass</strong></span></p>
+<p>We know how to determine the seismic force at any level in a building, but exactly where does this force act? For flexible diaphragm analysis, we usually would treat the seismic force as a uniformly distributed load across the length of the level. That works well with the simply supported beam analysis procedure for flexible diaphragms.</p>
+<p>(insert image of a uniformly distributed load at a floor plan view)</p>
+<p>For a rigid diaphragm, we apply the force at a single point all at once. So instead of a uniform load (plf), we would have a point load (lb). But where is this single point? Recall that the source of our seismic force is simply the mass of the building, so the location of the applied force is just at the center of the floor level mass. This is seen in plan view:</p>
+<p>(insert image of a CM with a point load along the CM, floor plan view)</p>
+<p>Determining the center of mass (CM) for a level is fairly straight forward:</p>
+<p>(Lecture team please show the formulas and state the definitions of the variables. Please provide a short example where you are given a rectangular floor plan with three wall lines in the N-S direction, and 2 wall lines in the E-W direction. Please clearly label the origin)</p>
+<p><span style="text-decoration: underline;"><strong>Center of Rigidity</strong></span></p>
+<p>Similar to the center of mass, the center of rigidity is determined by tabulating the different sources of rigidity and their distance. It could also be considered as the center point of the diaphragm support.&nbsp;</p>
+<p>The rigidity comes from the LFRS that is directly below the level under consideration. At any level, the floor or diaphragm is being supported vertically by some sort of framing or walls directly below, these vertical elements below are what will be taking on the lateral loads distributed throughout the diaphragm. So to determine the center of rigidity we will always be looking at the rigidity of the vertical elements below the diaphragm under consideration.</p>
+<p>(Lecture team please show the formulas and state the definitions of the variables. Please provide a short example where you are given the rigidity values and the locations/distances. Use the same floor plan as the Center Mass example above)</p>
+<p><span style="text-decoration: underline;"><strong>Relative Rigidity of Shearwalls</strong></span></p>
+<p>The procedure for determining the center of rigidity has one additional step: Finding the relative rigidity of each vertical element.&nbsp;</p>
+<p>On the seismic exam, it is very likely you will be directly given the relative rigidities of each vertical element when asked about a rigid diaphragm problem. However, you may need to determine these values yourself. The process is simple but can be time consuming. Also, if you have to determine these values by hand it is more likely the vertical elements will be cantilevered shear walls instead of moment frames or braced frames.</p>
+<p>Rigidity can be expressed via formulas that look very similar to deflection equations.&nbsp;</p>
+<p>(lecture team please fill the below formula out and explain what each part of the equation represents)</p>
+<p>Cantilever wall Rigidity =</p>
+<p>Fixed wall rigidity =</p>
+<p>Each shearwall would get a single rigidity value using one of the above equations, and then you could use the center of rigidity formula.</p>
+<p>Use the cantilever wall formula for a shearwall that is not continuous above the level under consideration. In simpler terms, if you&rsquo;re analyzing the diaphragm forces at the roof level, the vertical elements below should be analyzed as a cantilever wall. Also, if you aren&rsquo;t explicitly told in the problem statement if you have a cantilevered wall condition or fixed wall condition, just assume it is cantilevered.</p>
+<p>The fixed wall formula should be used if the problem statement explicitly says the vertical elements are fixed at both ends, or if you can identify that you&rsquo;re analyzing a floor level that has continuous shearwalls that extend above the current level.&nbsp;</p>
+<img src="cantilevered_wall_example.png">
+<img src="fixed_wall.png">
+<p>(do a single simple example for the rigidity of a single cantilever shearwall)</p>
+<p><span style="text-decoration: underline;"><strong>Inherent Torsional Moment</strong></span></p>
+<p>With the center of mass and center of rigidity identified, let&rsquo;s look at an example floor plan and introduce the inherent torsional moment.</p>
+<img src="diagram4.png">
+<p>The above plan view is for a cantilevered structure that does not have a LFRS on the left side of the structure. Our CR would be offset to the right near the LFRS, while the CM may be closer to the direct center if the mass is evenly distributed. Clearly there is quite some distance between the applied load (from the mass) and the LFRS in the N-S direction.</p>
+<p>The distance between the CM and CR is the &lt;i&gt;eccentricity&lt;/i&gt; of applied load to the center of resistance. Recalling the definition of a moment, M = Force x Distance.</p>
+<img src="diagram5.png">
+<img src="diagram6.png">
+<p>This is the &lt;q&gt;Inherent Torsional Moment&lt;/q&gt;. When the CM and CR are not aligned, a moment force will occur that needs to be included in the diaphragm analysis. This moment force will be resisted by all of the vertical elements depending on their distance and relative rigidity.</p>
+<p>(Lecture team, please insert a picture with the CM and CR and &lsquo;e&rsquo; labeled. Use floor plan from previous examples)</p>
+<p>The inherent torsional moment &lt;i&gt;M&lt;sub&gt;t&lt;/sub&gt;&lt;/i&gt;is simply a product of the seismic force and the eccentricity between center of rigidity (center of resistance) and center of mass (center of applied force).</p>
+<p>M&lt;sub&gt;t&lt;/sub&gt; = F x e</p>
+<p><span style="text-decoration: underline;"><strong>Accidental Torsional Moment</strong></span></p>
+<p>Per ASCE 7 section 12.8.4.2&lt;q&gt; Accidental Torsion: Where diaphragms are not flexible, the design shall include the inherent torsional moment (Mt) resulting from the location of the structure masses plus the accidental torsional moments (Mta) caused by assumed displacement of the center of mass each way from its actual location by a distance equal to 5% of the dimension of the structure perpendicular to the direction of the applied forces.&lt;/q&gt;</p>
+<img src="diagram7.png">
+<p>Mass is the source of our seismic force, so in our structural model the total force will act in line with the CM. Since the exact location of the CM dictates the torsional moment, it is important to accurately predict the location. To account for the variability of the &lt;q&gt;true&lt;/q&gt; CM with the CM calculated from analysis, ASCE 7 provision 12.8.4.2 requires the engineer to assume that the CM may be somewhere to the left or to the right of the calculated location.&nbsp;</p>
+<p>This provision will require that you shift your CM by 5% of the length of the building (where length is taken as the dimension of the building perpendicular to the applied force, not necessarily the longer or shorter side).</p>
+<img src="diagram8.png">
+<img src="diagram9.png">
+<p>The above sketches show how you would move the CM (and resultant EQ Force) to the right and to the left in plan view. This will impact the design of the LFRS because certain elements will get their most critical design force from the mass shifted to the right, and some shifted to the left.</p>
+<p><span style="text-decoration: underline;"><strong>Force Distribution to Vertical Elements</strong></span></p>
+<p>To actually solve for the force distribution to vertical elements, we will have needed to determine the following quantities:</p>
+<p>(placeholder, fill this out)</p>
+<p>The formula for determine the force at a vertical element is:</p>
+<p>(insert the formula)</p>
+<p>(explain the two components of the formula in max two sentences)</p>
+<p>(continuing on the same example provided for the CM and CR, provide an example showing the forces at each shearwall.)</p>
+<img src="diagram10.png">
+<p><span style="text-decoration: underline;"><strong>Rigid Diaphragm - Example #1</strong></span></p>
+<p style="text-align: justify;">Given:&nbsp;</p>
+<ul>
+<li>Single-story building with masonry shear walls&nbsp;</li>
+<li>Concrete roof diaphragm</li>
+<ul>
+<li>Roof dead load weight DL = 90 psf&nbsp;</li>
+</ul>
+<li>Masonry shear wall dead load weight DL = 105 psf&nbsp;</li>
+<li>Window wall dead load weight DL = 15 psf&nbsp;</li>
+<li>Roof height = 12 ft</li>
+<li>Wall height = 12 ft&nbsp;</li>
+<li>Seismic base shear V</li>
+<ul>
+<li>N-S: V = 77.9 k&nbsp;</li>
+<li>E-W: V = 75.2 k&nbsp;</li>
+</ul>
+</ul>
+<p style="text-align: justify;">Find:&nbsp;</p>
+<ol>
+<li><strong>Center of Mass (C.M.), (X&lt;sub&gt;CM&lt;/sub&gt;, Y&lt;sub&gt;CM&lt;/sub&gt;):</strong></li>
+</ol>
+<p style="text-align: justify;">Before we start the calculations, it is important to decide the origin for the given diaphragm because all the calculations are done with respect to the origin decided. For this problem, we have taken the origin as the bottomost - left corner so that all the calculations can be done with respect to the positive x- and y- directions.&nbsp;</p>
+<p style="text-align: justify;">To calculate the Center of Mass, C.M. of the structure with respect to the origin, the following formulae are used:</p>
+<p style="text-align: justify;">X&lt;sub&gt;CM&lt;/sub&gt; = sum(Wx)/sum(W)</p>
+<p style="text-align: justify;">Y&lt;sub&gt;CM&lt;/sub&gt; = sum(Wy)/sum(W)</p>
+<p style="text-align: justify;">where ;</p>
+<p style="text-align: justify;">X&lt;sub&gt;CM&lt;/sub&gt; = distance of C.M. from the origin in x- direction</p>
+<p style="text-align: justify;">Y&lt;sub&gt;CM&lt;/sub&gt; = distance of C.M. from the origin in y- direction</p>
+<p style="text-align: justify;">To proceed with the problem, follow the given steps.</p>
+<p style="text-align: justify;">&lt;u&gt;Step 01: Distribute the structure into different sections&lt;/u&gt;&nbsp;</p>
+<p style="text-align: justify;">The structure given in this problem is non-symmetrical, so it is hard to calculate the area of the roof. Hence, the structure is distributed into different sections to make the calculations easier. Let us distribute the structure into different sections as shown in the figure below.</p>
+<img src="diagram11.png" style="text-align: justify">
+<p style="text-align: justify;">&lt;u&gt;Step 02: Find the Areas of each section&lt;/u&gt;</p>
+<p style="text-align: justify;">We can find the areas of each section as shown below.</p>
+<p style="text-align: justify;">A1 = 0.5 x 10 ft x 10 ft = 50 ft&lt;sup&gt;2&lt;/sup&gt;</p>
+<p style="text-align: justify;">A2 = 10 ft x (40 + 10) ft = 500 ft&lt;sup&gt;2&lt;/sup&gt;</p>
+<p style="text-align: justify;">A3 = 20 ft x (40 + 10) ft = 1000 ft&lt;sup&gt;2&lt;/sup&gt;</p>
+<p style="text-align: justify;">A4 = 40 ft x (20 + 10) ft = 1200 ft&lt;sup&gt;2&lt;/sup&gt;</p>
+<p style="text-align: justify;">&lt;u&gt;Step 03: Find the total weight of the structure resisted by the diaphragm:&lt;/u&gt;</p>
+<p style="text-align: justify;">For a single story building, the diaphragm resists the roof weights, and the tributary wall weights for the shear walls and window walls. To proceed with the problem solution, first, let's find the roof weights. The dead load of the roof is given as 90 psf.&nbsp;</p>
+<p style="text-align: justify;">So, Roof Weight = Roof Dead Load x Roof Area.&nbsp;</p>
+<p style="text-align: justify;">Using this formula, we can calculate the roof weights for each section of the roof as shown below:</p>
+<p style="text-align: justify;">W1 = 90 psf x 50 ft&lt;sup&gt;2&lt;/sup&gt; = 4500 lbs = 4.5 kips</p>
+<p style="text-align: justify;">W2 = 90 psf x 500 ft&lt;sup&gt;2&lt;/sup&gt; = 45 kips</p>
+<p style="text-align: justify;">W3 = 90 psf x 1000 ft&lt;sup&gt;2&lt;/sup&gt; = 90 kips</p>
+<p style="text-align: justify;">W4 = 90 psf x 1200 ft&lt;sup&gt;2&lt;/sup&gt; = 108 kips&nbsp;&nbsp;</p>
+<p style="text-align: justify;">The next step is to find the wall weights. The given problem has both shear walls and window walls. First let us consider the shear walls as defined by the figure shown below. The dead load of the shear wall is given to be as 105 psf and the wall height is 12 ft.&nbsp;</p>
+<img src="diagram12.png" style="text-align: justify;">
+<p style="text-align: justify;">It must be noted that only the tributary height of the walls is used to find the wall weights, where the tributary wall height is 0.5 x total wall height. For the given problem, the tributary wall height = 0.5 x12 ft = 6 ft</p>
+<p style="text-align: justify;"><span style="color: #3c4043;">&amp;#8756;</span> Shear Wall Weight = Shear Wall Dead load x Tributary Wall Height x Length of Shear wall considered.&nbsp;</p>
+<p style="text-align: justify;">All the weights for shear walls can be calculated as shown below:</p>
+<p style="text-align: justify;">W&lt;sub&gt;A&lt;/sub&gt; = 105 psf x 6 ft x 40 ft = 25.2 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;B&lt;/sub&gt; = 105 psf x 6 ft x 20 ft = 12.6 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;C&lt;/sub&gt; = 105 psf x 6 ft x 30 ft = 18.9 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;D&lt;/sub&gt; = 105 psf x 6 ft x 20 ft = 12.6 kips</p>
+<p style="text-align: justify;">W&lt;sub&gt;E&lt;/sub&gt; = 105 psf x 6 ft x 20 ft = 12.6 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;F&lt;/sub&gt; = 105 psf x 6 ft x 40 ft = 25.2 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;G&lt;/sub&gt; = 105 psf x 6 ft x 10 ft = 6.3 kips</p>
+<p style="text-align: justify;">In addition to the weights of shear walls, we must also consider the weight of window walls. For our example, all non-shear walls are considered as window walls with a dead load of 15 psf. The figure below defines the window walls in the structure.</p>
+<img src="diagram13.png" style="text-align: justify;">
+<p style="text-align: justify;">The weights of these window walls can be calculated similar to the calculation of the shear wall weights.&nbsp;</p>
+<p style="text-align: justify;"><span style="color: #3c4043;">&amp;#8756; </span>Window Wall Weight = Window Wall Dead load x Tributary Wall Height x Length of Window Wall considered.&nbsp;</p>
+<p style="text-align: justify;">All the weights for window walls can be calculated as shown below:</p>
+<p style="text-align: justify;">Length of wall H = sqrt (10^2 +10^2) = 14.14 ft</p>
+<p style="text-align: justify;">W&lt;sub&gt;H&lt;/sub&gt; = 15 psf x 6 ft x 14.14 ft = 1.27 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;I&lt;/sub&gt; = 15 psf x 6 ft x 10 ft = 0.9 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;J&lt;/sub&gt; = 15 psf x 6 ft x 20 ft = 1.8 kips&nbsp;</p>
+<p style="text-align: justify;">W&lt;sub&gt;K&lt;/sub&gt; = 15 psf x 6 ft x 20 ft = 1.8 kips</p>
+<p style="text-align: justify;">W&lt;sub&gt;L&lt;/sub&gt; = 15 psf x 6 ft x 10 ft = 0.9 kips&nbsp;</p>
+<p style="text-align: justify;">&lt;U&gt; Step 04: The final step is to find the Center of mass:&lt;/u&gt;</p>
+<p style="text-align: justify;">To proceed with the calculation, it is easier to form a table using the calculated weights and by calculating the distance of each element from the origin in the x- and y- direction.&nbsp;</p>
+<p style="text-align: justify;">The first column shows the exact calculation. The rest follows the same concept. It is recommended that you solve on your own and compare answers.</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td>Element</td>
+<td>W (kips)</td>
+<td>X (ft)</td>
+<td>Y (ft)</td>
+<td>W x X (kip-ft)</td>
+<td>W x Y (kip-ft)</td>
+</tr>
+<tr>
+<td>W1</td>
+<td>4.5</td>
+<td>(⅔)x10 = 6.67</td>
+<td>(⅓)x10 + 40 = 43.33</td>
+<td>4.5 x 6.67&nbsp;= 30</td>
+<td>4.5 x 43.33&nbsp;= 195&nbsp;</td>
+</tr>
+<tr>
+<td>W2</td>
+<td>45</td>
+<td>35</td>
+<td>45</td>
+<td>1575</td>
+<td>2025</td>
+</tr>
+<tr>
+<td>W3</td>
+<td>90</td>
+<td>25</td>
+<td>30</td>
+<td>2250</td>
+<td>2700</td>
+</tr>
+<tr>
+<td>W4</td>
+<td>108</td>
+<td>65</td>
+<td>20</td>
+<td>7020</td>
+<td>2160</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;A&lt;/sub&gt;</td>
+<td>25.2</td>
+<td>30</td>
+<td>50</td>
+<td>756</td>
+<td>1260</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;B&lt;/sub&gt;</td>
+<td>12.6</td>
+<td>20</td>
+<td>20</td>
+<td>252</td>
+<td>252</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;C&lt;/sub&gt;</td>
+<td>18.9</td>
+<td>65</td>
+<td>0</td>
+<td>1228.5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;D&lt;/sub&gt;</td>
+<td>12.6</td>
+<td>0</td>
+<td>30</td>
+<td>0</td>
+<td>378</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;E&lt;/sub&gt;</td>
+<td>12.6</td>
+<td>50</td>
+<td>10</td>
+<td>630</td>
+<td>126</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;F&lt;/sub&gt;</td>
+<td>25.2</td>
+<td>80</td>
+<td>20</td>
+<td>2016</td>
+<td>504</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;G&lt;/sub&gt;</td>
+<td>6.3</td>
+<td>60</td>
+<td>45</td>
+<td>378</td>
+<td>283.5</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;H&lt;/sub&gt;</td>
+<td>1.27</td>
+<td>5</td>
+<td>45</td>
+<td>6.4</td>
+<td>57.2</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;I&lt;/sub&gt;</td>
+<td>0.9</td>
+<td>55</td>
+<td>50</td>
+<td>49.5</td>
+<td>45</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;J&lt;/sub&gt;</td>
+<td>1.8</td>
+<td>70</td>
+<td>40</td>
+<td>126</td>
+<td>72</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;K&lt;/sub&gt;</td>
+<td>1.8</td>
+<td>30</td>
+<td>20</td>
+<td>54</td>
+<td>36</td>
+</tr>
+<tr>
+<td>W&lt;sub&gt;L&lt;/sub&gt;</td>
+<td>0.9</td>
+<td>5</td>
+<td>20</td>
+<td>4.5</td>
+<td>18</td>
+</tr>
+<tr>
+<td><strong>Sum</strong></td>
+<td><strong>367.6</strong></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><strong>16375.9</strong></td>
+<td><strong>10111.7</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="text-align: justify;">X&lt;sub&gt;CM&lt;/sub&gt; = sum(Wx)/sum(W) = 16375.9/367.6 = 44.6 ft</p>
+<p style="text-align: justify;">Y&lt;sub&gt;CM&lt;/sub&gt; = sum(Wy)/sum(W) = 10111.7 / 367.6 = 27.5 ft&nbsp;</p>
+<p style="text-align: justify;">So the &lt;b&gt;Center of Mass, C.M. = (X&lt;sub&gt;CM&lt;/sub&gt;,Y&lt;sub&gt;CM&lt;/sub&gt;) = (44.6, 27.5) ft&lt;/b&gt; from the &lt;i&gt;origin&lt;/i&gt;.&nbsp;</p>
+<img src="diagram14.png" style="text-align: justify;">
+<p style="text-align: justify;">&nbsp;&nbsp;</p>
+<ol>
+<li><strong>Center of Rigidity (C.R.)&nbsp;</strong></li>
+</ol>
+<p style="text-align: justify;">Rigid diaphragms distribute the forces based on the relative rigidities of the shear walls.</p>
+<p style="text-align: justify;">The Center of Rigidity, C.R. = (X&lt;sub&gt;R&lt;/sub&gt;,Y&lt;sub&gt;R&lt;/sub&gt;) can be found using the formulae:</p>
+<p style="text-align: justify;">X&lt;sub&gt;R&lt;/sub&gt; = sum(Ry x X)/sum(Ry)&nbsp;</p>
+<p style="text-align: justify;">Y&lt;sub&gt;R&lt;/sub&gt; = sum(Rx x Y)/sum(Rx)</p>
+<p style="text-align: justify;">Where,&nbsp;</p>
+<p style="text-align: justify;">R&lt;sub&gt;x&lt;/sub&gt; = Relative Rigidity of shear walls along the x-direction, and</p>
+<p style="text-align: justify;">R&lt;sub&gt;y&lt;/sub&gt; = Relative Rigidity of shear walls along the y-direction</p>
+<p style="text-align: justify;">X = distance of Shear wall from origin in x-direction</p>
+<p style="text-align: justify;">Y = distance of Shear wall from origin in y-direction</p>
+<p style="text-align: justify;">It must be noted that the distance of Center of Rigidity from the origin in the x-direction, (X&lt;sub&gt;R&lt;/sub&gt;), will be based on the shear wall rigidities running along the y-direction. Similarly, the distance of Center of Rigidity from the origin in the y-direction, (Y&lt;sub&gt;R&lt;/sub&gt;), will be based on the shear wall rigidities running along the x-direction. This might sound confusing! So, let us solve the problem for further clarification.&nbsp;</p>
+<p style="text-align: justify;">The first step to find the Center of Rigidity of the structure is that we must find the relative rigidities of the shear walls. The relative rigidities of concrete and masonry shear walls or piers can be found using the formula given in the table below, depending on whether the shear walls are fixed or cantilever. These formulae have been derived in the book &lt;i&gt;Reinforced Masonry Engineering Handbook: Clay and Concrete Masonry, Sixth Edition&lt;/i&gt; starting on page 152/647.&nbsp;</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td>Type of Shear Wall&nbsp;</td>
+<td>Relative Rigidity&nbsp;</td>
+</tr>
+<tr>
+<td>Fixed Shear Walls / Piers</td>
+<td>R&lt;sub&gt;f&lt;/sub&gt; = 1 / (0.1(h/d)^3 + 0.3(h/d))</td>
+</tr>
+<tr>
+<td>Cantilever Shear Walls / Piers&nbsp;</td>
+<td>R&lt;sub&gt;c&lt;/sub&gt; = 1 / (0.4(h/d)^3 + 0.3(h/d))</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="text-align: justify;">A wall that is securely fixed to the foundation at the bottom and also fixed at the top is considered a fixed wall, and will act similar to a beam fixed at both ends.&nbsp;</p>
+<p style="text-align: justify;">As we are considering a single story building, the walls are fixed securely to the foundation but are free to translate and rotate from the top as the diaphragm deflects. So, the walls deflect similar to a cantilever beam which deflects and rotates at the end as the diaphragm deflects. Taking this into consideration, the shear walls are assumed as cantilever wall segments and the rigidity of these shear walls can be found using the formula 1 / (0.4(h/d)^3 + 0.3(h/d)).</p>
+<p style="text-align: justify;">Note: For the seismic exam, the relative rigidities of shear walls are usually given. But if not, you now know how to calculate them.&nbsp;</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td>Shear Wall</td>
+<td>Height,h (ft)&nbsp;</td>
+<td>Length,d (ft)</td>
+<td>Relative Rigidity</td>
+</tr>
+<tr>
+<td>Wall A</td>
+<td>12</td>
+<td>40</td>
+<td>9.92</td>
+</tr>
+<tr>
+<td>Wall B</td>
+<td>12</td>
+<td>20</td>
+<td>3.75</td>
+</tr>
+<tr>
+<td>Wall C</td>
+<td>12</td>
+<td>30</td>
+<td>6.87</td>
+</tr>
+<tr>
+<td>Wall D</td>
+<td>12</td>
+<td>20</td>
+<td>3.75</td>
+</tr>
+<tr>
+<td>Wall E</td>
+<td>12</td>
+<td>20</td>
+<td>3.75</td>
+</tr>
+<tr>
+<td>Wall F</td>
+<td>12</td>
+<td>40</td>
+<td>9.92</td>
+</tr>
+<tr>
+<td>Wall G</td>
+<td>12</td>
+<td>10</td>
+<td>0.95</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="text-align: justify;">Now that we have calculated the relative rigidities of the shear walls, the next and final step is to substitute them into the formulae. Please pay careful attention to this step as it is very important to get the directions correct for the shear walls.&nbsp;</p>
+<p style="text-align: justify;">To find the distance of the Center of Rigidity from the origin in the x-direction, consider the shear walls along the y-direction, namely, D, E, F, and G. So, the formulae can be written as:</p>
+<p style="text-align: justify;">X&lt;sub&gt;R&lt;/sub&gt; = sum(Ry x X)/sum(Ry)&nbsp;</p>
+<p style="text-align: justify;">&nbsp; = (RdXd + ReXe + RfXf + RgXg) / (Rd + Re + Rf + Rg)</p>
+<p style="text-align: justify;">&nbsp; = (3.75x0 + 3.75x50 + 9.92x80 + 0.95x60) / (3.75 + 3.75 + 9.92 + 0.95)</p>
+<p style="text-align: justify;">&nbsp; = 56.5 ft&nbsp;</p>
+<p style="text-align: justify;">Similarly, to find the distance of the Center of Rigidity&nbsp; from the origin in the y-direction, consider the shear walls along the x-direction, namely, A, B, and C. So, the formulae can be written as:</p>
+<p style="text-align: justify;">Y&lt;sub&gt;R&lt;/sub&gt; = sum(Rx x Y)/sum(Rx)&nbsp;</p>
+<p style="text-align: justify;">&nbsp; = (RaXa + RbXb + RcXc) / (Ra + Rb + Rc)</p>
+<p style="text-align: justify;">&nbsp; = (9.92x50 + 3.75x20 + 6.87x0) / (9.92 + 3.75 + 6.87)</p>
+<p style="text-align: justify;">&nbsp; = 27.8 ft&nbsp;</p>
+<p style="text-align: justify;">Finally the &lt;b&gt;Center of Rigidity, C.R. = (X&lt;sub&gt;R&lt;/sub&gt;,Y&lt;sub&gt;R&lt;/sub&gt;) = (56.5, 27.8) ft&lt;/b&gt; from the &lt;i&gt;origin&lt;/i&gt;.&nbsp;</p>
+<img src="diagram15.png" style="text-align: justify;">
+<p>Find:</p>
+<ol>
+<li><strong>E-W Direction: Torsional Irregularity Check - Total design force to Shearwalls A &amp; B &amp; C</strong></li>
+</ol>
+<p>To determine the total design force to the shearwalls in the E-W direction, the shearwalls that are of interest are perpendicular to the direction of the force. Based on the floor plan, the shearwalls that correspond to the E-W direction are shearwalls A, B, and C (highlighted below in the figure).&nbsp;</p>
+<img src="diagram16.png">
+<p>In a rigid diaphragm, the rigidities or stiffnesses of the vertical elements will affect the force distribution. Since the center of mass and center of rigidity are not coinciding, there will be eccentricity in the diaphragm. The eccentricities will be calculated along the axis in the direction of the force. In this case, the eccentricities will be calculated along the y-axis since the direction of the force is in the E-W direction. As a result of the eccentricity present, an inherent moment (torsion) will be developed. Begin by finding the difference between the center of rigidity and center of mass in the vertical direction. This will be the calculated eccentricity.&nbsp;</p>
+<img src="diagram17.png">
+<p>Calculated eccentricity e&lt;sub&gt;y&lt;/sub&gt; = Y&lt;sub&gt;R&lt;/sub&gt; - Y&lt;sub&gt;CM&lt;/sub&gt;&nbsp;</p>
+<p>Calculated eccentricity e&lt;sub&gt;y&lt;/sub&gt; = 27.8 ft - 27.5 ft = 0.3 ft&nbsp;</p>
+<p>The inherent torsional moment is calculated using the conventional equation for determining the moment. The force component is the seismic base shear of 75.2 k. The moment arm component is the calculated eccentricity.&nbsp;</p>
+<p>Inherent torsional moment M&lt;sub&gt;t&lt;/sub&gt; = V * Calculated eccentricity e&lt;sub&gt;x&lt;/sub&gt; Inherent torsional moment M&lt;sub&gt;t&lt;/sub&gt; = 75.2 k * 0.3 ft = 22.6 k-ft</p>
+<p>ASCE 7-16 prescribes an accidental eccentricity in the form of a 5% displacement that is applied on either side of the center of mass to account for the worst case scenario of force distribution to the shearwalls in a diaphragm. This means that even if the center of mass and center of rigidity do coincide with each other, the 5% displacement must still be applied to the diaphragm, which means that there will always be eccentricity present in rigid diaphragms.&nbsp;</p>
+<p>To determine the accidental eccentricity, multiply the length of the diaphragm perpendicular to the direction of the force by 0.05. There will be two accidental eccentricities that are calculated to account for the 5% displacement on &lt;i&gt;either&lt;/i&gt; side of the center of mass. Similar to the calculated eccentricity, there will be an accidental torsional moment that develops due to the accidental eccentricity.&nbsp;</p>
+<img src="diagram18.png">
+<p>Accidental eccentricity e&lt;sub&gt;y&lt;/sub&gt; = +/- 0.05*L&lt;sub&gt;T&lt;/sub&gt;</p>
+<p>Accidental eccentricity e&lt;sub&gt;y&lt;/sub&gt; = +/- 0.05 * 50 ft = +/- 2.5 ft</p>
+<p>Accidental torsional moment M&lt;sub&gt;ta&lt;/sub&gt; = V * Accidental eccentricity&nbsp;</p>
+<p>Accidental torsional moment M&lt;sub&gt;ta&lt;/sub&gt; = 75.2 k *(+/- 2.5 ft) = +/- 188 k-ft</p>
+<p>Next, determine the total eccentricity, also known as the design eccentricity. Add the calculated eccentricity and the accidental eccentricity to obtain the design eccentricity. As previously stated, there will be two design eccentricities due to the two accidental eccentricities. After determining the design eccentricity, calculate the resulting inherent torsional moment.&nbsp;</p>
+<p>Design eccentricity e&lt;sub&gt;yi&lt;/sub&gt; = Calculated eccentricity e&lt;sub&gt;y&lt;/sub&gt; + Accidental eccentricity e&lt;sub&gt;y&lt;/sub&gt;</p>
+<p>Design eccentricity e&lt;sub&gt;y1&lt;/sub&gt; = 2.5 ft + 0.3 ft = 2.8 ft&nbsp;</p>
+<p>Design eccentricity e&lt;sub&gt;y2&lt;/sub&gt; = 2.5 ft - 0.3 ft = 2.2 ft&nbsp;</p>
+<p>Inherent Torsional Moment M&lt;sub&gt;ti&lt;/sub&gt; = V * Design eccentricity e&lt;sub&gt;yi&lt;/sub&gt;&nbsp;</p>
+<p>Inherent Torsional Moment M&lt;sub&gt;t1&lt;/sub&gt; = 75.2 k * 2.8 ft = 210.6 k-ft</p>
+<p>Inherent Torsional Moment M&lt;sub&gt;t2&lt;/sub&gt; = 75.2 k * 2.2 ft = 165.4 k-ft</p>
+<p>Note that there are two torsional moments due to the two accidental eccentricities.&nbsp;</p>
+<p>As stated previously, force transfer in rigid diaphragms occurs based on the rigidities of the shearwalls. Using the rigidities calculated in Part B, find the sum of the rigidities of the shear walls in the E-W Direction. This will include shear walls A, B, and C.&nbsp;</p>
+<p>R&lt;sub&gt;a&lt;/sub&gt; = 9.92</p>
+<p>R&lt;sub&gt;b&lt;/sub&gt; = 3.72</p>
+<p>R&lt;sub&gt;c&lt;/sub&gt; = 6.87</p>
+<p>$$&Sigma;R_y = R_a+R_b+R_c$$</p>
+<p>$$&Sigma;R_y = 9.92 + 3.72 + 6.87 = 20.51$$</p>
+<p>The total design force that will be distributed to each shearwall consists of the direct shear and the torsional shear. The direct shear comes from the vertical force distribution of the structure, while the torsional shear stems from the eccentric diaphragm loading (eccentricity in the diaphragm). The two shears for each shearwall will be calculated separately first, and then summed up together to obtain the total design force.&nbsp;</p>
+<p>Design Forces: F&lt;sub&gt;A&lt;/sub&gt;, F&lt;sub&gt;B&lt;/sub&gt;, and F&lt;sub&gt;C&lt;/sub&gt;</p>
+<p>F&lt;sub&gt;i&lt;/sub&gt; = Direct Shear + Torsional Shear&nbsp;</p>
+<p>The direct shear will be calculated in the direction of the force because only vertical elements parallel to that direction will resist the direct shear. For this problem, the direction of the force is in the E-W direction, which means that the direct shear will be calculated in the same direction.&nbsp;</p>
+<p>Since force distribution in a rigid diaphragm is dependent on the rigidities of the shearwalls, the direct shear that is distributed to a particular shearwall will be a product of the seismic base shear (in the direction of the force) and the ratio between the rigidity of the shearwall and the total rigidity (of the shearwalls in the direction of the force).&nbsp;</p>
+<p>$$Direct Shear V_y = V * R/(&Sigma;R_y)$$</p>
+<p>V&lt;sub&gt;a&lt;/sub&gt; = 75.2 k * 9.92/20.51 = 36.37 k</p>
+<p>V&lt;sub&gt;b&lt;/sub&gt; = 75.2 k * 3.72/20.51 = 13.64 k</p>
+<p>V&lt;sub&gt;c&lt;/sub&gt; = 75.2 k * 6.87/20.51 = 25.19 k</p>
+<p>The torsional shear develops as a result of the eccentricity in a rigid diaphragm. Unlike the direct&nbsp;</p>
+<p>shear, the torsional shear is resisted by all of the vertical elements. This means that the torsional&nbsp;</p>
+<p>shear will be distributed to all of the vertical elements in the diaphragm. In other words, both the&nbsp;</p>
+<p>vertical elements that are parallel and perpendicular to the direction of the force will resist the&nbsp;</p>
+<p>torsional shear. In this problem, the torsional shear will be distributed to each of the shearwalls in the E-W direction, which means there will be a torsional shear calculated for each shearwall.&nbsp;</p>
+<p>$$Torsional Shear V_T = (M_T*R*d)/(&Sigma;R_y*d^2)$$</p>
+<img src="diagram19.png">
+<p>$$ V_Ta = (M_T1*R_a*d_a)/(&Sigma;R_y*d_a^2)$$</p>
+<p>V&lt;sub&gt;Ta&lt;/sub&gt; = (210.6k-ft*9.92*23ft)/(20.51*9.92^2) = 23.81 k</p>
+<p>$$ V_Tb = (M_T2*R_b*d_b)/(&Sigma;R_y*d_b^2)$$</p>
+<p>V&lt;sub&gt;Tb&lt;/sub&gt; = (165.4k-ft*3.72*7ft)/(20.51*3.72^2) = 15.17 k</p>
+<p>$$ V_Tc = (M_T1*R_c*d_c)/(&Sigma;R_y*d_c^2)$$</p>
+<p>V&lt;sub&gt;Tc&lt;/sub&gt; = (165.4k-ft*6.87*27ft)/(20.51*6.87^2) = 31.69 k</p>
+<p>Add the direct shear and torsional shear for each shearwall in the E-W to determine the&nbsp;</p>
+<p>corresponding total design force.&nbsp;</p>
+<p>Design Forces: F&lt;sub&gt;A&lt;/sub&gt;, F&lt;sub&gt;B&lt;/sub&gt;, and F&lt;sub&gt;C&lt;/sub&gt;</p>
+<p>F&lt;sub&gt;i&lt;/sub&gt; = Direct Shear + Torsional Shear&nbsp;</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td>Shearwall</td>
+<td>Direct Shear&nbsp;</td>
+<td>Torsional Shear&nbsp;</td>
+<td>Total Design Force&nbsp;</td>
+</tr>
+<tr>
+<td>A</td>
+<td>36.37 k</td>
+<td>23.18 k</td>
+<td>59.55 k&nbsp;</td>
+</tr>
+<tr>
+<td>BC</td>
+<td>13.64 k25.19 k</td>
+<td>15.17 k31.69 k&nbsp;</td>
+<td>28.81 k&nbsp;56.88 k&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><strong>N-S Direction: Torsional Irregularity Check - Total design force to shear walls D &amp; E &amp; F &amp; G&nbsp;</strong></li>
+</ol>
+<p>To determine the total design force to the shearwalls in the N-S direction, the shearwalls that are of interest are perpendicular to the direction of the force. Based on the floor plan, the shearwalls that correspond to the N-S direction are shearwalls D, E, F, and G (highlighted below in the figure).&nbsp;</p>
+<img src="diagram20.png">
+<p>In a rigid diaphragm, the rigidities or stiffnesses of the vertical elements will affect the force distribution. Since the center of mass and center of rigidity are not coinciding, there will be eccentricity in the diaphragm. The eccentricities will be calculated along the axis in the direction of the force. In this case, the eccentricities will be calculated along the y-axis since the direction of the force is in the N-S direction. As a result of the eccentricity present, an inherent moment (torsion) will be developed. Begin by finding the difference between the center of rigidity and center of mass in the vertical direction. This will be the calculated eccentricity.&nbsp;</p>
+<img src="diagram21.png">
+<p>Calculated eccentricity e&lt;sub&gt;x&lt;/sub&gt; = X&lt;sub&gt;R&lt;/sub&gt; - X&lt;sub&gt;CM&lt;/sub&gt;&nbsp;</p>
+<p>Calculated eccentricity e&lt;sub&gt;x&lt;/sub&gt; = 56.5 ft - 44.6 ft = 11.9 ft</p>
+<p>As stated in Part (c), the inherent torsional moment is calculated using the conventional equation for determining the moment. The force component is the seismic base shear of 77. 9 k. The moment arm component is the calculated eccentricity.&nbsp;</p>
+<p>Inherent torsional moment M&lt;sub&gt;t&lt;/su&gt; = V * Calculated eccentricity e&lt;sub&gt;x&lt;/sub&gt;&nbsp;</p>
+<p>Inherent torsional moment M&lt;sub&gt;t&lt;/su&gt; = 77.9 k * 11.9 ft = 927.0 k-ft</p>
+<p>ASCE 7-16 prescribes an accidental eccentricity in the form of a 5% displacement that is applied on either side of the center of mass to account for the worst case scenario of force distribution to the shearwalls in a diaphragm. This means that even if the center of mass and center of rigidity do coincide with each other, the 5% displacement must still be applied to the diaphragm, which means that there will always be eccentricity present in rigid diaphragms.&nbsp;</p>
+<p>To determine the accidental eccentricity, multiply the length of the diaphragm perpendicular to the direction of the force by 0.05. There will be two accidental eccentricities that are calculated to account for the 5% displacement on &lt;i&gt;either&lt;/i&gt; side of the center of mass. Similar to the calculated eccentricity, there will be an accidental torsional moment that develops due to the accidental eccentricity.&nbsp;</p>
+<img src="diagram22.png">
+<p>Accidental eccentricity e&lt;sub&gt;x&lt;/sub&gt; = +/- 0.05*L&lt;sub&gt;T&lt;/sub&gt;</p>
+<p>Accidental eccentricity e&lt;sub&gt;x&lt;/sub&gt; = +/- 0.05 * 80 ft = +/- 4 ft</p>
+<p>Accidental torsional moment M&lt;sub&gt;ta&lt;/sub&gt; = V * Accidental eccentricity&nbsp;</p>
+<p>Accidental torsional moment M&lt;sub&gt;ta&lt;/sub&gt; = 77.9 k *(+/- 4 ft) = +/- 311.6 k-ft</p>
+<p>Next, determine the total eccentricity, also known as the design eccentricity. Add the calculated eccentricity and the accidental eccentricity to obtain the design eccentricity. As previously stated, there will be two design eccentricities due to the two accidental eccentricities. After determining the design eccentricity, calculate the resulting inherent torsional moment.&nbsp;</p>
+<p>Design eccentricity e&lt;sub&gt;xi&lt;/sub&gt; = Calculated eccentricity e&lt;sub&gt;x&lt;/sub&gt; + Accidental eccentricity e&lt;sub&gt;x&lt;/sub&gt;</p>
+<p>Design eccentricity e&lt;sub&gt;x1&lt;/sub&gt; = 11.9 ft + 4 ft = 15.9 ft</p>
+<p>Design eccentricity e&lt;sub&gt;x2&lt;/sub&gt; = 11.9 ft - 4 ft = 7.9 ft&nbsp;</p>
+<p>Inherent Torsional Moment M&lt;sub&gt;ti&lt;/sub&gt; = V * Design eccentricity e&lt;sub&gt;xi&lt;/sub&gt;&nbsp;</p>
+<p>Inherent Torsional Moment M&lt;sub&gt;t1&lt;/sub&gt; = 77.9 k * 15.9 ft = 1238.6 k-ft</p>
+<p>Inherent Torsional Moment M&lt;sub&gt;t2&lt;/sub&gt; = 77.9 k * 7.9 ft = 615.4 k-ft</p>
+<p>Note that there are two torsional moments due to the two accidental eccentricities.&nbsp;</p>
+<p>As stated previously, force transfer in rigid diaphragms occurs based on the rigidities of the shearwalls. Using the rigidities calculated in Part B, find the sum of the rigidities of the shear walls in the N-S Direction. This will include shear walls D, E, F, and G.&nbsp;</p>
+<p>R&lt;sub&gt;d&lt;/sub&gt; = 3.75</p>
+<p>R&lt;sub&gt;e&lt;/sub&gt; = 3.75</p>
+<p>R&lt;sub&gt;f&lt;/sub&gt; = 9.92</p>
+<p>R&lt;sub&gt;g&lt;/sub&gt; = 0.95</p>
+<p>$$&Sigma;R_x = R_d+R_e+R_f+R_g$$</p>
+<p>$$&Sigma;R_x = 3.75 + 3.75 + 9.92 + 0.95 = 18.37$$</p>
+<p>The total design force that will be distributed to each shearwall consists of the direct shear and the torsional shear. The direct shear comes from the vertical force distribution of the structure, while the torsional shear stems from the eccentric diaphragm loading (eccentricity in the diaphragm). The two shears for each shearwall will be calculated separately first, and then summed up together to obtain the total design force.&nbsp;</p>
+<p>Design Forces: F&lt;sub&gt;D&lt;/sub&gt;, F&lt;sub&gt;E&lt;/sub&gt;, F&lt;sub&gt;F&lt;/sub&gt;,&nbsp;</p>
+<p>and F&lt;sub&gt;G&lt;/sub&gt;</p>
+<p>F&lt;sub&gt;i&lt;/sub&gt; = Direct Shear + Torsional Shear</p>
+<p>The direct shear will be calculated in the direction of the force because only vertical elements parallel to that direction will resist the direct shear. For this problem, the direction of the force is in the N-S direction, which means that the direct shear will be calculated in the same direction.&nbsp;</p>
+<p>Since force distribution in a rigid diaphragm is dependent on the rigidities of the shearwalls, the direct shear that is distributed to a particular shearwall will be a product of the seismic base shear (in the direction of the force) and the ratio between the rigidity of the shearwall and the total rigidity (of the shearwalls in the direction of the force).&nbsp;</p>
+<p>$$Direct Shear V_x = V * R/(&Sigma;R_x)$$</p>
+<p>V&lt;sub&gt;d&lt;/sub&gt; = 77.9 k * (3.75/18.37) = 15.90 k</p>
+<p>V&lt;sub&gt;e&lt;/sub&gt; = 77.9 k * (3.75/18.37) = 15.90 k</p>
+<p>V&lt;sub&gt;f&lt;/sub&gt; = 77.9 k * (9.92/18.37) = 42.07 k</p>
+<p>V&lt;sub&gt;g&lt;/sub&gt; = 77.9 * (0.95/18.37) = 4.03 k</p>
+<p>The torsional shear develops as a result of the eccentricity in a rigid diaphragm. Unlike the direct&nbsp;</p>
+<p>shear, the torsional shear is resisted by all of the vertical elements. This means that the torsional&nbsp;</p>
+<p>shear will be distributed to all of the vertical elements in the diaphragm. In other words, both the&nbsp;</p>
+<p>vertical elements that are parallel and perpendicular to the direction of the force will resist the&nbsp;</p>
+<p>torsional shear. In this problem, the torsional shear will be distributed to each of the shearwalls in the N-S direction, which means there will be a torsional shear calculated for each shearwall.&nbsp;</p>
+<p>$$Torsional Shear V_T = (M_T*R*d)/(&Sigma;R_x*d^2)$$</p>
+<img src="diagram23.png">
+<p>$$ V_Td = (M_T2*R_d*d_d)/(&Sigma;R_x*d_d^2)$$</p>
+<p>V&lt;sub&gt;Td&lt;/sub&gt; = (615.4k-ft*3.75*56.5ft)/(18.37*3.75^2) = 504.74 k</p>
+<p>$$ V_Te = (M_T1*R_e*d_e)/(&Sigma;R_x*d_e^2)$$</p>
+<p>V&lt;sub&gt;Te&lt;/sub&gt; = (1238.6k-ft*3.75*6.5ft)/(18.37*3.75^2) = 116.87 k</p>
+<p>$$ V_Tf = (M_T1*R_f*d_f)/(&Sigma;R_x*d_f^2)$$</p>
+<p>V&lt;sub&gt;Tf&lt;/sub&gt; = (1238.6k-ft*9.92*23.5ft)/(18.37*9.92^2) = 159.73 k</p>
+<p>$$ V_Tg = (M_T1*R_g*d_g)/(&Sigma;R_x*d_g^2)$$</p>
+<p>V&lt;sub&gt;Te&lt;/sub&gt; = (1238.6k-ft*0.95*0.5ft)/(18.37*0.95^2) = 35.49 k</p>
+<p>Add the direct shear and torsional shear for each shearwall in the N-S to determine the&nbsp;</p>
+<p>corresponding total design force.&nbsp;</p>
+<p>Design Forces: F&lt;sub&gt;D&lt;/sub&gt;, F&lt;sub&gt;E&lt;/sub&gt;, F&lt;sub&gt;F&lt;/sub&gt;,&nbsp;</p>
+<p>and F&lt;sub&gt;G&lt;/sub&gt;</p>
+<p>F&lt;sub&gt;i&lt;/sub&gt; = Direct Shear + Torsional Shear</p>
+<div>
+<table>
+<tbody>
+<tr>
+<td>Shearwall</td>
+<td>Direct Shear&nbsp;</td>
+<td>Torsional Shear&nbsp;</td>
+<td>Total Design Force&nbsp;</td>
+</tr>
+<tr>
+<td>D</td>
+<td>15.90 k</td>
+<td>504.74 k</td>
+<td>520.64 k&nbsp;</td>
+</tr>
+<tr>
+<td>E</td>
+<td>15.90 k</td>
+<td>116.87 k</td>
+<td>132.77 k</td>
+</tr>
+<tr>
+<td>F</td>
+<td>42.07 k&nbsp;</td>
+<td>159.73 k</td>
+<td>201.80 k</td>
+</tr>
+<tr>
+<td>G</td>
+<td>4.03 k</td>
+<td>35.49 k&nbsp;</td>
+<td>39.52 k&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>Rigid Diaphragm - Example #2</strong></span></p>
+<p>(Lecture team provide an example)</p>
+
         
 <div class="lectureSkip">
     <a href="../Lecture10A/"><i class="arrow leftArrow"></i><p> Previous Lecture</p></a>
