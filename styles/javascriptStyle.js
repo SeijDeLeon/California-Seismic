@@ -5,7 +5,7 @@
 window.addEventListener('scroll',function() {
     var currentScroll = window.pageYOffset;
     var heroArrow = document.getElementsByClassName("bottom-row");
-    const height = window.innerHeight|| document.documentElement.clientHeight|| 
+    const height = window.innerHeight|| document.documentElement.clientHeight||
 document.body.clientHeight;
     if (currentScroll > 0.8*height){
         if(heroArrow[0].className == "bottom-row"){
@@ -13,6 +13,18 @@ document.body.clientHeight;
            }
     }
 });
+
+function downloadJSON() {
+    fetch("./problems.json")
+        .then(res => res.json())
+        .then(fillData)
+        .catch(console.error);
+}
+
+function fillData(response) {
+    let data = JSON.parse(response[1].answers);
+    console.log(data[0]);
+}
 
 
 function toggleDropdown() {
@@ -32,7 +44,7 @@ function toggleDropdown() {
         y.className = "top-nav-container";
     }
 }
-        
+
 function dropdownMenuLecture() {
     var x = document.getElementById("dropdownClickLecture");
     if (x.className == "topnavLecture") {
@@ -50,7 +62,7 @@ function dropdownMenuQuestion() {
         x.className = "sidenavQuestion";
     }
 }
-        
+
 function questionCheck(answer, docId) {
     var x = document.getElementById(docId);
     if (answer == "TRUE") {
@@ -68,7 +80,7 @@ function showSolution(docId) {
         x.className = "questionSolution";
     }
 }
-        
+
 function hideSolution(docId) {
     var x = document.getElementById(docId);
     if (x.style.display != "none") {
@@ -96,7 +108,7 @@ function closeNav() {
 /* End sidebar code from w3schools.com */
 
 //$(document).ready(function() {
-//        var $sidebar   = $("#lectureSidebar"), 
+//        var $sidebar   = $("#lectureSidebar"),
 //            $window    = $(window),
 //            offset     = $sidebar.offset(),
 //            topPadding = 73;
@@ -116,7 +128,7 @@ function closeNav() {
 
 $(document).ready(function () {
     var top = $('#lectureSidebar').offset().top - parseFloat($('#lectureSidebar').css('marginTop').replace(/auto/, 0)) - 20;
-    
+
     var footer = $('.footingMain');
     var sidebar = $('.lectureSidebar');
     var body = document.body;
@@ -126,7 +138,7 @@ $(document).ready(function () {
 //    var docHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );
     var sidebarHeight = $('#lectureSidebar').height();
     var footerHeight = $('#footingMain').height();
-    
+
     $(window).scroll(function (event) {
         // Lecture Sidebar Sticky
         var y = $(this).scrollTop();
@@ -134,7 +146,7 @@ $(document).ready(function () {
             $('#lectureSidebarWrapper').css('top', 20 + 'px');
         } else {
             $('#lectureSidebarWrapper').css('top', 93 - y + 'px');
-        }     
+        }
         if (y+sidebarHeight+40 >= docHeight-footerHeight) {
             var endHeight = docHeight - y - footerHeight - sidebarHeight;
             $('#lectureSidebar').css('top', endHeight + 'px');
