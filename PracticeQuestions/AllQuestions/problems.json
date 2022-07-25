@@ -2,6 +2,7 @@
     {
         "problem_name": 1,
         "desc": "What importance factor should be used for the design of a hospital?",
+        "problem_pic": "{\"src\": \"example.png\", \"alt\": \"example picture\"}",
         "answer": 1.5,
         "answers": "[0.5, 1, 1.25, 1.5]",
         "answer_desc": "The Seismic Importance Factor or 'Ie' is determined in chapter 1 of ASCE 7. First the risk category of the proposed structure is assessed, and then the risk category is used to determine the Seismic Importance Factor. Start by evaluating the structure (hospital) in table 1.5-1, a hospital is typically considered an essential facility. This qualifies the structure as Risk Category IV. Now enter table 1.5-2, for a Risk Category IV structure the Seismic Importance Factor is listed as 1.5",
@@ -10,6 +11,7 @@
     {
         "problem_name": 2,
         "desc": "What redundancy factor should be used for the design of a structure with a single bay of steel moment frame on each side? Assume seismic design category D.",
+        "problem_pic": "{\"src\": \"05_lao_08_q.PNG\", \"alt\": \"Problem 5 Image\"} ",
         "answer": 1.4,
         "answers": "[1, 1.2, 1.3, 1.4]",
         "answer_desc": "Per ASCE 7 12.3.4.2, we evaluate a structure with a single bay of lateral resistance at each perimeter side. A structure should use a ro = 1.3 unless condition (a) or (b) is met. Condition (a) is not met because losing moment resistance at the beam-to-column connection of a single beam would create a %50 loss in story strength for the listed structure. Condition (b) is not met because it would require 2 bays on each perimeter side, in our case there is only 1 on each side. Therefore if neither condition (a) or (b) is met, the redundancy factor shall be taken as 1.3",
@@ -18,6 +20,7 @@
     {
         "problem_name": 3,
         "desc": "What building is most likely to require consideration of accidental moment due to torsion?",
+        "problem_pic": "{\"src\": \"05_lao_08_q.PNG\", \"alt\": \"Problem 5 Image\"} ",
         "answer": "A 3 story office building with concrete floors",
         "answers": "[\"A single story carport with untopped metal deck roof\", \"A 4 story house framed with light framed wood construction\", \"A 3 story office building with concrete floors\", \"A single story warehouse with a timber framed roof with wood roof sheathing.\"]",
         "answer_desc": "Per ASCE 7 12.8.4.2, we evaluate if torsional moment is required to be included in the analysis. Torsional moment is only required for rigid diaphragms. Then checking ASCE 7 12.3.1.1, a flexible diaphragm is typically allowed for untopped steel decking or wood structural panels (sheathing). Per ASCE 7 12.3.1.2, concrete slab or concrete filled metal deck may be rigid. Note that more information would be needed to qualify the diaphragms, but the most likely structure to have a rigid diaphragm is the one with the most rigid diaphragm, therefore the concrete floor."

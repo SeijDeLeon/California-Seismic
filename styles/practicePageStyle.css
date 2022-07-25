@@ -9,8 +9,31 @@ section.practiceQuestionBody h1{
     text-align:center;
 }
 
-div.questionBoxWrapper{
+.questionList {
+    flex-basis: 400px;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.imgContainer {
+    width: 200px;
+    height: 200px;
+}
+
+.problemPic {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.hoverAnswer {
+    cursor: pointer;
+}
+
 div.questionBox{
     background-color:white;
     text-align:center;
@@ -56,9 +79,9 @@ div.questionBox ul li a{
     background-Color:aqua;
     width:100%;
     padding:3px;
-    
+
     box-shadow: 2px 2px 2px -1px rgba(214,210,214,1), -1px -1px 2px -1px rgba(214,210,214,1);
-    
+
 }
 
 .questionSolutionButton{
