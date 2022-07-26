@@ -1,3 +1,9 @@
+//variables for diagonal line
+let numberOfAdditionalStories = 3;
+let xPixelforFirstStory = 37.5;
+let yPixelforFirstStory = 113.75;
+let xPixelsperStory = 37.5;
+let yPixelsperStory = 113.75;
 function setup() {
     createCanvas(1400, 1000);
   }
@@ -9,24 +15,18 @@ function setup() {
     //lines separating each section of rectangle
     line(700, 312.5, 900, 312.5);
     line(700, 425, 900, 425);
-    line(700, 537.5, 900, 537.5);
+    line(700, 537.5, 900, 537.5); //first story barrier
     line(650, 650, 950, 650);
     //diagonal line
-    line(525, 200, 675, 655);
-    //lines and arrows coming from diagonal line
-    line(525, 200, 650, 200);
-    triangle(650, 215, 650, 185, 665, 200);
-    line(562, 312.5, 650, 312.5);
-      triangle(650, 327.5, 650, 297.5, 665, 312.5);
-    line(600, 425, 650, 425);
-    triangle(650, 440, 650, 410, 665, 425);
-    line(636, 537.5, 650, 537.5);
-    triangle(650, 552.5, 650, 522.5, 665, 537.5);
-  //text on top of arrows
-    text("F4", 650, 180);
-    text("F3", 650, 292.5);
-    text("F2", 650, 405);
-    text("F1", 650, 517.5);
+    line(675, 655, 675 - xPixelforFirstStory - numberOfAdditionalStories * xPixelsperStory, 655 - yPixelforFirstStory - numberOfAdditionalStories * yPixelsperStory);
+    console.log(675 - xPixelforFirstStory);
+    //lines, arrows, and text coming from diagonal line
+    for(let i = 0; i <= numberOfAdditionalStories; i++)
+    {
+      line(675 - xPixelforFirstStory - 37 * i, 655 - yPixelforFirstStory - yPixelsperStory * i, 650, 655 - yPixelforFirstStory - yPixelsperStory * i);
+      triangle(650, 655 - yPixelforFirstStory + 11.25 - yPixelsperStory * i, 650, 655 - yPixelforFirstStory - 11.25 - yPixelsperStory * i, 665, 655 - yPixelforFirstStory - yPixelsperStory * i);
+      text("F" + (i + 1), 650, 655 - yPixelforFirstStory - 15 - yPixelsperStory * i);
+    }
   //vertical line on the right
     line(925, 655, 925, 620);
     line(925, 575, 925, 500);
@@ -53,24 +53,5 @@ function setup() {
     text("2nd", 960, 540.5);
     text("3rd", 960, 428);
     text("4th", 960, 315.5);
-    text("5th", 960, 203)
-  
-  
-    
-  
-    
-    
-    
-  
-  
-  
-  
-    
-  
-  
-    
-    
-  
-    
-    
+    text("5th", 960, 203);
   }
