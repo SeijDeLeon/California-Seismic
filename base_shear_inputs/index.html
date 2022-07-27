@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base Shear</title>
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+  <body>
+    <main>
+      <h1>Base Shear</h1>
+      <div class="container">
+        <div class="left-inputs">
+          <input type="text" class="inputs" id="Ie" placeholder="Ie: 1.0, 1.25, or 1.5" value="">  <!--1.0,1.25, 1.5-->
+          <p class="warning" id="ie-warning">H</p>
+          <input type="text" class="inputs" id="r" placeholder="R: 1-8 in increments of 0.5" value="">   <!--1-8 and include .5s-->
+          <p class="warning" id="r-warning">H</p>
+          <input type="text" class="inputs" id="t" placeholder="T: 0.1-2" value="">   <!--0.1-2-->
+          <p class="warning" id="t-warning">H</p>
+          <input type="text" class="inputs" id="sds" placeholder="Sds: 0.5-2" value="">   <!--0.5-2.0-->
+          <p class="warning" id="sds-warning">H</p>
+          <input type="text" class="inputs" id="sd1" placeholder="Sd1:less than Sds, 0.2-1.0" value="">   <!--less than Sds, 0.2 to 1.0-->
+          <p class="warning" id="sd1-warning">H</p>
+          <input type="text" class="inputs" id="s1" placeholder="S1: Sd1*1.5" value="">   <!--Sd1*1.5-->
+          <p class="warning" id="s1-warning">H</p>
+        </div>
+        <div class="right-inputs">
+          <input type="text" class="inputs" id="n" placeholder="N: 1-10" value="">   <!--1-10-->
+          <p class="warning" id="n-warning">H</p>
+          <input type="text" class="inputs" id="mroof" placeholder="Mroof: 1000-10000": 3-30 value="">   <!--3-30-->
+          <p class="warning" id="mroof-warning">H</p>
+          <input type="text" class="inputs" id="m2" placeholder="M2: 1000-10000" value="">   <!--??? 50%-->
+          <p class="warning" id="m2-warning">H</p>
+          <input type="text" class="inputs" id="mtyp" placeholder="Mtyp: 1000-10000" value="">   <!--??? 50%-->
+          <p class="warning" id="mtyp-warning">H</p>
+          <input type="text" class="inputs" id="h1" placeholder="H1: 10-18" value="">   <!--10-18-->
+          <p class="warning" id="h1-warning">H</p>
+          <input type="text" class="inputs" id="h2" placeholder="H2: 10-16" value="">   <!--10-16-->
+          <p class="warning" id="h2-warning">H</p>
+        </div>
+
+      </div>
+
+        <button type="button" id="Submit">Generate</button>
+    </main>
+
+  </body>
+  <script src = "https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+  <script src="sketch.js"></script>
+  <script src="index.js"></script>
+</html>
