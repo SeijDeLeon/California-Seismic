@@ -1,0 +1,67 @@
+.warning {
+  color:red;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.success {
+  border: 1px solid green;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item {
+  align-self: center;
+}
+
+.user-inputs {
+  margin: 0 20px;
+}
+
+.input-items {
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.restriction {
+  font-size: 14px;
+}
+
+.instruction {
+  font-size: 18px;
+}
+
+.field {
+  margin: 12px 0;
+  flex-basis: 300px;
+}
+
+.block {
+  display: block;
+  margin: inherit;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  margin-top: 20px;
+}
+
+form > div {
+  padding: 20px;
+}
+
+input[type=text] {
+  width: 200px;
+  height:20px;
+}
