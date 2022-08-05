@@ -23,21 +23,6 @@ const Y_SEPARATOR = 10;
 const X_SHIFT_FACTOR = 35;
 const ARROW_HEAD_LENGTH = 10;
 
-
-const decimalCount = num => {
-  const numStr = String(num);
-  if (numStr.includes(".")) { // String Contains Decimal
-    return numStr.split(".")[1].length;
-  };
-  // String Does Not Contain Decimal
-  return 0;
-}
-
-const grabDecimals = num => {
-  return parseFloat(String(num).split(".")[1]);
-}
-
-
 window.onload = function () {
   const nInput = document.getElementById("n-value");
   nInput.addEventListener("change", displayInputs);
@@ -67,6 +52,11 @@ window.onload = function () {
   });
 }
 
+/**
+ * Toggles the display of inputs to user whenever they change inputs in dropdown
+ * menu.
+ * @param {object} event - form event object
+ */
 function displayInputs(event) {
   if (event.target.value === "2") { // two story
     let hiddenElem = document.querySelectorAll("#mroof-hidden, #htyp-hidden");
@@ -87,6 +77,10 @@ function displayInputs(event) {
   }
 }
 
+/**
+ * Processes each text input and validates then with predefined conditions
+ * @returns {boolean} state of whether all user inputs are valid
+ */
 function processInputs() {
   let validForm = [];
   const form = document.getElementById('base-shear-form');
@@ -101,6 +95,12 @@ function processInputs() {
   return !validForm.includes(false);
 }
 
+/**
+ * Checks text inputs with test conditions and returns false if invalid, otherwise
+ * returns true.
+ * @param {object} input - DOM element of text input
+ * @returns {boolean} state of text input
+ */
 function validateInputs(input) {
   if (input.value.trim() === "") { // empty string
     return displayMessage(input, EMPTY_MESSAGE, false);
@@ -158,6 +158,16 @@ function validateInputs(input) {
   }
 }
 
+/**
+ * Checks if value has the correct decimal format. Returns true if valid, otherwise
+ * returns false
+ * @param {object} inputTag - DOM object of input field
+ * @param {string} errorMessage - error message to display
+ * @param {number} number - user input value
+ * @param {number} places - total accepted decimal places
+ * @param {number} decimalNum - number to check with user input
+ * @returns {boolean} false if input is invalid, otherwise true
+ */
 function validateDecimals(inputTag, errorMessage, number, places, decimalNum) {
   if (!checkDecimals(number, places, decimalNum)) { // decimal values not valid
     return displayMessage(inputTag, errorMessage, false);
@@ -179,6 +189,14 @@ function checkDecimals(number, places, decimalNum) {
   return true;
 }
 
+/**
+ * Displays message if input is invalid, otherwise hide the error message. Returns
+ * the state of whether input is valid
+ * @param {object} input - DOM object of input field
+ * @param {string} message - error message to display
+ * @param {boolean} type - value to validate successful or invalid input
+ * @returns {boolean} false if input is invalid, otherwise true
+ */
 function displayMessage(input, message, type) {
   const msg = input.parentNode.querySelector("p.warning");
   if (message) { // message exists
@@ -191,6 +209,10 @@ function displayMessage(input, message, type) {
   return type;
 }
 
+/**
+ * Grabs all text inputs in form and returns them to draw diagram.
+ * @returns {object} user text inputs
+ */
 function grabTextInputs() {
   let userInputs = {};
   const form = document.getElementById('base-shear-form');
@@ -226,8 +248,8 @@ function setup() {
 }
 
 /**
- *
- * @param {object} inputs
+ * Draws base shear diagram with the given user inputs
+ * @param {object} inputs - user inputs
  */
 function drawFigure(inputs) {
   console.log(inputs);
@@ -255,7 +277,6 @@ function drawFigure(inputs) {
  * @returns {object} New y-coordinate object for drawing force vectors
  */
 function drawStories(numOfStories, hBase, hTyp, m2, mTyp, mRoof) {
-  console.log(numOfStories, hBase, hTyp, m2, mTyp, mRoof);
   let yCoordinates = {}
   let finalFloorHeight = hBase;
   let roofMass = m2;
@@ -280,9 +301,7 @@ function drawStories(numOfStories, hBase, hTyp, m2, mTyp, mRoof) {
     newPosition = createPoints(startingPosition, hTyp);
     yCoordinates.y2 = newPosition.y_top;
     drawVerticalSeparator(firstFloorPositions, BASE_SEPARATOR);
-    console.log("works");
     for (let i = 1; i < numOfStories - 1; i++) { // middle floor(s)
-      console.log("doesn't work");
       drawSingleStory(startingPosition, newPosition, mTyp, hTyp, BASE_SEPARATOR);
       drawVerticalSeparator(newPosition, BASE_SEPARATOR);
       startingPosition = new Point(startingPosition.x, newPosition.y_top);
@@ -338,6 +357,33 @@ function drawVerticalSeparator(position, separator) {
 }
 
 /**
+ * Draws force vectors pointing to the building.
+ * @param {object} yCoordinates - y-coordinates used for positioning force vectors
+ * @param {number} numOfStories - number of stories of building
+ */
+function drawForceVectors(yCoordinates, numOfStories) {
+  const topY = Object.keys(yCoordinates).pop();
+  const hypotenuse = dist(650, yCoordinates.bottom, 675 - (numOfStories * X_SHIFT_FACTOR), yCoordinates[topY]);
+  const yTotalLength = yCoordinates.bottom - yCoordinates[topY];
+  // inverse cosine is in radians, convert to degrees
+  let angle =  Math.acos(yTotalLength / hypotenuse);
+  angle = radiansToDegrees(angle);
+  line(650, yCoordinates.bottom, 675 - (numOfStories * X_SHIFT_FACTOR), yCoordinates[topY]); // diagonal line
+  for (let i = 1; i <= numOfStories; i++) {
+    let key = "y".concat(i);
+    let forceLabel = "F".concat(i + 1);
+    let height = yCoordinates.bottom - yCoordinates[key];
+    let xLength = getTanFromDegrees(angle) * height;
+    line(650 - xLength, yCoordinates[key], 650, yCoordinates[key]); // horizontal line
+    // draw arrow point
+    line(650, yCoordinates[key], 650 - ARROW_HEAD_LENGTH, yCoordinates[key] - ARROW_HEAD_LENGTH);
+    line(650, yCoordinates[key], 650 - ARROW_HEAD_LENGTH, yCoordinates[key] + ARROW_HEAD_LENGTH);
+    // draw force label
+    text(forceLabel, 650, yCoordinates[key] - 15 - ARROW_HEAD_LENGTH);
+  }
+}
+
+/**
  * Changes the starting position of the diagram based on the numOfStories.
  * Starting xy coordinate: (700, 650) <-- bottom left corner of story building.
  * Function is subject to change to fit canvas element
@@ -381,29 +427,34 @@ function radiansToDegrees(radians) {
   return radians * (180 / Math.PI);
 }
 
+/**
+ * Returns the length of force vector from the angle of triangle
+ * @param {number} degrees - angle
+ * @returns {number} length of force vector
+ */
 function getTanFromDegrees(degrees) {
   return Math.tan(degrees * Math.PI / 180);
 }
 
+/**
+ * Counts the number of decimals places of the given float number
+ * @param {number} num - float number
+ * @returns {number} number of decimal places
+ */
+ const decimalCount = num => {
+  const numStr = String(num);
+  if (numStr.includes(".")) { // String Contains Decimal
+    return numStr.split(".")[1].length;
+  };
+  // String Does Not Contain Decimal
+  return 0;
+}
 
-function drawForceVectors(yCoordinates, numOfStories) {
-  const topY = Object.keys(yCoordinates).pop();
-  const hypotenuse = dist(650, yCoordinates.bottom, 675 - (numOfStories * X_SHIFT_FACTOR), yCoordinates[topY]);
-  const yTotalLength = yCoordinates.bottom - yCoordinates[topY];
-  // inverse cosine is in radians, convert to degrees
-  let angle =  Math.acos(yTotalLength / hypotenuse);
-  angle = radiansToDegrees(angle);
-  line(650, yCoordinates.bottom, 675 - (numOfStories * X_SHIFT_FACTOR), yCoordinates[topY]); // diagonal line
-  for (let i = 1; i <= numOfStories; i++) {
-    let key = "y".concat(i);
-    let forceLabel = "F".concat(i + 1);
-    let height = yCoordinates.bottom - yCoordinates[key];
-    let xLength = getTanFromDegrees(angle) * height;
-    line(650 - xLength, yCoordinates[key], 650, yCoordinates[key]); // horizontal line
-    // draw arrow point
-    line(650, yCoordinates[key], 650 - ARROW_HEAD_LENGTH, yCoordinates[key] - ARROW_HEAD_LENGTH);
-    line(650, yCoordinates[key], 650 - ARROW_HEAD_LENGTH, yCoordinates[key] + ARROW_HEAD_LENGTH);
-    // draw force label
-    text(forceLabel, 650, yCoordinates[key] - 15 - ARROW_HEAD_LENGTH);
-  }
+/**
+ * Grabs decimals from float number
+ * @param {number} num - float number
+ * @returns {array} list of decimal numbers
+ */
+const grabDecimals = num => {
+  return parseFloat(String(num).split(".")[1]);
 }
