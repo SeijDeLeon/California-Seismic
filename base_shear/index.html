@@ -34,13 +34,15 @@
               <p class="hidden warning"></p>
             </div>
             <div class="field">
-              <label for="sds" class="block">S<sub>ds</sub> value:</label>
+              <label for="sds" class="block">S<sub>DS</sub> value:</label>
               <input type="text" class="inputs" id="sds" placeholder="[0.5-2]">
+              <label for="sds-units">g</label>
               <p class="hidden warning" id="sds-warning">H</p>
             </div>
             <div class="field">
-              <label for="sd1" class="block">S<sub>d1</sub> value:</label>
-              <input type="text" class="inputs" id="sd1" placeholder="Less than Sds, [0.2-1.0]">
+              <label for="sd1" class="block">S<sub>D1</sub> value:</label>
+              <input type="text" class="inputs" id="sd1" placeholder="Less than Sᴅs, [0.2-1.0]">
+              <label for="sd1-units">g</label>
               <p class="hidden warning" id="sd1-warning">H</p>
             </div>
           </div>
@@ -48,9 +50,9 @@
             <div class="field" id="no-validation">
               <label for="n-value" class="block">N value (number of stories):</label>
               <select id="n-value">
-                <option value="1" selected>One</option>
+                <option value="1">One</option>
                 <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="3" selected>Three</option>
                 <option value="4">Four</option>
                 <option value="5">Five</option>
                 <option value="6">Six</option>
@@ -60,35 +62,47 @@
                 <option value="10">Ten</option>
               </select>
             </div>
-            <div class="field hidden" id="mroof-hidden">
+            <div class="field" id="mroof-hidden">
               <label for="mroof" class="block">M<sub>roof</sub> value:</label>
               <input type="text" class="inputs" id="mroof" placeholder="[3000-30000]">
+              <label for="mroof-units">lb</label>
               <p class="hidden warning" id="mroof-warning">H</p>
+            </div>
+            <div class="field" id="mtyp-hidden">
+              <label for="mtyp" class="block">M<sub>typ</sub> value:</label>
+              <input type="text" class="inputs" id="mtyp" placeholder="[5000-43000]">
+              <label for="mtyp-units">lb</label>
+              <p class="hidden warning" id="mtyp-warning">H</p>
             </div>
             <div class="field">
               <label for="m2" class="block">M<sub>2</sub> value:</label>
               <input type="text" class="inputs" id="m2" placeholder="[5000-43000]">
+              <label for="m2-units">lb</label>
               <p class="hidden warning" id="m2-warning">H</p>
             </div>
-            <div class="field hidden" id="mtyp-hidden">
-              <label for="mtyp" class="block">M<sub>typ</sub> value:</label>
-              <input type="text" class="inputs" id="mtyp" placeholder="[5000-43000]">
-              <p class="hidden warning" id="mtyp-warning">H</p>
+            <div class="field" id="htyp-hidden">
+              <label for="htyp" class="block"> H<sub>typ</sub> value:</label>
+              <input type="text" class="inputs" id="htyp" placeholder="[10-16]">
+              <label for="htyp-units">&#8242</label>
+              <p class="hidden warning" id="h2-warning">H</p>
             </div>
             <div class="field">
               <label for="hbase" class="block">H<sub>base</sub> value:</label>
               <input type="text" class="inputs" id="hbase" placeholder="[10-18]">
+              <label for="hbase-units">&#8242</label>
               <p class="hidden warning" id="h1-warning">H</p>
-            </div>
-            <div class="field hidden" id="htyp-hidden">
-              <label for="htyp" class="block"> H<sub>typ</sub> value:</label>
-              <input type="text" class="inputs" id="htyp" placeholder="[10-16]">
-              <p class="hidden warning" id="h2-warning">H</p>
             </div>
           </div>
         </div>
-        <button type="submit" id="Submit">Generate</button>
+        <button type="submit" id="submit">Generate</button>
       </form>
+      <section class="hidden" id="variables">
+        <div class="variable">
+          <span>T: </span>
+          <p id="t-value"></p>
+        </div>
+        <button id="reset">Reset</button>
+      </section>
     </div>
 
   </main>
