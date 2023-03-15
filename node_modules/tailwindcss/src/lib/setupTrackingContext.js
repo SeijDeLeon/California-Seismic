@@ -1,22 +1,16 @@
-import fs from 'fs'
-import path from 'path'
+// @ts-check
 
-import fastGlob from 'fast-glob'
+import fs from 'fs'
 import LRU from 'quick-lru'
-import normalizePath from 'normalize-path'
 
 import hash from '../util/hashConfig'
 import getModuleDependencies from '../lib/getModuleDependencies'
-
 import resolveConfig from '../public/resolve-config'
-
 import resolveConfigPath from '../util/resolveConfigPath'
-
-import { env } from './sharedState'
-
 import { getContext, getFileModifiedMap } from './setupContextUtils'
 import parseDependency from '../util/parseDependency'
 import { validateConfig } from '../util/validateConfig.js'
+import { parseCandidateFiles, resolvedChangedContent } from './content.js'
 
 let configPathCache = new LRU({ maxSize: 100 })
 
@@ -27,9 +21,7 @@ function getCandidateFiles(context, tailwindConfig) {
     return candidateFilesCache.get(context)
   }
 
-  let candidateFiles = tailwindConfig.content.files
-    .filter((item) => typeof item === 'string')
-    .map((contentPath) => normalizePath(contentPath))
+  let candidateFiles = parseCandidateFiles(context, tailwindConfig)
 
   return candidateFilesCache.set(context, candidateFiles).get(context)
 }
@@ -80,36 +72,6 @@ function getTailwindConfig(configOrPath) {
   return [newConfig, null, hash(newConfig), []]
 }
 
-function resolvedChangedContent(context, candidateFiles, fileModifiedMap) {
-  let changedContent = context.tailwindConfig.content.files
-    .filter((item) => typeof item.raw === 'string')
-    .map(({ raw, extension = 'html' }) => ({ content: raw, extension }))
-
-  for (let changedFile of resolveChangedFiles(candidateFiles, fileModifiedMap)) {
-    let content = fs.readFileSync(changedFile, 'utf8')
-    let extension = path.extname(changedFile).slice(1)
-    changedContent.push({ content, extension })
-  }
-  return changedContent
-}
-
-function resolveChangedFiles(candidateFiles, fileModifiedMap) {
-  let changedFiles = new Set()
-  env.DEBUG && console.time('Finding changed files')
-  let files = fastGlob.sync(candidateFiles)
-  for (let file of files) {
-    let prevModified = fileModifiedMap.has(file) ? fileModifiedMap.get(file) : -Infinity
-    let modified = fs.statSync(file).mtimeMs
-
-    if (modified > prevModified) {
-      changedFiles.add(file)
-      fileModifiedMap.set(file, modified)
-    }
-  }
-  env.DEBUG && console.timeEnd('Finding changed files')
-  return changedFiles
-}
-
 // DISABLE_TOUCH = TRUE
 
 // Retrieve an existing context from cache if possible (since contexts are unique per
@@ -141,7 +103,7 @@ export default function setupTrackingContext(configOrPath) {
         }
       }
 
-      let [context] = getContext(
+      let [context, , mTimesToCommit] = getContext(
         root,
         result,
         tailwindConfig,
@@ -149,6 +111,8 @@ export default function setupTrackingContext(configOrPath) {
         tailwindConfigHash,
         contextDependencies
       )
+
+      let fileModifiedMap = getFileModifiedMap(context)
 
       let candidateFiles = getCandidateFiles(context, tailwindConfig)
 
@@ -158,27 +122,47 @@ export default function setupTrackingContext(configOrPath) {
       // because it's impossible for a layer in one file to end up in the actual @tailwind rule
       // in another file since independent sources are effectively isolated.
       if (tailwindDirectives.size > 0) {
-        let fileModifiedMap = getFileModifiedMap(context)
-
         // Add template paths as postcss dependencies.
-        for (let fileOrGlob of candidateFiles) {
-          let dependency = parseDependency(fileOrGlob)
-          if (dependency) {
+        for (let contentPath of candidateFiles) {
+          for (let dependency of parseDependency(contentPath)) {
             registerDependency(dependency)
           }
         }
 
-        for (let changedContent of resolvedChangedContent(
+        let [changedContent, contentMTimesToCommit] = resolvedChangedContent(
           context,
           candidateFiles,
           fileModifiedMap
-        )) {
-          context.changedContent.push(changedContent)
+        )
+
+        for (let content of changedContent) {
+          context.changedContent.push(content)
+        }
+
+        // Add the mtimes of the content files to the commit list
+        // We can overwrite the existing values because unconditionally
+        // This is because:
+        // 1. Most of the files here won't be in the map yet
+        // 2. If they are that means it's a context dependency
+        // and we're reading this after the context. This means
+        // that the mtime we just read is strictly >= the context
+        // mtime. Unless the user / os is doing something weird
+        // in which the mtime would be going backwards. If that
+        // happens there's already going to be problems.
+        for (let [path, mtime] of contentMTimesToCommit.entries()) {
+          mTimesToCommit.set(path, mtime)
         }
       }
 
       for (let file of configDependencies) {
         registerDependency({ type: 'dependency', file })
+      }
+
+      // "commit" the new modified time for all context deps
+      // We do this here because we want content tracking to
+      // read the "old" mtime even when it's a context dependency.
+      for (let [path, mtime] of mTimesToCommit.entries()) {
+        fileModifiedMap.set(path, mtime)
       }
 
       return context
