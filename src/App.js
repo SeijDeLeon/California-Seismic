@@ -6,6 +6,7 @@ import Home from './components/Home.jsx';
 import Lectures from './components/Lectures.jsx';
 import Practice from './components/Practice.jsx';
 import ExamGuide from './components/ExamGuide.jsx';
+import Contributors from './components/Contributors.jsx';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path = "/lectures" element = {<Lectures />} />
         <Route path = "/practice" element = {<Practice />} />
         <Route path = "/exam-guide" element = {<ExamGuide />} />
+        <Route path = "/contributors" element = {<Contributors />} />
       </Routes>
       <h1 className='text-3xl font-bolt underline'>Footer</h1>
     </div>

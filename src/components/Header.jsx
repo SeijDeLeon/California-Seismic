@@ -38,10 +38,10 @@ export default function Header() {
       <header className="bg-white">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-1 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+            <NavLink className="-m-1.5 p-1.5" to='/'>
+              <span className="sr-only">California Seismic</span>
               <img className="h-16 w-auto" src={logo} alt="logo" />
-            </a>
+            </NavLink>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -105,24 +105,23 @@ export default function Header() {
               </Transition>
             </Popover>
 
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-              Practice
-            </a>
             <NavLink className="text-sm font-semibold leading-6 text-gray-900" to='/practice'>
               Practice
             </NavLink>
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            <NavLink className="text-sm font-semibold leading-6 text-gray-900" to='/exam-guide'>
               Exam Guide
-            </a>
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            </NavLink>
+            <NavLink className="text-sm font-semibold leading-6 text-gray-900" to='/contributors'>
               Contributors
-            </a>
+            </NavLink>
           </Popover.Group>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
+          {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
             </a>
-          </div>
+          </div> */}
+
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <div className="fixed inset-0 z-10" />
