@@ -8,6 +8,27 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
   XMarkIcon,
+  BuildingLibraryIcon,
+  BuildingOfficeIcon,
+  BuildingOffice2Icon,
+  GlobeAmericasIcon,
+  HomeModernIcon,
+  NewspaperIcon,
+  PuzzlePieceIcon,
+  SignalIcon,
+  UserGroupIcon,
+  CalculatorIcon,
+  CubeTransparentIcon,
+  PaintBrushIcon,
+  ScaleIcon,
+  Square3Stack3DIcon,
+  MapIcon,
+  CubeIcon,
+  ExclamationTriangleIcon,
+  AcademicCapIcon,
+  ChartBarIcon,
+  Squares2X2Icon,
+  HomeIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import logo from '../assets/logo.png'
@@ -15,23 +36,23 @@ import { NavLink } from "react-router-dom"
 
 
 const products = [
-  { name: 'Lecture 01', description: 'Intro to Seismic Exam', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Lecture 02', description: 'Earthquakes', href: '#', icon: FingerPrintIcon },
-  { name: 'Lecture 03', description: 'Code provisions', href: '#', icon: SquaresPlusIcon },
-  { name: 'Lecture 04', description: 'Risk Categories', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 05', description: 'Building systems, vertical and lateral.', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 06', description: 'Ductility and R values', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 07', description: 'Base Shear calculation', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 08', description: 'Force distributions along building height', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 09', description: 'Building drift calculations.', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 10A', description: 'Flexible Diaphragm Analysis', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 10B', description: 'Rigid Diaphgragm Analysis', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 11', description: 'Irregularities and Redundancy', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 12', description: 'Nonstructural component design', href: '#', icon: ArrowPathIcon },
-  { name: 'Lecture 13', description: 'Seismic detailing', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 01', description: 'Intro to Seismic Exam', href: '#', icon: AcademicCapIcon },
+  { name: 'Lecture 02', description: 'Earthquakes', href: '#', icon: GlobeAmericasIcon },
+  { name: 'Lecture 03', description: 'Code provisions', href: '#', icon: ScaleIcon },
+  { name: 'Lecture 04', description: 'Risk Categories', href: '#', icon: UserGroupIcon },
+  { name: 'Lecture 05', description: 'Building systems, vertical and lateral.', href: '#', icon: BuildingOffice2Icon },
+  { name: 'Lecture 06', description: 'Ductility and R values', href: '#', icon: HomeModernIcon },
+  { name: 'Lecture 07', description: 'Base Shear calculation', href: '#', icon: CalculatorIcon },
+  { name: 'Lecture 08', description: 'Force distributions along building height', href: '#', icon: ChartBarIcon },
+  { name: 'Lecture 09', description: 'Building drift calculations.', href: '#', icon: BuildingLibraryIcon },
+  { name: 'Lecture 10A', description: 'Flexible Diaphragm Analysis', href: '#', icon: HomeIcon },
+  { name: 'Lecture 10B', description: 'Rigid Diaphgragm Analysis', href: '#', icon: BuildingOfficeIcon },
+  { name: 'Lecture 11', description: 'Irregularities and Redundancy', href: '#', icon: ExclamationTriangleIcon },
+  { name: 'Lecture 12', description: 'Nonstructural component design', href: '#', icon:CubeIcon },
+  { name: 'Lecture 13', description: 'Seismic detailing', href: '#', icon: PaintBrushIcon },
 ]
 const callsToAction = [
-  { name: 'Show All Lectures', href: '#', icon: PlayCircleIcon },
+  { name: 'Show All Lectures', href: '#', icon: Squares2X2Icon },
 ]
 
 function classNames(...classes) {
@@ -77,7 +98,7 @@ export default function Header() {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-auto rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 max-h-[70vh]">
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-scroll rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 max-h-[70vh]">
                 <div className="grid grid-cols-1 divide-x divide-gray-900/5 bg-gray-50">
                     {callsToAction.map((item) => (
                       <a
