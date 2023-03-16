@@ -15,15 +15,23 @@ import { NavLink } from "react-router-dom"
 
 
 const products = [
-  { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-  { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-  { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 01', description: 'Intro to Seismic Exam', href: '#', icon: CursorArrowRaysIcon },
+  { name: 'Lecture 02', description: 'Earthquakes', href: '#', icon: FingerPrintIcon },
+  { name: 'Lecture 03', description: 'Code provisions', href: '#', icon: SquaresPlusIcon },
+  { name: 'Lecture 04', description: 'Risk Categories', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 05', description: 'Building systems, vertical and lateral.', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 06', description: 'Ductility and R values', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 07', description: 'Base Shear calculation', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 08', description: 'Force distributions along building height', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 09', description: 'Building drift calculations.', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 10A', description: 'Flexible Diaphragm Analysis', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 10B', description: 'Rigid Diaphgragm Analysis', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 11', description: 'Irregularities and Redundancy', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 12', description: 'Nonstructural component design', href: '#', icon: ArrowPathIcon },
+  { name: 'Lecture 13', description: 'Seismic detailing', href: '#', icon: ArrowPathIcon },
 ]
 const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
+  { name: 'Show All Lectures', href: '#', icon: PlayCircleIcon },
 ]
 
 function classNames(...classes) {
@@ -69,12 +77,24 @@ export default function Header() {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-auto rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 max-h-[70vh]">
+                <div className="grid grid-cols-1 divide-x divide-gray-900/5 bg-gray-50">
+                    {callsToAction.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                      >
+                        <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
                   <div className="p-4">
                     {products.map((item) => (
                       <div
                         key={item.name}
-                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                        className="group relative flex items-center gap-x-6 rounded-lg p-1 text-sm leading-6 hover:bg-gray-50"
                       >
                         <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                           <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
@@ -87,18 +107,6 @@ export default function Header() {
                           <p className="mt-1 text-gray-600">{item.description}</p>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                    {callsToAction.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                      >
-                        <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                        {item.name}
-                      </a>
                     ))}
                   </div>
                 </Popover.Panel>
