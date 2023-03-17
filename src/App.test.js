@@ -51,7 +51,7 @@ it('renders exam guide page when clicked from header', async () => {
 it('opens and closes lectures dropdown in header when clicked and off-clicked', async () => {
   const user = userEvent.setup();
   render(<BrowserRouter><App /></BrowserRouter>);
-  expect(screen.queryByText(/Lecture 01/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/Show All Lectures/i)).not.toBeInTheDocument();
 
   await act( async () => {
     //click on the exam resources button in the header
@@ -59,12 +59,12 @@ it('opens and closes lectures dropdown in header when clicked and off-clicked', 
   });
 
   //dropdown for first lecture should be visible
-  expect(screen.getByText(/Lecture 01/i)).toBeInTheDocument();
+  expect(screen.getByText(/Show All Lectures/i)).toBeInTheDocument();
 
   await act( async () => {
     //click off the lecture dropdown
     await user.click(screen.getByTestId('testBlankDiv'));
   });
 
-  expect(screen.queryByText(/Lecture 01/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/Show All Lectures/i)).not.toBeInTheDocument();
 });

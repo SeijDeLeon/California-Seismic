@@ -1,28 +1,17 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
   BuildingLibraryIcon,
   BuildingOfficeIcon,
   BuildingOffice2Icon,
   GlobeAmericasIcon,
   HomeModernIcon,
-  NewspaperIcon,
-  PuzzlePieceIcon,
-  SignalIcon,
   UserGroupIcon,
   CalculatorIcon,
-  CubeTransparentIcon,
   PaintBrushIcon,
   ScaleIcon,
-  Square3Stack3DIcon,
-  MapIcon,
   CubeIcon,
   ExclamationTriangleIcon,
   AcademicCapIcon,
@@ -30,12 +19,29 @@ import {
   Squares2X2Icon,
   HomeIcon
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import logo from '../assets/logo.png'
 import { NavLink } from "react-router-dom"
 
 
 const products = [
+  { name: '01: Intro to Seismic Exam', description: 'An overview of the exam and its requirements', href: '#', icon: AcademicCapIcon },
+  { name: '02: Geology & Earthquakes', description: 'Background information on how earthquakes occur', href: '#', icon: GlobeAmericasIcon },
+  { name: '03: Code Provisions', description: 'How the building code works', href: '#', icon: ScaleIcon },
+  { name: '04: Risk Categories', description: 'Defining seismic risk by building type', href: '#', icon: UserGroupIcon },
+  { name: '05: Building Systems', description: 'Vertical and Lateral system', href: '#', icon: BuildingOffice2Icon },
+  { name: '06: Ductility', description: 'The concept of ductility and R values', href: '#', icon: HomeModernIcon },
+  { name: '07: Base Shear', description: 'How to calculate base shear', href: '#', icon: CalculatorIcon },
+  { name: '08: Force Distribution', description: 'How to determine story forces', href: '#', icon: ChartBarIcon },
+  { name: '09: Drift', description: 'Lateral drift calculations ', href: '#', icon: BuildingLibraryIcon },
+  { name: '10A: Flexible Diaphragms', description: 'Intro to diaphragms and flexible analysis', href: '#', icon: HomeIcon },
+  { name: '10B: Rigid Diaphragms', description: 'Rigid diaphgragm analysis', href: '#', icon: BuildingOfficeIcon },
+  { name: '11: Irregularities', description: 'Irregularities and redundancy as applied to seismic design', href: '#', icon: ExclamationTriangleIcon },
+  { name: '12: Non-structural Components', description: 'Forces and basic design of non-structural components', href: '#', icon:CubeIcon },
+  { name: '13: Seismic Detailing', description: 'How to identify good seismic load paths', href: '#', icon: PaintBrushIcon },
+]
+
+const tempProducts = [
   { name: 'Lecture 01', description: 'Intro to Seismic Exam', href: '#', icon: AcademicCapIcon },
   { name: 'Lecture 02', description: 'Earthquakes', href: '#', icon: GlobeAmericasIcon },
   { name: 'Lecture 03', description: 'Code provisions', href: '#', icon: ScaleIcon },
@@ -118,7 +124,7 @@ export default function Header() {
                         className="group relative flex items-center gap-x-6 rounded-lg p-1 text-sm leading-6 hover:bg-gray-50"
                       >
                         <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                          <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                          <item.icon className="h-6 w-6 text-gray-600 group-hover:text-sky-600" aria-hidden="true" />
                         </div>
                         <div className="flex-auto">
                           <a href={item.href} className="block font-semibold text-gray-900">
@@ -156,14 +162,14 @@ export default function Header() {
           <div className="fixed inset-0 z-10" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+              <NavLink to='/'className="-m-1.5 p-1.5">
+              <span className="sr-only">California Seismic</span>
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
+                  src={logo}
+                  alt="California Seismic Logo"
                 />
-              </a>
+              </NavLink>
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -180,14 +186,14 @@ export default function Header() {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
-                          Product
+                          Lectures
                           <ChevronDownIcon
                             className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
                             aria-hidden="true"
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-2">
-                          {[...products, ...callsToAction].map((item) => (
+                          {[...callsToAction,...products].map((item) => (
                             <Disclosure.Button
                               key={item.name}
                               as="a"
@@ -201,32 +207,9 @@ export default function Header() {
                       </>
                     )}
                   </Disclosure>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Features
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Marketplace
-                  </a>
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Company
-                  </a>
-                </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
+                  <NavLink className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" to="/practice">Practice</NavLink>
+                  <NavLink className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" to="/exam-guide">Exam Guide</NavLink>
+                  <NavLink className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" to="/contributors">Contributors</NavLink>
                 </div>
               </div>
             </div>
