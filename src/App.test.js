@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
+
 import React from 'react';
 import App from './App';
 //import { render, unmountComponentAtNode } from "react-dom";
@@ -32,13 +34,37 @@ it('renders', () => {
   render(<BrowserRouter><App /></BrowserRouter>);
   expect(screen.getByText('Lectures')).toBeInTheDocument();
 });
-/*
-test('renders without crashing', () => {
-  render(<App />);
+
+it('renders exam guide page when clicked from header', async () => {
+  const user = userEvent.setup();
+  render(<BrowserRouter><App /></BrowserRouter>);
+
+  //click on the exam resources button in the header
+  await act( async () => {
+    await user.click(screen.getAllByText(/Exam Guide/i)[0]);
+  })
+
+  expect(screen.getByTestId('testExamGuideh1')).toBeInTheDocument();
 });
 
-test('renders exam resources page on click from header', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-}); */
+
+it('opens and closes lectures dropdown in header when clicked and off-clicked', async () => {
+  const user = userEvent.setup();
+  render(<BrowserRouter><App /></BrowserRouter>);
+  expect(screen.queryByText(/Lecture 01/i)).not.toBeInTheDocument();
+
+  await act( async () => {
+    //click on the exam resources button in the header
+    await user.click(screen.getByText(/Lectures/i));
+  });
+
+  //dropdown for first lecture should be visible
+  expect(screen.getByText(/Lecture 01/i)).toBeInTheDocument();
+
+  await act( async () => {
+    //click off the lecture dropdown
+    await user.click(screen.getByTestId('testBlankDiv'));
+  });
+
+  expect(screen.queryByText(/Lecture 01/i)).not.toBeInTheDocument();
+});

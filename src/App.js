@@ -20,7 +20,7 @@ function App() {
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
       </Routes>
-      <h1 className='text-3xl font-bolt underline'>Footer</h1>
+      <h1 className='text-3xl font-bolt underline'>Exam Guide</h1>
     </div>
   );
 }
