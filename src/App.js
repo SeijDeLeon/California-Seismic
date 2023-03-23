@@ -7,6 +7,8 @@ import Lectures from './components/Lectures.jsx';
 import Practice from './components/Practice.jsx';
 import ExamGuide from './components/ExamGuide.jsx';
 import Contributors from './components/Contributors.jsx';
+import UnderConstruction from './components/UnderConstruction.jsx';
+
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
       </Routes>
-      <h1 className='text-3xl font-bolt underline'>Exam Guide</h1>
+      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
     </div>
   );
 }

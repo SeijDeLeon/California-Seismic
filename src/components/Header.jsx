@@ -41,7 +41,7 @@ const products = [
   { name: '13: Seismic Detailing', description: 'How to identify good seismic load paths', href: '#', icon: PaintBrushIcon },
 ]
 
-const tempProducts = [
+/* const tempProducts = [
   { name: 'Lecture 01', description: 'Intro to Seismic Exam', href: '#', icon: AcademicCapIcon },
   { name: 'Lecture 02', description: 'Earthquakes', href: '#', icon: GlobeAmericasIcon },
   { name: 'Lecture 03', description: 'Code provisions', href: '#', icon: ScaleIcon },
@@ -56,7 +56,7 @@ const tempProducts = [
   { name: 'Lecture 11', description: 'Irregularities and Redundancy', href: '#', icon: ExclamationTriangleIcon },
   { name: 'Lecture 12', description: 'Nonstructural component design', href: '#', icon:CubeIcon },
   { name: 'Lecture 13', description: 'Seismic detailing', href: '#', icon: PaintBrushIcon },
-]
+] */
 const callsToAction = [
   { name: 'Show All Lectures', href: '#', icon: Squares2X2Icon },
 ]

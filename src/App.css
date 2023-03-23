@@ -28,11 +28,22 @@
   color: #61dafb;
 }
 
+.iframe-padding-left {
+  padding-left: calc(calc(100vw - 816px) / 2);
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 700) {
+  .iframe-padding-left {
+    padding:default;
   }
 }
