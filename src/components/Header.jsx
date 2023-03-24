@@ -41,22 +41,7 @@ const products = [
   { name: '13: Seismic Detailing', description: 'How to identify good seismic load paths', href: '#', icon: PaintBrushIcon },
 ]
 
-/* const tempProducts = [
-  { name: 'Lecture 01', description: 'Intro to Seismic Exam', href: '#', icon: AcademicCapIcon },
-  { name: 'Lecture 02', description: 'Earthquakes', href: '#', icon: GlobeAmericasIcon },
-  { name: 'Lecture 03', description: 'Code provisions', href: '#', icon: ScaleIcon },
-  { name: 'Lecture 04', description: 'Risk Categories', href: '#', icon: UserGroupIcon },
-  { name: 'Lecture 05', description: 'Building systems, vertical and lateral.', href: '#', icon: BuildingOffice2Icon },
-  { name: 'Lecture 06', description: 'Ductility and R values', href: '#', icon: HomeModernIcon },
-  { name: 'Lecture 07', description: 'Base Shear calculation', href: '#', icon: CalculatorIcon },
-  { name: 'Lecture 08', description: 'Force distributions along building height', href: '#', icon: ChartBarIcon },
-  { name: 'Lecture 09', description: 'Building drift calculations.', href: '#', icon: BuildingLibraryIcon },
-  { name: 'Lecture 10A', description: 'Flexible Diaphragm Analysis', href: '#', icon: HomeIcon },
-  { name: 'Lecture 10B', description: 'Rigid Diaphgragm Analysis', href: '#', icon: BuildingOfficeIcon },
-  { name: 'Lecture 11', description: 'Irregularities and Redundancy', href: '#', icon: ExclamationTriangleIcon },
-  { name: 'Lecture 12', description: 'Nonstructural component design', href: '#', icon:CubeIcon },
-  { name: 'Lecture 13', description: 'Seismic detailing', href: '#', icon: PaintBrushIcon },
-] */
+
 const callsToAction = [
   { name: 'Show All Lectures', href: '#', icon: Squares2X2Icon },
 ]
