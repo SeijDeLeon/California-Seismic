@@ -13,13 +13,17 @@ To make updates, run 'npm run build' in the console. The production files will b
 If updates are not visible within a few minutes of merging changes to the Master branch, verify if Cloudfront is caching a previous version, or if the local browser is caching the website.
 
 ## Installation & Setup
-After cloning the Master branch to your local computer
+After cloning the Master branch to your local computer, create a new branch and download the project dependencies.
 
-### `npm install`
+#### `git checkout -b <YourBranchName> `
 
-### `git checkout -b <YourBranchName> `
+*YourBranchName* should be a short description of the feature/fix that the branch will address.
 
-## Available Scripts
+#### `npm install`
+
+Installs project dependencies from package.json
+
+## Available Scripts for Development
 
 In the project directory, you can run:
 
@@ -39,9 +43,4 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
