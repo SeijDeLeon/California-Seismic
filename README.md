@@ -5,10 +5,21 @@
 The first free resource for passing the California Seismic Principles Exam.\
 We are currently working on updating the website and publishing our bank of 400+ lecture pages, 200+ practice problems, and 10+ lecture vidoes to the website. Expected completion Fall 2023
 
-## CodePipeline
-Any commit to the master branch will trigger a process within AWS CodePipeline to pull all contents of the Master branch, export all files in the build folder, and store contents into an S3 bucket for deployal through CloudFront to CaliforniaSeismic.com. 
+## Making Updates
+CaliforniaSeismic.com is automatically updated via CodePipeline with changes to the Master branch of this Github Repository. The files in the /build folder are stored into an AWS S3 bucket and distributed through Cloudfront.
 
-## Available Scripts from Create-React-App
+To make updates, run 'npm run build' in the console. The production files will be written to the /build folder.
+
+If updates are not visible within a few minutes of merging changes to the Master branch, verify if Cloudfront is caching a previous version, or if the local browser is caching the website.
+
+## Installation & Setup
+After cloning the Master branch to your local computer
+
+### `npm install`
+
+### `git checkout -b <YourBranchName> `
+
+## Available Scripts
 
 In the project directory, you can run:
 
