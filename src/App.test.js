@@ -32,7 +32,7 @@ it('routes to the correct component in when header link clicked', () => {
 
 it('renders', () => {
   render(<BrowserRouter><App /></BrowserRouter>);
-  expect(screen.getByText('Lectures')).toBeInTheDocument();
+  expect(screen.getAllByText('Lectures')[0]).toBeInTheDocument();
 });
 
 it('renders exam guide page when clicked from header', async () => {
@@ -55,7 +55,7 @@ it('opens and closes lectures dropdown in header when clicked and off-clicked', 
 
   await act( async () => {
     //click on the exam resources button in the header
-    await user.click(screen.getByText(/Lectures/i));
+    await user.click(screen.getAllByText(/Lectures/i)[0]);
   });
 
   //dropdown for first lecture should be visible

@@ -23,7 +23,7 @@ function App() {
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
       </Routes>
-      <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
+      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
       <Footer />
     </div>
   );

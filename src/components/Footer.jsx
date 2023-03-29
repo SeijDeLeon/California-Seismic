@@ -31,8 +31,6 @@ export default function Footer() {
         <div className="flex-1"></div>
       </div>
       <p className="text-sm">Copyright 2023 © California Seismic</p>
-
     </footer>
-
   )
 }
