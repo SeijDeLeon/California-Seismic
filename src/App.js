@@ -8,6 +8,7 @@ import Practice from './components/Practice.jsx';
 import ExamGuide from './components/ExamGuide.jsx';
 import Contributors from './components/Contributors.jsx';
 import UnderConstruction from './components/UnderConstruction.jsx';
+import Footer from './components/Footer.jsx';
 
 
 
@@ -22,7 +23,8 @@ function App() {
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
       </Routes>
-      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
+      <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
+      <Footer />
     </div>
   );
 }
