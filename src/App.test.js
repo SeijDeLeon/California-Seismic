@@ -1,38 +1,15 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 
 import React from 'react';
 import App from './App';
-//import { render, unmountComponentAtNode } from "react-dom";
 import { BrowserRouter } from 'react-router-dom';
 // use xit to temp exclude tests
 
-//let container = null;
-
-/* beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-}); */
-
-/* it('renders without crashing', () => {
-  render(<BrowserRouter><App /></BrowserRouter>, container);
-});
-
-it('routes to the correct component in when header link clicked', () => {
-  render(<BrowserRouter><App /></BrowserRouter>, container);
-}); */
 
 it('renders', () => {
   render(<BrowserRouter><App /></BrowserRouter>);
-  expect(screen.getByText('Lectures')).toBeInTheDocument();
+  expect(screen.getAllByText('Lectures')[0]).toBeInTheDocument();
 });
 
 it('renders exam guide page when clicked from header', async () => {
@@ -55,7 +32,7 @@ it('opens and closes lectures dropdown in header when clicked and off-clicked', 
 
   await act( async () => {
     //click on the exam resources button in the header
-    await user.click(screen.getByText(/Lectures/i));
+    await user.click(screen.getAllByText(/Lectures/i)[0]);
   });
 
   //dropdown for first lecture should be visible
@@ -67,4 +44,14 @@ it('opens and closes lectures dropdown in header when clicked and off-clicked', 
   });
 
   expect(screen.queryByText(/Show All Lectures/i)).not.toBeInTheDocument();
+});
+
+it('renders footer', () => {
+  render(<BrowserRouter><App /></BrowserRouter>);
+  const footer = screen.getByRole('contentinfo');
+  expect(footer).toBeInTheDocument();
+
+  //check if LinkedIn svg rendered correctly with a link to the company website
+  expect(within(footer).getByTitle('LinkedIn')).toBeInTheDocument();
+  expect(within(footer).getAllByRole('link')[0]).toHaveAttribute('href', 'http://linkedin.com/company/californiaseismic');
 });

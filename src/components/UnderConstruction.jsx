@@ -32,9 +32,10 @@ var updateGoogleDocStyle = () => {
     return (
       <>
       <p className="text-lg font-bold">Webpage Temporarily Under Construction!</p>
-      <p>If you would like to look at our current progress, check out <a href="https://docs.google.com/document/d/1aRLzEveYaZKGCn7DV82JvnDxy762QYwFrXvsRqLlSZg/edit?usp=sharing" className="underline decoration-yellow-500 text-sky-500"> this link to our blog!</a></p>
-      <img className = "m-auto max-w-sm md:max-w-lg" src={defaultImage} alt="Construction worker on top of calculator with construction background"></img>
+      <p className="p-4">If you would like to look at our current progress, check out <a href="https://docs.google.com/document/d/1aRLzEveYaZKGCn7DV82JvnDxy762QYwFrXvsRqLlSZg/edit?usp=sharing" className="underline decoration-yellow-500 text-sky-500"> this link to our blog!</a></p>
+      <img className = "m-auto max-w-sm md:max-w-lg pb-3" src={defaultImage} alt="Construction worker on top of calculator with construction background"></img>
 
+      <p className="hidden md:block pt-3"> Our progress document is shown below:</p>
       <iframe className="hidden md:block min-h-screen h-fit w-full iframe-padding-left" title="California Seismic Progress Journal" src="https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true"></iframe>
       </>
     )
