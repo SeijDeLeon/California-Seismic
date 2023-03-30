@@ -38,12 +38,12 @@ export default function Home() {
           </div>
         </div>
       </article>
-      <article className="w-screen bg-deep-blue flex justify-center md:py-40">
+      <article className="w-screen bg-deep-blue flex justify-center py-12 md:py-40">
         <div className="flex flex-col md:flex-row">
-          <img className="m-auto h-60 rounded-full border border-orange-300 border-8" src={headshot} alt="seij headshot" />
-          <section className="m-auto w-auto pl-32">
-            <h1 className="text-white text-6xl font-semibold">Education Matters</h1>
-            <p className="md:max-w-lg m-auto text-white text-left">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We’re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
+          <img className="m-auto h-40 md:h-60 rounded-full border border-orange-300 border-8" src={headshot} alt="seij headshot" />
+          <section className="m-auto w-auto md:pl-32">
+            <h1 className="text-white text-3xl md:text-6xl font-semibold">Education Matters</h1>
+            <p className="max-w-lg m-auto text-white text-left p-4 md:p-0">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We’re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
           </section>
         </div>
       </article>
