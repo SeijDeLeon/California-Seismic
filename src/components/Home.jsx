@@ -1,4 +1,5 @@
 import hero from '../assets/hero.jpg'
+import headshot from '../assets/seij_headshot.jpg'
 import '../App.css'
 import { NavLink } from 'react-router-dom'
 export default function Home() {
@@ -36,6 +37,13 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </article>
+      <article className="bg-deep-blue flex flex-col md:flex-row">
+        <img className="h-60 rounded-full border border-orange-300 border-8" src={headshot} alt="seij headshot" />
+        <section>
+          <h1 className="text-white">Education Matters</h1>
+          <p className="text-white">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We’re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
+        </section>
       </article>
     </main>
   );
