@@ -22,13 +22,13 @@ export default function Home() {
           </NavLink>
         </div>
       </div>
-      <article className="bg-slate-50 md:py-12">
+      <article className="bg-slate-50 md:py-32">
         <div className="max-w-6xl m-auto">
           <h1 className="font-bold text-5xl mb-8 md:mb-12">Explore</h1>
           <div className="flex flex-col md:flex-row">
             {cards.map((item, index) => (
-              <NavLink className="w-72 m-auto my-4 ease-out duration-300 rounded-lg hover:shadow-lg hover:bg-white" to={item.link}>
-                <figure key={index} className="">
+              <NavLink  key={`landingCard${index}`} className="w-72 m-auto my-4 ease-out duration-300 rounded-lg hover:shadow-lg hover:bg-white" to={item.link}>
+                <figure className="">
                   <img className="h-28 md:h-40 flex m-auto pt-2" alt={item.alt} src={item.img}/>
                   <h2 className="font-bold text-2xl">{item.title}</h2>
                   <p>{item.text}</p>
@@ -38,12 +38,14 @@ export default function Home() {
           </div>
         </div>
       </article>
-      <article className="bg-deep-blue flex flex-col md:flex-row">
-        <img className="h-60 rounded-full border border-orange-300 border-8" src={headshot} alt="seij headshot" />
-        <section>
-          <h1 className="text-white">Education Matters</h1>
-          <p className="text-white">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We’re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
-        </section>
+      <article className="w-screen bg-deep-blue flex justify-center md:py-40">
+        <div className="flex flex-col md:flex-row">
+          <img className="m-auto h-60 rounded-full border border-orange-300 border-8" src={headshot} alt="seij headshot" />
+          <section className="m-auto w-auto pl-32">
+            <h1 className="text-white text-6xl font-semibold">Education Matters</h1>
+            <p className="md:max-w-lg m-auto text-white text-left">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We’re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
+          </section>
+        </div>
       </article>
     </main>
   );
