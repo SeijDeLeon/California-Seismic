@@ -4,24 +4,34 @@ import '../App.css'
 import { NavLink } from 'react-router-dom'
 export default function Home() {
 
-  const bldgLineStroke = {'stroke': 'rgb(220,220,220)', 'stroke-width': '1'}
-  const arrowLineStroke = {'stroke': 'rgb(220,220,220)', 'stroke-width': '1'}
-  const arrowFill = {'fill':'rgb(220,220,220)', 'stroke':'rgb(220,220,220)', 'stroke-width': '1'}
+  const bldgLineStroke = {'stroke': 'url(#grad1)', 'strokeWidth': '1', 'filter':'url(#f1)'}
+  const arrowLineStroke = {'stroke': 'url(#grad2)', 'strokeWidth': '1', 'filter':'url(#f1)'}
+  const arrowFill = {'fill':'url(#grad2)', 'stroke':'rgb(220,220,220)', 'strokeWidth': '1', 'filter':'url(#f1)'}
+  const lineOnly = {'stroke': '#d9dadb', 'strokeWidth': '0.5'}
   const arrowEnd = 45
   const arrowThickness= 3
   const stories = [5, 33, 66 ]
 
   const building = <svg viewBox="0 0 100 100">
+    <title>Building with Seismic Forces</title>
     <defs>
-    <filter id="f1" x="0" y="0">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="50" />
+    <linearGradient id="grad1" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor='#989a9c'stopOpacity='1' />
+      <stop offset="100%" stopColor='#bbbcbd' stopOpacity='1' />
+    </linearGradient>
+    <linearGradient id="grad2" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor='#bebfc2'stopOpacity='1' />
+      <stop offset="100%" stopColor='#828385' stopOpacity='1' />
+    </linearGradient>
+    <filter id="f1" x="0" y="0" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>
     </filter>
   </defs>
     <line id="bL1" x1="50" y1={stories[0]} x2="50" y2="100" style={ bldgLineStroke} />
-    <line id="bL2" x1="100" y1={stories[0]} x2="100" y2="100" style={ bldgLineStroke} />
-    <line id="bL3" x1="50" y1={stories[0]} x2="100" y2={stories[0]} style={ bldgLineStroke} />
-    <line id="bL4" x1="50" y1={stories[1]} x2="100" y2={stories[1]} style={ bldgLineStroke} />
-    <line id="bL5" x1="50" y1={stories[2]} x2="100" y2={stories[2]} style={ bldgLineStroke} />
+    <line id="bL2" x1="95" y1={stories[0]} x2="95" y2="100" style={ bldgLineStroke} />
+    <line id="bL3" x1="50" y1={stories[0]} x2="95" y2={stories[0]} style={ bldgLineStroke} />
+    <line id="bL4" x1="50" y1={stories[1]} x2="95" y2={stories[1]} style={ bldgLineStroke} />
+    <line id="bL5" x1="50" y1={stories[2]} x2="95" y2={stories[2]} style={ bldgLineStroke} />
 
 
     <line id="aL1" x1="5" y1={stories[0]} x2={arrowEnd} y2="100" style={ arrowLineStroke } />
@@ -32,6 +42,19 @@ export default function Home() {
     <polygon id="aP1" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[0]} ${arrowEnd-arrowThickness},${stories[0]-arrowThickness} ${arrowEnd},${stories[0]}`} style={arrowFill} />
     <polygon id="aP2" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[1]} ${arrowEnd-arrowThickness},${stories[1]-arrowThickness} ${arrowEnd},${stories[1]}`} style={arrowFill} />
     <polygon id="aP3" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[2]} ${arrowEnd-arrowThickness},${stories[2]-arrowThickness} ${arrowEnd},${stories[2]}`} style={arrowFill} />
+
+
+    <line id="bLL1" x1="50" y1={stories[0]} x2="50" y2="100" style={ lineOnly} />
+    <line id="bLL2" x1="95" y1={stories[0]} x2="95" y2="100" style={ lineOnly} />
+    <line id="bLL3" x1="50" y1={stories[0]} x2="95" y2={stories[0]} style={ lineOnly} />
+    <line id="bLL4" x1="50" y1={stories[1]} x2="95" y2={stories[1]} style={ lineOnly} />
+    <line id="bLL5" x1="50" y1={stories[2]} x2="95" y2={stories[2]} style={ lineOnly} />
+
+
+    <line id="aLL1" x1="5" y1={stories[0]} x2={arrowEnd} y2="100" style={ lineOnly } />
+    <line id="aLL2" x1="5" y1={stories[0]} x2={arrowEnd} y2={stories[0]} style={ lineOnly } />
+    <line id="aLL3" x1="16" y1={stories[1]} x2={arrowEnd} y2={stories[1]} style={ lineOnly } />
+    <line id="aLL4" x1="30" y1={stories[2]} x2={arrowEnd} y2={stories[2]} style={ lineOnly } />
   </svg>
   const resourceCards = [
     {link: '/lectures', title: '10+ Lectures', text:'Start your studies here', img:'https://img.icons8.com/ios/100/null/podium-with-speaker.png', alt:"speaker at podium"},
