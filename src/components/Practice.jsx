@@ -1,7 +1,14 @@
-export default function Practice() {
+import UnderConstruction from './UnderConstruction.jsx';
 
-  return (
-    <h1>Practice</h1>
-  );
+export default function Practice( { display=false }) {
+
+  if (display === false) {
+    return (
+      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
+    );
+  } else {
+    return ( <h1> Practice</h1>)
+  }
+
 
 }
