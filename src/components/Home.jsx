@@ -3,6 +3,36 @@ import headshot from '../assets/seij_headshot.jpg'
 import '../App.css'
 import { NavLink } from 'react-router-dom'
 export default function Home() {
+
+  const bldgLineStroke = {'stroke': 'rgb(220,220,220)', 'stroke-width': '1'}
+  const arrowLineStroke = {'stroke': 'rgb(220,220,220)', 'stroke-width': '1'}
+  const arrowFill = {'fill':'rgb(220,220,220)', 'stroke':'rgb(220,220,220)', 'stroke-width': '1'}
+  const arrowEnd = 45
+  const arrowThickness= 3
+  const stories = [5, 33, 66 ]
+
+  const building = <svg viewBox="0 0 100 100">
+    <defs>
+    <filter id="f1" x="0" y="0">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="50" />
+    </filter>
+  </defs>
+    <line id="bL1" x1="50" y1={stories[0]} x2="50" y2="100" style={ bldgLineStroke} />
+    <line id="bL2" x1="100" y1={stories[0]} x2="100" y2="100" style={ bldgLineStroke} />
+    <line id="bL3" x1="50" y1={stories[0]} x2="100" y2={stories[0]} style={ bldgLineStroke} />
+    <line id="bL4" x1="50" y1={stories[1]} x2="100" y2={stories[1]} style={ bldgLineStroke} />
+    <line id="bL5" x1="50" y1={stories[2]} x2="100" y2={stories[2]} style={ bldgLineStroke} />
+
+
+    <line id="aL1" x1="5" y1={stories[0]} x2={arrowEnd} y2="100" style={ arrowLineStroke } />
+    <line id="aL2" x1="5" y1={stories[0]} x2={arrowEnd} y2={stories[0]} style={ arrowLineStroke } />
+    <line id="aL3" x1="16" y1={stories[1]} x2={arrowEnd} y2={stories[1]} style={ arrowLineStroke } />
+    <line id="aL4" x1="30" y1={stories[2]} x2={arrowEnd} y2={stories[2]} style={ arrowLineStroke } />
+
+    <polygon id="aP1" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[0]} ${arrowEnd-arrowThickness},${stories[0]-arrowThickness} ${arrowEnd},${stories[0]}`} style={arrowFill} />
+    <polygon id="aP2" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[1]} ${arrowEnd-arrowThickness},${stories[1]-arrowThickness} ${arrowEnd},${stories[1]}`} style={arrowFill} />
+    <polygon id="aP3" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[2]} ${arrowEnd-arrowThickness},${stories[2]-arrowThickness} ${arrowEnd},${stories[2]}`} style={arrowFill} />
+  </svg>
   const resourceCards = [
     {link: '/lectures', title: '10+ Lectures', text:'Start your studies here', img:'https://img.icons8.com/ios/100/null/podium-with-speaker.png', alt:"speaker at podium"},
     {link: '/practice', title: '100+ Questions', text:'Test your seismic knowledge with practice questions', img:'https://img.icons8.com/ios/100/null/test--v1.png', alt:'paper test'},
@@ -36,7 +66,11 @@ export default function Home() {
             Start Practicing
           </NavLink>
         </div>
+        <div className="absolute w-48 h-48 z-10 md:right-1/3 top-1/3">
+          {building}
+        </div>
       </div>
+
       <article className="bg-slate-50 h-fit py-8 md:h-auto md:py-32">
         <div className="max-w-6xl m-auto">
           <h1 className="font-bold text-5xl mb-4 md:mb-32">Explore</h1>
@@ -53,6 +87,7 @@ export default function Home() {
           </div>
         </div>
       </article>
+
       <article className="w-screen bg-deep-blue flex justify-center py-12 md:py-60">
         <div className="flex flex-col md:flex-row">
           <img className="m-auto h-40 md:h-60 rounded-full border border-orange-300 border-8" src={headshot} alt="seij headshot" />
@@ -62,6 +97,7 @@ export default function Home() {
           </section>
         </div>
       </article>
+
       <article className="bg-slate-50 h-fit py-8 md:h-auto md:py-32">
         <div className="max-w-6xl m-auto mb-8 md:mb-16">
           <h1 className="font-bold text-3xl md:text-5xl mb-4 md:mb-12">Why California Seismic?</h1>
