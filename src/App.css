@@ -69,3 +69,139 @@
     height:70vh;
   }
 }
+
+
+
+
+/***************** Animation for landing page ******************/
+
+@keyframes hideshow {
+  0% { opacity: 0.33; transform: translateX(-3px);}
+  33% { opacity: 1; transform: translateX(0px);}
+  50% { opacity: 0; transform: translateX(-3px);}
+  66% { opacity: 0; transform: translateX(-6px);}
+  100% { opacity: 0.33; transform: translateX(-3px);}
+}
+
+@keyframes hideshowArea {
+  0% { opacity: 0; transform: translateX(-5px);}
+  33% { opacity: 1; transform: translateX(0px);}
+  50% { opacity: 0; transform: translateX(-3px);}
+  66% { opacity: 0; transform: translateX(-6px);}
+  100% { opacity: 0; transform: translateX(-3px);}
+}
+
+
+
+#bL1 {
+  animation: rotate 10s ease infinite;
+}
+
+#bL2 {
+  animation: rotate 10s ease infinite;
+}
+
+#bL3 {
+  animation: highSlide 10s ease infinite;
+}
+
+#bL4 {
+  animation: midSlide 10s ease infinite;
+}
+
+#bL5 {
+  animation: lowSlide 10s ease infinite;
+}
+
+#aL1, #aL2, #aL3, #aL4, #aP1, #aP2, #aP3 {
+  animation: hideshow 10s ease infinite;
+}
+
+#vP1, #mP1 {
+  animation: hideshowArea 10s 0.2s ease infinite;
+}
+
+#vP2, #mP2 {
+  animation: hideshowArea 10s 0.4s ease infinite;
+}
+
+#vP3, #mP3 {
+  animation: hideshowArea 10s 0.6s ease infinite;
+}
+
+@keyframes lowSlide {
+  0% {
+    transform: translateX(0px);
+  }
+  33% {
+    transform: translateX(1px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  66% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes midSlide {
+  0% {
+    transform: translateX(0px);
+  }
+  33% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  66% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes highSlide {
+  0% {
+    transform: translateX(0px);
+  }
+  33% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  66% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+  33% {
+    transform: rotate(2deg);
+    transform-origin: 50% 100%;
+  }
+  50% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+  66% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+  100% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+}

@@ -1,7 +1,13 @@
-export default function Lectures() {
+import UnderConstruction from './UnderConstruction.jsx';
 
-  return (
-    <h1>Lectures</h1>
-  );
+export default function Lectures({ display=false }) {
+
+  if (display === false) {
+    return (
+      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
+    );
+  } else {
+    return ( <h1> Lectures</h1>)
+  }
 
 }

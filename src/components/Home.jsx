@@ -7,12 +7,44 @@ export default function Home() {
   const bldgLineStroke = {'stroke': 'url(#grad1)', 'strokeWidth': '1', 'filter':'url(#f1)'}
   const arrowLineStroke = {'stroke': 'url(#grad2)', 'strokeWidth': '1', 'filter':'url(#f1)'}
   const arrowFill = {'fill':'url(#grad2)', 'stroke':'rgb(220,220,220)', 'strokeWidth': '1', 'filter':'url(#f1)'}
-  const lineOnly = {'stroke': '#d9dadb', 'strokeWidth': '0.5'}
+  const graphFill = {'fill':'#717880', 'stroke':'#717880', 'strokeWidth': '1'}
+  const lineOnly = {'stroke': '#a5bcd4', 'strokeWidth': '0.5'}
   const arrowEnd = 45
   const arrowThickness= 3
-  const stories = [5, 33, 66 ]
+  const stories = [5, 33, 66, 100 ]
+  const xV = 150
+  const pointsV = [
+    `${xV}, ${stories[1]}
+    ${xV}, ${stories[0]}
+    ${xV+10}, ${stories[0]}
+    ${xV+10}, ${stories[1]}`,
 
-  const building = <svg viewBox="0 0 100 100">
+    `${xV}, ${stories[2]}
+    ${xV}, ${stories[1]}
+    ${xV+15}, ${stories[1]}
+    ${xV+15}, ${stories[2]}`,
+
+    `${xV}, ${stories[3]}
+    ${xV}, ${stories[2]}
+    ${xV+20}, ${stories[2]}
+    ${xV+20}, ${stories[3]}`]
+  const xM = 200
+  const pointsM = [
+    `${xM}, ${stories[0]}
+    ${xM}, ${stories[1]}
+    ${xM+5}, ${stories[1]}`,
+
+    `${xM}, ${stories[1]}
+    ${xM+5}, ${stories[1]}
+    ${xM+15}, ${stories[2]}
+    ${xM}, ${stories[2]}`,
+
+    `${xM}, ${stories[2]}
+    ${xM+15}, ${stories[2]}
+    ${xM+30}, ${stories[3]}
+    ${xM}, ${stories[3]}`]
+
+  const building = <svg className="buildingSVG" viewBox="0 0 250 120">
     <title>Building with Seismic Forces</title>
     <defs>
     <linearGradient id="grad1" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -43,18 +75,21 @@ export default function Home() {
     <polygon id="aP2" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[1]} ${arrowEnd-arrowThickness},${stories[1]-arrowThickness} ${arrowEnd},${stories[1]}`} style={arrowFill} />
     <polygon id="aP3" points={`${arrowEnd-arrowThickness},${arrowThickness + stories[2]} ${arrowEnd-arrowThickness},${stories[2]-arrowThickness} ${arrowEnd},${stories[2]}`} style={arrowFill} />
 
-
-    <line id="bLL1" x1="50" y1={stories[0]} x2="50" y2="100" style={ lineOnly} />
-    <line id="bLL2" x1="95" y1={stories[0]} x2="95" y2="100" style={ lineOnly} />
-    <line id="bLL3" x1="50" y1={stories[0]} x2="95" y2={stories[0]} style={ lineOnly} />
-    <line id="bLL4" x1="50" y1={stories[1]} x2="95" y2={stories[1]} style={ lineOnly} />
-    <line id="bLL5" x1="50" y1={stories[2]} x2="95" y2={stories[2]} style={ lineOnly} />
+    <line id="vL1" x1={xV} y1={stories[0]} x2={xV} y2="100" style={ lineOnly} />
+    <polygon id="vP1" points={pointsV[0]} style={graphFill} />
+    <polygon id="vP2" points={pointsV[1]} style={graphFill} />
+    <polygon id="vP3" points={pointsV[2]} style={graphFill} />
 
 
-    <line id="aLL1" x1="5" y1={stories[0]} x2={arrowEnd} y2="100" style={ lineOnly } />
-    <line id="aLL2" x1="5" y1={stories[0]} x2={arrowEnd} y2={stories[0]} style={ lineOnly } />
-    <line id="aLL3" x1="16" y1={stories[1]} x2={arrowEnd} y2={stories[1]} style={ lineOnly } />
-    <line id="aLL4" x1="30" y1={stories[2]} x2={arrowEnd} y2={stories[2]} style={ lineOnly } />
+    <line id="mL1" x1={xM} y1={stories[0]} x2={xM} y2="100" style={ lineOnly} />
+    <polygon id="mP1" points={pointsM[0]} style={graphFill} />
+    <polygon id="mP2" points={pointsM[1]} style={graphFill} />
+    <polygon id="mP3" points={pointsM[2]} style={graphFill} />
+
+    <text x={xV-4} y="120" fill='#989a9c'>V</text>
+    <text x={xM-4} y="120" fill='#989a9c'>M</text>
+
+
   </svg>
   const resourceCards = [
     {link: '/lectures', title: '10+ Lectures', text:'Start your studies here', img:'https://img.icons8.com/ios/100/null/podium-with-speaker.png', alt:"speaker at podium"},
@@ -89,7 +124,7 @@ export default function Home() {
             Start Practicing
           </NavLink>
         </div>
-        <div className="absolute w-48 h-48 z-10 md:right-1/3 top-1/3">
+        <div className="hidden lg:flex absolute w-40 h-auto z-10 lg:right-1/3 top-[40%]">
           {building}
         </div>
       </div>
