@@ -14,7 +14,7 @@ import Footer from './components/Footer.jsx';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App overflow-x-hidden">
       <Header />
       <Routes>
         <Route path = "/" element = {<Home />} />
