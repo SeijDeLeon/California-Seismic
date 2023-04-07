@@ -2,6 +2,7 @@ import hero from '../assets/hero.jpg'
 import headshot from '../assets/seij_headshot.jpg'
 import '../App.css'
 import { NavLink } from 'react-router-dom'
+import Button from './Button.jsx'
 export default function Home() {
 
   const bldgLineStroke = {'stroke': 'url(#grad1)', 'strokeWidth': '1', 'filter':'url(#f1)'}
@@ -118,11 +119,8 @@ export default function Home() {
         <div className="absolute z-10 md:left-[10%] top-1/3">
           <h1 className="md:flex justify-start text-5xl md:text-7xl text-white font-bold mb-4">Study for Free</h1>
           <p className="md:flex justify-start text-2xl text-white font-medium">You can pass the Seismic Exam. </p>
-            <p className="md:flex justify-start text-2xl text-white font-medium pb-8">Everything needed is right here</p>
-          <NavLink className="md:flex w-fit justify-start text-white text-lg font-bold bg-blue-600 hover:bg-blue-300 p-3 rounded-lg shadow-lg" to='/practice'>
-            <span className="sr-only">button</span>
-            Start Practicing
-          </NavLink>
+          <p className="md:flex justify-start text-2xl text-white font-medium pb-8">Everything needed is right here</p>
+          <Button text='Start Practicing' />
         </div>
         <div className="hidden lg:flex absolute w-40 h-auto z-10 lg:right-1/3 top-[40%]">
           {building}

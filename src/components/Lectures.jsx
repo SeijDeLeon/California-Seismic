@@ -145,7 +145,7 @@ export default function Lectures({ display=false }) {
     return (
       <main>
         <h2 className='text-xl font-bold my-4 md:my-8'> Lectures</h2>
-        <p className='text-left text-sm md:text-base max-w-3xl m-auto mx-6'> Start learning here. We recommend reading a single lecture, then watching the corresponding video. After finishing the lecture & video, try out the practice problems before moving on to the next lecture!</p>
+        <p className='text-left text-sm md:text-base max-w-3xl mx-6 md:m-auto'> Start learning here. We recommend reading a single lecture, then watching the corresponding video. After finishing the lecture & video, try out the practice problems before moving on to the next lecture!</p>
         <section className='my-8'>
           {lectures.map( (lecture, index) =>
             (

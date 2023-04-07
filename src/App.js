@@ -10,8 +10,6 @@ import Contributors from './components/Contributors.jsx';
 import UnderConstruction from './components/UnderConstruction.jsx';
 import Footer from './components/Footer.jsx';
 
-
-
 function App() {
   return (
     <div className="App overflow-x-hidden">
