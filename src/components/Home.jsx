@@ -167,6 +167,7 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <Button text='Show Lecture' link='/lectures' extraClasses={['mt-4']}/>
         <NavLink className="w-fit mt-4 text-white text-lg font-bold bg-blue-600 p-3 hover:bg-blue-300 rounded-lg shadow-xl" to='/lectures'>
             <span className="sr-only">button</span>
             Show Lectures
