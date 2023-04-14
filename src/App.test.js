@@ -3,11 +3,12 @@ import userEvent from '@testing-library/user-event'
 
 import React from 'react';
 import App from './App';
+import Lectures from './components/Lectures'
 import { BrowserRouter } from 'react-router-dom';
 // use xit to temp exclude tests
 
 
-it('renders', () => {
+it('renders home page', () => {
   render(<BrowserRouter><App /></BrowserRouter>);
   expect(screen.getAllByText('Lectures')[0]).toBeInTheDocument();
 });
@@ -54,4 +55,18 @@ it('renders footer', () => {
   //check if LinkedIn svg rendered correctly with a link to the company website
   expect(within(footer).getByTitle('LinkedIn')).toBeInTheDocument();
   expect(within(footer).getAllByRole('link')[0]).toHaveAttribute('href', 'http://linkedin.com/company/californiaseismic');
+});
+
+it('renders lecture landing page', async () => {
+  const user = userEvent.setup();
+
+  render(<Lectures display={true}/>);
+  expect(screen.getAllByText('Lectures')[0]).toBeInTheDocument();
+  const articles = screen.getAllByRole('article');
+  expect(articles.length).toBeGreaterThan(10);
+
+  //test hover functionality
+  expect(articles[1]).toHaveStyle(`border-color: "transparent"`)
+
+
 });

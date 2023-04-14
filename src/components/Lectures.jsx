@@ -151,11 +151,11 @@ export default function Lectures({ display=false }) {
         <section className='my-8'>
           {lectures.map( (lecture, index) =>
             (
-              <article key={`LectureDescription${index}`}className='flex flex-col md:flex-row  h-auto m-auto lg:max-w-7xl px-16 md:max-w-4xl my-4 hover:cursor-pointer hover:shadow-lg'>
+              <article key={`LectureDescription${index}`}className='flex flex-col md:flex-row  h-auto m-auto lg:max-w-7xl px-16 md:max-w-4xl py-3 hover:cursor-pointer hover:shadow-lg hover:border-2 border-2 hover:border-slate-100 border-transparent rounded-xl hover:ease-in ease-in duration-100'>
                 <div className='md:w-1/3'>
-                  <img className='h-auto' alt='Lecture Graphic' src={lecture.img}/>
+                  <img className='h-auto border-solid border-2 rounded-xl border-slate-300' alt='Lecture Graphic' src={lecture.img}/>
                 </div>
-                <section className='md:w-2/3 px-2'>
+                <section className='md:w-2/3 pl-12 pr-2'>
                   <h2 className='md:text-lg font-medium text-left'>{lecture.title}</h2>
                   <p className=' hidden md:block text-xs md:text-base text-left'>{lecture.text}</p>
                 </section>

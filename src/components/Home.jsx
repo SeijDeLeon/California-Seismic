@@ -120,7 +120,7 @@ export default function Home() {
           <h1 className="md:flex justify-start text-5xl md:text-7xl text-white font-bold mb-4">Study for Free</h1>
           <p className="md:flex justify-start text-2xl text-white font-medium">You can pass the Seismic Exam. </p>
           <p className="md:flex justify-start text-2xl text-white font-medium pb-8">Everything needed is right here</p>
-          <Button text='Start Practicing' />
+          <Button text='Start Practicing' extraClasses="md:flex"/>
         </div>
         <div className="hidden lg:flex absolute w-40 h-auto z-10 lg:right-1/3 top-[40%]">
           {building}
