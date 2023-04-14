@@ -146,10 +146,12 @@ export default function Lectures({ display=false }) {
       <main>
         <h2 className='text-xl font-bold my-4 md:my-8'> Lectures</h2>
         <p className='text-left text-sm md:text-base max-w-3xl mx-6 md:m-auto'> Start learning here. We recommend reading a single lecture, then watching the corresponding video. After finishing the lecture & video, try out the practice problems before moving on to the next lecture!</p>
+
+
         <section className='my-8'>
           {lectures.map( (lecture, index) =>
             (
-              <article key={`LectureDescription${index}`}className='flex flex-col md:flex-row  h-auto m-auto max-w-7xl px-16 my-4 hover:cursor-pointer hover:shadow-lg'>
+              <article key={`LectureDescription${index}`}className='flex flex-col md:flex-row  h-auto m-auto lg:max-w-7xl px-16 md:max-w-4xl my-4 hover:cursor-pointer hover:shadow-lg'>
                 <div className='md:w-1/3'>
                   <img className='h-auto' alt='Lecture Graphic' src={lecture.img}/>
                 </div>
@@ -179,6 +181,9 @@ export default function Lectures({ display=false }) {
               </article>
             )
           )}
+
+
+
         </section>
         <p className='my-4'>Done with all the lectures? Try out some practice problems or read our FAQ!</p>
       </main>
