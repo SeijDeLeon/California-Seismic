@@ -25,7 +25,7 @@ export default function Lectures({ display=false }) {
       pages: 10,
       problems: 0,
       difficulty: 0,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/02_Geology.png'
     },
     {
       title: '03: Code Provisions',
@@ -34,7 +34,7 @@ export default function Lectures({ display=false }) {
       pages: 10,
       problems: 3,
       difficulty: 0,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/03_Code.png'
     },
     {
       title: '04: Risk Categories',
@@ -43,7 +43,7 @@ export default function Lectures({ display=false }) {
       pages: 10,
       problems: 5,
       difficulty: 1,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/04_Risk.png'
     },
     {
       title: '05: Building Systems',
@@ -52,7 +52,7 @@ export default function Lectures({ display=false }) {
       pages: 10,
       problems: 5,
       difficulty: 1,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/05_Building.png'
     },
     {
       title: '06: Ductility',
@@ -61,7 +61,7 @@ export default function Lectures({ display=false }) {
       pages: 21,
       problems: 5,
       difficulty: 1,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/06_Ductility.png'
     },
     {
       title: '07: Base Shear',
@@ -70,7 +70,7 @@ export default function Lectures({ display=false }) {
       pages: 23,
       problems: 5,
       difficulty: 2,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/07_Base.png'
     },
     {
       title: '08: Force Distribution',
@@ -79,7 +79,7 @@ export default function Lectures({ display=false }) {
       pages: 31,
       problems: 5,
       difficulty: 2,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/08_Force.png'
     },
     {
       title: '09: Drift',
@@ -88,7 +88,7 @@ export default function Lectures({ display=false }) {
       pages: 40,
       problems: 5,
       difficulty: 1,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/09_Drift.png'
     },
     {
       title: '10A: Flexible Diaphragms',
@@ -97,7 +97,7 @@ export default function Lectures({ display=false }) {
       pages: 71,
       problems: 5,
       difficulty: 3,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/10A_Flexible.png'
     },
     {
       title: '10B: Rigid Diaphragms',
@@ -106,7 +106,7 @@ export default function Lectures({ display=false }) {
       pages: 60,
       problems: 5,
       difficulty: 3,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/10B_Rigid.png'
     },
     {
       title: '11: Irregularities',
@@ -115,7 +115,7 @@ export default function Lectures({ display=false }) {
       pages: 32,
       problems: 5,
       difficulty: 1,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/11_Irregularities.png'
     },
     {
       title: '12: Non-structural Components',
@@ -124,7 +124,7 @@ export default function Lectures({ display=false }) {
       pages: 43,
       problems: 5,
       difficulty: 2,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/12_Nonstructural.png'
     },
     {
       title: '13: Seismic Detailing',
@@ -133,7 +133,7 @@ export default function Lectures({ display=false }) {
       pages: 20,
       problems: 5,
       difficulty: 1,
-      img: '/images/lectures/01_Intro.png'
+      img: '/images/lectures/13_Seismic.png'
     },
   ]
 
