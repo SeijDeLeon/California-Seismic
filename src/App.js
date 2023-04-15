@@ -10,15 +10,13 @@ import Contributors from './components/Contributors.jsx';
 import UnderConstruction from './components/UnderConstruction.jsx';
 import Footer from './components/Footer.jsx';
 
-
-
 function App() {
   return (
-    <div className="App">
+    <div className="App overflow-x-hidden">
       <Header />
       <Routes>
         <Route path = "/" element = {<Home />} />
-        <Route path = "/lectures" element = {<Lectures />} />
+        <Route path = "/lectures" element = {<Lectures display='true' />} />
         <Route path = "/practice" element = {<Practice />} />
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
