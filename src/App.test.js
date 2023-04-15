@@ -1,4 +1,4 @@
-import { render, screen, act, within } from '@testing-library/react';
+import { render, screen, act, within, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 
 import React from 'react';
@@ -58,15 +58,18 @@ it('renders footer', () => {
 });
 
 it('renders lecture landing page', async () => {
-  const user = userEvent.setup();
-
   render(<Lectures display={true}/>);
   expect(screen.getAllByText('Lectures')[0]).toBeInTheDocument();
   const articles = screen.getAllByRole('article');
+
+  //should be many articles for many lectures
   expect(articles.length).toBeGreaterThan(10);
 
-  //test hover functionality
-  expect(articles[1]).toHaveStyle(`border-color: "transparent"`)
+  //should have no border by default
+  expect(articles[1]).toHaveStyle(`border-color: "transparent"`);
 
+  //should have border on hover
+  fireEvent.mouseEnter(articles[1]);
+  expect(articles[1]).toHaveStyle(`border-width: "2px"`);
 
 });
