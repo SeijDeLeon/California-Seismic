@@ -12,10 +12,11 @@ export default function Practice( { display=true }) {
     return (
       <main>
         <h1> Practice</h1>
-        {questionList.data.map((questionList, index) =>
-          <QuestionList questionList={questionList} key={questionList.title ? questionList.title : index}/>
-        )}
-
+        <div className='max-w-4xl m-auto'>
+          {questionList.data.map((questionList, index) =>
+            <QuestionList questionList={questionList} key={questionList.title ? questionList.title : index}/>
+          )}
+        </div>
       </main>
     )
   }
