@@ -1,5 +1,5 @@
 import Question from './Question.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function QuestionList( { questionList }) {
 
@@ -11,13 +11,36 @@ export default function QuestionList( { questionList }) {
   const textColorToggle = 'text-black';
   const borderStyle = 'border-solid border-2'
 
-  var completed = 2;
-  var total = questionList.questions.length;
-
   const [visibilityClass, setVisibilityClass] = useState(visibilityDefault);
   const [bgColorClass, setBgColorClass] = useState(bgColorDefault);
   const [textColorClass, setTextColorClass] = useState(textColorDefault);
+  const [completedCount, setCompletedCount] = useState(0);
 
+  //setup for recording total number of questions completed
+
+  const total = questionList.questions.length;
+
+  useEffect(() => {
+    if (!localStorage.getItem(questionList.title)) {
+      //set new data to localStorage
+      console.log('writing new data to' + questionList.title);
+      var defaultKeys = {};
+      for (let i = 0; i < total; i++) {
+        defaultKeys[questionList.questions[i].key] = false;
+      }
+      localStorage.setItem(questionList.title, JSON.stringify(defaultKeys));
+    } else {
+      //retrieve existing data from localStorage
+      var localStorageData = JSON.parse(localStorage.getItem(questionList.title));
+      var count = 0;
+      for (var key in localStorageData) {
+        if (localStorageData[key]) {
+          count++;
+        }
+        setCompletedCount(count);
+      }
+    }
+  }, [])
 
   const toggleVisibility = () => {
     visibilityClass === visibilityDefault ? setVisibilityClass(visibilityToggle) : setVisibilityClass(visibilityDefault);
@@ -28,11 +51,11 @@ export default function QuestionList( { questionList }) {
   return (
     <>
       <div onClick={toggleVisibility} className={`cursor-pointer flex hover:bg-sky-700 ${bgColorClass} ${textColorClass}`}>
-        <div className='w-1/2 text-lg text-left'>{questionList.title} </div>
+        <div className='w-1/2 text-lg text-left pl-4'>{questionList.title} </div>
         <div className='w-1/2 flex items-center'>
-          <p className='w/1-4 text-left'>{`(${completed}/${total})`}</p>
+          <p className='w/1-4 text-left'>{`(${completedCount}/${total})`}</p>
           <div className='bg-gray-100 h-4 w-3/4'>
-            <div style={ {width: `${completed/total*100}%`} } className={`bg-amber-300 text-left h-full`}></div>
+            <div style={ {width: `${completedCount/total*100}%`} } className={`bg-amber-300 text-left h-full`}></div>
           </div>
         </div>
       </div>
@@ -47,7 +70,7 @@ export default function QuestionList( { questionList }) {
         </thead>
         <tbody className={borderStyle}>
           {questionList.questions.map( (question, index) =>
-            <Question question={question} borderStyle={borderStyle} key={question.key ? question.key : index} />
+            <Question question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
           )}
         </tbody>
       </table>
