@@ -51,7 +51,7 @@ export default function Question( { question, borderStyle, title, completedCount
   }
 
   return (
-    <tr className={borderStyle}>
+    <tr className={`${borderStyle} h-8`}>
       <th className={borderStyle}><Button /></th>
       <th className={`${borderStyle} text-left pl-4`}>{question.description}</th>
       <th className={borderStyle}>{question.difficulty}</th>

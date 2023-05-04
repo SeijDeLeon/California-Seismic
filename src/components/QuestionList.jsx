@@ -3,15 +3,16 @@ import { useState, useEffect } from 'react';
 
 export default function QuestionList( { questionList }) {
 
-  const visibilityDefault = 'hidden';
-  const visibilityToggle = 'default'
+  const heightDefault = '0';
+  const maxTableHeight = 2*questionList.questions.length; //table row height is set as h-8 or 2rem
+  const heightToggle = maxTableHeight+'rem';
   const bgColorDefault = 'bg-sky-800';
   const bgColorToggle = 'bg-sky-500';
   const textColorDefault = 'text-white';
   const textColorToggle = 'text-black';
   const borderStyle = 'border-solid border-2'
 
-  const [visibilityClass, setVisibilityClass] = useState(visibilityDefault);
+  const [tableHeight, setTableHeight] = useState(heightDefault);
   const [bgColorClass, setBgColorClass] = useState(bgColorDefault);
   const [textColorClass, setTextColorClass] = useState(textColorDefault);
   const [completedCount, setCompletedCount] = useState(0);
@@ -43,7 +44,7 @@ export default function QuestionList( { questionList }) {
   }, [])
 
   const toggleVisibility = () => {
-    visibilityClass === visibilityDefault ? setVisibilityClass(visibilityToggle) : setVisibilityClass(visibilityDefault);
+    tableHeight === heightDefault ? setTableHeight(heightToggle) : setTableHeight(heightDefault);
     bgColorClass === bgColorDefault ? setBgColorClass(bgColorToggle) : setBgColorClass(bgColorDefault);
     textColorClass === textColorDefault ? setTextColorClass(textColorToggle) : setTextColorClass(textColorDefault);
   }
@@ -59,21 +60,23 @@ export default function QuestionList( { questionList }) {
           </div>
         </div>
       </div>
-      <table className={`w-full border-spacing-0 border-collapse ${borderStyle} ${visibilityClass}`} >
-        <thead className={`${borderStyle}`}>
-          <tr className={borderStyle}>
-            <th className={`${borderStyle}`}>Status</th>
-            <th className={`text-left pl-4 ${borderStyle}`}>Problem</th>
-            <th className={` ${borderStyle}`}>Difficulty</th>
-            <th className={` ${borderStyle}`}>Related Lectures</th>
-          </tr>
-        </thead>
-        <tbody className={borderStyle}>
-          {questionList.questions.map( (question, index) =>
-            <Question question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
-          )}
-        </tbody>
-      </table>
+      <div style={ {maxHeight: `${tableHeight}`, transition: 'max-height 0.2s linear'}} className={`overflow-hidden`}>
+        <table className={`w-full border-spacing-0 border-collapse ${borderStyle}`} >
+          <thead className={`${borderStyle}`}>
+            <tr className={borderStyle}>
+              <th className={`${borderStyle}`}>Status</th>
+              <th className={`text-left pl-4 ${borderStyle}`}>Problem</th>
+              <th className={` ${borderStyle}`}>Difficulty</th>
+              <th className={` ${borderStyle}`}>Related Lectures</th>
+            </tr>
+          </thead>
+          <tbody className={borderStyle}>
+            {questionList.questions.map( (question, index) =>
+              <Question question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
+            )}
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }
