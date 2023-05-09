@@ -1,10 +1,10 @@
-import Question from './Question.jsx';
+import QuestionRow from './QuestionRow.jsx';
 import { useState, useEffect } from 'react';
 
 export default function QuestionList( { questionList }) {
 
   const heightDefault = '0';
-  const maxTableHeight = 2*questionList.questions.length; //table row height is set as h-8 or 2rem
+  const maxTableHeight = 2*questionList.questions.length +2; //table row height is set as h-8 or 2rem
   const heightToggle = maxTableHeight+'rem';
   const bgColorDefault = 'bg-sky-800';
   const bgColorToggle = 'bg-sky-500';
@@ -51,16 +51,16 @@ export default function QuestionList( { questionList }) {
 
   return (
     <>
-      <div onClick={toggleVisibility} className={`cursor-pointer flex hover:bg-sky-700 ${bgColorClass} ${textColorClass}`}>
-        <div className='w-1/2 text-lg text-left pl-4'>{questionList.title} </div>
+      <div onClick={toggleVisibility} className={`cursor-pointer flex justify-between hover:bg-sky-700 border-solid border border-slate-500 ${bgColorClass} ${textColorClass}`}>
+        <p className='w-1/2 text-lg text-left pl-4'>{questionList.title} </p>
         <div className='w-1/2 flex items-center'>
-          <p className='w/1-4 text-left'>{`(${completedCount}/${total})`}</p>
+          <p className='w/1-4 text-left pr-2'>{`(${completedCount}/${total})`}</p>
           <div className='bg-gray-100 h-4 w-3/4'>
-            <div style={ {width: `${completedCount/total*100}%`} } className={`bg-amber-300 text-left h-full`}></div>
+            <div style={ {width: `${completedCount/total*100}%`} } className={`bg-amber-300 text-left h-full transition-all`}></div>
           </div>
         </div>
       </div>
-      <div style={ {maxHeight: `${tableHeight}`, transition: 'max-height 0.2s linear'}} className={`overflow-hidden`}>
+      <div style={ {maxHeight: `${tableHeight}`, transition: 'max-height 0.1s linear'}} className={`overflow-hidden`}>
         <table className={`w-full border-spacing-0 border-collapse ${borderStyle}`} >
           <thead className={`${borderStyle}`}>
             <tr className={borderStyle}>
@@ -72,7 +72,7 @@ export default function QuestionList( { questionList }) {
           </thead>
           <tbody className={borderStyle}>
             {questionList.questions.map( (question, index) =>
-              <Question question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
+              <QuestionRow question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
             )}
           </tbody>
         </table>
