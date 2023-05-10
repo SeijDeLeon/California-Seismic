@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import questionData from '../assets/questionData.js';
 
-export default function QuestionDisplay( { key='a1' } ) {
+export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) {
 
-  //search for the question that contains this key. for future use, this key can be an ID used in a 'GET' request to a server that has a database which contains all questions.
-  var primaryIndex = key.charCodeAt(0) - 97; //ASCII code for letter 'a' is 97
-  var secondaryIndex = Number(key.slice(1))-1;
+  //search for the question that contains this questionKey. for future use, this questionKey can be an ID used in a 'GET' request to a server that has a database which contains all questions.
+  var primaryIndex = questionKey.charCodeAt(0) - 97; //ASCII code for letter 'a' is 97
+  var secondaryIndex = Number(questionKey.slice(1))-1;
 
   var question = [];
   var title = '';
@@ -15,7 +15,7 @@ export default function QuestionDisplay( { key='a1' } ) {
     title = questionData.data[primaryIndex].title ? questionData.data[primaryIndex].title : questionData.data[0].title;
 
   } catch (error) {
-    console.log('unable to find question selected for display in QuestionDisplay.jsx using key ' + key);
+    console.log('unable to find question selected for display in QuestionDisplay.jsx using questionKey ' + questionKey);
     question = questionData.data[0].questions[0];
     title = questionData.data[0].title;
 

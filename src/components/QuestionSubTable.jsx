@@ -1,7 +1,7 @@
 import QuestionRow from './QuestionRow.jsx';
 import { useState, useEffect } from 'react';
 
-export default function QuestionList( { questionList }) {
+export default function QuestionSubTable( { setQuestionKey, questionList }) {
 
   const heightDefault = '0';
   const maxTableHeight = 2*questionList.questions.length +2; //table row height is set as h-8 or 2rem
