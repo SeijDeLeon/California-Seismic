@@ -1,6 +1,25 @@
 import { useState, useEffect } from 'react';
+import questionData from '../assets/questionData.js';
 
-export default function Question( { question, title } ) {
+export default function QuestionDisplay( { key='a1' } ) {
+
+  //search for the question that contains this key. for future use, this key can be an ID used in a 'GET' request to a server that has a database which contains all questions.
+  var primaryIndex = key.charCodeAt(0) - 97; //ASCII code for letter 'a' is 97
+  var secondaryIndex = Number(key.slice(1))-1;
+
+  var question = [];
+  var title = '';
+
+  try {
+    question =  questionData.data[primaryIndex].questions[secondaryIndex] ?  questionData.data[primaryIndex].questions[secondaryIndex] : questionData.data[0].questions[0];
+    title = questionData.data[primaryIndex].title ? questionData.data[primaryIndex].title : questionData.data[0].title;
+
+  } catch (error) {
+    console.log('unable to find question selected for display in QuestionDisplay.jsx using key ' + key);
+    question = questionData.data[0].questions[0];
+    title = questionData.data[0].title;
+
+  }
 
   const [checkedItem, setCheckedItem] = useState('');
   const [solutionDisplay, setSolutionDisplay] = useState(false);
@@ -46,7 +65,7 @@ export default function Question( { question, title } ) {
 
   return (
     <div className='max-w-4xl px-16 bg-white border-solid border rounded-md m-auto py-4'>
-      <div className='block'>Earthquakes</div>
+      <div className='block'>{title}</div>
       <div className='flex justify-center'>
         <p>Previous</p>
         <p>Next</p>
@@ -62,7 +81,7 @@ export default function Question( { question, title } ) {
         })}
       </div>
       <section className='bg-gradient-to-r from-blue-300 via-sky-200 to-sky-100 rounded m-auto shadow-inner'>
-        <p className='cursor-pointer' onClick={toggleSolutionDisplay} >Solution</p>
+        <p className='cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? 'Hide Solution': 'Show Solution' }</p>
         {solutionDisplay ?
           <div>
             <p>{`Answer: ${question.answer}`}</p>

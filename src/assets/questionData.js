@@ -4,9 +4,9 @@
       title: 'Earthquakes',
       questions: [
         {key:'a1', description:'Determine R value #1', question:"what is 1 + 1", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'easy'},
-        {key:'a2', description:'Determine R value #2', question:"what is 1 + 1", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'easy'},
-        {key:'a3', description:'Determine R value #3', question:"what is 1 + 1", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'easy'},
-        {key:'a4', description:'Determine R value #4', question:"what is 1 + 1", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'medium'},
+        {key:'a2', description:'Determine R value #2', question:"what is 1 + 12", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'easy'},
+        {key:'a3', description:'Determine R value #3', question:"what is 1 + 13", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'easy'},
+        {key:'a4', description:'Determine R value #4', question:"what is 1 + 14", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'medium'},
         {key:'a5', description:'Determine R value #5', question:"what is 1 + 1", false1:'1', false2:'3', false3: '5', answer:'2', solution:"Do simple math", imgQ:"a1Q.png", imgS:"a1S.png", lectures:'1, 3, 8', difficulty:'hard'}
       ]
     },
