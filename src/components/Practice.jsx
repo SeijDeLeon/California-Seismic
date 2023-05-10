@@ -15,8 +15,7 @@ export default function Practice( { display=true }) {
   } else {
     return (
       <main>
-        <h1> Practice</h1>
-        <QuestionDisplay questionKey={questionKey}/>
+        <QuestionDisplay questionKey={questionKey} setQuestionKey={setQuestionKey}/>
         <QuestionTable setQuestionKey={setQuestionKey}/>
       </main>
     )

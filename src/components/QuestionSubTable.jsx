@@ -72,7 +72,7 @@ export default function QuestionSubTable( { setQuestionKey, questionList }) {
           </thead>
           <tbody className={borderStyle}>
             {questionList.questions.map( (question, index) =>
-              <QuestionRow question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
+              <QuestionRow setQuestionKey={setQuestionKey} question={question} completedCount={completedCount} setCompletedCount={setCompletedCount} title={questionList.title} borderStyle={borderStyle} key={question.key ? question.key : index} />
             )}
           </tbody>
         </table>

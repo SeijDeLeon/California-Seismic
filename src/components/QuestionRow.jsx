@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import ScrollToTop from './ScrollToTop.jsx';
 
-export default function QuestionRow( { question, borderStyle, title, completedCount, setCompletedCount } ) {
+export default function QuestionRow( { question, borderStyle, title, completedCount, setCompletedCount, setQuestionKey } ) {
   //returns a single Question
 
   const [checked, setChecked] = useState(false);
@@ -28,7 +29,7 @@ export default function QuestionRow( { question, borderStyle, title, completedCo
       console.log(error);
      }
   }
-  const handleClick = () => {
+  const handleBoxClick = () => {
     if (checked) {
       //previously marked as true, now set to false
       updateLocalStorage(false);
@@ -42,10 +43,17 @@ export default function QuestionRow( { question, borderStyle, title, completedCo
     }
   }
 
+  const handleQuestionClick = () => {
+    var QuestionDisplay = document.getElementById('QuestionDisplay');
+    var questionDisplayHeight = QuestionDisplay.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({top: questionDisplayHeight, behavior: 'smooth'});
+    setQuestionKey(question.key);
+  }
+
   const Button = () => {
     return (
       <div className='flex justify-center'>
-        <button type='checkbox' onClick={handleClick} className={checked ? `bg-sky-500 ${buttonClass}` : `bg-sky-50 ${buttonClass}`}>&#10004;</button>
+        <button type='checkbox' onClick={handleBoxClick} className={checked ? `bg-sky-500 ${buttonClass}` : `bg-sky-50 ${buttonClass}`}>&#10004;</button>
       </div>
     )
   }
@@ -53,7 +61,7 @@ export default function QuestionRow( { question, borderStyle, title, completedCo
   return (
     <tr className={`${borderStyle} h-8`}>
       <th className={borderStyle}><Button /></th>
-      <th className={`${borderStyle} text-left pl-4`}>{question.description}</th>
+      <th className={`${borderStyle} text-left pl-4 hover:cursor-pointer`} onClick={handleQuestionClick}>{question.description}</th>
       <th className={borderStyle}>{question.difficulty}</th>
       <th className={borderStyle}>{question.lectures}</th>
     </tr>
