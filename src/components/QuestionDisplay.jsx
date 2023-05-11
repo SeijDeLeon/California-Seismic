@@ -6,6 +6,16 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
   const arrowChevronUp = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="m12 6.586-8.707 8.707 1.414 1.414L12 9.414l7.293 7.293 1.414-1.414L12 6.586z"/></svg>;
   const arrowChevronRight = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>;
   const arrowChevronLeft = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"/></svg>;
+
+  const splitText = (text) => {
+    return text.split('\n').map((line, index) => (
+      <p key={index}>
+        {line}
+        <br />
+      </p>
+    ));
+  }
+
   //search for the question that contains this questionKey. for future use, this questionKey can be an ID used in a 'GET' request to a server that has a database which contains all questions.
   var primaryIndex = questionKey.charCodeAt(0) - 97; //ASCII code for letter 'a' is 97
   var secondaryIndex = Number(questionKey.slice(1))-1;
@@ -105,17 +115,21 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
 
   const handleNextClick = () => {
     setSolutionDisplay(false);
-    setQuestionKey(nextQuestionKey)
+    setCheckedItem('');
+    setQuestionKey(nextQuestionKey);
   }
 
   const handlePrevClick = () => {
     setSolutionDisplay(false);
-    setQuestionKey(prevQuestionKey)
+    setCheckedItem('');
+    setQuestionKey(prevQuestionKey);
   }
 
   useEffect(() => {
     setSolutionDisplay(false);
+    setCheckedItem('');
   },[questionKey])
+
 
   return (
     <div className='max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4' id='QuestionDisplay'>
@@ -139,7 +153,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
         {solutionDisplay ?
           <div className='text-left p-4 mx-5'>
             <p className='py-4'>{`Answer: ${question.answer}`}</p>
-            <p className=''>{question.solution}</p>
+            <p className=''>{splitText(question.solution)}</p>
           </div>
         : <></>}
         <div className=' transition-all fill-white hover:fill-black m-auto flex justify-center cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? arrowChevronUp : arrowChevronDown}</div>
