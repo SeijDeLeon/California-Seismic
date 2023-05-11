@@ -104,13 +104,18 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
   }
 
   const handleNextClick = () => {
+    setSolutionDisplay(false);
     setQuestionKey(nextQuestionKey)
   }
 
   const handlePrevClick = () => {
+    setSolutionDisplay(false);
     setQuestionKey(prevQuestionKey)
   }
 
+  useEffect(() => {
+    setSolutionDisplay(false);
+  },[questionKey])
 
   return (
     <div className='max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4' id='QuestionDisplay'>
