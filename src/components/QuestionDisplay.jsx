@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import questionData from '../assets/questionData.js';
+import MathJax from 'react-mathjax';
 
 export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) {
   const arrowChevronDown = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 17.414 3.293 8.707l1.414-1.414L12 14.586l7.293-7.293 1.414 1.414L12 17.414z"/></svg>;
@@ -130,9 +131,54 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
     setCheckedItem('');
   },[questionKey])
 
+  const tex = `f(x) = \\int_{-\\infty}^\\infty
+    \\hat f(\\xi)\\,e^{2 \\pi i \\xi x}
+    \\,d\\xi`;
+
+  const sampleText = 'here is some sample text, we want Rd to display as $$R_d$$, so is $$x^3$$. \n This should be on a new line';
+
+  const mj = (text) => {
+    //search through the text string to identify sections that should be turned into Mathjax
+    //get index of all dollar signs
+    //store each chunk in an array, then  return the array with ...
+    // <p> here is some sampple text</p>
+    // <MathJax.Node inline formula{R_d} />
+
+    //at the very end, return <MathJax.Provider> {array} </MathJax.Provider>
+
+    //
+    if (text.length === 0 || text === undefined) return;
+
+    var sections = text.split('$$');
+
+    var plainText = false;
+    if (text[0] === '$') {
+      plainText = true;
+    }
+
+    var mathJaxText = sections.map((text, index) => {
+      plainText = !plainText;
+      return plainText ? text : <MathJax.Node inline formula={text} />;
+    })
+
+
+    var test = ['here is R_d with Mathjax: ', <MathJax.Node inline formula={'R_d'} />];
+    //get array of text
+    //return a combination of plain text and mathjax components
+    //ie <MathJax.Provider> <div> <p>The answer is: </p> <MathJax.Node inline formula{R_d^3} /> </div> </MathJax.Provider>
+    return  <MathJax.Provider> <div> {mathJaxText}</div> </MathJax.Provider>
+  };
 
   return (
     <div className='max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4' id='QuestionDisplay'>
+      <MathJax.Provider>
+        <div>
+            This is an inline math formula: <MathJax.Node inline formula={'a = b c'} />
+            <MathJax.Node formula={tex} />
+            <MathJax.Node formula={`The value of R_d is`} />
+        </div>
+      </MathJax.Provider>
+      {mj(sampleText)}
       <p className='text-lg font-bold underline-offset-2 underline'>{`${title} ${secondaryIndex + 1}/${totalQuestions}`}</p>
       <div className='flex justify-center fill-slate-400 text-slate-400 pb-4 text-sm'>
         <p onClick={handlePrevClick} className='flex items-center pr-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'> {arrowChevronLeft} Previous</p>
