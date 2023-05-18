@@ -9,6 +9,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
   const arrowChevronLeft = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"/></svg>;
 
   const splitText = (text) => {
+    //return an array of strings separated by any '\n' characters
     return text.split('\n').map((line, index) => (
       <p key={index}>
         {line}
@@ -137,47 +138,36 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
 
   const sampleText = 'here is some sample text, we want Rd to display as $$R_d$$, so is $$x^3$$. \n This should be on a new line';
 
-  const mj = (text) => {
-    //search through the text string to identify sections that should be turned into Mathjax
-    //get index of all dollar signs
-    //store each chunk in an array, then  return the array with ...
-    // <p> here is some sampple text</p>
-    // <MathJax.Node inline formula{R_d} />
-
-    //at the very end, return <MathJax.Provider> {array} </MathJax.Provider>
-
-    //
-    if (text.length === 0 || text === undefined) return;
-
-    var sections = text.split('$$');
-
-    var plainText = false;
-    if (text[0] === '$') {
-      plainText = true;
-    }
-
-    var mathJaxText = sections.map((text, index) => {
-      plainText = !plainText;
-      return plainText ? text : <MathJax.Node inline formula={text} />;
+  const mj = (originalText) => {
+    if (originalText.length === 0 || originalText === undefined) return;
+    //to do: add error handling for if the user has an odd number of $$ ()
+    var separatedText = originalText.split('\n'); //returns an array of elements
+    //return an array of MathJax.Provider
+    var productionText = separatedText.map((text, index) => {
+      var sections = text.split('$$');
+      var plainText = false;
+      if (text[0] === '$') {
+        plainText = true;
+      }
+      var mathJaxText = sections.map((text, index) => {
+        plainText = !plainText;
+        return plainText ? text : <MathJax.Node inline formula={text} />;
+      })
+      return  <MathJax.Provider> <div> {mathJaxText}</div> </MathJax.Provider>
     })
-
-
-    var test = ['here is R_d with Mathjax: ', <MathJax.Node inline formula={'R_d'} />];
-    //get array of text
-    //return a combination of plain text and mathjax components
-    //ie <MathJax.Provider> <div> <p>The answer is: </p> <MathJax.Node inline formula{R_d^3} /> </div> </MathJax.Provider>
-    return  <MathJax.Provider> <div> {mathJaxText}</div> </MathJax.Provider>
+    return productionText;
   };
 
-  return (
-    <div className='max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4' id='QuestionDisplay'>
-      <MathJax.Provider>
+/* {<MathJax.Provider>
         <div>
             This is an inline math formula: <MathJax.Node inline formula={'a = b c'} />
             <MathJax.Node formula={tex} />
             <MathJax.Node formula={`The value of R_d is`} />
         </div>
-      </MathJax.Provider>
+      </MathJax.Provider>} */
+  return (
+    <div className='max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4' id='QuestionDisplay'>
+
       {mj(sampleText)}
       <p className='text-lg font-bold underline-offset-2 underline'>{`${title} ${secondaryIndex + 1}/${totalQuestions}`}</p>
       <div className='flex justify-center fill-slate-400 text-slate-400 pb-4 text-sm'>
