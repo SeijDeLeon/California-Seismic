@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
+import { MathJaxContext } from "better-react-mathjax";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <ScrollToTop />
+    <MathJaxContext>
       <App />
+    </MathJaxContext>
     </BrowserRouter>
   </React.StrictMode>
 );
