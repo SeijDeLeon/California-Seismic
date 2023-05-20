@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import questionData from '../assets/questionData.js';
-import MathJax from 'react-mathjax';
+import { MathJax} from "better-react-mathjax";
+
 
 export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) {
   const arrowChevronDown = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 17.414 3.293 8.707l1.414-1.414L12 14.586l7.293-7.293 1.414 1.414L12 17.414z"/></svg>;
@@ -9,12 +10,13 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
   const arrowChevronLeft = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"/></svg>;
 
   const splitText = (text) => {
-    //return an array of strings separated by any '\n' characters
-    return text.split('\n').map((line, index) => (
-      <p key={index}>
+    //return an array of strings separated by any '<br>' characters
+    //don't revise this for \n because MathJax has heavy use of \\
+    return text.split('<br>').map((line, index) => (
+      <Fragment key={index}>
         {line}
         <br />
-      </p>
+      </Fragment>
     ));
   }
 
@@ -24,13 +26,13 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
 
   var question = [];
   var title = '';
-  var description='';
+  //var description='';
   var data = questionData.data;
 
   try {
     question =  data[primaryIndex].questions[secondaryIndex] ?  data[primaryIndex].questions[secondaryIndex] : data[0].questions[0];
     title = data[primaryIndex].title ? data[primaryIndex].title : data[0].title;
-    description = data[primaryIndex].questions[secondaryIndex].description ? data[primaryIndex].questions[secondaryIndex].description : data[0].questions[0].description
+    //description = data[primaryIndex].questions[secondaryIndex].description ? data[primaryIndex].questions[secondaryIndex].description : data[0].questions[0].description
 
   } catch (error) {
     console.log('unable to find question selected for display in QuestionDisplay.jsx using questionKey ' + questionKey);
@@ -128,74 +130,45 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
   }
 
   useEffect(() => {
+    setDisplay('opacity-0');
     setSolutionDisplay(false);
     setCheckedItem('');
-  },[questionKey])
+    setDisplay('opacity-100')
+  },[questionKey]);
 
-  const tex = `f(x) = \\int_{-\\infty}^\\infty
-    \\hat f(\\xi)\\,e^{2 \\pi i \\xi x}
-    \\,d\\xi`;
+  const [display, setDisplay] = useState('opacity-0');
 
-  const sampleText = 'here is some sample text, we want Rd to display as $$R_d$$, so is $$x^3$$. \n This should be on a new line';
-
-  const mj = (originalText) => {
-    if (originalText.length === 0 || originalText === undefined) return;
-    //to do: add error handling for if the user has an odd number of $$ ()
-    var separatedText = originalText.split('\n'); //returns an array of elements
-    //return an array of MathJax.Provider
-    var productionText = separatedText.map((text, index) => {
-      var sections = text.split('$$');
-      var plainText = false;
-      if (text[0] === '$') {
-        plainText = true;
-      }
-      var mathJaxText = sections.map((text, index) => {
-        plainText = !plainText;
-        return plainText ? text : <MathJax.Node inline formula={text} />;
-      })
-      return  <MathJax.Provider> <div> {mathJaxText}</div> </MathJax.Provider>
-    })
-    return productionText;
-  };
-
-/* {<MathJax.Provider>
-        <div>
-            This is an inline math formula: <MathJax.Node inline formula={'a = b c'} />
-            <MathJax.Node formula={tex} />
-            <MathJax.Node formula={`The value of R_d is`} />
-        </div>
-      </MathJax.Provider>} */
   return (
-    <div className='max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4' id='QuestionDisplay'>
 
-      {mj(sampleText)}
-      <p className='text-lg font-bold underline-offset-2 underline'>{`${title} ${secondaryIndex + 1}/${totalQuestions}`}</p>
-      <div className='flex justify-center fill-slate-400 text-slate-400 pb-4 text-sm'>
-        <p onClick={handlePrevClick} className='flex items-center pr-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'> {arrowChevronLeft} Previous</p>
-        <p onClick={handleNextClick} className='flex items-center pl-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'>Next {arrowChevronRight}</p>
+      <div className={`${display} max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4 transition-all duration-500`} id='QuestionDisplay'>
+        <p className='text-lg font-bold underline-offset-2 underline'>{`${title} ${secondaryIndex + 1}/${totalQuestions}`}</p>
+        <div className='flex justify-center fill-slate-400 text-slate-400 pb-4 text-sm'>
+          <p onClick={handlePrevClick} className='flex items-center pr-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'> {arrowChevronLeft} Previous</p>
+          <p onClick={handleNextClick} className='flex items-center pl-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'>Next {arrowChevronRight}</p>
+        </div>
+        <MathJax className='flex text-left m-auto'>{splitText(question.question)}</MathJax>
+        <div className='block py-4 m-auto'>
+          {randomizedAnswers.map((answer, index) => {
+            return (
+              <label key={index} className={`block text-left transition-all ${(answer===question.answer && solutionDisplay)? 'bg-gradient-to-r from-yellow-200' : ''}`}>
+                <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer}/> &#160;{answer}
+              </label>
+            )
+          })}
+        </div>
+        <section className='bg-sky-200 rounded m-auto shadow-inner'>
+          <p className='cursor-pointer text-slate-500 hover:text-slate-700' onClick={toggleSolutionDisplay}>{solutionDisplay ? '': 'Solution' }</p>
+          {solutionDisplay ?
+            <div className='text-left p-4 mx-5'>
+              <p className='py-4'>{`Answer: ${question.answer}`}</p>
+              <MathJax>{splitText(question.solution)}</MathJax>
+            </div>
+          : <></>}
+          <div className=' transition-all fill-white hover:fill-black m-auto flex justify-center cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? arrowChevronUp : arrowChevronDown}</div>
+          <p className='hover:cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? '' : ''}</p>
+        </section>
       </div>
-      <p className='flex m-auto'>{`Q: ${question.question}`}</p>
-      <div className='block py-4 m-auto'>
-        {randomizedAnswers.map((answer, index) => {
-          return (
-            <label key={index} className={`block text-left transition-all ${(answer===question.answer && solutionDisplay)? 'bg-gradient-to-r from-yellow-200' : ''}`}>
-              <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer}/> &#160;{answer}
-            </label>
-          )
-        })}
-      </div>
-      <section className='bg-sky-200 rounded m-auto shadow-inner'>
-        <p className='cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? '': 'Solution' }</p>
-        {solutionDisplay ?
-          <div className='text-left p-4 mx-5'>
-            <p className='py-4'>{`Answer: ${question.answer}`}</p>
-            <p className=''>{splitText(question.solution)}</p>
-          </div>
-        : <></>}
-        <div className=' transition-all fill-white hover:fill-black m-auto flex justify-center cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? arrowChevronUp : arrowChevronDown}</div>
-        <p className='hover:cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? '' : ''}</p>
-      </section>
-    </div>
+
 
 
   )
