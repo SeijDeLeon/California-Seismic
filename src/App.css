@@ -48,6 +48,10 @@
   justify-content: center;
 }
 
+.doc-content {
+  padding:0 !important;
+  max-width: 1200px !important;
+}
 
 @keyframes App-logo-spin {
   from {
