@@ -55,65 +55,65 @@ export default function Lectures({ display=false }) {
     { title: '07: Ductility',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'Seismic loads are',
+      prereqs:['Understand different types of building lateral systems','Determine seismic design category'],
+      objectives:['Know the relationship between R, Omega, and Cd','Understand the different phases of an inelastic force-deformation curve','Understand the requirements for using ductility values in building design']},
 
     { title: '08: Base Shear',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'The backbone of seismic calculations is based on one of the most familiar equations on all of physics. As earthquakes cause ground shaking and acceleration, the mass of a building structure is accelerated and creates forces that must be resistaed by the lateral system. ASCE 7 provides a procedural method of combining seismic accelerations and building mass into a static force.',
+      prereqs:['Lateral System Ductility', 'Basic Earthquake theory'],
+      objectives:['Determine effective seismic weight','Calculate seismic response coefficient Cs', 'Calculate Base Shear', 'Interpret a spectral response acceleration graph', 'Equivalent Lateral Force Procedure']},
 
     { title: '09: Force Distribution',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'Before a lateral system can be designed, the forces acting at each level of the structure must be determined. ASCE 7 provides a procedure for determining the forces at each level based on the relative weight tributary to that level and the total base shear.',
+      prereqs:['Calculate Seismic Base Shear'],
+      objectives:['Calculate tributary width', 'Calculate floor and wall weights', 'Calculate k factors', 'Calculate vertical distribution factor Cvx', 'Calculate vertical force distribution', 'Calculate horizontal force distribution']},
 
     { title: '10: Drift',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'Building structures must not only be designed to withstand the force from seismic events, but also the lateral deflection associated with the forces. This lateral deflection is often computed relative to adjacent floors, known as story drift. ASCE 7 imposes drift limits on building structures, and also provides a procedure for adjusting seismic forces so that the deflections can be properly estimated for inelastic structures.',
+      prereqs:['Vertical Force Distribution', 'Seismic Design Coefficients', 'Ductility', 'Seismic Base Shear'],
+      objectives:['Understand deflection vs drift', 'Understand drift vs drift ratio', 'Determine correct forces for drift calculations', 'Calculate drift and drift ratios', 'Calculate structural separation', 'Assess when P-Delta effects must be included in design']},
 
     { title: '11: Flexible Diaphragms',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'Diaphragms are an essential element of building structures designed to resist seismic forces. Identifying the difference between a floor and a diaphragm requires examining the force flow from wall to lateral system. In addition to understanding the purpose of a diaphragm, there are two types each with their own analysis procedure. ASCE 7 provides procedure for determining forces to diaphragms. ASCE 7 does not provide the necessary background to perform diaphragm analysis, so this lecture provides extensive examples and background on analysis procedures for flexible diaphragms. The following lecture covers rigid diaphragms.',
+      prereqs:['Vertical Force Distribution'],
+      objectives:['Visually identify detailing requirements for diaphragm action', 'Understand requirements for a floor or roof to be considered an effective diaphragm', 'Calculate diaphragm design forces', 'Understand how flexible diaphragms can be treated as simply supported beams for analysis', 'Calculate bending moment in flexible diaphragm', 'Calculate unit shear in flexible diaphragm', 'Calculate shear forces to lateral systems from flexible diaphragms', 'Calculate flexible diaphragm chord forces', 'Calculate collector / drag forces']},
 
     { title: '12: Rigid Diaphragms',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'Rigid diaphragms transfer forces to the building lateral system based on the relative rigidity of the lateral system itself. Because the diaphragm is analytically very rigid compared to the lateral system, the analysis procedure is different, and more tedious, than that of flexible diaphragms. ASCE 7 provides requirements for location of forces applied through rigid diaphragm, and also provides checks to help the designer verify if the building contains torsional irregularities. ASCE 7 does not provide guidance on how to analyze the forces in the diaphragm itself, so this is covered extensively in this lecture.',
+      prereqs:['Diaphragm Design Forces'],
+      objectives:['Calculate center of mass of rigid diaphragm', 'Calculate center of rigidty at rigid diaphragm', 'Calculate relative rigidity of shearwalls', 'Calculate inherent torsional moment', 'Correctly apply the accidental torsional moment', 'Calculate torsional amplification factor Ax','Calculate forces to lateral resisting system']},
 
     { title: '13: Irregularities',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'The equivalent lateral force procedure is based somewhat on historical context of regular buildings. The analysis procedure is best suited for certain common building systems/layouts. If a building under design does not match the intent of the code provisions, then the structure may need to be designed with an entirely differently analysis procedure, or the seismic forces increased via redundancy factors. ASCE 7 provides guidelines for how to evaluate if a building structure has an irregularity, and how to select appropriate redundancy factors and analytical procedures.',
+      prereqs:['Rigid diaphragms', 'Seismic base shear','Ductility', 'Building Period', 'Building systems'],
+      objectives:['Identify Horizontal Irregularities', 'Identify Vertical Irregularities', 'Determine permitted analytical procedures', 'Determine redundancy factor ρ','Calculate seismic load effect Em', 'Evaluate torsional amplification factors']},
 
     { title: '14: Non-structural Components',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
-      prereqs:['none'],
-      objectives:['']},
+      summary:'There is increasingly more data that shows the biggest repair cost due to earthquakes is from damage to non-structural components. While the building lateral system provides life safety to the building occupants during a seismic event, the contents inside like walls and equipment also pose a safety risk, and a significant financial liability. ASCE 7 provides an explicit method for calculating design forces on non-structural components and other various non-buiding structures.',
+      prereqs:['Seismic Base Shear'],
+      objectives:['Determine appropriate ap, Rp factors', 'Calculate non-structural component forces Fp', 'Analyze forces in suspended equipment', 'Analyze overturning forces on floor mounted equipment']},
 
     { title: '15: Seismic Detailing',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
       references:[],
-      summary:'',
+      summary:'A building structure cannot adequately resist seismic forces unless each element can transfer load to the next element. A critical aspect of seismic design is identifying load paths to allow forces to transfer in an efficient manner without failing connectors or elements theselves. This procedure of connecting elements together and providing adequate load path for lateral forces is known as seismic detailing',
       prereqs:['none'],
-      objectives:['']},
+      objectives:['Visually identify proper detailing procedures for common lateral resisting systems']},
   ];
 
   const Sidebar = <aside className='text-left sticky top-32'><ul>
@@ -144,9 +144,9 @@ useEffect(()=> {
             <h3>Lecture summary</h3>
             <p className='text-left pl-4'>{lectureData[idInt].summary}</p>
             <h3>Lecture Pre-Requisites</h3>
-            <ul className='text-left pl-4'>{lectureData[idInt].prereqs.map((prereq) => <li key={prereq}>{prereq}</li>)}</ul>
+            <ul className='text-left pl-4 list-disc'>{lectureData[idInt].prereqs.map((prereq) => <li key={prereq}>{prereq}</li>)}</ul>
             <h3>After this lecture you will know</h3>
-            <ul className='text-left pl-4'>{lectureData[idInt].objectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
+            <ul className='text-left pl-4 list-disc'>{lectureData[idInt].objectives.map((objective) => <li key={objective}>{objective}</li>)}</ul>
 
           </div>
           <div className="w-full px-6" id='googleDoc'></div>
