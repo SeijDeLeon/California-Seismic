@@ -34,7 +34,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
       { title: '04: Site Conditions',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vQknLoQHe8mNiQ2Ic2liolj8oWzw9cPTfYuWeoykIzPbKeK3kDTtA7NcV5Lqu2fNg2P-egUT6FuB5iL/pub?embedded=true',
       references:[],
       summary:'The magnitude of seismic waves depend on local soil conditions. ASCE 7 provides a method for adjusting base line seismic accelerations for unique soil conditions, discussed in this lecture. Determining site condition parameters is a basic skill that will be tested thoroughly on the exam.',
       prereqs:['Basics of seismic waves', 'Spectral acceleration'],
