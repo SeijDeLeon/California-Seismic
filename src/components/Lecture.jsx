@@ -26,7 +26,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '03: Code Provisions',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vTPD1IDa1z8BDbZwxCdZctVGOjdkFaDtSkaCAjuONNihWFK-R9jfeYD7WaHWSmN3WXiZDmOCs9CKgKQ/pub?embedded=true',
       references:['https://www.asce.org/publications-and-news/asce-7'],
       summary:'Building codes and reference standards are the basis for ensuring that structures are designed to a minimum standard. This lecture provides a brief history and overview of building codes to illustrate how ASCE 7 is related to the overall permitting process.',
       prereqs:['none'],
