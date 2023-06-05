@@ -58,7 +58,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '07: Ductility',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vTMQwKfzI9OhuFV6VtJb1oi8HQIBMFhXpgkW77zbJEn2GMeSx1qyIANBMuJIgPO5berjQKxPOTU_hlb/pub?embedded=true',
       references:[],
       summary:'Seismic loads are',
       prereqs:['Understand different types of building lateral systems','Determine seismic design category'],
