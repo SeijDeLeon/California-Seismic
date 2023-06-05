@@ -66,7 +66,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '08: Base Shear',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vT3e4VzrfjX2L6B4tf9plvqGlwuuTzmeb7ZJdp1ACI9PRnUZxozbMmLnnx_L0YfmlI-XQNwUosMj1yM/pub?embedded=true',
       references:[],
       summary:'The backbone of seismic calculations is based on one of the most familiar equations on all of physics. As earthquakes cause ground shaking and acceleration, the mass of a building structure is accelerated and creates forces that must be resistaed by the lateral system. ASCE 7 provides a procedural method of combining seismic accelerations and building mass into a static force.',
       prereqs:['Lateral System Ductility', 'Basic Earthquake theory'],
