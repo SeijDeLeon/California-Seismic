@@ -42,7 +42,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
       { title: '05: Risk Categories',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vR4AJFSLC9m3AsH5npn-m7VfPP4SfIYK7ANlrOD1NvbdGxsTn5MVYz7hZT27Ub_8f7prOsQjuDZR-yH/pub?embedded=true',
       references:[],
       summary:'The expected performance of building structures is set by the type of structure. Depending on the importance of a building, stricter seismic guidelines and even larger design forces are required. ASCE 7 provides a procedure for setting up these guidelines through design categories and importance factors, discussed in this lecture.',
       prereqs:['none'],
