@@ -50,7 +50,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '06: Building Systems',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vTmlyy0HQ2Gdrn0goPAYsfl3fjF5X6rebd-4pv-Osh2zXtofAF33d6UU_EZOevgjsZNSL2cAYxhTzqW/pub?embedded=true',
       references:[],
       summary:'Modern buildings utilize vertical and lateral resisting systems to resist both gravity loads and seismic/wind loads. Different systems have better performance than others, and ASCE 7 places limitations on lateral systems depending on relative seismic risk. This lecture covers how to verify which type of lateral system can be used depending on seismic risk, as well as methods for calculating essential building properties like fundamental period',
       prereqs:['none'],
