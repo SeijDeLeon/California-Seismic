@@ -82,7 +82,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '10: Drift',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vQbTIUgbGCs3z-PDv66ATWlF8eLPSppd66zGGcyIN7Bw9RGZhTyIASz8Hvc6zTo-t_9i3yp10K95FyM/pub?embedded=true',
       references:[],
       summary:'Building structures must not only be designed to withstand the force from seismic events, but also the lateral deflection associated with the forces. This lateral deflection is often computed relative to adjacent floors, known as story drift. ASCE 7 imposes drift limits on building structures, and also provides a procedure for adjusting seismic forces so that the deflections can be properly estimated for inelastic structures.',
       prereqs:['Vertical Force Distribution', 'Seismic Design Coefficients', 'Ductility', 'Seismic Base Shear'],
