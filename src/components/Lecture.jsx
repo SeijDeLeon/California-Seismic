@@ -74,7 +74,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '09: Force Distribution',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vS0bFc-R1Mkyvx0b-lrMjq_1SdjWeqlmikgVLEydVm6vmGXPlqcv6WGdgGmH1RE1RGPuIGM6sXouK4r/pub?embedded=true',
       references:[],
       summary:'Before a lateral system can be designed, the forces acting at each level of the structure must be determined. ASCE 7 provides a procedure for determining the forces at each level based on the relative weight tributary to that level and the total base shear.',
       prereqs:['Calculate Seismic Base Shear'],
