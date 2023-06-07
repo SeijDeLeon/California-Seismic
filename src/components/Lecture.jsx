@@ -90,7 +90,7 @@ export default function Lectures({ display=false }) {
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
 
     { title: '11: Flexible Diaphragms',
-      googleLink:'https://docs.google.com/document/d/e/2PACX-1vRXMDtgh4vUDHDi0YmJNOHZK_S6x-XqTingo_6fTYuu-rvtGR4IcrbAy5rb0SvDE4gzDlGIEfbdFcx7/pub?embedded=true',
+      googleLink:'https://docs.google.com/document/d/e/2PACX-1vSKqYE7pGVnX0gr066UPZ3HEokUvqDx8MweHrVeKI6PIwVWrIH5hcK_rIDeUo10sAz39zJSy_py1DVL/pub?embedded=true',
       references:[],
       summary:'Diaphragms are an essential element of building structures designed to resist seismic forces. Identifying the difference between a floor and a diaphragm requires examining the force flow from wall to lateral system. In addition to understanding the purpose of a diaphragm, there are two types each with their own analysis procedure. ASCE 7 provides procedure for determining forces to diaphragms. ASCE 7 does not provide the necessary background to perform diaphragm analysis, so this lecture provides extensive examples and background on analysis procedures for flexible diaphragms. The following lecture covers rigid diaphragms.',
       prereqs:['Vertical Force Distribution'],
