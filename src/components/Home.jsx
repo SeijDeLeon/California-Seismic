@@ -107,7 +107,7 @@ export default function Home() {
     text:'Our content is managed by a team of engineers that continually add material. We reflect the collaborative nature of Civil Engineering in our methods of providing content.',
     img:'/images/infoCard-members.JPG',
     alt:'members of california seismic'},
-    {title: 'Califiornia Expertise',
+    {title: 'California Expertise',
     text:'Our contributors are working professionals in California with advanced degrees in structural engineering from UC Berkeley, Stanford, UC Davis, and more.',
     img:'/images/infoCard-sf.jpg',
     alt:'san francisco city with bridge background'}
