@@ -122,7 +122,7 @@ export default function Home() {
           <p className="md:flex justify-start text-2xl text-white font-medium pb-8">Everything needed is right here</p>
           <Button text='Start Practicing' extraClasses="md:flex"/>
         </div>
-        <div className="hidden lg:flex absolute w-40 h-50 z-10 lg:right-1/3 top-[40%]">
+        <div className="hidden lg:flex absolute w-40 h-auto z-10 lg:right-1/3 top-[40%]">
           {building}
         </div>
       </div>
