@@ -116,13 +116,13 @@ export default function Home() {
   return (
     <main>
       <div className="hero">
-        <div className="absolute z-10 md:left-[10%] top-1/3">
+        <div className="absolute z-10 md:left-[10%] top-[38%] md:top-1/3">
           <h1 className="md:flex justify-start text-5xl md:text-7xl text-white font-bold mb-4">Study for Free</h1>
           <p className="md:flex justify-start text-2xl text-white font-medium">You can pass the Seismic Exam. </p>
           <p className="md:flex justify-start text-2xl text-white font-medium pb-8">Everything needed is right here</p>
           <Button text='Start Practicing' extraClasses="md:flex"/>
         </div>
-        <div className="hidden lg:flex absolute w-40 h-auto z-10 lg:right-1/3 top-[40%]">
+        <div className="hidden lg:flex absolute w-40 h-50 z-10 lg:right-1/3 top-[40%]">
           {building}
         </div>
       </div>
