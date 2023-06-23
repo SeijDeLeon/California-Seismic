@@ -1,9 +1,7 @@
 .App {
   text-align: center;
 }
-main{
-  min-height: 100vh;
-}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -28,6 +26,10 @@ main{
 
 .App-link {
   color: #61dafb;
+}
+
+main{
+  min-height: 100vh;
 }
 
 .iframe-padding-left {
