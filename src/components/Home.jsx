@@ -116,7 +116,7 @@ export default function Home() {
   return (
     <main>
       <div className="hero">
-        <div className="absolute z-10 md:left-[10%] top-1/3">
+        <div className="absolute z-10 md:left-[10%] top-[38%] md:top-1/3">
           <h1 className="md:flex justify-start text-5xl md:text-7xl text-white font-bold mb-4">Study for Free</h1>
           <p className="md:flex justify-start text-2xl text-white font-medium">You can pass the Seismic Exam. </p>
           <p className="md:flex justify-start text-2xl text-white font-medium pb-8">Everything needed is right here</p>
