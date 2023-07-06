@@ -193,16 +193,16 @@ export default function Lectures({ display=false }) {
             <h2 className="text-xl font-bold text-center">Done with all the lectures?</h2>
               <div className="flex flex-col md:flex-row md:space-x-6">
                   {/*Button 1 */}
-                  <div className="flex flex-col items-center p-6 space-y-6 rounded-lg bg-white md:w-1/3">
+                  <div className="flex-col items-center p-6 space-y-6 bg-white md:w-1/3">
                     <Button text='Start Practicing' extraClasses="md:flex hover:bg-blue-800"/>
                   </div>
                   {/*Button 2 */}
-                  <div className="flex-col items-center p-6 space-y-6 rounded-lg bg-white md:flex md:w-1/3">
+                  <div className="flex-col items-center p-6 space-y-6 bg-white md:flex md:w-1/3">
                     <Button text='Go to Exam Guide' extraClasses="md:flex hover:bg-blue-800" link='/exam-guide'/>
                   </div>
                   {/*Button 3 */}
-                  <div className="flex-col items-center p-6 space-y-6 rounded-lg bg-white md:flex md:w-1/3">
-                    <Button text='Read FAQs' extraClasses="md:flex hover:bg-blue-800"/>
+                  <div className="flex-col items-center p-6 space-y-6 bg-white md:flex md:w-1/3">
+                    <Button text='Read FAQs' extraClasses="md:flex hover:bg-blue-800" link='/exam-guide'/>
                   </div>
               </div>
           </div>
