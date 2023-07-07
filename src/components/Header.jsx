@@ -22,24 +22,30 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import logo from '../assets/logo.png'
 import { NavLink } from "react-router-dom"
+import cn from 'classnames'
+
+
+// Ensure these classes are always built
+const _classes = 'text-red-400 text-yellow-400 text-green-400 text-blue-400 text-indigo-400 text-purple-400 text-pink-400';
 
 
 const products = [
-  { name: '01: Intro to Seismic Exam', description: 'An overview of the exam and its requirements', href: '#', icon: AcademicCapIcon },
-  { name: '02: Geology & Earthquakes', description: 'Background information on how earthquakes occur', href: '#', icon: GlobeAmericasIcon },
-  { name: '03: Code Provisions', description: 'How the building code works', href: '#', icon: ScaleIcon },
-  { name: '04: Risk Categories', description: 'Defining seismic risk by building type', href: '#', icon: UserGroupIcon },
-  { name: '05: Building Systems', description: 'Vertical and Lateral system', href: '#', icon: BuildingOffice2Icon },
-  { name: '06: Ductility', description: 'The concept of ductility and R values', href: '#', icon: HomeModernIcon },
-  { name: '07: Base Shear', description: 'How to calculate base shear', href: '#', icon: CalculatorIcon },
-  { name: '08: Force Distribution', description: 'How to determine story forces', href: '#', icon: ChartBarIcon },
-  { name: '09: Drift', description: 'Lateral drift calculations ', href: '#', icon: BuildingLibraryIcon },
-  { name: '10A: Flexible Diaphragms', description: 'Intro to diaphragms and flexible analysis', href: '#', icon: HomeIcon },
-  { name: '10B: Rigid Diaphragms', description: 'Rigid diaphgragm analysis', href: '#', icon: BuildingOfficeIcon },
-  { name: '11: Irregularities', description: 'Irregularities and redundancy as applied to seismic design', href: '#', icon: ExclamationTriangleIcon },
-  { name: '12: Non-structural Components', description: 'Forces and basic design of non-structural components', href: '#', icon:CubeIcon },
-  { name: '13: Seismic Detailing', description: 'How to identify good seismic load paths', href: '#', icon: PaintBrushIcon },
+  { name: '01: Intro to Seismic Exam', description: 'An overview of the exam and its requirements', href: '#', icon: AcademicCapIcon, color: 'red' },
+  { name: '02: Geology & Earthquakes', description: 'Background information on how earthquakes occur', href: '#', icon: GlobeAmericasIcon, color: 'yellow' },
+  { name: '03: Code Provisions', description: 'How the building code works', href: '#', icon: ScaleIcon, className: 'z-10', color: 'green' },
+  { name: '04: Risk Categories', description: 'Defining seismic risk by building type', href: '#', icon: UserGroupIcon, color: 'blue' },
+  { name: '05: Building Systems', description: 'Vertical and Lateral system', href: '#', icon: BuildingOffice2Icon, color: 'indigo' },
+  { name: '06: Ductility', description: 'The concept of ductility and R values', href: '#', icon: HomeModernIcon, color: 'purple' },
+  { name: '07: Base Shear', description: 'How to calculate base shear', href: '#', icon: CalculatorIcon, color: 'pink' },
+  { name: '08: Force Distribution', description: 'How to determine story forces', href: '#', icon: ChartBarIcon, color: 'red' },
+  { name: '09: Drift', description: 'Lateral drift calculations ', href: '#', icon: BuildingLibraryIcon, color: 'yellow' },
+  { name: '10A: Flexible Diaphragms', description: 'Intro to diaphragms and flexible analysis', href: '#', icon: HomeIcon, color: 'green' },
+  { name: '10B: Rigid Diaphragms', description: 'Rigid diaphgragm analysis', href: '#', icon: BuildingOfficeIcon, color: 'blue' },
+  { name: '11: Irregularities', description: 'Irregularities and redundancy as applied to seismic design', href: '#', icon: ExclamationTriangleIcon, color: 'indigo' },
+  { name: '12: Non-structural Components', description: 'Forces and basic design of non-structural components', href: '#', icon:CubeIcon, color: 'purple' },
+  { name: '13: Seismic Detailing', description: 'How to identify good seismic load paths', href: '#', icon: PaintBrushIcon, color: 'pink' },
 ]
+
 
 
 const callsToAction = [
@@ -109,7 +115,8 @@ export default function Header() {
                         className="group relative flex items-center gap-x-6 rounded-lg p-1 text-sm leading-6 hover:bg-gray-50"
                       >
                         <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                          <item.icon className="h-6 w-6 text-gray-600 group-hover:text-sky-600" aria-hidden="true" />
+                          <item.icon className = {cn('h-6 w-6, text-gray-600', item.className, {'group-hover:text-red-400': item.color === 'red', 'group-hover:text-yellow-400': item.color === 'yellow', 
+                          'group-hover:text-green-400': item.color === 'green', 'group-hover:text-blue-400': item.color === 'blue', 'group-hover:text-indigo-400': item.color === 'indigo', 'group-hover:text-purple-400': item.color === 'purple', 'group-hover:text-pink-400': item.color === 'pink'})} aria-hidden="true" />
                         </div>
                         <div className="flex-auto">
                           <a href={item.href} className="block font-semibold text-gray-900">
