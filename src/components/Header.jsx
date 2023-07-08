@@ -25,25 +25,26 @@ import { NavLink } from "react-router-dom"
 
 
 const products = [
-  { name: '01: Intro to Seismic Exam', description: 'An overview of the exam and its requirements', href: '#', icon: AcademicCapIcon },
-  { name: '02: Geology & Earthquakes', description: 'Background information on how earthquakes occur', href: '#', icon: GlobeAmericasIcon },
-  { name: '03: Code Provisions', description: 'How the building code works', href: '#', icon: ScaleIcon },
-  { name: '04: Risk Categories', description: 'Defining seismic risk by building type', href: '#', icon: UserGroupIcon },
-  { name: '05: Building Systems', description: 'Vertical and Lateral system', href: '#', icon: BuildingOffice2Icon },
-  { name: '06: Ductility', description: 'The concept of ductility and R values', href: '#', icon: HomeModernIcon },
-  { name: '07: Base Shear', description: 'How to calculate base shear', href: '#', icon: CalculatorIcon },
-  { name: '08: Force Distribution', description: 'How to determine story forces', href: '#', icon: ChartBarIcon },
-  { name: '09: Drift', description: 'Lateral drift calculations ', href: '#', icon: BuildingLibraryIcon },
-  { name: '10A: Flexible Diaphragms', description: 'Intro to diaphragms and flexible analysis', href: '#', icon: HomeIcon },
-  { name: '10B: Rigid Diaphragms', description: 'Rigid diaphgragm analysis', href: '#', icon: BuildingOfficeIcon },
-  { name: '11: Irregularities', description: 'Irregularities and redundancy as applied to seismic design', href: '#', icon: ExclamationTriangleIcon },
-  { name: '12: Non-structural Components', description: 'Forces and basic design of non-structural components', href: '#', icon:CubeIcon },
-  { name: '13: Seismic Detailing', description: 'How to identify good seismic load paths', href: '#', icon: PaintBrushIcon },
+  { name: '01: Intro to Seismic Exam', description: 'An overview of the exam and its requirements', href: '01', icon: AcademicCapIcon },
+  { name: '02: Geology & Earthquakes', description: 'Background information on how earthquakes occur', href: '02', icon: GlobeAmericasIcon },
+  { name: '03: Code Provisions', description: 'How the building code works', href: '03', icon: ScaleIcon },
+  { name: '04: Site Conditions', description: 'Defining seismic risk by building type', href: '04', icon: UserGroupIcon },
+  { name: '05: Risk Categories', description: 'Defining seismic risk by building type', href: '05', icon: UserGroupIcon },
+  { name: '06: Building Systems', description: 'Vertical and Lateral system', href: '06', icon: BuildingOffice2Icon },
+  { name: '07: Ductility', description: 'The concept of ductility and R values', href: '07', icon: HomeModernIcon },
+  { name: '08: Base Shear', description: 'How to calculate base shear', href: '08', icon: CalculatorIcon },
+  { name: '09: Force Distribution', description: 'How to determine story forces', href: '09', icon: ChartBarIcon },
+  { name: '10: Drift', description: 'Lateral drift calculations ', href: '10', icon: BuildingLibraryIcon },
+  { name: '11: Flexible Diaphragms', description: 'Intro to diaphragms and flexible analysis', href: '11', icon: HomeIcon },
+  { name: '12: Rigid Diaphragms', description: 'Rigid diaphgragm analysis', href: '12', icon: BuildingOfficeIcon },
+  { name: '13: Irregularities', description: 'Irregularities and redundancy as applied to seismic design', href: '13', icon: ExclamationTriangleIcon },
+  { name: '14: Non-structural Components', description: 'Forces and basic design of non-structural components', href: '14', icon: CubeIcon },
+  { name: '15: Seismic Detailing', description: 'How to identify good seismic load paths', href: '15', icon: PaintBrushIcon },
 ]
 
 
 const callsToAction = [
-  { name: 'Show All Lectures', href: '#', icon: Squares2X2Icon },
+  { name: 'Show All Lectures', href: '/lectures', icon: Squares2X2Icon },
 ]
 
 function classNames(...classes) {
@@ -90,7 +91,7 @@ export default function Header() {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-scroll rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 max-h-[70vh]">
-                <div className="grid grid-cols-1 divide-x divide-gray-900/5 bg-gray-50">
+                  <div className="grid grid-cols-1 divide-x divide-gray-900/5 bg-gray-50">
                     {callsToAction.map((item) => (
                       <a
                         key={item.name}
@@ -112,11 +113,12 @@ export default function Header() {
                           <item.icon className="h-6 w-6 text-gray-600 group-hover:text-sky-600" aria-hidden="true" />
                         </div>
                         <div className="flex-auto">
-                          <a href={item.href} className="block font-semibold text-gray-900">
-                            {item.name}
-                            <span className="absolute inset-0" />
-                          </a>
-                          <p className="mt-1 text-gray-600">{item.description}</p>
+                          <NavLink to={`lectures/${item.href}`} >
+                            <p className="block font-semibold text-gray-900">
+                              {item.name}
+                            </p>
+                            <p className="mt-1 text-gray-600">{item.description}</p>
+                          </NavLink>
                         </div>
                       </div>
                     ))}
@@ -135,7 +137,7 @@ export default function Header() {
               Contributors
             </NavLink>
           </Popover.Group>
-          <div data-testid = 'testBlankDiv'className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
+          <div data-testid='testBlankDiv' className="hidden lg:flex lg:flex-1 lg:justify-end"></div>
           {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
@@ -147,8 +149,8 @@ export default function Header() {
           <div className="fixed inset-0 z-10" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <NavLink to='/'className="-m-1.5 p-1.5">
-              <span className="sr-only">California Seismic</span>
+              <NavLink to='/' className="-m-1.5 p-1.5">
+                <span className="sr-only">California Seismic</span>
                 <img
                   className="h-8 w-auto"
                   src={logo}
@@ -178,7 +180,7 @@ export default function Header() {
                           />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-2">
-                          {[...callsToAction,...products].map((item) => (
+                          {[...callsToAction, ...products].map((item) => (
                             <Disclosure.Button
                               key={item.name}
                               as="a"
