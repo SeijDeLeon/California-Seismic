@@ -11,6 +11,8 @@ import Contributors from './components/Contributors.jsx';
 import UnderConstruction from './components/UnderConstruction.jsx';
 import Footer from './components/Footer.jsx';
 
+import BaseShear from './components/BaseShear.jsx';
+
 function App() {
   return (
     <div className="App">
@@ -22,6 +24,7 @@ function App() {
         <Route path = "/practice" element = {<Practice />} />
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
+        <Route path = "/baseshear" element = {<BaseShear />} />
       </Routes>
       <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
       <Footer />
