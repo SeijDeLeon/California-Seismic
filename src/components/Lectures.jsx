@@ -188,7 +188,7 @@ export default function Lectures({ display=false }) {
         </section>
         <section>
           {/*Container to heading and button blocks */}
-          <div className="max-w-6xl px-5 mx-auto text-center">
+          <div className="max-w-6xl px-5 p-6 mx-auto text-center">
             {/*Heading*/}
             <h2 className="text-xl font-bold text-center">Done with all the lectures?</h2>
               <div className="flex flex-col md:flex-row md:space-x-6 space-y-0">
