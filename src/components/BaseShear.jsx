@@ -1,13 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import * as d3 from 'd3';
 
 const BaseShearDiagram = () => {
   const chartRef = useRef();
+  const [userInput, setUserInput] = useState('');
 
   useEffect(() => {
     drawChart();
-  }, []);
+  }, [userInput]);
 
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
+  };
 
   const drawChart = () => {
     console.log('drawChart called');
@@ -21,27 +25,33 @@ const BaseShearDiagram = () => {
     // Calculate the total base shear
     const totalBaseShear = 400; //Currently using this as the y-axis max
 
-    // Set up SVG container using D3
-    const svg = d3.select(chartRef.current)
-      .append('svg')
-      .attr('width', '100%') //Uses the entire div the 100%
-      .attr('height', '100%')
-      .style('display', 'block') // SVG is displayed as a block element
-      .style('margin', '0 auto'); // Centering with margin
+        // Set up scales and axes
+        const xScale = d3.scaleBand()
+        .domain(forces.map(force => force.floor))
+        .range([50, totalBaseShear])
+        .padding(0.3);
+  
+      const yScale = d3.scaleLinear()
+        .domain([0, totalBaseShear])
+        .range([250, 50]);
+  
+      const xAxis = d3.axisBottom(xScale)
+        .tickFormat(d => `Base Shear`) // Custom label format 
+      const yAxis = d3.axisLeft(yScale);
 
-    // Set up scales and axes
-    const xScale = d3.scaleBand()
-      .domain(forces.map(force => force.floor))
-      .range([50, totalBaseShear])
-      .padding(0.3);
-
-    const yScale = d3.scaleLinear()
-      .domain([0, totalBaseShear])
-      .range([250, 50]);
-
-    const xAxis = d3.axisBottom(xScale)
-      .tickFormat(d => `Base Shear`) // Custom label format 
-    const yAxis = d3.axisLeft(yScale);
+      // Set up SVG container using D3
+      let svg = d3.select(chartRef.current).select('svg');
+      if (svg.empty()) {
+        svg = d3
+          .select(chartRef.current)
+          .append('svg')
+          .attr('width', totalBaseShear)//Uses the entire div the 100%
+          .attr('height', totalBaseShear)
+          .style('display', 'block')// SVG is displayed as a block element
+          .style('margin', '0 auto');// Centering with margin
+      } else {
+        svg.selectAll('*').remove(); // Clear the SVG contents if it already exists
+      }
 
     // Draw the base shear diagram
     svg.selectAll('.bar')
@@ -86,10 +96,22 @@ const BaseShearDiagram = () => {
       <div className="flex justify-center items-center">
         <h1 className="text-center text-6xl text-black font-bold mb-4">Base Shear Diagram</h1>
       </div>
-      <div className="justify-end flex items-center">
-        <div className="w-1/2 h-screen " ref={chartRef}></div>
+      <div className='flex justify-evenly items-center'>
+          <div className="p-4 justify-start items-center">
+            <label htmlFor="userInput" className="block mb-2">
+              User Input:
+            </label>
+            <input
+              type="text"
+              className="p-2 border border-gray-300 rounded"
+              value={userInput}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <div className="w-1/2 h-3/4 justify-end p-6" ref={chartRef}></div>
+          </div>
       </div>
-      
     </>
   );
 };
