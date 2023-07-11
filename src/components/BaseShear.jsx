@@ -3,7 +3,12 @@ import * as d3 from 'd3';
 
 const BaseShearDiagram = () => {
   const chartRef = useRef();
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState({
+    input1: '',
+    input2: '',
+    input3: '',
+    input4: '',
+  });
 
   useEffect(() => {
     drawChart();
@@ -97,17 +102,106 @@ const BaseShearDiagram = () => {
         <h1 className="text-center text-6xl text-black font-bold mb-4">Base Shear Diagram</h1>
       </div>
       <div className='flex justify-evenly items-center'>
-          <div className="p-4 justify-start items-center">
-            <label htmlFor="userInput" className="block mb-2">
-              User Input:
-            </label>
-            <input
-              type="text"
-              className="p-2 border border-gray-300 rounded"
-              value={userInput}
-              onChange={handleInputChange}
-            />
-          </div>
+            <div className="flex flex-col">
+                        <div className="p-4">
+                          <label htmlFor="userInput" className="block mb-2">
+                            Input 1:
+                          </label>
+                          <input
+                            type="text"
+                            id="input1"
+                            className="p-2 border border-gray-300 rounded"
+                            value={userInput.input1}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                        <div className="p-4">
+                        <label htmlFor="input2" className="block mb-2">
+                          Input 2:
+                        </label>
+                        <input
+                          type="text"
+                          id="input2"
+                          className="p-2 border border-gray-300 rounded"
+                          value={userInput.input2}
+                          onChange={(event) => handleInputChange(event, 'input2')}
+                        />
+                        </div>
+                        <div className="p-4">
+                        <label htmlFor="input2" className="block mb-2">
+                          Input 3:
+                        </label>
+                        <input
+                          type="text"
+                          id="input2"
+                          className="p-2 border border-gray-300 rounded"
+                          value={userInput.input3}
+                          onChange={(event) => handleInputChange(event, 'input3')}
+                        />
+                        </div>
+                        <div className="p-4">
+                        <label htmlFor="input2" className="block mb-2">
+                          Input 4:
+                        </label>
+                        <input
+                          type="text"
+                          id="input2"
+                          className="p-2 border border-gray-300 rounded"
+                          value={userInput.input4}
+                          onChange={(event) => handleInputChange(event, 'input4')}
+                        />
+                        </div>
+                </div>
+            <div className="flex flex-col">
+                    <div className="p-4">
+                      <label htmlFor="userInput" className="block mb-2">
+                        Input 1:
+                      </label>
+                      <input
+                        type="text"
+                        id="input1"
+                        className="p-2 border border-gray-300 rounded"
+                        value={userInput.input1}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="p-4">
+                    <label htmlFor="input2" className="block mb-2">
+                      Input 2:
+                    </label>
+                    <input
+                      type="text"
+                      id="input2"
+                      className="p-2 border border-gray-300 rounded"
+                      value={userInput.input2}
+                      onChange={(event) => handleInputChange(event, 'input2')}
+                    />
+                    </div>
+                    <div className="p-4">
+                    <label htmlFor="input2" className="block mb-2">
+                      Input 3:
+                    </label>
+                    <input
+                      type="text"
+                      id="input2"
+                      className="p-2 border border-gray-300 rounded"
+                      value={userInput.input3}
+                      onChange={(event) => handleInputChange(event, 'input3')}
+                    />
+                    </div>
+                    <div className="p-4">
+                    <label htmlFor="input2" className="block mb-2">
+                      Input 4:
+                    </label>
+                    <input
+                      type="text"
+                      id="input2"
+                      className="p-2 border border-gray-300 rounded"
+                      value={userInput.input4}
+                      onChange={(event) => handleInputChange(event, 'input4')}
+                    />
+                    </div>
+            </div>
           <div>
             <div className="w-1/2 h-3/4 justify-end p-6" ref={chartRef}></div>
           </div>
