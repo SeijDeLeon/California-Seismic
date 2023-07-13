@@ -28,9 +28,6 @@
   color: #61dafb;
 }
 
-main{
-  min-height: 100vh;
-}
 
 .iframe-padding-left {
   padding-left: calc(calc(100vw - 816px) / 2);
