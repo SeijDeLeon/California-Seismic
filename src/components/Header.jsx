@@ -32,7 +32,7 @@ const _classes = 'text-red-400 text-yellow-400 text-green-400 text-blue-400 text
 const products = [
   { name: '01: Intro to Seismic Exam', description: 'An overview of the exam and its requirements', href: '#', icon: AcademicCapIcon, color: 'red' },
   { name: '02: Geology & Earthquakes', description: 'Background information on how earthquakes occur', href: '#', icon: GlobeAmericasIcon, color: 'yellow' },
-  { name: '03: Code Provisions', description: 'How the building code works', href: '#', icon: ScaleIcon, className: 'z-10', color: 'green' },
+  { name: '03: Code Provisions', description: 'How the building code works', href: '#', icon: ScaleIcon,color: 'green' },
   { name: '04: Risk Categories', description: 'Defining seismic risk by building type', href: '#', icon: UserGroupIcon, color: 'blue' },
   { name: '05: Building Systems', description: 'Vertical and Lateral system', href: '#', icon: BuildingOffice2Icon, color: 'indigo' },
   { name: '06: Ductility', description: 'The concept of ductility and R values', href: '#', icon: HomeModernIcon, color: 'purple' },
