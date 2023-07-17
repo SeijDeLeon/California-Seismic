@@ -11,7 +11,6 @@ import Contributors from "./components/Contributors.jsx";
 import UnderConstruction from "./components/UnderConstruction.jsx";
 import Footer from "./components/Footer.jsx";
 import Error404 from "./components/Error404";
-import QuestionCategories from "./components/ProblemGenerator/QuestionCategories";
 import QuestionGeneratorDisplay from "./components/ProblemGenerator/QuestionGeneratorDisplay";
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
         <Route path="/exam-guide" element={<ExamGuide />} />
         <Route path="/contributors" element={<Contributors />} />
         <Route path="/pageNotFound" element={<Error404 />} />
-        <Route path="/questionCategories" element={<QuestionCategories />} />
         <Route
           path="/questionGeneratorDisplay"
           element={<QuestionGeneratorDisplay />}

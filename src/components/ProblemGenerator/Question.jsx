@@ -1,24 +1,77 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import generatorLogic from "./GeneratorLogic";
 
-const Question = () => {
-  const questionAnswer = {
-    question: `Determine the fundamental period of the below SDOF structure. The
-          height is [8-30] ft, the modulus of elasticity for the column is
-          [29,000] ksi, and the mass at the top weighs [5-100] kips?`,
-    choices: ["Option A", "Option B", "Option C", "Option D"],
+const Question = ({ category }) => {
+  const [question, setQuestion] = useState({
+    question: ``,
+    choices: [],
+    answer: "",
+  });
+  const [showSolution, setShowSolution] = useState(false);
+  const [chosen, setChosen] = useState(null);
+  const colorRef = useRef();
+  useEffect(() => setQuestion(generatorLogic(category)), []);
+
+  const handleSubmit = () => {
+    setShowSolution(true);
+    if (question.answer === chosen) {
+      colorRef.current.classList.remove("bg-gray-400");
+      colorRef.current.classList.add("bg-green-400");
+    } else {
+      colorRef.current.classList.remove("bg-gray-400");
+      colorRef.current.classList.add("bg-red-400");
+    }
   };
+
   return (
-    <div className="question-container">
+    <div className="flex gap-5 p-5 border-2 border-black rounded m-5">
       <p>Question:</p>
-      <div className="question">
-        <p>{questionAnswer.question}</p>
-        <ul className="choices">
-          {questionAnswer.choices.map((choice) => (
-            <li>{choice}</li>
+      <div className="text-start">
+        <p>{question.question}</p>
+        <ul className="p-10">
+          {question.choices.map((choice) => (
+            <li
+              ref={choice === chosen ? colorRef : null}
+              value={choice}
+              key={choice}
+              className={
+                "border-2 border-black rounded p-2 m-2 cursor-pointer " +
+                (choice === chosen && "bg-gray-400")
+              }
+              onClick={(e) => {
+                setChosen(e.target.value);
+              }}
+            >
+              {choice}
+            </li>
           ))}
         </ul>
-        <div>solution</div>
-        <div>next >></div>
+        <button
+          className="rounded-full border-2 border-black p-1 w-20"
+          onClick={handleSubmit}
+          disabled={!chosen || showSolution}
+        >
+          Sumbit
+        </button>
+        <div
+          className={
+            showSolution
+              ? "cursor-pointer"
+              : "pointer-events-none text-gray-500"
+          }
+        >
+          Solution
+        </div>
+        <p
+          className="cursor-pointer"
+          onClick={() => {
+            setShowSolution(false);
+            setChosen(null);
+            setQuestion(generatorLogic(category));
+          }}
+        >
+          {"Next" + ">>"}
+        </p>
       </div>
     </div>
   );

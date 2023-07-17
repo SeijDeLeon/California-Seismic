@@ -17,13 +17,12 @@ const Timer = () => {
   }, [seconds]);
 
   return (
-    <div>
-      <div>
+    <div className="border-2 border-black rounded-full w-40">
+      <p>
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}
-      </div>
+      </p>
       <button onClick={startTimer}>start timer</button>
-      <button>stop</button>
     </div>
   );
 };
