@@ -19,7 +19,7 @@ function ExamScorePopUpModal({visible, handleOnSubmit}){
                 <div>
                     {/* Buttons */}
                     <div className="text-xl flex justify-center px-5 py-5 mt-5">
-                        <Link to={`/practice/exams/1`}>
+                        <Link to={`/practice/exams/`}>
                         <button className="px-4 py-2 bg-orange-500 text-white rounded-full" link='/practice'>Retake exam?</button>
                         </Link>
                     </div>
