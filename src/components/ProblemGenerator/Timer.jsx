@@ -17,7 +17,7 @@ const Timer = () => {
   }, [seconds]);
 
   return (
-    <div className="border-2 border-black rounded-full w-40">
+    <div className="border-2 shadow-xl rounded-full w-40">
       <p>
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}

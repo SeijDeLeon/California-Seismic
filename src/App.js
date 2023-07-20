@@ -25,10 +25,7 @@ function App() {
         <Route path="/exam-guide" element={<ExamGuide />} />
         <Route path="/contributors" element={<Contributors />} />
         <Route path="/pageNotFound" element={<Error404 />} />
-        <Route
-          path="/questionGeneratorDisplay"
-          element={<QuestionGeneratorDisplay />}
-        />
+        <Route path="/practice/random" element={<QuestionGeneratorDisplay />} />
       </Routes>
       <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
       <Footer />

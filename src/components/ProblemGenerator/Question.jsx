@@ -24,7 +24,7 @@ const Question = ({ category }) => {
   };
 
   return (
-    <div className="flex gap-5 p-5 border-2 border-black rounded m-5">
+    <div className="flex gap-5 p-5 border-2 rounded-xl m-5 shadow-xl">
       <p>Question:</p>
       <div className="text-start">
         <p>{question.question}</p>
@@ -35,7 +35,7 @@ const Question = ({ category }) => {
               value={choice}
               key={choice}
               className={
-                "border-2 border-black rounded p-2 m-2 cursor-pointer " +
+                "border-2  rounded-xl p-2 m-2 cursor-pointer " +
                 (choice === chosen && "bg-gray-400")
               }
               onClick={(e) => {
@@ -47,7 +47,7 @@ const Question = ({ category }) => {
           ))}
         </ul>
         <button
-          className="rounded-full border-2 border-black p-1 w-20"
+          className="rounded-full border-2 p-1 w-20"
           onClick={handleSubmit}
           disabled={!chosen || showSolution}
         >
