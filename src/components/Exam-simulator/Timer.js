@@ -26,7 +26,7 @@ function Timer() {
 
   return (
     <div>
-      <span>{formatTime(minutes)}:{formatTime(remainingSeconds)}</span>
+      <span>{formatTime(minutes)} mins : {formatTime(remainingSeconds)} secs</span>
     </div>
   );
 }
