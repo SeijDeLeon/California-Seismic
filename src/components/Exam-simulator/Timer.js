@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function Timer() {
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(9000);
 
   useEffect(() => {
     const interval = setInterval(() => {
