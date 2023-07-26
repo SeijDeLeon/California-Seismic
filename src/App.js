@@ -21,7 +21,7 @@ function App() {
         <Route path="/lectures" element={<Lectures display="true" />} />
         <Route path="/lectures/:id" element={<Lecture display="true" />} />
         <Route path="/practice" element={<Practice />} />
-        <Route path="/exam-guide" element={<ExamGuide />} />
+        <Route path="/exam-guide" element={<ExamGuide display="true"/>} />
         <Route path="/contributors" element={<Contributors />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
