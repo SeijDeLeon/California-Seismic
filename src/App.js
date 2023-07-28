@@ -11,6 +11,7 @@ import Contributors from "./components/Contributors.jsx";
 import UnderConstruction from "./components/UnderConstruction.jsx";
 import Footer from "./components/Footer.jsx";
 import Error404 from "./components/Error404";
+import QuestionGeneratorDisplay from "./components/ProblemGenerator/QuestionGeneratorDisplay";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/practice" element={<Practice />} />
         <Route path="/exam-guide" element={<ExamGuide />} />
         <Route path="/contributors" element={<Contributors />} />
+        <Route path="/practice/random" element={<QuestionGeneratorDisplay />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
