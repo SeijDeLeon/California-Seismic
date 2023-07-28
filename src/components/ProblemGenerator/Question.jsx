@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import generatorLogic from "./GeneratorLogic";
+import { ForwardIcon } from "@heroicons/react/24/solid";
 
-const Question = ({ category }) => {
+const Question = ({ category, totalQuestions, answeredCorrect }) => {
   const [question, setQuestion] = useState({
     question: ``,
     choices: [],
@@ -14,7 +15,9 @@ const Question = ({ category }) => {
 
   const handleSubmit = () => {
     setShowSolution(true);
+    totalQuestions((prev) => prev + 1);
     if (question.answer === chosen) {
+      answeredCorrect((prev) => prev + 1);
       colorRef.current.classList.remove("bg-gray-400");
       colorRef.current.classList.add("bg-green-400");
     } else {
@@ -28,7 +31,7 @@ const Question = ({ category }) => {
       <p>Question:</p>
       <div className="text-start">
         <p>{question.question}</p>
-        <ul className="p-10">
+        <ul className="p-2">
           {question.choices.map((choice) => (
             <li
               ref={choice === chosen ? colorRef : null}
@@ -47,7 +50,7 @@ const Question = ({ category }) => {
           ))}
         </ul>
         <button
-          className="rounded-full border-2 p-1 w-20"
+          className="rounded-full border-2  w-20"
           onClick={handleSubmit}
           disabled={!chosen || showSolution}
         >
@@ -63,14 +66,14 @@ const Question = ({ category }) => {
           Solution
         </div>
         <p
-          className="cursor-pointer"
+          className="cursor-pointer flex justify-start items-center gap-2"
           onClick={() => {
             setShowSolution(false);
             setChosen(null);
             setQuestion(generatorLogic(category));
           }}
         >
-          {"Next" + ">>"}
+          Next <ForwardIcon className="h-5 w-5" />
         </p>
       </div>
     </div>
