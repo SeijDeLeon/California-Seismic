@@ -104,21 +104,69 @@ const BaseShearDiagram = () => {
      .domain([0, forces.length - 1]) // Using sequential indices (0, 1, 2, ...)
      .range([50, totalBaseShear]);
 
-    // Add arrows pointing to the rectangles
-    svg.selectAll(".arrow")
-      .data(forces)
-      .enter()
-      .append("path")
-      .attr("class", "arrow")
-      .attr("d", (d, i) => {
-        const barX = xArrowScale(i) + xScale.bandwidth() / 2;
-        const barY = yScale(d.value);
-        const arrowX = barX;
-        const arrowY = barY - arrowSize; // Point the arrowhead to the top of the rectangle
-        return `M ${barX} ${barY} L ${arrowX - arrowSize / 2} ${arrowY} M ${barX} ${barY} L ${arrowX + arrowSize / 2} ${arrowY}`;
-      })
-      .attr("stroke", "blue") // Color of the arrow lines
-      .attr("stroke-width", 2); // Width of the arrow lines
+    // // Define the arrow marker
+    // svg.append("svg:defs").selectAll("marker")
+    //   .data(["arrow-end"]) // Unique identifier for the marker
+    //   .enter().append("svg:marker")
+    //   .attr("id", "arrow-end")
+    //   .attr("viewBox", "0 -5 10 10")
+    //   .attr("refX", arrowSize + 2) // Adjust the refX based on the arrowSize to position the arrow correctly
+    //   .attr("refY", 0)
+    //   .attr("markerWidth", 6)
+    //   .attr("markerHeight", 6)
+    //   .attr("orient", "auto")
+    //   .append("svg:path")
+    //   .attr("d", "M0,-5L10,0L0,5")
+    //   .style("fill", "blue"); 
+
+    // // Add arrows pointing to the rectangles
+    // svg.selectAll('.arrow')
+    //   .data(forces)
+    //   .enter()
+    //   .append('path')
+    //   .attr('class', 'arrow')
+    //   .attr('d', (d, i) => {
+    //     const barX = xScale(d.floor) + xScale.bandwidth() / 2;
+    //     const barY = yScale(d.value);
+    //     const arrowX = barX;
+    //     const arrowY = barY - arrowSize; // Point the arrowhead to the top of the rectangle
+    //     return `M ${barX} ${barY} L ${arrowX - arrowSize / 2} ${arrowY} M ${barX} ${barY} L ${arrowX + arrowSize / 2} ${arrowY}`;
+    //   })
+    //   .attr('stroke', 'blue')
+    //   .attr('stroke-width', 2)
+    //   .attr("marker-end", "url(#arrow-end)"); // Attach the arrowhead marker to the arrow
+
+      // Define the arrow marker
+    svg.append("svg:defs").selectAll("marker")
+    .data(["arrow-end"]) // Unique identifier for the marker
+    .enter().append("svg:marker")
+    .attr("id", "arrow-end")
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", -arrowSize) // Set the refX to a negative value to position the arrowhead to the left of the starting point
+    .attr("refY", 0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5")
+    .style("fill", "blue"); // Set the fill color of the arrowhead (optional)
+
+  // Add arrows pointing to the rectangles
+  svg.selectAll(".arrow")
+    .data(forces)
+    .enter()
+    .append("path")
+    .attr("class", "arrow")
+    .attr("d", (d, i) => {
+      const barX = xScale(d.floor) + xScale.bandwidth() / 2;
+      const barY = yScale(d.value);
+      const arrowX = xScale(d.floor); // Set the arrowX to the left of the rectangle
+      const arrowY = barY; // Set the arrowY to the top edge of the rectangle
+      return `M ${barX} ${barY} L ${arrowX} ${arrowY}`;
+    })
+    .attr("stroke", "blue") // Color of the arrow lines
+    .attr("stroke-width", 2)
+    .attr("marker-end", "url(#arrow-end)"); // Attach the arrowhead marker to the arrow
 
     // Append the axes to the SVG container
     svg.append('g')
