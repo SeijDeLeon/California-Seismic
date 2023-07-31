@@ -49,11 +49,12 @@ const BaseShearDiagram = () => {
         .tickFormat(d => `Base Shear`) // Custom label format 
       const yAxis = d3.axisLeft(yScale);
 
-      const svgWidth = totalBaseShear + 100; // Adding extra space for better visualization
-      const svgHeight = 300; // Set an appropriate height
+      const svgWidth = totalBaseShear + 100; // Adding extra space 
+      const svgHeight = 300; // Set a height
 
       // Set up SVG container using D3
       let svg = d3.select(chartRef.current).select('svg'); //might hardcode this
+
       if (svg.empty()) {
         svg = d3
           .select(chartRef.current)
@@ -80,18 +81,18 @@ const BaseShearDiagram = () => {
       .style("stroke", "black") // Creating a outline rectangle
       .style("stroke-width", "2px"); //Set the stroke to thicker
 
-    // // Add labels to the rectangles
-    // svg.selectAll('.label')
-    //   .data(forces)
-    //   .enter()
-    //   .append('text')
-    //   .attr('class', 'label')
-    //   .attr('x', force => xScale(force.floor) + xScale.bandwidth() / 2) // Position in the middle of the rectangle
-    //   .attr('y', force => yScale(force.value) +15) // y position(+15) to place it above the rectangle
-    //   .attr('text-anchor', 'middle') // Anchor the text in the middle
-    //   .text(force => force.value) // Use the value as the label text
-    //   .style("font-size", "12px")
-    //   .style("font-weight", "bold");
+    // Add labels to the rectangles
+    svg.selectAll('.label')
+      .data(forces)
+      .enter()
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', force => xScale(force.floor) + xScale.bandwidth() / 2) // Position in the middle of the rectangle
+      .attr('y', force => yScale(force.value) +15) // y position(+15) to place it above the rectangle
+      .attr('text-anchor', 'middle') // Anchor the text in the middle
+      .text(force => force.value) // Use the value as the label text
+      .style("font-size", "12px")
+      .style("font-weight", "bold");
 
       // Sample data for the bar graph
     const barData = [10, 20, 30, 40, 50];
@@ -104,37 +105,6 @@ const BaseShearDiagram = () => {
      .domain([0, forces.length - 1]) // Using sequential indices (0, 1, 2, ...)
      .range([50, totalBaseShear]);
 
-    // // Define the arrow marker
-    // svg.append("svg:defs").selectAll("marker")
-    //   .data(["arrow-end"]) // Unique identifier for the marker
-    //   .enter().append("svg:marker")
-    //   .attr("id", "arrow-end")
-    //   .attr("viewBox", "0 -5 10 10")
-    //   .attr("refX", arrowSize + 2) // Adjust the refX based on the arrowSize to position the arrow correctly
-    //   .attr("refY", 0)
-    //   .attr("markerWidth", 6)
-    //   .attr("markerHeight", 6)
-    //   .attr("orient", "auto")
-    //   .append("svg:path")
-    //   .attr("d", "M0,-5L10,0L0,5")
-    //   .style("fill", "blue"); 
-
-    // // Add arrows pointing to the rectangles
-    // svg.selectAll('.arrow')
-    //   .data(forces)
-    //   .enter()
-    //   .append('path')
-    //   .attr('class', 'arrow')
-    //   .attr('d', (d, i) => {
-    //     const barX = xScale(d.floor) + xScale.bandwidth() / 2;
-    //     const barY = yScale(d.value);
-    //     const arrowX = barX;
-    //     const arrowY = barY - arrowSize; // Point the arrowhead to the top of the rectangle
-    //     return `M ${barX} ${barY} L ${arrowX - arrowSize / 2} ${arrowY} M ${barX} ${barY} L ${arrowX + arrowSize / 2} ${arrowY}`;
-    //   })
-    //   .attr('stroke', 'blue')
-    //   .attr('stroke-width', 2)
-    //   .attr("marker-end", "url(#arrow-end)"); // Attach the arrowhead marker to the arrow
 
       // Define the arrow marker
     svg.append("svg:defs").selectAll("marker")
@@ -142,15 +112,17 @@ const BaseShearDiagram = () => {
     .enter().append("svg:marker")
     .attr("id", "arrow-end")
     .attr("viewBox", "0 -5 10 10")
-    .attr("refX", -arrowSize) // Set the refX to a negative value to position the arrowhead to the left of the starting point
+    .attr("refX", 2) // Set the refX to a negative value to position the arrowhead to the left of the starting point
     .attr("refY", 0)
     .attr("markerWidth", 6)
     .attr("markerHeight", 6)
     .attr("orient", "auto")
     .append("svg:path")
     .attr("d", "M0,-5L10,0L0,5")
-    .style("fill", "blue"); // Set the fill color of the arrowhead (optional)
+    .style("fill", "blue");
 
+    const arrowOffset = 100;
+  
   // Add arrows pointing to the rectangles
   svg.selectAll(".arrow")
     .data(forces)
@@ -158,15 +130,23 @@ const BaseShearDiagram = () => {
     .append("path")
     .attr("class", "arrow")
     .attr("d", (d, i) => {
-      const barX = xScale(d.floor) + xScale.bandwidth() / 2;
+      const barX = 0; //xScale(d.floor) + xScale.bandwidth() / 2;
       const barY = yScale(d.value);
-      const arrowX = xScale(d.floor); // Set the arrowX to the left of the rectangle
+      const arrowX = barX + arrowOffset; //xScale(d.floor); // Set the arrowX to the left of the rectangle
       const arrowY = barY; // Set the arrowY to the top edge of the rectangle
       return `M ${barX} ${barY} L ${arrowX} ${arrowY}`;
     })
     .attr("stroke", "blue") // Color of the arrow lines
     .attr("stroke-width", 2)
     .attr("marker-end", "url(#arrow-end)"); // Attach the arrowhead marker to the arrow
+
+    // Draw the text on the arrow
+    // const textOffsetX = 10; // Adjust this value to control the text position on the arrow
+    // d3.select(this).append("text")
+    //   .attr("x", (barX + arrowX) / 2 + textOffsetX)
+    //   .attr("y", barY)
+    //   .attr("text-anchor", "middle")
+    //   .text((i !== 0) ? `Fi+${i}` : `F${i + 1}`);
 
     // Append the axes to the SVG container
     svg.append('g')
