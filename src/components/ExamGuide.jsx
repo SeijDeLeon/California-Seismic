@@ -20,18 +20,43 @@ export default function ExamGuide( { display=false }) {
 
     const questionData = [
       {
-        title: 'Day of the Exam',
+        title: 'Pass Rate',
         data: [
-          {question:"",
-           answer:"",
+          {question:"How many questions do I need to answer correctly to pass?",
+           answer:`The historical data for the cut rate ranges from 40% to 60%. If you walk away from the exam feeling confident about 3/4 of the questions, you're probably in good shape!`,
            image:""},
-          {question:"",
-           answer:"",
+          {question:"How many people take the exam and pass it each year?",
+           answer:"The board doesn't post the raw data anymore for number of test takers or the pass rate, however we can infer there are over 1500 people taking the test each year based on historic data. (In addition, if you checkout license info from new PE licenses there's around 1500 new licenses granted each year, so counting people retaking the test there should way more than 1500 test takers). The pass rate form historic data centered around 50%.",
            image:""}
         ]
       },
       {
-        title: 'After Obtaining PE License',
+        title: 'Study Effort',
+        data: [
+          {question:"How much time is needed to study for the exam?",
+           answer:`Everyone has a different level of availability for studying, but in general most people start studying at least a month in advance. For those actively using ASCE 7 at their workplace, the level of effort will be less than people unfamiliar with the standard.`,
+           image:""},
+          {question:"How many sample questions should I do before taking the exam?",
+           answer:"If you can answer any sample question in under two minutes, you're in good shape. If you can look at a question and lay out the solution process in a few seconds, that's a nother great indiciator you've done enough practice. Speed is going to be the defining factor for how well you do on the exam, there's not enough time to figure out how to solve a question using any sort of reference material, you either know it or you don't. ",
+           image:""}
+        ]
+      },
+      {
+        title: 'The day of the Exam',
+        data: [
+          {question:"What do I need to bring with me to the testing center?",
+           answer:`You'll need to bring all your reference materials, calculator, and your ID. You will be provided pencils and scratch paper for the exam. You can also bring water/snacks with you to the test center and keep in your locker if you need.`,
+           image:""},
+          {question:"What reference material can I bring?",
+           answer:"There are two basic limitations on your reference material. One is that all the material needs to fit within a standard banker's box. Second, all material needs to be bound. Bound material can be in a three ring binder, or bound as book. Loose papers are not allowed.",
+           image:""},
+           {question:"What calculator can I bring to the exam?",
+           answer:<><p>The board provides specific calculators that you can bring. Note it's OK to bring two calculators to the exam, so one can be your backup!</p><ul><li>fx-115 and fx-991 models</li><li> HP 33s and HP 35s models </li><li> TI-30X and TI-36X models </li></ul></>,
+           image:""}
+        ]
+      },
+      {
+        title: `PE license info`,
         data: [
           {question:"What is the renewal process looks like once I get my PE license?",
            answer:"Once you obtain your PE license for the first time, you will have effectively paid for it to be valid for the next two years. As the two year anniversary approaches, the board will send you a mailed letter with instructions for renewing your license, which will cost $180. This renewal will repeat every two years if you wish to keep your license valid.",
@@ -47,7 +72,7 @@ export default function ExamGuide( { display=false }) {
     ];
 
     const Sidebar =
-    <aside className='text-left sticky top-4 pl-2 h-4/6 rounded-lg bg-[rgb(246,209,164)] bg-[linear-gradient(196deg, rgba(246,209,164,1) 0%, rgba(246,223,155,1) 49%, rgba(182,216,248,1) 78%)]'>
+    <aside className='text-left sticky h-[calc(100vh-200px)] top-4 pl-2 pb-16 rounded-lg bg-[rgb(246,209,164)] bg-[linear-gradient(196deg, rgba(246,209,164,1) 0%, rgba(246,223,155,1) 49%, rgba(182,216,248,1) 78%)]'>
       <span className='flex items-center pt-10'>
         <ClipboardDocumentCheckIcon className="h-5 w-5 flex-none text-gray-400 mx-2" aria-hidden="true"/>
         <p className='text-md text-left py-3 text-slate-700'>General Information</p>
@@ -119,10 +144,10 @@ export default function ExamGuide( { display=false }) {
               <p className=' text-3xl w-fit m-auto border-b-2 border-orange-300/50 font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>Seismic Exam FAQ</p>
               <div className='max-w-full text-left px-4 mt-4'>
                 {questionData.map((category) =>
-                    <section key={category.title}>
+                    <section className='py-4' key={category.title}>
                       <h3 className='font-semibold pt-2 text-2xl text-slate-700'>{category.title}</h3>
                       {category.data.map((data) =>
-                        <div key={data.question}>
+                        <div className='py-2' key={data.question}>
                           <p className='font-semibold pt-2 text-lg text-slate-700'>{data.question}</p>
                           <p className=''> {data.answer}</p>
                         </div>
