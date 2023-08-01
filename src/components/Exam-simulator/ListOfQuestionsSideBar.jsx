@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { CheckIcon } from '@heroicons/react/20/solid';
+import React, { useState } from "react";
+import { CheckIcon } from "@heroicons/react/20/solid";
 
-function ListOfQuestionsSideBar({selectedExam, selectedFlags, setCurrentQuestion}){
-    const [triangleColors, setTriangleColors] = useState(selectedExam.questions.map(() => 'gray'));
+function ListOfQuestionsSideBar({
+  selectedExam,
+  selectedFlags,
+  setCurrentQuestion,
+}) {
+  const [triangleColors, setTriangleColors] = useState(
+    selectedExam.questions.map(() => "gray")
+  );
 
-    const changeTriangleColor = (index) => {
-      const newTriangleColors = [...triangleColors];
-      newTriangleColors[index] = newTriangleColors[index] === 'gray' ? 'red' : 'gray';
-      setTriangleColors(newTriangleColors);
-    };
-  
+  const changeTriangleColor = (index) => {
+    const newTriangleColors = [...triangleColors];
+    newTriangleColors[index] =
+      newTriangleColors[index] === "gray" ? "red" : "gray";
+    setTriangleColors(newTriangleColors);
+  };
 
-    return (
-        <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4 px-2">
+  return (
+    <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4 px-2">
       <div className="top-0 p-4 py-2 w-full grid grid-rows-1 grid-flow-col items-center">
         <ul className="flex flex-col space-y-2">
           {/* Question list */}
@@ -26,7 +32,7 @@ function ListOfQuestionsSideBar({selectedExam, selectedFlags, setCurrentQuestion
                 <div className="flex items-center border-r border-gray-300 pr-2">
                   <svg
                     className="flex space-x-4"
-                    stroke={selectedFlags[index] ? 'black' : 'white'}
+                    stroke={selectedFlags[index] ? "black" : "white"}
                     width="30"
                     height="30"
                   >
@@ -35,13 +41,22 @@ function ListOfQuestionsSideBar({selectedExam, selectedFlags, setCurrentQuestion
                 </div>
                 {/* Question Number Button */}
                 <div className="flex items-center border-r border-gray-300 pr-2">
-                  <button className="rounded flex hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 px-1" onClick={() => {setCurrentQuestion(index);}} key={index}>
+                  <button
+                    className="rounded flex hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 px-1"
+                    onClick={() => {
+                      setCurrentQuestion(index);
+                    }}
+                    key={index}
+                  >
                     <span className="ml-2">Q: {index + 1}</span>
                   </button>
                 </div>
                 {/* Triangle SVG Button */}
                 <div className="flex items-center">
-                  <button onClick={() => changeTriangleColor(index)} className="bg-color-yellow rounded-lg p-2 flex items-center justify-center px-2">
+                  <button
+                    onClick={() => changeTriangleColor(index)}
+                    className="bg-color-yellow rounded-lg p-2 flex items-center justify-center px-2"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -64,7 +79,7 @@ function ListOfQuestionsSideBar({selectedExam, selectedFlags, setCurrentQuestion
         </ul>
       </div>
     </aside>
-    )
+  );
 }
 
 export default ListOfQuestionsSideBar;

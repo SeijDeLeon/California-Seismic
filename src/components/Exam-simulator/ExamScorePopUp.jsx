@@ -1,6 +1,7 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 
-function ExamScorePopUpModal({visible, onClose, score, restartExam, answeredQuestionsLength, selectedExamQuestionsList}){
+function ExamScorePopUpModal({visible, onClose, score, setDisplaySolution, restartExam, answeredQuestionsLength, selectedExamQuestionsList, selectedOption={selectedOption} }){
 
     if(!visible) return null;
     return(
@@ -43,6 +44,12 @@ function ExamScorePopUpModal({visible, onClose, score, restartExam, answeredQues
                         Go Back
                     </button>
                     </div>
+                    <div>
+                    <button className="px-4 py-2 bg-blue-500 text-white rounded-full" onClick={() => {onClose(); setDisplaySolution(true);}}>
+                        See solution
+                    </button>
+                    </div>
+                    
                 </div>
                 </div>
             </div>
