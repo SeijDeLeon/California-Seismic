@@ -28,15 +28,16 @@
   color: #61dafb;
 }
 
+
 .iframe-padding-left {
   padding-left: calc(calc(100vw - 816px) / 2);
 }
 
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  url('./assets/hero.jpg');
-  width:100%;
-  height:92vh;
+    url("./assets/hero.jpg");
+  width: 100%;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   background-position: bottom;
@@ -49,7 +50,7 @@
 }
 
 .doc-content {
-  padding:0 !important;
+  padding: 0 !important;
   max-width: 1200px !important;
 }
 
@@ -64,38 +65,63 @@
 
 @media only screen and (max-width: 700) {
   .iframe-padding-left {
-    padding:default;
+    padding: default;
   }
 }
 
 @media only screen and (max-width: 700px) {
-  .hero{
-    height:70vh;
+  .hero {
+    height: 70vh;
   }
 }
-
-
-
 
 /***************** Animation for landing page ******************/
 
 @keyframes hideshow {
-  0% { opacity: 0.33; transform: translateX(-3px);}
-  33% { opacity: 1; transform: translateX(0px);}
-  50% { opacity: 0; transform: translateX(-3px);}
-  66% { opacity: 0; transform: translateX(-6px);}
-  100% { opacity: 0.33; transform: translateX(-3px);}
+  0% {
+    opacity: 0.33;
+    transform: translateX(-3px);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(-3px);
+  }
+  66% {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  100% {
+    opacity: 0.33;
+    transform: translateX(-3px);
+  }
 }
 
 @keyframes hideshowArea {
-  0% { opacity: 0; transform: translateX(-5px);}
-  33% { opacity: 1; transform: translateX(0px);}
-  50% { opacity: 0; transform: translateX(-3px);}
-  66% { opacity: 0; transform: translateX(-6px);}
-  100% { opacity: 0; transform: translateX(-3px);}
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateX(-3px);
+  }
+  66% {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-3px);
+  }
 }
-
-
 
 #bL1 {
   animation: rotate 10s ease infinite;
@@ -117,19 +143,28 @@
   animation: lowSlide 10s ease infinite;
 }
 
-#aL1, #aL2, #aL3, #aL4, #aP1, #aP2, #aP3 {
+#aL1,
+#aL2,
+#aL3,
+#aL4,
+#aP1,
+#aP2,
+#aP3 {
   animation: hideshow 10s ease infinite;
 }
 
-#vP1, #mP1 {
+#vP1,
+#mP1 {
   animation: hideshowArea 10s 0.2s ease infinite;
 }
 
-#vP2, #mP2 {
+#vP2,
+#mP2 {
   animation: hideshowArea 10s 0.4s ease infinite;
 }
 
-#vP3, #mP3 {
+#vP3,
+#mP3 {
   animation: hideshowArea 10s 0.6s ease infinite;
 }
 
@@ -209,3 +244,46 @@
     transform-origin: 50% 100%;
   }
 }
+/***************** CSS for problem generator project ******************/
+/* .question-categories {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  margin: auto;
+}
+.question-category {
+  border: 2px solid black;
+  background-color: lightgrey;
+  border-radius: 5px;
+  height: 200px;
+  width: 300px;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.question-container {
+  border: 2px solid grey;
+  border-radius: 5px;
+  margin: 5px;
+  width: 60vw;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+} */
+/* .question {
+} */
+/* .question {
+  text-align: start;
+}
+.choices {
+  padding: 10px;
+}
+.choices > li {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 5px;
+} */

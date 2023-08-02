@@ -11,6 +11,9 @@ import Contributors from "./components/Contributors.jsx";
 import UnderConstruction from "./components/UnderConstruction.jsx";
 import Footer from "./components/Footer.jsx";
 import Error404 from "./components/Error404";
+import QuestionGeneratorDisplay from "./components/ProblemGenerator/QuestionGeneratorDisplay";
+import ExamsListPage from "./components/Exam-simulator/ExamsListPage";
+import SinglePracticeExam from "./components/Exam-simulator/SinglePracticeExam";
 
 function App() {
   return (
@@ -21,8 +24,11 @@ function App() {
         <Route path="/lectures" element={<Lectures display="true" />} />
         <Route path="/lectures/:id" element={<Lecture display="true" />} />
         <Route path="/practice" element={<Practice />} />
+        <Route path="/practice/exams" element={<ExamsListPage />} />
+        <Route path="/practice/exams/:examId" element={<SinglePracticeExam />} />
         <Route path="/exam-guide" element={<ExamGuide display="true"/>} />
         <Route path="/contributors" element={<Contributors />} />
+        <Route path="/practice/random" element={<QuestionGeneratorDisplay />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
