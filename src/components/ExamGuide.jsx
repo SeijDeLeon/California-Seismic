@@ -17,6 +17,23 @@ export default function ExamGuide( { display=false }) {
   } else {
 
 
+    function Link(link, text) {
+      return (
+        <a className="text-blue-700" href={link} >{text}</a>
+      )
+    }
+
+    const handleSidebarClick = (id) => {
+      var heading = document.getElementById(id);
+      if (heading !== null) {
+        console.log({heading});
+        console.log(window.scrollY);
+        var headingHeight = heading.getBoundingClientRect().top + window.scrollY;
+        console.log({headingHeight});
+        window.scrollTo({top: headingHeight, behavior: 'smooth'});
+      }
+    }
+
 
     const questionData = [
       {
@@ -26,7 +43,7 @@ export default function ExamGuide( { display=false }) {
            answer:`The historical data for the cut rate ranges from 40% to 60%. If you walk away from the exam feeling confident about 3/4 of the questions, you're probably in good shape!`,
            image:""},
           {question:"How many people take the exam and pass it each year?",
-           answer:"The board doesn't post the raw data anymore for number of test takers or the pass rate, however we can infer there are over 1500 people taking the test each year based on historic data. (In addition, if you checkout license info from new PE licenses there's around 1500 new licenses granted each year, so counting people retaking the test there should way more than 1500 test takers). The pass rate form historic data centered around 50%.",
+           answer:"Over 2000 people each year take the exam, and typicall 50% of test takers pass.",
            image:""}
         ]
       },
@@ -51,7 +68,7 @@ export default function ExamGuide( { display=false }) {
            answer:"There are two basic limitations on your reference material. One is that all the material needs to fit within a standard banker's box. Second, all material needs to be bound. Bound material can be in a three ring binder, or bound as book. Loose papers are not allowed.",
            image:""},
            {question:"What calculator can I bring to the exam?",
-           answer:<><p>The board provides specific calculators that you can bring. Note it's OK to bring two calculators to the exam, so one can be your backup!</p><ul><li>fx-115 and fx-991 models</li><li> HP 33s and HP 35s models </li><li> TI-30X and TI-36X models </li></ul></>,
+           answer:<>The board provides specific calculators that you can bring. Note it's OK to bring two calculators to the exam, so one can be your backup!<ul className='pl-8 list-disc'><li>fx-115 and fx-991 models</li><li> HP 33s and HP 35s models </li><li> TI-30X and TI-36X models </li></ul></>,
            image:""}
         ]
       },
@@ -71,22 +88,24 @@ export default function ExamGuide( { display=false }) {
       }
     ];
 
+    const sidebarData = [
+      {icon: ClipboardDocumentCheckIcon, text: 'General Information'},
+      {icon: MapIcon, text: 'Pathway to License'},
+      {icon: ChatBubbleLeftRightIcon, text: 'FAQ'}
+    ]
     const Sidebar =
-    <aside className='text-left sticky h-[calc(100vh-200px)] top-4 pl-2 pb-16 rounded-lg bg-[rgb(246,209,164)] bg-[linear-gradient(196deg, rgba(246,209,164,1) 0%, rgba(246,223,155,1) 49%, rgba(182,216,248,1) 78%)]'>
-      <span className='flex items-center pt-10'>
-        <ClipboardDocumentCheckIcon className="h-5 w-5 flex-none text-gray-400 mx-2" aria-hidden="true"/>
-        <p className='text-md text-left py-3 text-slate-700'>General Information</p>
+    <aside className='text-left sticky  top-4 bottom-4 pl-2 pb-8 rounded-lg'>
+    {sidebarData.map((item) => {
+      return (
+      <span onClick={() => handleSidebarClick(item.text)} id={item.text} key={item.text} className='flex items-center pt-10'>
+        <item.icon className='h-5 w-5 flex-none text-gray-400 mx-2' aria-hidden='true'/>
+        <p className='text-md text-left py-3 text-slate-700'>{item.text}</p>
       </span>
-      <span className='flex items-center pt-10'>
-        <MapIcon className="h-5 w-5 flex-none text-gray-400 mx-2" aria-hidden="true"/>
-        <p className='text-md text-left py-3 text-slate-700'>Pathway to License</p>
-      </span>
-      <span className='flex items-center pt-10'>
-        <ChatBubbleLeftRightIcon className="h-5 w-5 flex-none text-gray-400 mx-2" aria-hidden="true"/>
-        <p className='text-md text-left py-3 text-slate-700'>FAQ</p>
-      </span>
+      )
+    }
+    )}
       <ul>
-        {questionData.map((item) => <li className='text-sm pl-10 text-slate-700 mb-2' key={item.title}>{item.title}</li>)}
+        {questionData.map((item) => <li onClick={() => handleSidebarClick(item.title)} id={item.title} className='text-sm pl-10 text-slate-700 mb-2' key={item.title}>{item.title}</li>)}
       </ul>
     </aside>
 
@@ -101,20 +120,11 @@ export default function ExamGuide( { display=false }) {
             <article>
               <p className='m-auto w-fit border-b-2 border-orange-300/50 text-3xl font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>General Exam Information</p>
               <div className='max-w-full text-left px-4 mt-4'>
-                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Sub Heading</h3>
                 <p className='text-left pb-2'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                The California Seismic Principles Exam is one of two state specific exams required to obtain a California Civil PE license. The exam is computer based, with a total of 55 multiple choice questions over a 2.5 hour duration. Reference materials are allowed to be brought into the exam, at a minimum ASCE 7 will be needed on hand to pass the exam.
                 </p>
-                <p className='text-left'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-
-                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Sub Heading</h3>
                 <p className='text-left pb-2'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p className='text-left'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Passing the Seismic Exam is the last stage to obtaining a California PE License, along with passing the Surveying Exam. Each of these state specific exams is narrow in scope, requiring focused time to study. It is not likely that a test taker can pass them based on work experience alone due to the fast paced nature of the exam.
                 </p>
               </div>
             </article>
@@ -122,21 +132,31 @@ export default function ExamGuide( { display=false }) {
             <article>
               <p className=' text-3xl w-fit m-auto border-b-2 border-sky-300/50 font-semibold tracking-wide text-center text-sky-600 max-w-full pt-4 px-2'>Pathway to License</p>
               <div className='max-w-full text-left px-4 mt-4'>
-                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Sub Heading</h3>
+                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Why obtain a PE license?</h3>
                 <p className='text-left pb-2'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                For those thinking about whether or not to obtain a Professional Engineer’s (PE) license, you may have a few questions on your mind. Why should I spend my time studying for the PE license when I can work full time and gain experience through work? Why should I spend so much money on all these applications? I can still make a living without a PE license, right?
                 </p>
                 <p className='text-left'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                To start, yes, you have to study hard and sacrifice your free time to obtain a license. Also, it is true that you don’t necessarily need a PE license in order to be successful in your career. Nevertheless, obtaining a PE license provides possibilities that make it worth it if you've made it this far. Obtaining your license can open up doors to new opportunities that require a valid license, and once you've obtained your license you don't have to take the exams again.
                 </p>
 
-                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Sub Heading</h3>
-                <p className='text-left pb-2'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p className='text-left'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Process to Obtaining your PE License</h3>
+                <ol className='text-left pb-2 pl-4 list-decimal'>
+                  <li>Register and pass the Fundamentals of Engineering (FE) exam. You can register for the FE exam on the National Council of Examiners for Engineering and Surveying (NCEES) {Link("https://ncees.org/exams/fe-exam/","website")}. The exam fee is $175 and the exam is offered year round at any NCEES approved test centers.</li>
+                  <li>Once you pass the FE exam, apply for the Engineer in Training (EIT) Certification. The application fee for the EIT is $75. The application can be submitted online through the {Link("https://www.bpelsg.ca.gov/pubs/forms/eit-lsitapp.pdf","BPELSG Connect portal")}. To apply, you must:</li>
+                    <ul className='pl-2 list-disc'>
+                      <li>Have three years or more of engineering-related work experience or ABET certified university engineering education. </li>
+                      <li>Have never been convicted of a crime related to engineering practice.</li>
+                      <li>Previously passed the FE exam.</li>
+                      <li> {Link("https://www.bpelsg.ca.gov/applicants/fingerprinting_faqs_1.shtml","Submit official fingerprints")}</li>
+                    </ul>
+                  <li>After obtaining the EIT certificate, apply for and take the 8-hour national PE exam. This exam has 80 multiple choice questions, is offered on a continuous basis, and has two separate halfs. The first half is based in general Civil Engineering principles, while the second half is more in depth focused on one sector, which you can choose from. The PE exam used to be in person and also required you to bring your own reference materials, but after the pandemic switched to computer based. The reference materials are also provided on the computer as well. The cost for the exam is $375. More information can be found at {Link("https://ncees.org/exams/pe-exam/civil/", "the NCEES website")}</li>
+                  <li>Accumulate the qualifying experience. There are various pathways to accomplish this experience (see below flowchart), but typically you need 6 years of qualifying experience. Most people have an ABET accredited bachelor’s degree in Civil Engineering that counts for 4 years of qualifying experience. From there you’ll just need two more years, which would mean two years of working under a registered Professional Engineer doing qualifying work. If you get a Master’s degree in Civil Engineering, that will also count as 1 year!</li>
+                  <li>Once you gain the required experience, gather your education and experience verification documents to submit the PE application package to the Board for Professional Engineers, Land Surveyors, and Geologists. This application is now submitted online through the {Link("https://connect.bpelsg.ca.gov/#/", "BPELSG Connect portal")}. The application fee for the license itself is $175, in addition to a $175 fee each for both the seismic and surveying exams. The total cost to the Board will come out to be $525 when you first apply for the license (because you'll also typically apply to take the seismic and surveying exam at the same time). See {Link("https://www.bpelsg.ca.gov/applicants/application_fees.shtml", "here")} for application costs.</li>
+                  <li>After you receive an Authorization to Test approval from the Board, you can take the seismic and surveying exams during one of two following quarters, depending on when you are approved. These are computer-based exams offered by Prometric Testing. Both exams are 2.5 hours long and consist of 55 multiple-choice questions. In addition to the exam fees to the Board listed previously, an additional $70 fee for each exam must be paid to Prometric Testing. <br/><br/> Optional: If you fail either exam, you'll need to obtain re-authorization from the Board (and pay the $175 to them), then re-schedule the exam with Prometric (and pay them their $70 fee)</li>
+                  <li>Once you pass both the Seismic and Surveying exam you're all done! If the Board gave you authorization to take the exams in the first place, they've effectively already confirmed you have the necessary experience to be a licensed engineer. With the exams complete, you'll recieve a letter in the mail with your license card and a formal paper that can be framed.</li>
+
+                </ol>
               </div>
             </article>
 
@@ -149,7 +169,7 @@ export default function ExamGuide( { display=false }) {
                       {category.data.map((data) =>
                         <div className='py-2' key={data.question}>
                           <p className='font-semibold pt-2 text-lg text-slate-700'>{data.question}</p>
-                          <p className=''> {data.answer}</p>
+                          <span className=''> {data.answer}</span>
                         </div>
                       )}
                     </section>
@@ -163,6 +183,9 @@ export default function ExamGuide( { display=false }) {
             <aside className='text-center sticky top-0'>
               <p className='text-lg text-left py-4 text-slate-500'>References</p>
                 <ul className='text-left'>
+                  <li>{Link("https://www.bpelsg.ca.gov/applicants/exam_schedule_final_filing_dates.pdf","Exam Schedules")}</li>
+                  <li>{Link("https://www.bpelsg.ca.gov/applicants/exam_statistics.pdf","Exam Pass Rate")}</li>
+                  <li>{Link("https://www.prometric.com/sites/default/files/2020-02/Civil%20Seismic%20Principles%20CIB_4.pdf","Prometric Exam Info")}</li>
 
                 </ul>
             </aside>
