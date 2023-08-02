@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-
+//as reference https://clearcalcs.com/calculations/seismicAnalysisUS
 const BaseShearDiagram = () => {
   const chartRef = useRef();
   const [userInput, setUserInput] = useState({
@@ -18,38 +18,38 @@ const BaseShearDiagram = () => {
     setUserInput(event.target.value);
   };
 
-  //thinking about using a for loop to populate the forces for the floors. 
+  //thinking about using a for loop to populate the forces for the floors.
 
   const arrowSize = 10; // Size of the arrow
 
   const drawChart = () => {
     console.log('drawChart called');
-    const forces = [
+    const forces = [ //value is the height. each rectangle shares the same bottom axis.
       { floor: 1, value: 100 }, // Example forces for each floor
       { floor: 1, value: 200 }, // by having floor as 1, the rectangles stack
       { floor: 1, value: 300 },
       { floor: 1, value: 400 }
     ];
 
-    // Calculate the total base shear
+    // Calculate the total base shear (should be renamed to Y axis max)
     //const totalBaseShear = 400; //Currently using this as the y-axis max
     const totalBaseShear = d3.max(forces, force => force.value);
 
     // Set up scales and axes
     const xScale = d3.scaleBand()
       .domain(forces.map(force => force.floor))
-      .range([50, totalBaseShear])
+      .range([50, totalBaseShear]) //second argument to be rewritten
       .padding(0.3);
 
     const yScale = d3.scaleLinear()
-      .domain([0, totalBaseShear + arrowSize])
+      .domain([0, totalBaseShear + arrowSize]) //change arrowSize to be 'padding'
       .range([250, 50]);
 
     const xAxis = d3.axisBottom(xScale)
-      .tickFormat(d => `Base Shear`) // Custom label format 
+      .tickFormat(d => `Base Shear`) // Custom label format (long term need to get rid of ticks on x-axis)
     const yAxis = d3.axisLeft(yScale);
 
-    const svgWidth = totalBaseShear + 100; // Adding extra space 
+    const svgWidth = totalBaseShear + 100; // Adding extra space
     const svgHeight = 300; // Set a height
 
     // Set up SVG container using D3
