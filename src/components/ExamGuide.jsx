@@ -17,19 +17,16 @@ export default function ExamGuide( { display=false }) {
   } else {
 
 
-    function Link(link, text) {
+    function Link(link, text, color="text-sky-700") {
       return (
-        <a className="text-blue-700" href={link} >{text}</a>
+        <a target='_blank' rel='noopener noreferrer' className={`${color} underline`} href={link} >{text}</a>
       )
     }
 
     const handleSidebarClick = (id) => {
       var heading = document.getElementById(id);
       if (heading !== null) {
-        console.log({heading});
-        console.log(window.scrollY);
         var headingHeight = heading.getBoundingClientRect().top + window.scrollY;
-        console.log({headingHeight});
         window.scrollTo({top: headingHeight, behavior: 'smooth'});
       }
     }
@@ -88,37 +85,60 @@ export default function ExamGuide( { display=false }) {
       }
     ];
 
-    const sidebarData = [
+    const leftSidebarData = [
       {icon: ClipboardDocumentCheckIcon, text: 'General Information'},
       {icon: MapIcon, text: 'Pathway to License'},
       {icon: ChatBubbleLeftRightIcon, text: 'FAQ'}
     ]
-    const Sidebar =
-    <aside className='text-left sticky  top-4 bottom-4 pl-2 pb-8 rounded-lg'>
-    {sidebarData.map((item) => {
+
+    const LeftSidebar =
+    <aside className='text-left sticky top-4 bottom-4 pl-2 pb-8 rounded-lg'>
+    {leftSidebarData.map((item) => {
       return (
-      <span onClick={() => handleSidebarClick(item.text)} id={item.text} key={item.text} className='flex items-center pt-10'>
-        <item.icon className='h-5 w-5 flex-none text-gray-400 mx-2' aria-hidden='true'/>
-        <p className='text-md text-left py-3 text-slate-700'>{item.text}</p>
+      <span onClick={() => handleSidebarClick(item.text)} key={item.text} className='flex items-center my-4  rounded-lg hover:cursor-pointer group hover:bg-sky-300 hover:shadow-lg'>
+        <item.icon className='h-5 w-5 flex-none text-gray-400 mx-2 group-hover:text-white' aria-hidden='true'/>
+        <p className='text-md text-left text-slate-700 group-hover:text-white'>{item.text}</p>
       </span>
       )
     }
     )}
       <ul>
-        {questionData.map((item) => <li onClick={() => handleSidebarClick(item.title)} id={item.title} className='text-sm pl-10 text-slate-700 mb-2' key={item.title}>{item.title}</li>)}
+        {questionData.map((item) => <li onClick={() => handleSidebarClick(item.title)} className='text-sm ml-8 pl-2 text-slate-700 mb-2 rounded-lg hover:cursor-pointer hover:bg-sky-300 hover:shadow-lg hover:text-white' key={item.title}>{item.title}</li>)}
       </ul>
     </aside>
+
+    const rightSidebarData = [
+      {link:"https://www.bpelsg.ca.gov/applicants/exam_schedule_final_filing_dates.pdf", text:"Exam Schedules"},
+      {link:"https://www.bpelsg.ca.gov/applicants/exam_statistics.pdf",text:"Exam Pass Rate"},
+      {link:"https://www.prometric.com/sites/default/files/2020-02/Civil%20Seismic%20Principles%20CIB_4.pdf", text:"Prometric Exam Info"}
+    ]
+
+    const RightSidebar =
+    <div className='sm:w-0 hidden lg:block lg:w-2/12'>
+      <aside className='text-center sticky top-0'>
+        <p className='text-lg text-left py-4 text-slate-500'>References</p>
+          <ul className='text-left'>
+            {rightSidebarData.map( (item) => {
+              return (
+                <li key={item.text} className="my-2 hover:text-sky-700">{Link(item.link,item.text, "text-slate-700")}</li>
+              )
+            })}
+          </ul>
+      </aside>
+    </div>
 
     return (
       <main data-testid="testExamGuideh1" className='max-w-screen-2xl m-auto px-4'>
         <div className='flex h-full pt-4'>
+          {/* Left Sidebar */}
           <div className='sm:w-0 hidden lg:block lg:w-2/12 pt-8'>
-            {Sidebar}
+            {LeftSidebar}
           </div>
 
+          {/* General Information */}
           <section className='sm:w-full  lg:w-8/12 overflow-auto flex flex-col justify-center px-4'>
             <article>
-              <p className='m-auto w-fit border-b-2 border-orange-300/50 text-3xl font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>General Exam Information</p>
+              <p id={leftSidebarData[0].text} className='m-auto w-fit border-b-2 border-orange-300/50 text-3xl font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>{leftSidebarData[0].text}n</p>
               <div className='max-w-full text-left px-4 mt-4'>
                 <p className='text-left pb-2'>
                 The California Seismic Principles Exam is one of two state specific exams required to obtain a California Civil PE license. The exam is computer based, with a total of 55 multiple choice questions over a 2.5 hour duration. Reference materials are allowed to be brought into the exam, at a minimum ASCE 7 will be needed on hand to pass the exam.
@@ -129,8 +149,9 @@ export default function ExamGuide( { display=false }) {
               </div>
             </article>
 
+            {/* Pathway to License */}
             <article>
-              <p className=' text-3xl w-fit m-auto border-b-2 border-sky-300/50 font-semibold tracking-wide text-center text-sky-600 max-w-full pt-4 px-2'>Pathway to License</p>
+              <p id={leftSidebarData[1].text} className=' text-3xl w-fit m-auto border-b-2 border-sky-300/50 font-semibold tracking-wide text-center text-sky-600 max-w-full pt-4 px-2'>{leftSidebarData[1].text}</p>
               <div className='max-w-full text-left px-4 mt-4'>
                 <h3 className='font-semibold pt-2 text-xl text-slate-700'>Why obtain a PE license?</h3>
                 <p className='text-left pb-2'>
@@ -160,12 +181,13 @@ export default function ExamGuide( { display=false }) {
               </div>
             </article>
 
+            {/* FAQ Section */}
             <article>
-              <p className=' text-3xl w-fit m-auto border-b-2 border-orange-300/50 font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>Seismic Exam FAQ</p>
+              <p id={leftSidebarData[2].text} className=' text-3xl w-fit m-auto border-b-2 border-orange-300/50 font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>{leftSidebarData[2].text}</p>
               <div className='max-w-full text-left px-4 mt-4'>
                 {questionData.map((category) =>
                     <section className='py-4' key={category.title}>
-                      <h3 className='font-semibold pt-2 text-2xl text-slate-700'>{category.title}</h3>
+                      <h3 id={category.title} className='font-semibold pt-2 text-2xl text-slate-700'>{category.title}</h3>
                       {category.data.map((data) =>
                         <div className='py-2' key={data.question}>
                           <p className='font-semibold pt-2 text-lg text-slate-700'>{data.question}</p>
@@ -178,18 +200,8 @@ export default function ExamGuide( { display=false }) {
             </article>
           </section>
 
-
-          <div className='sm:w-0 hidden lg:block lg:w-2/12'>
-            <aside className='text-center sticky top-0'>
-              <p className='text-lg text-left py-4 text-slate-500'>References</p>
-                <ul className='text-left'>
-                  <li>{Link("https://www.bpelsg.ca.gov/applicants/exam_schedule_final_filing_dates.pdf","Exam Schedules")}</li>
-                  <li>{Link("https://www.bpelsg.ca.gov/applicants/exam_statistics.pdf","Exam Pass Rate")}</li>
-                  <li>{Link("https://www.prometric.com/sites/default/files/2020-02/Civil%20Seismic%20Principles%20CIB_4.pdf","Prometric Exam Info")}</li>
-
-                </ul>
-            </aside>
-          </div>
+          {/* Right Sidebar */}
+          {RightSidebar }
         </div>
       </main>
     )
