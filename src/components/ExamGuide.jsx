@@ -92,20 +92,22 @@ export default function ExamGuide( { display=false }) {
     ]
 
     const LeftSidebar =
-    <aside className='text-left sticky top-4 bottom-4 pl-2 pb-8 rounded-lg'>
-    {leftSidebarData.map((item) => {
-      return (
-      <span onClick={() => handleSidebarClick(item.text)} key={item.text} className='flex items-center my-4  rounded-lg hover:cursor-pointer group hover:bg-sky-300 hover:shadow-lg'>
-        <item.icon className='h-5 w-5 flex-none text-gray-400 mx-2 group-hover:text-white' aria-hidden='true'/>
-        <p className='text-md text-left text-slate-700 group-hover:text-white'>{item.text}</p>
-      </span>
-      )
-    }
-    )}
-      <ul>
-        {questionData.map((item) => <li onClick={() => handleSidebarClick(item.title)} className='text-sm ml-8 pl-2 text-slate-700 mb-2 rounded-lg hover:cursor-pointer hover:bg-sky-300 hover:shadow-lg hover:text-white' key={item.title}>{item.title}</li>)}
-      </ul>
-    </aside>
+    <div className='sm:w-0 hidden lg:block lg:w-2/12 pt-8'>
+      <aside className='text-left sticky top-4 bottom-4 pl-2 pb-8 rounded-lg'>
+      {leftSidebarData.map((item) => {
+        return (
+        <span onClick={() => handleSidebarClick(item.text)} key={item.text} className='flex items-center my-4  rounded-lg hover:cursor-pointer group hover:bg-sky-300 hover:shadow-lg'>
+          <item.icon className='h-5 w-5 flex-none text-gray-400 mx-2 group-hover:text-white' aria-hidden='true'/>
+          <p className='text-md text-left text-slate-700 group-hover:text-white'>{item.text}</p>
+        </span>
+        )
+      }
+      )}
+        <ul>
+          {questionData.map((item) => <li onClick={() => handleSidebarClick(item.title)} className='text-sm ml-8 pl-2 text-slate-700 mb-2 rounded-lg hover:cursor-pointer hover:bg-sky-300 hover:shadow-lg hover:text-white' key={item.title}>{item.title}</li>)}
+        </ul>
+      </aside>
+    </div>
 
     const rightSidebarData = [
       {link:"https://www.bpelsg.ca.gov/applicants/exam_schedule_final_filing_dates.pdf", text:"Exam Schedules"},
@@ -120,7 +122,7 @@ export default function ExamGuide( { display=false }) {
           <ul className='text-left'>
             {rightSidebarData.map( (item) => {
               return (
-                <li key={item.text} className="my-2 hover:text-sky-700">{Link(item.link,item.text, "text-slate-700")}</li>
+                <li key={item.text} className="my-2 hover:text-sky-700">{Link(item.link,item.text)}</li>
               )
             })}
           </ul>
@@ -131,13 +133,11 @@ export default function ExamGuide( { display=false }) {
       <main data-testid="testExamGuideh1" className='max-w-screen-2xl m-auto px-4'>
         <div className='flex h-full pt-4'>
           {/* Left Sidebar */}
-          <div className='sm:w-0 hidden lg:block lg:w-2/12 pt-8'>
-            {LeftSidebar}
-          </div>
+          {LeftSidebar}
 
-          {/* General Information */}
           <section className='sm:w-full  lg:w-8/12 overflow-auto flex flex-col justify-center px-4'>
-            <article>
+            {/* General Information */}
+            <article className='pb-12'>
               <p id={leftSidebarData[0].text} className='m-auto w-fit border-b-2 border-orange-300/50 text-3xl font-semibold tracking-wide text-center text-amber-600 max-w-full pt-4 px-2'>{leftSidebarData[0].text}n</p>
               <div className='max-w-full text-left px-4 mt-4'>
                 <p className='text-left pb-2'>
@@ -150,9 +150,9 @@ export default function ExamGuide( { display=false }) {
             </article>
 
             {/* Pathway to License */}
-            <article>
+            <article className='pb-12'>
               <p id={leftSidebarData[1].text} className=' text-3xl w-fit m-auto border-b-2 border-sky-300/50 font-semibold tracking-wide text-center text-sky-600 max-w-full pt-4 px-2'>{leftSidebarData[1].text}</p>
-              <div className='max-w-full text-left px-4 mt-4'>
+              <div className='max-w-full text-left px-4 my-4'>
                 <h3 className='font-semibold pt-2 text-xl text-slate-700'>Why obtain a PE license?</h3>
                 <p className='text-left pb-2'>
                 For those thinking about whether or not to obtain a Professional Engineer’s (PE) license, you may have a few questions on your mind. Why should I spend my time studying for the PE license when I can work full time and gain experience through work? Why should I spend so much money on all these applications? I can still make a living without a PE license, right?
@@ -161,8 +161,8 @@ export default function ExamGuide( { display=false }) {
                 To start, yes, you have to study hard and sacrifice your free time to obtain a license. Also, it is true that you don’t necessarily need a PE license in order to be successful in your career. Nevertheless, obtaining a PE license provides possibilities that make it worth it if you've made it this far. Obtaining your license can open up doors to new opportunities that require a valid license, and once you've obtained your license you don't have to take the exams again.
                 </p>
 
-                <h3 className='font-semibold pt-2 text-xl text-slate-700'>Process to Obtaining your PE License</h3>
-                <ol className='text-left pb-2 pl-4 list-decimal'>
+                <h3 className='font-semibold pt-2 text-xl text-slate-700 mt-4'>Process to Obtaining your PE License</h3>
+                <ol className='text-left pb-2 pl-4 list-decimal space-y-4'>
                   <li>Register and pass the Fundamentals of Engineering (FE) exam. You can register for the FE exam on the National Council of Examiners for Engineering and Surveying (NCEES) {Link("https://ncees.org/exams/fe-exam/","website")}. The exam fee is $175 and the exam is offered year round at any NCEES approved test centers.</li>
                   <li>Once you pass the FE exam, apply for the Engineer in Training (EIT) Certification. The application fee for the EIT is $75. The application can be submitted online through the {Link("https://www.bpelsg.ca.gov/pubs/forms/eit-lsitapp.pdf","BPELSG Connect portal")}. To apply, you must:</li>
                     <ul className='pl-2 list-disc'>
@@ -174,7 +174,7 @@ export default function ExamGuide( { display=false }) {
                   <li>After obtaining the EIT certificate, apply for and take the 8-hour national PE exam. This exam has 80 multiple choice questions, is offered on a continuous basis, and has two separate halfs. The first half is based in general Civil Engineering principles, while the second half is more in depth focused on one sector, which you can choose from. The PE exam used to be in person and also required you to bring your own reference materials, but after the pandemic switched to computer based. The reference materials are also provided on the computer as well. The cost for the exam is $375. More information can be found at {Link("https://ncees.org/exams/pe-exam/civil/", "the NCEES website")}</li>
                   <li>Accumulate the qualifying experience. There are various pathways to accomplish this experience (see below flowchart), but typically you need 6 years of qualifying experience. Most people have an ABET accredited bachelor’s degree in Civil Engineering that counts for 4 years of qualifying experience. From there you’ll just need two more years, which would mean two years of working under a registered Professional Engineer doing qualifying work. If you get a Master’s degree in Civil Engineering, that will also count as 1 year!</li>
                   <li>Once you gain the required experience, gather your education and experience verification documents to submit the PE application package to the Board for Professional Engineers, Land Surveyors, and Geologists. This application is now submitted online through the {Link("https://connect.bpelsg.ca.gov/#/", "BPELSG Connect portal")}. The application fee for the license itself is $175, in addition to a $175 fee each for both the seismic and surveying exams. The total cost to the Board will come out to be $525 when you first apply for the license (because you'll also typically apply to take the seismic and surveying exam at the same time). See {Link("https://www.bpelsg.ca.gov/applicants/application_fees.shtml", "here")} for application costs.</li>
-                  <li>After you receive an Authorization to Test approval from the Board, you can take the seismic and surveying exams during one of two following quarters, depending on when you are approved. These are computer-based exams offered by Prometric Testing. Both exams are 2.5 hours long and consist of 55 multiple-choice questions. In addition to the exam fees to the Board listed previously, an additional $70 fee for each exam must be paid to Prometric Testing. <br/><br/> Optional: If you fail either exam, you'll need to obtain re-authorization from the Board (and pay the $175 to them), then re-schedule the exam with Prometric (and pay them their $70 fee)</li>
+                  <li>After you receive an Authorization to Test approval from the Board, you can take the seismic and surveying exams during one of two following quarters, depending on when you are approved. These are computer-based exams offered by Prometric Testing. Both exams are 2.5 hours long and consist of 55 multiple-choice questions. In addition to the exam fees to the Board listed previously, an additional $70 fee for each exam must be paid to Prometric Testing. <br/> Optional: If you fail either exam, you'll need to obtain re-authorization from the Board (and pay the $175 to them), then re-schedule the exam with Prometric (and pay them their $70 fee)</li>
                   <li>Once you pass both the Seismic and Surveying exam you're all done! If the Board gave you authorization to take the exams in the first place, they've effectively already confirmed you have the necessary experience to be a licensed engineer. With the exams complete, you'll recieve a letter in the mail with your license card and a formal paper that can be framed.</li>
 
                 </ol>
