@@ -26,7 +26,7 @@ function App() {
         <Route path="/practice" element={<Practice />} />
         <Route path="/practice/exams" element={<ExamsListPage />} />
         <Route path="/practice/exams/:examId" element={<SinglePracticeExam />} />
-        <Route path="/exam-guide" element={<ExamGuide />} />
+        <Route path="/exam-guide" element={<ExamGuide display="true"/>} />
         <Route path="/contributors" element={<Contributors />} />
         <Route path="/practice/random" element={<QuestionGeneratorDisplay />} />
         <Route path="*" element={<Error404 />} />
