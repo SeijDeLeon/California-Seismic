@@ -15,7 +15,7 @@ export default function Lectures({ display=false }) {
       summary:'This lecture is an overview of the California Seismic Principles Exam. The basics of where the exam sits on the path to earning a PE license, and its requirements will be explained. Nothing in this lecture will be on the exam',
       prereqs:['none'],
       objectives:['Exam requirements and general information'],
-      video:'https://www.youtube.com/embed/b3ootXSAaqE'},
+      video:'https://www.youtube.com/embed/yjVDpxXzc5M'},
 
     { title: '02: Geology & Earthquakes',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vTgK-Wt0tdhKtZHpgY7Vl9qmvFnYJvq8QRpkGKhwJ8WvoHJ5UXdc-aRx0ABaoZ-Kl174yqejes51PYS/pub?embedded=true',
@@ -23,7 +23,7 @@ export default function Lectures({ display=false }) {
       summary:'How do earthquakes occur, and how does historical data make its way into the building code? The basics of seismology are discussed in this lecture, with a key emphasis on the modern building code.',
       prereqs:['none'],
       objectives:['Different types of seismic waves', 'The difference between different magnitudes', 'How ground motions can be used to develop spectral accelerations', 'How the building code approaches sets limits on seismic risk'],
-      video:'https://www.youtube.com/embed/b3ootXSAaqE'},
+      video:'https://www.youtube.com/embed/lUUr4ILz57w'},
 
     { title: '03: Code Provisions',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vTPD1IDa1z8BDbZwxCdZctVGOjdkFaDtSkaCAjuONNihWFK-R9jfeYD7WaHWSmN3WXiZDmOCs9CKgKQ/pub?embedded=true',
