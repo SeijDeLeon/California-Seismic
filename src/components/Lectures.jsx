@@ -1,4 +1,5 @@
 import UnderConstruction from './UnderConstruction.jsx';
+import Button from './Button.jsx';
 import {
   AcademicCapIcon,
   PlayCircleIcon,
@@ -185,7 +186,27 @@ export default function Lectures({ display=false }) {
 
 
         </section>
-        <p className='my-4'>Done with all the lectures? Try out some practice problems or read our FAQ!</p>
+        <section>
+          {/*Container to heading and button blocks */}
+          <div className="max-w-6xl px-5 p-6 mx-auto text-center">
+            {/*Heading*/}
+            <h2 className="text-xl font-bold text-center">Done with all the lectures?</h2>
+              <div className="flex flex-col md:flex-row md:space-x-6 space-y-0">
+                  {/*Button 1 */}
+                  <div className="flex flex-col items-center p-3 space-y-2 bg-white md:w-1/3">
+                    <Button text='Start Practicing' extraClasses="w-48 md:w-48 hover:bg-blue-800"/>
+                  </div>
+                  {/*Button 2 */}
+                  <div className="flex flex-col items-center p-3 space-y-2 bg-white md:flex md:w-1/3">
+                    <Button text='Go to Exam Guide' extraClasses="w-48 md:w-48 hover:bg-blue-800" link='/exam-guide'/>
+                  </div>
+                  {/*Button 3 */}
+                  <div className="flex flex-col items-center p-3 space-y-2 bg-white md:flex md:w-1/3">
+                    <Button text='Read FAQs' extraClasses="w-48 md:w-48 hover:bg-blue-800" link='/exam-guide'/>
+                  </div>
+              </div>
+          </div>
+        </section>
       </main>
     )
   }
