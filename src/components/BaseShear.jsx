@@ -20,7 +20,7 @@ const BaseShearDiagram = () => {
 
   //thinking about using a for loop to populate the forces for the floors.
 
-  const arrowSize = 10; // Size of the arrow
+  const padding = 10; // padding used to be arrowSize
 
   const drawChart = () => {
     console.log('drawChart called');
@@ -33,27 +33,28 @@ const BaseShearDiagram = () => {
 
     // Calculate the total base shear (should be renamed to Y axis max)
     //const totalBaseShear = 400; //Currently using this as the y-axis max
-    const totalBaseShear = d3.max(forces, force => force.value);
+    const yAxisMax = d3.max(forces, force => force.value);
 
     // Set up scales and axes
     const xScale = d3.scaleBand()
       .domain(forces.map(force => force.floor))
-      .range([50, totalBaseShear]) //second argument to be rewritten
+      .range([50, yAxisMax]) //second argument to be rewritten
       .padding(0.3);
 
     const yScale = d3.scaleLinear()
-      .domain([0, totalBaseShear + arrowSize]) //change arrowSize to be 'padding'
+      .domain([0, yAxisMax + padding])
       .range([250, 50]);
 
     const xAxis = d3.axisBottom(xScale)
       .tickFormat(d => `Base Shear`) // Custom label format (long term need to get rid of ticks on x-axis)
     const yAxis = d3.axisLeft(yScale);
 
-    const svgWidth = totalBaseShear + 100; // Adding extra space
+    //Creating the SVG Width and Height
+    const svgWidth = yAxisMax + 100; // Adding extra space
     const svgHeight = 300; // Set a height
 
     // Set up SVG container using D3
-    let svg = d3.select(chartRef.current).select('svg'); //might hardcode this
+    let svg = d3.select(chartRef.current).select('svg'); //might need to hardcode this to make it show up nicely
 
     if (svg.empty()) {
       svg = d3
@@ -81,7 +82,7 @@ const BaseShearDiagram = () => {
       .style("stroke", "black") // Creating a outline rectangle
       .style("stroke-width", "2px"); //Set the stroke to thicker
 
-    // Add labels to the rectangles
+    // Add labels to the rectangles, this is the numbers in the middle of the rectangle
     svg.selectAll('.label')
       .data(forces)
       .enter()
@@ -109,9 +110,11 @@ const BaseShearDiagram = () => {
       .attr("d", "M0,-5L10,0L0,5")
       .style("fill", "blue");
 
+    //Arrows consts
     const arrowOffset = 100;
     const barCoordinates = [];
 
+    //Creating the arrows
     svg.selectAll(".arrow")
       .data(forces)
       .enter()
@@ -152,18 +155,14 @@ const BaseShearDiagram = () => {
 
     const firstArrow = forces[0];
     const lastArrow = forces[forces.length - 1];
-    // const lineData = [
-    //   { x: arrowOffset2 + xScale(firstArrow.floor) + xScale.bandwidth() / 2, y: yScale(firstArrow.value) + arrowSize / 2 }, // First arrow's top edge
-    //   { x: arrowOffset2 + xScale(lastArrow.floor) + xScale.bandwidth() / 2, y: yScale(lastArrow.value) + arrowSize / 2 }, // Last arrow's top edge
-    // ];
 
     console.log("First");
     console.log(arrowOffset2 + xScale(firstArrow.floor) + xScale.bandwidth() / 2);
-    console.log(yScale(firstArrow.value) + arrowSize / 2);
+    console.log(yScale(firstArrow.value) + padding / 2);
 
     console.log("2");
     console.log(arrowOffset2 + xScale(lastArrow.floor) + xScale.bandwidth());
-    console.log(yScale(lastArrow.value) + arrowSize / 2);
+    console.log(yScale(lastArrow.value) + padding / 2);
 
     svg.append("path")
       .attr("d", lineGenerator(barCoordinates))
@@ -171,15 +170,43 @@ const BaseShearDiagram = () => {
       .attr("stroke-width", 2)
       .attr("fill", "none");
 
-    // Append the axes to the SVG container
-    svg.append('g')
+    const triangleHeight = 200;
+    const triangleBase = 300;
+      
+
+    svg.select("#triangle-container")
+      .attr("width", svgWidth)
+      .attr("height", svgHeight);
+
+    // Define the points of the upside-down triangle
+    const trianglePoints = [
+      { x: barCoordinates[3].x , y: barCoordinates[3].y }, //Top Left Point
+      { x: barCoordinates[3].x+100 , y: barCoordinates[3].y  }, //Top Right Point
+      { x: barCoordinates[0].x+100 , y: 250 } //Bottom Point //y: barCoordinates[0].y
+    ];
+
+    console.log("x");
+    console.log(barCoordinates[0].x+100);
+    console.log("y");
+    console.log(barCoordinates[0].y );
+
+
+    //Create a path element for the triangle
+    svg.append("path")
+      .attr("d", `M ${trianglePoints[0].x} ${trianglePoints[0].y} L ${trianglePoints[1].x} ${trianglePoints[1].y} L ${trianglePoints[2].x} ${trianglePoints[2].y} Z`)
+      .attr("fill", "none") 
+      .attr("stroke", "blue")  //Set the stroke color to blue
+      .attr("stroke-width", 2)   
+
+    //Append the axes to the SVG container
+    svg.append('g') //creating the x-axis
       .attr('transform', 'translate(0, 250)')
       .call(xAxis);
 
-    svg.append('g')
+    svg.append('g') //creating the y-axis
       .attr('transform', 'translate(50, 0)')
       .call(yAxis)
-      .style("opacity", 0);;
+      .style("opacity", 0);
 
   };
 

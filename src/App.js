@@ -12,6 +12,7 @@ import UnderConstruction from './components/UnderConstruction.jsx';
 import Footer from './components/Footer.jsx';
 
 import BaseShear from './components/BaseShear.jsx';
+import floorCalc from './components/floorCalc.jsx';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path = "/exam-guide" element = {<ExamGuide />} />
         <Route path = "/contributors" element = {<Contributors />} />
         <Route path = "/baseshear" element = {<BaseShear />} />
+        <Route path = "/fc" element = {<floorCalc />} />
       </Routes>
       <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
       <Footer />
