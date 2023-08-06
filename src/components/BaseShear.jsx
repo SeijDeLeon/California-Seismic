@@ -94,18 +94,6 @@ const BaseShearDiagram = () => {
       .style("font-size", "12px")
       .style("font-weight", "bold");
 
-    // Sample data for the bar graph
-    const barData = [10, 20, 30, 40, 50];
-
-    // Sample data for vertical forces (base shear)
-    const baseShearData = [15, 25, 10, 35, 30];
-
-    // Create a separate x scale for the arrows
-    const xArrowScale = d3.scaleLinear()
-      .domain([0, forces.length - 1]) // Using sequential indices (0, 1, 2, ...)
-      .range([50, totalBaseShear]);
-
-
     // Define the arrow marker
     svg.append("svg:defs").selectAll("marker")
       .data(["arrow-end"]) // Unique identifier for the marker
