@@ -9,6 +9,10 @@ const exams = [
               id: 0, 
               text: '1 Average field standard penetration resistance test and average standard penetration resistance test for cohesionless soil layers',
               isCorrect: false,
+              image: {
+                src: '/images/lectures/10A_Flexible.png',
+                alt: 'Image 1',
+              },
             },
             {
               id: 1, 
@@ -24,7 +28,8 @@ const exams = [
               id: 3, 
               text: 'Average shear wave velocity',
               isCorrect: true,
-            }
+            },
+            
           ],
           solution: 'ASCE 7-16 chapter 20.3.5\nThe hard rock, Site Class A, category shall be supported by the shear wave velocity measurement either on site or on profiles of the same rock type in the same formation with an equal or higher degree of weathering and fracturing.',
         },
