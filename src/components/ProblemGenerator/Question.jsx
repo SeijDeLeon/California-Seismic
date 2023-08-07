@@ -9,13 +9,14 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
     answer: "",
   });
   const [showSolution, setShowSolution] = useState(false);
+  const [viewSolution, setViewSolution] = useState(false);
   const [chosen, setChosen] = useState(null);
   const colorRef = useRef();
   useEffect(() => setQuestion(generatorLogic(category)), []);
 
   const handleSubmit = () => {
     setShowSolution(true);
-    totalQuestions((prev) => prev + 1);
+    // totalQuestions((prev) => prev + 1);
     if (question.answer === chosen) {
       answeredCorrect((prev) => prev + 1);
       colorRef.current.classList.remove("bg-gray-400");
@@ -31,6 +32,13 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
       <p>Question:</p>
       <div className="text-start">
         <p>{question.question}</p>
+        {/* <div className="flex justify-center self-center"> */}
+        <img
+          src={question.image}
+          alt="question pic"
+          className="w-96 block mr-auto ml-auto"
+        />
+        {/* </div> */}
         <ul className="p-2">
           {question.choices.map((choice) => (
             <li
@@ -45,7 +53,7 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
                 setChosen(e.target.value);
               }}
             >
-              {choice}
+              {choice} s
             </li>
           ))}
         </ul>
@@ -56,25 +64,40 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
         >
           Sumbit
         </button>
-        <div
-          className={
-            showSolution
-              ? "cursor-pointer"
-              : "pointer-events-none text-gray-500"
-          }
-        >
-          Solution
+        <div className="flex justify-between p-2">
+          <div
+            className="cursor-pointer flex justify-start items-center gap-2 font-bold"
+            onClick={() => {
+              setShowSolution(false);
+              setChosen(null);
+              totalQuestions((prev) => prev + 1);
+              setQuestion(generatorLogic(category));
+            }}
+          >
+            Next <ForwardIcon className="h-5 w-5" />
+          </div>
+          <div
+            className={
+              showSolution
+                ? "cursor-pointer font-bold"
+                : "pointer-events-none text-gray-500 font-bold"
+            }
+            onClick={() => setViewSolution(!viewSolution)}
+          >
+            View Solution
+          </div>
         </div>
-        <p
-          className="cursor-pointer flex justify-start items-center gap-2"
-          onClick={() => {
-            setShowSolution(false);
-            setChosen(null);
-            setQuestion(generatorLogic(category));
-          }}
-        >
-          Next <ForwardIcon className="h-5 w-5" />
-        </p>
+        {viewSolution && (
+          <div>
+            Sociable on as carriage my position weddings raillery consider.
+            Peculiar trifling absolute and wandered vicinity property yet. The
+            and collecting motionless difficulty son. His hearing staying ten
+            colonel met. Sex drew six easy four dear cold deny. Moderate
+            children at of outweigh it. Unsatiable it considered invitation he
+            travelling insensible. Consulted admitting oh mr up as described
+            acuteness propriety moonlight.
+          </div>
+        )}
       </div>
     </div>
   );

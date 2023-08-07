@@ -1,3 +1,4 @@
+import fundamentalPeriodImage from "../../assets/fundmentalPeriod.png";
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -13,7 +14,8 @@ export const fundamentalPeriod = () => {
   let kips = randomValGen(5, 100);
   let question = `Determine the fundamental period of the below SDOF structure. The
           height is ${height} ft, the modulus of elasticity for the column is
-          ${ksi}, and the mass at the top weighs ${kips}?`;
+          ${ksi} ksi, and the mass at the top weighs ${kips} kips?`;
+  let image = fundamentalPeriodImage;
   let answer = 5;
   let choices = shuffleArray([
     answer,
@@ -21,5 +23,5 @@ export const fundamentalPeriod = () => {
     answer + randomValGen(20, 30),
     answer + randomValGen(30, 40),
   ]);
-  return { question: question, choices: choices, answer: answer };
+  return { question: question, image: image, choices: choices, answer: answer };
 };
