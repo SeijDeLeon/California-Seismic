@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
 //as reference https://clearcalcs.com/calculations/seismicAnalysisUS
-let floorValue = 0;
-const newFloorHeights = {};
-const forces = {};
 
 const BaseShearDiagram = () => {
   const chartRef = useRef();
@@ -15,28 +12,49 @@ const BaseShearDiagram = () => {
     input5: '',
   });
 
-  const [floorLevel, setFloorHeights] = useState({});
+  const [floorValue, setFloorValue] = useState(0);
+  const newFloorHeights = {};
 
-  useEffect(() => {
-    drawChart();
-  }, [userInput]);
+  const [floorLevel, setFloorHeights] = useState({});
+  let scaler = 10;
 
   const handleInputChange = (event, inputName) => {
-    floorValue = parseInt(event.target.value);
+    const newValue = parseInt(event.target.value);
+    const newFloorValue = isNaN(newValue) || newValue < 2 ? 2 : newValue;
 
-    // Ensure the new value is at least 2
-    floorValue = isNaN(floorValue) || floorValue < 2 ? 2 : floorValue;
+    setFloorValue(newFloorValue);
+
+    scaler *= 10;
 
     setUserInput(prevState => ({
       ...prevState,
-      [inputName]: floorValue,
+      [inputName]: newFloorValue,
     }));
 
-    for (let i = 1; i <= floorValue; i++) {
+    const newFloorHeights = {};
+    for (let i = 1; i <= newFloorValue; i++) {
       newFloorHeights[`${i}`] = 10;
     }
     setFloorHeights(newFloorHeights);
   };
+
+  //Old working
+  // const handleInputChange = (event, inputName) => {
+  //   floorValue = parseInt(event.target.value);
+
+  //   // Ensure the new value is at least 2
+  //   floorValue = isNaN(floorValue) || floorValue < 2 ? 2 : floorValue;
+
+  //   setUserInput(prevState => ({
+  //     ...prevState,
+  //     [inputName]: floorValue,
+  //   }));
+
+  //   for (let i = 1; i <= floorValue; i++) {
+  //     newFloorHeights[`${i}`] = 10;
+  //   }
+  //   setFloorHeights(newFloorHeights);
+  // };
 
   const handleFloorHeightChange = (event, floorNum) => {
     setFloorHeights(prevHeights => ({
@@ -45,36 +63,43 @@ const BaseShearDiagram = () => {
     }));
   };
 
-  // const forces = Object.keys(floorLevel).map(floor => ({
-  //   floor: parseInt(floor.slice(5)), 
-  //   value: parseInt(floorLevel[floor]) || 10, 
-  // }));
-
   //thinking about using a for loop to populate the forces for the floors.
 
-  const padding = 10; // padding used to be arrowSize
+  const padding = 100; // padding used to be arrowSize
 
-  const drawChart = () => {
+  //----------------------------------------------------- Start of drawChart ----------------------------------------------------------
+  const drawChart = useCallback(() => {
     console.log('drawChart called');
+    console.log('drawChart called with floorValue:', floorValue);
 
-    console.log([floorLevel, setFloorHeights]);
+    // const forces = [ //value is the height. each rectangle shares the same bottom axis.
+    //   { floor: 1, value: 100 }, // Example forces for each floor
+    //   { floor: 1, value: 200 }, // by having floor as 1, the rectangles stack
+    //   { floor: 1, value: 300 },
+    //   { floor: 1, value: 400 },
+    //   { floor: 1, value: 500 }
+    // ];
 
-    const forces = [ //value is the height. each rectangle shares the same bottom axis.
-      { floor: 1, value: 100 }, // Example forces for each floor
-      { floor: 1, value: 200 }, // by having floor as 1, the rectangles stack
-      { floor: 1, value: 300 },
-      { floor: 1, value: 400 },
-      { floor: 1, value: 500 }
-    ];
+    const forces = [];
+    let valueIncrease = 0;
 
-    // const forces = Object.keys(floorLevel).map(floor => ({
-    //   floor: parseInt(floor.slice(5)), 
-    //   value: parseInt(floorLevel[floor]) || 10*10, 
-    // }));
+    // Not working - trying to get it to work
+    for (let i = 1; i <= floorValue; i++) {
+      forces.push({ floor: 1, value: 100 + valueIncrease });
+      valueIncrease += 100;
+    }
 
-    
 
-    const yAxisMax = d3.max(forces, force => force.value);
+    // for (let i = 1; i <= 5; i++){
+    //   forces.push({floor: 1, value: 100+valueIncrease});
+    //   valueIncrease += 100;
+    // }
+
+    // console.log("forces");
+    // console.log(forces);
+
+    //const yAxisMax = d3.max(forces, force => force.value);
+    const yAxisMax = floorValue * 100;
 
     // Set up scales and axes
     const xScale = d3.scaleBand()
@@ -87,12 +112,16 @@ const BaseShearDiagram = () => {
       .range([250, 50]);
 
     const xAxis = d3.axisBottom(xScale)
-      .tickFormat(d => `Base Shear`) // Custom label format (long term need to get rid of ticks on x-axis)
+      //.tickFormat(d => `Base Shear`) // Custom label format (long term need to get rid of ticks on x-axis)
+      .tickValues([]);
+
     const yAxis = d3.axisLeft(yScale);
 
     //Creating the SVG Width and Height
-    const svgWidth = yAxisMax + 100; // Adding extra space
-    const svgHeight = 300; // Set a height
+    scaler *= 10;
+    //const svgWidth = yAxisMax + 100; // Adding extra space
+    const svgWidth = 500 + yAxisMax*scaler;
+    const svgHeight = 500 + yAxisMax*scaler; // Set a height
 
     // Set up SVG container using D3
     let svg = d3.select(chartRef.current).select('svg'); // might need to hardcode this to make it show up nicely
@@ -105,6 +134,7 @@ const BaseShearDiagram = () => {
         .attr('height', svgHeight)
         .style('display', 'block')// SVG is displayed as a block element
         .style('margin', '0 auto');// Centering with margin
+
     } else {
       svg.selectAll('*').remove(); // Clear the SVG contents if it already exists
     }
@@ -117,8 +147,8 @@ const BaseShearDiagram = () => {
       .attr('class', 'bar')
       .attr('x', force => xScale(force.floor))
       .attr('y', force => yScale(force.value))
-      .attr('width', xScale.bandwidth())
-      .attr('height', force => 250 - yScale(force.value))
+      .attr('width', 200)   // .attr('width', xScale.bandwidth()) old code --- this forces the rectangles to be 200 px
+      .attr('height', force => 250 - yScale(force.value)) //this will be changing as the user enter in heights
       .style("fill", "none") // Creating a outline rectangle
       .style("stroke", "black") // Creating a outline rectangle
       .style("stroke-width", "2px"); //Set the stroke to thicker
@@ -129,7 +159,7 @@ const BaseShearDiagram = () => {
       .enter()
       .append('text')
       .attr('class', 'label')
-      .attr('x', force => xScale(force.floor) + xScale.bandwidth() / 2) // Position in the middle of the rectangle
+      .attr('x', force => xScale(force.floor) + 200 / 2) // Position in the middle of the rectangle
       .attr('y', force => yScale(force.value) + 15) // y position(+15) to place it above the rectangle
       .attr('text-anchor', 'middle') // Anchor the text in the middle
       .text(force => force.value) // Use the value as the label text
@@ -194,38 +224,20 @@ const BaseShearDiagram = () => {
       });
     console.log(barCoordinates);
 
-    // Used to connect the arrows
-    // const lineGenerator = d3.line()
-    //   .x(d => d.x)
-    //   .y(d => d.y);
+    //hypotenuse line - had errors so it's left out ------------------------------------------
+    // // Define the points of the upside-down triangle
+    // const hypotenusePoints = [
+    //   { x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y }, // Top Left Point
+    //   { x: barCoordinates[3].x + 100, y: barCoordinates[3].y }, // Top Right Point
+    //   { x: barCoordinates[0].x + 100, y: 250 } //Bottom Point // y: barCoordinates[0].y
+    // ];
+
+    // // Create a path element for the hypotenuse of the triangle
     // svg.append("path")
-    //   .attr("d", lineGenerator(barCoordinates))
-    //   .attr("stroke", "red")
-    //   .attr("stroke-width", 2)
-    //   .attr("fill", "none");
-
-    // Define the points of the upside-down triangle
-    const hypotenusePoints = [
-      { x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y }, // Top Left Point
-      { x: barCoordinates[3].x + 100, y: barCoordinates[3].y }, // Top Right Point
-      { x: barCoordinates[0].x + 100, y: 250 } //Bottom Point // y: barCoordinates[0].y
-    ];
-
-    //console.log(barCoordinates.length-1)
-
-    // // Create a path element for the triangle
-    // svg.append("path")
-    //   .attr("d", `M ${hypotenusePoints[0].x} ${hypotenusePoints[0].y} L ${hypotenusePoints[1].x} ${hypotenusePoints[1].y} L ${hypotenusePoints[2].x} ${hypotenusePoints[2].y} Z`)
+    //   .attr("d", `M ${hypotenusePoints[0].x} ${hypotenusePoints[0].y} L ${hypotenusePoints[hypotenusePoints.length - 1].x - 90} ${hypotenusePoints[hypotenusePoints.length - 1].y}`) //hardcode 90 to get the hyp
     //   .attr("fill", "none")
-    //   .attr("stroke", "blue")  //Set the stroke color to blue
-    //   .attr("stroke-width", 2)
-
-    // Create a path element for the hypotenuse of the triangle
-    svg.append("path")
-      .attr("d", `M ${hypotenusePoints[0].x} ${hypotenusePoints[0].y} L ${hypotenusePoints[hypotenusePoints.length - 1].x - 90} ${hypotenusePoints[hypotenusePoints.length - 1].y}`) //hardcode 90 to get the hyp
-      .attr("fill", "none")
-      .attr("stroke", "blue")
-      .attr("stroke-width", 2);
+    //   .attr("stroke", "blue")
+    //   .attr("stroke-width", 2);
 
     //Append the axes to the SVG container
     svg.append('g') //creating the x-axis
@@ -237,14 +249,24 @@ const BaseShearDiagram = () => {
       .call(yAxis)
       .style("opacity", 0);
 
-  };
+  }, [floorValue]);
+
+  useEffect(() => {
+    console.log('IN useEffect');
+    if (floorValue === undefined || floorValue === null) {
+      console.log('floorValue DNE');
+      return; // Return if floorValue doesn't exist
+    }
+    drawChart();
+  }, [floorValue, drawChart]);
 
   return (
     <>
       <div className="flex justify-center items-center">
         <h1 className="text-center text-6xl text-black font-bold mb-4">Base Shear Diagram</h1>
       </div>
-      <div className='flex justify-evenly items-center'>
+      {/* used to be justify-evenly */}
+      <div className='flex justify-start items-center'> 
         {/* Input Column 1 */}
         <div className="flex flex-col">
           {/* The Floors + - */}
@@ -381,7 +403,8 @@ const BaseShearDiagram = () => {
 
         {/* Chart Column */}
         <div>
-          <div className="w-1/2 h-3/4 justify-end p-6" ref={chartRef}></div>
+        <div className="flex justify-center items-center h-screen" ref={chartRef}></div>
+          {/* <div className="w-1/2 h-3/4 justify-end p-6" ref={chartRef}></div> */}
         </div>
       </div>
     </>
