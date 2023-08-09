@@ -18,6 +18,10 @@ function SinglePracticeExam() {
   );
   const [answeredQuestions, setAnsweredQuestions] = useState([]); //An array of booleans that tracks whether a question has been answered or not.
 
+  const [unansweredQuestions, setUnansweredQuestions] = useState([
+    ...Array(selectedExam.questions.length).keys(),
+  ]);
+
   const [questionsState, setQuestionsState] = useState(
     selectedExam.questions.map((question) => ({
       flagged: false,
@@ -44,10 +48,21 @@ function SinglePracticeExam() {
     if (!hasAnswered) {
       setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
     }
+
+    //Remember flagged items
+    const newSelectedFlags = [...selectedFlags];
+    newSelectedFlags[currentQuestion] = true;
+    setSelectedFlags(newSelectedFlags);
+
+    const answeredQ = [...answeredQuestions];
+    answeredQ[currentQuestion] = true;
+    setAnsweredQuestions(answeredQ);
+    setUnansweredQuestions((prevUnansweredQuestions) =>
+      prevUnansweredQuestions.filter((index) => index !== currentQuestion)
+    );
   };
 
   const clickNext = () => {
-    unCheck();
     if (currentQuestion + 1 < selectedExam.questions.length) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
     }
@@ -63,14 +78,6 @@ function SinglePracticeExam() {
     setScore(0);
     setCurrentQuestion(0);
     setSelectedFlags(Array(selectedExam.questions.length).fill(false)); // Reset selectedFlags
-  };
-
-  const unCheck = () => {
-    let allRadioButtons = document.querySelectorAll(".form-radio");
-    // Loop through all the radio buttons and set the 'checked' property to false
-    allRadioButtons.forEach((radioButton) => {
-      radioButton.checked = false;
-    });
   };
 
   const handleChange = (event) => {
@@ -104,8 +111,7 @@ function SinglePracticeExam() {
               {/* Question container */}
               <div className="bg-white p-4 rounded shadow mb-4">
                 <h3 className="text-lg font-bold">
-                  Question:{" "}
-                  <p className="text-blue-600">{currentQuestion + 1}</p>out of{" "}
+                  Question: {currentQuestion + 1} out of{" "}
                   {selectedExam.questions.length}
                 </h3>
                 <p className="mb-4 mt-6">
@@ -133,18 +139,19 @@ function SinglePracticeExam() {
                         <span
                           className={
                             displaySolution
-                              ? option.id === selectedOption
+                              ? selectedOption
                                 ? option.isCorrect
                                   ? "bg-gradient-to-r from-green-300"
                                   : "bg-gradient-to-r from-red-300"
-                                : option.isCorrect
-                                ? "bg-gradient-to-r from-green-300"
                                 : null
                               : null
                           }
                         >
-                          {option.text}
+                          <p className="px-2">{option.text}</p>
                         </span>
+                        {/* {option.image && (
+                        <img src={option.image.src} alt={option.image.alt}/>
+                      )} */}
                       </div>
                     )
                   )}
