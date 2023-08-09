@@ -16,15 +16,13 @@ const BaseShearDiagram = () => {
   const newFloorHeights = {};
 
   const [floorLevel, setFloorHeights] = useState({});
-  let scaler = 10;
+  let scaler = 10; //this is supposed to change with each run so the svg gets bigger.
 
   const handleInputChange = (event, inputName) => {
     const newValue = parseInt(event.target.value);
     const newFloorValue = isNaN(newValue) || newValue < 2 ? 2 : newValue;
 
     setFloorValue(newFloorValue);
-
-    scaler *= 10;
 
     setUserInput(prevState => ({
       ...prevState,
@@ -38,24 +36,6 @@ const BaseShearDiagram = () => {
     setFloorHeights(newFloorHeights);
   };
 
-  //Old working
-  // const handleInputChange = (event, inputName) => {
-  //   floorValue = parseInt(event.target.value);
-
-  //   // Ensure the new value is at least 2
-  //   floorValue = isNaN(floorValue) || floorValue < 2 ? 2 : floorValue;
-
-  //   setUserInput(prevState => ({
-  //     ...prevState,
-  //     [inputName]: floorValue,
-  //   }));
-
-  //   for (let i = 1; i <= floorValue; i++) {
-  //     newFloorHeights[`${i}`] = 10;
-  //   }
-  //   setFloorHeights(newFloorHeights);
-  // };
-
   const handleFloorHeightChange = (event, floorNum) => {
     setFloorHeights(prevHeights => ({
       ...prevHeights,
@@ -63,40 +43,20 @@ const BaseShearDiagram = () => {
     }));
   };
 
-  //thinking about using a for loop to populate the forces for the floors.
-
-  const padding = 100; // padding used to be arrowSize
+  const padding = 100;
 
   //----------------------------------------------------- Start of drawChart ----------------------------------------------------------
   const drawChart = useCallback(() => {
     console.log('drawChart called');
     console.log('drawChart called with floorValue:', floorValue);
 
-    // const forces = [ //value is the height. each rectangle shares the same bottom axis.
-    //   { floor: 1, value: 100 }, // Example forces for each floor
-    //   { floor: 1, value: 200 }, // by having floor as 1, the rectangles stack
-    //   { floor: 1, value: 300 },
-    //   { floor: 1, value: 400 },
-    //   { floor: 1, value: 500 }
-    // ];
-
     const forces = [];
     let valueIncrease = 0;
 
-    // Not working - trying to get it to work
     for (let i = 1; i <= floorValue; i++) {
       forces.push({ floor: 1, value: 100 + valueIncrease });
       valueIncrease += 100;
     }
-
-
-    // for (let i = 1; i <= 5; i++){
-    //   forces.push({floor: 1, value: 100+valueIncrease});
-    //   valueIncrease += 100;
-    // }
-
-    // console.log("forces");
-    // console.log(forces);
 
     //const yAxisMax = d3.max(forces, force => force.value);
     const yAxisMax = floorValue * 100;
@@ -119,7 +79,6 @@ const BaseShearDiagram = () => {
 
     //Creating the SVG Width and Height
     scaler *= 10;
-    //const svgWidth = yAxisMax + 100; // Adding extra space
     const svgWidth = 500 + yAxisMax*scaler;
     const svgHeight = 500 + yAxisMax*scaler; // Set a height
 
@@ -166,13 +125,13 @@ const BaseShearDiagram = () => {
       .style("font-size", "12px")
       .style("font-weight", "bold");
 
-    // Define the arrow marker
+    //Define the arrow marker
     svg.append("svg:defs").selectAll("marker")
-      .data(["arrow-end"]) // Unique identifier for the marker
+      .data(["arrow-end"]) //Unique identifier for the marker
       .enter().append("svg:marker")
       .attr("id", "arrow-end")
       .attr("viewBox", "0 -5 10 10")
-      .attr("refX", 2) // Set the refX to a negative value to position the arrowhead to the left of the starting point
+      .attr("refX", 2) //Set the refX to a value to position the arrowhead to the left of the starting point
       .attr("refY", 0)
       .attr("markerWidth", 6)
       .attr("markerHeight", 6)
@@ -181,11 +140,15 @@ const BaseShearDiagram = () => {
       .attr("d", "M0,-5L10,0L0,5")
       .style("fill", "blue");
 
-    // Arrows consts
-    const arrowOffset = 100;
+    //Arrows consts
+    const arrowOffset = 100 + (xScale.bandwidth()%10) + (svgWidth % 100); //100 + (xScale.bandwidth() % 10) + (svgWidth / 100); 
+    console.log("arrow");
+    console.log(arrowOffset);
+    //const arrowOffset = floorValue*10;
     const barCoordinates = [];
 
     let minus = 0;
+    let barX = 0;
 
     // Creating the arrows
     svg.selectAll(".arrow")
@@ -194,7 +157,15 @@ const BaseShearDiagram = () => {
       .append("g")
       .attr("class", "arrow")
       .each(function (d, i) {
-        const barX = 0;
+        if(floorValue == 2){
+          barX = -30
+        }
+        else if(floorValue >= 5){
+          barX = floorValue*10; //trying to move the arrows closer as floors get higher
+        }
+        else{
+          barX = -10;
+        }
         const barY = yScale(d.value);
         //console.log(d.value);
         let arrowX = barX + arrowOffset;
@@ -209,15 +180,21 @@ const BaseShearDiagram = () => {
           .attr("stroke-width", 2)
           .attr("marker-end", "url(#arrow-end)");
 
-        const midX = (barX + arrowX) / 2;
+        let midX = (barX + arrowX) / 2;
+        if(floorValue >= 5){
+          midX = (barX + arrowX) / 3;
+        }
         const midY = (barY + arrowY) / 2;
 
-        const textOffsetX = midX / 2;
+        let textOffsetX = midX / 2;
+        if(floorValue >= 5){
+          textOffsetX = midX-floorValue*2;
+        }
         svg.append("text")
           .attr("x", midX + textOffsetX)
           .attr("y", midY)
           .attr("text-anchor", "start")
-          .text((i === 0) ? `F${i + 1}` : `F${i + 2}`);
+          .text((i === 0) ? `F${i + 1}` : `F${i + 1}`);
         barCoordinates.push({ x: barX + 60 - minus, y: barY });
         minus += 10;
         console.log(minus);
