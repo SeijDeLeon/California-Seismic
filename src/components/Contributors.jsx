@@ -6,85 +6,85 @@ export default function Contributors({ display = true }) {
       title: "Andy Troung",
       text: "Front End Intern 2022",
       img: "images/contributors/andy_truong.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Bishal Nayak",
       text: "Civil Intern 2021",
       img: "images/contributors/bishal_nayak.jpg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Brandon Xu",
       text: "Civil Intern 2020",
       img: "images/contributors/brandon_xu.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Camille Lerasan",
       text: "Civil Intern 2022",
       img: "images/contributors/camille_lerasan.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Jerry Wu",
       text: "Front End Intern 2022",
       img: "images/contributors/jerry_wu.jpg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Jose Hernandez",
       text: "Civil Intern 2020",
       img: "images/contributors/jose_hernandez.jpg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Julia Lu",
       text: "CIvil Intern 2020",
       img: "images/contributors/julia_lu.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Kaier Lao",
       text: "Civil Intern 2020",
       img: "images/contributors/kaier_lao.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Mayur Patil",
       text: "Civil Intern 2020",
       img: "images/contributors/mayur_patil.jpg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Myron Zhou",
       text: "Front End Intern 2022",
       img: "images/contributors/myron_zhou.jpg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Ramneet Sidhu",
       text: "Civil Intern 2020",
       img: "images/contributors/ramneet_sidhu.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Rebecca Castro",
       text: "Civil Intern 2021",
       img: "images/contributors/rebecca_castro.jpeg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Rembrandt Fernandez",
       text: "Civil Intern 2020",
       img: "images/contributors/rembrandt_fernandez.jpg",
-      alt: "...",
+      alt: "headshot",
     },
     {
       title: "Sophie Huang",
       text: "Front End Intern 2020",
       img: "images/contributors/sophie_huang.jpg",
-      alt: "...",
+      alt: "headshot",
     },
 
   ];
@@ -102,8 +102,8 @@ export default function Contributors({ display = true }) {
           </h1>
           <div className="p-4">
             <img
-              src="/images/contributors/group_6207.jpg"
-              alt="..."
+              src="/images/contributors/group_6207.JPG"
+              alt="Group in front of Library"
               className="m-auto w-full"
             />
           </div>
@@ -149,7 +149,7 @@ export default function Contributors({ display = true }) {
               <div className="p-4">
                 <img
                   src="/images/contributors/ann_do.jpg"
-                  alt="..."
+                  alt="headshot Annie"
                   className="w-60 rounded-full md:h-80 md:w-80 flex m-auto pt-2"
                 />
                 <div className="container rounded-md mx-auto mt-4 p-4">
@@ -166,7 +166,7 @@ export default function Contributors({ display = true }) {
               <div className="p-4">
                 <img
                   src="/images/contributors/seij_de_leon.jpg"
-                  alt="..."
+                  alt="headshot Seij"
                   className="w-60 rounded-full md:h-80 md:w-80 flex m-auto pt-2"
                 />
                 <div className="container rounded-md mx-auto mt-4 p-4">
