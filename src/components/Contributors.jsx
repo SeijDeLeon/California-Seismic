@@ -10,19 +10,19 @@ export default function Contributors({ display = true }) {
     },
     {
       title: "Bishal Nayak",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2021",
       img: "images/contributors/bishal_nayak.jpg",
       alt: "...",
     },
     {
       title: "Brandon Xu",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2020",
       img: "images/contributors/brandon_xu.jpeg",
       alt: "...",
     },
     {
       title: "Camille Lerasan",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2022",
       img: "images/contributors/camille_lerasan.jpeg",
       alt: "...",
     },
@@ -34,25 +34,25 @@ export default function Contributors({ display = true }) {
     },
     {
       title: "Jose Hernandez",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2020",
       img: "images/contributors/jose_hernandez.jpg",
       alt: "...",
     },
     {
       title: "Julia Lu",
-      text: "Front End Intern 2022",
+      text: "CIvil Intern 2020",
       img: "images/contributors/julia_lu.jpeg",
       alt: "...",
     },
     {
       title: "Kaier Lao",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2020",
       img: "images/contributors/kaier_lao.jpeg",
       alt: "...",
     },
     {
       title: "Mayur Patil",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2020",
       img: "images/contributors/mayur_patil.jpg",
       alt: "...",
     },
@@ -64,34 +64,29 @@ export default function Contributors({ display = true }) {
     },
     {
       title: "Ramneet Sidhu",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2020",
       img: "images/contributors/ramneet_sidhu.jpeg",
       alt: "...",
     },
     {
       title: "Rebecca Castro",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2021",
       img: "images/contributors/rebecca_castro.jpeg",
       alt: "...",
     },
     {
       title: "Rembrandt Fernandez",
-      text: "Front End Intern 2022",
+      text: "Civil Intern 2020",
       img: "images/contributors/rembrandt_fernandez.jpg",
       alt: "...",
     },
     {
       title: "Sophie Huang",
-      text: "Front End Intern 2022",
+      text: "Front End Intern 2020",
       img: "images/contributors/sophie_huang.jpg",
       alt: "...",
     },
-    {
-      title: "ABC DEFG",
-      text: "Front End Intern 2022",
-      img: "images/contributors/placeholder_headshot.png",
-      alt: "...",
-    },
+
   ];
 
   if (display === false) {
@@ -101,7 +96,7 @@ export default function Contributors({ display = true }) {
   } else {
     return (
       <main className="container mx-auto mt-4 p-4">
-        <div className="container max-h-full border-2 mx-auto mt-4 p-4">
+        <div className="container max-h-full mx-auto mt-4 p-4">
           <h1 className="text-4xl text-left text-slate-700 font-medium mb-2 mx-6 mt-6 font-sans tracking-wide">
             Community Powered.
           </h1>
@@ -109,14 +104,14 @@ export default function Contributors({ display = true }) {
             <img
               src="/images/contributors/group_6207.jpg"
               alt="..."
-              className="w-full"
+              className="m-auto w-full"
             />
           </div>
           <p className="text-xl text-left font-medium mb-2 mx-6 font-sans tracking-wide text-slate-700">
             Civil Engineering is community based, so are we.
           </p>
         </div>
-        <div className="container border-2 mx-auto mt-4 p-4">
+        <div className="container mx-auto mt-4 p-4">
           <h2 className="text-4xl text-left font-medium mt-6 mb-2 mx-6 font-sans tracking-wide text-slate-700">
             Contributors
           </h2>
@@ -124,7 +119,7 @@ export default function Contributors({ display = true }) {
             {infoCards.map((item, index) => (
               <div
                 key={`infoCard${index}`}
-                className="container rounded-md border-2 mx-auto mt-4 p-4"
+                className="container rounded-md mx-auto mt-4 p-4"
               >
                 <div className="p-4">
                   <figure>
@@ -145,12 +140,12 @@ export default function Contributors({ display = true }) {
             ))}
           </div>
         </div>
-        <div className="container border-2 mx-auto mt-4 p-4">
+        <div className="container mx-auto mt-4 p-4">
           <h2 className="text-4xl text-left font-medium mt-6 mb-2 mx-6 font-sans tracking-wide text-slate-700">
             Leadership
           </h2>
           <div className="p-4 flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-            <div className="container rounded-md border-2 mx-auto mt-4 p-4">
+            <div className="container rounded-md mx-auto mt-4 p-4">
               <div className="p-4">
                 <img
                   src="/images/contributors/ann_do.jpg"
@@ -167,7 +162,7 @@ export default function Contributors({ display = true }) {
                 </div>
               </div>
             </div>
-            <div className="container rounded-md border-2 mx-auto mt-4 p-4">
+            <div className="container rounded-md mx-auto mt-4 p-4">
               <div className="p-4">
                 <img
                   src="/images/contributors/seij_de_leon.jpg"
@@ -186,16 +181,18 @@ export default function Contributors({ display = true }) {
             </div>
           </div>
         </div>
-        <div className="container items-center border-2 mx-auto mt-4 p-4">
+        <div className="container items-center mx-auto mt-4 p-4">
           <h2 className="text-4xl text-left font-medium mt-6 mb-2 mx-6 text-slate-700 font-sans tracking-wide">
             Interested in Joining?
           </h2>
           <div className="container flex justify-center items-center mx-auto mt-4 p-4">
-            <div className="flex flex-col justify-center md:w-8/12 md:h-8/12 relative border border-black border-opacity-20">
+            <div className="flex flex-col justify-center md:w-8/12 md:h-8/12 relative ">
+            <a target='_blank' rel='noopener noreferrer' className='' href='https://www.linkedin.com/in/seij-de-leon/' >
               <button className="flex justify-center items-center mx-auto mt-6 mb-6 py-6 w-52 h-20 bg-sky-400 hover:bg-sky-500 outline outline-offset-2 outline-slate-300 rounded-lg text-white font-bold font-sans tracking-wider">
-                Click here to message
+                Contact us
               </button>
-              <div className="text-black text-2xl text-slate-700 font-sans tracking-wider p-4">
+              </a>
+              <div className="text-black text-left text-2xl text-slate-700 font-sans tracking-wider p-4">
                 California Seismic is an open source project with opportunities
                 in technical writing, problem creation, front end development,
                 video editing, and more! If you would like to learn more about
