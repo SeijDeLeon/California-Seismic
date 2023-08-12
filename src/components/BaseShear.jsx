@@ -157,14 +157,30 @@ const BaseShearDiagram = () => {
       .append("g")
       .attr("class", "arrow")
       .each(function (d, i) {
-        if(floorValue == 2){
+        //the lower barX is the more distance there is between the graph and arrows
+        if(floorValue === 2){
           barX = -30
         }
-        else if(floorValue >= 5){
-          barX = floorValue*10; //trying to move the arrows closer as floors get higher
-        }
-        else{
+        else if(floorValue === 3 && floorValue < 6 ){
           barX = -10;
+        }
+        else if(floorValue === 4 && floorValue < 6 ){
+          barX = floorValue;
+        }
+        // else if(floorValue === 5 && floorValue < 6 ){
+        //   barX = floorValue*7; //trying to move the arrows closer as floors get higher
+        // }
+        // else if(floorValue === 6 && floorValue < 8 ){
+        //   barX = floorValue*8; //trying to move the arrows closer as floors get higher
+        // }
+        // else if(floorValue === 7 && floorValue < 8 ){
+        //   barX = floorValue*9; //trying to move the arrows closer as floors get higher
+        // }
+        // else if(floorValue === 8 && floorValue < 10 ){
+        //   barX = floorValue*10; //trying to move the arrows closer as floors get higher
+        // }
+        else{
+          barX = floorValue*(floorValue+2);
         }
         const barY = yScale(d.value);
         //console.log(d.value);
@@ -181,7 +197,7 @@ const BaseShearDiagram = () => {
           .attr("marker-end", "url(#arrow-end)");
 
         let midX = (barX + arrowX) / 2;
-        if(floorValue >= 5){
+        if(floorValue >= 4){
           midX = (barX + arrowX) / 3;
         }
         const midY = (barY + arrowY) / 2;
