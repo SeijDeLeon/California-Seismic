@@ -14,9 +14,6 @@ const BaseShearDiagram = () => {
 
   const [numOfFloors, setNumOfFloors] = useState(0);
 
-  // // OG Code
-  //const [floorHeight, setFloorHeights] = useState({});
-
   const [floorHeight, setFloorHeights] = useState(() => {
     const storedHeights = JSON.parse(localStorage.getItem('floorHeight'));
     return storedHeights || {};
@@ -33,16 +30,6 @@ const BaseShearDiagram = () => {
       [inputName]: newFloorValue,
     }));
 
-    // //OG Code
-    // const newFloorHeights = {};
-    // for (let i = 1; i <= newFloorValue; i++) {
-    //   newFloorHeights[`${i}`] = 10;
-    // }
-    // setFloorHeights(newFloorHeights);
-
-    // // Update local storage with the new floor heights
-    // localStorage.setItem('floorHeight', JSON.stringify(newFloorHeights));
-
     // Adjust floor heights when numOffloors changes
     setFloorHeights(prevFloorHeights => {
       const adjustedHeights = { ...prevFloorHeights };
@@ -52,23 +39,17 @@ const BaseShearDiagram = () => {
         }
       }
       for (let i = newFloorValue + 1; i <= numOfFloors; i++) {
-        delete adjustedHeights[i]; // Remove heights for floors that are removed
+        delete adjustedHeights[i]; // deleting the old heights
       }
       return adjustedHeights;
     });
 
     // Update local storage with the adjusted floor heights
     localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
-
   };
 
 
   const handleFloorHeightChange = (event, floorNum) => {
-    // //OG code
-    // setFloorHeights(prevHeights => ({
-    //   ...prevHeights,
-    //   [floorNum]: event.target.value,
-    // }));
     const newHeight = parseInt(event.target.value);
 
     setUserInput(prevUserInput => ({
@@ -100,9 +81,9 @@ const BaseShearDiagram = () => {
     //console.log('drawChart called');
     //console.log('drawChart called with numOfFloors:', numOfFloors);
 
-    console.log("In draw");
-    console.log("floorNum");
-    console.log(numOfFloors);
+    // console.log("In draw");
+    // console.log("floorNum");
+    // console.log(numOfFloors);
 
     console.log("floorHeight22");
     console.log(floorHeight);
@@ -111,12 +92,21 @@ const BaseShearDiagram = () => {
     let valueIncrease = 0;
     let multiplerFloor = 10
 
-    console.log(floorHeight[1])
-
     for (let i = 1; i <= numOfFloors; i++) {
       forces.push({ floor: 1, value: (multiplerFloor * floorHeight[i]) + valueIncrease });
-      valueIncrease += 100;
+      console.log("math");
+      console.log((multiplerFloor * floorHeight[i]) + valueIncrease);
+      if(numOfFloors >= 10){
+        valueIncrease += 200;
+      }
+      else{
+        valueIncrease += 100;
+      }
+      
     }
+
+    console.log("forces");
+    console.log(forces);
 
     //this variable help determine the max of Y
     const yAxisMax = numOfFloors * 100;
@@ -145,7 +135,7 @@ const BaseShearDiagram = () => {
     let svg = d3.select(chartRef.current).select('svg'); // might need to hardcode this to make it show up nicely
     svg.style("overflow", "visible");
 
-    //had a weird bug of 2 svgs being created so i used a if statement to correct it. 
+    //had a weird bug of 2 svgs being created so I used a if statement to correct it. 
     if (svg.empty()) {
       svg = d3 //creating the svg
         .select(chartRef.current)
@@ -204,7 +194,6 @@ const BaseShearDiagram = () => {
 
     //Arrows consts
     const arrowOffset = 100 + (xScale.bandwidth() % 10) + (svgWidth % 100); //100 + (xScale.bandwidth() % 10) + (svgWidth / 100); 
-    //console.log(arrowOffset);
     const barCoordinates = []; //this is needed to set the hyp
 
     let minus = 0;
@@ -280,28 +269,20 @@ const BaseShearDiagram = () => {
           .attr("y", midY)
           .attr("text-anchor", "start")
           .text((i === 0) ? `F${i + 1}` : `F${i + 1}`);
-        barCoordinates.push({ x: barX + lineLengthShortener - minus, y: barY });
+        barCoordinates.push({ x: barX + lineLengthShortener - minus, y: barY }); //this helps set up the hyp line
         minus += 10;
       });
-    // console.log("barCoordinates");
-    // console.log(barCoordinates);
 
-    //hypotenuse line - had errors so it's left out ------------------------------------------
-    // // Define the points of the upside-down triangle
+    //hypotenuse line - this is meant to connect the force 1 to force n
     let hypotenusePoints = [];
-    if (numOfFloors === 1) {
+    if (numOfFloors === 1) { //hard code if there is one floor
       hypotenusePoints.push({ x: barCoordinates[0].x, y: barCoordinates[0].y });
       hypotenusePoints.push({ x: 50, y: 250 });
     }
     else if (numOfFloors > 1) {
       hypotenusePoints.push({ x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y });
-      hypotenusePoints.push({ x: barCoordinates[0].x, y: barCoordinates[0].y });
+      hypotenusePoints.push({ x: barCoordinates[0].x+4, y: 250  }); //({ x: barCoordinates[0].x, y: barCoordinates[0].y });
     }
-
-    // console.log("barCoordinates");
-    // console.log(barCoordinates);
-    // console.log("hypotenusePoints");
-    // console.log(hypotenusePoints);
 
     if (numOfFloors >= 1) {
       svg.append("path")
@@ -323,13 +304,13 @@ const BaseShearDiagram = () => {
       .call(yAxis)
       .style("opacity", 0);
 
-  }, [numOfFloors, floorHeight]);
+  }, [numOfFloors, floorHeight]); //how to share the variables across consts
 
   useEffect(() => {
     console.log('IN useEffect');
+    localStorage.clear(); // Making sure nothing in local at start
+    console.log('localStorage cleared');
     localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
-    console.log("flooeHEIGHTLocal");
-    console.log(floorHeight);
     if (numOfFloors === undefined || numOfFloors === null) {
       console.log('floorValue DNE');
       return; // Return if floorValue doesn't exist
@@ -491,7 +472,7 @@ const BaseShearDiagram = () => {
 
         {/* Chart Column */}
         {/* <div className="flex flex-grow item-center p-6"> */}
-        <div className="flex-grow overflow-x-auto">
+        <div className="flex">
           <div className='w-full h-screen' ref={chartRef}>
           </div>
         </div>
