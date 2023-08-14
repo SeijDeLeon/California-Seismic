@@ -14,7 +14,13 @@ const BaseShearDiagram = () => {
 
   const [numOfFloors, setNumOfFloors] = useState(0);
 
-  const [floorHeight, setFloorHeights] = useState({});
+  // // OG Code
+  //const [floorHeight, setFloorHeights] = useState({});
+
+  const [floorHeight, setFloorHeights] = useState(() => {
+    const storedHeights = JSON.parse(localStorage.getItem('floorHeight'));
+    return storedHeights || {};
+  });
 
   const handleInputChange = (event, inputName) => {
     const newValue = parseInt(event.target.value);
@@ -27,18 +33,64 @@ const BaseShearDiagram = () => {
       [inputName]: newFloorValue,
     }));
 
-    const newFloorHeights = {};
-    for (let i = 1; i <= newFloorValue; i++) {
-      newFloorHeights[`${i}`] = 10;
-    }
-    setFloorHeights(newFloorHeights);
+    // //OG Code
+    // const newFloorHeights = {};
+    // for (let i = 1; i <= newFloorValue; i++) {
+    //   newFloorHeights[`${i}`] = 10;
+    // }
+    // setFloorHeights(newFloorHeights);
+
+    // // Update local storage with the new floor heights
+    // localStorage.setItem('floorHeight', JSON.stringify(newFloorHeights));
+
+    // Adjust floor heights when numOffloors changes
+    setFloorHeights(prevFloorHeights => {
+      const adjustedHeights = { ...prevFloorHeights };
+      for (let i = 1; i <= newFloorValue; i++) {
+        if (!adjustedHeights[i]) {
+          adjustedHeights[i] = 10;
+        }
+      }
+      for (let i = newFloorValue + 1; i <= numOfFloors; i++) {
+        delete adjustedHeights[i]; // Remove heights for floors that are removed
+      }
+      return adjustedHeights;
+    });
+
+    // Update local storage with the adjusted floor heights
+    localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
+
   };
 
+
   const handleFloorHeightChange = (event, floorNum) => {
-    setFloorHeights(prevHeights => ({
-      ...prevHeights,
-      [floorNum]: event.target.value,
+    // //OG code
+    // setFloorHeights(prevHeights => ({
+    //   ...prevHeights,
+    //   [floorNum]: event.target.value,
+    // }));
+    const newHeight = parseInt(event.target.value);
+
+    setUserInput(prevUserInput => ({
+      ...prevUserInput,
+      floorHeight: {
+        ...prevUserInput.floorHeight,
+        [floorNum]: newHeight,
+      },
     }));
+
+    setFloorHeights(prevFloorHeights => ({
+      ...prevFloorHeights,
+      [floorNum]: newHeight,
+    }));
+
+    const updatedFloorHeights = {
+      ...floorHeight,
+      [floorNum]: newHeight,
+    };
+
+    localStorage.setItem('floorHeight', JSON.stringify(updatedFloorHeights));
+
   };
 
   const padding = 100;
@@ -48,11 +100,21 @@ const BaseShearDiagram = () => {
     //console.log('drawChart called');
     //console.log('drawChart called with numOfFloors:', numOfFloors);
 
+    console.log("In draw");
+    console.log("floorNum");
+    console.log(numOfFloors);
+
+    console.log("floorHeight22");
+    console.log(floorHeight);
+
     const forces = [];
     let valueIncrease = 0;
+    let multiplerFloor = 10
+
+    console.log(floorHeight[1])
 
     for (let i = 1; i <= numOfFloors; i++) {
-      forces.push({ floor: 1, value: (100 * i) + valueIncrease });
+      forces.push({ floor: 1, value: (multiplerFloor * floorHeight[i]) + valueIncrease });
       valueIncrease += 100;
     }
 
@@ -90,8 +152,7 @@ const BaseShearDiagram = () => {
         .append('svg')
         .attr('width', "100%")// Uses the entire div the 100%
         .attr('height', "100%")
-        .attr("viewBox", `0 -150 ${svgWidth} ${svgHeight}`) //-150 dtermines the position of where the svg starts
-        //.attr("viewBox", `0 0 700 700`)
+        .attr("viewBox", `0 -150 ${svgWidth} ${svgHeight}`) //-150 dtermines the position of where the svg starts //this can also zoom in and make the chart bigger
         .style('display', 'block')// SVG is displayed as a block element
         .style('margin', '0 auto');// Centering with margin
 
@@ -143,11 +204,12 @@ const BaseShearDiagram = () => {
 
     //Arrows consts
     const arrowOffset = 100 + (xScale.bandwidth() % 10) + (svgWidth % 100); //100 + (xScale.bandwidth() % 10) + (svgWidth / 100); 
-    console.log(arrowOffset);
+    //console.log(arrowOffset);
     const barCoordinates = []; //this is needed to set the hyp
 
     let minus = 0;
     let barX = 0;
+    let lineLengthShortener = 50; //this helps determine how line the arrow line will be
 
     // Creating the arrows
     svg.selectAll(".arrow")
@@ -179,11 +241,11 @@ const BaseShearDiagram = () => {
         let arrowX = barX + arrowOffset;
         let arrowY = barY;
 
-        console.log(minus);
+        //console.log(minus);
 
         d3.select(this)
           .append("path")
-          .attr("d", `M ${barX + 60 - minus} ${barY} L ${arrowX} ${arrowY}`)
+          .attr("d", `M ${barX + lineLengthShortener - minus} ${barY} L ${arrowX} ${arrowY}`)
           .attr("stroke", "blue")
           .attr("stroke-width", 2)
           .attr("marker-end", "url(#arrow-end)");
@@ -218,36 +280,28 @@ const BaseShearDiagram = () => {
           .attr("y", midY)
           .attr("text-anchor", "start")
           .text((i === 0) ? `F${i + 1}` : `F${i + 1}`);
-        barCoordinates.push({ x: barX + 60 - minus, y: barY });
+        barCoordinates.push({ x: barX + lineLengthShortener - minus, y: barY });
         minus += 10;
       });
-    console.log("barCoordinates");
-    console.log(barCoordinates);
+    // console.log("barCoordinates");
+    // console.log(barCoordinates);
 
     //hypotenuse line - had errors so it's left out ------------------------------------------
     // // Define the points of the upside-down triangle
     let hypotenusePoints = [];
     if (numOfFloors === 1) {
-      hypotenusePoints.push({ x: 0, y: 150 });
+      hypotenusePoints.push({ x: barCoordinates[0].x, y: barCoordinates[0].y });
       hypotenusePoints.push({ x: 50, y: 250 });
     }
     else if (numOfFloors > 1) {
       hypotenusePoints.push({ x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y });
       hypotenusePoints.push({ x: barCoordinates[0].x, y: barCoordinates[0].y });
-      // hypotenusePoints = [
-      //   { x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y }, // Top Left Point
-      //   { x: barCoordinates[0].x + 100, y: 250 } //Bottom Point // y: barCoordinates[0].y
-      // ];
     }
 
-    console.log("barCoordinates");
-    console.log(barCoordinates);
-    console.log("hypotenusePoints");
-    console.log(hypotenusePoints);
-    // hypotenusePoints = [
-    //   { x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y }, // Top Left Point
-    //   { x: barCoordinates[0].x + 100, y: 250 } //Bottom Point // y: barCoordinates[0].y
-    // ];
+    // console.log("barCoordinates");
+    // console.log(barCoordinates);
+    // console.log("hypotenusePoints");
+    // console.log(hypotenusePoints);
 
     if (numOfFloors >= 1) {
       svg.append("path")
@@ -259,15 +313,6 @@ const BaseShearDiagram = () => {
         .attr("stroke-width", 2);
     }
 
-
-    // //Create a path element for the hypotenuse of the triangle
-    // svg.append("path")
-    //   .attr("d", `M ${hypotenusePoints[0].x} ${hypotenusePoints[0].y} L ${hypotenusePoints[hypotenusePoints.length - 1].x - 90} ${hypotenusePoints[hypotenusePoints.length - 1].y}`) //hardcode 90 to get the hyp
-    //   .attr("fill", "none")
-    //   .attr("stroke", "blue")
-    //   .attr("stroke-width", 2);
-
-
     //Append the axes to the SVG container
     svg.append('g') //creating the x-axis
       .attr('transform', 'translate(0, 250)')
@@ -278,16 +323,31 @@ const BaseShearDiagram = () => {
       .call(yAxis)
       .style("opacity", 0);
 
-  }, [numOfFloors]);
+  }, [numOfFloors, floorHeight]);
 
   useEffect(() => {
     console.log('IN useEffect');
+    localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
+    console.log("flooeHEIGHTLocal");
+    console.log(floorHeight);
     if (numOfFloors === undefined || numOfFloors === null) {
       console.log('floorValue DNE');
       return; // Return if floorValue doesn't exist
     }
     drawChart();
-  }, [numOfFloors, drawChart]);
+
+    // Clear localStorage when page is refreshed 
+    const clearLocalStorage = () => {
+      localStorage.removeItem('floorHeight');
+    };
+
+    window.addEventListener('beforeunload', clearLocalStorage);
+
+    return () => {
+      window.removeEventListener('beforeunload', clearLocalStorage)
+    };
+
+  }, [numOfFloors, floorHeight, drawChart]);
 
   return (
     <>
@@ -339,7 +399,10 @@ const BaseShearDiagram = () => {
             ))}
           </div>
           {/* Floor Height End */}
+        </div>
 
+        {/* Input Column 2 */}
+        <div className="flex flex-col">
           <div className="p-4">
             <label htmlFor="input2" className="block mb-2">
               Input 2:
@@ -364,10 +427,6 @@ const BaseShearDiagram = () => {
               onChange={(event) => handleInputChange(event, 'input3')}
             />
           </div>
-        </div>
-
-        {/* Input Column 2 */}
-        <div className="flex flex-col">
           <div className="p-4">
             <label htmlFor="input4" className="block mb-2">
               Input 4:
@@ -431,11 +490,9 @@ const BaseShearDiagram = () => {
         </div>
 
         {/* Chart Column */}
-        <div className=" item-center p-6">
+        {/* <div className="flex flex-grow item-center p-6"> */}
+        <div className="flex-grow overflow-x-auto">
           <div className='w-full h-screen' ref={chartRef}>
-
-            {/* <div className="flex justify-center items-start w-full h-screen" ref={chartRef}></div> */}
-            {/* <div className="w-1/2 h-3/4 justify-end p-6" ref={chartRef}></div> */}
           </div>
         </div>
       </div>
