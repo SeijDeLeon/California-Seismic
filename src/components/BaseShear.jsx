@@ -6,11 +6,16 @@ const BaseShearDiagram = () => {
   const chartRef = useRef();
   const [userInput, setUserInput] = useState({
     input1: '',
-    input2: '',
-    input3: '',
-    input4: '',
-    input5: '',
   });
+
+  //this is set up for the algorithm
+  const [input2, setInput2] = useState('');
+  const [input3, setInput3] = useState('');
+  const [input4, setInput4] = useState('');
+  const [input5, setInput5] = useState('');
+  const [input6, setInput6] = useState('');
+  const [input7, setInput7] = useState('');
+  const [input8, setInput8] = useState('');
 
   const [numOfFloors, setNumOfFloors] = useState(0);
 
@@ -21,31 +26,56 @@ const BaseShearDiagram = () => {
 
   const handleInputChange = (event, inputName) => {
     const newValue = parseInt(event.target.value);
-    const newFloorValue = isNaN(newValue) || newValue < 1 ? 1 : newValue;
+    switch (inputName) {
+      case 'input2':
+        setInput2(newValue);
+        break;
+      case 'input3':
+        setInput3(newValue);
+        break;
+      case 'input4':
+        setInput4(newValue);
+        break;
+      case 'input5':
+        setInput5(newValue);
+        break;
+      case 'input6':
+        setInput6(newValue);
+        break;
+      case 'input7':
+        setInput7(newValue);
+        break;
+      case 'input8':
+        setInput8(newValue);
+        break;
+      default:
+        const newFloorValue = isNaN(newValue) || newValue < 1 ? 1 : newValue;
 
-    setNumOfFloors(newFloorValue);
+        setNumOfFloors(newFloorValue);
 
-    setUserInput(prevState => ({
-      ...prevState,
-      [inputName]: newFloorValue,
-    }));
+        setUserInput(prevState => ({
+          ...prevState,
+          [inputName]: newFloorValue,
+        }));
 
-    // Adjust floor heights when numOffloors changes
-    setFloorHeights(prevFloorHeights => {
-      const adjustedHeights = { ...prevFloorHeights };
-      for (let i = 1; i <= newFloorValue; i++) {
-        if (!adjustedHeights[i]) {
-          adjustedHeights[i] = 10;
-        }
+        // Adjust floor heights when numOffloors changes
+        setFloorHeights(prevFloorHeights => {
+          const adjustedHeights = { ...prevFloorHeights };
+          for (let i = 1; i <= newFloorValue; i++) {
+            if (!adjustedHeights[i]) {
+              adjustedHeights[i] = 10;
+            }
+          }
+          for (let i = newFloorValue + 1; i <= numOfFloors; i++) {
+            delete adjustedHeights[i]; // deleting the old heights
+          }
+          return adjustedHeights;
+        });
+
+        // Update local storage with the adjusted floor heights
+        localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
+        ;
       }
-      for (let i = newFloorValue + 1; i <= numOfFloors; i++) {
-        delete adjustedHeights[i]; // deleting the old heights
-      }
-      return adjustedHeights;
-    });
-
-    // Update local storage with the adjusted floor heights
-    localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
   };
 
 
@@ -96,13 +126,13 @@ const BaseShearDiagram = () => {
       forces.push({ floor: 1, value: (multiplerFloor * floorHeight[i]) + valueIncrease });
       console.log("math");
       console.log((multiplerFloor * floorHeight[i]) + valueIncrease);
-      if(numOfFloors >= 10){
+      if (numOfFloors >= 10) {
         valueIncrease += 200;
       }
-      else{
+      else {
         valueIncrease += 100;
       }
-      
+
     }
 
     console.log("forces");
@@ -281,7 +311,7 @@ const BaseShearDiagram = () => {
     }
     else if (numOfFloors > 1) {
       hypotenusePoints.push({ x: barCoordinates[barCoordinates.length - 1].x, y: barCoordinates[barCoordinates.length - 1].y });
-      hypotenusePoints.push({ x: barCoordinates[0].x+4, y: 250  }); //({ x: barCoordinates[0].x, y: barCoordinates[0].y });
+      hypotenusePoints.push({ x: barCoordinates[0].x + 4, y: 250 }); //({ x: barCoordinates[0].x, y: barCoordinates[0].y });
     }
 
     if (numOfFloors >= 1) {
@@ -339,7 +369,7 @@ const BaseShearDiagram = () => {
       <div className='flex justify-start items-center'>
         {/* Input Column 1 */}
         <div className="flex flex-col">
-          {/* The Floors + - */}
+          {/* The Floors + - Buttons */}
           <div className="p-4">
             <label htmlFor="input1" className="block mb-2">
               Floors:
@@ -362,7 +392,7 @@ const BaseShearDiagram = () => {
               >+</button>
             </div>
           </div>
-          {/* End of floor + - */}
+          {/* End of floor + - Buttons*/}
           {/* Floor Heights */}
           <div className="p-4">
             <h2 className="text-xl font-semibold mb-4">Floor Heights</h2>
