@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PlayIcon, StopIcon } from "@heroicons/react/24/solid";
 
 const Timer = () => {
@@ -6,6 +6,7 @@ const Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [timerStarted, setTimerStarted] = useState(false);
   const [timerId, setTimerId] = useState(0);
+  const colorRef = useRef();
   const startTimer = () => {
     setTimerStarted(true);
     setTimerId(
@@ -17,6 +18,7 @@ const Timer = () => {
 
   const stopTimer = () => {
     clearInterval(timerId);
+    colorRef.current.classList.remove("bg-red-400");
     setTimerStarted(false);
     setSeconds(0);
     setMinutes(0);
@@ -26,13 +28,16 @@ const Timer = () => {
       setSeconds(0);
       setMinutes((prev) => prev + 1);
     }
-    if (minutes === 2) {
-      stopTimer();
+    if (minutes === 2 && seconds === 45) {
+      colorRef.current.classList.add("bg-red-400");
     }
   }, [seconds]);
 
   return (
-    <div className="border-2 shadow-xl rounded-full w-40 font-bold">
+    <div
+      ref={colorRef}
+      className="border-2 shadow-xl rounded-full w-40 font-bold"
+    >
       <p className="font-extrabold text-2xl">
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}

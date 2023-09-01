@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import generatorLogic from "./GeneratorLogic";
 import { ForwardIcon } from "@heroicons/react/24/solid";
 
-const Question = ({ category, totalQuestions, answeredCorrect }) => {
+const Question = ({ category, answeredCorrect }) => {
   const [question, setQuestion] = useState({
     question: ``,
     choices: [],
@@ -10,36 +10,36 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
   });
   const [showSolution, setShowSolution] = useState(false);
   const [viewSolution, setViewSolution] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [chosen, setChosen] = useState(null);
   const colorRef = useRef();
   useEffect(() => setQuestion(generatorLogic(category)), []);
 
   const handleSubmit = () => {
     setShowSolution(true);
-    // totalQuestions((prev) => prev + 1);
+    setSubmitted(true);
     if (question.answer === chosen) {
       answeredCorrect((prev) => prev + 1);
       colorRef.current.classList.remove("bg-gray-400");
       colorRef.current.classList.add("bg-green-400");
     } else {
+      answeredCorrect(0);
       colorRef.current.classList.remove("bg-gray-400");
       colorRef.current.classList.add("bg-red-400");
     }
   };
 
   return (
-    <div className="flex gap-5 p-5 border-2 rounded-xl m-5 shadow-xl">
-      <p>Question:</p>
+    <div className="flex gap-5 p-5 border rounded-xl mb-4 shadow-xl w-3/4 h-1/2">
+      {/* <p>Question:</p> */}
       <div className="text-start">
-        <p>{question.question}</p>
-        {/* <div className="flex justify-center self-center"> */}
+        <p className="font-bold">{question.question}</p>
         <img
           src={question.image}
           alt="question pic"
           className="w-96 block mr-auto ml-auto"
         />
-        {/* </div> */}
-        <ul className="p-2">
+        <ul className="">
           {question.choices.map((choice) => (
             <li
               ref={choice === chosen ? colorRef : null}
@@ -50,6 +50,7 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
                 (choice === chosen && "bg-gray-400")
               }
               onClick={(e) => {
+                console.log(e.target.value, "chosen", e.target);
                 setChosen(e.target.value);
               }}
             >
@@ -58,11 +59,11 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
           ))}
         </ul>
         <button
-          className="rounded-full border-2  w-20"
+          className="rounded-full border-2  w-20 m-2"
           onClick={handleSubmit}
           disabled={!chosen || showSolution}
         >
-          Sumbit
+          Submit
         </button>
         <div className="flex justify-between p-2">
           <div
@@ -70,8 +71,12 @@ const Question = ({ category, totalQuestions, answeredCorrect }) => {
             onClick={() => {
               setShowSolution(false);
               setChosen(null);
-              totalQuestions((prev) => prev + 1);
               setQuestion(generatorLogic(category));
+              if (!submitted) {
+                console.log("not submitted");
+                answeredCorrect(0);
+              }
+              setSubmitted(false);
             }}
           >
             Next <ForwardIcon className="h-5 w-5" />

@@ -13,42 +13,23 @@ const QuestionGeneratorDisplay = () => {
     "Category 6",
   ];
   const [category, setCategory] = useState("Fundamental Period");
-  const [totalQuestions, setTotalQuestions] = useState(0);
   const [answeredCorrect, setAnsweredCorrect] = useState(0);
   const [bestScore, setBestScore] = useState(
-    localStorage.getItem("bestScore")
-      ? {
-          correct: parseInt(
-            JSON.parse(localStorage.getItem("bestScore")).correct
-          ),
-          total: parseInt(JSON.parse(localStorage.getItem("bestScore")).total),
-        }
-      : {
-          correct: 0,
-          total: 0,
-        }
+    isNaN(localStorage.getItem("bestScore"))
+      ? 0
+      : parseInt(JSON.parse(localStorage.getItem("bestScore")))
   );
   useEffect(() => {
-    let prevBest = isNaN(bestScore.correct / bestScore.total)
-      ? 0
-      : bestScore.correct / bestScore.total;
-    let currBest = isNaN(answeredCorrect / totalQuestions)
-      ? 0
-      : answeredCorrect / totalQuestions;
-    if (answeredCorrect > bestScore.correct || currBest > prevBest) {
-      setBestScore({
-        ...bestScore,
-        correct: answeredCorrect,
-        total: totalQuestions,
-      });
+    if (answeredCorrect > bestScore) {
+      setBestScore(answeredCorrect);
     }
-  }, [totalQuestions]);
+  }, [answeredCorrect]);
   useEffect(() => {
     localStorage.setItem("bestScore", JSON.stringify(bestScore));
   }, [bestScore]);
   return (
-    <div className="w-2/3 m-auto">
-      <div className="grid grid-cols-3 gap-5 m-5 ">
+    <div className="m-auto">
+      <div className="grid grid-cols-3 gap-5 m-5 mt-0">
         {categories.map((item) => (
           <div
             className="border-2 rounded-lg cursor-pointer font-bold hover:bg-slate-300"
@@ -58,32 +39,32 @@ const QuestionGeneratorDisplay = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-around m-10">
-        <Tooltip content={"Streak of correctly answered in current session."}>
-          <div className="border-2 rounded-full shadow-xl w-40 font-bold">
-            <p>Current</p>
-            <p className="font-extrabold text-xl">{answeredCorrect}</p>
-          </div>
-        </Tooltip>
-        <Tooltip
-          content={
-            "Timer for 2:45 mins. Changes to red color after specified time."
-          }
-        >
-          <Timer />
-        </Tooltip>
-        <Tooltip content={"Best streak of correctly answered in all sessions."}>
-          <div className="border-2 rounded-full shadow-xl w-40 font-bold">
-            <p>Best</p>
-            {bestScore.correct}/{bestScore.total}
-          </div>
-        </Tooltip>
+      <div className="flex justify-evenly">
+        <div className="flex flex-col justify-center gap-10 items-center ">
+          <Tooltip content={"Streak of correctly answered in current session."}>
+            <div className="border-2 rounded-full shadow-xl w-40 font-bold">
+              <p>Current</p>
+              <p className="font-extrabold text-2xl">{answeredCorrect}</p>
+            </div>
+          </Tooltip>
+          <Tooltip
+            content={
+              "Timer for 2:45 mins. Changes to red color after specified time."
+            }
+          >
+            <Timer />
+          </Tooltip>
+          <Tooltip
+            content={"Best streak of correctly answered in all sessions."}
+          >
+            <div className="border-2 rounded-full shadow-xl w-40 font-bold">
+              <p>Best</p>
+              <p className="font-extrabold text-2xl">{bestScore}</p>
+            </div>
+          </Tooltip>
+        </div>
+        <Question category={category} answeredCorrect={setAnsweredCorrect} />
       </div>
-      <Question
-        category={category}
-        totalQuestions={setTotalQuestions}
-        answeredCorrect={setAnsweredCorrect}
-      />
     </div>
   );
 };

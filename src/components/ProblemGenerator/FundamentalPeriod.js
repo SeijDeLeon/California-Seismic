@@ -17,11 +17,20 @@ export const fundamentalPeriod = () => {
           ${ksi} ksi, and the mass at the top weighs ${kips} kips?`;
   let image = fundamentalPeriodImage;
   let answer = 5;
+  // let answer =
+
+  //     2 *
+  //     Math.PI *
+  //     Math.sqrt((kips * Math.pow(height, 3)) / (ksi * 386.09))
+
+  // ;
+  // console.log(answer, answer.toFixed(2), "ans");
   let choices = shuffleArray([
     answer,
     answer + randomValGen(1, 10),
     answer + randomValGen(20, 30),
     answer + randomValGen(30, 40),
   ]);
+  console.log(choices, answer, "hhh");
   return { question: question, image: image, choices: choices, answer: answer };
 };
