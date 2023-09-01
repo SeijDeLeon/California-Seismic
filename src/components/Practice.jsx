@@ -14,9 +14,11 @@ export default function Practice( { display=true }) {
     );
   } else {
     return (
-      <main>
-        <QuestionDisplay questionKey={questionKey} setQuestionKey={setQuestionKey}/>
-        <QuestionTable setQuestionKey={setQuestionKey}/>
+      <main className='min-h-[calc(92vh-120px)] flex flex-col justify-center bg-gray-100'>
+        <div className='max-w-screen-2xl mx-auto px-4'>
+          <QuestionDisplay questionKey={questionKey} setQuestionKey={setQuestionKey}/>
+          <QuestionTable setQuestionKey={setQuestionKey}/>
+        </div>
       </main>
     )
   }

@@ -18,6 +18,7 @@ import {
   ChartBarIcon,
   Squares2X2Icon,
   HomeIcon,
+  MapPinIcon
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import logo from "../assets/logo.png";
@@ -44,9 +45,9 @@ const products = [
   },
   {
     name: "04: Site Conditions",
-    description: "Defining seismic risk by building type",
+    description: "Seismic factors based on soil characteristics",
     href: "04",
-    icon: UserGroupIcon,
+    icon: MapPinIcon,
   },
   {
     name: "05: Risk Categories",
