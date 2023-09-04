@@ -4,7 +4,7 @@ const shuffleArray = (array) => {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  return array;
+  return array.map((choice) => parseFloat(choice.toFixed(2)));
 };
 const randomValGen = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
@@ -16,21 +16,19 @@ export const fundamentalPeriod = () => {
           height is ${height} ft, the modulus of elasticity for the column is
           ${ksi} ksi, and the mass at the top weighs ${kips} kips?`;
   let image = fundamentalPeriodImage;
-  let answer = 5;
-  // let answer =
-
-  //     2 *
-  //     Math.PI *
-  //     Math.sqrt((kips * Math.pow(height, 3)) / (ksi * 386.09))
-
-  // ;
-  // console.log(answer, answer.toFixed(2), "ans");
+  let answer = parseFloat(
+    (
+      2 *
+      Math.PI *
+      Math.sqrt((kips * Math.pow(height, 3)) / (ksi * 386.09))
+    ).toFixed(2)
+  );
   let choices = shuffleArray([
     answer,
-    answer + randomValGen(1, 10),
-    answer + randomValGen(20, 30),
-    answer + randomValGen(30, 40),
+    answer + randomValGen(1, 5),
+    answer + randomValGen(6, 10),
+    answer + randomValGen(11, 20),
   ]);
-  console.log(choices, answer, "hhh");
+
   return { question: question, image: image, choices: choices, answer: answer };
 };

@@ -15,9 +15,9 @@ const QuestionGeneratorDisplay = () => {
   const [category, setCategory] = useState("Fundamental Period");
   const [answeredCorrect, setAnsweredCorrect] = useState(0);
   const [bestScore, setBestScore] = useState(
-    isNaN(localStorage.getItem("bestScore"))
-      ? 0
-      : parseInt(JSON.parse(localStorage.getItem("bestScore")))
+    localStorage.getItem("bestScore")
+      ? parseInt(JSON.parse(localStorage.getItem("bestScore")))
+      : 0
   );
   useEffect(() => {
     if (answeredCorrect > bestScore) {
@@ -32,6 +32,7 @@ const QuestionGeneratorDisplay = () => {
       <div className="grid grid-cols-3 gap-5 m-5 mt-0">
         {categories.map((item) => (
           <div
+            key={item}
             className="border-2 rounded-lg cursor-pointer font-bold hover:bg-slate-300"
             onClick={(e) => setCategory(e.target.value)}
           >

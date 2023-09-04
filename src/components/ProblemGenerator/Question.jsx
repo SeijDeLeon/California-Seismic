@@ -39,25 +39,24 @@ const Question = ({ category, answeredCorrect }) => {
           alt="question pic"
           className="w-96 block mr-auto ml-auto"
         />
-        <ul className="">
-          {question.choices.map((choice) => (
-            <li
+        <div className="flex justify-evenly">
+          {question.choices.map((choice, ind) => (
+            <button
               ref={choice === chosen ? colorRef : null}
               value={choice}
               key={choice}
               className={
-                "border-2  rounded-xl p-2 m-2 cursor-pointer " +
+                "border-2 rounded-xl p-2 m-2 cursor-pointer " +
                 (choice === chosen && "bg-gray-400")
               }
               onClick={(e) => {
-                console.log(e.target.value, "chosen", e.target);
-                setChosen(e.target.value);
+                setChosen(parseFloat(e.target.value));
               }}
             >
               {choice} s
-            </li>
+            </button>
           ))}
-        </ul>
+        </div>
         <button
           className="rounded-full border-2  w-20 m-2"
           onClick={handleSubmit}
@@ -73,7 +72,6 @@ const Question = ({ category, answeredCorrect }) => {
               setChosen(null);
               setQuestion(generatorLogic(category));
               if (!submitted) {
-                console.log("not submitted");
                 answeredCorrect(0);
               }
               setSubmitted(false);
@@ -94,13 +92,10 @@ const Question = ({ category, answeredCorrect }) => {
         </div>
         {viewSolution && (
           <div>
-            Sociable on as carriage my position weddings raillery consider.
-            Peculiar trifling absolute and wandered vicinity property yet. The
-            and collecting motionless difficulty son. His hearing staying ten
-            colonel met. Sex drew six easy four dear cold deny. Moderate
-            children at of outweigh it. Unsatiable it considered invitation he
-            travelling insensible. Consulted admitting oh mr up as described
-            acuteness propriety moonlight.
+            This is a cantilevered column SDOF structure, so we can first
+            determine the stiffness of the SDOF and then plug the stiffness into
+            the period equation for an SDOF system. Determine stiffness: k =
+            3(El)/h3
           </div>
         )}
       </div>
