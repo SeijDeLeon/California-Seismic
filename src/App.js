@@ -1,7 +1,10 @@
+import { Route, Routes } from "react-router-dom";
+import{ useEffect } from "react";
+
 import logo from "./logo.svg";
 import "./App.css";
+
 import Header from "./components/Header.jsx";
-import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home.jsx";
 import Lectures from "./components/Lectures.jsx";
 import Lecture from "./components/Lecture.jsx";
@@ -15,7 +18,14 @@ import QuestionGeneratorDisplay from "./components/ProblemGenerator/QuestionGene
 import ExamsListPage from "./components/Exam-simulator/ExamsListPage";
 import SinglePracticeExam from "./components/Exam-simulator/SinglePracticeExam";
 
+//Google Analytics
+import ReactGA from 'react-ga4';
+const TRACKING_ID = "G-7M8L6VYQZH";
+ReactGA.initialize(TRACKING_ID);
+
+
 function App() {
+
   return (
     <div className="App">
       <Header />
