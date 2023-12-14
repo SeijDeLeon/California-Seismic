@@ -22,9 +22,9 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
     ));
   }
 
-  const checkPath = (id) => {
+  const checkPath = (key) => {
     try {
-      images(`./${id}`);
+      images(`./${key}Q.png`);
       return true;
     }
     catch(err) {
@@ -160,7 +160,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
           <p onClick={handleNextClick} className='flex items-center pl-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'>Next {arrowChevronRight}</p>
         </div>
         <MathJax className='flex text-left m-auto'>{splitText(question.question)}</MathJax>
-        {checkPath(question.imgQ) ? <img src={images(`./${question.imgQ}`)} alt="question" /> : <Fragment></Fragment>}
+        {checkPath(question.key) ? <img src={images(`./${question.key}Q.png`)} alt="question" /> : <Fragment></Fragment>}
         <div className='block py-4 m-auto'>
           {randomizedAnswers.map((answer, index) => {
             return (
