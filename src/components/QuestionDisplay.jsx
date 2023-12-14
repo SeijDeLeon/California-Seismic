@@ -140,7 +140,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
 
   return (
 
-      <div className={`${display} max-w-3xl px-16 bg-white border-solid border rounded-md m-auto py-4 transition-all duration-500`} id='QuestionDisplay'>
+      <div className={`${display} max-w-3xl w-full px-16 bg-white border-solid border rounded-md m-auto py-4 transition-all duration-500`} id='QuestionDisplay'>
         <p className='text-lg font-bold underline-offset-2 underline'>{`${title} ${secondaryIndex + 1}/${totalQuestions}`}</p>
         <div className='flex justify-center fill-slate-400 text-slate-400 pb-4 text-sm'>
           <p onClick={handlePrevClick} className='flex items-center pr-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'> {arrowChevronLeft} Previous</p>

@@ -27,6 +27,12 @@ export default function Contributors({ display = true }) {
       alt: "headshot",
     },
     {
+      title: "Christy Yuen",
+      text: "Front End Intern 2023",
+      img: "images/contributors/christy_yuen.png",
+      alt: "headshot",
+    },
+    {
       title: "Jerry Wu",
       text: "Front End Intern 2022",
       img: "images/contributors/jerry_wu.jpg",
@@ -51,15 +57,21 @@ export default function Contributors({ display = true }) {
       alt: "headshot",
     },
     {
-      title: "Mayur Patil",
-      text: "Civil Intern 2020",
-      img: "images/contributors/mayur_patil.jpg",
+      title: "Kanchan Mhatre",
+      text: "Front End Intern 2023",
+      img: "images/contributors/kanchan_mhatre.png",
       alt: "headshot",
     },
     {
       title: "Myron Zhou",
       text: "Front End Intern 2022",
       img: "images/contributors/myron_zhou.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Ramesh Pothamsetty",
+      text: "Front End Intern 2023",
+      img: "images/contributors/ramesh_pothamsetty.jpeg",
       alt: "headshot",
     },
     {
