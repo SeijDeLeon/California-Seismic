@@ -1,6 +1,8 @@
 import { useState, useEffect, Fragment } from 'react';
 import questionData from '../assets/questionData.js';
 import { MathJax} from "better-react-mathjax";
+const images = require.context('../../public/images/questions', true);
+
 
 
 export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) {
@@ -18,6 +20,17 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
         <br />
       </Fragment>
     ));
+  }
+
+  const checkPath = (id) => {
+    try {
+      images(`./${id}`);
+      return true;
+    }
+    catch(err) {
+      console.log('false');
+      return false;
+    }
   }
 
   //search for the question that contains this questionKey. for future use, this questionKey can be an ID used in a 'GET' request to a server that has a database which contains all questions.
@@ -147,6 +160,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
           <p onClick={handleNextClick} className='flex items-center pl-3 hover:fill-slate-600 hover:cursor-pointer hover:text-slate-600 transition-all'>Next {arrowChevronRight}</p>
         </div>
         <MathJax className='flex text-left m-auto'>{splitText(question.question)}</MathJax>
+        {checkPath(question.imgQ) ? <img src={images(`./${question.imgQ}`)} alt="question" /> : <Fragment></Fragment>}
         <div className='block py-4 m-auto'>
           {randomizedAnswers.map((answer, index) => {
             return (
