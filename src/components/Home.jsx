@@ -149,14 +149,14 @@ export default function Home() {
           <img className="m-auto h-40 md:h-60 " src="https://img.icons8.com/fluency/240/student-center.png" alt="graduation cap inside house" />
           <section className="m-auto w-auto md:pl-32 pt-4">
             <h1 className="text-white text-3xl md:text-6xl font-semibold mb-4">Education > Profits</h1>
-            <p className="max-w-lg m-auto text-white text-left p-8 md:p-0">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We&apos;re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
+            <p className="max-w-lg m-auto text-lg text-white text-left p-8 md:p-0">California Seismic exists because of a passion for education. Engineering knowledge should be free and easy to access, yet there are few complete resources for Civil Engineering outside of higher education. We&apos;re here to change that by providing a comprehensive resource for one of the most technically challenging aspects, Seismic Design. </p>
           </section>
         </div>
       </article>
 
       <article className="bg-slate-50 h-fit py-8 md:h-auto md:py-32">
         <div className="max-w-6xl m-auto mb-8 md:mb-16">
-          <h1 className="font-bold text-3xl md:text-5xl mb-4 md:mb-12">Why California Seismic?</h1>
+          <h1 className="font-bold text-3xl md:text-5xl mb-4 md:mb-12">Why Use California Seismic?</h1>
           <div className="flex flex-col md:flex-row">
             {infoCards.map((item, index) => (
               <figure key={`infoCard${index}`} className="w-72 m-auto my-4">
