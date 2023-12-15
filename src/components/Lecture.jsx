@@ -60,7 +60,7 @@ export default function Lectures({ display=false }) {
     { title: '07: Ductility',
       googleLink:'https://docs.google.com/document/d/e/2PACX-1vTMQwKfzI9OhuFV6VtJb1oi8HQIBMFhXpgkW77zbJEn2GMeSx1qyIANBMuJIgPO5berjQKxPOTU_hlb/pub?embedded=true',
       references:[],
-      summary:'Seismic loads are',
+      summary:'Seismic loads are based in part on the concept of energy absorption via building lateral systems. Different systems can withstand more deformation before brittle failure. Ductility of lateral systems is represented via factors from ASCE 7 tables.',
       prereqs:['Understand different types of building lateral systems','Determine seismic design category'],
       objectives:['Know the relationship between R, Omega, and Cd','Understand the different phases of an inelastic force-deformation curve','Understand the requirements for using ductility values in building design'],
       video:'https://www.youtube.com/embed/b3ootXSAaqE'},
