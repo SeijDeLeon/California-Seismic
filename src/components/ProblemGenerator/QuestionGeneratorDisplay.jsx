@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
 import Question from "./Question";
-import { Popover } from "@headlessui/react";
 import Tooltip from "../Tooltip";
 const QuestionGeneratorDisplay = () => {
   const categories = [
@@ -28,7 +27,7 @@ const QuestionGeneratorDisplay = () => {
     localStorage.setItem("bestScore", JSON.stringify(bestScore));
   }, [bestScore]);
   return (
-    <div className="m-auto">
+    <div className="m-auto max-w-6xl">
       <div className="grid grid-cols-3 gap-5 m-5 mt-0">
         {categories.map((item) => (
           <div

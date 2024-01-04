@@ -12,6 +12,7 @@ const Question = ({ category, answeredCorrect }) => {
   const [viewSolution, setViewSolution] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [chosen, setChosen] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(false);
   const colorRef = useRef();
   useEffect(() => setQuestion(generatorLogic(category)), []);
 
@@ -20,6 +21,7 @@ const Question = ({ category, answeredCorrect }) => {
     setSubmitted(true);
     if (question.answer === chosen) {
       answeredCorrect((prev) => prev + 1);
+      setIsCorrect(true);
       colorRef.current.classList.remove("bg-gray-400");
       colorRef.current.classList.add("bg-green-400");
     } else {
@@ -48,6 +50,9 @@ const Question = ({ category, answeredCorrect }) => {
               className={
                 "border-2 rounded-xl p-2 m-2 cursor-pointer " +
                 (choice === chosen && "bg-gray-400")
+                // (question.answer === choice && isCorrect
+                //   ? "bg-green-400"
+                //   : null)
               }
               onClick={(e) => {
                 setChosen(parseFloat(e.target.value));
@@ -57,14 +62,25 @@ const Question = ({ category, answeredCorrect }) => {
             </button>
           ))}
         </div>
-        <button
-          className="rounded-full border-2  w-20 m-2"
-          onClick={handleSubmit}
-          disabled={!chosen || showSolution}
-        >
-          Submit
-        </button>
-        <div className="flex justify-between p-2">
+
+        <div className="flex justify-around items-center p-4">
+          <button
+            className="rounded-full border-2  w-20 m-2"
+            onClick={handleSubmit}
+            disabled={!chosen || showSolution}
+          >
+            Submit
+          </button>
+          <div
+            className={
+              showSolution
+                ? "cursor-pointer font-bold"
+                : "pointer-events-none text-gray-500 font-bold"
+            }
+            onClick={() => setViewSolution(!viewSolution)}
+          >
+            {viewSolution ? "Hide Solution" : "View Solution"}
+          </div>
           <div
             className="cursor-pointer flex justify-start items-center gap-2 font-bold"
             onClick={() => {
@@ -79,25 +95,8 @@ const Question = ({ category, answeredCorrect }) => {
           >
             Next <ForwardIcon className="h-5 w-5" />
           </div>
-          <div
-            className={
-              showSolution
-                ? "cursor-pointer font-bold"
-                : "pointer-events-none text-gray-500 font-bold"
-            }
-            onClick={() => setViewSolution(!viewSolution)}
-          >
-            View Solution
-          </div>
         </div>
-        {viewSolution && (
-          <div>
-            This is a cantilevered column SDOF structure, so we can first
-            determine the stiffness of the SDOF and then plug the stiffness into
-            the period equation for an SDOF system. Determine stiffness: k =
-            3(El)/h3
-          </div>
-        )}
+        {viewSolution && <div>{question.solution}</div>}
       </div>
     </div>
   );
