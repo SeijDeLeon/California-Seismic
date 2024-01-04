@@ -25,10 +25,20 @@ export const fundamentalPeriod = () => {
   );
   let choices = shuffleArray([
     answer,
-    answer + randomValGen(1, 5),
-    answer + randomValGen(6, 10),
-    answer + randomValGen(11, 20),
+    answer + randomValGen(1, 2),
+    answer + randomValGen(3, 6),
+    answer + randomValGen(7, 9),
   ]);
+  let solution = `This is a cantilevered column SDOF structure, so we can first
+            determine the stiffness of the SDOF and then plug the stiffness into
+            the period equation for an SDOF system. Determine stiffness: k =
+            3(EI)/h3`;
 
-  return { question: question, image: image, choices: choices, answer: answer };
+  return {
+    question: question,
+    image: image,
+    choices: choices,
+    answer: answer,
+    solution: solution,
+  };
 };
