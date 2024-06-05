@@ -139,7 +139,7 @@ const handleUSGSSubmit = async () => {
           <p className='text-lg text-center font-medium'>{`Peak Ground Acceleration = ${pga}g`}</p>
         </div>
         <div className='text-left space-y-2 py-2'>
-          <p className='italic'>What does Peak Ground Acceleration (PGA) mean?</p>
+          <p className='italic'>What does Peak Ground Acceleration (PGA) actually mean?</p>
           <p>{`The units of PGA are in 'g', which is Earth's Gravitational Acceleration. If you weigh 100 lbs on Earth from 1.0g, then during this earthquake your body could experience a horizontal acceleration of ${pga}g, or ${pga*100} lbs!` }</p>
           <p className='italic'>What kind of earthquake is expected to cause this PGA?</p>
           <p>The PGA calcuated from USGS is an estimated ground shaking that has no more than a 2% chance of exceedance in a 50 year period. Expressed as a return period, this would be an earthquake with a return period of approximately 2500 years.</p>
