@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
 import Question from "./Question";
-import Tooltip from "../Tooltip";
+import Tooltip from "../../common/Tooltip";
 const QuestionGeneratorDisplay = () => {
   const categories = [
     "Fundamental Period",

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import ScrollToTop from './components/ScrollToTop.jsx';
+import ScrollToTop from './components/common/ScrollToTop.jsx';
 import { MathJaxContext } from "better-react-mathjax";
 
 

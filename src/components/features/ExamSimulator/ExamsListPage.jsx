@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { exams } from '../../assets/duplicateQuestionData.js';
+import { exams } from '../../../assets/data/duplicateQuestionData.js';
 import StartExamPopUpModal from './StartExamPopUpModal.jsx';
 
 function ExamsListPage() {

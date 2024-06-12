@@ -1,4 +1,4 @@
-import logo from '../assets/logo.png'
+import logo from '../../assets/images/logo.png'
 import { NavLink } from 'react-router-dom'
 
 export default function Footer() {

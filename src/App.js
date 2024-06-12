@@ -4,20 +4,22 @@ import{ useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import Header from "./components/Header.jsx";
-import Home from "./components/Home.jsx";
-import Lectures from "./components/Lectures.jsx";
-import Lecture from "./components/Lecture.jsx";
-import Practice from "./components/Practice.jsx";
-import ExamGuide from "./components/ExamGuide.jsx";
-import Contributors from "./components/Contributors.jsx";
-import UnderConstruction from "./components/UnderConstruction.jsx";
-import Footer from "./components/Footer.jsx";
-import Error404 from "./components/Error404";
-import QuestionGeneratorDisplay from "./components/ProblemGenerator/QuestionGeneratorDisplay";
-import ExamsListPage from "./components/Exam-simulator/ExamsListPage";
-import SinglePracticeExam from "./components/Exam-simulator/SinglePracticeExam";
-import USGS from "./components/USGS.jsx";
+import Header from "./components/common/Header.jsx";
+import Home from "./routes/Home.jsx";
+import Lectures from "./routes/Lectures.jsx";
+import Lecture from "./routes/Lecture.jsx";
+import Practice from "./routes/Practice.jsx";
+import ExamGuide from "./routes/ExamGuide.jsx";
+import Contributors from "./routes/Contributors.jsx";
+import UnderConstruction from "./components/common/UnderConstruction.jsx";
+import Footer from "./components/common/Footer.jsx";
+import Error404 from "./routes/Error404";
+import PracticeExams from "./routes/PracticeExams.jsx";
+import PracticeExamSingle from "./routes/PracticeExamSingle.jsx";
+import USGS from "./routes/USGS.jsx";
+import PracticeRandom from "./routes/PracticeRandom.jsx";
+
+
 
 //Google Analytics
 import ReactGA from 'react-ga4';
@@ -32,14 +34,15 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/index.html" element={<Home />} />
         <Route path="/lectures" element={<Lectures display="true" />} />
         <Route path="/lectures/:id" element={<Lecture display="true" />} />
         <Route path="/practice" element={<Practice />} />
-        <Route path="/practice/exams" element={<ExamsListPage />} />
-        <Route path="/practice/exams/:examId" element={<SinglePracticeExam />} />
+        <Route path="/practice/exams" element={<PracticeExams />} />
+        <Route path="/practice/exams/:examId" element={<PracticeExamSingle />} />
         <Route path="/exam-guide" element={<ExamGuide display="true"/>} />
         <Route path="/contributors" element={<Contributors />} />
-        <Route path="/practice/random" element={<QuestionGeneratorDisplay />} />
+        <Route path="/practice/random" element={<PracticeRandom />} />
         <Route path="/USGS" element={<USGS />} />
         <Route path="*" element={<Error404 />} />
       </Routes>

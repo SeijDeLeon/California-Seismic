@@ -1,8 +1,8 @@
-import hero from '../assets/hero.jpg'
-import headshot from '../assets/seij_headshot.jpg'
+import hero from '../assets/images/hero.jpg'
+import headshot from '../assets/images/seij_headshot.jpg'
 import '../App.css'
 import { NavLink } from 'react-router-dom'
-import Button from './Button.jsx'
+import Button from '../components/common/Button.jsx'
 export default function Home() {
 
   const bldgLineStroke = {'stroke': 'url(#grad1)', 'strokeWidth': '1', 'filter':'url(#f1)'}

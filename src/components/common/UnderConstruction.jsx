@@ -1,5 +1,5 @@
-import defaultImage from '../assets/underConstruction.png'
-import '../App.css';
+import defaultImage from '../../assets/images/underConstruction.png'
+import '../../App.css';
 import { useEffect } from 'react';
 
 export default function UnderConstruction( {displayUnderConstruction}) {

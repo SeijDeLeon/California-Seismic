@@ -1,6 +1,5 @@
-import UnderConstruction from './UnderConstruction.jsx';
 import { NavLink } from "react-router-dom";
-import Button from './Button.jsx';
+import Button from '../components/common/Button.jsx';
 import {
   AcademicCapIcon,
   PlayCircleIcon,
@@ -8,7 +7,7 @@ import {
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline'
 
-export default function Lectures({ display=false }) {
+export default function Lectures() {
 
   const lectures = [
     {
@@ -163,11 +162,6 @@ export default function Lectures({ display=false }) {
     },
   ]
 
-  if (display === false) {
-    return (
-      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
-    );
-  } else {
     return (
       <main>
         <h2 className='text-xl font-bold my-4 md:my-8'> Lectures</h2>
@@ -223,5 +217,3 @@ export default function Lectures({ display=false }) {
       </main>
     )
   }
-
-}

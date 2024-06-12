@@ -1,4 +1,3 @@
-import UnderConstruction from './UnderConstruction.jsx';
 import {
   MapIcon,
   ClipboardDocumentCheckIcon,
@@ -6,16 +5,6 @@ import {
 } from '@heroicons/react/24/outline'
 
 export default function ExamGuide( { display=false }) {
-
-  if (display === false) {
-    return (
-      <>
-        <h1 data-testid="testExamGuideh1"> Exam Guide </h1>
-        <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
-      </>
-    );
-  } else {
-
 
     function Link(link, text, color="text-sky-700") {
       return (
@@ -206,6 +195,3 @@ export default function ExamGuide( { display=false }) {
       </main>
     )
   }
-
-
-}

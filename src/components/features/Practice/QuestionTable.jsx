@@ -1,4 +1,4 @@
-import questionData from '../assets/questionData.js';
+import questionData from '../../../assets/data/questionData.js';
 import QuestionSubTable from './QuestionSubTable.jsx';
 export default function QuestionTable({ setQuestionKey }) {
 
