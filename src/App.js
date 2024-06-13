@@ -17,6 +17,7 @@ import PracticeExams from "./routes/PracticeExams.jsx";
 import PracticeExamSingle from "./routes/PracticeExamSingle.jsx";
 import USGS from "./routes/USGS.jsx";
 import PracticeRandom from "./routes/PracticeRandom.jsx";
+import ASCE7 from "./routes/ASCE7.jsx";
 
 
 
@@ -43,6 +44,8 @@ function App() {
         <Route path="/contributors" element={<Contributors />} />
         <Route path="/practice/random" element={<PracticeRandom />} />
         <Route path="/USGS" element={<USGS />} />
+        <Route path="/ASCE7" element={<ASCE7 />} />
+        <Route path="/ASCE7/:sectionParam" element={<ASCE7 />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
