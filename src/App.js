@@ -11,7 +11,6 @@ import Lecture from "./routes/Lecture.jsx";
 import Practice from "./routes/Practice.jsx";
 import ExamGuide from "./routes/ExamGuide.jsx";
 import Contributors from "./routes/Contributors.jsx";
-import UnderConstruction from "./components/common/UnderConstruction.jsx";
 import Footer from "./components/common/Footer.jsx";
 import Error404 from "./routes/Error404";
 import PracticeExams from "./routes/PracticeExams.jsx";
@@ -46,7 +45,6 @@ function App() {
         <Route path="/USGS" element={<USGS />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
-      <UnderConstruction displayUnderConstruction={false}></UnderConstruction>
       <Footer />
     </div>
   );
