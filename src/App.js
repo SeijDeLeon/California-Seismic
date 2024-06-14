@@ -18,6 +18,8 @@ import PracticeExamSingle from "./routes/PracticeExamSingle.jsx";
 import USGS from "./routes/USGS.jsx";
 import PracticeRandom from "./routes/PracticeRandom.jsx";
 import ASCE7 from "./routes/ASCE7.jsx";
+import BaseShearApp from "./routes/BaseShearApp.jsx";
+import Demo from "./routes/Demo.jsx";
 
 
 
@@ -46,6 +48,8 @@ function App() {
         <Route path="/USGS" element={<USGS />} />
         <Route path="/ASCE7" element={<ASCE7 />} />
         <Route path="/ASCE7/:sectionParam" element={<ASCE7 />} />
+        <Route path="/baseshear" element={<BaseShearApp />} />
+        <Route path="/demo" element={<Demo visible={true} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
