@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ScrollToTop from './ScrollToTop.jsx';
+
 
 export default function QuestionRow( { question, borderStyle, title, completedCount, setCompletedCount, setQuestionKey } ) {
   //returns a single Question

@@ -21,7 +21,7 @@ import {
   MapPinIcon
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import logo from "../assets/logo.png";
+import logo from "../../assets/images/logo.png";
 import { NavLink } from "react-router-dom";
 
 const products = [

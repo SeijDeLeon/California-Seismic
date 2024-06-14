@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { exams } from "../../assets/duplicateQuestionData.js";
+import { exams } from "../../../assets/data/duplicateQuestionData.js";
 import ExamScorePopUpModal from "./ExamScorePopUp.jsx";
 import ListOfQuestionsSideBar from "./ListOfQuestionsSideBar.jsx";
 import Timer from "./Timer.js";

@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
-import questionData from '../assets/questionData.js';
+import questionData from '../../../assets/data/questionData.js';
 import { MathJax} from "better-react-mathjax";
-const images = require.context('../../public/images/questions', true);
+const images = require.context('../../../../public/images/questions', true);
 
 
 

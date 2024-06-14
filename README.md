@@ -3,14 +3,13 @@
 # California Seismic
 
 The first free resource for passing the California Seismic Principles Exam.\
-We are currently working on updating the website and publishing our bank of 400+ lecture pages, 200+ practice problems, and 10+ lecture vidoes to the website. Expected completion Fall 2023
+We are currently working on updating the website and publishing our bank of 400+ lecture pages, 200+ practice problems, and 10+ lecture vidoes to the website.
 
 ## Making Updates
-CaliforniaSeismic.com is automatically updated via CodePipeline with changes to the Master branch of this Github Repository. The files in the /build folder are stored into an AWS S3 bucket and distributed through Cloudfront.
+CaliforniaSeismic.com is automatically updated via CodePipeline with changes to the Master branch of this Github Repository. Build files do not need to be uploaded to this repository.
 
-To make updates, run 'npm run build' in the console. The production files will be written to the /build folder.
 
-If updates are not visible within a few minutes of merging changes to the Master branch, verify if Cloudfront is caching a previous version, or if the local browser is caching the website.
+If updates are not visible within a few minutes of merging changes to the Master branch, verify if Cloudfront is caching a previous version, or if the local browser is caching the website. Cloudfront invalidation may be required to see recent changes.
 
 ## Installation & Setup
 After cloning the Master branch to your local computer, create a new branch and download the project dependencies.
@@ -40,7 +39,4 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
 

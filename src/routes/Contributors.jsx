@@ -1,5 +1,3 @@
-import UnderConstruction from "./UnderConstruction.jsx";
-
 export default function Contributors({ display = true }) {
   const infoCards = [
     {
@@ -101,11 +99,6 @@ export default function Contributors({ display = true }) {
 
   ];
 
-  if (display === false) {
-    return (
-      <UnderConstruction displayUnderConstruction={true}></UnderConstruction>
-    );
-  } else {
     return (
       <main className="container mx-auto mt-4 p-4">
         <div className="container max-h-full mx-auto mt-4 p-4">
@@ -216,4 +209,3 @@ export default function Contributors({ display = true }) {
       </main>
     );
   }
-}
