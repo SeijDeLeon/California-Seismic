@@ -1,6 +1,30 @@
 export default function Contributors({ display = true }) {
   const infoCards = [
     {
+      title: "Binh Nguyen",
+      text: "Front End Intern 2024",
+      img: "",
+      alt: "headshot",
+    },
+    {
+      title: "Francis Nguyen",
+      text: "Front End Intern 2024",
+      img: "",
+      alt: "headshot",
+    },
+    {
+      title: "Frank Mundo",
+      text: "Front End Intern 2024",
+      img: "",
+      alt: "headshot",
+    },
+    {
+      title: "Joel Zapana",
+      text: "Front End Intern 2024",
+      img: "images/contributors/joel_zapana_test.jpg",
+      alt: "headshot",
+    },
+    {
       title: "Andy Troung",
       text: "Front End Intern 2022",
       img: "images/contributors/andy_truong.jpeg",
