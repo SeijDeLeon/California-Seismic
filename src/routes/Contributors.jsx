@@ -9,7 +9,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Francis Nguyen",
       text: "Front End Intern 2024",
-      img: "",
+      img: "images/contributors/francis_nguyen.jpg",
       alt: "headshot",
     },
     {
