@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+
+import { sections } from '../assets/data/ASCE7/CH1/sections.js';
 // import data from somewhere. for now, create a small data object
-const fakeData = {
+/* const fakeData = {
   '12.1.1' : {
     title: 'Basic Requirements',
     body: 'The seismic analysis and design procedures to be used in the design of building structures....',
     img: 'image goes here. this should be a reference to an image in the public/images/ASCE7/CHx folder.'
   }
-};
+}; */
 
 export default function ASCE7() {
 
@@ -27,20 +29,25 @@ export default function ASCE7() {
     //logic here
   }
 
-  if ( section in fakeData) {
+  const imgPath = 'ASCE7/CH1/';
+  const imageUrl = `${process.env.PUBLIC_URL}/ASCE7/CH1`; //this is not working.. I can't get the image to show up..
+
+  if ( section in sections) {
     return (
       <h1>We found the section. Display it here</h1>
     )
   } else {
+    //in this section I am trying to display the first image only, though it isn't working.
     return (
       <main>
         <h1>We didn't find the section, or you navigated to the /ASCE7 path without any additional params.</h1>
         <ul>
-          {Object.keys(fakeData).map((key) => {
+          {Object.keys(sections).map((key) => {
             return (
               <li key={key}>
                 <p>{key}</p>
-                <p>{fakeData[key].title}</p>
+                <p>{sections[key].title}</p>
+                <img src={`${imageUrl}${sections[key].imgs[0]}`} alt='asce7' />
               </li>
             )
           })}
