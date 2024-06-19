@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { exams } from "../../../assets/data/duplicateQuestionData.js";
-import ExamScorePopUpModal from "./ExamScorePopUp.jsx";
-import ListOfQuestionsSideBar from "./ListOfQuestionsSideBar.jsx";
-import Timer from "./Timer.js";
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { exams } from '../../../assets/data/duplicateQuestionData.js';
+import { randomExams } from '../../../assets/data/randomExams.js'; //generateRandomQuestions
+import ExamScorePopUpModal from './ExamScorePopUp.jsx';
+import ListOfQuestionsSideBar from './ListOfQuestionsSideBar.jsx';
+import Timer from './Timer.js';
 
 function SinglePracticeExam() {
   const { examId } = useParams();
-  const selectedExam = exams[examId]; // Find the selected exam using the examId
+  // const selectedExam = exams[examId]; // Find the selected exam using the examId
+  const selectedExam = randomExams[examId]; //generateRandomQuestions: new selectedExam from randomExams
   const [currentQuestion, setCurrentQuestion] = useState(0); //Tracks the index of the current question being displayed.
   const [score, setScore] = useState(0); //Holds the user's current score in the exam
   const [showPopUp, setShowPopUp] = useState(false); //Controls the visibility of the exam score pop-up modal.
@@ -89,7 +91,8 @@ function SinglePracticeExam() {
 
   return (
     <main>
-      <div className="container h-auto mx-auto px-6 py-6 bg-gray-100">
+      {/* generateRandomQuestions: reduce the space for x y direction px-6 py-6 => pr-3 py-1 */}
+      <div className="container h-auto mx-auto pr-3 py-1 bg-gray-100">
         <div className="flex flex-row max-h-screen py-4">
           <ListOfQuestionsSideBar
             selectedExam={selectedExam}
@@ -100,23 +103,67 @@ function SinglePracticeExam() {
           <section className="w-full max-h-screen overflow-y-auto sm:w-2/3 md:w-3/4 pt-1 px-2">
             <div>
               {/* Exam tab */}
-              <div className="bg-white p-4 rounded shadow mb-4">
+              {/* <div className="bg-white p-4 rounded shadow mb-4">
                 <h3 className="text-lg font-bold">{selectedExam.name}</h3>
-              </div>
+              </div> */}
               {/* Timer */}
-              <div className="bg-white p-4 rounded shadow mb-4">
+              {/* <div className="bg-white p-4 rounded shadow mb-4">
                 <h3 className="text-lg font-bold">Timer</h3>
                 {displaySolution ? "00:00" : <Timer />}
+              </div> */}
+
+              {/* generateRandomQuestions:  */}
+              <div className="flex justify-between bg-white py-4 px-6 rounded shadow mb-4">
+                <h3 className="text-lg font-bold">{selectedExam.name}</h3>
+                <h3 className="text-lg flex">
+                  <span className="mr-4 font-bold ">Timer:</span>{' '}
+                  {displaySolution ? '00:00' : <Timer />}
+                </h3>
               </div>
+
               {/* Question container */}
-              <div className="bg-white p-4 rounded shadow mb-4">
-                <h3 className="text-lg font-bold">
-                  Question: {currentQuestion + 1} out of{" "}
+              {/* generateRandomQuestions: remove mb-4 */}
+              <div className="bg-white p-4 rounded shadow">
+                {/* generateRandomQuestions: add mt-2  */}
+                <h3 className="text-lg font-bold mt-2">
+                  Question: {currentQuestion + 1} out of{' '}
                   {selectedExam.questions.length}
                 </h3>
-                <p className="mb-4 mt-6">
+                {/* <p className="mb-4 mt-6">
                   Q: {selectedExam.questions[currentQuestion].question}
-                </p>
+                </p> */}
+                {/* generateRandomQuestions: format questions, break into multiple lines */}
+                <div className="mt-6 p-6 text-left">
+                  {selectedExam.questions[currentQuestion].question
+                    .trim()
+                    .split('\n')
+                    .map((line, idx) => (
+                      <p className={`${idx > 1 && '&& indent-6'} `} key={idx}>
+                        {idx === 0 ? (
+                          <span className="font-bold">Q: </span>
+                        ) : null}
+                        {line}
+                      </p>
+                    ))}
+                </div>
+
+                {/* generateRandomQuestions: add new image if the question have an image */}
+                {selectedExam.questions[currentQuestion].question_img && (
+                  <div className="px-6 flex justify-between">
+                    {selectedExam.questions[currentQuestion].question_img &&
+                      selectedExam.questions[currentQuestion].question_img.map(
+                        (img, idx) => (
+                          <img
+                            key={idx}
+                            src={img}
+                            alt={img}
+                            className="object-contain"
+                          />
+                        )
+                      )}
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 gap-4 text-left p-6">
                   {selectedExam.questions[currentQuestion].options.map(
                     (option) => (
@@ -136,13 +183,14 @@ function SinglePracticeExam() {
                             option.id
                           }
                         />
+                        {/* generateRandomQuestions: add images for options   */}
                         <span
                           className={
                             displaySolution
                               ? selectedOption
                                 ? option.isCorrect
-                                  ? "bg-gradient-to-r from-green-300"
-                                  : "bg-gradient-to-r from-red-300"
+                                  ? 'bg-gradient-to-r from-green-300'
+                                  : 'bg-gradient-to-r from-red-300'
                                 : null
                               : null
                           }
@@ -152,21 +200,37 @@ function SinglePracticeExam() {
                         {/* {option.image && (
                         <img src={option.image.src} alt={option.image.alt}/>
                       )} */}
+                        {option.image && (
+                          <img src={option.image.src} alt={option.image.alt} />
+                        )}
                       </div>
                     )
                   )}
                 </div>
               </div>
               {/* Buttons */}
+              {/* generateRandomQuestions: add hover for Previous and Next buttons */}
+              {/* generateRandomQuestions: invalidate Previous button if 1st question, Next if the last question */}
               <div className="flex justify-center py-6">
                 <button
-                  className="px-4 py-2 mr-2 bg-blue-500 text-white rounded"
+                  className={`px-4 py-2 mr-2 rounded text-white
+                  ${
+                    currentQuestion === 0
+                      ? 'bg-slate-400'
+                      : 'bg-blue-500 hover:bg-blue-600 transition-colors duration-300'
+                  }`}
                   onClick={clickPrevious}
                 >
                   Previous
                 </button>
                 <button
-                  className="px-4 py-2 bg-orange-500 text-white rounded"
+                  className={`px-4 py-2 text-white rounded
+                                    ${
+                                      currentQuestion ===
+                                      selectedExam.questions.length - 1
+                                        ? 'bg-slate-400'
+                                        : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
+                                    }`}
                   onClick={clickNext}
                 >
                   Next
