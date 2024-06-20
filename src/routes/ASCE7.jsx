@@ -30,9 +30,9 @@ export default function ASCE7() {
   }
 
   const imgPath = 'ASCE7/CH1/';
-  const imageUrl = `${process.env.PUBLIC_URL}/ASCE7/CH1`; //this is not working.. I can't get the image to show up..
+  const imageUrl = `${process.env.PUBLIC_URL}/ASCE7/CH1/`; 
 
-  if ( section in sections) {
+  if (section in sections) {
     return (
       <h1>We found the section. Display it here</h1>
     )
