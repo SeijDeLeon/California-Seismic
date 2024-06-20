@@ -1,0 +1,7 @@
+// calculateV.js
+
+function calculateV(Cs, W) {
+  return Cs * W;
+}
+
+export default calculateV;

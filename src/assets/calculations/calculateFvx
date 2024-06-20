@@ -1,0 +1,12 @@
+// calculateFvx.js
+
+function calculateFvx(w_x, C_vx, V) {
+  if (w_x.length !== C_vx.length) {
+    throw new Error('The lengths of w_x and C_vx arrays must be the same.');
+  }
+
+  const Fvx = C_vx.map(Cvx => Cvx * V);
+  return Fvx;
+}
+
+export default calculateFvx;
