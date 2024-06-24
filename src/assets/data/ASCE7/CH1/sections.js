@@ -8,7 +8,7 @@ const sections = {
     subsections: {
       '1.2.1': {
         title: 'Definitions',
-        imgs: ['1.2.1_1.png, 1.2.1_2.png, 1.2.1_3.png']
+        imgs: ['1.2.1_1.png, 1.2.1_2.png, 1.2.1_3.png, 1.2.1_4.png']
       },
       '1.2.2': {
         title: 'Symbols',
