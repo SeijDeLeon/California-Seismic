@@ -1,0 +1,10 @@
+// calculateCs.js
+
+function calculateCs(SDS, SD1, T, Ie, R) {
+  const Cs1 = SDS / (R / Ie);
+  const Cs2 = SD1 / (T * (R / Ie));
+  const CsMin = Math.max(0.044 * SDS * Ie, 0.01);
+  return Math.min(Cs1, Cs2, CsMin);
+}
+
+export default calculateCs;

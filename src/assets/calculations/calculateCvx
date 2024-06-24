@@ -1,0 +1,11 @@
+// calculateCvx.js
+
+function calculateCvx(w_x, h_x, totalWeightHeight) {
+  if (w_x.length !== h_x.length) {
+    throw new Error('The lengths of w_x and h_x arrays must be the same.');
+  }
+
+  return w_x.map((wx, index) => (wx * h_x[index]) / totalWeightHeight);
+}
+
+export default calculateCvx;
