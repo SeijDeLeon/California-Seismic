@@ -15,7 +15,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Frank Mundo",
       text: "Front End Intern 2024",
-      img: "",
+      img: "images/contributors/frankie_mundo.jpg",
       alt: "headshot",
     },
     {
