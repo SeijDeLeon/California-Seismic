@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
-import{ useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import{ useEffect, useState } from "react";
 
 import logo from "./logo.svg";
 import "./App.css";
@@ -30,10 +30,21 @@ ReactGA.initialize(TRACKING_ID);
 
 
 function App() {
+  const [showHeaderFooter, setShowHeaderFooter] = useState(true);
+  const location = useLocation()
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    if(currentPath.startsWith('/practice/exams/')){
+      setShowHeaderFooter(false)
+    }else{
+      setShowHeaderFooter(true)
+    }
+  }, [location.pathname])
 
   return (
     <div className="App">
-      <Header />
+     {showHeaderFooter &&  <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/index.html" element={<Home />} />
@@ -52,7 +63,7 @@ function App() {
         <Route path="/demo" element={<Demo visible={true} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
-      <Footer />
+      {showHeaderFooter &&  <Footer />}
     </div>
   );
 }

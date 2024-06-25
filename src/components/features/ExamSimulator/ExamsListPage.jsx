@@ -18,7 +18,7 @@ function ExamsListPage() {
       <div className='max-w-screen-2xl m-auto px-4'>
         <section>
           {/* Container for Heading and List of Exams */}
-          <div className="max-w-6xl px-5 py-6 mx-auto mt-24 text-center">
+          <div className="max-w-6xl px-5 py-6 mx-auto mt-0 text-center">
             {/* Heading */}
             <div className="bg-white p-4 rounded shadow mb-4">
               <h3 className="text-lg font-bold">Select an exam to begin</h3>
