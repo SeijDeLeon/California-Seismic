@@ -27,7 +27,7 @@ import { NavLink } from 'react-router-dom';
 // For hover-group for icons:
 // group-hover:text-blue-600 group-hover:text-amber-600 group-hover:text-teal-600
 // group-hover:text-blue-500 group-hover:text-amber-500 group-hover:text-teal-500
-//group-hover:text-blue-400 group-hover:text-amber-400 group-hover:text-teal-400
+// group-hover:text-blue-400 group-hover:text-amber-400 group-hover:text-teal-400
 // group-hover:text-blue-300 group-hover:text-amber-300 group-hover:text-teal-300
 // group-hover:text-blue-200 group-hover:text-amber-200 group-hover:text-teal-200
 
