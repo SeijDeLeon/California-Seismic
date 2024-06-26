@@ -220,6 +220,7 @@ function SinglePracticeExam() {
                       ? 'bg-slate-400'
                       : 'bg-blue-500 hover:bg-blue-600 transition-colors duration-300'
                   }`}
+                  disabled={currentQuestion === 0}
                   onClick={clickPrevious}
                 >
                   Previous
@@ -232,6 +233,7 @@ function SinglePracticeExam() {
                                         ? 'bg-slate-400'
                                         : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
                                     }`}
+                  disabled={currentQuestion === selectedExam.questions.length - 1}
                   onClick={clickNext}
                 >
                   Next
