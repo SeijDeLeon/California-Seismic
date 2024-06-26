@@ -19,8 +19,8 @@ function ListOfQuestionsSideBar({
 
   return (
     <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4 px-2">
-      {/* generateRandomQuestions: edit py-1 => py-1  */}
-      <div className="top-0 p-4 py-1 w-full grid grid-rows-1 grid-flow-col items-center">
+      {/* generateRandomQuestions: edit p-4 py-1 => px-4   */}
+      <div className="top-0 px-4 w-full grid grid-rows-1 grid-flow-col items-center">
         <ul className="flex flex-col space-y-2">
           {/* Question list */}
           {selectedExam.questions.map((question, index) => (

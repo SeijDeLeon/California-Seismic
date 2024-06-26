@@ -100,7 +100,7 @@ function SinglePracticeExam() {
             setCurrentQuestion={setCurrentQuestion}
           />
 
-          <section className="w-full max-h-screen overflow-y-auto sm:w-2/3 md:w-3/4 pt-1 px-2">
+          <section className="w-full max-h-screen overflow-y-auto sm:w-2/3 md:w-3/4 px-2">
             <div>
               {/* Exam tab */}
               {/* <div className="bg-white p-4 rounded shadow mb-4">
@@ -149,7 +149,7 @@ function SinglePracticeExam() {
 
                 {/* generateRandomQuestions: add new image if the question have an image */}
                 {selectedExam.questions[currentQuestion].question_img && (
-                  <div className="px-6 flex justify-between">
+                  <div className="flex gap-4 flex-wrap mx-6 my-2">
                     {selectedExam.questions[currentQuestion].question_img &&
                       selectedExam.questions[currentQuestion].question_img.map(
                         (img, idx) => (
@@ -157,7 +157,7 @@ function SinglePracticeExam() {
                             key={idx}
                             src={img}
                             alt={img}
-                            className="object-contain"
+                            className="object-contain max-h-40"
                           />
                         )
                       )}
@@ -201,7 +201,8 @@ function SinglePracticeExam() {
                         <img src={option.image.src} alt={option.image.alt}/>
                       )} */}
                         {option.image && (
-                          <img src={option.image.src} alt={option.image.alt} />
+                          <img src={option.image.src} alt={option.image.alt} 
+                          className='max-h-20 ml-3'/>
                         )}
                       </div>
                     )

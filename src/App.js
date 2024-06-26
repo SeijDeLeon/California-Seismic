@@ -30,21 +30,12 @@ ReactGA.initialize(TRACKING_ID);
 
 
 function App() {
-  const [showHeaderFooter, setShowHeaderFooter] = useState(true);
-  const location = useLocation()
-
-  useEffect(() => {
-    const currentPath = location.pathname;
-    if(currentPath.startsWith('/practice/exams/')){
-      setShowHeaderFooter(false)
-    }else{
-      setShowHeaderFooter(true)
-    }
-  }, [location.pathname])
+  const location = useLocation();
+  const hideHeaderFooter = location.pathname.startsWith('/practice/exams/')
 
   return (
     <div className="App">
-     {showHeaderFooter &&  <Header />}
+     {!hideHeaderFooter &&  <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/index.html" element={<Home />} />
@@ -63,7 +54,7 @@ function App() {
         <Route path="/demo" element={<Demo visible={true} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
-      {showHeaderFooter &&  <Footer />}
+      {!hideHeaderFooter &&  <Footer />}
     </div>
   );
 }
