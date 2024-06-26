@@ -9,7 +9,4 @@ module.exports = {
     },
   },
   plugins: [],
-  variants: {
-    textColor: ['group-hover', 'hover'],
-  },
 };
