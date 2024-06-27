@@ -11,7 +11,7 @@ export default function Viewer({ section }) {
             <h1 className="text-lg">{chapter13['13.2'].subsections[section].title}</h1>
             <div className="mt-5 max-h-96 overflow-y-auto">
                 {images.map((image, index) => (
-                    <img className="w-4/5 mx-auto" src={image} alt={`Image ${index + 1}`} />
+                    <img key={image} className="w-3/5 mx-auto" src={image} alt={`${index + 1}`} />
                 ))}
             </div>
         </div>
