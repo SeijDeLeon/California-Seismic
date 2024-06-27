@@ -5,7 +5,7 @@ import Viewer from '../components/features/ASCE7/Viewer';
 
 export default function ASCE7() {
   const { sectionParam } = useParams();
-  const [ section, setSection ] = useState(sectionParam || "13.2.3");
+  const [ section, setSection ] = useState(sectionParam || "1.3.1");
   const handleSectionSelection = (key) => {
     setSection(key);
   }
