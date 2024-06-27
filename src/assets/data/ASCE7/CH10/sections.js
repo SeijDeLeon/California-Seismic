@@ -106,7 +106,7 @@ const sections = {
     },
     '10.6' : {
         title: 'Design Temperatures for Freezing Rain',
-        imgs: ['10.6_1.png, 10.6_2.png'],
+        imgs: ['10.6_1.png', '10.6_2.png'],
         subsections: {
             'figure10.6-1': {
                 title: 'Temperatures Concurrent with Ice Thicknesses Caused by Freezing Rain: Contiguous 48 States',
