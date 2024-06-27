@@ -90,30 +90,29 @@ function SinglePracticeExam() {
   const [displaySolution, setDisplaySolution] = useState(false);
 
   return (
-    <main>
-      {/* generateRandomQuestions: reduce the space for x y direction px-6 py-6 => pr-3 py-1 */}
-      <div className="container h-auto mx-auto pr-3 py-1 bg-gray-100">
-        <div className="flex flex-row max-h-screen py-4">
+    <main className="h-screen ">
+      <div className="container h-screen mx-auto bg-gray-100">
+        <div className="flex flex-row max-h-screen p-4 gap-4">
           <ListOfQuestionsSideBar
             selectedExam={selectedExam}
             selectedFlags={selectedFlags}
             setCurrentQuestion={setCurrentQuestion}
           />
 
-          <section className="w-full max-h-screen overflow-y-auto sm:w-2/3 md:w-3/4 px-2">
-            <div>
-              {/* Exam tab */}
-              {/* <div className="bg-white p-4 rounded shadow mb-4">
+          <section className="w-full max-h-screen sm:w-2/3 md:w-3/4 overflow-hidden grid grid-rows-6">
+            {/* Exam tab */}
+            {/* <div className="bg-white p-4 rounded shadow mb-4">
                 <h3 className="text-lg font-bold">{selectedExam.name}</h3>
               </div> */}
-              {/* Timer */}
-              {/* <div className="bg-white p-4 rounded shadow mb-4">
+            {/* Timer */}
+            {/* <div className="bg-white p-4 rounded shadow mb-4">
                 <h3 className="text-lg font-bold">Timer</h3>
                 {displaySolution ? "00:00" : <Timer />}
               </div> */}
 
-              {/* generateRandomQuestions:  */}
-              <div className="flex justify-between bg-white py-4 px-6 rounded shadow mb-4">
+            <div className="row-span-5 overflow-hidden">
+              {/* Title and Timer  */}
+              <div className="flex justify-between bg-white py-4 px-6 rounded shadow">
                 <h3 className="text-lg font-bold">{selectedExam.name}</h3>
                 <h3 className="text-lg flex">
                   <span className="mr-4 font-bold ">Timer:</span>{' '}
@@ -122,97 +121,102 @@ function SinglePracticeExam() {
               </div>
 
               {/* Question container */}
-              {/* generateRandomQuestions: remove mb-4 */}
-              <div className="bg-white p-4 rounded shadow">
-                {/* generateRandomQuestions: add mt-2  */}
-                <h3 className="text-lg font-bold mt-2">
-                  Question: {currentQuestion + 1} out of{' '}
-                  {selectedExam.questions.length}
-                </h3>
-                {/* <p className="mb-4 mt-6">
+              <div className="bg-white px-2 py-4 rounded shadow mt-2 h-full">
+                <div className="h-90p overflow-hidden overflow-y-auto">
+                  <h3 className="text-lg font-bold mt-2">
+                    Question: {currentQuestion + 1} out of{' '}
+                    {selectedExam.questions.length}
+                  </h3>
+                  {/* <p className="mb-4 mt-6">
                   Q: {selectedExam.questions[currentQuestion].question}
                 </p> */}
-                {/* generateRandomQuestions: format questions, break into multiple lines */}
-                <div className="mt-6 p-6 text-left">
-                  {selectedExam.questions[currentQuestion].question
-                    .trim()
-                    .split('\n')
-                    .map((line, idx) => (
-                      <p className={`${idx > 1 && '&& indent-6'} `} key={idx}>
-                        {idx === 0 ? (
-                          <span className="font-bold">Q: </span>
-                        ) : null}
-                        {line}
-                      </p>
-                    ))}
-                </div>
+                  {/* generateRandomQuestions: format questions, break into multiple lines */}
+                  <div className="p-6 text-left">
+                    {selectedExam.questions[currentQuestion].question
+                      .trim()
+                      .split('\n')
+                      .map((line, idx) => (
+                        <p className={`${idx > 1 && '&& indent-6'} `} key={idx}>
+                          {idx === 0 ? (
+                            <span className="font-bold">Q: </span>
+                          ) : null}
+                          {line}
+                        </p>
+                      ))}
+                  </div>
 
-                {/* generateRandomQuestions: add new image if the question have an image */}
-                {selectedExam.questions[currentQuestion].question_img && (
-                  <div className="flex gap-4 flex-wrap mx-6 my-2">
-                    {selectedExam.questions[currentQuestion].question_img &&
-                      selectedExam.questions[currentQuestion].question_img.map(
-                        (img, idx) => (
+                  {/* generateRandomQuestions: add new image if the question have an image */}
+                  {selectedExam.questions[currentQuestion].question_img && (
+                    <div className="flex gap-4 flex-wrap mx-6 my-2">
+                      {selectedExam.questions[currentQuestion].question_img &&
+                        selectedExam.questions[
+                          currentQuestion
+                        ].question_img.map((img, idx) => (
                           <img
                             key={idx}
                             src={img}
                             alt={img}
                             className="object-contain max-h-40"
                           />
-                        )
-                      )}
-                  </div>
-                )}
+                        ))}
+                    </div>
+                  )}
 
-                <div className="grid grid-cols-1 gap-4 text-left p-6">
-                  {selectedExam.questions[currentQuestion].options.map(
-                    (option) => (
-                      <div key={option.id} className="flex items-center">
-                        <input
-                          type="radio"
-                          className="form-radio"
-                          name="answer"
-                          value={option.id}
-                          // defaultChecked={false}
-                          onChange={handleChange}
-                          onClick={() => {
-                            handleOptionClick(option.id, option.isCorrect);
-                          }}
-                          checked={
-                            questionsState[currentQuestion].selectedOption ===
-                            option.id
-                          }
-                        />
-                        {/* generateRandomQuestions: add images for options   */}
-                        <span
-                          className={
-                            displaySolution
-                              ? selectedOption
-                                ? option.isCorrect
-                                  ? 'bg-gradient-to-r from-green-300'
-                                  : 'bg-gradient-to-r from-red-300'
+                  <div className="grid grid-cols-1 gap-4 text-left p-6">
+                    {selectedExam.questions[currentQuestion].options.map(
+                      (option) => (
+                        <div key={option.id} className="flex items-center">
+                          <input
+                            type="radio"
+                            className="form-radio"
+                            name="answer"
+                            value={option.id}
+                            // defaultChecked={false}
+                            onChange={handleChange}
+                            onClick={() => {
+                              handleOptionClick(option.id, option.isCorrect);
+                            }}
+                            checked={
+                              questionsState[currentQuestion].selectedOption ===
+                              option.id
+                            }
+                          />
+                          {/* generateRandomQuestions: add images for options   */}
+                          <span
+                            className={
+                              displaySolution
+                                ? selectedOption
+                                  ? option.isCorrect
+                                    ? 'bg-gradient-to-r from-green-300'
+                                    : 'bg-gradient-to-r from-red-300'
+                                  : null
                                 : null
-                              : null
-                          }
-                        >
-                          <p className="px-2">{option.text}</p>
-                        </span>
-                        {/* {option.image && (
+                            }
+                          >
+                            <p className="px-2">{option.text}</p>
+                          </span>
+                          {/* {option.image && (
                         <img src={option.image.src} alt={option.image.alt}/>
                       )} */}
-                        {option.image && (
-                          <img src={option.image.src} alt={option.image.alt} 
-                          className='max-h-20 ml-3'/>
-                        )}
-                      </div>
-                    )
-                  )}
+                          {option.image && (
+                            <img
+                              src={option.image.src}
+                              alt={option.image.alt}
+                              className="max-h-20 ml-3"
+                            />
+                          )}
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
+            </div>
+
+            {/* Previous/Next and Submit buttons  */}
+            <div className="row-span-1">
               {/* Buttons */}
-              {/* generateRandomQuestions: add hover for Previous and Next buttons */}
-              {/* generateRandomQuestions: invalidate Previous button if 1st question, Next if the last question */}
-              <div className="flex justify-center py-6">
+              <div className="flex justify-center py-4">
                 <button
                   className={`px-4 py-2 mr-2 rounded text-white
                   ${
@@ -233,14 +237,16 @@ function SinglePracticeExam() {
                                         ? 'bg-slate-400'
                                         : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
                                     }`}
-                  disabled={currentQuestion === selectedExam.questions.length - 1}
+                  disabled={
+                    currentQuestion === selectedExam.questions.length - 1
+                  }
                   onClick={clickNext}
                 >
                   Next
                 </button>
               </div>
               {/* Submit */}
-              <div className="bg-white p-4 py-6 rounded shadow mb-4">
+              <div className="bg-white py-4 rounded shadow">
                 <button
                   className="px-4 py-2 bg-green-500 text-white rounded"
                   onClick={handleOnSubmit}
@@ -248,21 +254,22 @@ function SinglePracticeExam() {
                   Submit
                 </button>
               </div>
-              <ExamScorePopUpModal
-                visible={showPopUp}
-                onClose={() => setShowPopUp(false)}
-                handleOnSubmit={handleOnSubmit}
-                displaySolution={displaySolution}
-                setDisplaySolution={setDisplaySolution}
-                selectedExam={selectedExam}
-                score={score}
-                restartExam={restartExam}
-                answeredQuestionsLength={answeredQuestions.length}
-                selectedExamQuestionsList={selectedExam.questions.length}
-                currentQuestion={currentQuestion}
-                selectedOption={selectedOption}
-              />
             </div>
+
+            <ExamScorePopUpModal
+              visible={showPopUp}
+              onClose={() => setShowPopUp(false)}
+              handleOnSubmit={handleOnSubmit}
+              displaySolution={displaySolution}
+              setDisplaySolution={setDisplaySolution}
+              selectedExam={selectedExam}
+              score={score}
+              restartExam={restartExam}
+              answeredQuestionsLength={answeredQuestions.length}
+              selectedExamQuestionsList={selectedExam.questions.length}
+              currentQuestion={currentQuestion}
+              selectedOption={selectedOption}
+            />
           </section>
         </div>
       </div>

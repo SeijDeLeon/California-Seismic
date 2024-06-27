@@ -17,8 +17,8 @@ function ListOfQuestionsSideBar({
   };
 
   return (
-    <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4 px-2">
-      <div className="top-0 px-4 w-full grid grid-rows-1 grid-flow-col items-center">
+    <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4">
+      <div className="top-0 pr-4 w-full grid grid-rows-1 grid-flow-col items-center">
         <ul className="flex flex-col space-y-2">
           {/* Question list */}
           {selectedExam.questions.map((question, index) => (
