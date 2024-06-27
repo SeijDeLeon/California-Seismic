@@ -3,7 +3,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Binh Nguyen",
       text: "Front End Intern 2024",
-      img: "",
+      img: "images/contributors/binh_nguyen.jpg",
       alt: "headshot",
     },
     {
