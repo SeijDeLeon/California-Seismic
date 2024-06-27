@@ -12,7 +12,7 @@ const sections = {
         subsections: {
             '2.3.1': {
                 title: 'Basic Combinations',
-                imgs: ['2.3.1_1.png, 2.3.1_2.png']
+                imgs: ['2.3.1_1.png', '2.3.1_2.png']
             },
             '2.3.2': {
                 title: 'Load Combinations Including Flood Load',
@@ -24,7 +24,7 @@ const sections = {
             },
             '2.3.4': {
                 title: 'Load Combinations Including Self-Straining Forces and Effects',
-                imgs: ['2.3.4_1.png, 2.3.4_2.png']
+                imgs: ['2.3.4_1.png', '2.3.4_2.png']
             },
             '2.3.5': {
                 title: 'Load Combinations for Nonspecified Loads',
@@ -32,7 +32,7 @@ const sections = {
             },
             '2.3.6': {
                 title: 'Basic Combinations with Seismic Load Effects',
-                imgs: ['2.3.6_1.png, 2.3.6_2.png']
+                imgs: ['2.3.6_1.png', '2.3.6_2.png']
             }
         }
     },
@@ -41,7 +41,7 @@ const sections = {
         subsections: {
             '2.4.1': {
                 title: 'Basic Combinations',
-                imgs: ['2.4.1_1.png, 2.4.1_2.png, 2.4.1_3.png']
+                imgs: ['2.4.1_1.png', '2.4.1_2.png', '2.4.1_3.png']
             },
             '2.4.2': {
                 title: 'Load Combinations Including Flood Load',
@@ -49,7 +49,7 @@ const sections = {
             },
             '2.4.3': {
                 title: 'Load Combinations Including Atmospheric Ice Loads',
-                imgs: ['2.4.3_1.png, 2.4.3_2.png']
+                imgs: ['2.4.3_1.png', '2.4.3_2.png']
             },
             '2.4.4': {
                 title: 'Load Combinations Including Self-Straining Forces and Effects',
@@ -57,7 +57,7 @@ const sections = {
             },
             '2.4.5': {
                 title: 'Basic Combinations with Seismic Load Effects',
-                imgs: ['2.4.5_1.png, 2.4.5_2.png']
+                imgs: ['2.4.5_1.png', '2.4.5_2.png']
             }
         }
     },

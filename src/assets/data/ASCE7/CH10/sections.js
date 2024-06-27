@@ -23,18 +23,18 @@ const sections = {
     },
     '10.3' : {
         title: 'Symbols',
-        imgs: ['10.3_1.png, 10.3_2.png']
+        imgs: ['10.3_1.png', '10.3_2.png']
     },
     '10.4' : {
         title: 'Ice Loads Caused by Freezing Rain',
         subsections: {
             'figure10.4-1': {
                 title: 'Characteristic Dimension for Calculating the Ice Area for a Variety of Cross-Sectional Shapes',
-                imgs: ['figure10.4-1_1.png, figure10.4-1_2.png']
+                imgs: ['figure10.4-1_1.png', 'figure10.4-1_2.png']
             },
             'figure10.4-2': {
                 title: 'Equivalent Radial Ice Thicknesses Caused by Freezing Rain with Concurrent 3-Second Gust Speeds, for a 500-Year Mean Recurrence Interval',
-                imgs: ['figure10.4-2_1.png, figure10.4-2_2.png']
+                imgs: ['figure10.4-2_1.png', 'figure10.4-2_2.png']
             },
             'figure10.4-3': {
                 title: 'Lake Superior Detail',
@@ -70,7 +70,7 @@ const sections = {
             },
             '10.4.5': {
                 title: 'Topographic Factor',
-                imgs: ['10.4.5_1.png, 10.4.5_2.png']
+                imgs: ['10.4.5_1.png', '10.4.5_2.png']
             },
             '10.4.6': {
                 title: 'Design Ice Thickness for Freezing Rain',

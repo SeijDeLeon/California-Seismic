@@ -8,7 +8,7 @@ const sections = {
     subsections: {
       '1.2.1': {
         title: 'Definitions',
-        imgs: ['1.2.1_1.png, 1.2.1_2.png, 1.2.1_3.png, 1.2.1_4.png']
+        imgs: ['1.2.1_1.png', '1.2.1_2.png', '1.2.1_3.png', '1.2.1_4.png']
       },
       '1.2.2': {
         title: 'Symbols',
@@ -33,7 +33,7 @@ const sections = {
       },
       '1.3.1': {
         title: 'Strength and Stiffness',
-        imgs: ['1.3.1_1.png, 1.3.1_2.png, 1.3.1_3.png, 1.3.1_4.png, 1.3.1_5.png, 1.3.1_6.png']
+        imgs: ['1.3.1_1.png', '1.3.1_2.png', '1.3.1_3.png', '1.3.1_4.png', '1.3.1_5.png', '1.3.1_6.png']
       },
       '1.3.2': {
         title: 'Serviceability',
@@ -63,7 +63,7 @@ const sections = {
   },
   '1.4' : {
     title: 'General Structural Integrity',
-    imgs: ['1.4_1.png, 1.4_2.png'],
+    imgs: ['1.4_1.png', '1.4_2.png'],
     subsections: {
       '1.4.1': {
         title: 'Load Path Connections',
@@ -92,7 +92,7 @@ const sections = {
     subsections: {
       'table1.5-1': {
         title: 'Risk Category of Buildings and Other Structures for Flood, Wind, Snow, Earthquake, and Ice Loads',
-        imgs: ['table1.5-1_1.png, table1.5-1_2.png']
+        imgs: ['table1.5-1_1.png', 'table1.5-1_2.png']
       },
       'table1.5-2': {
         title: 'Importance Factors by Risk Category of Buildings and Other Structures for Snow, Ice, and Earthquake Loads',
@@ -108,7 +108,7 @@ const sections = {
       },
       '1.5.3': {
         title: 'Toxic, Highly Toxic, and Explosive Substances',
-        imgs: ['1.5.3_1.png, 1.5.3_2.png']
+        imgs: ['1.5.3_1.png', '1.5.3_2.png']
       }
     }
   },
