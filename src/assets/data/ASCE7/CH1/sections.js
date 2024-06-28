@@ -19,6 +19,10 @@ const sections = {
   '1.3' : {
     title: 'Basic Requirements',
     subsections: {
+      '1.3.1': {
+        title: 'Strength and Stiffness',
+        imgs: ['1.3.1_1.png', '1.3.1_2.png', '1.3.1_3.png', '1.3.1_4.png', '1.3.1_5.png', '1.3.1_6.png', 'table1.3-1.png', 'table1.3-2.png', 'table1.3-3.png']
+      },
       'table1.3-1': {
         title: 'Target Reliability and Associated Reliability Indices for Load Conditions That Do Not Include Earthquake, Tsunami, or Extraordinary Events',
         imgs: ['table1.3-1.png']
@@ -30,10 +34,6 @@ const sections = {
       'table1.3-3': {
         title: 'Target Reliability (Conditional Probability of Failure) for Ordinary Noncritical Structural Members Caused by Earthquake',
         imgs: ['table1.3-3.png']
-      },
-      '1.3.1': {
-        title: 'Strength and Stiffness',
-        imgs: ['1.3.1_1.png', '1.3.1_2.png', '1.3.1_3.png', '1.3.1_4.png', '1.3.1_5.png', '1.3.1_6.png']
       },
       '1.3.2': {
         title: 'Serviceability',
@@ -90,6 +90,10 @@ const sections = {
   '1.5' : {
     title: 'Classification of Buildings and Other Structures',
     subsections: {
+      '1.5.1': {
+        title: 'Risk Categorization',
+        imgs: ['1.5.1.png', 'table1.5-1_1.png', 'table1.5-1_2.png', 'table1.5-2.png']
+      },
       'table1.5-1': {
         title: 'Risk Category of Buildings and Other Structures for Flood, Wind, Snow, Earthquake, and Ice Loads',
         imgs: ['table1.5-1_1.png', 'table1.5-1_2.png']
@@ -97,10 +101,6 @@ const sections = {
       'table1.5-2': {
         title: 'Importance Factors by Risk Category of Buildings and Other Structures for Snow, Ice, and Earthquake Loads',
         imgs: ['table1.5-2.png']
-      },
-      '1.5.1': {
-        title: 'Risk Categorization',
-        imgs: ['1.5.1.png']
       },
       '1.5.2': {
         title: 'Multiple Risk Categories',

@@ -5,7 +5,7 @@ import Viewer from "../components/features/ASCE7/Viewer";
 
 export default function ASCE7() {
   const { sectionParam } = useParams();
-  const [ section, setSection ] = useState(sectionParam || "1.3.1");
+  const [ section, setSection ] = useState(sectionParam || "table1.3-3");
   const handleSectionSelection = (key) => {
     setSection(key);
   };
@@ -20,7 +20,7 @@ export default function ASCE7() {
             selectedSection={section}
           />
         </div>
-        <div className="w-1/2 border border-gray-300 bg-gray-100 p-4">
+        <div className="w-1/2 border border-gray-300 p-4">
           <Viewer section={section} />
         </div>
       </div>

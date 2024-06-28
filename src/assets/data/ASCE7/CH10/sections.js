@@ -28,9 +28,17 @@ const sections = {
     '10.4' : {
         title: 'Ice Loads Caused by Freezing Rain',
         subsections: {
+            '10.4.1': {
+                title: 'Ice Weight',
+                imgs: ['10.4.1.png', 'figure10.4-1_1.png', 'figure10.4-1_2.png']
+            },
             'figure10.4-1': {
                 title: 'Characteristic Dimension for Calculating the Ice Area for a Variety of Cross-Sectional Shapes',
                 imgs: ['figure10.4-1_1.png', 'figure10.4-1_2.png']
+            },
+            '10.4.2': {
+                title: 'Nominal Ice Thickness',
+                imgs: ['10.4.2.png', 'figure10.4-2_1.png', 'figure10.4-2_2.png', 'figure10.4-3.png', 'figure10.4-4.png', 'figure10.4-5.png', 'figure10.4-6.png']
             },
             'figure10.4-2': {
                 title: 'Equivalent Radial Ice Thicknesses Caused by Freezing Rain with Concurrent 3-Second Gust Speeds, for a 500-Year Mean Recurrence Interval',
@@ -51,14 +59,6 @@ const sections = {
             'figure10.4-6': {
                 title: '500-Year Mean Recurrence Interval Uniform Ice Thicknesses Caused by Freezing Rain with Concurrent 3-Second Gust Speeds: Alaska',
                 imgs: ['figure10.4-6.png']
-            },
-            '10.4.1': {
-                title: 'Ice Weight',
-                imgs: ['10.4.1.png']
-            },
-            '10.4.2': {
-                title: 'Nominal Ice Thickness',
-                imgs: ['10.4.2.png']
             },
             '10.4.3': {
                 title: 'Height Factor',
@@ -106,13 +106,13 @@ const sections = {
     },
     '10.6' : {
         title: 'Design Temperatures for Freezing Rain',
-        imgs: ['10.6_1.png', '10.6_2.png'],
+        imgs: ['10.6_1.png', '10.6_2.png', 'figure10.6-1.png', 'figure10.6-2.png'],
         subsections: {
             'figure10.6-1': {
                 title: 'Temperatures Concurrent with Ice Thicknesses Caused by Freezing Rain: Contiguous 48 States',
                 imgs: ['figure10.6-1.png']
             },
-            'figure10.6-1': {
+            'figure10.6-2': {
                 title: 'Temperatures Concurrent with Ice Thicknesses Caused by Freezing Rain: Alaska',
                 imgs: ['figure10.6-2.png']
             }
