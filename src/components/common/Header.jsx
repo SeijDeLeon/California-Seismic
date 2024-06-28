@@ -22,7 +22,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import logo from '../../assets/images/logo.png';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // For hover-group for icons:
 // group-hover:text-blue-600 group-hover:text-amber-600 group-hover:text-teal-600
@@ -308,17 +308,28 @@ export default function Header() {
                             aria-hidden="true"
                           />
                         </Disclosure.Button>
+                        <Link></Link>
                         <Disclosure.Panel className="mt-2 space-y-2">
-                          {[...callsToAction, ...products].map((item, index) => (
-                            <Disclosure.Button
-                              key={item.name}
-                              as="a"
-                              href={`${index === 0 ? item.href : `lectures/${item.href}`}`}
-                              className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                            >
-                              {item.name}
-                            </Disclosure.Button>
-                          ))}
+                          {[...callsToAction, ...products].map(
+                            (item, index) => (
+                              <Disclosure.Button
+                                key={item.name}
+                                as="a"
+                                className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                              >
+                                <Link
+                                  to={
+                                    index === 0
+                                      ? item.href
+                                      : `lectures/${item.href}`
+                                  }
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </Disclosure.Button>
+                            )
+                          )}
                         </Disclosure.Panel>
                       </>
                     )}
