@@ -11,10 +11,6 @@ const sections = {
     title: "Site Class Definitions",
     imgs: ["20.3.png"],
     subsections: {
-      'table20.3-1': {
-        title: 'Table 20.3-1 Site Classification',
-        imgs: ['table20.3-1.png']
-      },
       '20.3.1': {
         title: 'Site Class F',
         imgs: ['20.3.1_1.png', '20.3.1_2.png']
@@ -34,6 +30,10 @@ const sections = {
       '20.3.5': {
         title: 'Shear Wave Velocity for Site Class A',
         imgs: ['20.3.5.png']
+      },
+      'table20.3-1': {
+        title: 'Table 20.3-1 Site Classification',
+        imgs: ['table20.3-1.png']
       },
     }
   },

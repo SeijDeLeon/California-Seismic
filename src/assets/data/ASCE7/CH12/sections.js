@@ -1,7 +1,6 @@
 const sections = {
   '12.1': {
     title: "Structural Design Basis",
-    imgs: [],
     subsections: {
       '12.1.1': {
         title: 'Basic Requirements',
@@ -31,15 +30,14 @@ const sections = {
   },
   '12.2': {
     title: "Structural System Selection",
-    imgs: [],
     subsections: {
+      '12.2.1': {
+        title: 'Selection and Limitations',
+        imgs: ['12.2.1_1.png', '12.2.1_2.png', '12.2.1.1.png', '12.2.1.2_1.png', '12.2.1.2_2.png', 'table12.2-1_1.png', 'table12.2-1_2.png', 'table12.2-1_3.png', 'table12.2-1_4.png', 'table12.2-1_5.png', 'table12.2-1_6.png']
+      },
       'table12.2-1' : {
         title: 'Design Coefficients and Factors for Seismic Force-Resisting Systems',
         imgs: ['table12.2-1_1.png', 'table12.2-1_2.png', 'table12.2-1_3.png', 'table12.2-1_4.png', 'table12.2-1_5.png', 'table12.2-1_6.png']
-      },
-      '12.2.1': {
-        title: 'Selection and Limitations',
-        imgs: ['12.2.1_1.png', '12.2.1_2.png', '12.2.1.1.png', '12.2.1.2_1.png', '12.2.1.2_2.png']
       },
       '12.2.2': {
         title: 'Combinations of Framing Systems in Different Directions',
@@ -61,8 +59,19 @@ const sections = {
   },
   '12.3': {
     title: "Diaphragm Flexibility, Configuration Irregularities, and Redundancy",
-    imgs: [],
     subsections: {
+      '12.3.1': {
+        title: 'Diaphragm Flexibility',
+        imgs: ['12.3.1.1.png', '12.3.1.2.png', '12.3.1.3.png', 'figure12.3-1.png']
+      },
+      '12.3.2': {
+        title: 'Irregular and Regular Classification',
+        imgs: ['12.3.2.png', '12.3.2.1.png', '12.3.2.2_1.png', '12.3.2.2_2.png', 'table12.3-1_1.png', 'table12.3-1_2.png', 'table12.3-2.png']
+      },
+      'figure12.3-1' : {
+        title: 'Flexible Diaphragm',
+        imgs: ['figure12.3-1.png']
+      },
       'table12.3-1' : {
         title: 'Horizontal Structural Irregularities',
         imgs: ['table12.3-1_1.png', 'table12.3-1_2.png']
@@ -71,29 +80,17 @@ const sections = {
         title: 'Vertical Structural Irregularities',
         imgs: ['table12.3-2.png']
       },
+      '12.3.3': {
+        title: 'Limitations and Additional Requirements for Systems with Structural Irregularities',
+        imgs: ['12.3.3.1.png', '12.3.3.2_1.png', '12.3.3.2_2.png', '12.3.3.3.png', '12.3.3.4.png', 'table12.3-3.png', 'figure12.3-2.png']
+      },
       'table12.3-3' : {
         title: 'Requirements for Each Story Resisting More than 35% of the Base Shear',
         imgs: ['table12.3-3.png']
       },
-      'figure12.3-1' : {
-        title: 'Flexible Diaphragm',
-        imgs: ['figure12.3-1.png']
-      },
       'figure12.3-2' : {
         title: 'Shear Wall and Wall Pier Height-to-Length Ratio Determination',
         imgs: ['figure12.3-2.png']
-      },
-      '12.3.1': {
-        title: 'Diaphragm Flexibility',
-        imgs: ['12.3.1.1.png', '12.3.1.2.png', '12.3.1.3.png']
-      },
-      '12.3.2': {
-        title: 'Irregular and Regular Classification',
-        imgs: ['12.3.2.png', '12.3.2.1.png', '12.3.2.2_1.png', '12.3.2.2_2.png']
-      },
-      '12.3.3': {
-        title: 'Limitations and Additional Requirements for Systems with Structural Irregularities',
-        imgs: ['12.3.3.1.png', '12.3.3.2_1.png', '12.3.3.2_2.png', '12.3.3.3.png', '12.3.3.4.png']
       },
       '12.3.4': {
         title: 'Redundancy',
@@ -103,7 +100,6 @@ const sections = {
   },
   '12.4': {
     title: "Seismic Load Effects and Combinations",
-    imgs: [],
     subsections: {
       '12.4.1': {
         title: 'Applicability',
@@ -125,7 +121,6 @@ const sections = {
   },
   '12.5': {
     title: "Direction of Loading",
-    imgs: [],
     subsections: {
       '12.5.1': {
         title: 'Direction of Loading Criteria',
@@ -179,8 +174,15 @@ const sections = {
   },
   '12.8': {
     title: "Equivalent Lateral Force (ELF) Procedure",
-    imgs: [],
     subsections: {
+      '12.8.1': {
+        title: 'Seismic Base Shear',
+        imgs: ['12.8.1.png', '12.8.1.1_1.png', '12.8.1.1_2.png', '12.8.1.1_3.png', '12.8.1.2.png', '12.8.1.3_1.png','12.8.1.3_2.png']
+      },
+      '12.8.2': {
+        title: 'Period Determination',
+        imgs: ['12.8.2.png', '12.8.2.1_1.png', '12.8.2.1_2.png', 'table12.8-1.png', 'table12.8-2.png']
+      },
       'table12.8-1' : {
         title: 'Coefficient for Upper Limit on Calculated Period',
         imgs: ['table12.8-1.png']
@@ -188,6 +190,18 @@ const sections = {
       'table12.8-2' : {
         title: 'Values of Approximate Period Parameters Ct and x',
         imgs: ['table12.8-2.png']
+      },
+      '12.8.3': {
+        title: 'Vertical Distribution of Seismic Forces',
+        imgs: ['12.8.3.png']
+      },
+      '12.8.4': {
+        title: 'Horizontal Distribution of Forces',
+        imgs: ['12.8.4_1.png', '12.8.4_2.png', '12.8.4.2.png', '12.8.4.3.png', 'figure12.8-1.png']
+      },
+      '12.8.5': {
+        title: 'Overturning',
+        imgs: ['12.8.5.png']
       },
       'figure12.8-1' : {
         title: 'Torsional Amplification Factor',
@@ -197,29 +211,9 @@ const sections = {
         title: 'Story Drift Determination',
         imgs: ['figure12.8-2.png']
       },
-      '12.8.1': {
-        title: 'Seismic Base Shear',
-        imgs: ['12.8.1.png', '12.8.1.1_1.png', '12.8.1.1_2.png', '12.8.1.1_3.png', '12.8.1.2.png', '12.8.1.3_1.png','12.8.1.3_2.png']
-      },
-      '12.8.2': {
-        title: 'Period Determination',
-        imgs: ['12.8.2.png', '12.8.2.1_1.png', '12.8.2.1_2.png']
-      },
-      '12.8.3': {
-        title: 'Vertical Distribution of Seismic Forces',
-        imgs: ['12.8.3.png']
-      },
-      '12.8.4': {
-        title: 'Horizontal Distribution of Forces',
-        imgs: ['12.8.4_1.png', '12.8.4_2.png', '12.8.4.2.png', '12.8.4.3.png']
-      },
-      '12.8.5': {
-        title: 'Overturning',
-        imgs: ['12.8.5.png']
-      },
       '12.8.6': {
         title: 'Story Drift Determination',
-        imgs: ['12.8.6_1.png', '12.8.6_2.png', '12.8.6.1.png', '12.8.6.2.png']
+        imgs: ['12.8.6_1.png', '12.8.6_2.png', '12.8.6.1.png', '12.8.6.2.png', 'figure12.8-2.png']
       },  
       '12.8.7': {
         title: 'P-Delta Effects',
@@ -229,7 +223,6 @@ const sections = {
   },
   '12.9': {
     title: "Linear Dynamic Analysis",
-    imgs: [],
     subsections: {
       '12.9.1': {
         title: 'Modal Response Spectrum Analysis',
@@ -245,35 +238,34 @@ const sections = {
     title: "Diaphragms, Chords, and Collectors",
     imgs: ["12.10.png"],
     subsections: {
-      'table12.10-1' : {
-        title: 'Diaphragm Design Force Reduction Factor',
-        imgs: ['table12.10-1.png']
-      },
-      'figure12.10-1' : {
-        title: 'Collectors',
-        imgs: ['figure12.10-1.png']
-      },
-      'figure12.10-2' : {
-        title: 'Calculating the Design Acceleration Coefficient Cpx in Buildings with N ≤ 2 and in Buildings with N ≥ 3',
-        imgs: ['figure12.10-2.png']
-      },
       '12.10.1': {
         title: 'Diaphragm Design',
         imgs: ['12.10.1_1.png', '12.10.1_2.png', '12.10.1.1_1.png', '12.10.1.1_2.png']
       },
       '12.10.2': {
         title: 'Collector Elements',
-        imgs: ['12.10.2.png', '12.10.2.1_1.png', '12.10.2.1_2.png']
+        imgs: ['12.10.2.png', '12.10.2.1_1.png', '12.10.2.1_2.png', 'figure12.10-1.png']
+      },
+      'figure12.10-1' : {
+        title: 'Collectors',
+        imgs: ['figure12.10-1.png']
       },
       '12.10.3': {
         title: 'Alternative Design Provisions for Diaphragms, Including Chords and Collectors',
-        imgs: ['12.10.3.png', '12.10.3.1.png', '12.10.3.2_1.png', '12.10.3.2_2.png', '12.10.3.2_3.png', '12.10.3.2_4.png', '12.10.3.3.png', '12.10.3.4.png', '12.10.3.5.png',]
+        imgs: ['12.10.3.png', '12.10.3.1.png', '12.10.3.2_1.png', '12.10.3.2_2.png', '12.10.3.2_3.png', '12.10.3.2_4.png', '12.10.3.3.png', '12.10.3.4.png', '12.10.3.5.png', 'figure12.10-2.png', 'table12.10-1.png']
+      },
+      'figure12.10-2' : {
+        title: 'Calculating the Design Acceleration Coefficient Cpx in Buildings with N ≤ 2 and in Buildings with N ≥ 3',
+        imgs: ['figure12.10-2.png']
+      },
+      'table12.10-1' : {
+        title: 'Diaphragm Design Force Reduction Factor',
+        imgs: ['table12.10-1.png']
       },
     },
   },
   '12.11': {
     title: "Structural Walls and Their Anchorage",
-    imgs: [],
     subsections: {
       '12.11.1': {
         title: 'Design for Out-of-Plane Forces',
@@ -287,15 +279,10 @@ const sections = {
   },
   '12.12': {
     title: "Drift and Deformation",
-    imgs: [],
     subsections: {
-      'table12.12-1' : {
-        title: 'Allowable Story Drift',
-        imgs: ['table12.12-1.png']
-      },
       '12.12.1': {
         title: 'Story Drift Limit',
-        imgs: ['12.12.1.png', '12.12.1.1.png']
+        imgs: ['12.12.1.png', '12.12.1.1.png', 'table12.12-1.png']
       },
       '12.12.2': {
         title: 'Diaphragm Deflection',
@@ -304,6 +291,10 @@ const sections = {
       '12.12.3': {
         title: 'Structural Separation',
         imgs: ['12.12.3_1.png', '12.12.3_2.png']
+      },
+      'table12.12-1' : {
+        title: 'Allowable Story Drift',
+        imgs: ['table12.12-1.png']
       },
       '12.12.4': {
         title: 'Members Spanning between Structures',
@@ -317,20 +308,7 @@ const sections = {
   },
   '12.13': {
     title: "Foundation Design",
-    imgs: [],
     subsections: {
-      'table12.13-1' : {
-        title: 'Resistance Factors for Strength Design of Soil–Foundation Interface',
-        imgs: ['table12.13-1.png']
-      },
-      'table12.13-2' : {
-        title: 'Upper Limit on Lateral Spreading Horizontal Ground Displacement for Shallow Foundations Beyond Which Deep Foundations Are Required',
-        imgs: ['table12.13-2.png']
-      },
-      'table12.13-3' : {
-        title: 'Differential Settlement Threshold',
-        imgs: ['table12.13-3.png']
-      },
       '12.13.1': {
         title: 'Design Basis',
         imgs: ['12.13.1.png']
@@ -349,12 +327,16 @@ const sections = {
       },
       '12.13.5': {
         title: ' Strength Design for Foundation Geotechnical Capacity',
-        imgs: ['12.13.5.1_1.png', '12.13.5.1_2.png', '12.13.5.2.png','12.13.5.3.png']
+        imgs: ['12.13.5.1_1.png', '12.13.5.1_2.png', '12.13.5.2.png','12.13.5.3.png', 'table12.13-1.png']
       },
       '12.13.6': {
         title: 'Allowable Stress Design for Foundation Geotechnical Capacity',
         imgs: ['12.13.6_1.png', '12.13.6_2.png']
       },  
+      'table12.13-1' : {
+        title: 'Resistance Factors for Strength Design of Soil–Foundation Interface',
+        imgs: ['table12.13-1.png']
+      },
       '12.13.7': {
         title: 'Requirements for Structures Assigned to Seismic Design Category C',
         imgs: ['12.13.7.png', '12.13.7.1.png', '12.13.7.2.png', '12.13.7.3.png']
@@ -365,21 +347,28 @@ const sections = {
       },  
       '12.13.9': {
         title: 'Requirements for Foundations on Liquefiable Sites',
-        imgs: ['12.13.9_1.png', '12.13.9_2.png', '12.13.9.1.png', '12.13.9.2_1.png', '12.13.9.2_2.png', '12.13.9.2_3.png', '12.13.9.2_4.png', '12.13.9.3_1.png', '12.13.9.3_2.png', '12.13.9.3_3.png', '12.13.9.3_4.png']
+        imgs: ['12.13.9_1.png', 'table12.13-2.png', '12.13.9_2.png', '12.13.9.1.png', '12.13.9.2_1.png', 'table12.13-3.png', '12.13.9.2_2.png', '12.13.9.2_3.png', '12.13.9.2_4.png', '12.13.9.3_1.png', '12.13.9.3_2.png', '12.13.9.3_3.png', '12.13.9.3_4.png']
+      },
+      'table12.13-2' : {
+        title: 'Upper Limit on Lateral Spreading Horizontal Ground Displacement for Shallow Foundations Beyond Which Deep Foundations Are Required',
+        imgs: ['table12.13-2.png']
+      },
+      'table12.13-3' : {
+        title: 'Differential Settlement Threshold',
+        imgs: ['table12.13-3.png']
       },
     },
   },
   '12.14': {
     title: "Simplified Alternative Structural Design Criteria For Simple Bearing Wall or Building Frame Systems",
-    imgs: [],
     subsections: {
+      '12.14.1': {
+        title: 'General',
+        imgs: ['12.14.1.1_1.png', '12.14.1.1_2.png', '12.14.1.1_3.png', '12.14.1.1_4.png', '12.14.1.2.png', '12.14.1.3.png', '12.14.1.4_1.png', '12.14.1.4_2.png', 'table12.14-1_1.png', 'table12.14-1_2.png', 'table12.14-1_3.png']
+      },
       'table12.14-1' : {
         title: 'Design Coefficients and Factors for Seismic Force-Resisting Systems for Simplified Design Procedure',
         imgs: ['table12.14-1_1.png', 'table12.14-1_2.png', 'table12.14-1_3.png']
-      },
-      '12.14.1': {
-        title: 'General',
-        imgs: ['12.14.1.1_1.png', '12.14.1.1_2.png', '12.14.1.1_3.png', '12.14.1.1_4.png', '12.14.1.2.png', '12.14.1.3.png', '12.14.1.4_1.png', '12.14.1.4_2.png']
       },
       '12.14.2': {
         title: 'Design Basis',

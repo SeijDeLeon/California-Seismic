@@ -1,6 +1,7 @@
 import { sections as chapter1 } from "../../../assets/data/ASCE7/CH1/sections.js";
 import { sections as chapter2 } from "../../../assets/data/ASCE7/CH2/sections.js";
 import { sections as chapter10 } from "../../../assets/data/ASCE7/CH10/sections.js";
+import { sections as chapter11 } from "../../../assets/data/ASCE7/CH11/sections.js";
 import { sections as chapter12 } from "../../../assets/data/ASCE7/CH12/sections.js";
 import { sections as chapter13 } from "../../../assets/data/ASCE7/CH13/sections.js";
 import { sections as chapter20 } from "../../../assets/data/ASCE7/CH20/sections.js";
@@ -10,6 +11,7 @@ const chapters = {
   chapter1,
   chapter2,
   chapter10,
+  chapter11,
   chapter12,
   chapter13,
   chapter20,
@@ -40,9 +42,9 @@ const Selector = () => {
               key={key}
               className={`${getMarginClass(level)} ${getFontSizeClass(
                 level
-              )} mb-2`}
+              )} mb-2 cursor-pointer hover:underline`}
             >
-              {key + " " + subObj[key].title}
+              {key + "\xa0\xa0" + subObj[key].title}
             </div>
           );
           if (subObj[key].subsections) {

@@ -1,7 +1,6 @@
 const sections = {
   '13.1': {
     title: "General",
-    imgs: [],
     subsections: {
       '13.1.1': {
         title: 'Scope',
@@ -39,12 +38,7 @@ const sections = {
   },
   '13.2': {
     title: "General Design Requirements",
-    imgs: [],
     subsections: {
-      'table13.2-1' : {
-        title: 'Applicable Requirements for Architectural, Mechanical, and Electrical Components: Supports and Attachments',
-        imgs: ['table13.2-1.png']
-      },
       '13.2.1': {
         title: 'Applicable Requirements for Architectural, Mechanical, and Electrical Components, Supports, and Attachments',
         imgs: ['13.2.1.png']
@@ -63,7 +57,11 @@ const sections = {
       },
       '13.2.5': {
         title: 'Testing Alternative for Seismic Capacity Determination',
-        imgs: ['13.2.5_1.png', '13.2.5_2.png']
+        imgs: ['13.2.5_1.png', '13.2.5_2.png', 'table13.2-1.png']
+      },
+      'table13.2-1' : {
+        title: 'Applicable Requirements for Architectural, Mechanical, and Electrical Components: Supports and Attachments',
+        imgs: ['table13.2-1.png']
       },
       '13.2.6': {
         title: 'Experience Data Alternative for Seismic Capacity Determination',
@@ -77,11 +75,14 @@ const sections = {
   },
   '13.3': {
     title: "Seismic Demands on Nonstructural Components",
-    imgs: [],
     subsections: {
       '13.3.1': {
         title: 'Seismic Design Force',
-        imgs: ['13.3.1.1_1.png', '13.3.1.1_2.png', '13.3.1.2.png', '13.3.1.3.png', '13.3.1.4_1.png', '13.3.1.4_2.png', '13.3.1.4_3.png']
+        imgs: ['13.3.1.1_1.png', '13.3.1.1_2.png', '13.3.1.2.png', '13.3.1.3.png', '13.3.1.4_1.png', '13.3.1.4_2.png', '13.3.1.4_3.png', 'figure13.3-1.png']
+      },
+      'figure13.3-1' : {
+        title: 'Component Dynamic Amplification Factor',
+        imgs: ['figure13.3-1.png']
       },
       '13.3.2': {
         title: 'Seismic Relative Displacements',
@@ -125,16 +126,7 @@ const sections = {
   },
   '13.5': {
     title: "Architectual Components",
-    imgs: [],
     subsections: {
-      'table13.5-1': {
-        title: 'Coefficients for Architectural Components',
-        imgs: ['table13.5-1_1.png', 'table13.5-1_2.png'],
-      },
-      'table13.5-2': {
-        title: 'Reference Standards for Structural Sealant Glazing',
-        imgs: ['table13.5-2.png'],
-      },
       '13.5.1': {
         title: 'General',
         imgs: ['13.5.1.png']
@@ -145,7 +137,11 @@ const sections = {
       },
       '13.5.3': {
         title: 'Exterior Nonstructural Wall Elements and Connections',
-        imgs: ['13.5.3_1.png', '13.5.3_2.png', '13.5.3_3.png', '13.5.3_4.png']
+        imgs: ['13.5.3_1.png', '13.5.3_2.png', '13.5.3_3.png', '13.5.3_4.png', 'table13.5-1_1.png', 'table13.5-1_2.png']
+      },
+      'table13.5-1': {
+        title: 'Coefficients for Architectural Components',
+        imgs: ['table13.5-1_1.png', 'table13.5-1_2.png'],
       },
       '13.5.4': {
         title: 'Glass',
@@ -153,7 +149,11 @@ const sections = {
       },
       '13.5.5': {
         title: 'Out-of-Plane Bending',
-        imgs: ['13.5.5_1.png', '13.5.5_2.png']
+        imgs: ['13.5.5_1.png', '13.5.5_2.png', 'table13.5-2.png']
+      },
+      'table13.5-2': {
+        title: 'Reference Standards for Structural Sealant Glazing',
+        imgs: ['table13.5-2.png'],
       },
       '13.5.6': {
         title: 'Suspended Ceilings',
@@ -179,15 +179,14 @@ const sections = {
   },
   '13.6': {
     title: "Mechanical and Electrical Components",
-    imgs: [],
     subsections: {
+      '13.6.1': {
+        title: 'General',
+        imgs: ['13.6.1_1.png', '13.6.1_2.png', '13.6.1_3.png', 'table13.6-1_1.png', 'table13.6-1_2.png']
+      },
       'table13.6-1': {
         title: 'Seismic Coefficients for Mechanical and Electrical Components',
         imgs: ['table13.6-1_1.png', 'table13.6-1_2.png']
-      },
-      '13.6.1': {
-        title: 'General',
-        imgs: ['13.6.1_1.png', '13.6.1_2.png', '13.6.1_3.png']
       },
       '13.6.2': {
         title: 'Mechanical Components',
