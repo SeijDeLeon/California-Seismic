@@ -27,6 +27,15 @@ const getFontSizeClass = (level) => {
   const fontSizeClasses = ["text-base", "text-sm"];
   return fontSizeClasses[level];
 };
+// display tables/figures correctly
+const formatKey = (key) => {
+  if (key.startsWith('figure')) {
+    return `Figure ${key.replace('figure', '')}`;
+  } else if (key.startsWith('table')) {
+    return `Table ${key.replace('table', '')}`;
+  }
+  return key;
+};
 
 const Selector = ({ handleSectionSelection, selectedSection }) => {
 
@@ -46,7 +55,7 @@ const Selector = ({ handleSectionSelection, selectedSection }) => {
               )} mb-2 ${hasImages ? "cursor-pointer hover:underline" : ""}`}
               onClick={() => handleSectionSelection(key, subObj[key])}
             >
-              {key + "\xa0\xa0" + subObj[key].title}
+              {formatKey(key) + "\xa0\xa0" + subObj[key].title}
             </div>
           );
           if (subObj[key].subsections) {
