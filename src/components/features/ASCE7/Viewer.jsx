@@ -58,9 +58,9 @@ export default function Viewer({ section }) {
         }
     }
     return(
-        <div className="max-h-96">
+        <div>
             <h1 className="text-lg">{title}</h1>
-            <div className="mt-5 h-96 overflow-y-auto">
+            <div className="mt-5 max-h-[70vh] overflow-y-auto">
                 {images.map((image, index) => (
                     <img key={index} className="w-7/8 mb-5 mx-auto" src={image} alt={`Image ${index + 1}`} />
                 ))}

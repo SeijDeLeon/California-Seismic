@@ -28,7 +28,7 @@ const getFontSizeClass = (level) => {
   return fontSizeClasses[level];
 };
 
-const Selector = () => {
+const Selector = ({ handleSectionSelection, selectedSection }) => {
 
   // recursive function to print out titles + subsection titles
   const renderTitles = (obj) => {
@@ -37,12 +37,14 @@ const Selector = () => {
     function generateElements(subObj, level = 0) {
       for (const key in subObj) {
         if (subObj.hasOwnProperty(key)) {
+          const hasImages = !!subObj[key].imgs
           elements.push(
             <div
               key={key}
               className={`${getMarginClass(level)} ${getFontSizeClass(
                 level
-              )} mb-2 cursor-pointer hover:underline`}
+              )} mb-2 ${hasImages ? "cursor-pointer hover:underline" : ""}`}
+              onClick={() => handleSectionSelection(key, subObj[key])}
             >
               {key + "\xa0\xa0" + subObj[key].title}
             </div>
@@ -61,7 +63,7 @@ const Selector = () => {
   return (
     <>
       <h1 className="text-lg">Selector</h1>
-      <div className="overflow-y-scroll max-h-96 text-left">
+      <div className="overflow-y-scroll max-h-[70vh] text-left">
         {/* map thru all sections */}
         {Object.keys(chapters).map((chapterKey) => ( 
           <div key={chapterKey}>
