@@ -20,7 +20,7 @@ const sections = {
       },
       '11.1.5': {
         title: 'Quality Assurance',
-        imgs: ['11.1.5']
+        imgs: ['11.1.5.png']
       },
     }
   },
@@ -43,15 +43,15 @@ const sections = {
         title: 'Site Coefficients and Risk-Targeted Maximum Considered Earthquake Spectral Response Acceleration Parameters',
         imgs: ['11.4.4.png', 'table11.4-1.png', 'table11.4-2.png', 'figure11.4-1.png']
       },
-      'Figure 11.4-1': {
+      'figure11.4-1': {
         title: 'Design Responnse Spectrum',
         imgs: ['figure11.4-1.png']
       },
-      'Table 11.4-1': {
+      'table11.4-1': {
         title: 'Short-Period Site Coefficient, Fa',
         imgs: ['table11.4-1.png']
       },
-      'Table 11.4-2': {
+      'table11.4-2': {
         title: 'Long-Period Site Coefficient, Fv',
         imgs: ['table11.4-2.png']
       },
@@ -109,7 +109,7 @@ const sections = {
         title: 'Additional Geotechnical Investigation Report Requirements for Seismic Design Categories D through F',
         imgs: ['11.8.3.png', 'table11.8-1.png']
       },
-      'Table 11.8-1': {
+      'table11.8-1': {
         title: 'Site Coefficient F_PGA',
         imgs: ['table11.8-1.png']
       }
@@ -126,7 +126,7 @@ const sections = {
         title: 'MCER Vertical Response Spectrum',
         imgs: ['11.9.2_1.png', '11.9.2_2.png', 'table11.9-1.png']
       },
-      'Table 11.9-1': {
+      'table11.9-1': {
         title: 'Values of Vertical Coefficient Cv',
         imgs: ['table11.9-1.png']
       },

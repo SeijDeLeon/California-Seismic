@@ -16,7 +16,7 @@ const sections = {
       },
       '12.1.4': {
         title: 'Connection to Supports',
-        imgs: ['12.1.4_1.png', '12.1.4_2.png']
+        imgs: ['12.1.4.png']
       },
       '12.1.5': {
         title: 'Foundation Design',
@@ -152,7 +152,6 @@ const sections = {
   },
   '12.7': {
     title: "Modeling Criteria",
-    imgs: ['12.7.png'],
     subsections: {
       '12.7.1': {
         title: 'Foundation Modeling',
