@@ -13,6 +13,12 @@ export default function Contributors({ display = true }) {
       alt: "headshot",
     },
     {
+      title: "Matt McIvor",
+      text: "Front End Intern 2024",
+      img: "images/contributors/matt_mcivor.jpg",
+      alt: "headshot",
+    },
+    {
       title: "Frank Mundo",
       text: "Front End Intern 2024",
       img: "images/contributors/frankie_mundo.jpg",
