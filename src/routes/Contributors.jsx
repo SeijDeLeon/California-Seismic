@@ -21,7 +21,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Joel Zapana",
       text: "Front End Intern 2024",
-      img: "images/contributors/joel_zapana_test.jpg",
+      img: "images/contributors/joel_zapana.jpg",
       alt: "headshot",
     },
     {
