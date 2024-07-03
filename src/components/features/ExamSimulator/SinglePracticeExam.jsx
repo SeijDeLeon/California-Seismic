@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { exams } from '../../../assets/data/duplicateQuestionData.js';
 import { randomExams } from '../../../assets/data/randomExams.js'; //generateRandomQuestions
 import ExamScorePopUpModal from './ExamScorePopUp.jsx';
 import ListOfQuestionsSideBar from './ListOfQuestionsSideBar.jsx';
 import Timer from './Timer.js';
+import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
+import { FaFlag } from 'react-icons/fa6';
+import { RxSlash } from 'react-icons/rx';
 
 function SinglePracticeExam() {
   const { examId } = useParams();
@@ -25,12 +28,18 @@ function SinglePracticeExam() {
   ]);
 
   const [questionsState, setQuestionsState] = useState(
-    selectedExam.questions.map((question) => ({
+    selectedExam.questions.map((question, idx) => ({
       flagged: false,
       answered: null,
       selectedOption: null, // Add selectedOption property for each question
+      idx: idx, // add idx property for tracking flagged question
     }))
   );
+
+  const [reviewFlaggedQuestions, setReviewFlaggedQuestions] = useState(false);
+
+  const [flaggedQuestions, setFlaggedQuestions] = useState([]);
+  const [currentFlaggedQuestion, setCurrentFlaggedQuestion] = useState(0);
 
   const handleOnSubmit = () => setShowPopUp(true);
 
@@ -89,6 +98,42 @@ function SinglePracticeExam() {
 
   const [displaySolution, setDisplaySolution] = useState(false);
 
+  const handleReviewFlaggedQuestionsCick = () => {
+    setReviewFlaggedQuestions(!reviewFlaggedQuestions);
+  };
+
+  const handleNextFlaggedQuestion = () => {
+    setCurrentFlaggedQuestion(
+      (currentFlaggedQuestion % flaggedQuestions.length) + 1
+    );
+  };
+
+  const handlePreviousFlaggedQuestion = () => {
+    setCurrentFlaggedQuestion(() => {
+      if (currentFlaggedQuestion > 1) {
+        return currentFlaggedQuestion - 1;
+      } else {
+        return flaggedQuestions.length;
+      }
+    });
+  };
+
+  const handleSetDefaultFlaggedQuestion = () => {
+    //default 1st question in the list when turning on flagged mode
+    const firstFlaggedQuestionIndex = questionsState.findIndex(ques => ques.flagged)
+    if(firstFlaggedQuestionIndex !== -1){
+      setCurrentQuestion(firstFlaggedQuestionIndex)
+    }
+  };
+
+  //continuously track the current Flagged question and current question
+  useEffect(() => {
+    if (flaggedQuestions.length > 0) {
+      setCurrentQuestion(flaggedQuestions[currentFlaggedQuestion - 1].idx);
+    }
+    setFlaggedQuestions(questionsState.filter((ques) => ques.flagged));
+  }, [questionsState, flaggedQuestions.length, currentFlaggedQuestion]);
+
   return (
     <main className="h-screen ">
       <div className="container h-screen mx-auto bg-gray-100">
@@ -97,18 +142,16 @@ function SinglePracticeExam() {
             selectedExam={selectedExam}
             selectedFlags={selectedFlags}
             setCurrentQuestion={setCurrentQuestion}
+            reviewFlaggedQuestions={reviewFlaggedQuestions}
+            questionsState={questionsState}
+            setQuestionsState={setQuestionsState}
+            setCurrentFlaggedQuestion={setCurrentFlaggedQuestion}
+            handleSetDefaultFlaggedQuestion={handleSetDefaultFlaggedQuestion}
+            flaggedQuestions={flaggedQuestions}
           />
 
           <section className="w-full max-h-screen sm:w-2/3 md:w-3/4 overflow-hidden grid grid-rows-6">
-            {/* Exam tab */}
-            {/* <div className="bg-white p-4 rounded shadow mb-4">
-                <h3 className="text-lg font-bold">{selectedExam.name}</h3>
-              </div> */}
-            {/* Timer */}
-            {/* <div className="bg-white p-4 rounded shadow mb-4">
-                <h3 className="text-lg font-bold">Timer</h3>
-                {displaySolution ? "00:00" : <Timer />}
-              </div> */}
+            {/* EXAM TAB */}
 
             <div className="row-span-5 overflow-hidden">
               {/* Title and Timer  */}
@@ -213,42 +256,100 @@ function SinglePracticeExam() {
               </div>
             </div>
 
-            {/* Previous/Next and Submit buttons  */}
+            {/* BUTTONS  */}
             <div className="row-span-1">
-              {/* Buttons */}
-              <div className="flex justify-center py-4">
-                <button
-                  className={`px-4 py-2 mr-2 rounded text-white
+              {/* ReviewFlaggedQuestions/Next-Previous Buttons */}
+              {reviewFlaggedQuestions ? (
+                <>
+                  {/* ReviewFlaggedQuestions Buttons  */}
+                  <div className="flex justify-center py-4 gap-4 text-xl">
+
+                    <button
+                      className={`px-4 py-2 rounded bg-none text-black 
+                      ${
+                        flaggedQuestions.length <= 1
+                          ? 'text-slate-500'
+                          : 'hover:text-slate-500 transition-colors duration-300'
+                      }`}
+                      onClick={handlePreviousFlaggedQuestion}
+                      disabled={flaggedQuestions.length <= 1}
+                    >
+                      <ImArrowLeft />
+                    </button>
+
+                    <div className="flex gap-4 items-center">
+                      <FaFlag />
+                      <div className="flex gap-1 items-center">
+                        {flaggedQuestions.length === 0
+                          ? 0
+                          : currentFlaggedQuestion}
+                        <RxSlash />
+                        {flaggedQuestions.length}
+                      </div>
+                    </div>
+
+                    <button
+                      className={`px-4 py-2 rounded bg-none text-black 
+                      ${
+                        flaggedQuestions.length <= 1
+                          ? 'text-slate-500'
+                          : 'hover:text-slate-500 transition-colors duration-300'
+                      }`}
+                      onClick={handleNextFlaggedQuestion}
+                      disabled={flaggedQuestions.length <= 1}
+                    >
+                      <ImArrowRight />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Next-Previous Buttons */}
+                  <div className="flex justify-center py-4 gap-4">
+                    <button
+                      className={`px-4 py-2 rounded text-white
                   ${
                     currentQuestion === 0
                       ? 'bg-slate-400'
                       : 'bg-blue-500 hover:bg-blue-600 transition-colors duration-300'
                   }`}
-                  disabled={currentQuestion === 0}
-                  onClick={clickPrevious}
-                >
-                  Previous
-                </button>
-                <button
-                  className={`px-4 py-2 text-white rounded
+                      disabled={currentQuestion === 0}
+                      onClick={clickPrevious}
+                    >
+                      Previous
+                    </button>
+                    <button
+                      className={`px-4 py-2 text-white rounded
                                     ${
                                       currentQuestion ===
                                       selectedExam.questions.length - 1
                                         ? 'bg-slate-400'
                                         : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
                                     }`}
-                  disabled={
-                    currentQuestion === selectedExam.questions.length - 1
-                  }
-                  onClick={clickNext}
-                >
-                  Next
-                </button>
-              </div>
-              {/* Submit */}
-              <div className="bg-white py-4 rounded shadow">
+                      disabled={flaggedQuestions.length <= 1}
+                      onClick={clickNext}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {/* Review-Submit */}
+              <div className="bg-white py-4 rounded shadow flex gap-4 justify-center">
                 <button
-                  className="px-4 py-2 bg-green-500 text-white rounded"
+                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300"
+                  onClick={() => {
+                    handleReviewFlaggedQuestionsCick();
+                    handleSetDefaultFlaggedQuestion();
+                  }}
+                >
+                  {reviewFlaggedQuestions
+                    ? 'Done Reviewing Flagged Questions'
+                    : 'Review Flagged Questions'}
+                </button>
+                <button
+                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors duration-300"
                   onClick={handleOnSubmit}
                 >
                   Submit
