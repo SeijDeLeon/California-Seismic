@@ -44,7 +44,7 @@ const sections = {
         imgs: ['11.4.4.png', 'table11.4-1.png', 'table11.4-2.png', 'figure11.4-1.png']
       },
       'figure11.4-1': {
-        title: 'Design Responnse Spectrum',
+        title: 'Design Response Spectrum',
         imgs: ['figure11.4-1.png']
       },
       'table11.4-1': {

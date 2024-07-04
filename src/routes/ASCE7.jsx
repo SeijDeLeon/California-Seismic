@@ -1,14 +1,21 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Selector from "../components/features/ASCE7/Selector";
 import Viewer from "../components/features/ASCE7/Viewer";
 
 export default function ASCE7() {
   const { sectionParam } = useParams();
-  const [ section, setSection ] = useState(sectionParam || "table1.3-3");
+  const [ section, setSection ] = useState(sectionParam || "1.1");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setSection(sectionParam || "1.1")
+  }, [sectionParam])
+
   const handleSectionSelection = (key, obj) => {
     if (obj.imgs) {
       setSection(key);
+      navigate(`/ASCE7/${key}`)
     }
   };
 
