@@ -27,7 +27,7 @@ const QuestionGeneratorDisplay = () => {
     localStorage.setItem("bestScore", JSON.stringify(bestScore));
   }, [bestScore]);
   return (
-    <div className="m-auto max-w-6xl">
+    <div className="m-auto max-w-6xl min-h-[calc(92vh-120px)]">
       <div className="grid grid-cols-3 gap-5 m-5 mt-0">
         {categories.map((item) => (
           <div
