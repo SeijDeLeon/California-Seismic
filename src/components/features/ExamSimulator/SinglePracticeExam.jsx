@@ -103,36 +103,51 @@ function SinglePracticeExam() {
   };
 
   const handleNextFlaggedQuestion = () => {
-    setCurrentFlaggedQuestion(
-      (currentFlaggedQuestion % flaggedQuestions.length) + 1
-    );
+    if (currentFlaggedQuestion === flaggedQuestions.length - 1) {
+      setCurrentFlaggedQuestion(0);
+    } else {
+      setCurrentFlaggedQuestion(
+        (currentFlaggedQuestion % (flaggedQuestions.length - 1)) + 1
+      );
+    }
   };
 
   const handlePreviousFlaggedQuestion = () => {
     setCurrentFlaggedQuestion(() => {
-      if (currentFlaggedQuestion > 1) {
+      if (currentFlaggedQuestion > 0) {
         return currentFlaggedQuestion - 1;
       } else {
-        return flaggedQuestions.length;
+        return flaggedQuestions.length - 1;
       }
     });
   };
 
-  const handleSetDefaultFlaggedQuestion = () => {
-    //default 1st question in the list when turning on flagged mode
-    const firstFlaggedQuestionIndex = questionsState.findIndex(ques => ques.flagged)
-    if(firstFlaggedQuestionIndex !== -1){
-      setCurrentQuestion(firstFlaggedQuestionIndex)
-    }
-  };
-
   //continuously track the current Flagged question and current question
   useEffect(() => {
-    if (flaggedQuestions.length > 0) {
-      setCurrentQuestion(flaggedQuestions[currentFlaggedQuestion - 1].idx);
-    }
+    //only run for flagged mood
+    if (!reviewFlaggedQuestions) return;
+
+    //find all flagged questions
     setFlaggedQuestions(questionsState.filter((ques) => ques.flagged));
-  }, [questionsState, flaggedQuestions.length, currentFlaggedQuestion]);
+
+    //find first flagged question = current flagged question
+    const firstFlaggedQuestionIndex = questionsState.findIndex(
+      (ques) => ques.flagged
+    );
+
+    if (firstFlaggedQuestionIndex !== -1) {
+      setCurrentQuestion(firstFlaggedQuestionIndex);
+    }
+
+    if (flaggedQuestions.length > 1) {
+      setCurrentQuestion(flaggedQuestions[currentFlaggedQuestion].idx);
+    }
+  }, [
+    questionsState,
+    flaggedQuestions.length,
+    currentFlaggedQuestion,
+    reviewFlaggedQuestions,
+  ]);
 
   return (
     <main className="h-screen ">
@@ -145,8 +160,8 @@ function SinglePracticeExam() {
             reviewFlaggedQuestions={reviewFlaggedQuestions}
             questionsState={questionsState}
             setQuestionsState={setQuestionsState}
+            currentFlaggedQuestion={currentFlaggedQuestion}
             setCurrentFlaggedQuestion={setCurrentFlaggedQuestion}
-            handleSetDefaultFlaggedQuestion={handleSetDefaultFlaggedQuestion}
             flaggedQuestions={flaggedQuestions}
           />
 
@@ -263,7 +278,6 @@ function SinglePracticeExam() {
                 <>
                   {/* ReviewFlaggedQuestions Buttons  */}
                   <div className="flex justify-center py-4 gap-4 text-xl">
-
                     <button
                       className={`px-4 py-2 rounded bg-none text-black 
                       ${
@@ -282,7 +296,7 @@ function SinglePracticeExam() {
                       <div className="flex gap-1 items-center">
                         {flaggedQuestions.length === 0
                           ? 0
-                          : currentFlaggedQuestion}
+                          : currentFlaggedQuestion + 1}
                         <RxSlash />
                         {flaggedQuestions.length}
                       </div>
@@ -326,7 +340,7 @@ function SinglePracticeExam() {
                                         ? 'bg-slate-400'
                                         : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
                                     }`}
-                      disabled={flaggedQuestions.length <= 1}
+                      disabled={questionsState.length <= 1}
                       onClick={clickNext}
                     >
                       Next
@@ -341,7 +355,7 @@ function SinglePracticeExam() {
                   className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300"
                   onClick={() => {
                     handleReviewFlaggedQuestionsCick();
-                    handleSetDefaultFlaggedQuestion();
+                    // handleSetDefaultFlaggedQuestion();
                   }}
                 >
                   {reviewFlaggedQuestions

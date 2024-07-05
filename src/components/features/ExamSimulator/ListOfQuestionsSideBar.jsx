@@ -8,8 +8,8 @@ function ListOfQuestionsSideBar({
   reviewFlaggedQuestions,
   questionsState,
   setQuestionsState,
+  currentFlaggedQuestion,
   setCurrentFlaggedQuestion,
-  handleSetDefaultFlaggedQuestion,
   flaggedQuestions,
 }) {
   const [flagColors, setFlagColors] = useState(
@@ -21,7 +21,7 @@ function ListOfQuestionsSideBar({
     newFlagColors[index] = newFlagColors[index] === 'gray' ? 'red' : 'gray';
     setFlagColors(newFlagColors);
 
-    //change flagged value
+    //change flagged value, flag/unflag ques
     const newQuestionsState = [...questionsState].map((ques, idx) => {
       if (idx === index) {
         return {
@@ -34,26 +34,24 @@ function ListOfQuestionsSideBar({
     });
 
     setQuestionsState(newQuestionsState);
-    handleSetDefaultFlaggedQuestion(); //default 1st question in the list when turning on flagged mode
-    setCurrentFlaggedQuestion(1); //reset the first flagged ques on sidebar
+
+    if (reviewFlaggedQuestions && flaggedQuestions.length > 0) {
+      setCurrentFlaggedQuestion(currentFlaggedQuestion % (flaggedQuestions.length-1)); //next flagged question
+    }
   };
 
+  //flagged mode: when selecting queqtuq
   const handleSetCurrentFlaggedQuestion = (index) => {
     flaggedQuestions.map((ques, idx) => {
       if (ques.idx === index) {
-        setCurrentFlaggedQuestion(idx + 1);
+        setCurrentFlaggedQuestion(idx);
       }
     });
   };
 
-  useEffect(() => {
-    handleSetDefaultFlaggedQuestion();
-  }, [questionsState]);
-
   return (
     <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4">
       <div className="top-0 pr-4 w-full grid grid-rows-1 grid-flow-col justify-items-center">
-
         {/* FLAGGED MODE  */}
         {reviewFlaggedQuestions ? (
           <ul className="flex flex-col space-y-2 w-full">
@@ -65,7 +63,7 @@ function ListOfQuestionsSideBar({
             ) : (
               <>
                 <li
-                  key='title'
+                  key="title"
                   className="bg-red-500 text-white font-bold p-4 rounded shadow text-center"
                 >
                   On Flagged Mode
@@ -134,7 +132,7 @@ function ListOfQuestionsSideBar({
             )}
           </ul>
         ) : (
-          // NO FLAGGED MODE 
+          // NO FLAGGED MODE
           <ul className="flex flex-col space-y-2 w-full">
             {/* Question list */}
             {selectedExam.questions.map((question, index) => (
