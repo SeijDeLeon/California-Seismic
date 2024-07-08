@@ -45,7 +45,7 @@ export default function Viewer({ section }) {
       const dotCount = section.split(".").length - 1;
       if (dotCount === 1) {
         const sectionData = currentChapter[section];
-        if (sectionData) {
+        if (sectionData && sectionData.imgs) {
           images = sectionData.imgs.map(
             (img) =>
               `${process.env.PUBLIC_URL}/ASCE7/CH${currentChapterNumber}/${img}`
@@ -56,11 +56,13 @@ export default function Viewer({ section }) {
         const [part1, part2] = section.split(".");
         const subsection =
           currentChapter[`${part1}.${part2}`]?.subsections?.[section];
-        if (subsection) {
+        if (subsection && subsection.imgs) {
           images = subsection.imgs.map(
             (img) =>
               `${process.env.PUBLIC_URL}/ASCE7/CH${currentChapterNumber}/${img}`
           );
+          title = subsection.title;
+        } else if (subsection) {
           title = subsection.title;
         }
       }
