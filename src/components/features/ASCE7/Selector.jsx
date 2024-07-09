@@ -37,7 +37,7 @@ const formatKey = (key) => {
   return key;
 };
 
-const Selector = ({ handleSectionSelection, selectedSection }) => {
+const Selector = ({ handleSectionSelection }) => {
 
   // recursive function to print out titles + subsection titles
   const renderTitles = (obj) => {

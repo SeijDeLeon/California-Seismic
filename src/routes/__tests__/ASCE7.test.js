@@ -3,25 +3,6 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import ASCE7 from "../ASCE7.jsx";
 
-// Mock Selector component
-jest.mock("../../components/features/ASCE7/Selector", () => (props) => {
-  const handleClick = () => {
-    console.log("Selector item clicked");
-    props.handleSectionSelection("1.2.1", {
-      title: "Section 1.2.1 Content",
-      imgs: ["1.2.1.png"],
-    });
-  };
-
-  return (
-    <div>
-      <div data-testid="selector-item" onClick={handleClick}>
-        Section 1.2.1
-      </div>
-    </div>
-  );
-});
-
 describe("ASCE7 component with actual Viewer", () => {
   test("render default image (section 1.1)", () => {
     render(
@@ -44,7 +25,7 @@ describe("ASCE7 component with actual Viewer", () => {
       </MemoryRouter>
     );
 
-    const selectorItem = screen.getByTestId("selector-item");
+    const selectorItem = screen.getByText(/1\.2\.1\s+Definitions/);
     fireEvent.click(selectorItem);
     await waitFor(() => {
       expect(screen.getByAltText("1.2.1_1.png")).toBeInTheDocument();
@@ -76,15 +57,3 @@ describe("ASCE7 component with actual Viewer", () => {
   });
 });
 
-// // Mock Viewer component
-// jest.mock('../../components/features/ASCE7/Viewer', () => ({ section }) => {
-//   console.log(`Viewer rendered with section: ${section}`);
-
-//   if (section === '1.1') {
-//     return <div>Section 1.1 Content</div>;
-//   }
-//   if (section === '1.2.1') {
-//     return <div>Section 1.2.1 Content</div>;
-//   }
-//   return <div>Section was not found.</div>;
-// });

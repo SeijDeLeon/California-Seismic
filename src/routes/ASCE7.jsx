@@ -26,7 +26,6 @@ export default function ASCE7() {
         <div className="w-1/2 border border-gray-300 bg-gray-100 p-4">
           <Selector
             handleSectionSelection={handleSectionSelection}
-            selectedSection={section}
           />
         </div>
         <div className="w-1/2 border border-gray-300 p-4">
