@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import calculateCs from '../calculations/calculateCs';
-import calculateV from '../calculations/calculateV';
-import calculateCvx from '../calculations/calculateCvx';
-import calculateFvx from '../calculations/calculateFvx';
+import calculateCs from '..assets/data/calculations/calculateCs';
+import calculateV from '..assets/data/calculations/calculateV';
+import calculateCvx from '..assets/data/calculations/calculateCvx';
+import calculateFvx from '..assets/data/calculations/calculateFvx';
 
 const tabs = [
   { name: 'Base Shear', id: 'baseShear' },
