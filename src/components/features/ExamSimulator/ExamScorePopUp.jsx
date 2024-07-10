@@ -1,60 +1,93 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-function ExamScorePopUpModal({visible, onClose, score, setDisplaySolution, restartExam, answeredQuestionsLength, selectedExamQuestionsList, selectedOption={selectedOption} }){
+function ExamScorePopUpModal({
+  visible,
+  onClose,
+  questionsState,
+}) {
+  if (!visible) return null;
 
-    if(!visible) return null;
-    return(
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
-            <div className="bg-white p-4 rounded-lg w-4/5 md:w-2/5 h-auto">
-                <div className="max-w-6xl px-5 py-5 mx-auto mt-6 text-center">
-                {answeredQuestionsLength === selectedExamQuestionsList ? (
-                    score > 2 ? (
-                    <h1 className="text-xl md:text-3xl font-semibold text-green-600 text-gray-700">
-                        Congratulations! You passed!
-                    </h1>
-                    ) : (
-                    <h1 className="text-xl md:text-3xl font-semibold text-red-600 text-gray-700">
-                        Unfortunately, you failed
-                    </h1>
-                    )
-                ) : (
-                    <h1 className="text-xl md:text-3xl font-semibold text-red-600 text-gray-700">
-                    You still have {selectedExamQuestionsList - answeredQuestionsLength} unanswered questions. <br />
-                    Are you sure you want to quit?
-                    </h1>
-                )}
-                </div>
-                <div className="max-w-6xl px-5 mx-auto mt-4 text-center">
-                <h1 className="text-2xl md:text-2xl font-semibold text-gray-700">
-                    Your score is {score}
-                </h1>
-                </div>
-                <div className="text-lg flex justify-center mt-5">
-                <div className="flex flex-row gap-4">
-                    <div>
-                    <Link to={`/practice/exams/`}>
-                        <button className="px-4 py-2 bg-orange-500 text-white rounded-full">
-                        Retake exam?
-                        </button>
-                    </Link>
-                    </div>
-                    <div>
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-full" onClick={onClose}>
-                        Go Back
-                    </button>
-                    </div>
-                    <div>
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-full" onClick={() => {onClose(); setDisplaySolution(true);}}>
-                        See solution
-                    </button>
-                    </div>
-                    
-                </div>
-                </div>
-            </div>
+
+  const numberOfAnsweredQuestions = questionsState.questions.filter(
+    (ques) => ques.answered !== null
+  ).length;
+
+  const numberOfFlaggedQuestions = questionsState.questions.filter(
+    (ques) => ques.flagged
+  ).length;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
+      <div className="bg-white rounded-lg w-4/5 md:w-2/5 h-auto">
+
+        {/* HEADER  */}
+        <div className="py-3 pl-6 text-start">
+          <p className="font-medium text-gray-600">SUBMIT</p>
         </div>
-    )
+
+        <hr />
+
+        {/* TEXT  */}
+        <div className="max-w-6xl pl-6 py-6 mx-auto leading-10 text-lg tracking-wide text-start">
+          {numberOfAnsweredQuestions < questionsState.questions.length && (
+            <p>
+              You still have{' '}
+              <span className="text-red-400 font-bold">
+                {questionsState.questions.length - numberOfAnsweredQuestions}
+              </span>{' '}
+              unanswered questions.
+            </p>
+          )}
+          {numberOfFlaggedQuestions > 0 && (
+            <p>
+              You still have{' '}
+              <span className="text-red-400 font-bold">
+                {numberOfFlaggedQuestions}
+              </span>{' '}
+              flagged questions.
+            </p>
+          )}
+          {numberOfAnsweredQuestions === questionsState.questions.length &&
+            numberOfFlaggedQuestions === 0 && (
+              <p className="text-lg">
+                <span className="text-blue-400">Congratulation!</span> You have
+                fininshed your exam.
+              </p>
+            )}
+        </div>
+
+        <hr />
+
+        {/* BUTTONS  */}
+        <div className="flex justify-end py-3 pr-6">
+          <div className="flex flex-row gap-4">
+            <div>
+              <button
+                className="px-4 py-2 border border-gray-400 rounded hover:bg-gray-200 duration-75 transition-colors"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
+            <div>
+              <Link to={`/practice/exams/0/result`} state={{ questionsState }}>
+                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 duration-75 transition-colors">
+                  {numberOfAnsweredQuestions <
+                    questionsState.questions.length ||
+                  numberOfFlaggedQuestions > 0 ? (
+                    <span>Continue to submit ?</span>
+                  ) : (
+                    <span>Submit</span>
+                  )}
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ExamScorePopUpModal;

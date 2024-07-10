@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 
 function ListOfQuestionsSideBar({
   selectedExam,
   selectedFlags,
   setCurrentQuestion,
-  reviewFlaggedQuestions,
+  onFlaggedMode,
   questionsState,
+  currentQuestion ,
   setQuestionsState,
   currentFlaggedQuestion,
   setCurrentFlaggedQuestion,
@@ -18,25 +19,30 @@ function ListOfQuestionsSideBar({
 
   const changeFlagColor = (index) => {
     const newFlagColors = [...flagColors];
-    newFlagColors[index] = newFlagColors[index] === 'gray' ? 'red' : 'gray';
+    newFlagColors[index] = newFlagColors[index] === 'gray' ? 'orange' : 'gray';
     setFlagColors(newFlagColors);
 
     //change flagged value, flag/unflag ques
-    const newQuestionsState = [...questionsState].map((ques, idx) => {
-      if (idx === index) {
-        return {
-          ...ques,
-          flagged: !ques.flagged,
-        };
-      }
+    const newQuestionsState = {
+      ...questionsState,
+      questions: { ...questionsState }.questions.map((ques, idx) => {
+        if (idx === index) {
+          return {
+            ...ques,
+            flagged: !ques.flagged,
+          };
+        }
 
-      return ques;
-    });
+        return ques;
+      }),
+    };
 
     setQuestionsState(newQuestionsState);
 
-    if (reviewFlaggedQuestions && flaggedQuestions.length > 0) {
-      setCurrentFlaggedQuestion(currentFlaggedQuestion % (flaggedQuestions.length-1)); //next flagged question
+    if (onFlaggedMode && flaggedQuestions.length > 0) {
+      setCurrentFlaggedQuestion(
+        currentFlaggedQuestion % (flaggedQuestions.length - 1)
+      ); //next flagged question
     }
   };
 
@@ -53,7 +59,7 @@ function ListOfQuestionsSideBar({
     <aside className="w-full h-auto overflow-y-auto sm:w-1/3 md:w-1/4">
       <div className="top-0 pr-4 w-full grid grid-rows-1 grid-flow-col justify-items-center">
         {/* FLAGGED MODE  */}
-        {reviewFlaggedQuestions ? (
+        {onFlaggedMode ? (
           <ul className="flex flex-col space-y-2 w-full">
             {/*Flagged Question list */}
             {flaggedQuestions.length <= 0 ? (
@@ -64,11 +70,11 @@ function ListOfQuestionsSideBar({
               <>
                 <li
                   key="title"
-                  className="bg-red-500 text-white font-bold p-4 rounded shadow text-center"
+                  className="bg-orange-500 text-white font-bold p-4 rounded shadow text-center"
                 >
                   On Flagged Mode
                 </li>
-                {questionsState.map(
+                {questionsState.questions.map(
                   (ques, index) =>
                     ques.flagged && (
                       <li
@@ -95,7 +101,9 @@ function ListOfQuestionsSideBar({
                           {/* Question Number Button */}
                           <div className="flex items-center border-gray-300 justify-center">
                             <button
-                              className="rounded flex hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 px-4 py-1"
+                              className={`rounded flex px-4 py-1 hover:bg-gray-400 
+                      active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300
+                      ${currentQuestion === index && 'bg-gray-200'}`}
                               onClick={() => {
                                 setCurrentQuestion(index);
                                 handleSetCurrentFlaggedQuestion(index);
@@ -155,13 +163,15 @@ function ListOfQuestionsSideBar({
                   {/* Question Number Button */}
                   <div className="flex items-center border-gray-300 justify-center">
                     <button
-                      className="rounded flex hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 px-4 py-1"
+                      className={`rounded flex px-4 py-1 hover:bg-gray-400 
+                      active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300
+                      ${currentQuestion === index && 'bg-gray-200'}`}
                       onClick={() => {
                         setCurrentQuestion(index);
                       }}
                       key={index}
                     >
-                      <span className="">Q: {index + 1}</span>
+                      <span>Q: {index + 1}</span>
                     </button>
                   </div>
                   {/* Flag SVG Button */}

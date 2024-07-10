@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { exams } from '../../../assets/data/duplicateQuestionData.js';
+// import { exams } from '../../../assets/data/duplicateQuestionData.js';
 import { randomExams } from '../../../assets/data/randomExams.js'; //generateRandomQuestions
 import ExamScorePopUpModal from './ExamScorePopUp.jsx';
 import ListOfQuestionsSideBar from './ListOfQuestionsSideBar.jsx';
@@ -14,63 +14,50 @@ function SinglePracticeExam() {
   // const selectedExam = exams[examId]; // Find the selected exam using the examId
   const selectedExam = randomExams[examId]; //generateRandomQuestions: new selectedExam from randomExams
   const [currentQuestion, setCurrentQuestion] = useState(0); //Tracks the index of the current question being displayed.
-  const [score, setScore] = useState(0); //Holds the user's current score in the exam
   const [showPopUp, setShowPopUp] = useState(false); //Controls the visibility of the exam score pop-up modal.
   const [selectedOption, setSelectedOption] = useState(null); //Holds the ID of the selected option for the current question.
   const [selectedFlags, setSelectedFlags] = useState(
     //An array of booleans that tracks whether a question has been flagged or not.
     Array(selectedExam.questions.length).fill(false)
   );
-  const [answeredQuestions, setAnsweredQuestions] = useState([]); //An array of booleans that tracks whether a question has been answered or not.
-
-  const [unansweredQuestions, setUnansweredQuestions] = useState([
-    ...Array(selectedExam.questions.length).keys(),
-  ]);
-
-  const [questionsState, setQuestionsState] = useState(
-    selectedExam.questions.map((question, idx) => ({
-      flagged: false,
-      answered: null,
-      selectedOption: null, // Add selectedOption property for each question
-      idx: idx, // add idx property for tracking flagged question
-    }))
-  );
-
-  const [reviewFlaggedQuestions, setReviewFlaggedQuestions] = useState(false);
-
+  const [onFlaggedMode, setOnFlaggedMode] = useState(false);
   const [flaggedQuestions, setFlaggedQuestions] = useState([]);
   const [currentFlaggedQuestion, setCurrentFlaggedQuestion] = useState(0);
+  const [questionsState, setQuestionsState] = useState({
+    ...selectedExam,
+    questions: selectedExam.questions.map((question, idx) => ({
+      ...question,
+      flagged: false, //question is flagged or not
+      answered: null, //question is answered or not
+      selectedOption: null, // Add selectedOption property for each question
+      idx: idx, // add idx property for tracking flagged question
+      isCorrectAnswered: null, // answered question is correct or not
+    })),
+  });
 
   const handleOnSubmit = () => setShowPopUp(true);
 
-  const handleOptionClick = (optionId, isCorrect) => {
-    const updatedQuestionsState = questionsState.map((question, index) =>
-      index === currentQuestion
-        ? { ...question, answered: optionId, selectedOption: optionId }
-        : question
-    );
+  const handleOptionClick = (optionId) => {
+    const updatedQuestionsState = {
+      ...questionsState,
+      questions: questionsState.questions.map((question, index) => {
+        return index === currentQuestion
+          ? {
+              ...question,
+              answered: optionId,
+              selectedOption: optionId,
+              isCorrectAnswered: question.options[optionId].isCorrect,
+            }
+          : question;
+      }),
+    };
 
     setQuestionsState(updatedQuestionsState);
-
-    // Check if the user has already answered the current question
-    const hasAnswered = questionsState[currentQuestion].answered !== null;
-
-    // If the user hasn't already answered, add score
-    if (!hasAnswered) {
-      setScore((prevScore) => (isCorrect ? prevScore + 1 : prevScore));
-    }
 
     //Remember flagged items
     const newSelectedFlags = [...selectedFlags];
     newSelectedFlags[currentQuestion] = true;
     setSelectedFlags(newSelectedFlags);
-
-    const answeredQ = [...answeredQuestions];
-    answeredQ[currentQuestion] = true;
-    setAnsweredQuestions(answeredQ);
-    setUnansweredQuestions((prevUnansweredQuestions) =>
-      prevUnansweredQuestions.filter((index) => index !== currentQuestion)
-    );
   };
 
   const clickNext = () => {
@@ -85,21 +72,13 @@ function SinglePracticeExam() {
     }
   };
 
-  const restartExam = () => {
-    setScore(0);
-    setCurrentQuestion(0);
-    setSelectedFlags(Array(selectedExam.questions.length).fill(false)); // Reset selectedFlags
-  };
+  // const handleChange = (event) => {
+  //   const selectedOptionId = event.target.value;
+  //   // setSelectedOption(selectedOptionId);
+  // };
 
-  const handleChange = (event) => {
-    const selectedOptionId = event.target.value;
-    setSelectedOption(selectedOptionId);
-  };
-
-  const [displaySolution, setDisplaySolution] = useState(false);
-
-  const handleReviewFlaggedQuestionsCick = () => {
-    setReviewFlaggedQuestions(!reviewFlaggedQuestions);
+  const handleonFlaggedModeCick = () => {
+    setOnFlaggedMode(!onFlaggedMode);
   };
 
   const handleNextFlaggedQuestion = () => {
@@ -125,13 +104,15 @@ function SinglePracticeExam() {
   //continuously track the current Flagged question and current question
   useEffect(() => {
     //only run for flagged mood
-    if (!reviewFlaggedQuestions) return;
+    if (!onFlaggedMode) return;
 
     //find all flagged questions
-    setFlaggedQuestions(questionsState.filter((ques) => ques.flagged));
+    setFlaggedQuestions(
+      questionsState.questions.filter((ques) => ques.flagged)
+    );
 
     //find first flagged question = current flagged question
-    const firstFlaggedQuestionIndex = questionsState.findIndex(
+    const firstFlaggedQuestionIndex = questionsState.questions.findIndex(
       (ques) => ques.flagged
     );
 
@@ -141,31 +122,37 @@ function SinglePracticeExam() {
 
     if (flaggedQuestions.length > 1) {
       setCurrentQuestion(flaggedQuestions[currentFlaggedQuestion].idx);
+    } else {
+      setCurrentFlaggedQuestion(0); //if not do this, currentFlaggedQuestion = NaN
     }
   }, [
-    questionsState,
+    questionsState.questions,
     flaggedQuestions.length,
     currentFlaggedQuestion,
-    reviewFlaggedQuestions,
+    onFlaggedMode,
   ]);
 
   return (
-    <main className="h-screen ">
-      <div className="container h-screen mx-auto bg-gray-100">
-        <div className="flex flex-row max-h-screen p-4 gap-4">
+    <main className="h-screen">
+      <div className="container h-screen mx-auto bg-gray-100 py-2 px-2">
+        <div className="flex flex-row h-full gap-4">
           <ListOfQuestionsSideBar
             selectedExam={selectedExam}
             selectedFlags={selectedFlags}
-            setCurrentQuestion={setCurrentQuestion}
-            reviewFlaggedQuestions={reviewFlaggedQuestions}
+            onFlaggedMode={onFlaggedMode}
             questionsState={questionsState}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
             setQuestionsState={setQuestionsState}
             currentFlaggedQuestion={currentFlaggedQuestion}
             setCurrentFlaggedQuestion={setCurrentFlaggedQuestion}
             flaggedQuestions={flaggedQuestions}
           />
 
-          <section className="w-full max-h-screen sm:w-2/3 md:w-3/4 overflow-hidden grid grid-rows-6">
+          <section
+            className="w-full max-h-screen
+          sm:w-2/3 md:w-3/4 overflow-hidden grid grid-rows-6"
+          >
             {/* EXAM TAB */}
 
             <div className="row-span-5 overflow-hidden">
@@ -173,30 +160,31 @@ function SinglePracticeExam() {
               <div className="flex justify-between bg-white py-4 px-6 rounded shadow">
                 <h3 className="text-lg font-bold">{selectedExam.name}</h3>
                 <h3 className="text-lg flex">
-                  <span className="mr-4 font-bold ">Timer:</span>{' '}
-                  {displaySolution ? '00:00' : <Timer />}
+                  <span className="mr-4 font-bold ">Timer:</span> <Timer />
                 </h3>
               </div>
 
               {/* Question container */}
               <div className="bg-white px-2 py-4 rounded shadow mt-2 h-full">
                 <div className="h-90p overflow-hidden overflow-y-auto">
-                  <h3 className="text-lg font-bold mt-2">
+
+                  {/* <h3 className="text-lg font-bold mt-2">
                     Question: {currentQuestion + 1} out of{' '}
                     {selectedExam.questions.length}
-                  </h3>
+                  </h3> */}
+
                   {/* <p className="mb-4 mt-6">
                   Q: {selectedExam.questions[currentQuestion].question}
                 </p> */}
                   {/* generateRandomQuestions: format questions, break into multiple lines */}
-                  <div className="p-6 text-left">
+                  <div className="py-4 px-6 text-left">
                     {selectedExam.questions[currentQuestion].question
                       .trim()
                       .split('\n')
                       .map((line, idx) => (
                         <p className={`${idx > 1 && '&& indent-6'} `} key={idx}>
                           {idx === 0 ? (
-                            <span className="font-bold">Q: </span>
+                            <span className="font-semibold">Q - {currentQuestion + 1}: </span>
                           ) : null}
                           {line}
                         </p>
@@ -230,32 +218,18 @@ function SinglePracticeExam() {
                             name="answer"
                             value={option.id}
                             // defaultChecked={false}
-                            onChange={handleChange}
-                            onClick={() => {
-                              handleOptionClick(option.id, option.isCorrect);
+                            // onChange={handleChange}
+                            onChange={() => {
+                              handleOptionClick(option.id);
                             }}
                             checked={
-                              questionsState[currentQuestion].selectedOption ===
-                              option.id
+                              questionsState.questions[currentQuestion]
+                                .selectedOption === option.id
                             }
                           />
                           {/* generateRandomQuestions: add images for options   */}
-                          <span
-                            className={
-                              displaySolution
-                                ? selectedOption
-                                  ? option.isCorrect
-                                    ? 'bg-gradient-to-r from-green-300'
-                                    : 'bg-gradient-to-r from-red-300'
-                                  : null
-                                : null
-                            }
-                          >
-                            <p className="px-2">{option.text}</p>
-                          </span>
-                          {/* {option.image && (
-                        <img src={option.image.src} alt={option.image.alt}/>
-                      )} */}
+                          <p className="px-2">{option.text}</p>
+
                           {option.image && (
                             <img
                               src={option.image.src}
@@ -272,11 +246,11 @@ function SinglePracticeExam() {
             </div>
 
             {/* BUTTONS  */}
-            <div className="row-span-1">
-              {/* ReviewFlaggedQuestions/Next-Previous Buttons */}
-              {reviewFlaggedQuestions ? (
+            <div className="row-span-1 flex flex-col justify-between">
+              {/* onFlaggedMode/Next-Previous Buttons */}
+              {onFlaggedMode ? (
                 <>
-                  {/* ReviewFlaggedQuestions Buttons  */}
+                  {/* onFlaggedMode Buttons  */}
                   <div className="flex justify-center py-4 gap-4 text-xl">
                     <button
                       className={`px-4 py-2 rounded bg-none text-black 
@@ -319,7 +293,7 @@ function SinglePracticeExam() {
               ) : (
                 <>
                   {/* Next-Previous Buttons */}
-                  <div className="flex justify-center py-4 gap-4">
+                  {/* <div className="flex justify-center py-4 gap-4">
                     <button
                       className={`px-4 py-2 rounded text-white
                   ${
@@ -340,30 +314,71 @@ function SinglePracticeExam() {
                                         ? 'bg-slate-400'
                                         : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
                                     }`}
-                      disabled={questionsState.length <= 1}
+                      disabled={questionsState.questions.length <= 1}
                       onClick={clickNext}
                     >
                       Next
+                    </button>
+                  </div> */}
+
+                  <div className="flex justify-center py-4 gap-4 text-xl">
+                    <button
+                      className={`px-4 py-2 rounded bg-none text-black 
+                      ${
+                        currentQuestion === 0
+                          ? 'text-slate-500'
+                          : 'hover:text-slate-500 transition-colors duration-300'
+                      }`}
+                      disabled={currentQuestion === 0}
+                      onClick={clickPrevious}
+                    >
+                      <ImArrowLeft />
+                    </button>
+
+                    <div className="flex gap-4 items-center">
+                      <div className="flex gap-1 items-center">
+                        {currentQuestion + 1}
+                        <RxSlash />
+                        {questionsState.questions.length}
+                      </div>
+                    </div>
+
+                    <button
+                      className={`px-4 py-2 rounded bg-none text-black 
+                      ${
+                        currentQuestion + 1 === questionsState.questions.length
+                          ? 'text-slate-500'
+                          : 'hover:text-slate-500 transition-colors duration-300'
+                      }
+                      `}
+                      disabled={
+                        currentQuestion + 1 === questionsState.questions.length
+                      }
+                      onClick={clickNext}
+                    >
+                      <ImArrowRight />
                     </button>
                   </div>
                 </>
               )}
 
               {/* Review-Submit */}
-              <div className="bg-white py-4 rounded shadow flex gap-4 justify-center">
+              <div className="bg-white p-3 rounded shadow flex gap-4 justify-between">
                 <button
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300"
+                  className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors duration-300
+                  flex justify-between gap-2 items-center"
                   onClick={() => {
-                    handleReviewFlaggedQuestionsCick();
-                    // handleSetDefaultFlaggedQuestion();
+                    handleonFlaggedModeCick();
                   }}
                 >
-                  {reviewFlaggedQuestions
-                    ? 'Done Reviewing Flagged Questions'
-                    : 'Review Flagged Questions'}
+                  <span className='font-medium'>
+                    {onFlaggedMode ? 'Turn Off' : 'Turn On'}
+                  </span>
+                  <FaFlag />
                 </button>
                 <button
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors duration-300"
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300 
+                  font-medium"
                   onClick={handleOnSubmit}
                 >
                   Submit
@@ -374,16 +389,8 @@ function SinglePracticeExam() {
             <ExamScorePopUpModal
               visible={showPopUp}
               onClose={() => setShowPopUp(false)}
-              handleOnSubmit={handleOnSubmit}
-              displaySolution={displaySolution}
-              setDisplaySolution={setDisplaySolution}
-              selectedExam={selectedExam}
-              score={score}
-              restartExam={restartExam}
-              answeredQuestionsLength={answeredQuestions.length}
-              selectedExamQuestionsList={selectedExam.questions.length}
-              currentQuestion={currentQuestion}
-              selectedOption={selectedOption}
+              // selectedOption={selectedOption}
+              questionsState={questionsState}
             />
           </section>
         </div>

@@ -9,7 +9,7 @@ const randomExams = [
           {
             id: 0,
             text: '1.5 times the maximum considered carthquake ground motion',
-            isCorrect: false,
+            isCorrect: true,
           },
           {
             id: 1,
@@ -24,7 +24,7 @@ const randomExams = [
           {
             id: 3,
             text: '3/2 times the earthquake that has a 10% probability of being exceeded in 50 years',
-            isCorrect: true,
+            isCorrect: false,
           },
         ],
         solution:
