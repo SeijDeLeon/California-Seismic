@@ -33,6 +33,42 @@ export default function NonStructuralComponentSolution({equipment, table, tableN
                     {`\\(F_{p} = \\frac{0.4a_{p}S_{DS}W_{p}}{\\frac{R_{p}}{I_{p}}}(1 + 2\\frac{z}{h}) = \\frac{0.4(${ap})(${SDS})(${Wp})}{\\frac{${Rp}}{${Ip}}}(1 + 2\\frac{${z}}{${h}}) = ${original}\\ lb\\)`}
                 </MathJax>
             </p>
+            <br />
+            <p>
+                <MathJax>
+                    {`\\(F_{p}\\) is not required to be taken as greater than`}
+                </MathJax>
+            </p>
+            <br />
+            <p className="ml-40">
+                <MathJax>
+                    {`\\(F_{pmax} = 1.6S_{DS}I_{p}W_{p}} = 1.6(${SDS})(${Ip})(${Wp}) = ${max}\\ lb\\)`}
+                </MathJax>
+            </p>
+            <br />
+            <p>
+                <MathJax>
+                    {`and \\(F_{p}\\) shall not be taken as less than`}
+                </MathJax>
+            </p>
+            <br />
+            <p className="ml-40">
+                <MathJax>
+                    {`\\(F_{pmin} = 0.3S_{DS}I_{p}W_{p}} = 0.3(${SDS})(${Ip})(${Wp}) = ${min}\\ lb\\)`}
+                </MathJax>
+            </p>
+            <br />
+            <p>
+                <MathJax>
+                    {`\\(F_{p} = max(min(F_{p},\\ F_{pmax}),\\ F_{pmin}) = max(min(${original}\\ lb,\\ ${max}\\ lb),\\ ${min}\\ lb) = ${answer}\\ lb\\)`}
+                </MathJax>
+            </p>
+            <br />
+            <p>
+                <MathJax>
+                    {`The seismic force on the component is \\(${answer}\\ lb\\).`}
+                </MathJax>
+            </p>
         </Fragment>
     );
 }
