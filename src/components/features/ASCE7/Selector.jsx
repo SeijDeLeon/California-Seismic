@@ -5,7 +5,7 @@ import { sections as chapter11 } from "../../../assets/data/ASCE7/CH11/sections.
 import { sections as chapter12 } from "../../../assets/data/ASCE7/CH12/sections.js";
 import { sections as chapter13 } from "../../../assets/data/ASCE7/CH13/sections.js";
 import { sections as chapter20 } from "../../../assets/data/ASCE7/CH20/sections.js";
-  
+
 // chapter data
 const chapters = {
   chapter1,
@@ -29,16 +29,15 @@ const getFontSizeClass = (level) => {
 };
 // display tables/figures correctly
 const formatKey = (key) => {
-  if (key.startsWith('figure')) {
-    return `Figure ${key.replace('figure', '')}`;
-  } else if (key.startsWith('table')) {
-    return `Table ${key.replace('table', '')}`;
+  if (key.startsWith("figure")) {
+    return `Figure ${key.replace("figure", "")}`;
+  } else if (key.startsWith("table")) {
+    return `Table ${key.replace("table", "")}`;
   }
   return key;
 };
 
 const Selector = ({ handleSectionSelection }) => {
-
   // recursive function to print out titles + subsection titles
   const renderTitles = (obj) => {
     const elements = [];
@@ -46,16 +45,24 @@ const Selector = ({ handleSectionSelection }) => {
     function generateElements(subObj, level = 0) {
       for (const key in subObj) {
         if (subObj.hasOwnProperty(key)) {
-          const hasImages = !!subObj[key].imgs
+          const hasImages = !!subObj[key].imgs;
           elements.push(
             <div
               key={key}
               className={`${getMarginClass(level)} ${getFontSizeClass(
                 level
-              )} mb-2 ${hasImages ? "cursor-pointer hover:underline" : ""}`}
-              onClick={() => handleSectionSelection(key, subObj[key])}
+              )} mb-2`}
             >
-              {formatKey(key) + "\xa0\xa0" + subObj[key].title}
+              <p
+                className={`inline ${
+                  hasImages
+                    ? "cursor-pointer underline text-sky-700"
+                    : ""
+                }`}
+                onClick={() => handleSectionSelection(key, subObj[key])}
+              >
+                {formatKey(key) + "\xa0\xa0" + subObj[key].title}
+              </p>
             </div>
           );
           if (subObj[key].subsections) {
@@ -70,11 +77,11 @@ const Selector = ({ handleSectionSelection }) => {
   };
 
   return (
-    <>
+    <div className="overflow-y-scroll h-[75vh]">
       <h1 className="text-lg">Selector</h1>
-      <div className="overflow-y-scroll max-h-[70vh] text-left">
+      <div className="mt-5 text-left">
         {/* map thru all sections */}
-        {Object.keys(chapters).map((chapterKey) => ( 
+        {Object.keys(chapters).map((chapterKey) => (
           <div key={chapterKey}>
             <h2 className="text-md font-bold">
               {chapterKey.slice(0, 1).toUpperCase() +
@@ -86,7 +93,7 @@ const Selector = ({ handleSectionSelection }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

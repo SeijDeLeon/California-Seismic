@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import ASCE7 from "../ASCE7.jsx";
 
-describe("ASCE7 component with actual Viewer", () => {
+describe("ASCE7 component", () => {
   test("render default image (section 1.1)", () => {
     render(
       <MemoryRouter initialEntries={["/ASCE7"]}>

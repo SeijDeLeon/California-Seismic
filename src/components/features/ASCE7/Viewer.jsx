@@ -69,9 +69,9 @@ export default function Viewer({ section }) {
     }
   }
   return (
-    <div>
+    <div className="h-[75vh] overflow-y-auto">
       <h1 className="text-lg">{title}</h1>
-      <div className="mt-5 max-h-[70vh] overflow-y-auto">
+      <div className="mt-5">
         {images.map((image, index) => {
           const imageName = image.split("/").pop();
           return (

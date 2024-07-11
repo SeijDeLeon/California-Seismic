@@ -268,11 +268,11 @@ const sections = {
     subsections: {
       '12.11.1': {
         title: 'Design for Out-of-Plane Forces',
-        imgs: ['12.11.1.png', '12.11.2.1_1.png', '12.11.2.1_2.png', '12.11.2.1_3.png', '12.11.2.2_1.png', '12.11.2.2_2.png', '12.11.2.2_3.png',]
+        imgs: ['12.11.1.png']
       },
       '12.11.2': {
-        title: 'Anchorage of Structural Walls and Transfer of Design Forces into Diaphragms or Other Supporting Structural Elements',
-        imgs: ['12.11.2.png', '12.11.2.1_1.png', '12.11.2.1_2.png']
+        title: 'Wall Anchorage Forces',
+        imgs: ['12.11.2.1_1.png', '12.11.2.1_2.png', '12.11.2.1_3.png', '12.11.2.2_1.png', '12.11.2.2_2.png', '12.11.2.2_3.png']
       },
     },
   },
