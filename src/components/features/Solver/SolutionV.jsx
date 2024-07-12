@@ -1,5 +1,5 @@
 import React from 'react';
-import MathJax from 'react-mathjax2';
+import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const SolutionV = ({ inputs, result }) => {
   const { weights, Cs } = inputs;
@@ -10,17 +10,18 @@ const SolutionV = ({ inputs, result }) => {
   const solution = `V = ${result}`;
   
   return (
-    <MathJax.Context input="tex">
+    <MathJaxContext>
       <div>
-        <MathJax.Node>{equation}</MathJax.Node>
-        <MathJax.Node>{filledEquation}</MathJax.Node>
-        <MathJax.Node>{solution}</MathJax.Node>
+        <MathJax>{`\\(${equation}\\)`}</MathJax>
+        <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
+        <MathJax>{`\\(${solution}\\)`}</MathJax>
       </div>
-    </MathJax.Context>
+    </MathJaxContext>
   );
 };
 
 export default SolutionV;
+
 
 
 

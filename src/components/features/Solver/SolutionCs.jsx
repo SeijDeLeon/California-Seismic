@@ -1,5 +1,5 @@
 import React from 'react';
-import MathJax from 'react-mathjax2';
+import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const SolutionCs = ({ inputs, result }) => {
   const { SDS, SD1, T, Ie, R, T0, TL } = inputs;
@@ -8,13 +8,13 @@ const SolutionCs = ({ inputs, result }) => {
   const solution = `Cs = ${result}`;
 
   return (
-    <MathJax.Context input="tex">
+    <MathJaxContext>
       <div>
-        <MathJax.Node>{equation}</MathJax.Node>
-        <MathJax.Node>{filledEquation}</MathJax.Node>
-        <MathJax.Node>{solution}</MathJax.Node>
+        <MathJax>{`\\(${equation}\\)`}</MathJax>
+        <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
+        <MathJax>{`\\(${solution}\\)`}</MathJax>
       </div>
-    </MathJax.Context>
+    </MathJaxContext>
   );
 };
 
