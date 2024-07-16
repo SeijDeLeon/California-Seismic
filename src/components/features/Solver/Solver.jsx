@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import calculateCs from '../utils/calculateCs';
-import calculateV from '../utils/calculateV';
-import calculateCvx from '../utils/calculateCvx';
-import calculateFvx from '../utils/calculateFvx';
+import calculateCs from '../../../assets/data/calculations/calculateCs';
+import calculateV from '../../../assets/data/calculations/calculateV';
+import calculateCvx from '../../../assets/data/calculations/calculateCvx';
+import calculateFvx from '../../../assets/data/calculations/calculateFvx';
+import InputBlock from './InputBlock';
+import OutputBlock from './OutputBlock';
 
 const tabs = [
   { name: 'Base Shear', id: 'baseShear' },
@@ -80,6 +82,16 @@ const Solver = () => {
     return 'float';
   };
 
+  const inputFields = [
+    { label: 'S<sub>DS</sub>', name: 'SDS' },
+    { label: 'S<sub>D1</sub>', name: 'SD1' },
+    { label: 'T', name: 'T' },
+    { label: 'I<sub>e</sub>', name: 'Ie' },
+    { label: 'R', name: 'R' },
+    { label: 'T<sub>0</sub>', name: 'T0' },
+    { label: 'T<sub>L</sub>', name: 'TL' },
+  ];
+
   return (
     <div className="w-full max-w-4xl mx-auto p-6">
       <div className="border-b border-gray-200 pb-5">
@@ -101,83 +113,16 @@ const Solver = () => {
             {/* Calculate Cs Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate C<sub>s</sub></h2>
-              <div className="mb-4">
-                <label className="block mb-2">S<sub>DS</sub></label>
-                <input
-                  type="text"
-                  name="SDS"
-                  value={inputs.SDS}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('SDS')}
-                  className="w-full p-2 border rounded"
+              {inputFields.map(field => (
+                <InputBlock
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  value={inputs[field.name]}
+                  handleChange={handleChange}
+                  placeholder={getPreviewText(field.name)}
                 />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">S<sub>D1</sub></label>
-                <input
-                  type="text"
-                  name="SD1"
-                  value={inputs.SD1}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('SD1')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">T</label>
-                <input
-                  type="text"
-                  name="T"
-                  value={inputs.T}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('T')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">I<sub>e</sub></label>
-                <input
-                  type="text"
-                  name="Ie"
-                  value={inputs.Ie}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('Ie')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">R</label>
-                <input
-                  type="text"
-                  name="R"
-                  value={inputs.R}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('R')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">T<sub>0</sub></label>
-                <input
-                  type="text"
-                  name="T0"
-                  value={inputs.T0}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('T0')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">T<sub>L</sub></label>
-                <input
-                  type="text"
-                  name="TL"
-                  value={inputs.TL}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('TL')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
+              ))}
               <button
                 onClick={handleCalculateCs}
                 className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
@@ -187,10 +132,10 @@ const Solver = () => {
             </div>
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">C<sub>s</sub> Output</h2>
-              <div className="mb-4">
-                <label className="block mb-2">Seismic Response Coefficient (C<sub>s</sub>)</label>
-                <output className="w-full p-2 border rounded block">{results.Cs}</output>
-              </div>
+              <OutputBlock
+                label="Seismic Response Coefficient (C<sub>s</sub>)"
+                value={results.Cs}
+              />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
                 <p>Seismic Response Coefficient (C<sub>s</sub>): <span className="font-bold">{results.Cs}</span></p>
@@ -203,28 +148,20 @@ const Solver = () => {
             {/* Calculate V Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate V</h2>
-              <div className="mb-4">
-                <label className="block mb-2">C<sub>s</sub></label>
-                <input
-                  type="text"
-                  name="Cs"
-                  value={inputs.Cs}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('Cs')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">Weights (kip)</label>
-                <input
-                  type="text"
-                  name="weights"
-                  value={inputs.weights}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('weights')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
+              <InputBlock
+                label="C<sub>s</sub>"
+                name="Cs"
+                value={inputs.Cs}
+                handleChange={handleChange}
+                placeholder={getPreviewText('Cs')}
+              />
+              <InputBlock
+                label="Weights (kip)"
+                name="weights"
+                value={inputs.weights}
+                handleChange={handleChange}
+                placeholder={getPreviewText('weights')}
+              />
               <button
                 onClick={handleCalculateV}
                 className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
@@ -234,10 +171,10 @@ const Solver = () => {
             </div>
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">V Output</h2>
-              <div className="mb-4">
-                <label className="block mb-2">Seismic Base Shear (V)</label>
-                <output className="w-full p-2 border rounded block">{results.V}</output>
-              </div>
+              <OutputBlock
+                label="Seismic Base Shear (V)"
+                value={results.V}
+              />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
                 <p>Seismic Base Shear (V): <span className="font-bold">{results.V}</span></p>
@@ -250,28 +187,20 @@ const Solver = () => {
             {/* Calculate Cvx Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate C<sub>vx</sub></h2>
-              <div className="mb-4">
-                <label className="block mb-2">Weights (kip)</label>
-                <input
-                  type="text"
-                  name="weights"
-                  value={inputs.weights}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('weights')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">Heights (ft)</label>
-                <input
-                  type="text"
-                  name="heights"
-                  value={inputs.heights}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('heights')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
+              <InputBlock
+                label="Weights (kip)"
+                name="weights"
+                value={inputs.weights}
+                handleChange={handleChange}
+                placeholder={getPreviewText('weights')}
+              />
+              <InputBlock
+                label="Heights (ft)"
+                name="heights"
+                value={inputs.heights}
+                handleChange={handleChange}
+                placeholder={getPreviewText('heights')}
+              />
               <button
                 onClick={handleCalculateCvx}
                 className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
@@ -281,44 +210,30 @@ const Solver = () => {
             </div>
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">C<sub>vx</sub> Output</h2>
-              <div className="mb-4">
-                <label className="block mb-2">Vertical Distribution Factor (C<sub>vx</sub>)</label>
-                <output className="w-full p-2 border rounded block">{results.Cvx.join(', ')}</output>
-              </div>
+              <OutputBlock
+                label="Vertical Distribution Factor (C<sub>vx</sub>)"
+                value={JSON.stringify(results.Cvx)}
+              />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
-                <p>Vertical Distribution Factor (C<sub>vx</sub>): <span className="font-bold">{results.Cvx.join(', ')}</span></p>
+                <p>Vertical Distribution Factor (C<sub>vx</sub>): <span className="font-bold">{JSON.stringify(results.Cvx)}</span></p>
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
-                {`Cvx: [${results.Cvx.join(', ')}]`}
+                {`Cvx: ${JSON.stringify(results.Cvx)}`}
               </pre>
             </div>
             {/* Calculate Fvx Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate F<sub>vx</sub></h2>
-              <div className="mb-4">
-                <label className="block mb-2">C<sub>vx</sub></label>
-                <input
-                  type="text"
-                  name="Cvx"
-                  value={inputs.Cvx}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('Cvx')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2">Seismic Base Shear (V)</label>
-                <input
-                  type="text"
-                  name="V"
-                  value={inputs.V}
-                  onChange={handleChange}
-                  placeholder={getPreviewText('V')}
-                  className="w-full p-2 border rounded"
-                />
-              </div>
+              <OutputBlock
+                label="Vertical Distribution Factor (C<sub>vx</sub>)"
+                value={JSON.stringify(results.Cvx)}
+              />
+              <OutputBlock
+                label="Seismic Base Shear (V)"
+                value={results.V}
+              />
               <button
                 onClick={handleCalculateFvx}
                 className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
@@ -328,31 +243,19 @@ const Solver = () => {
             </div>
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">F<sub>vx</sub> Output</h2>
-              <div className="mb-4">
-                <label className="block mb-2">Story Force (F<sub>vx</sub>)</label>
-                <output className="w-full p-2 border rounded block">{results.Fvx.join(', ')}</output>
-              </div>
+              <OutputBlock
+                label="Vertical Force Distribution (F<sub>vx</sub>)"
+                value={JSON.stringify(results.Fvx)}
+              />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
-                <p>Story Force (F<sub>vx</sub>): <span className="font-bold">{results.Fvx.join(', ')}</span></p>
+                <p>Vertical Force Distribution (F<sub>vx</sub>): <span className="font-bold">{JSON.stringify(results.Fvx)}</span></p>
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
-                {`Fvx: [${results.Fvx.join(', ')}]`}
+                {`Fvx: ${JSON.stringify(results.Fvx)}`}
               </pre>
             </div>
-          </div>
-        )}
-        {activeTab === 'other1' && (
-          <div className="p-4">
-            <h2 className="text-lg font-medium mb-4">Other Calculation 1</h2>
-            {/* Other Calculation 1 content */}
-          </div>
-        )}
-        {activeTab === 'other2' && (
-          <div className="p-4">
-            <h2 className="text-lg font-medium mb-4">Other Calculation 2</h2>
-            {/* Other Calculation 2 content */}
           </div>
         )}
       </div>
@@ -361,6 +264,3 @@ const Solver = () => {
 };
 
 export default Solver;
-
-
-

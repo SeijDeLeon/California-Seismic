@@ -19,6 +19,7 @@ import USGS from "./routes/USGS.jsx";
 import PracticeRandom from "./routes/PracticeRandom.jsx";
 import ASCE7 from "./routes/ASCE7.jsx";
 import BaseShearApp from "./routes/BaseShearApp.jsx";
+import Solver from "./routes/SolverPage.jsx";
 import Demo from "./routes/Demo.jsx";
 
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/ASCE7" element={<ASCE7 />} />
         <Route path="/ASCE7/:sectionParam" element={<ASCE7 />} />
         <Route path="/baseshear" element={<BaseShearApp />} />
+        <Route path="/solver/interface" element={<Solver />} />
         <Route path="/demo" element={<Demo visible={true} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
