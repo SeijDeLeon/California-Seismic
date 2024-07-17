@@ -1,9 +1,9 @@
 import fundamentalPeriodImage from "./fundmentalPeriod.png";
 import { MathJax } from "better-react-mathjax";
-import calculateFp from '../../../assets/data/calculations/calculateFp';
+import calculateFpOriginal from '../../../assets/data/calculations/calculateFpOriginal';
 import calculateFpmax from '../../../assets/data/calculations/calculateFpmax';
 import calculateFpmin from '../../../assets/data/calculations/calculateFpmin';
-import calculateFpOriginal from '../../../assets/data/calculations/calculateFpOriginal';
+import calculateFp from '../../../assets/data/calculations/calculateFp';
 import NonStructuralComponentSolution from './NonStructuralComponentSolution';
 
 const shuffleArray = (array) => {
@@ -58,10 +58,10 @@ export const nonStructuralComponent = () => {
           \\(${z}\\ ft\\) from the ground level. \\(S_{DS}\\ =\\ ${SDS}\\)`;
   let question = <MathJax>{questionText}</MathJax>
   let image = fundamentalPeriodImage;
-  let answer = calculateFp(ap, SDS, Wp, Rp, Ip, z, h);
+  let original = calculateFpOriginal(ap, SDS, Wp, Rp, Ip, z, h);
   let max = calculateFpmax(SDS, Wp, Ip);
   let min = calculateFpmin(SDS, Wp, Ip);
-  let original = calculateFpOriginal(ap, SDS, Wp, Rp, Ip, z, h);
+  let answer = calculateFp(original, max, min);
   let choices = shuffleArray([
     answer,
     answer - randomValGen(1, 2),
@@ -80,10 +80,10 @@ export const nonStructuralComponent = () => {
       Ip={Ip}
       z={z}
       h={h}
-      answer={answer}
+      original={original}
       max={max}
       min={min}
-      original={original}
+      answer={answer}
     />
   );
 

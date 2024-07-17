@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { MathJax } from "better-react-mathjax";
-export default function NonStructuralComponentSolution({equipment, table, tableName, ap, SDS, Wp, Rp, Ip, z, h, answer, max, min, original} ) {
+export default function NonStructuralComponentSolution({equipment, table, tableName, ap, SDS, Wp, Rp, Ip, z, h, original, max, min, answer} ) {
     return (
         <Fragment>
             <p>To determine the component force, use Section 13 of ASCE 7.</p>
