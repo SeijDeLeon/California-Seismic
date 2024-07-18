@@ -273,7 +273,7 @@ export default function Header() {
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-10" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel className="border-red-500 fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <NavLink to="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">California Seismic</span>
@@ -308,26 +308,26 @@ export default function Header() {
                             aria-hidden="true"
                           />
                         </Disclosure.Button>
-                        <Link></Link>
+
                         <Disclosure.Panel className="mt-2 space-y-2">
                           {[...callsToAction, ...products].map(
                             (item, index) => (
-                              <Disclosure.Button
-                                key={item.name}
-                                as="a"
-                                className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                              <Link
+                                to={
+                                  index === 0
+                                    ? item.href
+                                    : `lectures/${item.href}`
+                                }
+                                onClick={() => setMobileMenuOpen(false)}
                               >
-                                <Link
-                                  to={
-                                    index === 0
-                                      ? item.href
-                                      : `lectures/${item.href}`
-                                  }
-                                  onClick={() => setMobileMenuOpen(false)}
+                                <Disclosure.Button
+                                  key={item.name}
+                                  as="a"
+                                  className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                   {item.name}
-                                </Link>
-                              </Disclosure.Button>
+                                </Disclosure.Button>
+                              </Link>
                             )
                           )}
                         </Disclosure.Panel>
