@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { MathJax } from "better-react-mathjax";
-export default function NonStructuralComponentSolution({equipment, table, tableName, ap, SDS, Wp, Rp, Ip, z, h, original, max, min, answer} ) {
+export default function NonStructuralComponentSolution({equipment, table, tableName, ap, SDS, Wp, Rp, Ip, z, h, Fp_original, Fp_max, Fp_min, answer} ) {
+    // Renamed Fp_original, Fp_max, and Fp_min.
     return (
         <Fragment>
             <p>To determine the component force, use Section 13 of ASCE 7.</p>
@@ -30,7 +31,7 @@ export default function NonStructuralComponentSolution({equipment, table, tableN
             <br />
             <p className="ml-40">
                 <MathJax>
-                    {`\\(F_{p} = \\frac{0.4a_{p}S_{DS}W_{p}}{\\frac{R_{p}}{I_{p}}}(1 + 2\\frac{z}{h}) = \\frac{0.4(${ap})(${SDS})(${Wp})}{\\frac{${Rp}}{${Ip}}}(1 + 2\\frac{${z}}{${h}}) = ${original}\\ lb\\)`}
+                    {`\\(F_{p} = \\frac{0.4a_{p}S_{DS}W_{p}}{\\frac{R_{p}}{I_{p}}}(1 + 2\\frac{z}{h}) = \\frac{0.4(${ap})(${SDS})(${Wp})}{\\frac{${Rp}}{${Ip}}}(1 + 2\\frac{${z}}{${h}}) = ${Fp_original}\\ lb\\)`}
                 </MathJax>
             </p>
             <br />
@@ -42,7 +43,7 @@ export default function NonStructuralComponentSolution({equipment, table, tableN
             <br />
             <p className="ml-40">
                 <MathJax>
-                    {`\\(F_{pmax} = 1.6S_{DS}I_{p}W_{p}} = 1.6(${SDS})(${Ip})(${Wp}) = ${max}\\ lb\\)`}
+                    {`\\(F_{pmax} = 1.6S_{DS}I_{p}W_{p}} = 1.6(${SDS})(${Ip})(${Wp}) = ${Fp_max}\\ lb\\)`}
                 </MathJax>
             </p>
             <br />
@@ -54,13 +55,13 @@ export default function NonStructuralComponentSolution({equipment, table, tableN
             <br />
             <p className="ml-40">
                 <MathJax>
-                    {`\\(F_{pmin} = 0.3S_{DS}I_{p}W_{p}} = 0.3(${SDS})(${Ip})(${Wp}) = ${min}\\ lb\\)`}
+                    {`\\(F_{pmin} = 0.3S_{DS}I_{p}W_{p}} = 0.3(${SDS})(${Ip})(${Wp}) = ${Fp_min}\\ lb\\)`}
                 </MathJax>
             </p>
             <br />
             <p>
                 <MathJax>
-                    {`\\(F_{p} = max(min(F_{p},\\ F_{pmax}),\\ F_{pmin}) = max(min(${original}\\ lb,\\ ${max}\\ lb),\\ ${min}\\ lb) = ${answer}\\ lb\\)`}
+                    {`\\(F_{p} = max(min(F_{p},\\ F_{pmax}),\\ F_{pmin}) = max(min(${Fp_original}\\ lb,\\ ${Fp_max}\\ lb),\\ ${Fp_min}\\ lb) = ${answer}\\ lb\\)`}
                 </MathJax>
             </p>
             <br />
