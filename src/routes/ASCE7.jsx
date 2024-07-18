@@ -1,51 +1,54 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-// import data from somewhere. for now, create a small data object
-const fakeData = {
-  '12.1.1' : {
-    title: 'Basic Requirements',
-    body: 'The seismic analysis and design procedures to be used in the design of building structures....',
-    img: 'image goes here. this should be a reference to an image in the public/images/ASCE7/CHx folder.'
-  }
-};
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import Selector from "../components/features/ASCE7/Selector";
+import Viewer from "../components/features/ASCE7/Viewer";
 
 export default function ASCE7() {
+  const { sectionParam } = useParams();
+  const [ section, setSection ] = useState(sectionParam || "1.1");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [indexClicked, setIndexClicked] = useState(false);
+  const navigate = useNavigate();
+  const viewerRef = useRef(null);
 
-  //if this functionality requires more than a single component, then all components need to go into a ASCE7 folder in components/features/ASCE7 and should be imported into this file.
-  //text data for ASCE7 may live within the src/assets/data/ASCE7/CHX folder. Images should be kept in public/images/ASCE7 so that we avoid having to bundle them and load them in our main website.
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  //this function should accept parameters corresponding to a specific code section.
-  //if no parameters are found, (indicating that the url is californiaseismic.com/ASCE7) then we should have a minimal display of all available sections that can be displayed as links.
-  //If a user clicks the link, the section should appear in a box below or to the right of the link list (without using react router)
+  useEffect(() => {
+    setSection(sectionParam || "1.1")
+  }, [sectionParam])
 
-  const { sectionParam } = useParams(); //retrieve section from url. This is a string value. this 'section' key exactly matches the :section in the route path in App.js, if one changes so must the other
-  console.log({sectionParam});
+  useEffect(() => {
+    if (isMobile && indexClicked && viewerRef.current) { // Check if index was clicked
+      viewerRef.current.scrollIntoView({ behavior: 'smooth' });
+      setIndexClicked(false); // Reset the click state
+    }
+  }, [section, isMobile, indexClicked]);
 
-  const [ section, setSection ] = useState(sectionParam); //hold state variable which will trigger render of new content if link is clicked
+  const handleSectionSelection = (key, obj) => {
+    if (obj.imgs) {
+      setSection(key);
+      setIndexClicked(true);
+      navigate(`/ASCE7/${key}`)
+    }
+  };
 
-  const handleSectionLinkClick = (key) => {
-    //logic here
-  }
-
-  if ( section in fakeData) {
-    return (
-      <h1>We found the section. Display it here</h1>
-    )
-  } else {
-    return (
-      <main>
-        <h1>We didn't find the section, or you navigated to the /ASCE7 path without any additional params.</h1>
-        <ul>
-          {Object.keys(fakeData).map((key) => {
-            return (
-              <li key={key}>
-                <p>{key}</p>
-                <p>{fakeData[key].title}</p>
-              </li>
-            )
-          })}
-        </ul>
-      </main>
-    )
-  }
+  return (
+    <section>
+      <h1 className="text-center text-4xl my-4">ASCE7</h1>
+      <div className="flex flex-col items-center md:flex-row justify-between p-5 mx-4 gap-2 h-full md:h-[85vh] 2xl:max-w-screen-2xl 2xl:mx-auto">
+        <div className="w-4/5 md:w-1/2 border border-gray-300 bg-gray-100 p-4">
+          <Selector
+            handleSectionSelection={handleSectionSelection}
+          />
+        </div>
+        <div ref={viewerRef} className="w-4/5 md:w-1/2 border border-gray-300 p-4">
+          <Viewer section={section} />
+        </div>
+      </div>
+    </section>
+  );
 }
