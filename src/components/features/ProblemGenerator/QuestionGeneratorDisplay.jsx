@@ -5,7 +5,7 @@ import Tooltip from "../../common/Tooltip";
 const QuestionGeneratorDisplay = () => {
   const categories = [
     "Fundamental Period",
-    "Category 2",
+    "Nonstructural Component",
     "Category 3",
     "Category 4",
     "Category 5",
@@ -33,7 +33,7 @@ const QuestionGeneratorDisplay = () => {
           <div
             key={item}
             className="border-2 rounded-lg cursor-pointer font-bold hover:bg-slate-300"
-            onClick={(e) => setCategory(e.target.value)}
+            onClick={() => setCategory(item)}
           >
             {item}
           </div>

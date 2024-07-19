@@ -60,5 +60,6 @@ export const fundamentalPeriod = () => {
     choices: choices,
     answer: answer,
     solution: solution,
+    label: "s",
   };
 };

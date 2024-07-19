@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import generatorLogic from "./GeneratorLogic";
-import { ForwardIcon } from "@heroicons/react/24/solid";
+import { ForwardIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
 
 const Question = ({ category, answeredCorrect }) => {
   const [question, setQuestion] = useState({
@@ -14,7 +14,9 @@ const Question = ({ category, answeredCorrect }) => {
   const [chosen, setChosen] = useState(null);
   const [isCorrect, setIsCorrect] = useState(false);
   const colorRef = useRef();
-  useEffect(() => setQuestion(generatorLogic(category)), []);
+  useEffect(() => {
+    setQuestion(generatorLogic(category));
+  }, [category]);
 
   const handleSubmit = () => {
     setShowSolution(true);
@@ -58,7 +60,7 @@ const Question = ({ category, answeredCorrect }) => {
                 setChosen(parseFloat(e.target.value));
               }}
             >
-              {choice} s
+              {choice} {question.label}
             </button>
           ))}
         </div>
@@ -91,9 +93,10 @@ const Question = ({ category, answeredCorrect }) => {
                 answeredCorrect(0);
               }
               setSubmitted(false);
+              setViewSolution(false);
             }}
           >
-            Next <ForwardIcon className="h-5 w-5" />
+            Regenerate <ArrowPathIcon className="h-5 w-5" />
           </div>
         </div>
         {viewSolution && <div>{question.solution}</div>}
