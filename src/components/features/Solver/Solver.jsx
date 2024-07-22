@@ -3,12 +3,18 @@ import calculateCs from '../../../assets/data/calculations/calculateCs';
 import calculateV from '../../../assets/data/calculations/calculateV';
 import calculateCvx from '../../../assets/data/calculations/calculateCvx';
 import calculateFvx from '../../../assets/data/calculations/calculateFvx';
+import calculateStiffness from '../../../assets/data/calculations/calculateStiffness';
+import calculateFundamentalPeriod from '../../../assets/data/calculations/calculateFundamentalPeriod';
 import InputBlock from './InputBlock';
 import OutputBlock from './OutputBlock';
+import SolutionCs from './SolutionCs';
+import SolutionV from './SolutionV';
+import SolutionCvx from './SolutionCvx';
+import SolutionFvx from './SolutionFvx';
 
 const tabs = [
   { name: 'Base Shear', id: 'baseShear' },
-  { name: 'Other', id: 'other1' },
+  { name: 'Fundamental Period', id: 'fundamentalPeriod' },
   { name: 'Other', id: 'other2' },
 ];
 
@@ -25,6 +31,10 @@ const Solver = () => {
     Cs: '',
     weights: '',
     heights: '',
+    E: '',
+    I: '',
+    h: '',
+    W: '',
   });
 
   const [results, setResults] = useState({
@@ -32,6 +42,8 @@ const Solver = () => {
     V: '',
     Cvx: [],
     Fvx: [],
+    stiffness: '',
+    fundamentalPeriod: '',
   });
 
   const handleChange = (e) => {
@@ -75,21 +87,41 @@ const Solver = () => {
     setResults({ ...results, Fvx: Fvx.map(f => f.toFixed(4)) });
   };
 
+  const handleCalculateStiffness = () => {
+    const { E, I, h } = inputs;
+    const stiffness = calculateStiffness(parseFloat(E), parseFloat(I), parseFloat(h));
+    setResults({ ...results, stiffness: stiffness.toFixed(4) });
+  };
+
+  const handleCalculateFundamentalPeriod = () => {
+    const { W } = inputs;
+    const { stiffness } = results;
+    const fundamentalPeriod = calculateFundamentalPeriod(parseFloat(W), parseFloat(stiffness));
+    setResults({ ...results, fundamentalPeriod: fundamentalPeriod.toFixed(4) });
+  };
+
   const getPreviewText = (name) => {
-    if (name === 'weights' || name === 'heights') {
+    if (name === 'weights' || name === 'heights' || name === 'Cvx') {
       return '[float, float, ...]';
     }
     return 'float';
   };
 
-  const inputFields = [
-    { label: 'S<sub>DS</sub>', name: 'SDS' },
-    { label: 'S<sub>D1</sub>', name: 'SD1' },
+  const inputFieldsBaseShear = [
+    { label: <span>S<sub>DS</sub></span>, name: 'SDS' },
+    { label: <span>S<sub>D1</sub></span>, name: 'SD1' },
     { label: 'T', name: 'T' },
-    { label: 'I<sub>e</sub>', name: 'Ie' },
+    { label: <span>I<sub>e</sub></span>, name: 'Ie' },
     { label: 'R', name: 'R' },
-    { label: 'T<sub>0</sub>', name: 'T0' },
-    { label: 'T<sub>L</sub>', name: 'TL' },
+    { label: <span>T<sub>0</sub></span>, name: 'T0' },
+    { label: <span>T<sub>L</sub></span>, name: 'TL' },
+  ];
+
+  const inputFieldsFundamentalPeriod = [
+    { label: 'E', name: 'E' },
+    { label: 'I', name: 'I' },
+    { label: 'h', name: 'h' },
+    { label: 'W', name: 'W' },
   ];
 
   return (
@@ -113,7 +145,7 @@ const Solver = () => {
             {/* Calculate Cs Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate C<sub>s</sub></h2>
-              {inputFields.map(field => (
+              {inputFieldsBaseShear.map(field => (
                 <InputBlock
                   key={field.name}
                   label={field.label}
@@ -133,23 +165,24 @@ const Solver = () => {
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">C<sub>s</sub> Output</h2>
               <OutputBlock
-                label="Seismic Response Coefficient (C<sub>s</sub>)"
+                label={<span>Seismic Response Coefficient (C<sub>s</sub>)</span>}
                 value={results.Cs}
               />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
                 <p>Seismic Response Coefficient (C<sub>s</sub>): <span className="font-bold">{results.Cs}</span></p>
+                <SolutionCs inputs={inputs} result={results.Cs} />
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
-                {`Cs: ${results.Cs}`}
+                {`{Cs: ${results.Cs}}`}
               </pre>
             </div>
             {/* Calculate V Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate V</h2>
               <InputBlock
-                label="C<sub>s</sub>"
+                label={<span>C<sub>s</sub></span>}
                 name="Cs"
                 value={inputs.Cs}
                 handleChange={handleChange}
@@ -178,15 +211,16 @@ const Solver = () => {
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
                 <p>Seismic Base Shear (V): <span className="font-bold">{results.V}</span></p>
+                <SolutionV inputs={inputs} result={results.V} />
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
-                {`V: ${results.V}`}
+                {`{V: ${results.V}}`}
               </pre>
             </div>
             {/* Calculate Cvx Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
-              <h2 className="text-lg font-medium mb-4">Calculate C<sub>vx</sub></h2>
+            <h2 className="text-lg font-medium mb-4">Calculate C<sub>vx</sub></h2>
               <InputBlock
                 label="Weights (kip)"
                 name="weights"
@@ -211,28 +245,35 @@ const Solver = () => {
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">C<sub>vx</sub> Output</h2>
               <OutputBlock
-                label="Vertical Distribution Factor (C<sub>vx</sub>)"
-                value={JSON.stringify(results.Cvx)}
+                label={<span>Vertical Distribution Factor (C<sub>vx</sub>)</span>}
+                value={results.Cvx.join(', ')}
               />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
-                <p>Vertical Distribution Factor (C<sub>vx</sub>): <span className="font-bold">{JSON.stringify(results.Cvx)}</span></p>
+                <p>Vertical Distribution Factor (C<sub>vx</sub>): <span className="font-bold">{results.Cvx.join(', ')}</span></p>
+                <SolutionCvx inputs={inputs} result={results.Cvx} />
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
-                {`Cvx: ${JSON.stringify(results.Cvx)}`}
+                {`{Cvx: [${results.Cvx.join(', ')}]}`}
               </pre>
             </div>
             {/* Calculate Fvx Section */}
             <div className="bg-yellow-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">Calculate F<sub>vx</sub></h2>
-              <OutputBlock
-                label="Vertical Distribution Factor (C<sub>vx</sub>)"
-                value={JSON.stringify(results.Cvx)}
+              <InputBlock
+                label={<span>C<sub>vx</sub></span>}
+                name="Cvx"
+                value={inputs.Cvx}
+                handleChange={handleChange}
+                placeholder={getPreviewText('Cvx')}
               />
-              <OutputBlock
-                label="Seismic Base Shear (V)"
-                value={results.V}
+              <InputBlock
+                label="V (kip)"
+                name="V"
+                value={inputs.V}
+                handleChange={handleChange}
+                placeholder={getPreviewText('V')}
               />
               <button
                 onClick={handleCalculateFvx}
@@ -244,16 +285,95 @@ const Solver = () => {
             <div className="bg-blue-100 rounded-lg p-4">
               <h2 className="text-lg font-medium mb-4">F<sub>vx</sub> Output</h2>
               <OutputBlock
-                label="Vertical Force Distribution (F<sub>vx</sub>)"
-                value={JSON.stringify(results.Fvx)}
+                label={<span>Story Shear (F<sub>vx</sub>)</span>}
+                value={results.Fvx.join(', ')}
               />
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
-                <p>Vertical Force Distribution (F<sub>vx</sub>): <span className="font-bold">{JSON.stringify(results.Fvx)}</span></p>
+                <p>Story Shear (F<sub>vx</sub>): <span className="font-bold">{results.Fvx.join(', ')}</span></p>
+                <SolutionFvx inputs={inputs} result={results.Fvx} />
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
-                {`Fvx: ${JSON.stringify(results.Fvx)}`}
+                {`{Fvx: [${results.Fvx.join(', ')}]}`}
+              </pre>
+            </div>
+          </div>
+        )}
+        {activeTab === 'fundamentalPeriod' && (
+          <div className="grid grid-cols-2 gap-4">
+            {/* Calculate Stiffness Section */}
+            <div className="bg-yellow-100 rounded-lg p-4">
+              <h2 className="text-lg font-medium mb-4">Calculate Stiffness</h2>
+              {inputFieldsFundamentalPeriod.slice(0, 3).map(field => (
+                <InputBlock
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  value={inputs[field.name]}
+                  handleChange={handleChange}
+                  placeholder={getPreviewText(field.name)}
+                />
+              ))}
+              <button
+                onClick={handleCalculateStiffness}
+                className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
+              >
+                Calculate Stiffness
+              </button>
+            </div>
+            <div className="bg-blue-100 rounded-lg p-4">
+              <h2 className="text-lg font-medium mb-4">Stiffness Output</h2>
+              <OutputBlock
+                label="Stiffness (k)"
+                value={results.stiffness}
+              />
+              <h3 className="text-md font-medium mb-4">Formatted Output</h3>
+              <div className="border p-4 rounded mb-4">
+                <p>Stiffness (k): <span className="font-bold">{results.stiffness}</span></p>
+              </div>
+              <h3 className="text-md font-medium mb-4">Code Output</h3>
+              <pre className="bg-gray-100 p-4 rounded">
+                {`{stiffness: ${results.stiffness}}`}
+              </pre>
+            </div>
+            {/* Calculate Fundamental Period Section */}
+            <div className="bg-yellow-100 rounded-lg p-4">
+              <h2 className="text-lg font-medium mb-4">Calculate Fundamental Period</h2>
+              <InputBlock
+                label="Stiffness (k)"
+                name="stiffness"
+                value={inputs.stiffness}
+                handleChange={handleChange}
+                placeholder={getPreviewText('stiffness')}
+              />
+              <InputBlock
+                label="Weight (W)"
+                name="W"
+                value={inputs.W}
+                handleChange={handleChange}
+                placeholder={getPreviewText('W')}
+              />
+              <button
+                onClick={handleCalculateFundamentalPeriod}
+                className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
+              >
+                Calculate Fundamental Period
+              </button>
+            </div>
+            <div className="bg-blue-100 rounded-lg p-4">
+              <h2 className="text-lg font-medium mb-4">Fundamental Period Output</h2>
+              <OutputBlock
+                label="Fundamental Period (T)"
+                value={results.fundamentalPeriod}
+              />
+              <h3 className="text-md font-medium mb-4">Formatted Output</h3>
+              <div className="border p-4 rounded mb-4">
+                <p>Fundamental Period (T): <span className="font-bold">{results.fundamentalPeriod}</span></p>
+              </div>
+              <h3 className="text-md font-medium mb-4">Code Output</h3>
+              <pre className="bg-gray-100 p-4 rounded">
+                {`{fundamentalPeriod: ${results.fundamentalPeriod}}`}
               </pre>
             </div>
           </div>
