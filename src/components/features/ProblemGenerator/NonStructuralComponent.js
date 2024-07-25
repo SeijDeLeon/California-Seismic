@@ -32,28 +32,26 @@ const heightOptions = [
     24
 ]; // ft
 
+function getRandomFromKeyValueList(list) {
+  if (!list || typeof list !== 'object') {
+      console.error("Invalid list:", list);
+      return null;
+  }
+  const keys = Object.keys(list);
+  if (keys.length === 0) {
+      console.error("List is empty:", list);
+      return null;
+  }
+  const randomIndex = Math.floor(Math.random() * keys.length);
+  const randomKey = keys[randomIndex];
+  return { key: randomKey, value: list[randomKey] };
+}
+
 export const nonStructuralComponent = () => {
   const SDS = randomValGenSmall(0.8, 1.8);
   const Wp = randomValGen(20, 40); // lb
 
-  function getRandomEquipment(equipment) {
-    if (!equipment || typeof equipment !== 'object') {
-      console.error("Invalid equipment list:", equipment);
-      return null;
-    }
-  
-    const keys = Object.keys(equipment);
-    if (keys.length === 0) {
-      console.error("Equipment list is empty:", equipment);
-      return null;
-    }
-  
-    const randomIndex = Math.floor(Math.random() * keys.length);
-    const randomKey = keys[randomIndex];
-    return { key: randomKey, value: equipment[randomKey] };
-  }
-
-  const selectedEquipment = getRandomEquipment(equipment);
+  const selectedEquipment = getRandomFromKeyValueList(equipment);
   const { key: equipmentName, value: equipmentDetails } = selectedEquipment;
   const { ap, Rp, attachmentPoint, table, tableName } = equipmentDetails;
   const randomHeightIndex = Math.floor(Math.random() * heightOptions.length);

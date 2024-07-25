@@ -1,5 +1,6 @@
 import { fundamentalPeriod } from "./FundamentalPeriod";
 import { nonStructuralComponent } from "./NonStructuralComponent";
+import { baseShear } from "./BaseShear";
 
 const generatorLogic = (category) => {
   switch (category) {
@@ -7,7 +8,9 @@ const generatorLogic = (category) => {
       return fundamentalPeriod();
     case "Nonstructural Component":
       return nonStructuralComponent();
-    case "category3":
+    case "Base Shear":
+      return baseShear();
+    case "category4":
       break;
     default:
     //  code...

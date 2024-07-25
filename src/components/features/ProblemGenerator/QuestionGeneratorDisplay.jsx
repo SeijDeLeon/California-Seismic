@@ -6,7 +6,7 @@ const QuestionGeneratorDisplay = () => {
   const categories = [
     "Fundamental Period",
     "Nonstructural Component",
-    "Category 3",
+    "Base Shear",
     "Category 4",
     "Category 5",
     "Category 6",

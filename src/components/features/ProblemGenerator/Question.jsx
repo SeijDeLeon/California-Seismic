@@ -16,6 +16,9 @@ const Question = ({ category, answeredCorrect }) => {
   const colorRef = useRef();
   useEffect(() => {
     setQuestion(generatorLogic(category));
+    setViewSolution(false);
+    setShowSolution(false);
+    setSubmitted(false);
   }, [category]);
 
   const handleSubmit = () => {
