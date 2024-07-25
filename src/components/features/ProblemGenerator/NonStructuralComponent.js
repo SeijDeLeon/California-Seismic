@@ -17,13 +17,16 @@ const randomValGen = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
 const randomValGenSmall = (min, max) =>
-  (Math.random() * (max - min) + min).toFixed(1);
+  parseFloat((Math.random() * (max - min) + min).toFixed(1));
+
+const randomValGenSmaller = (min, max) =>
+  parseFloat((Math.random() * (max - min) + min).toFixed(2));
 
 const equipment = {
-  "Interior partial height partition wall": { ap: 1.0, Rp: 2.5, attachmentPoint: "ground", table: "13.5-1", tableName: "All other walls and partitions" },
-  "Ductwork with high deformability and welded joints": { ap: 2.5, Rp: 9.0, attachmentPoint: "second floor", table: "13.6-1", tableName: "Ductwork, including in-line components, constructed of high-deformability materials, with joints made by welding or brazing" },
-  "Cabinet": { ap: 1.0, Rp: 2.5, attachmentPoint: "second floor", table: "13.5-1", tableName: "Cabinets" },
-  "Air handling unit": { ap: 2.5, Rp: 6.0, attachmentPoint: "roof", table: "13.6-1", tableName: "Airside HV ACR, fans, air handlers, air conditioning units, cabinet heaters, air distribution boxes, and other mechanical components constructed of sheet metal framing" }
+  "interior partial height partition wall": { ap: 1.0, Rp: 2.5, attachmentPoint: "ground", table: "13.5-1", tableName: "All other walls and partitions" },
+  "ductwork with high deformability and welded joints": { ap: 2.5, Rp: 9.0, attachmentPoint: "second floor", table: "13.6-1", tableName: "Ductwork, including in-line components, constructed of high-deformability materials, with joints made by welding or brazing" },
+  "cabinet": { ap: 1.0, Rp: 2.5, attachmentPoint: "second floor", table: "13.5-1", tableName: "Cabinets" },
+  "air handling unit": { ap: 2.5, Rp: 6.0, attachmentPoint: "roof", table: "13.6-1", tableName: "Airside HV ACR, fans, air handlers, air conditioning units, cabinet heaters, air distribution boxes, and other mechanical components constructed of sheet metal framing" }
   };
 const heightOptions = [
     16,
@@ -77,13 +80,39 @@ export const nonStructuralComponent = () => {
   let Fp_max = calculateFpmax(SDS, Wp, Ip);
   let Fp_min = calculateFpmin(SDS, Wp, Ip);
   let answer = calculateFp(Fp_original, Fp_max, Fp_min);
-  //we will want to customize the fake choices later. probably they should be Fpmax , Fpmin, and something else.
-  let choices = shuffleArray([
-    answer,
-    answer - randomValGen(1, 2),
-    answer + randomValGen(1, 2),
-    answer + randomValGen(3, 6),
-  ]);
+  let choices;
+  if (answer === Fp_original) {
+    choices = shuffleArray([
+      answer,
+      Fp_max,
+      Fp_min,
+      answer + randomValGenSmaller(0, 1),
+    ]);
+  }
+  else if (answer === Fp_max) {
+    choices = shuffleArray([
+      answer,
+      Fp_original,
+      Fp_min,
+      answer + randomValGenSmaller(0, 1),
+    ]);
+  }
+  else if (answer === Fp_min) {
+    choices = shuffleArray([
+      answer,
+      Fp_original,
+      Fp_max,
+      answer - randomValGenSmaller(0, 1),
+    ]);
+  }
+  else {
+    choices = shuffleArray([
+      answer,
+      answer - randomValGen(1, 2),
+      answer + randomValGen(1, 2),
+      answer + randomValGen(3, 6),
+    ]);
+  }
   let solution = (
     <NonStructuralComponentSolution
       equipmentName={equipmentName}

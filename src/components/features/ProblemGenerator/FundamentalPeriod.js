@@ -1,6 +1,9 @@
 import fundamentalPeriodImage from "./fundmentalPeriod.png";
 import { MathJax } from "better-react-mathjax";
 import FundamentalPeriodSolution from './FundamentalPeriodSolution';
+import calculateStiffness from '../../../assets/data/calculations/calculateStiffness';
+import calculateFundamentalPeriod from '../../../assets/data/calculations/calculateFundamentalPeriod';
+
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -10,6 +13,10 @@ const shuffleArray = (array) => {
 };
 const randomValGen = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomValGenSmaller = (min, max) =>
+parseFloat((Math.random() * (max - min) + min).toFixed(2));
+
 export const fundamentalPeriod = () => {
   let height = randomValGen(8, 30); //ft
   let E = randomValGen(10000000, 29000000); //lb/in^2
@@ -23,23 +30,14 @@ export const fundamentalPeriod = () => {
           mass at the top weighs \\(${kips}\\ kips\\)?`;
   let question = <MathJax>{questionText}</MathJax>
   let image = fundamentalPeriodImage;
-  let stiffness = parseFloat(
-    (
-      ((3 * E * inertia) / Math.pow(height * 12, 3))
-    ).toFixed(2)
-  );
-  let answer = parseFloat(
-    (
-      2 *
-      Math.PI *
-      Math.sqrt((pounds) / (stiffness * G))
-    ).toFixed(2)
-  );
+  let stiffness = calculateStiffness(E, inertia, height);
+  let answer = calculateFundamentalPeriod(kips, stiffness);
+  //right now, the answer is always the smallest. The randomValGenSmaller doesn't work correctly if we insert numbers smaller than 1
   let choices = shuffleArray([
     answer,
-    answer + randomValGen(1, 2),
-    answer + randomValGen(3, 6),
-    answer + randomValGen(7, 9),
+    answer + randomValGenSmaller(0, 1),
+    answer + randomValGenSmaller(0, 1),
+    answer + randomValGenSmaller(0, 1),
   ]);
   let solution = (
     <FundamentalPeriodSolution

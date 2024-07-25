@@ -1,5 +1,6 @@
 import baseShearImage from "./nonStructuralComponent.png";
 import { MathJax } from "better-react-mathjax";
+import BaseShearQuestion from './BaseShearQuestion';
 //import BaseShearSolution from './BaseShearSolution';
 
 const shuffleArray = (array) => {
@@ -13,7 +14,7 @@ const randomValGen = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
 const randomValGenSmall = (min, max) =>
-  (Math.random() * (max - min) + min).toFixed(1);
+  parseFloat((Math.random() * (max - min) + min).toFixed(1));
 
 const LFRS = {
     "Special reinforced concrete shear walls": { R: 5.0, Cd: 5.0, omega: 2.5 },
@@ -23,10 +24,10 @@ const LFRS = {
 };
 
 const buildingOptions = {
-    "office": { RC: "II" },
-    "hospital": { RC: "IV" },
-    "detention center": { RC: "III" },
-    "public assembly with >500 people": { RC: "III" }
+    "Office": { RC: "II" },
+    "Hospital": { RC: "IV" },
+    "Detention Center": { RC: "III" },
+    "Public Assembly": { RC: "III" }
 };
 
 function getRandomFromKeyValueList(list) {
@@ -64,7 +65,7 @@ function interpolate(min, max, randomizer) {
 
 export const baseShear = () => {
   const selectedLFRS = getRandomFromKeyValueList(LFRS);
-  const { key: LFRSName, value: LFRSDetails } = selectedLFRS;
+  const { key: LFRSname, value: LFRSDetails } = selectedLFRS;
   const { R, Cd, omega } = LFRSDetails;
 
   const selectedBuilding = getRandomFromKeyValueList(buildingOptions);
@@ -83,19 +84,35 @@ export const baseShear = () => {
   const firstStoryHeight = randomValGen(10, 14); // ft
   const otherStoryHeights = randomValGen(10, 12); // ft
   const etswOtherLevels = randomValGen(2, 10); // kips
-  const etswRoof = etswOtherLevels * 0.6; // kips
+  const etswRoof = parseFloat(etswOtherLevels * 0.6).toFixed(1); // kips
 
-  const T = (stories / 10) * randomValGenSmall(0.8, 1.2); // seconds
+  const T = parseFloat((stories / 10) * randomValGenSmall(0.8, 1.2)).toFixed(2); // seconds
   const TL = 12; // seconds
-  //const T0...
-  const SDS = interpolate(SDSmin, SDSmax, zeroToOne); // g
-  const SD1 = interpolate(SD1min, SD1max, zeroToOne); // g
-  const S1 = interpolate(S1min, S1max, zeroToOne) * randomValGenSmall(0.9, 1.1); // g
+  const SDS = parseFloat(interpolate(SDSmin, SDSmax, zeroToOne)).toFixed(3); // g
+  const SD1 = parseFloat(interpolate(SD1min, SD1max, zeroToOne)).toFixed(3); // g
+  const S1 = parseFloat(interpolate(S1min, S1max, zeroToOne) * randomValGenSmall(0.9, 1.1)).toFixed(3); // g
 
-  let question = `Determine the vertical and horizontal distribution of seismic
-                    forces in the following building structure. Assume that a site 
-                    specific ground motion hazard is not required, and that amplification 
-                    to forces per 11.4.8 are not required.`;
+  let question = (
+    <BaseShearQuestion
+      stories={stories}
+      firstStoryHeight={firstStoryHeight}
+      otherStoryHeights={otherStoryHeights}
+      etswOtherLevels={etswOtherLevels}
+      etswRoof={etswRoof}
+      T={T}
+      LFRSname={LFRSname}
+      R={R}
+      Cd={Cd}
+      omega={omega}
+      buildingName={buildingName}
+      RC={RC}
+      Ie={Ie}
+      SDS={SDS}
+      SD1={SD1}
+      S1={S1}
+      TL={TL}
+    />
+  );
   let image = baseShearImage;
 
   let answer = 100;
@@ -105,28 +122,7 @@ export const baseShear = () => {
     answer + randomValGen(1, 2),
     answer + randomValGen(3, 6),
   ]);
-  let solution = "Hello..."
-  /*
-  //insert values into solution file
-  let solution = (
-    <BaseShearSolution
-      equipmentName={equipmentName}
-      table={table}
-      tableName={tableName}
-      ap={ap}
-      SDS={SDS}
-      Wp={Wp}
-      Rp={Rp}
-      Ip={Ip}
-      z={z}
-      h={h}
-      Fp_original={Fp_original}
-      Fp_max={Fp_max}
-      Fp_min={Fp_min}
-      answer={answer}
-    />
-  );
-  */
+  let solution = "Soon...";
 
   return {
     question: question,
