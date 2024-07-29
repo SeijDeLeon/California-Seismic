@@ -7,7 +7,7 @@ const calculateFp = (FpOriginal, Fpmax, Fpmin) => {
       Fp = Fpmin;
     }
 
-    return parseFloat(Fp.toFixed(2));
+    return Fp;
   };
   
   export default calculateFp;

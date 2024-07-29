@@ -5,7 +5,7 @@ const calculateFpOriginal = (ap, SDS, Wp, Rp, Ip, z, h) => {
 
     // 13.3-1
     let FpOriginal = ((0.4 * ap * SDS * Wp) / (Rp / Ip)) * (1 + 2 * (z / h));
-    return parseFloat(FpOriginal.toFixed(2));
+    return FpOriginal;
   };
   
   export default calculateFpOriginal;

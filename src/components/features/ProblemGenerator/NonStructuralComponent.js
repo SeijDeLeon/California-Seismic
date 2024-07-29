@@ -76,10 +76,10 @@ export const nonStructuralComponent = () => {
           \\(${z}\\ ft\\) from the ground level. \\(S_{DS}\\ =\\ ${SDS}.\\)`;
   let question = <MathJax>{questionText}</MathJax>
   let image = nonStructuralComponentImage;
-  let Fp_original = calculateFpOriginal(ap, SDS, Wp, Rp, Ip, z, h);
-  let Fp_max = calculateFpmax(SDS, Wp, Ip);
-  let Fp_min = calculateFpmin(SDS, Wp, Ip);
-  let answer = calculateFp(Fp_original, Fp_max, Fp_min);
+  let Fp_original = parseFloat(calculateFpOriginal(ap, SDS, Wp, Rp, Ip, z, h).toFixed(2));
+  let Fp_max = parseFloat(calculateFpmax(SDS, Wp, Ip).toFixed(2));
+  let Fp_min = parseFloat(calculateFpmin(SDS, Wp, Ip).toFixed(2));
+  let answer = parseFloat(calculateFp(Fp_original, Fp_max, Fp_min).toFixed(2));
   let choices;
   if (answer === Fp_original) {
     choices = shuffleArray([

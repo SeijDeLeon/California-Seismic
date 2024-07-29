@@ -30,8 +30,8 @@ export const fundamentalPeriod = () => {
           mass at the top weighs \\(${kips}\\ kips\\)?`;
   let question = <MathJax>{questionText}</MathJax>
   let image = fundamentalPeriodImage;
-  let stiffness = calculateStiffness(E, inertia, height);
-  let answer = calculateFundamentalPeriod(kips, stiffness);
+  let stiffness = parseFloat(calculateStiffness(E, inertia, height).toFixed(2));
+  let answer = parseFloat(calculateFundamentalPeriod(kips, stiffness).toFixed(2));
   //right now, the answer is always the smallest. The randomValGenSmaller doesn't work correctly if we insert numbers smaller than 1
   let choices = shuffleArray([
     answer,
