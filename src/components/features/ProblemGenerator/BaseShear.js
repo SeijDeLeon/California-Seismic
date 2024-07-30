@@ -1,7 +1,7 @@
 import baseShearImage from "./nonStructuralComponent.png";
 import { MathJax } from "better-react-mathjax";
 import BaseShearQuestion from './BaseShearQuestion';
-//import BaseShearSolution from './BaseShearSolution';
+//import BaseShearSolution from './BaseShearSolution'; will update when accessing staging branch
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
