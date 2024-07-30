@@ -5,8 +5,8 @@ import Tooltip from "../../common/Tooltip";
 const QuestionGeneratorDisplay = () => {
   const categories = [
     "Fundamental Period",
-    "Category 2",
-    "Category 3",
+    "Nonstructural Component",
+    "Base Shear",
     "Category 4",
     "Category 5",
     "Category 6",
@@ -27,13 +27,13 @@ const QuestionGeneratorDisplay = () => {
     localStorage.setItem("bestScore", JSON.stringify(bestScore));
   }, [bestScore]);
   return (
-    <div className="m-auto max-w-6xl">
+    <div className="m-auto max-w-6xl min-h-[calc(92vh-120px)]">
       <div className="grid grid-cols-3 gap-5 m-5 mt-0">
         {categories.map((item) => (
           <div
             key={item}
             className="border-2 rounded-lg cursor-pointer font-bold hover:bg-slate-300"
-            onClick={(e) => setCategory(e.target.value)}
+            onClick={() => setCategory(item)}
           >
             {item}
           </div>
