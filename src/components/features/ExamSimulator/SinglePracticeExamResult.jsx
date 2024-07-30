@@ -295,9 +295,9 @@ const SinglePracticeExamResult = () => {
               : incorrectQuestionList.questions.length > 0 &&
                 incorrectQuestionList.questions.map((ques, quesIdx) => (
                   <QuestionAccordion
-                    key={ques.id || quesIdx}
+                    key={ques.idx}
                     ques={ques}
-                    quesIdx={quesIdx}
+                    quesIdx={ques.idx}
                     expandedIndex={expandedIndex}
                     handleOpenAccordionClick={handleOpenAccordionClick}
                     currentQuestion={currentQuestion}
