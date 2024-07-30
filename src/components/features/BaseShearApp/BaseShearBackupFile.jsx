@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
 //as reference https://clearcalcs.com/calculations/seismicAnalysisUS
 
-const BaseShearDiagram = () => {
+const BaseShearApp = () => {
   const chartRef = useRef();
   const [userInput, setUserInput] = useState({
     input1: '',
@@ -511,4 +511,4 @@ const BaseShearDiagram = () => {
   );
 };
 
-export default BaseShearDiagram;
+export default BaseShearApp;
