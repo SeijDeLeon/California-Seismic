@@ -3,20 +3,43 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const SolutionCvx = ({ inputs, result }) => {
   const { weights, heights } = inputs;
-  const parsedWeights = JSON.parse(weights);
-  const parsedHeights = JSON.parse(heights);
+
+  let parsedWeights = [];
+  let parsedHeights = [];
+  try {
+    parsedWeights = JSON.parse(weights) || [];
+    parsedHeights = JSON.parse(heights) || [];
+  } catch (error) {
+    console.error("Error parsing weights or heights input:", error);
+  }
+
   const totalWeightHeight = parsedWeights.reduce((sum, weight, index) => sum + weight * parsedHeights[index], 0);
-  const equation = `C_{vx} = \\frac{w_{i} h_{i}}{\\sum w_{i} h_{i}}`;
   const filledEquation = result.map((cvx, index) => `C_{vx,${index + 1}} = \\frac{${parsedWeights[index]} \\cdot ${parsedHeights[index]}}{${totalWeightHeight}} = ${cvx}`);
-  const solution = `Cvx = ${result}`;
-  
+  const solution = `C_{vx} = ${result}`;
+
   return (
     <MathJaxContext>
       <div>
-        <MathJax>{`\\(${equation}\\)`}</MathJax>
-        {filledEquation.map((filledEquation, index) => (
-          <MathJax key={index}>{`\\(${filledEquation}\\)`}</MathJax>
+        <p>
+          The vertical distribution factor, C<sub>vx</sub>, is calculated using Equation 12.8-12 from ASCE 7:
+        </p>
+        <ul>
+          <li>
+            <a href="/ASCE7/12.8.3" className="text-blue-500 underline">
+              <MathJax>{`\\(C_{vx} = \\frac{w_{i} h_{i}}{\\sum w_{i} h_{i}}\\)`}</MathJax>
+              &nbsp;(Equation 12.8-12)
+            </a>
+          </li>
+        </ul>
+        <p>
+          Substituting the provided values into the equation for each level:
+        </p>
+        {filledEquation.map((filledEq, index) => (
+          <MathJax key={index}>{`\\(${filledEq}\\)`}</MathJax>
         ))}
+        <p>
+          After performing the calculations, the vertical distribution factor is found to be:
+        </p>
         <MathJax>{`\\(${solution}\\)`}</MathJax>
       </div>
     </MathJaxContext>
@@ -24,7 +47,3 @@ const SolutionCvx = ({ inputs, result }) => {
 };
 
 export default SolutionCvx;
-
-
-
-
