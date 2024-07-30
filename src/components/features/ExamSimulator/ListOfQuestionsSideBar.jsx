@@ -7,11 +7,12 @@ function ListOfQuestionsSideBar({
   setCurrentQuestion,
   onFlaggedMode,
   questionsState,
-  currentQuestion ,
-  setQuestionsState,
+  currentQuestion,
   currentFlaggedQuestion,
   setCurrentFlaggedQuestion,
   flaggedQuestions,
+  setFlaggedQuestions,
+
 }) {
   const [flagColors, setFlagColors] = useState(
     selectedExam.questions.map(() => 'gray')
@@ -24,8 +25,8 @@ function ListOfQuestionsSideBar({
 
     //change flagged value, flag/unflag ques
     const newQuestionsState = {
-      ...questionsState,
-      questions: { ...questionsState }.questions.map((ques, idx) => {
+      ...questionsState.current,
+      questions: questionsState.current.questions.map((ques, idx) => {
         if (idx === index) {
           return {
             ...ques,
@@ -37,20 +38,41 @@ function ListOfQuestionsSideBar({
       }),
     };
 
-    setQuestionsState(newQuestionsState);
+    // setQuestionsState(newQuestionsState);
+    questionsState.current = newQuestionsState;
+    flaggedQuestions = {...questionsState.current}.questions.filter(
+      (ques) => ques.flagged
+    );
+    setFlaggedQuestions(flaggedQuestions)
 
-    if (onFlaggedMode && flaggedQuestions.length > 0) {
-      setCurrentFlaggedQuestion(
-        currentFlaggedQuestion % (flaggedQuestions.length - 1)
-      ); //next flagged question
+
+    //on flag mode: keep track flagged ques and current ques
+    if (onFlaggedMode) {
+      if (flaggedQuestions.length > 0) {
+        currentFlaggedQuestion = currentFlaggedQuestion % flaggedQuestions.length;
+        setCurrentFlaggedQuestion(currentFlaggedQuestion)
+
+        currentQuestion = flaggedQuestions[currentFlaggedQuestion].idx
+        setCurrentQuestion(currentQuestion);
+      } else {
+        currentFlaggedQuestion = 0;
+        setCurrentFlaggedQuestion(currentFlaggedQuestion)
+      }
     }
+
   };
 
-  //flagged mode: when selecting queqtuq
+  //flagged mode: when selecting
   const handleSetCurrentFlaggedQuestion = (index) => {
-    flaggedQuestions.map((ques, idx) => {
+
+    // set current question 
+    currentQuestion = index;
+    setCurrentQuestion(index)
+
+    flaggedQuestions.forEach((ques, idx) => {
       if (ques.idx === index) {
         setCurrentFlaggedQuestion(idx);
+        currentFlaggedQuestion = idx;
       }
     });
   };
@@ -74,7 +96,7 @@ function ListOfQuestionsSideBar({
                 >
                   On Flagged Mode
                 </li>
-                {questionsState.questions.map(
+                {questionsState.current.questions.map(
                   (ques, index) =>
                     ques.flagged && (
                       <li
@@ -105,7 +127,8 @@ function ListOfQuestionsSideBar({
                       active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300
                       ${currentQuestion === index && 'bg-gray-200'}`}
                               onClick={() => {
-                                setCurrentQuestion(index);
+                                // currentQuestion = index;
+                                // setCurrentQuestion(index);
                                 handleSetCurrentFlaggedQuestion(index);
                               }}
                               key={index}
@@ -167,6 +190,7 @@ function ListOfQuestionsSideBar({
                       active:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300
                       ${currentQuestion === index && 'bg-gray-200'}`}
                       onClick={() => {
+                        currentQuestion = index;
                         setCurrentQuestion(index);
                       }}
                       key={index}

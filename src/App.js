@@ -22,6 +22,7 @@ import Demo from './routes/Demo.jsx';
 
 //Google Analytics
 import ReactGA from 'react-ga4';
+import ExamsHistory from './components/features/ExamSimulator/ExamsHistory.jsx';
 const TRACKING_ID = 'G-7M8L6VYQZH';
 ReactGA.initialize(TRACKING_ID);
 
@@ -48,6 +49,10 @@ function App() {
         <Route
           path="/practice/exams/:examId/result"
           element={<SinglePracticeExamResult />}
+        />
+        <Route
+          path="/practice/exams-history"
+          element={<ExamsHistory />}
         />
         <Route path="/exam-guide" element={<ExamGuide display="true" />} />
         <Route path="/contributors" element={<Contributors />} />

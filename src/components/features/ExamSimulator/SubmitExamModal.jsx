@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function ExamScorePopUpModal({
-  visible,
-  onClose,
-  questionsState,
-}) {
+function SubmitExamModal({ visible, onClose, questionsState }) {
   if (!visible) return null;
-
 
   const numberOfAnsweredQuestions = questionsState.questions.filter(
     (ques) => ques.answered !== null
@@ -17,10 +12,24 @@ function ExamScorePopUpModal({
     (ques) => ques.flagged
   ).length;
 
+  const storeQuestionsStateHanlder = () => {
+    const allExams = JSON.parse(localStorage.getItem('allExams'));
+    // console.log(value)
+    // console.log('JSON.parse(value): ', allExams)
+    // localStorage.setItem('allExams', JSON.stringify(questionsState));
+    // console.log('store')
+
+    if(allExams){
+      localStorage.setItem('allExams', JSON.stringify([...allExams, {...questionsState, date: new Date().toLocaleString()}]));
+    }else{
+      localStorage.setItem('allExams', JSON.stringify([{...questionsState, date: new Date().toLocaleString()}]));
+    }
+
+  };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center">
       <div className="bg-white rounded-lg w-4/5 md:w-2/5 h-auto">
-
         {/* HEADER  */}
         <div className="py-3 pl-6 text-start">
           <p className="font-medium text-gray-600">SUBMIT</p>
@@ -63,16 +72,14 @@ function ExamScorePopUpModal({
         <div className="flex justify-end py-3 pr-6">
           <div className="flex flex-row gap-4">
             <div>
-              <button
-                className="px-4 py-2 border border-gray-400 rounded hover:bg-gray-200 duration-75 transition-colors"
-                onClick={onClose}
+              <Link
+                to={`/practice/exams/0/result`}
+                state={{ questionsState, fromExamPage: true }}
               >
-                Cancel
-              </button>
-            </div>
-            <div>
-              <Link to={`/practice/exams/0/result`} state={{ questionsState }}>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 duration-75 transition-colors">
+                <button 
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 duration-75 transition-colors"
+                onClick={storeQuestionsStateHanlder}
+                >
                   {numberOfAnsweredQuestions <
                     questionsState.questions.length ||
                   numberOfFlaggedQuestions > 0 ? (
@@ -83,6 +90,15 @@ function ExamScorePopUpModal({
                 </button>
               </Link>
             </div>
+
+            <div>
+              <button
+                className="px-4 py-2 border border-gray-400 rounded hover:bg-gray-200 duration-75 transition-colors"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -90,4 +106,4 @@ function ExamScorePopUpModal({
   );
 }
 
-export default ExamScorePopUpModal;
+export default SubmitExamModal;

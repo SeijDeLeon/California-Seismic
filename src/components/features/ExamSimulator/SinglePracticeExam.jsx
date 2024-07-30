@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 // import { exams } from '../../../assets/data/duplicateQuestionData.js';
 import { randomExams } from '../../../assets/data/randomExams.js'; //generateRandomQuestions
-import ExamScorePopUpModal from './ExamScorePopUp.jsx';
+import SubmitExamModal from './SubmitExamModal.jsx';
 import ListOfQuestionsSideBar from './ListOfQuestionsSideBar.jsx';
 import Timer from './Timer.js';
 import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
@@ -15,15 +15,18 @@ function SinglePracticeExam() {
   const selectedExam = randomExams[examId]; //generateRandomQuestions: new selectedExam from randomExams
   const [currentQuestion, setCurrentQuestion] = useState(0); //Tracks the index of the current question being displayed.
   const [showPopUp, setShowPopUp] = useState(false); //Controls the visibility of the exam score pop-up modal.
-  const [selectedOption, setSelectedOption] = useState(null); //Holds the ID of the selected option for the current question.
+  // const [selectedOption, setSelectedOption] = useState(null); //Holds the ID of the selected option for the current question.
   const [selectedFlags, setSelectedFlags] = useState(
     //An array of booleans that tracks whether a question has been flagged or not.
     Array(selectedExam.questions.length).fill(false)
   );
   const [onFlaggedMode, setOnFlaggedMode] = useState(false);
-  const [flaggedQuestions, setFlaggedQuestions] = useState([]);
+  // let flaggedQuestions = useRef([]);
+  const [flaggedQuestions, setFlaggedQuestions] = useState([])
   const [currentFlaggedQuestion, setCurrentFlaggedQuestion] = useState(0);
-  const [questionsState, setQuestionsState] = useState({
+  let secondsCount = useRef(0);
+
+  let questionsState = useRef({
     ...selectedExam,
     questions: selectedExam.questions.map((question, idx) => ({
       ...question,
@@ -35,12 +38,20 @@ function SinglePracticeExam() {
     })),
   });
 
-  const handleOnSubmit = () => setShowPopUp(true);
+  const handleOnSubmit = () => {
+    setShowPopUp(true);
+
+    questionsState.current = {
+      ...questionsState.current,
+      timer: secondsCount.current,
+    };
+    // console.log('questionState: ', questionsState)
+  };
 
   const handleOptionClick = (optionId) => {
     const updatedQuestionsState = {
-      ...questionsState,
-      questions: questionsState.questions.map((question, index) => {
+      ...questionsState.current,
+      questions: questionsState.current.questions.map((question, index) => {
         return index === currentQuestion
           ? {
               ...question,
@@ -52,7 +63,9 @@ function SinglePracticeExam() {
       }),
     };
 
-    setQuestionsState(updatedQuestionsState);
+    // setQuestionsState(updatedQuestionsState);
+    questionsState.current = updatedQuestionsState;
+    // console.log(questionsState.current);
 
     //Remember flagged items
     const newSelectedFlags = [...selectedFlags];
@@ -72,65 +85,52 @@ function SinglePracticeExam() {
     }
   };
 
-  // const handleChange = (event) => {
-  //   const selectedOptionId = event.target.value;
-  //   // setSelectedOption(selectedOptionId);
-  // };
-
   const handleonFlaggedModeCick = () => {
     setOnFlaggedMode(!onFlaggedMode);
+
+    if (!onFlaggedMode) {
+      //when turn on the flag mode, default flagged ques
+      setCurrentFlaggedQuestion(0);
+
+      const firstFlaggedQuestionIndex =
+        questionsState.current.questions.findIndex((ques) => ques.flagged);
+
+      if (firstFlaggedQuestionIndex === -1) {
+        setCurrentQuestion(0);
+      } else {
+        setCurrentQuestion(
+          questionsState.current.questions[firstFlaggedQuestionIndex].idx
+        );
+      }
+    }
   };
 
   const handleNextFlaggedQuestion = () => {
+    let cur;
+
     if (currentFlaggedQuestion === flaggedQuestions.length - 1) {
-      setCurrentFlaggedQuestion(0);
+      cur = 0;
     } else {
-      setCurrentFlaggedQuestion(
-        (currentFlaggedQuestion % (flaggedQuestions.length - 1)) + 1
-      );
+      cur = currentFlaggedQuestion + 1;
     }
+
+    setCurrentFlaggedQuestion(cur);
+    setCurrentQuestion(flaggedQuestions[cur].idx);
   };
 
   const handlePreviousFlaggedQuestion = () => {
-    setCurrentFlaggedQuestion(() => {
-      if (currentFlaggedQuestion > 0) {
-        return currentFlaggedQuestion - 1;
-      } else {
-        return flaggedQuestions.length - 1;
-      }
-    });
+    let cur;
+
+    if (currentFlaggedQuestion > 0) {
+      cur = currentFlaggedQuestion - 1;
+    } else {
+      cur = flaggedQuestions.current.length - 1;
+    }
+
+    setCurrentFlaggedQuestion(cur);
+    setCurrentQuestion(flaggedQuestions[cur].idx);
   };
 
-  //continuously track the current Flagged question and current question
-  useEffect(() => {
-    //only run for flagged mood
-    if (!onFlaggedMode) return;
-
-    //find all flagged questions
-    setFlaggedQuestions(
-      questionsState.questions.filter((ques) => ques.flagged)
-    );
-
-    //find first flagged question = current flagged question
-    const firstFlaggedQuestionIndex = questionsState.questions.findIndex(
-      (ques) => ques.flagged
-    );
-
-    if (firstFlaggedQuestionIndex !== -1) {
-      setCurrentQuestion(firstFlaggedQuestionIndex);
-    }
-
-    if (flaggedQuestions.length > 1) {
-      setCurrentQuestion(flaggedQuestions[currentFlaggedQuestion].idx);
-    } else {
-      setCurrentFlaggedQuestion(0); //if not do this, currentFlaggedQuestion = NaN
-    }
-  }, [
-    questionsState.questions,
-    flaggedQuestions.length,
-    currentFlaggedQuestion,
-    onFlaggedMode,
-  ]);
 
   return (
     <main className="h-screen">
@@ -143,10 +143,12 @@ function SinglePracticeExam() {
             questionsState={questionsState}
             currentQuestion={currentQuestion}
             setCurrentQuestion={setCurrentQuestion}
-            setQuestionsState={setQuestionsState}
             currentFlaggedQuestion={currentFlaggedQuestion}
             setCurrentFlaggedQuestion={setCurrentFlaggedQuestion}
+
             flaggedQuestions={flaggedQuestions}
+            setFlaggedQuestions={setFlaggedQuestions}
+          
           />
 
           <section
@@ -160,22 +162,16 @@ function SinglePracticeExam() {
               <div className="flex justify-between bg-white py-4 px-6 rounded shadow">
                 <h3 className="text-lg font-bold">{selectedExam.name}</h3>
                 <h3 className="text-lg flex">
-                  <span className="mr-4 font-bold ">Timer:</span> <Timer />
+                  <span className="mr-4 font-bold ">Timer:</span>{' '}
+                  <Timer
+                    secondsCount={secondsCount}
+                  />
                 </h3>
               </div>
 
               {/* Question container */}
               <div className="bg-white px-2 py-4 rounded shadow mt-2 h-full">
-                <div className="h-90p overflow-hidden overflow-y-auto">
-
-                  {/* <h3 className="text-lg font-bold mt-2">
-                    Question: {currentQuestion + 1} out of{' '}
-                    {selectedExam.questions.length}
-                  </h3> */}
-
-                  {/* <p className="mb-4 mt-6">
-                  Q: {selectedExam.questions[currentQuestion].question}
-                </p> */}
+                <div className="h-[90%] overflow-hidden overflow-y-auto">
                   {/* generateRandomQuestions: format questions, break into multiple lines */}
                   <div className="py-4 px-6 text-left">
                     {selectedExam.questions[currentQuestion].question
@@ -184,7 +180,9 @@ function SinglePracticeExam() {
                       .map((line, idx) => (
                         <p className={`${idx > 1 && '&& indent-6'} `} key={idx}>
                           {idx === 0 ? (
-                            <span className="font-semibold">Q - {currentQuestion + 1}: </span>
+                            <span className="font-semibold">
+                              Q - {currentQuestion + 1}:{' '}
+                            </span>
                           ) : null}
                           {line}
                         </p>
@@ -223,7 +221,7 @@ function SinglePracticeExam() {
                               handleOptionClick(option.id);
                             }}
                             checked={
-                              questionsState.questions[currentQuestion]
+                              questionsState.current.questions[currentQuestion]
                                 .selectedOption === option.id
                             }
                           />
@@ -293,34 +291,6 @@ function SinglePracticeExam() {
               ) : (
                 <>
                   {/* Next-Previous Buttons */}
-                  {/* <div className="flex justify-center py-4 gap-4">
-                    <button
-                      className={`px-4 py-2 rounded text-white
-                  ${
-                    currentQuestion === 0
-                      ? 'bg-slate-400'
-                      : 'bg-blue-500 hover:bg-blue-600 transition-colors duration-300'
-                  }`}
-                      disabled={currentQuestion === 0}
-                      onClick={clickPrevious}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      className={`px-4 py-2 text-white rounded
-                                    ${
-                                      currentQuestion ===
-                                      selectedExam.questions.length - 1
-                                        ? 'bg-slate-400'
-                                        : 'bg-orange-500 hover:bg-orange-600 transition-colors duration-300'
-                                    }`}
-                      disabled={questionsState.questions.length <= 1}
-                      onClick={clickNext}
-                    >
-                      Next
-                    </button>
-                  </div> */}
-
                   <div className="flex justify-center py-4 gap-4 text-xl">
                     <button
                       className={`px-4 py-2 rounded bg-none text-black 
@@ -339,20 +309,22 @@ function SinglePracticeExam() {
                       <div className="flex gap-1 items-center">
                         {currentQuestion + 1}
                         <RxSlash />
-                        {questionsState.questions.length}
+                        {questionsState.current.questions.length}
                       </div>
                     </div>
 
                     <button
                       className={`px-4 py-2 rounded bg-none text-black 
                       ${
-                        currentQuestion + 1 === questionsState.questions.length
+                        currentQuestion + 1 ===
+                        questionsState.current.questions.length
                           ? 'text-slate-500'
                           : 'hover:text-slate-500 transition-colors duration-300'
                       }
                       `}
                       disabled={
-                        currentQuestion + 1 === questionsState.questions.length
+                        currentQuestion + 1 ===
+                        questionsState.current.questions.length
                       }
                       onClick={clickNext}
                     >
@@ -371,7 +343,7 @@ function SinglePracticeExam() {
                     handleonFlaggedModeCick();
                   }}
                 >
-                  <span className='font-medium'>
+                  <span className="font-medium">
                     {onFlaggedMode ? 'Turn Off' : 'Turn On'}
                   </span>
                   <FaFlag />
@@ -386,11 +358,10 @@ function SinglePracticeExam() {
               </div>
             </div>
 
-            <ExamScorePopUpModal
+            <SubmitExamModal
               visible={showPopUp}
               onClose={() => setShowPopUp(false)}
-              // selectedOption={selectedOption}
-              questionsState={questionsState}
+              questionsState={questionsState.current}
             />
           </section>
         </div>
