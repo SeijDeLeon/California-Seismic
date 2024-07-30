@@ -19,6 +19,10 @@ import USGS from "./routes/USGS.jsx";
 import PracticeRandom from "./routes/PracticeRandom.jsx";
 import ASCE7 from "./routes/ASCE7.jsx";
 import BaseShearApp from "./routes/BaseShearApp.jsx";
+// import BaseShearDiagram from "./src/components/features/BaseShearApp/BaseShearBackupFile.jsx";
+// src/components/features/BaseShearApp/BaseShearBackupFile.jsx
+
+
 import Demo from "./routes/Demo.jsx";
 
 
