@@ -19,6 +19,7 @@ import PracticeRandom from './routes/PracticeRandom.jsx';
 import ASCE7 from './routes/ASCE7.jsx';
 import BaseShearApp from './routes/BaseShearApp.jsx';
 import Demo from './routes/Demo.jsx';
+import Solver from './routes/SolverPage.jsx';
 
 //Google Analytics
 import ReactGA from 'react-ga4';
@@ -61,6 +62,7 @@ function App() {
         <Route path="/ASCE7" element={<ASCE7 />} />
         <Route path="/ASCE7/:sectionParam" element={<ASCE7 />} />
         <Route path="/baseshear" element={<BaseShearApp />} />
+        <Route path="/Solver" element={<Solver />} />
         <Route path="/demo" element={<Demo visible={true} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
