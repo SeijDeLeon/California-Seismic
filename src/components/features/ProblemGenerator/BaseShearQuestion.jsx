@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { MathJax } from "better-react-mathjax";
-export default function BaseShearQuestion({stories, firstStoryHeight, otherStoryHeights, etswOtherLevels, etswRoof, T, LFRSname, R, Cd, omega, buildingName, RC, Ie, SDS, SD1, S1, TL} ) {
+export default function BaseShearQuestion({stories, firstStoryHeight, otherStoryHeights, etswOtherLevels, etswRoof, T, LFRSname, R, Cd, omega, buildingName, RC, Ie, SDS, SD1, S1, T0, TL} ) {
     return (
         <Fragment>
             <p>Determine the vertical and horizontal distribution of seismic forces in the following building structure. Assume that a site specific ground motion hazard is not required, and that amplification to forces per 11.4.8 are not required.</p>
@@ -80,6 +80,11 @@ export default function BaseShearQuestion({stories, firstStoryHeight, otherStory
             <p className="font-normal">
                 <MathJax>
                     {`\\(S_{1} = ${S1}\\ g\\)`}
+                </MathJax>
+            </p>
+            <p className="font-normal">
+                <MathJax>
+                    {`\\(T_{0} = ${T0}\\ s\\)`}
                 </MathJax>
             </p>
             <p className="font-normal">
