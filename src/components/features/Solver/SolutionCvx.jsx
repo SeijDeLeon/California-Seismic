@@ -25,7 +25,7 @@ const SolutionCvx = ({ inputs, result }) => {
         </p>
         <ul>
           <li>
-            <a href="/ASCE7/12.8.3" className="text-blue-500 underline">
+            <a href="/ASCE7/12.8.3" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
               <MathJax>{`\\(C_{vx} = \\frac{w_{i} h_{i}}{\\sum w_{i} h_{i}}\\)`}</MathJax>
               &nbsp;(Equation 12.8-12)
             </a>
