@@ -3,15 +3,117 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
 const SolutionCs = ({ inputs, result }) => {
   const { SDS, SD1, T, Ie, R, T0, TL } = inputs;
-  const equation = `Cs = \\frac{S_{DS} I_e}{R} \\left(\\frac{T_{0}}{T}\\right) \\left(1 + \\frac{S_{D1} T}{T_{L}}\\right)`;
-  const filledEquation = `Cs = \\frac{${SDS} \\cdot ${Ie}}{${R}} \\left(\\frac{${T0}}{${T}}\\right) \\left(1 + \\frac{${SD1} \\cdot ${T}}{${TL}}\\right)`;
-  const solution = `Cs = ${result}`;
+
+  let filledEquation = '';
+  let explanation = '';
+  let usedEquation = '';
+
+  let Cs = SDS / (R / Ie);
+  if (Cs < SD1 / (T * (R / Ie))) {
+    Cs = SD1 / (T * (R / Ie));
+    filledEquation = `C_s = \\frac{${SD1}}{${T} \\cdot \\frac{${R}}{${Ie}}}`;
+    explanation = "Found using Equation 12.8-3 as it gives a lower value:";
+    usedEquation = "/ASCE7/12.8.1";
+  } else {
+    if (T <= TL) {
+      const Cs_max = 0.044 * SDS * Ie;
+      if (Cs > Cs_max) {
+        Cs = Cs_max;
+        filledEquation = `C_s = 0.044 \\cdot ${SDS} \\cdot ${Ie}`;
+        explanation = "Found using Equation 12.8-4 for T <= TL:";
+        usedEquation = "/ASCE7/12.8.1";
+      }
+    } else {
+      const Cs_max_TL = (0.044 * SDS * TL) / T;
+      if (Cs > Cs_max_TL) {
+        Cs = Cs_max_TL;
+        filledEquation = `C_s = \\frac{0.044 \\cdot ${SDS} \\cdot ${TL}}{${T}}`;
+        explanation = "Found using Equation 12.8-4 for T > TL:";
+        usedEquation = "/ASCE7/12.8.1";
+      }
+    }
+
+    const Cs_exception = 0.5 * SDS * Ie / R;
+    if (T >= T0 && T <= TL) {
+      if (Cs > Cs_exception) {
+        Cs = Cs_exception;
+        filledEquation = `C_s = 0.5 \\cdot \\frac{${SDS} \\cdot ${Ie}}{${R}}`;
+        explanation = "Found using Equation 12.8-5 for T0 <= T <= TL:";
+        usedEquation = "/ASCE7/12.8.1";
+      }
+    }
+
+    const Cs_near_fault = 0.044 * SDS * Ie;
+    if (T <= TL) {
+      if (Cs < Cs_near_fault) {
+        Cs = Cs_near_fault;
+        filledEquation = `C_s = 0.044 \\cdot ${SDS} \\cdot ${Ie}`;
+        explanation = "Found using Equation 12.8-6 for near-fault conditions:";
+        usedEquation = "/ASCE7/12.8.1";
+      }
+    }
+  }
+
+  const solution = `C_s = ${result}`;
 
   return (
     <MathJaxContext>
       <div>
-        <MathJax>{`\\(${equation}\\)`}</MathJax>
+        <h2>Calculation of Seismic Response Coefficient (C<sub>s</sub>)</h2>
+        <p>{explanation}</p>
+        <ul>
+          {usedEquation === "/ASCE7/12.8.1" && (
+            <li>
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+                <MathJax>{`\\(C_s = \\frac{S_{DS} I_e}{R}\\)`}</MathJax>
+                &nbsp;(Equation 12.8-2)
+              </a>
+            </li>
+          )}
+          {usedEquation === "/ASCE7/12.8.1" && (
+            <li>
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+                <MathJax>{`\\(C_s = \\frac{S_{D1}}{T \\cdot \\frac{R}{I_e}}\\)`}</MathJax>
+                &nbsp;(Equation 12.8-3)
+              </a>
+            </li>
+          )}
+          {usedEquation === "/ASCE7/12.8.1" && (
+            <li>
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+                <MathJax>{`\\(C_s = 0.044 S_{DS} I_e\\)`}</MathJax>
+                &nbsp;(Equation 12.8-4)
+              </a>
+            </li>
+          )}
+          {usedEquation === "/ASCE7/12.8.1" && (
+            <li>
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+                <MathJax>{`\\(C_s = \\frac{0.044 S_{DS} T_L}{T}\\)`}</MathJax>
+                &nbsp;(Equation 12.8-4)
+              </a>
+            </li>
+          )}
+          {usedEquation === "/ASCE7/12.8.1" && (
+            <li>
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+                <MathJax>{`\\(C_s = 0.5 \\cdot \\frac{S_{DS} I_e}{R}\\)`}</MathJax>
+                &nbsp;(Equation 12.8-5)
+              </a>
+            </li>
+          )}
+          {usedEquation === "/ASCE7/12.8.1" && (
+            <li>
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+                <MathJax>{`\\(C_s = 0.044 S_{DS} I_e\\)`}</MathJax>
+                &nbsp;(Equation 12.8-6)
+              </a>
+            </li>
+          )}
+        </ul>
+        <p>Substituting the provided values into the equation:</p>
         <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
+        <p>After performing the calculations, the seismic response coefficient is found to be:</p>
         <MathJax>{`\\(${solution}\\)`}</MathJax>
       </div>
     </MathJaxContext>

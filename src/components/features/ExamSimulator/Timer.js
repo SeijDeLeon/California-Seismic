@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 
-function Timer() {
+function Timer({secondsCount}) {
   const [seconds, setSeconds] = useState(9000);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds(prevSeconds => prevSeconds - 1);
+      secondsCount.current += 1;
+      // console.log('secondsCount from timer: ', secondsCount.current)
     }, 1000);
 
     if (seconds === 0) {
