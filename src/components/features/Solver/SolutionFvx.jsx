@@ -22,7 +22,7 @@ const SolutionFvx = ({ inputs, result }) => {
         </p>
         <ul>
           <li>
-            <a href="/ASCE7/12.8.4" className="text-blue-500 underline">
+            <a href="/ASCE7/12.8.4" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
               <MathJax>{`\\(F_{vx} = C_{vx} V\\)`}</MathJax>
               &nbsp;(Equation 12.8-13)
             </a>

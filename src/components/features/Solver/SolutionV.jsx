@@ -26,7 +26,7 @@ const SolutionV = ({ inputs, result }) => {
         </p>
         <ul>
           <li>
-            <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+            <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
               <MathJax>{`\\(V = C_s W\\)`}</MathJax>
               &nbsp;(Equation 12.8-1)
             </a>

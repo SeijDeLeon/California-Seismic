@@ -59,10 +59,20 @@ const Solver = () => {
     }
   };
 
+  const [calculated, setCalculated] = useState({
+    Cs: false,
+    V: false,
+    Cvx: false,
+    Fvx: false,
+    stiffness: false,
+    fundamentalPeriod: false,
+  });  
+
   const handleCalculateCs = () => {
     const { SDS, SD1, T, Ie, R, T0, TL } = inputs;
     const Cs = calculateCs(parseFloat(SDS), parseFloat(SD1), parseFloat(T), parseFloat(Ie), parseFloat(R), parseFloat(T0), parseFloat(TL));
     setResults({ ...results, Cs: Cs.toFixed(4) });
+    setCalculated(prev => ({ ...prev, Cs: true }));
   };
 
   const handleCalculateV = () => {
@@ -70,6 +80,7 @@ const Solver = () => {
     const parsedWeights = parseArrayInput(weights);
     const V = calculateV(parseFloat(Cs), parsedWeights);
     setResults({ ...results, V: V.toFixed(4) });
+    setCalculated(prev => ({ ...prev, V: true }));
   };
 
   const handleCalculateCvx = () => {
@@ -79,18 +90,21 @@ const Solver = () => {
     const totalWeightHeight = parsedWeights.reduce((sum, weight, index) => sum + parseFloat(weight || 0) * parseFloat(parsedHeights[index] || 0), 0);
     const Cvx = calculateCvx(parsedWeights, parsedHeights, totalWeightHeight);
     setResults({ ...results, Cvx: Cvx.map(c => c.toFixed(4)) });
+    setCalculated(prev => ({ ...prev, Cvx: true }));
   };
 
   const handleCalculateFvx = () => {
     const { Cvx, V } = results;
     const Fvx = calculateFvx(Cvx.map(c => parseFloat(c)), parseFloat(V));
     setResults({ ...results, Fvx: Fvx.map(f => f.toFixed(4)) });
+    setCalculated(prev => ({ ...prev, Fvx: true }));
   };
 
   const handleCalculateStiffness = () => {
     const { E, I, h } = inputs;
     const stiffness = calculateStiffness(parseFloat(E), parseFloat(I), parseFloat(h));
     setResults({ ...results, stiffness: stiffness.toFixed(4) });
+    setCalculated(prev => ({ ...prev, stiffness: true }));
   };
 
   const handleCalculateFundamentalPeriod = () => {
@@ -98,6 +112,7 @@ const Solver = () => {
     const { stiffness } = results;
     const fundamentalPeriod = calculateFundamentalPeriod(parseFloat(W), parseFloat(stiffness));
     setResults({ ...results, fundamentalPeriod: fundamentalPeriod.toFixed(4) });
+    setCalculated(prev => ({ ...prev, fundamentalPeriod: true }));
   };
 
   const getPreviewText = (name) => {
@@ -168,11 +183,15 @@ const Solver = () => {
                 label={<span>Seismic Response Coefficient (C<sub>s</sub>)</span>}
                 value={results.Cs}
               />
-              <h3 className="text-md font-medium mb-4">Formatted Output</h3>
-              <div className="border p-4 rounded mb-4">
-                <p>Seismic Response Coefficient (C<sub>s</sub>): <span className="font-bold">{results.Cs}</span></p>
-                <SolutionCs inputs={inputs} result={results.Cs} />
-              </div>
+              {calculated.Cs && (
+                <>
+                  <h3 className="text-md font-medium mb-4">Formatted Output</h3>
+                  <div className="border p-4 rounded mb-4">
+                   <p>Seismic Response Coefficient (C<sub>s</sub>): <span className="font-bold">{results.Cs}</span></p>
+                   <SolutionCs inputs={inputs} result={results.Cs} />
+                  </div>
+                 </>
+              )}
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
                 {`{Cs: ${results.Cs}}`}
@@ -208,11 +227,15 @@ const Solver = () => {
                 label="Seismic Base Shear (V)"
                 value={results.V}
               />
-              <h3 className="text-md font-medium mb-4">Formatted Output</h3>
-              <div className="border p-4 rounded mb-4">
-                <p>Seismic Base Shear (V): <span className="font-bold">{results.V}</span></p>
-                <SolutionV inputs={inputs} result={results.V} />
-              </div>
+              {calculated.V && (
+                <>
+                  <h3 className="text-md font-medium mb-4">Formatted Output</h3>
+                  <div className="border p-4 rounded mb-4">
+                   <p>Seismic Base Shear (V): <span className="font-bold">{results.Cs}</span></p>
+                   <SolutionV inputs={inputs} result={results.V} />
+                  </div>
+                 </>
+              )}
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
                 {`{V: ${results.V}}`}
@@ -248,11 +271,15 @@ const Solver = () => {
                 label={<span>Vertical Distribution Factor (C<sub>vx</sub>)</span>}
                 value={results.Cvx.join(', ')}
               />
-              <h3 className="text-md font-medium mb-4">Formatted Output</h3>
-              <div className="border p-4 rounded mb-4">
-                <p>Vertical Distribution Factor (C<sub>vx</sub>): <span className="font-bold">{results.Cvx.join(', ')}</span></p>
-                <SolutionCvx inputs={inputs} result={results.Cvx} />
-              </div>
+              {calculated.Cvx && (
+                <>
+                  <h3 className="text-md font-medium mb-4">Formatted Output</h3>
+                  <div className="border p-4 rounded mb-4">
+                   <p>Vertical Distribution Factor (C<sub>vx</sub>): <span className="font-bold">{results.Cs}</span></p>
+                   <SolutionCvx inputs={inputs} result={results.Cvx} />
+                  </div>
+                 </>
+              )}
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
                 {`{Cvx: [${results.Cvx.join(', ')}]}`}
@@ -288,11 +315,15 @@ const Solver = () => {
                 label={<span>Story Shear (F<sub>vx</sub>)</span>}
                 value={results.Fvx.join(', ')}
               />
-              <h3 className="text-md font-medium mb-4">Formatted Output</h3>
-              <div className="border p-4 rounded mb-4">
-                <p>Story Shear (F<sub>vx</sub>): <span className="font-bold">{results.Fvx.join(', ')}</span></p>
-                <SolutionFvx inputs={inputs} result={results.Fvx} />
-              </div>
+              {calculated.Fvx && (
+                <>
+                  <h3 className="text-md font-medium mb-4">Formatted Output</h3>
+                  <div className="border p-4 rounded mb-4">
+                   <p>Story Shear (F<sub>vx</sub>): <span className="font-bold">{results.Cs}</span></p>
+                   <SolutionFvx inputs={inputs} result={results.Fvx} />
+                  </div>
+                 </>
+              )}
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
                 {`{Fvx: [${results.Fvx.join(', ')}]}`}
@@ -331,6 +362,7 @@ const Solver = () => {
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
                 <p>Stiffness (k): <span className="font-bold">{results.stiffness}</span></p>
+                {/*<SolutionStiffness inputs={inputs} result={results.stiffness} />*/} 
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
@@ -370,6 +402,7 @@ const Solver = () => {
               <h3 className="text-md font-medium mb-4">Formatted Output</h3>
               <div className="border p-4 rounded mb-4">
                 <p>Fundamental Period (T): <span className="font-bold">{results.fundamentalPeriod}</span></p>
+                {/*<SolutionFundamentalPeriod inputs={inputs} result={results.fundamentalPeriod} />*/} 
               </div>
               <h3 className="text-md font-medium mb-4">Code Output</h3>
               <pre className="bg-gray-100 p-4 rounded">
