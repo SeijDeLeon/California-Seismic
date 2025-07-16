@@ -1,0 +1,33 @@
+import { DefaultInput, CounterInput, ListInput } from './BentoInputTypes';
+import { EquationFormat } from './EquationFormat';
+
+export const BentoInput = ({ label, value, equation, listItems, onChange, inputType, trailingUnit }) => {
+    const renderInput = () => {
+        switch (inputType) {
+            case 'counter':
+                return <CounterInput value={value} onChange={onChange} />;
+            case 'list':
+                return <ListInput value={value} listItems={listItems} onChange={onChange} />;
+            case 'default':
+            default:
+                return <DefaultInput value={value} onChange={onChange} />;
+        }
+    };
+
+    return (
+        <div className="w-full flex justify-between items-center border-black border-t-2 border-l-2 border-b border-r rounded-lg p-2 text-sm bg-white">
+            {label && (
+                <div className="w-1/3 flex text-start">
+                    <label className="text-sm text-black">{label}</label>
+                </div>
+            )}
+            {equation && (
+                <EquationFormat value={equation} />
+            )}
+            {renderInput()}
+            {trailingUnit && (
+                <span className="text-sm text-black">{trailingUnit}</span>
+            )}
+        </div>
+    );
+};
