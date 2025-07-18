@@ -1,8 +1,7 @@
-export const BentoColumn = ({ children, scrollable = false }) => {
+export const BentoColumn = ({ children }) => {
     return (
         <div
-            className={`gap-4 py-2 px-8 ${scrollable ? "overflow-y-auto max-h-screen scroll-smooth overscroll-contain" : ""
-                } flex-auto border-r-6  border-black w-4/12 min-h-[300px] `}
+            className={`flex-auto h-screen overflow-auto w-full sm:w-full py-2 px-4 md:px-6 lg:px-8`}
         >
             {children}
         </div>
