@@ -2,6 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import generatorLogic from "./GeneratorLogic";
 import { ForwardIcon, ArrowPathIcon } from "@heroicons/react/24/solid";
 
+const valuesEqual = (val1, val2) => {
+  if (Array.isArray(val1) && Array.isArray(val2)) {
+    if (val1.length !== val2.length) return false;
+    for (let i = 0; i < val1.length; i++) {
+      if (val1[i] !== val2[i]) return false;
+    }
+    return true;
+  }
+  return val1 === val2;
+};
+
 const Question = ({ category, answeredCorrect }) => {
   const [question, setQuestion] = useState({
     question: ``,
@@ -24,7 +35,7 @@ const Question = ({ category, answeredCorrect }) => {
   const handleSubmit = () => {
     setShowSolution(true);
     setSubmitted(true);
-    if (question.answer === chosen) {
+    if (valuesEqual(question.answer, chosen)) {
       answeredCorrect((prev) => prev + 1);
       setIsCorrect(true);
       colorRef.current.classList.remove("bg-gray-400");
@@ -49,21 +60,20 @@ const Question = ({ category, answeredCorrect }) => {
         <div className="flex justify-evenly">
           {question.choices.map((choice, ind) => (
             <button
-              ref={choice === chosen ? colorRef : null}
-              value={choice}
+              ref={valuesEqual(choice, chosen) ? colorRef : null}
               key={choice}
               className={
                 "border-2 rounded-xl p-2 m-2 cursor-pointer " +
-                (choice === chosen && "bg-gray-400")
+                (valuesEqual(choice, chosen) ? "bg-gray-400" : "")
                 // (question.answer === choice && isCorrect
                 //   ? "bg-green-400"
                 //   : null)
               }
-              onClick={(e) => {
-                setChosen(parseFloat(e.target.value));
+              onClick={() => {
+                setChosen(choice);
               }}
             >
-              {choice} {question.label}
+              {Array.isArray(choice) ? `[${choice.join(', ')}]` : choice} {question.label}
             </button>
           ))}
         </div>
