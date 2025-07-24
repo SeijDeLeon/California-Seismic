@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { BentoContainer } from '../../common/BentoContainer';
+import { EquationFormat } from '../../common/EquationFormat';
+import { BentoInput } from '../../common/BentoInput';
+import { BentoBox } from '../../common/BentoBox';
 import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
 import { getFloorsWithBot, calculateForces } from './Calculations';
 
 const BaseShearApp = () => {
+
+  const [selectedRisk, setSelectedRisk] = useState("II - Regular Building");
+  const [selectedSiteClass, setSelectedSiteClass] = useState("D - Default");
+  const [numberOfFloors, setNumberOfFloors] = useState(1);
+  const [shortPeriodSpectralAcceleration, setShortPeriodSpectralAcceleration] = useState(0);
+  const [longPeriodSpectralAcceleration, setLongPeriodSpectralAcceleration] = useState(0);
+  const [longPeriodTransitionPeriod, setLongPeriodTransitionPeriod] = useState(0);
   const [floors, setFloors] = useState([{ height: 20, weight: 100000 }]);
 
   const updatedFloors = getFloorsWithBot(floors);
@@ -38,15 +49,81 @@ const BaseShearApp = () => {
   };
 
   return (
-    <div className="p-6 font-sans max-w-screen-xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Base Shear Diagram</h1>
-      <div className="flex flex-col lg:flex-row gap-6">
+    <BentoContainer title="Base Shear Calculator">
+      <BentoBox title="USER INPUTS:">
+        <BentoInput
+          label="Risk Category"
+          value={selectedRisk}
+          listItems={[
+            "I - Low Risk",
+            "II - Regular Building",
+            "III - Substantial Risk",
+            "IV - Essential Facilities",
+          ]}
+          onChange={(newVal) => setSelectedRisk(newVal)}
+          inputType="list"
+        />
+        <BentoInput
+          label="Site Class"
+          value={selectedSiteClass}
+          listItems={[
+            "A - Hard Rock",
+            "B - Rock",
+            "C - Very Dense Soil and Soft Rock",
+            "D - Stiff Soil",
+            "D - Default",
+            "E - Soft Clay Soil",
+          ]}
+          onChange={(newVal) => setSelectedSiteClass(newVal)}
+          inputType="list"
+        />
+        <BentoInput
+          label="Short Period Spectral Acceleration"
+          value={shortPeriodSpectralAcceleration}
+          equation={<EquationFormat value={"\\(S_{s,input} =\\)"} />}
+          onChange={(e) => setShortPeriodSpectralAcceleration(e.target.value)}
+          inputType="default"
+        />
+        <BentoInput
+          label="Long Period Spectral Acceleration"
+          value={longPeriodSpectralAcceleration}
+          equation={<EquationFormat value={"\\(S_{1,input} =\\)"} />}
+          onChange={(e) => setLongPeriodSpectralAcceleration(e.target.value)}
+          inputType="default"
+        />
+        <BentoInput
+          label="Long Period Transition Period"
+          value={longPeriodTransitionPeriod}
+          equation={<EquationFormat value={"\\(T_{L,input} =\\)"} />}
+          onChange={(e) => setLongPeriodTransitionPeriod(e.target.value)}
+          inputType="default"
+        // trailingUnit="ft"
+        />
+
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+      </BentoBox>
+
+      <BentoBox title="INPUTS:">
         <InputTable
           floors={updatedFloors}
           addFloor={addFloor}
           deleteFloor={deleteFloor}
           handleChange={handleChange}
         />
+      </BentoBox>
+      <BentoBox title="SVG:">
         <RenderSVG
           floors={updatedFloors}
           forces={forces}
@@ -54,11 +131,14 @@ const BaseShearApp = () => {
           totalBaseShear={totalBaseShear}
           totalHeight={totalHeight}
         />
-      </div>
-      <div className="mt-10">
+      </BentoBox> 
+      <BentoBox title="DIAGRAM:">
         <DisplacementPlot />
-      </div>
-    </div>
+      </BentoBox>
+      <BentoBox title="SOLUTIONS:">
+        {/* FILL IN WITH JASON'S SOLUTION CODE WHEN ITS FINISHED */}
+      </BentoBox>
+    </BentoContainer>
   );
 };
 

@@ -1,6 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import ArrowUp from '../../assets/images/arrow-up.png';
-import ArrowDown from '../../assets/images/arrow-down.png';
 
 export const DefaultInput = ({ value, onChange }) => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
-  <div className="w-full lg:w-1/2">
+  <div className="w-full lg:w-3/4">
     <table className="w-full border-collapse text-sm mb-4">
       <thead className="bg-gray-100">
         <tr>
@@ -14,7 +14,7 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
       </thead>
       <tbody>
         {floors.map((floor, i) => (
-          <tr key={i} className="even:bg-blue-50">
+          <tr key={i} className="bg-white">
             <td className="text-center">{i + 1}</td>
             <td><input type="number" value={floor.height} onChange={(e) => handleChange(i, 'height', e.target.value)} className="w-full p-1 border" /></td>
             <td><input type="number" value={floor.weight} onChange={(e) => handleChange(i, 'weight', e.target.value)} className="w-full p-1 border" /></td>
@@ -25,7 +25,7 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
       </tbody>
     </table>
     <button onClick={addFloor} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">+ Add Floor</button>
-    </div>
+  </div>
   );
 
 export default InputTable;

@@ -5,14 +5,13 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
   const scale = 4;
 
   return (
-    <div className="w-full lg:w-1/2 overflow-x-auto">
+    <div className="w-full overflow-x-auto">
       <svg
-        width="600"
-        height={(totalHeight * scale) + 100}
-        viewBox={`0 0 500 ${(totalHeight * scale) + 100}`}
-        style={{ border: '1px solid #ccc' }}
+        width="100%"
+        height={`${totalHeight * scale + 100}px`}
+        style={{ display: 'block' }}
       >
-         <g transform='translate(60,0)'>
+         <g transform='translate(100,0)'>
             <defs>
               <marker
                 id="arrowhead"
