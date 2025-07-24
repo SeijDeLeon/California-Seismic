@@ -167,7 +167,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
 
               <label key={index} className={`flex items-start gap-2 transition-all ${(answer === question.answer && solutionDisplay) ? 'bg-gradient-to-r from-yellow-200' : ''}`}>
                 <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer} className="mt-1" />
-                <span className="block text-left">{answer}</span>
+                <span className="block text-left"><MathJax>{answer}</MathJax></span>
 
               </label>
             )
