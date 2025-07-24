@@ -6,7 +6,6 @@ import { BentoContainer } from '../../common/BentoContainer';
 import { EquationFormat } from '../../common/EquationFormat';
 import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
-import { BentoColumn } from '../../common/BentoColumn.jsx';
 
 const BaseShearApp = () => {
   const [selectedRisk, setSelectedRisk] = useState("II - Regular Building");
@@ -16,16 +15,16 @@ const BaseShearApp = () => {
   const [longPeriodSpectralAcceleration, setLongPeriodSpectralAcceleration] = useState(0);
   const [longPeriodTransitionPeriod, setLongPeriodTransitionPeriod] = useState(0);
 
-  const [settingsMenu, setSettingsMenu] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [fontSize, setFontSize] = useState(16);
-  const [asceVersion, setAsceVersion] = useState('ASCE-17');
+  // const [settingsMenu, setSettingsMenu] = useState(false);
+  // const [darkMode, setDarkMode] = useState(false);
+  // const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  // const [fontSize, setFontSize] = useState(16);
+  // const [asceVersion, setAsceVersion] = useState('ASCE-17');
 
 
-  const handleSettingsOpen = () => {
-    setSettingsMenu(true);
-  };
+  // const handleSettingsOpen = () => {
+  //   setSettingsMenu(true);
+  // };
 
   const chartRef = useRef();
   // const [userInput, setUserInput] = useState({ input1: '' });
@@ -316,177 +315,235 @@ const BaseShearApp = () => {
   }, [numberOfFloors, floorHeight, drawChart]);
 
   return (
-    <div className="flex flex-col h-screen">
-      <header className="flex items-center bg-white z-10 px-4 py-2">
-        <div className="flex-1 text-center">
-          <h1 className="text-6xl font-bold">Base Shear Diagram</h1>
-        </div>
+    <BentoContainer title="Base Shear Calculator">
+      <BentoBox title="USER INPUTS:">
+        <BentoInput
+          label="Risk Category"
+          value={selectedRisk}
+          listItems={[
+            "I - Low Risk",
+            "II - Regular Building",
+            "III - Substantial Risk",
+            "IV - Essential Facilities",
+          ]}
+          onChange={(newVal) => setSelectedRisk(newVal)}
+          inputType="list"
+        />
+        <BentoInput
+          label="Site Class"
+          value={selectedSiteClass}
+          listItems={[
+            "A - Hard Rock",
+            "B - Rock",
+            "C - Very Dense Soil and Soft Rock",
+            "D - Stiff Soil",
+            "D - Default",
+            "E - Soft Clay Soil",
+          ]}
+          onChange={(newVal) => setSelectedSiteClass(newVal)}
+          inputType="list"
+        />
+        <BentoInput
+          label="Short Period Spectral Acceleration"
+          value={shortPeriodSpectralAcceleration}
+          equation={<EquationFormat value={"\\(S_{s,input} =\\)"} />}
+          onChange={(e) => setShortPeriodSpectralAcceleration(e.target.value)}
+          inputType="default"
+        />
+        <BentoInput
+          label="Long Period Spectral Acceleration"
+          value={longPeriodSpectralAcceleration}
+          equation={<EquationFormat value={"\\(S_{1,input} =\\)"} />}
+          onChange={(e) => setLongPeriodSpectralAcceleration(e.target.value)}
+          inputType="default"
+        />
+        <BentoInput
+          label="Long Period Transition Period"
+          value={longPeriodTransitionPeriod}
+          equation={<EquationFormat value={"\\(T_{L,input} =\\)"} />}
+          onChange={(e) => setLongPeriodTransitionPeriod(e.target.value)}
+          inputType="default"
+        // trailingUnit="ft"
+        />
+        <section className="mt-2 text-black grid grid-cols-2 gap-8 text-xs w-full justify-between items-center">
+          <section>
 
-        <button
-          onClick={handleSettingsOpen}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Settings
-        </button>
-      </header>
-      <main className="flex-1 overflow-y-auto snap-y snap-mandatory bg-gray-500">
-        <section className="snap-start bg-gray-500">
-          <BentoContainer>
-            <BentoColumn>
-              <BentoBox title="USER INPUTS:">
-                <BentoInput
-                  label="Risk Category"
-                  value={selectedRisk}
-                  listItems={[
-                    "I - Low Risk",
-                    "II - Regular Building",
-                    "III - Substantial Risk",
-                    "IV - Essential Facilities",
-                  ]}
-                  onChange={(newVal) => setSelectedRisk(newVal)}
-                  inputType="list"
-                />
-                <BentoInput
-                  label="Site Class"
-                  value={selectedSiteClass}
-                  listItems={[
-                    "A - Hard Rock",
-                    "B - Rock",
-                    "C - Very Dense Soil and Soft Rock",
-                    "D - Stiff Soil",
-                    "D - Default",
-                    "E - Soft Clay Soil",
-                  ]}
-                  onChange={(newVal) => setSelectedSiteClass(newVal)}
-                  inputType="list"
-                />
-                <BentoInput
-                  label="Short Period Spectral Acceleration"
-                  value={shortPeriodSpectralAcceleration}
-                  equation={<EquationFormat value={"\\(S_{s,input} =\\)"} />}
-                  onChange={(e) => setShortPeriodSpectralAcceleration(e.target.value)}
-                  inputType="default"
-                />
-                <BentoInput
-                  label="Long Period Spectral Acceleration"
-                  value={longPeriodSpectralAcceleration}
-                  equation={<EquationFormat value={"\\(S_{1,input} =\\)"} />}
-                  onChange={(e) => setLongPeriodSpectralAcceleration(e.target.value)}
-                  inputType="default"
-                />
-                <BentoInput
-                  label="Long Period Transition Period"
-                  value={longPeriodTransitionPeriod}
-                  equation={<EquationFormat value={"\\(T_{L,input} =\\)"} />}
-                  onChange={(e) => setLongPeriodTransitionPeriod(e.target.value)}
-                  inputType="default"
-                // trailingUnit="ft"
-                />
-              </BentoBox>
-              <BentoBox title="PROPERTIES:">
-                <BentoInput
-                  label="Building Stories"
-                  value={numberOfFloors}
-                  onChange={(e) => setNumberOfFloors(e)}
-                  inputType="counter"
-                />
-                <section className="text-black grid grid-cols-2 gap-8 text-sm w-full justify-between items-center border-black border-t-2 border-l-2 border-b border-r rounded-lg p-2 bg-white">
-                  <p className="text-start">Building Risk Category:</p>
-                  <section>
-                    <EquationFormat value={"\\(RC =\\)"} result={selectedRisk} />
-                  </section>
-
-
-                  <p className="text-start">Site Class:</p>
-                  <section>
-                    <EquationFormat value={"\\(S_{DS} =\\)"} result={selectedSiteClass} />
-                  </section>
-
-                  <p className="text-start">Short-Period Spectral Acceleration:</p>
-                  <section>
-                    <EquationFormat value={"\\(S_{DS} =\\)"} result={shortPeriodSpectralAcceleration} />
-                  </section>
-
-
-                  <p className="text-start">Long-Period Spectral Acceleration:</p>
-                  <section>
-                    <EquationFormat value={"\\(S_{1} =\\)"} result={longPeriodSpectralAcceleration} />
-                  </section>
-
-                  <p className="text-start">Long-Period Transition Period:</p>
-                  <section>
-                    <EquationFormat value={"\\(T_{L} =\\)"} result={`${longPeriodTransitionPeriod}s`} />
-                  </section>
-
-                  <section>
-
-                    <table className="w-full">
-                      <tbody>
-                        {Array.from({ length: numberOfFloors }, (_, i) => (
-                          <tr key={i} className="border-b border-gray-300">
-                            <td className="py-2 px-4">{`F${i + 1}`}</td>
-                            <td className="py-2 px-4">
-                              <input
-                                type="number"
-                                value={floorHeight[i + 1] || ''}
-                                onChange={(e) => handleFloorHeightChange(e, i + 1)}
-                                className="border rounded p-1 w-full"
-                              />
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </section>
-                </section>
-              </BentoBox>
-              <BentoBox title="DETAILS:">
-              </BentoBox>
-            </BentoColumn>
-            <BentoColumn>
-              <BentoBox title="SUMMARY:">
-                <section className="text-black grid grid-cols-2 gap-4 text-sm">
-                  <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-                  <section>
-                    <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-                  </section>
-
-
-                  <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-                  <section>
-                    <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-                  </section>
-
-                  <p className="text-start">Seismic Design Category:</p>
-                  <section>
-                    <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-                  </section>
-
-
-                  <p className="text-start">Seismic Base Shear:</p>
-                  <section>
-                    <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-                  </section>
-
-                </section>
-
-                <Chart chartRef={chartRef} />
-              </BentoBox>
-
-
-            </BentoColumn>
-
-          </BentoContainer>
+            <table className="w-full">
+              <tbody>
+                {Array.from({ length: numberOfFloors }, (_, i) => (
+                  <tr key={i} className="border-b border-gray-300">
+                    <td className="py-2 px-4">{`F${i + 1}`}</td>
+                    <td className="py-2 px-4">
+                      <input
+                        type="number"
+                        value={floorHeight[i + 1] || ''}
+                        onChange={(e) => handleFloorHeightChange(e, i + 1)}
+                        className="border rounded p-1 w-full"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
         </section>
-      </main>
-      <button
-        className="fixed bottom-0 right-0 rounded m-4 p-2 bg-blue-500 text-white"
-        onClick={() =>
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        }>
-        Scroll to Top
-      </button>
-      {settingsMenu && (
+        <section className="mt-2 text-black grid grid-cols-2 gap-8 text-xs w-full justify-between items-center">
+          <section>
+
+            <table className="w-full">
+              <tbody>
+                {Array.from({ length: numberOfFloors }, (_, i) => (
+                  <tr key={i} className="border-b border-gray-300">
+                    <td className="py-2 px-4">{`F${i + 1}`}</td>
+                    <td className="py-2 px-4">
+                      <input
+                        type="number"
+                        value={floorHeight[i + 1] || ''}
+                        onChange={(e) => handleFloorHeightChange(e, i + 1)}
+                        className="border rounded p-1 w-full"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-8 text-xs w-full justify-between items-center">
+          <section>
+
+            <table className="w-full">
+              <tbody>
+                {Array.from({ length: numberOfFloors }, (_, i) => (
+                  <tr key={i} className="border-b border-gray-300">
+                    <td className="py-2 px-4">{`F${i + 1}`}</td>
+                    <td className="py-2 px-4">
+                      <input
+                        type="number"
+                        value={floorHeight[i + 1] || ''}
+                        onChange={(e) => handleFloorHeightChange(e, i + 1)}
+                        className="border rounded p-1 w-full"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+      </BentoBox>
+
+      <BentoBox title="DIAGRAM:">
+        <Chart chartRef={chartRef} />
+      </BentoBox>
+      <BentoBox title="SOLUTIONS:">
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
+          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
+
+          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
+
+          <p className="text-start">Seismic Design Category:</p>
+          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
+
+          <p className="text-start">Seismic Base Shear:</p>
+          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
+        </section>
+      </BentoBox>
+
+      {/* {settingsMenu && (
         <section className={`fixed inset-0 flex z-50 pointer-events-${settingsMenu ? 'auto' : 'none'}`}>
           <section className={`absolute inset-0 bg-gray-800 bg-opacity-50 transition-opacity duration-200
               ${settingsMenu ? 'opacity-100' : 'opacity-0'}`}
@@ -553,8 +610,8 @@ const BaseShearApp = () => {
             </button>
           </section>
         </section>
-      )}
-    </div>
+      )} */}
+    </BentoContainer>
   );
 };
 

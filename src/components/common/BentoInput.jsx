@@ -15,10 +15,10 @@ export const BentoInput = ({ label, value, equation, listItems, onChange, inputT
     };
 
     return (
-        <div className="w-full flex justify-between items-center border-black border-t-2 border-l-2 border-b border-r rounded-lg p-2 text-sm bg-white">
+        <div className="w-full flex justify-between items-center mb-1 text-xs">
             {label && (
                 <div className="w-1/3 flex text-start">
-                    <label className="text-sm text-black">{label}</label>
+                    <label className="text-xs text-black">{label}</label>
                 </div>
             )}
             {equation && (
@@ -26,7 +26,7 @@ export const BentoInput = ({ label, value, equation, listItems, onChange, inputT
             )}
             {renderInput()}
             {trailingUnit && (
-                <span className="text-sm text-black">{trailingUnit}</span>
+                <span className="text-xs text-black">{trailingUnit}</span>
             )}
         </div>
     );
