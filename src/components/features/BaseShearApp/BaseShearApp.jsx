@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
 // import InputSection from './InputSection';
 import Chart from './Chart';
@@ -8,6 +8,7 @@ import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
 
 const BaseShearApp = () => {
+  // THIS IS SUBJECT TO CHANGE FOR YOU, EVANIA
   const [selectedRisk, setSelectedRisk] = useState("II - Regular Building");
   const [selectedSiteClass, setSelectedSiteClass] = useState("D - Default");
   const [numberOfFloors, setNumberOfFloors] = useState(1);
@@ -15,57 +16,14 @@ const BaseShearApp = () => {
   const [longPeriodSpectralAcceleration, setLongPeriodSpectralAcceleration] = useState(0);
   const [longPeriodTransitionPeriod, setLongPeriodTransitionPeriod] = useState(0);
 
-  // const [settingsMenu, setSettingsMenu] = useState(false);
-  // const [darkMode, setDarkMode] = useState(false);
-  // const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  // const [fontSize, setFontSize] = useState(16);
-  // const [asceVersion, setAsceVersion] = useState('ASCE-17');
-
-
-  // const handleSettingsOpen = () => {
-  //   setSettingsMenu(true);
-  // };
-
+  // old code
   const chartRef = useRef();
-  // const [userInput, setUserInput] = useState({ input1: '' });
-  // const [inputs, setInputs] = useState({
-  //   input2: '',
-  //   input3: '',
-  //   input4: '',
-  //   input5: '',
-  //   input6: '',
-  //   input7: '',
-  //   input8: '',
-  // });
   const [floorHeight, setFloorHeights] = useState(() => {
     const storedHeights = JSON.parse(localStorage.getItem('floorHeight'));
     return storedHeights || {};
   });
 
-  // const handleInputChange = (event, inputName) => {
-  //   const newValue = parseInt(event.target.value);
-  //   if (inputName === 'input1') {
-  //     const newFloorValue = isNaN(newValue) || newValue < 1 ? 1 : newValue;
-  //     setNumberOfFloors(newFloorValue);
-  //     setUserInput(prevState => ({ ...prevState, input1: newFloorValue }));
-  //     setFloorHeights(prevFloorHeights => {
-  //       const adjustedHeights = { ...prevFloorHeights };
-  //       for (let i = 1; i <= newFloorValue; i++) {
-  //         if (!adjustedHeights[i]) {
-  //           adjustedHeights[i] = 10;
-  //         }
-  //       }
-  //       for (let i = newFloorValue + 1; i <= numberOfFloors; i++) {
-  //         delete adjustedHeights[i];
-  //       }
-  //       return adjustedHeights;
-  //     });
-  //     localStorage.setItem('floorHeight', JSON.stringify(floorHeight));
-  //   } else {
-  //     setInputs(prevState => ({ ...prevState, [inputName]: newValue }));
-  //   }
-  // };
-
+  // use your own code to set the floor heights
   const handleFloorHeightChange = (event, floorNum) => {
     const newHeight = parseInt(event.target.value);
     setFloorHeights(prevFloorHeights => ({ ...prevFloorHeights, [floorNum]: newHeight }));
@@ -365,124 +323,7 @@ const BaseShearApp = () => {
           inputType="default"
         // trailingUnit="ft"
         />
-        <section className="mt-2 text-black grid grid-cols-2 gap-8 text-xs w-full justify-between items-center">
-          <section>
 
-            <table className="w-full">
-              <tbody>
-                {Array.from({ length: numberOfFloors }, (_, i) => (
-                  <tr key={i} className="border-b border-gray-300">
-                    <td className="py-2 px-4">{`F${i + 1}`}</td>
-                    <td className="py-2 px-4">
-                      <input
-                        type="number"
-                        value={floorHeight[i + 1] || ''}
-                        onChange={(e) => handleFloorHeightChange(e, i + 1)}
-                        className="border rounded p-1 w-full"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-8 text-xs w-full justify-between items-center">
-          <section>
-
-            <table className="w-full">
-              <tbody>
-                {Array.from({ length: numberOfFloors }, (_, i) => (
-                  <tr key={i} className="border-b border-gray-300">
-                    <td className="py-2 px-4">{`F${i + 1}`}</td>
-                    <td className="py-2 px-4">
-                      <input
-                        type="number"
-                        value={floorHeight[i + 1] || ''}
-                        onChange={(e) => handleFloorHeightChange(e, i + 1)}
-                        className="border rounded p-1 w-full"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-8 text-xs w-full justify-between items-center">
-          <section>
-
-            <table className="w-full">
-              <tbody>
-                {Array.from({ length: numberOfFloors }, (_, i) => (
-                  <tr key={i} className="border-b border-gray-300">
-                    <td className="py-2 px-4">{`F${i + 1}`}</td>
-                    <td className="py-2 px-4">
-                      <input
-                        type="number"
-                        value={floorHeight[i + 1] || ''}
-                        onChange={(e) => handleFloorHeightChange(e, i + 1)}
-                        className="border rounded p-1 w-full"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
         <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
           <p className="text-start">Design Short-Period Spectral Acceleration:</p>
           <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
@@ -499,118 +340,12 @@ const BaseShearApp = () => {
       </BentoBox>
 
       <BentoBox title="DIAGRAM:">
+        {/* old chart, use yours - its way better */}
         <Chart chartRef={chartRef} />
       </BentoBox>
       <BentoBox title="SOLUTIONS:">
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.52"} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"2.12"} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={"121,851lb"} />
-        </section>
+        {/* FILL IN WITH JASON'S SOLUTION CODE WHEN ITS FINISHED */}
       </BentoBox>
-
-      {/* {settingsMenu && (
-        <section className={`fixed inset-0 flex z-50 pointer-events-${settingsMenu ? 'auto' : 'none'}`}>
-          <section className={`absolute inset-0 bg-gray-800 bg-opacity-50 transition-opacity duration-200
-              ${settingsMenu ? 'opacity-100' : 'opacity-0'}`}
-            onClick={() => setSettingsMenu(false)}
-          />
-          <section className={'relative ml-auto w-72 h-full bg-white p-6 rounded-l shadow-lg'}>
-            <h2 className="text-2xl font-bold mb-4">Settings</h2>
-            <section className="space-y-4">
-              <section className="inline-flex bg-gray-200 rounded-full p-1">
-                <button
-                  onClick={() => setAsceVersion('ASCE-17')}
-                  className={`px-3 py-1 rounded-full transition-colors duration-150 ${asceVersion === 'ASCE-17'
-                    ? 'bg-white text-black'
-                    : 'text-gray-600'}`}>
-                  ASCE‑17
-                </button>
-                <button
-                  onClick={() => setAsceVersion('ASCE-22')}
-                  className={`px-3 py-1 rounded-full transition-colors duration-150 ${asceVersion === 'ASCE-22'
-                    ? 'bg-white text-black'
-                    : 'text-gray-600'}`}>
-                  ASCE‑22
-                </button>
-              </section>
-            </section>
-            <section className="flex items-center justify-between">
-              <span>Dark Mode</span>
-              <input
-                type="checkbox"
-                checked={darkMode}
-                onChange={() => setDarkMode(!darkMode)}
-                className="h-5 w-5"
-              />
-            </section>
-
-            <section className="flex items-center justify-between">
-              <span>Notifications</span>
-              <input
-                type="checkbox"
-                checked={notificationsEnabled}
-                onChange={() => setNotificationsEnabled(!notificationsEnabled)}
-                className="h-5 w-5"
-              />
-            </section>
-
-            <section>
-              <label className="block mb-1">Font Size: {fontSize}px</label>
-              <input
-                type="range"
-                min="12"
-                max="24"
-                value={fontSize}
-                onChange={e => setFontSize(Number(e.target.value))}
-                className="w-full"
-              />
-            </section>
-
-
-            <button
-              className="mt-6 w-full bg-red-500 text-white py-2 rounded"
-              onClick={() => setSettingsMenu(false)}
-            >
-              Close
-            </button>
-          </section>
-        </section>
-      )} */}
     </BentoContainer>
   );
 };
