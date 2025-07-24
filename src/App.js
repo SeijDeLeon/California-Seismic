@@ -20,7 +20,7 @@ import ASCE7 from './routes/ASCE7.jsx';
 import BaseShearApp from './routes/BaseShearApp.jsx';
 import Demo from './routes/Demo.jsx';
 import Solver from './routes/SolverPage.jsx';
-
+import Output from './components/features/DiaphragmAnalysis/Output.jsx';
 //Google Analytics
 import ReactGA from 'react-ga4';
 import ExamsHistory from './components/features/ExamSimulator/ExamsHistory.jsx';
@@ -64,6 +64,7 @@ function App() {
         <Route path="/baseshear" element={<BaseShearApp />} />
         <Route path="/Solver" element={<Solver />} />
         <Route path="/demo" element={<Demo visible={true} />} />
+        <Route path="/output" element={<Output/>} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}

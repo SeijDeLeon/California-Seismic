@@ -11,6 +11,7 @@
     "better-react-mathjax": "^2.0.2",
     "chart.js": "^4.4.3",
     "d3": "^7.9.0",
+    "lucide-react": "^0.525.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
