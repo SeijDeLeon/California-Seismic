@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import questionData from '../../../assets/data/questionData.js';
 import { MathJax} from "better-react-mathjax";
 const images = require.context('../../../../public/images/questions', true);
-
+console.log('Available images:', images.keys());
 
 
 export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) {
@@ -165,7 +165,7 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
           {randomizedAnswers.map((answer, index) => {
             return (
               <label key={index} className={`block text-left transition-all ${(answer===question.answer && solutionDisplay)? 'bg-gradient-to-r from-yellow-200' : ''}`}>
-                <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer}/> &#160;{answer}
+                <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer}/> &#160;<MathJax inline>{answer}</MathJax>
               </label>
             )
           })}
