@@ -13,7 +13,7 @@ const SolutionCs = ({ inputs, result }) => {
     Cs = SD1 / (T * (R / Ie));
     filledEquation = `C_s = \\frac{${SD1}}{${T} \\cdot \\frac{${R}}{${Ie}}}`;
     explanation = "Found using Equation 12.8-3 as it gives a lower value:";
-    usedEquation = "/ASCE7/12.8.1";
+    usedEquation = "12.8-3";
   } else {
     if (T <= TL) {
       const Cs_max = 0.044 * SDS * Ie;
@@ -21,7 +21,7 @@ const SolutionCs = ({ inputs, result }) => {
         Cs = Cs_max;
         filledEquation = `C_s = 0.044 \\cdot ${SDS} \\cdot ${Ie}`;
         explanation = "Found using Equation 12.8-4 for T <= TL:";
-        usedEquation = "/ASCE7/12.8.1";
+        usedEquation = "12.8-4";
       }
     } else {
       const Cs_max_TL = (0.044 * SDS * TL) / T;
@@ -29,7 +29,7 @@ const SolutionCs = ({ inputs, result }) => {
         Cs = Cs_max_TL;
         filledEquation = `C_s = \\frac{0.044 \\cdot ${SDS} \\cdot ${TL}}{${T}}`;
         explanation = "Found using Equation 12.8-4 for T > TL:";
-        usedEquation = "/ASCE7/12.8.1";
+        usedEquation = "12.8-4-TL";
       }
     }
 
@@ -39,7 +39,7 @@ const SolutionCs = ({ inputs, result }) => {
         Cs = Cs_exception;
         filledEquation = `C_s = 0.5 \\cdot \\frac{${SDS} \\cdot ${Ie}}{${R}}`;
         explanation = "Found using Equation 12.8-5 for T0 <= T <= TL:";
-        usedEquation = "/ASCE7/12.8.1";
+        usedEquation = "12.8-5";
       }
     }
 
@@ -49,7 +49,7 @@ const SolutionCs = ({ inputs, result }) => {
         Cs = Cs_near_fault;
         filledEquation = `C_s = 0.044 \\cdot ${SDS} \\cdot ${Ie}`;
         explanation = "Found using Equation 12.8-6 for near-fault conditions:";
-        usedEquation = "/ASCE7/12.8.1";
+        usedEquation = "12.8-6";
       }
     }
   }
@@ -62,49 +62,49 @@ const SolutionCs = ({ inputs, result }) => {
         <h2>Calculation of Seismic Response Coefficient (C<sub>s</sub>)</h2>
         <p>{explanation}</p>
         <ul>
-          {usedEquation === "/ASCE7/12.8.1" && (
+          {usedEquation === "12.8-2" && (
             <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
                 <MathJax>{`\\(C_s = \\frac{S_{DS} I_e}{R}\\)`}</MathJax>
                 &nbsp;(Equation 12.8-2)
               </a>
             </li>
           )}
-          {usedEquation === "/ASCE7/12.8.1" && (
+          {usedEquation === "12.8-3" && (
             <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
                 <MathJax>{`\\(C_s = \\frac{S_{D1}}{T \\cdot \\frac{R}{I_e}}\\)`}</MathJax>
                 &nbsp;(Equation 12.8-3)
               </a>
             </li>
           )}
-          {usedEquation === "/ASCE7/12.8.1" && (
+          {usedEquation === "12.8-4" && (
             <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
                 <MathJax>{`\\(C_s = 0.044 S_{DS} I_e\\)`}</MathJax>
                 &nbsp;(Equation 12.8-4)
               </a>
             </li>
           )}
-          {usedEquation === "/ASCE7/12.8.1" && (
+          {usedEquation === "12.8-4-TL" && (
             <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
                 <MathJax>{`\\(C_s = \\frac{0.044 S_{DS} T_L}{T}\\)`}</MathJax>
                 &nbsp;(Equation 12.8-4)
               </a>
             </li>
           )}
-          {usedEquation === "/ASCE7/12.8.1" && (
+          {usedEquation === "12.8-5" && (
             <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
                 <MathJax>{`\\(C_s = 0.5 \\cdot \\frac{S_{DS} I_e}{R}\\)`}</MathJax>
                 &nbsp;(Equation 12.8-5)
               </a>
             </li>
           )}
-          {usedEquation === "/ASCE7/12.8.1" && (
+          {usedEquation === "12.8-6" && (
             <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline">
+              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
                 <MathJax>{`\\(C_s = 0.044 S_{DS} I_e\\)`}</MathJax>
                 &nbsp;(Equation 12.8-6)
               </a>

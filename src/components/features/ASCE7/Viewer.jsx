@@ -30,9 +30,11 @@ export default function Viewer({ section }) {
       const subsection =
         pictureCurrentChapter[subParts[0]]?.subsections?.[section];
       if (subsection) {
+        const baseUrl = process.env.PUBLIC_URL || "";
+        const prefix = baseUrl.includes("/ASCE7") ? baseUrl: `${baseUrl}/ASCE7`;
         images = subsection.imgs.map(
           (img) =>
-            `${process.env.PUBLIC_URL}/ASCE7/CH${pictureCurrentChapterNumber}/${img}`
+            `${prefix.replace(/\/$/,"")}/CH${pictureCurrentChapterNumber}/${img}`
         );
         title = subsection.title;
       }
@@ -46,9 +48,12 @@ export default function Viewer({ section }) {
       if (dotCount === 1) {
         const sectionData = currentChapter[section];
         if (sectionData && sectionData.imgs) {
+
+          const baseUrl = process.env.PUBLIC_URL || "";
+          const prefix = baseUrl.includes("/ASCE7") ? baseUrl: `${baseUrl}/ASCE7`;
           images = sectionData.imgs.map(
             (img) =>
-              `${process.env.PUBLIC_URL}/ASCE7/CH${currentChapterNumber}/${img}`
+              `${prefix.replace(/\/$/,"")}/CH${currentChapterNumber}/${img}`
           );
           title = sectionData.title;
         }
@@ -57,9 +62,12 @@ export default function Viewer({ section }) {
         const subsection =
           currentChapter[`${part1}.${part2}`]?.subsections?.[section];
         if (subsection && subsection.imgs) {
+          const baseUrl = process.env.PUBLIC_URL || "";
+          const prefix = baseUrl.includes("/ASCE7") ? baseUrl: `${baseUrl}/ASCE7`;
+          
           images = subsection.imgs.map(
             (img) =>
-              `${process.env.PUBLIC_URL}/ASCE7/CH${currentChapterNumber}/${img}`
+              `${prefix.replace(/\/$/,"")}/CH${currentChapterNumber}/${img}`
           );
           title = subsection.title;
         } else if (subsection) {

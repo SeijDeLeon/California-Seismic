@@ -164,8 +164,9 @@ export default function QuestionDisplay( { questionKey='a1', setQuestionKey } ) 
         <div className='block py-4 m-auto'>
           {randomizedAnswers.map((answer, index) => {
             return (
-              <label key={index} className={`block text-left transition-all ${(answer===question.answer && solutionDisplay)? 'bg-gradient-to-r from-yellow-200' : ''}`}>
-                <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer}/> &#160;{answer}
+              <label key={index} className={`flex items-start gap-2 transition-all ${(answer === question.answer && solutionDisplay) ? 'bg-gradient-to-r from-yellow-200' : ''}`}>
+                <input type='radio' value={answer} onChange={handleChange} checked={checkedItem === answer} className="mt-1" />
+                <span className="block text-left">{answer}</span>
               </label>
             )
           })}
