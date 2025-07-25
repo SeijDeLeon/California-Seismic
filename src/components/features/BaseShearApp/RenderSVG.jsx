@@ -161,7 +161,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
                 label: `V = ${Math.round(totalBaseShear)} lb`,
                 direction: 'left',
                 labelPosition: 'middle',
-                labelOffsetX: 40,
+                labelOffsetX: 50,
                 scaleFactor: 100
             })}
 

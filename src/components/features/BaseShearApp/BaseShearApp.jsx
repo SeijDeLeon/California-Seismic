@@ -12,10 +12,10 @@ const BaseShearApp = () => {
 
   const [selectedRisk, setSelectedRisk] = useState("II - Regular Building");
   const [selectedSiteClass, setSelectedSiteClass] = useState("D - Default");
-  const [numberOfFloors, setNumberOfFloors] = useState(1);
   const [shortPeriodSpectralAcceleration, setShortPeriodSpectralAcceleration] = useState(0);
   const [longPeriodSpectralAcceleration, setLongPeriodSpectralAcceleration] = useState(0);
   const [longPeriodTransitionPeriod, setLongPeriodTransitionPeriod] = useState(0);
+  const [showDiagramType, setShowDiagramType] = useState('svg'); // or 'plot'
   const [floors, setFloors] = useState([{ height: 20, weight: 100000 }]);
 
   const updatedFloors = getFloorsWithBot(floors);
@@ -115,7 +115,7 @@ const BaseShearApp = () => {
         </section>
       </BentoBox>
 
-      <BentoBox title="INPUTS:">
+      <BentoBox title="BUILDING STORIES:">
         <InputTable
           floors={updatedFloors}
           addFloor={addFloor}
@@ -123,18 +123,52 @@ const BaseShearApp = () => {
           handleChange={handleChange}
         />
       </BentoBox>
-      <BentoBox title="SVG:">
-        <RenderSVG
-          floors={updatedFloors}
-          forces={forces}
-          storyVs={storyVs}
-          totalBaseShear={totalBaseShear}
-          totalHeight={totalHeight}
-        />
-      </BentoBox> 
+
       <BentoBox title="DIAGRAM:">
-        <DisplacementPlot />
+        {/* Truly centered toggle switch */}
+        <div className="w-full flex justify-center mb-4">
+          <div className="relative flex items-center bg-gray-500 rounded-full w-28 h-10">
+            {/* Sliding background highlight */}
+            <div
+              className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${
+                showDiagramType === 'plot' ? 'right-1' : 'left-1'
+              }`}
+            ></div>
+
+            {/* SVG label */}
+            <button
+              className="z-10 w-1/2 text-center text-white text-sm font-medium pl-1"
+              onClick={() => setShowDiagramType('svg')}
+            >
+              SVG
+            </button>
+
+            {/* Plot label */}
+            <button
+              className="z-10 w-1/2 text-center text-white text-sm font-medium pr-1"
+              onClick={() => setShowDiagramType('plot')}
+            >
+              Plot
+            </button>
+          </div>
+        </div>
+
+        {/* Diagram rendering */}
+        <div className="w-full flex justify-center items-center">
+          {showDiagramType === 'svg' ? (
+            <RenderSVG
+              floors={updatedFloors}
+              forces={forces}
+              storyVs={storyVs}
+              totalBaseShear={totalBaseShear}
+              totalHeight={totalHeight}
+            />
+          ) : (
+            <DisplacementPlot />
+          )}
+        </div>
       </BentoBox>
+
       <BentoBox title="SOLUTIONS:">
         {/* FILL IN WITH JASON'S SOLUTION CODE WHEN ITS FINISHED */}
       </BentoBox>
