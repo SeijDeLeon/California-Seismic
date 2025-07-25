@@ -1,11 +1,9 @@
-import { DefaultInput, CounterInput, ListInput } from './BentoInputTypes';
+import { DefaultInput, ListInput } from './BentoInputTypes';
 import { EquationFormat } from './EquationFormat';
 
 export const BentoInput = ({ label, value, equation, listItems, onChange, inputType, trailingUnit }) => {
     const renderInput = () => {
         switch (inputType) {
-            case 'counter':
-                return <CounterInput value={value} onChange={onChange} />;
             case 'list':
                 return <ListInput value={value} listItems={listItems} onChange={onChange} />;
             case 'default':

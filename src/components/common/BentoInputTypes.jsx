@@ -16,32 +16,6 @@ export const DefaultInput = ({ value, onChange }) => {
     );
 };
 
-export const CounterInput = ({ value, onChange }) => {
-    const handleChange = (newValue) => {
-        if (newValue >= 1 && newValue <= 20) {
-            onChange(newValue);
-        }
-    };
-
-    return (
-        <div className="align-center justify-between flex flex-row items-center">
-            <p className="text-xs font-bold mr-5">{value}</p>
-            <div>
-                <button
-                    className='mr-2 bg-white rounded active:scale-125 transition-all border-1 border-black'
-                    onClick={() => handleChange(value - 1)}>
-                    <img src={ArrowDown} alt="Decrease" className="h-7 w-7 rounded " />
-                </button>
-                <button
-                    className='ml-2 bg-white rounded active:scale-125 transition-all border-1 border-black'
-                    onClick={() => handleChange(value + 1)}>
-                    <img src={ArrowUp} alt="Increase" className="h-7 w-7 rounded " />
-                </button>
-            </div>
-
-        </div>
-    );
-}
 export const ListInput = ({ value, listItems, onChange }) => {
     const [showList, setShowList] = useState(false);
     const containerRef = useRef(null);
