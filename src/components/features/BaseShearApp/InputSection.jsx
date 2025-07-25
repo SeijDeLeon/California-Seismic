@@ -1,7 +1,7 @@
 import React from 'react';
 
 const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
-  <div className="w-full lg:w-3/4">
+  <div className="w-full lg:w-4/5">
     <table className="w-full border-collapse text-sm mb-4">
       <thead className="bg-gray-100">
         <tr>

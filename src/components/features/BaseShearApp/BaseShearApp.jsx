@@ -125,17 +125,14 @@ const BaseShearApp = () => {
       </BentoBox>
 
       <BentoBox title="DIAGRAM:">
-        {/* Truly centered toggle switch */}
         <div className="w-full flex justify-center mb-4">
           <div className="relative flex items-center bg-gray-500 rounded-full w-28 h-10">
-            {/* Sliding background highlight */}
             <div
               className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${
                 showDiagramType === 'plot' ? 'right-1' : 'left-1'
               }`}
             ></div>
 
-            {/* SVG label */}
             <button
               className="z-10 w-1/2 text-center text-white text-sm font-medium pl-1"
               onClick={() => setShowDiagramType('svg')}
@@ -143,7 +140,6 @@ const BaseShearApp = () => {
               SVG
             </button>
 
-            {/* Plot label */}
             <button
               className="z-10 w-1/2 text-center text-white text-sm font-medium pr-1"
               onClick={() => setShowDiagramType('plot')}
@@ -153,7 +149,6 @@ const BaseShearApp = () => {
           </div>
         </div>
 
-        {/* Diagram rendering */}
         <div className="w-full flex justify-center items-center">
           {showDiagramType === 'svg' ? (
             <RenderSVG
