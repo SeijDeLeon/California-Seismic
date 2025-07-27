@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Timer from "./Timer";
 import Question from "./Question";
 import CategoryList from "./CategoryList";
-import Tooltip from "../../common/Tooltip";
+import Tooltip from "./Tooltip";
 
 const QuestionGeneratorDisplay = () => {
   const [category, setCategory] = useState("Fundamental Period");
@@ -31,7 +31,7 @@ const QuestionGeneratorDisplay = () => {
         setCategory={setCategory}
         resetTimer={resetTimer}
       />
-      <section className="flex justify-between text-sm lg:block lg:absolute lg:bottom-0 my-5 lg:my-0 z-10">
+      <section className="flex justify-between items-center text-sm lg:block lg:absolute lg:bottom-0 my-5 lg:my-0 z-10">
         <Tooltip content="Timer for 2:45 mins. Changes to red color after specified time.">
           <Timer ref={timerRef} />
         </Tooltip>
