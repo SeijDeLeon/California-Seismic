@@ -1,6 +1,42 @@
 export default function Contributors({ display = true }) {
   const infoCards = [
     {
+      title: "Jeriko Carrera",
+      text: "Front End Intern 2025",
+      img: "images/contributors/placeholder_headshot.png",
+      alt: "headshot",
+    },
+    {
+      title: "Evania Cheng",
+      text: "Front End Intern 2025",
+      img: "images/contributors/placeholder_headshot.png",
+      alt: "headshot",
+    },
+    {
+      title: "Roy Cheung",
+      text: "Front End Intern 2025",
+      img: "images/contributors/placeholder_headshot.png",
+      alt: "headshot",
+    },
+    {
+      title: "Saumya Chourasia",
+      text: "Front End Intern 2025",
+      img: "images/contributors/saumya_chourasia.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Hayley Greenough",
+      text: "Front End Intern 2025",
+      img: "images/contributors/hayley_greenough.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Jason Zhao",
+      text: "Front End Intern 2025",
+      img: "images/contributors/jason_zhao.png",
+      alt: "headshot",
+    },
+    {
       title: "Binh Nguyen",
       text: "Front End Intern 2024",
       img: "images/contributors/binh_nguyen.jpg",
@@ -159,7 +195,7 @@ export default function Contributors({ display = true }) {
                 <div className="p-4">
                   <figure>
                     <img
-                      className="w-60 rounded-full md:h-full flex m-auto pt-2"
+                      className="w-60 h-60 rounded-full object-cover mx-auto"
                       alt={item.alt}
                       src={item.img}
                     />
@@ -185,7 +221,7 @@ export default function Contributors({ display = true }) {
                 <img
                   src="/images/contributors/ann_do.jpg"
                   alt="headshot Annie"
-                  className="w-60 rounded-full md:h-80 md:w-80 flex m-auto pt-2"
+                  className="w-80 h-80 rounded-full object-cover mx-auto"
                 />
                 <div className="container rounded-md mx-auto mt-4 p-4">
                   <div className="p-4">
@@ -202,7 +238,7 @@ export default function Contributors({ display = true }) {
                 <img
                   src="/images/contributors/seij_de_leon.jpg"
                   alt="headshot Seij"
-                  className="w-60 rounded-full md:h-80 md:w-80 flex m-auto pt-2"
+                  className="w-80 h-80 rounded-full object-cover mx-auto"
                 />
                 <div className="container rounded-md mx-auto mt-4 p-4">
                   <div className="p-4">
