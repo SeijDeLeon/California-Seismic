@@ -15,7 +15,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Roy Cheung",
       text: "Front End Intern 2025",
-      img: "images/contributors/placeholder_headshot.png",
+      img: "images/contributors/roy_cheung.jpg",
       alt: "headshot",
     },
     {
