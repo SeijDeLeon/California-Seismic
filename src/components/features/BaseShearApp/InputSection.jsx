@@ -19,12 +19,12 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
             <td><input type="number" value={floor.height} onChange={(e) => handleChange(i, 'height', e.target.value)} className="w-full p-1 border" /></td>
             <td><input type="number" value={floor.weight} onChange={(e) => handleChange(i, 'weight', e.target.value)} className="w-full p-1 border" /></td>
             <td className="text-center">{Math.round(floor.bot)}</td>
-            <td className="text-center"><button onClick={() => deleteFloor(i)} className="text-red-600 hover:text-red-800">✕</button></td>
+            <td className="text-center"><button onClick={() => deleteFloor(i)} className="text-red-600 hover:text-red-800">X</button></td>
           </tr>
         ))}
       </tbody>
     </table>
-    <button onClick={addFloor} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">+ Add Floor</button>
+    <button onClick={addFloor} className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-800">+ Add Floor</button>
   </div>
 );
 

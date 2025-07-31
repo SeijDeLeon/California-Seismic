@@ -7,11 +7,13 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
   return (
     <div className="w-full overflow-x-auto">
       <svg
-        width="100%"
+        width="800"
         height={`${totalHeight * scale + 100}px`}
-        style={{ display: 'block' }}
+        viewBox={`0 0 600 ${totalHeight * scale + 100}`}
+        className="mx-auto block"
+        preserveAspectRatio="xMidYMax meet"
       >
-         <g transform='translate(100,0)'>
+         <g transform="translate(50,0)">
             <defs>
               <marker
                 id="arrowhead"
@@ -161,7 +163,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
                 label: `V = ${Math.round(totalBaseShear)} lb`,
                 direction: 'left',
                 labelPosition: 'middle',
-                labelOffsetX: 40,
+                labelOffsetX: 50,
                 scaleFactor: 100
             })}
 

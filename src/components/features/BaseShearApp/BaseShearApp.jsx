@@ -7,6 +7,7 @@ import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
 import { useBaseShearState } from './useBaseShearState';
+import { getFloorsFromBottom, calculateForces } from './Calculations';
 
 const BaseShearApp = () => {
   const {
@@ -119,7 +120,6 @@ const BaseShearApp = () => {
           inputType="default"
           tooltip="Transition period (TL) between constant acceleration and velocity response. Common values range from 4 to 8 seconds."
         />
-
         <BentoInput
           label="Importance Factor"
           value={inputs.Ie}
@@ -146,17 +146,47 @@ const BaseShearApp = () => {
           handleChange={handleChange}
         />
       </BentoBox>
-      <BentoBox title="SVG:">
-        {/* <DisplacementPlot /> */}
-        <RenderSVG
-          floors={updatedFloors}
-          forces={forces}
-          storyVs={storyVs}
-          totalBaseShear={totalBaseShear}
-          totalHeight={totalHeight}
-        />
 
+      <BentoBox title="DIAGRAM:">
+        <div className="w-full flex justify-center mb-4">
+          <div className="relative flex items-center bg-gray-500 rounded-full w-28 h-10">
+            <div
+              className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${
+                showDiagramType === 'plot' ? 'right-1' : 'left-1'
+              }`}
+            ></div>
+
+            <button
+              className="z-10 w-1/2 text-center text-white text-sm font-medium pl-1"
+              onClick={() => setShowDiagramType('svg')}
+            >
+              SVG
+            </button>
+
+            <button
+              className="z-10 w-1/2 text-center text-white text-sm font-medium pr-1"
+              onClick={() => setShowDiagramType('plot')}
+            >
+              Plot
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full flex justify-center items-center">
+          {showDiagramType === 'svg' ? (
+            <RenderSVG
+              floors={updatedFloors}
+              forces={forces}
+              storyVs={storyVs}
+              totalBaseShear={totalBaseShear}
+              totalHeight={totalHeight}
+            />
+          ) : (
+            <DisplacementPlot />
+          )}
+        </div>
       </BentoBox>
+
       <BentoBox title="SOLUTIONS:">
         {(
           !inputs.shortPeriodSpectralAcceleration ||
