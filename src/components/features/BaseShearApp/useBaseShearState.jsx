@@ -21,13 +21,20 @@ export const useBaseShearState = () => {
     const saved = localStorage.getItem("baseShearInputs");
     return saved ? JSON.parse(saved) : defaultInputs;
   });
-
-  const [results, setResults] = useState({
-    Fv: 0, Fa: 0, SMS: 0, SM1: 0,
-    SDS: 0, SD1: 0, Ts: 0,
-    Cs_initial: 0, Cs_min: 0, Cs_max: 0, Cs_final: 0,
-    SDC: '',
-  });
+  const [results, setResults] = useState([
+    { key: 'Fv', value: 0, label: '\\mathrm{F}_v' },
+    { key: 'Fa', value: 0, label: '\\mathrm{F}_a' },
+    { key: 'SMS', value: 0, label: 'SMS' },
+    { key: 'SM1', value: 0, label: 'SM1' },
+    { key: 'SDS', value: 0, label: 'SDS' },
+    { key: 'SD1', value: 0, label: 'SD1' },
+    { key: 'Ts', value: 0, label: 'T_s' },
+    { key: 'Cs_initial', value: 0, label: 'C_s\\ \\text{(initial)}' },
+    { key: 'Cs_min', value: 0, label: 'C_{s,\\min}' },
+    { key: 'Cs_max', value: 0, label: 'C_{s,\\max}' },
+    { key: 'Cs_final', value: 0, label: 'C_{s,\\text{final}}' },
+    { key: 'SDC', value: '', label: '\\mathrm{SDC}' },
+  ]);
 
   const parsedSiteClass = inputs.selectedSiteClass.charAt(0);
   const updatedFloors = getFloorsFromBottom(inputs.floors);
@@ -55,14 +62,20 @@ export const useBaseShearState = () => {
 
     const SDC = calculateBaseShearUnits.getSDC(SDS, SD1, inputs.selectedRisk);
 
-    setResults({
-      Fv, Fa, SMS, SM1, SDS, SD1, Ts,
-      Cs_initial: Cs.Cs_initial,
-      Cs_min: Cs.Cs_min,
-      Cs_max: Cs.Cs_max,
-      Cs_final: Cs.Cs_final,
-      SDC: SDC,
-    });
+    setResults([
+      { key: 'Fv', value: Fv, label: '\\mathrm{F}_v' },
+      { key: 'Fa', value: Fa, label: '\\mathrm{F}_a' },
+      { key: 'SMS', value: SMS, label: 'SMS' },
+      { key: 'SM1', value: SM1, label: 'SM1' },
+      { key: 'SDS', value: SDS, label: 'SDS' },
+      { key: 'SD1', value: SD1, label: 'SD1' },
+      { key: 'Ts', value: Ts, label: 'T_s' },
+      { key: 'Cs_initial', value: Cs.Cs_initial, label: 'C_s\\ \\text{initial}' },
+      { key: 'Cs_min', value: Cs.Cs_min, label: 'C_{s,\\min}' },
+      { key: 'Cs_max', value: Cs.Cs_max, label: 'C_{s,\\max}' },
+      { key: 'Cs_final', value: Cs.Cs_final, label: 'C_{s,\\text{final}}' },
+      { key: 'SDC', value: SDC, label: '\\mathrm{SDC}' },
+    ]);
   }, [inputs.shortPeriodSpectralAcceleration, inputs.longPeriodSpectralAcceleration, inputs.longPeriodTransitionPeriod, inputs.selectedRisk, inputs.selectedSiteClass, parsedSiteClass, inputs.T, inputs.R, inputs.Ie]);
 
 

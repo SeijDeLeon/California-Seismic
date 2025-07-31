@@ -139,6 +139,7 @@ const BaseShearApp = () => {
         <button onClick={resetInputs} className="my-3 mb-5 font-bold w-auto rounded hover:text-red-700 text-sm self-end">
           Reset All Inputs
         </button>
+        <h5 className="font-semibold mb-2 text-md">Building Properties:</h5>
         <InputTable
           floors={updatedFloors}
           addFloor={addFloor}
@@ -197,15 +198,22 @@ const BaseShearApp = () => {
           </p>
         ) : (
           <section className="flex gap-1 flex-col text-sm text-gray-700 justify-start items-start align-start pl-3">
-            {Object.entries(results)
-              .filter(([key]) => key !== 'SDC')
-              .map(([key, val]) => (
-                <p key={key}>
-                  {`${key}: ${(typeof val === 'number' && !isNaN(val)) ? val.toFixed(2) : 'N/A'}`}
-                </p>
+            {results
+              .filter(({ key }) => key !== 'SDC')
+              .map(({ key, value, label }) => (
+                <EquationFormat
+                  key={key}
+                  value={`\\(${label} =\\)`}
+                  result={typeof value === 'number' ? value.toFixed(2) : value}
+                />
               ))}
-
-            <p>Seismic Design Category: {results.SDC || results.SDC || 'N/A'}</p>
+            {results.filter(({ key }) => key === 'SDC').map(({ key, value }) => (
+              <EquationFormat
+                key={key}
+                value={`Seismic Design Category (SDC) =`}
+                result={value || 'N/A'}
+              />
+            ))}
 
             <p className="font-bold text-2xl">Total Base Shear: {
               typeof totalBaseShear === 'number' && !isNaN(totalBaseShear)
