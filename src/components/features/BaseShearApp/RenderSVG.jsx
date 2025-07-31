@@ -7,7 +7,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
   return (
     <div className="w-full overflow-x-auto">
       <svg
-        width="600"
+        width="800"
         height={`${totalHeight * scale + 100}px`}
         viewBox={`0 0 600 ${totalHeight * scale + 100}`}
         className="mx-auto block"
