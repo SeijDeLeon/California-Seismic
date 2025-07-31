@@ -1,7 +1,10 @@
+// DiaphragmViewer.jsx
 import React, { useState, useEffect, useRef } from "react";
+import WallInputs from "./WallInputs";
+import Solution from "../Solver/Solution";
 import ChordPlots from "./ChordPlots";
 
-// Custom hook to replace `use-resize-observer`
+// Custom hook
 const useResizeObserver = () => {
   const ref = useRef(null);
   const [width, setWidth] = useState(1);
@@ -24,13 +27,19 @@ export default function DiaphragmViewer() {
   const [wTop, setwTop] = useState(100);
   const [showRightWall, setShowRightWall] = useState(false);
   const [showGhostWall, setShowGhostWall] = useState(false);
-  const [leftWidthFt, setLeftWidthFt] = useState(25);
+  const [leftWidthFt, setLeftWidthFt] = useState(50);
   const [rightWidthFt, setRightWidthFt] = useState(25);
   const [heightFt, setHeightFt] = useState(40);
+  const [calculations, setCalculations] = useState({
+    Vmax: 0,
+    moment: 0,
+    chord: 0,
+    width: 1,
+  });
 
   const { ref, width = 1 } = useResizeObserver();
 
-  const ftToPx = (ft) => ft * 5;
+  const ftToPx = (ft) => ft * 3;
 
   const heightPx = ftToPx(heightFt);
   const leftWidthPx = ftToPx(leftWidthFt);
@@ -75,60 +84,23 @@ export default function DiaphragmViewer() {
   const fxLabelX = leftWallX + (topArrowEnd - topArrowStart) / 2;
   const bottomY = paddingY + heightPx + 20;
 
-  const clampToZero = (val) => (val < 0 ? 0 : val);
-
   const handleToggleWall = () => {
     setShowRightWall((prev) => !prev);
   };
 
   return (
     <div className="flex flex-col justify-center items-center p-6">
-      <div className="mb-4 flex gap-4 flex-wrap justify-center">
-        <label className="flex flex-col text-sm">
-          Left Width (ft)
-          <input
-            type="number"
-            min={0}
-            value={leftWidthFt}
-            onChange={(e) => setLeftWidthFt(clampToZero(+e.target.value))}
-            className="border px-1"
-          />
-        </label>
-
-        {showRightWall && (
-          <label className="flex flex-col text-sm">
-            Right Width (ft)
-            <input
-              type="number"
-              min={0}
-              value={rightWidthFt}
-              onChange={(e) => setRightWidthFt(clampToZero(+e.target.value))}
-              className="border px-1"
-            />
-          </label>
-        )}
-
-        <label className="flex flex-col text-sm">
-          Height (ft)
-          <input
-            type="number"
-            min={0}
-            value={heightFt}
-            onChange={(e) => setHeightFt(clampToZero(+e.target.value))}
-            className="border px-1"
-          />
-        </label>
-        <label className="flex flex-col text-sm">
-          W (lb/ft)
-          <input
-            type="number"
-            min={0}
-            value={wTop}
-            onChange={(e) => setwTop(clampToZero(+e.target.value))}
-            className="border px-1"
-          />
-        </label>
-      </div>
+      <WallInputs
+        leftWidthFt={leftWidthFt}
+        setLeftWidthFt={setLeftWidthFt}
+        rightWidthFt={rightWidthFt}
+        setRightWidthFt={setRightWidthFt}
+        heightFt={heightFt}
+        setHeightFt={setHeightFt}
+        wTop={wTop}
+        setwTop={setwTop}
+        showRightWall={showRightWall}
+      />
 
       <button
         onClick={handleToggleWall}
@@ -158,7 +130,7 @@ export default function DiaphragmViewer() {
             </marker>
           </defs>
 
-          {/* Left Wall */}
+          {/* Walls and annotations */}
           <rect
             x={leftWallX}
             y={paddingY}
@@ -178,7 +150,6 @@ export default function DiaphragmViewer() {
             strokeWidth="2"
           />
 
-          {/* Actual Right Wall */}
           {showRightWall && rightWidthFt > 0 && (
             <>
               <rect
@@ -202,7 +173,6 @@ export default function DiaphragmViewer() {
             </>
           )}
 
-          {/* Ghost Right Wall on Hover */}
           {!showRightWall && showGhostWall && (
             <>
               <rect
@@ -230,7 +200,7 @@ export default function DiaphragmViewer() {
             </>
           )}
 
-          {/* Dimension Lines */}
+          {/* Dimension lines */}
           <line
             x1={leftWallX + 5}
             y1={bottomY}
@@ -273,7 +243,7 @@ export default function DiaphragmViewer() {
             </>
           )}
 
-          {/* Height Indicator */}
+          {/* Height line */}
           <line
             x1={leftWallX + totalStructureWidth + 20}
             y1={paddingY}
@@ -296,7 +266,7 @@ export default function DiaphragmViewer() {
             {heightFt} ft
           </text>
 
-          {/* Force Arrows & Label */}
+          {/* Force Arrows */}
           {topForceArrows}
           <text
             x={fxLabelX}
@@ -310,7 +280,21 @@ export default function DiaphragmViewer() {
         </svg>
       </div>
 
-      <ChordPlots />
+      <Solution
+        leftWidthFt={leftWidthFt}
+        rightWidthFt={rightWidthFt}
+        heightFt={heightFt}
+        wTop={wTop}
+        showRightWall={showRightWall}
+        setCalculations={setCalculations} // ✅ THIS LINE IS ESSENTIAL
+      />
+
+      <ChordPlots
+        Vmax={calculations.Vmax}
+        moment={calculations.moment}
+        chord={calculations.chord}
+        width={calculations.width}
+      />
     </div>
   );
 }

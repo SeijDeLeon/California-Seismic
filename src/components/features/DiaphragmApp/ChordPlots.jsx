@@ -1,29 +1,44 @@
+// ChordPlots.jsx
 import Plot from "react-plotly.js";
 
-export default function ChordPlots() {
+export default function ChordPlots({ Vmax, moment, chord, width }) {
+  const halfWidth = width / 2;
+  const momentY = moment * 1.1 || 10; // prevent zero height plots
+  const chordY = chord * 1.1 || 10; // prevent zero height plots
+
   return (
-    <div>
-      <div>
-        <Plot
-          className="Shear"
-          data={[
-            {
-              x: [-10, -10, 10, 10],
-              y: [0, 1000, -1000, 0],
-              type: "scatter",
-              mode: "lines+markers",
-              marker: { color: "black" },
-            },
-          ]}
-          layout={{ width: 500, height: 300, title: { text: "Shear Force" } }}
-        />
-      </div>
+    <div className="flex flex-col items-center gap-8">
+      {/* Shear Force Plot */}
+      <Plot
+        className="Shear"
+        data={[
+          {
+            x: [-halfWidth, -halfWidth, halfWidth, halfWidth],
+            y: [0, Vmax, -Vmax, 0],
+            type: "scatter",
+            mode: "lines+markers",
+            marker: { color: "black" },
+          },
+        ]}
+        layout={{
+          width: 500,
+          height: 300,
+          title: { text: "Shear Force" },
+          yaxis: {
+            title: "Force (lb)",
+            tickformat: ".1f",
+            showgrid: false,
+          },
+        }}
+      />
+
+      {/* Moment Diagram */}
       <Plot
         className="Moment"
         data={[
           {
-            x: [0, 5, 10],
-            y: [0, 20, 0],
+            x: [0, halfWidth, width],
+            y: [0, moment, 0],
             type: "scatter",
             mode: "lines",
             marker: { color: "black" },
@@ -34,24 +49,24 @@ export default function ChordPlots() {
           width: 500,
           height: 300,
           title: { text: "Moment Diagram" },
-          xaxis: {
-            range: [0, 10], // Explicitly set x-axis range
-            showgrid: false,
-          },
+          xaxis: { range: [0, width], showgrid: false, title: "Width (ft)" },
           yaxis: {
-            range: [0, 21], // Explicitly set y-axis range
+            range: [0, momentY],
             showticklabels: true,
             showgrid: false,
-            tickformat: ".1f", // Format y-axis tick labels
+            title: "Moment (lb-ft)",
+            tickformat: ".1f",
           },
         }}
       />
+
+      {/* Chord Force Plot */}
       <Plot
         className="Chord"
         data={[
           {
-            x: [0, 5, 10],
-            y: [0, 10, 0],
+            x: [0, halfWidth, width],
+            y: [0, chord, 0],
             type: "scatter",
             mode: "lines",
             marker: { color: "black" },
@@ -62,32 +77,16 @@ export default function ChordPlots() {
           width: 500,
           height: 300,
           title: { text: "Chord Force" },
-          xaxis: {
-            range: [0, 10], // Explicitly set x-axis range
-            showgrid: false,
-          },
+          xaxis: { range: [0, width], showgrid: false, title: "Width (ft)" },
           yaxis: {
-            range: [0, 21], // Explicitly set y-axis range
+            range: [0, chordY],
             showticklabels: true,
             showgrid: false,
-            tickformat: ".1f", // Format y-axis tick labels
+            title: "Force (lb)",
+            tickformat: ".1f",
           },
         }}
       />
     </div>
   );
-}
-
-{
-  /* the chord function here */
-}
-{
-  /* force * length/2 */
-}
-
-{
-  /* the moment diagram here */
-}
-{
-  /* force * length^2/8(depth)  is the peak moment */
 }
