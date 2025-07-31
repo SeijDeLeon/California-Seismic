@@ -10,6 +10,8 @@ export const useBaseShearState = () => {
     shortPeriodSpectralAcceleration: "1.50",
     longPeriodSpectralAcceleration: "0.60",
     longPeriodTransitionPeriod: "8.00",
+    Ie: "1.00",
+    R: "5.00",
     T: "1.00",
     buildingHeight: 0,
     floors: [{ height: 20, weight: 100000 }],
@@ -76,16 +78,9 @@ export const useBaseShearState = () => {
   const { totalBaseShear, totalHeight, forces, storyVs } = calculateForces(updatedFloors, seismicParams);
 
   const resetInputs = () => {
-    const systemDefaults = {
-      "Shear Wall (R = 5.0)": 5.00,
-      "Moment Frame (R = 5.5)": 5.50,
-      "Braced Frame (R = 6.0)": 6.00,
-      "Wood Light-Frame (R = 6.5)": 6.50,
-    };
-
     const reset = {
       ...defaultInputs,
-      R: systemDefaults[defaultInputs.selectedSystem],
+      R: 5.00,
     };
 
     setInputs(reset);
