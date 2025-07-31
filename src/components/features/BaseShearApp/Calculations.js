@@ -3,11 +3,11 @@ import calculateCvx from '../../../assets/data/calculations/calculateCvx';
 import calculateFvx from '../../../assets/data/calculations/calculateFvx';
 import calculateV from '../../../assets/data/calculations/calculateV';
 
-export const getFloorsWithBot = (floors) => {
-  let runningBot = 0;
+export const getFloorsFromBottom = (floors) => {
+  let heightBottomToTop = 0;
   return floors.map((floor) => {
-    const updated = { ...floor, bot: runningBot };
-    runningBot += floor.height;
+    const updated = { ...floor, bottom: heightBottomToTop };
+    heightBottomToTop += floor.height;
     return updated;
   });
 };

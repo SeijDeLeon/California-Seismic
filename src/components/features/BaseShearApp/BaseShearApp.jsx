@@ -6,7 +6,7 @@ import { BentoBox } from '../../common/BentoBox';
 import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
-import { getFloorsWithBot, calculateForces } from './Calculations';
+import { getFloorsFromBottom, calculateForces } from './Calculations';
 
 const BaseShearApp = () => {
 
@@ -15,10 +15,10 @@ const BaseShearApp = () => {
   const [shortPeriodSpectralAcceleration, setShortPeriodSpectralAcceleration] = useState(0);
   const [longPeriodSpectralAcceleration, setLongPeriodSpectralAcceleration] = useState(0);
   const [longPeriodTransitionPeriod, setLongPeriodTransitionPeriod] = useState(0);
-  const [showDiagramType, setShowDiagramType] = useState('svg'); // or 'plot'
+  const [showDiagramType, setShowDiagramType] = useState('svg'); // shows svg by default
   const [floors, setFloors] = useState([{ height: 20, weight: 100000 }]);
 
-  const updatedFloors = getFloorsWithBot(floors);
+  const updatedFloors = getFloorsFromBottom(floors);
 
   const seismicParams = {
     SDS: 1.0,
