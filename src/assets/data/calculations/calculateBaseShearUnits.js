@@ -1,12 +1,18 @@
 import calculateCs from '../../../assets/data/calculations/calculateCs';
 
 const interpolate = (value, valueArray, map, siteClass) => {
+  if (value <= valueArray[0]) return map[valueArray[0]][siteClass];
+  if (value >= valueArray[valueArray.length - 1]) return map[valueArray[valueArray.length - 1]][siteClass];
+
   for (let i = 0; i < valueArray.length - 1; i++) {
     if (value > valueArray[i] && value < valueArray[i + 1]) {
-      const slope = (map[valueArray[i + 1]][siteClass] - map[valueArray[i]][siteClass]) / (valueArray[i + 1] - valueArray[i]);
+      const slope = (map[valueArray[i + 1]][siteClass] - map[valueArray[i]][siteClass]) / 
+                    (valueArray[i + 1] - valueArray[i]);
       return map[valueArray[i]][siteClass] + slope * (value - valueArray[i]);
     }
   }
+
+  return null;
 }
 
 const getFv = (s1, siteClass) => {
@@ -75,6 +81,52 @@ const getV = (Cs, W) => {
   return V;
 };
 
+const getSDC = (SDS, SD1, riskCategory) => {
+  const riskLevel = {
+    "I - Low Risk": 1,
+    "II - Regular Building": 2,
+    "III - Substantial Risk": 3,
+    "IV - Essential Facilities": 4,
+  }[riskCategory];
+
+  // (Table 11.6-1)
+  let sdcS;
+  if (riskLevel === 1 || riskLevel === 2 || riskLevel === 3) {
+    if (SDS < 0.167) sdcS = 'A';
+    else if (SDS < 0.33) sdcS = 'B';
+    else if (SDS < 0.50) sdcS = 'C';
+    else if (SDS >= 0.50) sdcS = 'D';
+  } else if (riskLevel === 4) {
+    if (SDS < 0.167) sdcS = 'A';
+    else if (SDS < 0.33) sdcS = 'C';
+    else if (SDS >= 0.33) sdcS = 'D';
+  } else {
+    sdcS = 'D';
+  }
+
+  // (Table 11.6-2)
+  let sdc1;
+  if (riskLevel === 1 || riskLevel === 2 || riskLevel === 3) {
+    if (SD1 < 0.067) sdc1 = 'A';
+    else if (SD1 < 0.133) sdc1 = 'B';
+    else if (SD1 < 0.20) sdc1 = 'C';
+    else if (SD1 >= 0.20) sdc1 = 'D';
+  } else if (riskLevel === 4) {
+    if (SD1 < 0.067) sdc1 = 'A';
+    else if (SD1 < 0.133) sdc1 = 'C';
+    else if (SD1 >= 0.133) sdc1 = 'D';
+  } else {
+    sdc1 = 'D';
+  }
+
+  const severityRank = { A: 0, B: 1, C: 2, D: 3, E: 4, F: 5 };
+  // based on which is more severe
+  let SDC = severityRank[sdcS] > severityRank[sdc1] ? sdcS : sdc1;
+
+  return SDC;
+};
+
+
 export const calculateBaseShearUnits = {
   getFv,
   getFa,
@@ -84,5 +136,6 @@ export const calculateBaseShearUnits = {
   getSD1,
   getTs,
   getCs,
-  getV
+  getV,
+  getSDC,
 };

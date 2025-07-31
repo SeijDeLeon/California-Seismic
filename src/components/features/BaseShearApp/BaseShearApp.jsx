@@ -1,177 +1,144 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { BentoContainer } from '../../common/BentoContainer';
+import { useEffect } from 'react';
 import { EquationFormat } from '../../common/EquationFormat';
 import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
+import { BentoContainer } from '../../common/BentoContainer';
 import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
-import { getFloorsWithBot, calculateForces } from './Calculations';
-import { calculateBaseShearUnits } from '../../../assets/data/calculations/calculateBaseShearUnits';
+import { useBaseShearState } from './useBaseShearState';
 
 const BaseShearApp = () => {
+  const {
+    inputs, setInputs, results,
+    updatedFloors, totalBaseShear,
+    totalHeight, forces, storyVs, resetInputs
+  } = useBaseShearState();
 
-  const [selectedRisk, setSelectedRisk] = useState("II - Regular Building");
-  const [selectedSiteClass, setSelectedSiteClass] = useState("D - Default");
-  const [numberOfFloors, setNumberOfFloors] = useState(1);
-  const [shortPeriodSpectralAcceleration, setShortPeriodSpectralAcceleration] = useState(0);
-  const [longPeriodSpectralAcceleration, setLongPeriodSpectralAcceleration] = useState(0);
-  const [longPeriodTransitionPeriod, setLongPeriodTransitionPeriod] = useState(0);
-  const [floors, setFloors] = useState([{ height: 20, weight: 100000 }]);
-  const [Cs_initial, setCs_initial] = useState(0);
-  const [Cs_min, setCs_min] = useState(0);
-  const [Cs_max, setCs_max] = useState(0);
-  const [Cs_final, setCs_final] = useState(0);
-  const [Fv, setFv] = useState(0);
-  const [Fa, setFa] = useState(0);
-  const [SMS, setSMS] = useState(0);
-  const [SM1, setSM1] = useState(0);
-  const [SDS, setSDS] = useState(0);
-  const [SD1, setSD1] = useState(0);
-  const [Ts, setTs] = useState(0);
-
-  const updatedFloors = getFloorsWithBot(floors);
-
-  useEffect(() => {
-    const parsedSiteClass = selectedSiteClass.charAt(0);
-
-    const Fv_local = calculateBaseShearUnits.getFv(longPeriodSpectralAcceleration, parsedSiteClass);
-    const Fa_local = calculateBaseShearUnits.getFa(shortPeriodSpectralAcceleration, parsedSiteClass);
-
-    const SMS_local = calculateBaseShearUnits.getSMS(Fa_local, shortPeriodSpectralAcceleration);
-    const SM1_local = calculateBaseShearUnits.getSM1(Fv_local, longPeriodSpectralAcceleration);
-
-    const SDS_local = calculateBaseShearUnits.getSDS(SMS_local);
-    const SD1_local = calculateBaseShearUnits.getSD1(SM1_local);
-
-    const Ts_local = calculateBaseShearUnits.getTs(SDS_local, SD1_local);
-
-    const Cs = calculateBaseShearUnits.getCs(
-      SDS_local,
-      SD1_local,
-      Ts_local,
-      1.0,
-      5.5,
-      longPeriodSpectralAcceleration,
-      longPeriodTransitionPeriod,
-      parsedSiteClass
-    );
-
-    setFv(Fv_local);
-    setFa(Fa_local);
-    setSMS(SMS_local);
-    setSM1(SM1_local);
-    setSDS(SDS_local);
-    setSD1(SD1_local);
-    setTs(Ts_local);
-    setCs_initial(Cs.Cs_initial);
-    setCs_min(Cs.Cs_min);
-    setCs_max(Cs.Cs_max);
-    setCs_final(Cs.Cs_final);
-    console.log(Fv_local, Fa_local, SMS_local, SM1_local, SDS_local, SD1_local, Ts_local, Cs);
-  }, [
-    longPeriodSpectralAcceleration,
-    shortPeriodSpectralAcceleration,
-    longPeriodTransitionPeriod,
-    selectedRisk,
-    selectedSiteClass,
-  ]);
-
-  const seismicParams = {
-    SDS: SDS,
-    SD1: SD1,
-    T: 1.0,
-    Ie: 1.0,
-    R: 5.5,
-    T0: 0.12,
-    TL: longPeriodTransitionPeriod || 8.0
+  const handleInputChange = (key) => (valOrEvent) => {
+    const value = valOrEvent?.target?.value ?? valOrEvent;
+    setInputs((prev) => ({ ...prev, [key]: value }));
   };
 
-  const { totalBaseShear, totalHeight, forces, storyVs } = calculateForces(updatedFloors, seismicParams);
-
   const addFloor = () => {
-    setFloors([...floors, { height: 20, weight: 1000 }]);
+    setInputs((prev) => ({
+      ...prev,
+      floors: [...prev.floors, { height: 20, weight: 1000 }]
+    }));
   };
 
   const deleteFloor = (index) => {
-    const newFloors = [...floors];
+    const newFloors = [...inputs.floors];
     newFloors.splice(index, 1);
-    setFloors(newFloors);
+    setInputs((prev) => ({ ...prev, floors: newFloors }));
   };
 
   const handleChange = (index, key, value) => {
-    const newFloors = [...floors];
+    const newFloors = [...inputs.floors];
     newFloors[index][key] = parseFloat(value) || 0;
-    setFloors(newFloors);
+    setInputs((prev) => ({ ...prev, floors: newFloors }));
   };
+
+  useEffect(() => {
+    const Ie_map = {
+      "I - Low Risk": "1.00",
+      "II - Regular Building": "1.00",
+      "III - Substantial Risk": "1.25",
+      "IV - Essential Facilities": "1.50",
+    };
+    setInputs((prev) => ({ ...prev, Ie: Ie_map[prev.selectedRisk] }));
+  }, [inputs.selectedRisk, setInputs]);
 
   return (
     <BentoContainer title="Base Shear Calculator">
       <BentoBox title="USER INPUTS:">
         <BentoInput
           label="Risk Category"
-          value={selectedRisk}
+          value={inputs.selectedRisk}
           listItems={[
             "I - Low Risk",
             "II - Regular Building",
             "III - Substantial Risk",
             "IV - Essential Facilities",
           ]}
-          onChange={(newVal) => setSelectedRisk(newVal)}
+          onChange={handleInputChange("selectedRisk")}
           inputType="list"
+          tooltip="Defines the building’s occupancy importance. Category II is standard for most structures; Categories III and IV are for critical or high-occupancy facilities."
         />
         <BentoInput
           label="Site Class"
-          value={selectedSiteClass}
+          value={inputs.selectedSiteClass}
           listItems={[
-            "A - Hard Rock",
-            "B - Rock",
-            "C - Very Dense Soil and Soft Rock",
-            "D - Stiff Soil",
-            "D - Default",
-            "E - Soft Clay Soil",
+            "A - Hard Rock", "B - Rock", "C - Very Dense Soil and Soft Rock",
+            "D - Stiff Soil", "D - Default", "E - Soft Clay Soil"
           ]}
-          onChange={(newVal) => setSelectedSiteClass(newVal)}
+          onChange={handleInputChange("selectedSiteClass")}
           inputType="list"
+          tooltip="Select the soil classification at the site. Class D is most common for general use when geotechnical data is unavailable."
+        />
+        <BentoInput
+          label="Lateral Force-Resisting System"
+          value={inputs.selectedSystem}
+          listItems={[
+            "Unreinforced Masonry (R = 1.5)",
+            "Shear Wall (R = 5.0)",
+            "Concrete Moment Frame (R = 5.0)",
+            "Steel Moment Frame (R = 5.5)",
+            "Braced Frame (R = 6.0)",
+          ]}
+          onChange={(val) => {
+            const match = val.match(/\(R = ([\d.]+)\)/);
+            const R = match ? parseFloat(match[1]) : 5.5;
+            setInputs((prev) => ({ ...prev, selectedSystem: val, R }));
+          }}
+          equation={<EquationFormat value={"\\(R =\\)"} />}
+          inputType="list"
+          tooltip="Select the lateral force-resisting system. This determines the response modification factor R."
         />
         <BentoInput
           label="Short Period Spectral Acceleration"
-          value={shortPeriodSpectralAcceleration}
+          value={inputs.shortPeriodSpectralAcceleration}
           equation={<EquationFormat value={"\\(S_{s,input} =\\)"} />}
-          onChange={(e) => setShortPeriodSpectralAcceleration(e.target.value)}
+          onChange={handleInputChange("shortPeriodSpectralAcceleration")}
           inputType="default"
+          tooltip="Mapped acceleration parameter (Ss) at a 0.2-second period. Typical values range from 0.25 to 2.0 g depending on seismicity."
         />
         <BentoInput
           label="Long Period Spectral Acceleration"
-          value={longPeriodSpectralAcceleration}
+          value={inputs.longPeriodSpectralAcceleration}
           equation={<EquationFormat value={"\\(S_{1,input} =\\)"} />}
-          onChange={(e) => setLongPeriodSpectralAcceleration(e.target.value)}
+          onChange={handleInputChange("longPeriodSpectralAcceleration")}
           inputType="default"
+          tooltip="Mapped acceleration parameter (S1) at a 1.0-second period. Typical values range from 0.1 to 1.0 g."
         />
         <BentoInput
           label="Long Period Transition Period"
-          value={longPeriodTransitionPeriod}
+          value={inputs.longPeriodTransitionPeriod}
           equation={<EquationFormat value={"\\(T_{L,input} =\\)"} />}
-          onChange={(e) => setLongPeriodTransitionPeriod(e.target.value)}
+          onChange={handleInputChange("longPeriodTransitionPeriod")}
           inputType="default"
+          tooltip="Transition period (TL) between constant acceleration and velocity response. Common values range from 4 to 8 seconds."
         />
 
-        <section className="mt-2 text-black grid grid-cols-2 gap-2 text-xs w-full justify-between items-center">
-          <p className="text-start">Design Short-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={SDS.toFixed(3)} />
-
-          <p className="text-start">Design Long-Period Spectral Acceleration:</p>
-          <EquationFormat value={"\\(S_{D1} =\\)"} result={SD1.toFixed(3)} />
-
-          <p className="text-start">Seismic Design Category:</p>
-          <EquationFormat value={"\\(S_{DS} =\\)"} result={"E"} />
-
-          <p className="text-start">Seismic Base Shear:</p>
-          <EquationFormat value={"\\(V =\\)"} result={totalBaseShear.toFixed(0)} />
-        </section>
-      </BentoBox>
-
-      <BentoBox title="INPUTS:">
+        <BentoInput
+          label="Importance Factor"
+          value={inputs.Ie}
+          equation={<EquationFormat value={"\\(I_{e} =\\)"} />}
+          onChange={handleInputChange("Ie")}
+          inputType="default"
+          tooltip="Amplifies seismic forces for critical facilities. 1.0 for most buildings; 1.25 or 1.5 for essential or hazardous structures."
+        />
+        <BentoInput
+          label="Fundamental Period"
+          value={inputs.T}
+          equation={<EquationFormat value={"\\(T =\\)"} />}
+          onChange={handleInputChange("T")}
+          inputType="default"
+          tooltip="Estimated vibration period of the structure in seconds. Typical range is 0.1 to 3.0 seconds depending on height and stiffness."
+        />
+        <button onClick={resetInputs} className="px-4 py-2 my-3 mb-5  rounded hover:text-red-700">
+          Reset All Inputs
+        </button>
         <InputTable
           floors={updatedFloors}
           addFloor={addFloor}
@@ -180,6 +147,7 @@ const BaseShearApp = () => {
         />
       </BentoBox>
       <BentoBox title="SVG:">
+        {/* <DisplacementPlot /> */}
         <RenderSVG
           floors={updatedFloors}
           forces={forces}
@@ -187,24 +155,38 @@ const BaseShearApp = () => {
           totalBaseShear={totalBaseShear}
           totalHeight={totalHeight}
         />
-      </BentoBox>
-      <BentoBox title="DIAGRAM:">
-        <DisplacementPlot />
+
       </BentoBox>
       <BentoBox title="SOLUTIONS:">
-        <p>Fv: {Fv.toFixed(2)}</p>
-        <p>Fa: {Fa.toFixed(2)}</p>
-        <p>SMS: {SMS.toFixed(2)}</p>
-        <p>SM1: {SM1.toFixed(2)}</p>
-        <p>SDS: {SDS.toFixed(2)}</p>
-        <p>SD1: {SD1.toFixed(2)}</p>
-        <p>Ts: {Ts.toFixed(2)}</p>
-        <p>Cs Initial: {Cs_initial.toFixed(2)}</p>
-        <p>Cs Min: {Cs_min.toFixed(2)}</p>
-        <p>Cs Max: {Cs_max.toFixed(2)}</p>
-        <p>Cs Final: {Cs_final.toFixed(2)}</p>
-        <p>Total Base Shear: {totalBaseShear.toFixed(2)} kips</p>
+        {(
+          !inputs.shortPeriodSpectralAcceleration ||
+          !inputs.longPeriodSpectralAcceleration ||
+          !inputs.longPeriodTransitionPeriod
+        ) ? (
+          <p className="text-red-600 font-semibold">
+            Please provide Short Period Acceleration (Ss), Long Period Acceleration (S1), and Long Period Transition Period (TL) to see results.
+          </p>
+        ) : (
+          <section className="flex gap-1 flex-col text-sm text-gray-700 justify-start items-start align-start pl-3">
+            {Object.entries(results)
+              .filter(([key]) => key !== 'SDC')
+              .map(([key, val]) => (
+                <p key={key}>
+                  {`${key}: ${(typeof val === 'number' && !isNaN(val)) ? val.toFixed(2) : 'N/A'}`}
+                </p>
+              ))}
+
+            <p>Seismic Design Category: {results.SDC || results.SDC || 'N/A'}</p>
+
+            <p className="font-bold text-2xl">Total Base Shear: {
+              typeof totalBaseShear === 'number' && !isNaN(totalBaseShear)
+                ? `${totalBaseShear.toFixed(2)} kips`
+                : 'N/A'
+            }</p>
+          </section>
+        )}
       </BentoBox>
+
     </BentoContainer>
   );
 };
