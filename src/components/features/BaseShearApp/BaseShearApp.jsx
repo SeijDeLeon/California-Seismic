@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { EquationFormat } from '../../common/EquationFormat';
 import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
@@ -7,9 +7,9 @@ import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
 import { useBaseShearState } from './useBaseShearState';
-import { getFloorsFromBottom, calculateForces } from './Calculations';
 
 const BaseShearApp = () => {
+  const [showDiagramType, setShowDiagramType] = useState('svg');
   const {
     inputs, setInputs, results,
     updatedFloors, totalBaseShear,
@@ -136,7 +136,7 @@ const BaseShearApp = () => {
           inputType="default"
           tooltip="Estimated vibration period of the structure in seconds. Typical range is 0.1 to 3.0 seconds depending on height and stiffness."
         />
-        <button onClick={resetInputs} className="px-4 py-2 my-3 mb-5  rounded hover:text-red-700">
+        <button onClick={resetInputs} className="my-3 mb-5 font-bold w-auto rounded hover:text-red-700 text-sm self-end">
           Reset All Inputs
         </button>
         <InputTable
@@ -151,9 +151,8 @@ const BaseShearApp = () => {
         <div className="w-full flex justify-center mb-4">
           <div className="relative flex items-center bg-gray-500 rounded-full w-28 h-10">
             <div
-              className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${
-                showDiagramType === 'plot' ? 'right-1' : 'left-1'
-              }`}
+              className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${showDiagramType === 'plot' ? 'right-1' : 'left-1'
+                }`}
             ></div>
 
             <button

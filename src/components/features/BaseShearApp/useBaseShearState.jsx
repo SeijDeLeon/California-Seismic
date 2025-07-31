@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getFloorsWithBot, calculateForces } from './Calculations';
+import { getFloorsFromBottom, calculateForces } from './Calculations';
 import { calculateBaseShearUnits } from '../../../assets/data/calculations/calculateBaseShearUnits';
 
 export const useBaseShearState = () => {
@@ -10,7 +10,6 @@ export const useBaseShearState = () => {
     shortPeriodSpectralAcceleration: "1.50",
     longPeriodSpectralAcceleration: "0.60",
     longPeriodTransitionPeriod: "8.00",
-    Ie: "1.00",
     T: "1.00",
     buildingHeight: 0,
     floors: [{ height: 20, weight: 100000 }],
@@ -29,7 +28,7 @@ export const useBaseShearState = () => {
   });
 
   const parsedSiteClass = inputs.selectedSiteClass.charAt(0);
-  const updatedFloors = getFloorsWithBot(inputs.floors);
+  const updatedFloors = getFloorsFromBottom(inputs.floors);
 
   useEffect(() => {
     const Fv = calculateBaseShearUnits.getFv(inputs.longPeriodSpectralAcceleration, parsedSiteClass);
