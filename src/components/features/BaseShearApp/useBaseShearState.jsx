@@ -29,10 +29,10 @@ export const useBaseShearState = () => {
     { key: 'SDS', value: 0, label: 'SDS' },
     { key: 'SD1', value: 0, label: 'SD1' },
     { key: 'Ts', value: 0, label: 'T_s' },
-    { key: 'Cs_initial', value: 0, label: 'C_s\\ \\text{(initial)}' },
+    { key: 'Cs_initial', value: 0, label: 'C_{s,\\initial}' },
     { key: 'Cs_min', value: 0, label: 'C_{s,\\min}' },
     { key: 'Cs_max', value: 0, label: 'C_{s,\\max}' },
-    { key: 'Cs_final', value: 0, label: 'C_{s,\\text{final}}' },
+    { key: 'Cs_final', value: 0, label: 'C_{s,\\final}' },
     { key: 'SDC', value: '', label: '\\mathrm{SDC}' },
   ]);
 
@@ -70,7 +70,7 @@ export const useBaseShearState = () => {
       { key: 'SDS', value: SDS, label: 'SDS' },
       { key: 'SD1', value: SD1, label: 'SD1' },
       { key: 'Ts', value: Ts, label: 'T_s' },
-      { key: 'Cs_initial', value: Cs.Cs_initial, label: 'C_s\\ \\text{initial}' },
+      { key: 'Cs_initial', value: Cs.Cs_initial, label: 'C_{s,\\text{initial}}' },
       { key: 'Cs_min', value: Cs.Cs_min, label: 'C_{s,\\min}' },
       { key: 'Cs_max', value: Cs.Cs_max, label: 'C_{s,\\max}' },
       { key: 'Cs_final', value: Cs.Cs_final, label: 'C_{s,\\text{final}}' },
