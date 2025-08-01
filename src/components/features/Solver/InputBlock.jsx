@@ -1,20 +1,20 @@
 import { Listbox } from "@headlessui/react"
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
-const InputBlock = ({ valueToCalculate, setValueToCalculate, activeTab, tabValues, inputs, handleInputChange, calculate }) => {
-  const inputFields = () => {
-    switch (valueToCalculate) {
-      case "Cs": return ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"];
-      case "V": return ["Cs", "weights"];
-      case "Cvx": return ["weights", "heights"];
-      case "Fvx": return ["Cvx", "V"];
-      case "stiffness": return ["E", "I", "h"];
-      case "fundamentalPeriod": return ["stiffness", "weights"];
-      default: return []
-    }
+const getRequiredFields = (value) => {
+  switch (value) {
+    case "Cs": return ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"];
+    case "V": return ["Cs", "weights"];
+    case "Cvx": return ["weights", "heights"];
+    case "Fvx": return ["Cvx", "V"];
+    case "stiffness": return ["E", "I", "h"];
+    case "fundamentalPeriod": return ["stiffness", "weights"];
+    default: return []
   }
+}
 
-  const inputLabels = (field) => {
+const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChange }) => {
+  const getFieldLabel = (field) => {
     switch (field) {
       case "SDS": return <span>S<sub>DS</sub></span>
       case "SD1": return <span>S<sub>D1</sub></span>
@@ -32,63 +32,73 @@ const InputBlock = ({ valueToCalculate, setValueToCalculate, activeTab, tabValue
     }
   }
 
-  const getPreviewText = (name) => {
-    if (name === 'weights' || name === 'heights' || name === 'Cvx') {
-      return '[float, float, ...]';
-    }
-    return 'float';
+  const getFieldValidation = (field) => {
+    return (field === 'weights' || field === 'heights' || field === 'Cvx') ?
+      {
+        previewText: '[float, float, ...]',
+        regex: "\\[\\s*-?(\\d+|\\d*\\.\\d+)(\\s*,\\s*-?(\\d+|\\d*\\.\\d+))*\\s*\\]"
+      } : {
+        previewText: 'float',
+        regex: "-?(\\d+(\\.\\d+)?|\\.\\d+)"
+      }
   };
 
   return (
-    <section>
+    <section className="py-6 pr-12">
       <p className='text-gray-500'>Calculate</p>
       <Listbox
-        value={valueToCalculate}
-        onChange={setValueToCalculate}
+        value={value}
+        onChange={handleValueChange}
         as="div"
         className="relative"
       >
-        <Listbox.Button className="text-3xl font-semibold flex items-center justify-between w-full mb-3">
-          {valueToCalculate}
+        <Listbox.Button className="text-3xl font-bold flex items-center justify-between w-full">
+          {value}
           <ChevronDownIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         </Listbox.Button>
-        <Listbox.Options className="absolute z-10 p-2 w-full rounded bg-white shadow-lg ring-1 ring-gray-900/5">
-          {tabValues[activeTab].map(value =>
+        <Listbox.Options className="absolute w-full rounded bg-white shadow-lg ring-1 ring-gray-900/5 z-10 mt-2 p-2">
+          {options.map(option =>
             <Listbox.Option
-              key={value.id}
-              value={value.id}
+              key={option.id}
+              value={option.id}
               className="p-2 rounded hover:bg-gray-100 cursor-pointer"
             >
-              {value.name} ({value.id})
+              {option.name} ({option.id})
             </Listbox.Option>
           )}
         </Listbox.Options>
       </Listbox>
 
-      {inputFields().map(field => (
-        <div key={field}>
-          <label className="block mb-2">{inputLabels(field)}</label>
-          <input
-            name={field}
-            value={inputs[field]}
-            onChange={handleInputChange}
-            placeholder={getPreviewText(field)}
-            className="w-full p-2 border rounded"
-          />
-        </div>
-      ))}
-
-      <button
-        onClick={calculate}
-        className="w-full py-2 px-4 bg-blue-500 text-white rounded mt-4"
-      >
-        Calculate {valueToCalculate}
-      </button>
+      <form className="mt-8 space-y-3">
+        {getRequiredFields(value).map(field => {
+          const { previewText, regex } = getFieldValidation(field);
+          return (
+            <div key={field} className="flex flex-col-reverse gap-y-2">
+              <input
+                id={field}
+                name={field}
+                value={inputs[field]}
+                onChange={handleInputChange}
+                placeholder={previewText}
+                pattern={regex}
+                required
+                className="text-sm w-full rounded p-2 peer border invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
+              />
+              <label
+                htmlFor={field}
+                className="peer-[&:not(:placeholder-shown):not(:focus):invalid]:text-red-500"
+              >
+                {getFieldLabel(field)}
+              </label>
+            </div>
+          )
+        })}
+      </form>
     </section>
   )
-};
+}
 
 export default InputBlock;

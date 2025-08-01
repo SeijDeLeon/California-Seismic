@@ -1,32 +1,91 @@
+import calculateCs from '../../../assets/data/calculations/calculateCs';
+import calculateV from '../../../assets/data/calculations/calculateV';
+import calculateCvx from '../../../assets/data/calculations/calculateCvx';
+import calculateFvx from '../../../assets/data/calculations/calculateFvx';
+import calculateStiffness from '../../../assets/data/calculations/calculateStiffness';
+import calculateFundamentalPeriod from '../../../assets/data/calculations/calculateFundamentalPeriod';
 import SolutionCs from './SolutionCs';
 import SolutionV from './SolutionV';
 import SolutionCvx from './SolutionCvx';
 import SolutionFvx from './SolutionFvx';
 
-// results.Cvx.join(', '), fvx
-const OutputBlock = ({ valueToCalculate, inputs, result, calculated }) => {
-  const getSolution = () => {
-    switch (valueToCalculate) {
-      case "Cs": return <SolutionCs inputs={inputs} result={result} />
-      case "V": return <SolutionV inputs={inputs} result={result} />
-      case "Cvx": return <SolutionCvx inputs={inputs} result={result} />
-      case "Fvx": return <SolutionFvx inputs={inputs} result={result} />
-      default: return <div>Not supported</div>
+const getRequiredFields = (value) => {
+  switch (value) {
+    case "Cs": return ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"];
+    case "V": return ["Cs", "weights"];
+    case "Cvx": return ["weights", "heights"];
+    case "Fvx": return ["Cvx", "V"];
+    case "stiffness": return ["E", "I", "h"];
+    case "fundamentalPeriod": return ["stiffness", "weights"];
+    default: return []
+  }
+}
+
+const OutputBlock = ({ value, inputs, isValueValidated }) => {
+  const parseArrayInput = (input) => {
+    try {
+      return JSON.parse(input);
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const getResult = (value, inputs) => {
+    if (!isValueValidated) return [null, null];
+
+    const parsedFields = getRequiredFields(value).map(field => {
+      if (field === 'weights' || field === 'heights')
+        return parseArrayInput(inputs[field]);
+      else if (field === "Cvx")
+        return parseArrayInput(inputs[field]).map(c => parseFloat(c));
+      else
+        return parseFloat(inputs[field]);
+    });
+
+    switch (value) {
+      case "Cs":
+        const Cs = calculateCs(...parsedFields).toFixed(4);
+        return [Cs, <SolutionCs inputs={inputs} result={Cs} />];
+
+      case "V":
+        const V = calculateV(...parsedFields).toFixed(4);
+        return [V, <SolutionV inputs={inputs} result={V} />];
+
+      case "Cvx":
+        const totalWeightHeight = parsedFields[0].reduce((sum, weight, index) => sum + parseFloat(weight || 0) * parseFloat(parsedFields[1][index] || 0), 0);
+        const Cvx = calculateCvx(...parsedFields, totalWeightHeight).map(c => c.toFixed(4));
+        return [Cvx, <SolutionCvx inputs={inputs} result={Cvx} />];
+
+      case "Fvx":
+        const Fvx = calculateFvx(...parsedFields).map(f => f.toFixed(4));
+        return [Fvx, <SolutionFvx inputs={inputs} result={Fvx} />];
+
+      case "stiffness":
+        const stiffness = calculateStiffness(...parsedFields).toFixed(4);
+        return [stiffness, null];
+
+      case "fundamentalPeriod":
+        const fundamentalPeriod = calculateFundamentalPeriod(...parsedFields).toFixed(4);
+        return [fundamentalPeriod, null];
+
+      default: return [null, null]
     }
   }
 
-  const formattedResult = Array.isArray(result) ? result.join(', ') : result
+  const [result, solution] = getResult(value, inputs);
+  const formattedResult = Array.isArray(result) ? `[${result.join(', ')}]` : result;
 
   return (
-    <section>
-      <p className='text-gray-500'>{valueToCalculate} Output</p>
-      <output className='text-3xl font-semibold mb-3'>{formattedResult || "-"}</output>
-      {calculated && getSolution()}
-
-      <p className="text-gray-500">Code Output</p>
-      <pre className="text-center bg-gray-100 p-4 rounded">
-        {`{${valueToCalculate}: ${formattedResult}}`}
-      </pre>
+    <section className="py-6 pl-12">
+      <p className='text-gray-500'>{value} Output</p>
+      <output className='text-3xl font-bold'>{formattedResult || "-"}</output>
+      <div className='mt-8'>
+        {solution}
+        <p className="text-gray-500">Code Output</p>
+        <pre className="text-center bg-gray-100 p-4 rounded">
+          {`{${value}: ${formattedResult}}`}
+        </pre>
+      </div>
     </section>
   )
 }
