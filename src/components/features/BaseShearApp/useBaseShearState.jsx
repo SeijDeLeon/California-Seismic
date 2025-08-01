@@ -22,8 +22,8 @@ export const useBaseShearState = () => {
     return saved ? JSON.parse(saved) : defaultInputs;
   });
   const [results, setResults] = useState([
-    { key: 'Fv', value: 0, label: '\\mathrm{F}_v' },
-    { key: 'Fa', value: 0, label: '\\mathrm{F}_a' },
+    { key: 'Fv', value: 0, label: 'F_v' },
+    { key: 'Fa', value: 0, label: 'F_a' },
     { key: 'SMS', value: 0, label: 'SMS' },
     { key: 'SM1', value: 0, label: 'SM1' },
     { key: 'SDS', value: 0, label: 'SDS' },
@@ -63,8 +63,8 @@ export const useBaseShearState = () => {
     const SDC = calculateBaseShearUnits.getSDC(SDS, SD1, inputs.selectedRisk);
 
     setResults([
-      { key: 'Fv', value: Fv, label: '\\mathrm{F}_v' },
-      { key: 'Fa', value: Fa, label: '\\mathrm{F}_a' },
+      { key: 'Fv', value: 0, label: 'F_v' },
+      { key: 'Fa', value: 0, label: 'F_a' },
       { key: 'SMS', value: SMS, label: 'SMS' },
       { key: 'SM1', value: SM1, label: 'SM1' },
       { key: 'SDS', value: SDS, label: 'SDS' },
