@@ -1,10 +1,8 @@
-// DiaphragmViewer.jsx
 import React, { useState, useEffect, useRef } from "react";
 import WallInputs from "./WallInputs";
-import Solution from "../Solver/Solution";
+import SolutionChord from "../Solver/SolutionChord";
 import ChordPlots from "./ChordPlots";
 
-// Custom hook
 const useResizeObserver = () => {
   const ref = useRef(null);
   const [width, setWidth] = useState(1);
@@ -37,52 +35,107 @@ export default function DiaphragmViewer() {
     width: 1,
   });
 
-  const { ref, width = 1 } = useResizeObserver();
+  const { ref } = useResizeObserver();
 
   const ftToPx = (ft) => ft * 3;
-
   const heightPx = ftToPx(heightFt);
   const leftWidthPx = ftToPx(leftWidthFt);
   const rightWidthPx = ftToPx(rightWidthFt);
-  const totalStructureWidth = leftWidthPx + (showRightWall ? rightWidthPx : 0);
+  const structureWidth =
+    leftWidthPx +
+    (showRightWall ? rightWidthPx : showGhostWall ? rightWidthPx : 0);
 
   const paddingX = 60;
-  const paddingY = 80;
+  const basePaddingY = 80;
 
-  const viewBoxWidth =
-    totalStructureWidth +
-    paddingX * 2 +
-    (showGhostWall && !showRightWall ? rightWidthPx : 0);
-  const viewBoxHeight = heightPx + paddingY * 2;
+  const arrowLength = 10 + wTop * 0.1;
+  const extraTopPadding = arrowLength + 20;
+  const paddingTop = basePaddingY + extraTopPadding;
 
-  const leftWallX = paddingX;
-  const rightWallX = leftWallX + leftWidthPx;
+  const viewBoxWidth = structureWidth + paddingX * 2;
+  const viewBoxHeight = heightPx + paddingTop + basePaddingY;
 
-  const topArrowSpacing = 20;
-  const topArrowStart = leftWallX;
-  const topArrowEnd =
-    rightWallX +
-    (showRightWall ? rightWidthPx : showGhostWall ? rightWidthPx : 0);
-  const topArrowY1 = paddingY - 30;
-  const topArrowY2 = paddingY - 10;
+  const structureStartX = paddingX;
+  const structureEndX = structureStartX + structureWidth;
+  const centerX = (structureStartX + structureEndX) / 2;
+
+  const topArrowBaseY = paddingTop - 10;
+  const topArrowTipY = topArrowBaseY - arrowLength;
+
+  const minSpacing = 50;
+  const availableWidth = structureEndX - structureStartX;
+  const arrowCount = Math.max(2, Math.floor(availableWidth / minSpacing));
+  const arrowSpacing = availableWidth / (arrowCount - 1);
 
   const topForceArrows = [];
-  for (let x = topArrowStart; x <= topArrowEnd; x += topArrowSpacing) {
+  for (let i = 0; i < arrowCount; i++) {
+    const x = structureStartX + i * arrowSpacing;
     topForceArrows.push(
       <line
-        key={`top-arrow-${x}`}
+        key={`top-arrow-${i}`}
         x1={x}
-        y1={topArrowY1}
+        y1={topArrowTipY}
         x2={x}
-        y2={topArrowY2}
+        y2={topArrowBaseY}
         stroke="black"
         markerEnd="url(#arrow)"
       />
     );
   }
 
-  const fxLabelX = leftWallX + (topArrowEnd - topArrowStart) / 2;
-  const bottomY = paddingY + heightPx + 20;
+  const arrowConnectorLine = (
+    <line
+      x1={structureStartX}
+      y1={topArrowTipY}
+      x2={structureEndX}
+      y2={topArrowTipY}
+      stroke="black"
+      strokeWidth="1"
+    />
+  );
+
+  const wallLabels = (
+    <>
+      <line
+        x1={structureStartX}
+        y1={topArrowTipY - 30}
+        x2={structureStartX}
+        y2={topArrowTipY}
+        stroke="gray"
+        strokeWidth="1"
+        strokeDasharray="4,4"
+      />
+      <text
+        x={structureStartX}
+        y={topArrowTipY - 35}
+        fontSize="12"
+        fill="gray"
+        textAnchor="middle"
+      >
+        Wall A
+      </text>
+      <line
+        x1={structureEndX}
+        y1={topArrowTipY - 30}
+        x2={structureEndX}
+        y2={topArrowTipY}
+        stroke="gray"
+        strokeWidth="1"
+        strokeDasharray="4,4"
+      />
+      <text
+        x={structureEndX}
+        y={topArrowTipY - 35}
+        fontSize="12"
+        fill="gray"
+        textAnchor="middle"
+      >
+        Wall B
+      </text>
+    </>
+  );
+
+  const bottomY = paddingTop + heightPx + 20;
 
   const handleToggleWall = () => {
     setShowRightWall((prev) => !prev);
@@ -113,7 +166,7 @@ export default function DiaphragmViewer() {
 
       <div ref={ref} className="w-full mb-4">
         <svg
-          className="w-full h-auto bg-white"
+          className="w-full h-auto bg-white pt-8"
           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
           preserveAspectRatio="xMidYMid meet"
         >
@@ -130,10 +183,10 @@ export default function DiaphragmViewer() {
             </marker>
           </defs>
 
-          {/* Walls and annotations */}
+          {/* Walls */}
           <rect
-            x={leftWallX}
-            y={paddingY}
+            x={structureStartX}
+            y={paddingTop}
             width={leftWidthPx}
             height={heightPx}
             fill="none"
@@ -141,8 +194,8 @@ export default function DiaphragmViewer() {
             strokeWidth="2"
           />
           <rect
-            x={leftWallX + 5}
-            y={paddingY + 5}
+            x={structureStartX + 5}
+            y={paddingTop + 5}
             width={leftWidthPx - 10}
             height={heightPx - 10}
             fill="none"
@@ -150,11 +203,11 @@ export default function DiaphragmViewer() {
             strokeWidth="2"
           />
 
-          {showRightWall && rightWidthFt > 0 && (
+          {showRightWall && (
             <>
               <rect
-                x={rightWallX}
-                y={paddingY}
+                x={structureStartX + leftWidthPx}
+                y={paddingTop}
                 width={rightWidthPx}
                 height={heightPx}
                 fill="none"
@@ -162,9 +215,9 @@ export default function DiaphragmViewer() {
                 strokeWidth="2"
               />
               <rect
-                x={rightWallX + 5}
-                y={paddingY + 5}
-                width={rightWidthPx - 10}
+                x={structureStartX + leftWidthPx}
+                y={paddingTop + 5}
+                width={rightWidthPx - 5}
                 height={heightPx - 10}
                 fill="none"
                 stroke="#000"
@@ -176,20 +229,20 @@ export default function DiaphragmViewer() {
           {!showRightWall && showGhostWall && (
             <>
               <rect
-                x={rightWallX}
-                y={paddingY}
+                x={structureStartX + leftWidthPx}
+                y={paddingTop}
                 width={rightWidthPx}
                 height={heightPx}
                 fill="gray"
                 stroke="#000"
                 strokeWidth="2"
-                opacity={0.3}
+                opacity={0.2}
                 strokeDasharray="5,5"
               />
               <rect
-                x={rightWallX + 5}
-                y={paddingY + 5}
-                width={rightWidthPx - 10}
+                x={structureStartX + leftWidthPx}
+                y={paddingTop + 5}
+                width={rightWidthPx - 5}
                 height={heightPx - 10}
                 fill="gray"
                 stroke="#000"
@@ -202,16 +255,16 @@ export default function DiaphragmViewer() {
 
           {/* Dimension lines */}
           <line
-            x1={leftWallX + 5}
+            x1={structureStartX + 5}
             y1={bottomY}
-            x2={leftWallX + leftWidthPx - 5}
+            x2={structureStartX + leftWidthPx - 5}
             y2={bottomY}
             stroke="gray"
             markerStart="url(#arrow)"
             markerEnd="url(#arrow)"
           />
           <text
-            x={leftWallX + leftWidthPx / 2}
+            x={structureStartX + leftWidthPx / 2}
             y={bottomY + 15}
             fontSize="12"
             fill="gray"
@@ -223,16 +276,16 @@ export default function DiaphragmViewer() {
           {showRightWall && (
             <>
               <line
-                x1={rightWallX + 5}
+                x1={structureStartX + leftWidthPx + 5}
                 y1={bottomY}
-                x2={rightWallX + rightWidthPx - 5}
+                x2={structureStartX + leftWidthPx + rightWidthPx - 5}
                 y2={bottomY}
                 stroke="gray"
                 markerStart="url(#arrow)"
                 markerEnd="url(#arrow)"
               />
               <text
-                x={rightWallX + rightWidthPx / 2}
+                x={structureStartX + leftWidthPx + rightWidthPx / 2}
                 y={bottomY + 15}
                 fontSize="12"
                 fill="gray"
@@ -243,50 +296,53 @@ export default function DiaphragmViewer() {
             </>
           )}
 
-          {/* Height line */}
+          {/* Height */}
           <line
-            x1={leftWallX + totalStructureWidth + 20}
-            y1={paddingY}
-            x2={leftWallX + totalStructureWidth + 20}
-            y2={paddingY + heightPx}
+            x1={structureEndX + 20}
+            y1={paddingTop + 5}
+            x2={structureEndX + 20}
+            y2={paddingTop + heightPx - 5}
             stroke="gray"
             markerStart="url(#arrow)"
             markerEnd="url(#arrow)"
           />
           <text
-            x={leftWallX + totalStructureWidth + 25}
-            y={paddingY + 10 + heightPx / 2}
+            x={structureEndX + 25}
+            y={paddingTop + heightPx / 2 + 10}
             fontSize="12"
             fill="gray"
-            transform={`rotate(-90, ${leftWallX + totalStructureWidth + 25}, ${
-              paddingY + heightPx / 2
+            transform={`rotate(-90, ${structureEndX + 25}, ${
+              paddingTop + heightPx / 2
             })`}
             textAnchor="middle"
           >
             {heightFt} ft
           </text>
 
-          {/* Force Arrows */}
+          {/* Force arrows and labels */}
+          {arrowConnectorLine}
           {topForceArrows}
+          {wallLabels}
+
           <text
-            x={fxLabelX}
-            y={paddingY - 40}
+            x={centerX}
+            y={topArrowTipY - 10}
             fontSize="12"
             fill="black"
             textAnchor="middle"
           >
-            Fₓ = {wTop} lb/ft
+            W = {wTop} plf
           </text>
         </svg>
       </div>
 
-      <Solution
+      <SolutionChord
         leftWidthFt={leftWidthFt}
         rightWidthFt={rightWidthFt}
         heightFt={heightFt}
         wTop={wTop}
         showRightWall={showRightWall}
-        setCalculations={setCalculations} // ✅ THIS LINE IS ESSENTIAL
+        setCalculations={setCalculations}
       />
 
       <ChordPlots
