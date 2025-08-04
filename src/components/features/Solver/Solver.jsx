@@ -89,14 +89,18 @@ const Solver = () => {
   }
 
   const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    setValue(tabOptions[tab][0].id);
-    resetInputs();
+    if (tab !== activeTab) {
+      setActiveTab(tab);
+      setValue(tabOptions[tab][0].id);
+      resetInputs();
+    }
   }
 
-  const handleValueChange = (value) => {
-    setValue(value);
-    resetInputs();
+  const handleValueChange = (newValue) => {
+    if (newValue !== value) {
+      setValue(newValue);
+      resetInputs();
+    }
   }
 
   const handleInputChange = (e) => {
