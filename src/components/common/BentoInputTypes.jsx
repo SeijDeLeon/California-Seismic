@@ -1,10 +1,34 @@
 import { useState, useRef, useEffect } from 'react';
 
-export const DefaultInput = ({ value, onChange }) => {
+export const DefaultInput = ({ value, onChange, tooltip }) => {
+    const formatValue = (raw) => {
+        // Ensure number is parsed and rounded to 2 decimal places
+        let num = parseFloat(raw);
+        if (isNaN(num)) return '';
+        return num.toFixed(2);
+    };
+
+    const handleBlur = (e) => {
+        const formatted = formatValue(e.target.value);
+        onChange({ target: { value: formatted } });
+    };
+
+    const handleChange = (e) => {
+        const raw = e.target.value;
+        if (/^\.\d*$/.test(raw)) {
+            onChange({ target: { value: `0${raw}` } });
+            return;
+        }
+
+        onChange(e);
+    };
+
     return (
         <input
+            title={tooltip}
             value={value}
-            onChange={onChange}
+            onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="Required"
             className="rounded border-black px-2 w-1/3 border-b-4 bg-gray-100 text-end"
             type="number"
@@ -16,33 +40,7 @@ export const DefaultInput = ({ value, onChange }) => {
     );
 };
 
-export const CounterInput = ({ value, onChange }) => {
-    const handleChange = (newValue) => {
-        if (newValue >= 1 && newValue <= 20) {
-            onChange(newValue);
-        }
-    };
-
-    return (
-        <div className="align-center justify-between flex flex-row items-center">
-            <p className="text-xs font-bold mr-5">{value}</p>
-            <div>
-                <button
-                    className='mr-2 bg-white rounded active:scale-125 transition-all border-1 border-black'
-                    onClick={() => handleChange(value - 1)}>
-                    <img src={ArrowDown} alt="Decrease" className="h-7 w-7 rounded " />
-                </button>
-                <button
-                    className='ml-2 bg-white rounded active:scale-125 transition-all border-1 border-black'
-                    onClick={() => handleChange(value + 1)}>
-                    <img src={ArrowUp} alt="Increase" className="h-7 w-7 rounded " />
-                </button>
-            </div>
-
-        </div>
-    );
-}
-export const ListInput = ({ value, listItems, onChange }) => {
+export const ListInput = ({ value, listItems, onChange, tooltip }) => {
     const [showList, setShowList] = useState(false);
     const containerRef = useRef(null);
 
@@ -60,7 +58,8 @@ export const ListInput = ({ value, listItems, onChange }) => {
         <div ref={containerRef} className="relative w-1/3">
             <button
                 type="button"
-                className="w-full border-b-1 bg-gray-100  px-2 text-left hover:bg-gray-300"
+                title={tooltip}
+                className="w-full border-b-1 bg-gray-100 px-2 text-left hover:bg-gray-300"
                 onClick={() => setShowList((prev) => !prev)}
             >
                 {value || "Select an option"}
