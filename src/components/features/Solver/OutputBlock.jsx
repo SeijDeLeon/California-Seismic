@@ -81,8 +81,8 @@ const OutputBlock = ({ value, inputs, isValueValidated }) => {
       <output className='text-3xl font-bold'>{formattedResult || "-"}</output>
       <div className='mt-8'>
         {solution}
-        <p className="text-gray-500">Code Output</p>
-        <pre className="text-center bg-gray-100 p-4 rounded">
+        <p className="text-gray-500 mt-6 mb-2">Code Output</p>
+        <pre className="text-center border p-4 rounded whitespace-pre-wrap">
           {`{${value}: ${formattedResult}}`}
         </pre>
       </div>
