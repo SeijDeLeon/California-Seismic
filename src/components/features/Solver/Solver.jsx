@@ -10,7 +10,7 @@ const getRequiredFields = (value) => {
     case "Cvx": return ["weights", "heights"];
     case "Fvx": return ["Cvx", "V"];
     case "stiffness": return ["E", "I", "h"];
-    case "fundamentalPeriod": return ["stiffness", "weights"];
+    case "fundamentalPeriod": return ["stiffness", "W"];
     default: return []
   }
 }
