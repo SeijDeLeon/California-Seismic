@@ -1,42 +1,37 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, useLocation } from "react-router-dom";
+import logo from "./logo.svg";
+import "./App.css";
 
-import Header from './components/common/Header.jsx';
-import Home from './routes/Home.jsx';
-import Lectures from './routes/Lectures.jsx';
-import Lecture from './routes/Lecture.jsx';
-import Practice from './routes/Practice.jsx';
-import ExamGuide from './routes/ExamGuide.jsx';
-import Contributors from './routes/Contributors.jsx';
-import Footer from './components/common/Footer.jsx';
-import Error404 from './routes/Error404';
-import PracticeExams from './routes/PracticeExams.jsx';
-import PracticeExamSingle from './routes/PracticeExamSingle.jsx';
-import SinglePracticeExamResult from './components/features/ExamSimulator/SinglePracticeExamResult.jsx';
-import USGS from './routes/USGS.jsx';
-import PracticeRandom from './routes/PracticeRandom.jsx';
-import ASCE7 from './routes/ASCE7.jsx';
-import BaseShearApp from './routes/BaseShearApp.jsx';
-import Demo from './routes/Demo.jsx';
-import Solver from './routes/SolverPage.jsx';
-<<<<<<< HEAD
-import DiaphragmInput from './components/features/DiaphragmApp/DiaphragmInput.jsx';
-
-=======
-import Output from './components/features/DiaphragmAnalysis/Output.jsx';
->>>>>>> 80ee3eff78454d34b4e8155af7e92203a67b5ae4
+import Header from "./components/common/Header.jsx";
+import Home from "./routes/Home.jsx";
+import Lectures from "./routes/Lectures.jsx";
+import Lecture from "./routes/Lecture.jsx";
+import Practice from "./routes/Practice.jsx";
+import ExamGuide from "./routes/ExamGuide.jsx";
+import Contributors from "./routes/Contributors.jsx";
+import Footer from "./components/common/Footer.jsx";
+import Error404 from "./routes/Error404";
+import PracticeExams from "./routes/PracticeExams.jsx";
+import PracticeExamSingle from "./routes/PracticeExamSingle.jsx";
+import SinglePracticeExamResult from "./components/features/ExamSimulator/SinglePracticeExamResult.jsx";
+import USGS from "./routes/USGS.jsx";
+import PracticeRandom from "./routes/PracticeRandom.jsx";
+import ASCE7 from "./routes/ASCE7.jsx";
+import BaseShearApp from "./routes/BaseShearApp.jsx";
+import Demo from "./routes/Demo.jsx";
+import Solver from "./routes/SolverPage.jsx";
+import Output from "./components/features/DiaphragmAnalysis/Output.jsx";
 //Google Analytics
-import ReactGA from 'react-ga4';
-import ExamsHistory from './components/features/ExamSimulator/ExamsHistory.jsx';
-const TRACKING_ID = 'G-7M8L6VYQZH';
+import ReactGA from "react-ga4";
+import ExamsHistory from "./components/features/ExamSimulator/ExamsHistory.jsx";
+const TRACKING_ID = "G-7M8L6VYQZH";
 ReactGA.initialize(TRACKING_ID);
 
 function App() {
   const location = useLocation();
   const hideHeaderFooter =
-    location.pathname.startsWith('/practice/exams/') &&
-    !location.pathname.endsWith('/result');
+    location.pathname.startsWith("/practice/exams/") &&
+    !location.pathname.endsWith("/result");
 
   return (
     <div className="App">
@@ -56,10 +51,7 @@ function App() {
           path="/practice/exams/:examId/result"
           element={<SinglePracticeExamResult />}
         />
-        <Route
-          path="/practice/exams-history"
-          element={<ExamsHistory />}
-        />
+        <Route path="/practice/exams-history" element={<ExamsHistory />} />
         <Route path="/exam-guide" element={<ExamGuide display="true" />} />
         <Route path="/contributors" element={<Contributors />} />
         <Route path="/practice/random" element={<PracticeRandom />} />
@@ -69,11 +61,7 @@ function App() {
         <Route path="/baseshear" element={<BaseShearApp />} />
         <Route path="/Solver" element={<Solver />} />
         <Route path="/demo" element={<Demo visible={true} />} />
-<<<<<<< HEAD
-        <Route path="/diaphragm" element={<DiaphragmInput />} />
-=======
-        <Route path="/output" element={<Output/>} />
->>>>>>> 80ee3eff78454d34b4e8155af7e92203a67b5ae4
+        <Route path="/output" element={<Output />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
