@@ -19,6 +19,43 @@ const Solver = () => {
   const [activeTab, setActiveTab] = useState("Base Shear");
   const [value, setValue] = useState("Cs");
 
+  const tabOptions = {
+    "Base Shear": [
+      {
+        name: "Seismic Response Coefficient",
+        label: <span>C<sub>s</sub></span>,
+        id: "Cs"
+      },
+      {
+        name: "Seismic Base Shear",
+        label: "V",
+        id: "V"
+      },
+      {
+        name: "Vertical Distribution Factor",
+        label: <span>C<sub>vx</sub></span>,
+        id: "Cvx"
+      },
+      {
+        name: "Story Shear",
+        label: <span>F<sub>vx</sub></span>,
+        id: "Fvx"
+      }
+    ],
+    "Fundamental Period": [
+      {
+        name: "Stiffness",
+        label: "Stiffness",
+        id: "stiffness"
+      },
+      {
+        name: "Fundamental Period",
+        label: "Fundamental Period",
+        id: "fundamentalPeriod"
+      }
+    ]
+  }
+
   const defaultInputs = {
     SDS: '',
     SD1: '',
@@ -43,22 +80,8 @@ const Solver = () => {
   for (const field in defaultInputs) {
     defaultInputsValidated[field] = false;
   }
-
   const [inputs, setInputs] = useState(defaultInputs);
   const [inputsValidated, setInputsValidated] = useState(defaultInputsValidated);
-
-  const tabOptions = {
-    "Base Shear": [
-      { name: "Seismic Response Coefficient", id: "Cs" },
-      { name: "Seismic Base Shear", id: "V" },
-      { name: "Vertical Distribution Factor", id: "Cvx" },
-      { name: "Story Shear", id: "Fvx" }
-    ],
-    "Fundamental Period": [
-      { name: "Stiffness", id: "stiffness" },
-      { name: "Fundamental Period", id: "fundamentalPeriod" }
-    ]
-  }
 
   const resetInputs = () => {
     setInputs(defaultInputs);
@@ -103,7 +126,7 @@ const Solver = () => {
         )}
       </ul>
 
-      <div className='mt-3 grid grid-cols-2 divide-x divide-solid flex-1'>
+      <div className='mt-3 lg:grid lg:grid-cols-2 lg:divide-x lg:divide-solid lg:flex-1'>
         <InputBlock
           value={value}
           handleValueChange={handleValueChange}
@@ -113,6 +136,7 @@ const Solver = () => {
         />
         <OutputBlock
           value={value}
+          valueLabel={tabOptions[activeTab].find(option => option.id === value).label}
           inputs={inputs}
           isValueValidated={getRequiredFields(value).every(field => inputsValidated[field] === true)}
         />

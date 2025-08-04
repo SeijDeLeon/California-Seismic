@@ -44,7 +44,7 @@ const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChan
   };
 
   return (
-    <section className="py-6 pr-12">
+    <section className="py-6 lg:pr-6 xl:pr-12">
       <p className='text-gray-500'>Calculate</p>
       <Listbox
         value={value}
@@ -53,7 +53,7 @@ const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChan
         className="relative"
       >
         <Listbox.Button className="text-3xl font-bold flex items-center justify-between w-full">
-          {value}
+          {options.find(option => option.id === value).label}
           <ChevronDownIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -66,7 +66,7 @@ const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChan
               value={option.id}
               className="p-2 rounded hover:bg-gray-100 cursor-pointer"
             >
-              {option.name} ({option.id})
+              {option.name} {(option.name !== option.label) && <>({option.label})</>}
             </Listbox.Option>
           )}
         </Listbox.Options>
