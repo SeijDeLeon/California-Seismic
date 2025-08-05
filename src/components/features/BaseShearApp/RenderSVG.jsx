@@ -3,7 +3,8 @@ import { renderArrow } from './Arrow';
 
 const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => {
   const scale = 4;
-
+  const formatted_total_height = Number.isInteger(totalHeight) ? totalHeight : parseFloat(totalHeight.toFixed(2))
+  
   return (
     <div className="w-full overflow-x-auto">
       <svg
@@ -65,7 +66,8 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
                 const Fx = Math.round(forces[i]);
                 const Wx = Math.round(floor.weight);
                 const storyV = Math.round(storyVs[i]);
-
+                const formatted_height = Number.isInteger(floor.bottom) ? floor.bottom : parseFloat(floor.bottom.toFixed(1))
+              
                 const group = (
                 <g key={i}>
                     {/* Black border */}
@@ -119,14 +121,14 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
                     markerEnd="url(#arrowhead-down)"
                     />
                     <text
-                    x={rectX + rectWidth + 40}
+                    x={rectX + rectWidth + 35}
                     y={yTop + h / 2 - 10}
                     fontSize="11"
                     fill="#666"
                     dominantBaseline="middle"
                     transform={`rotate(-270, ${rectX + rectWidth + 40}, ${yTop + h / 2 - 10})`}
                     >
-                    {Math.round(floor.height)} ft
+                    {formatted_height} ft
                     </text>
                 </g>
                 );
@@ -157,26 +159,26 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
 
             {/* V Arrow at base */}
             {renderArrow({
-                xEnd: (150 + 200) / 2, // center of building
-                y: 50 + totalHeight * scale + 35,
-                forceValue: totalBaseShear,
-                label: `V = ${Math.round(totalBaseShear)} lb`,
-                direction: 'left',
-                labelPosition: 'middle',
-                labelOffsetX: 50,
-                scaleFactor: 100
+              xEnd: (150 + 200) / 2, // center of building
+              y: 50 + totalHeight * scale + 35,
+              forceValue: totalBaseShear,
+              label: `V = ${Math.round(totalBaseShear)} lb`,
+              direction: 'left',
+              labelPosition: 'middle',
+              labelOffsetX: 50,
+              scaleFactor: 100
             })}
 
             {/* Total hn arrow outside the building */}
             <line
-            x1={150 + 200 + 70}
-            y1={50 + 4}
-            x2={150 + 200 + 70}
-            y2={50 + totalHeight * scale - 4}
-            stroke="#888"
-            strokeWidth="1.5"
-            markerStart="url(#arrowhead-up)"
-            markerEnd="url(#arrowhead-down)"
+              x1={150 + 200 + 70}
+              y1={50 + 4}
+              x2={150 + 200 + 70}
+              y2={50 + totalHeight * scale - 4}
+              stroke="#888"
+              strokeWidth="1.5"
+              markerStart="url(#arrowhead-up)"
+              markerEnd="url(#arrowhead-down)"
             />
             <text
               x={150 + 200 + 85}
@@ -188,7 +190,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
             >
               <tspan>h</tspan>
               <tspan baselineShift="sub" fontSize="12" dy="-2">n</tspan>
-              <tspan dy="2"> = {totalHeight}</tspan>
+              <tspan dy="2"> = {formatted_total_height}</tspan>
               <tspan dx="3">ft</tspan>
             </text>
           </g>

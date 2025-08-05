@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { EquationFormat } from '../../common/EquationFormat';
 import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
@@ -9,8 +9,11 @@ import DisplacementPlot from './Plot';
 import { useBaseShearState } from './useBaseShearState';
 
 const BaseShearApp = () => {
+  const [showDiagramType, setShowDiagramType] = useState('svg');
   const {
-    inputs, setInputs, results, updatedFloors, resetInputs
+    inputs, setInputs, results,
+    updatedFloors, totalBaseShear,
+    totalHeight, forces, storyVs, resetInputs
   } = useBaseShearState();
 
   const handleInputChange = (key) => (valOrEvent) => {
@@ -46,12 +49,6 @@ const BaseShearApp = () => {
     };
     setInputs((prev) => ({ ...prev, Ie: Ie_map[prev.selectedRisk] }));
   }, [inputs.selectedRisk, setInputs]);
-
-  const totalBaseShear = (results || []).find(result => result.key === 'V')?.value;
-  const keysToShow = [
-    'Fv', 'Fa', 'SMS', 'SM1', 'SDS', 'SD1', 'Ts',
-    'Cs_initial', 'Cs_min', 'Cs_max', 'Cs_final'
-    ]
 
   return (
     <BentoContainer title="Base Shear Calculator">
@@ -152,13 +149,44 @@ const BaseShearApp = () => {
       </BentoBox>
 
       <BentoBox title="DIAGRAM:">
-        <RenderSVG
-        floors={updatedFloors}
-        forces={results.find(result => result.key === 'Fvx')?.value || []}
-        storyVs={results.find(result => result.key === 'storyVs')?.value || []}
-        totalBaseShear={results.find(result => result.key === 'V')?.value || 0}
-        totalHeight={results.find(result => result.key === 'totalHeight')?.value || 0}
-        />
+        <div className="w-full flex justify-center mb-4">
+          <div className="relative flex items-center bg-gray-500 rounded-full w-28 h-10">
+            <div
+              className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${showDiagramType === 'plot' ? 'right-1' : 'left-1'
+                }`}
+            ></div>
+
+            <button
+              className="z-10 w-1/2 text-center text-white text-sm font-medium pl-1"
+              onClick={() => setShowDiagramType('svg')}
+            >
+              SVG
+            </button>
+
+            <button
+              className="z-10 w-1/2 text-center text-white text-sm font-medium pr-1"
+              onClick={() => setShowDiagramType('plot')}
+            >
+              Plot
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full flex justify-center items-center">
+          {showDiagramType === 'svg' ? (
+            <RenderSVG
+              floors={updatedFloors}
+              forces={forces}
+              storyVs={storyVs}
+              totalBaseShear={totalBaseShear}
+              totalHeight={totalHeight}
+            />
+          ) : (
+            <DisplacementPlot
+              floors={updatedFloors}
+            />
+          )}
+        </div>
       </BentoBox>
 
       <BentoBox title="SOLUTIONS:">
@@ -184,10 +212,11 @@ const BaseShearApp = () => {
             {results.filter(({ key }) => key === 'SDC').map(({ key, value }) => (
               <EquationFormat
                 key={key}
-                value={`Seismic Design Category (${key}) =`}
+                value={`Seismic Design Category (SDC) =`}
                 result={value || 'N/A'}
               />
             ))}
+
             <p className="font-bold text-2xl">Total Base Shear: {
               typeof totalBaseShear === 'number' && !isNaN(totalBaseShear)
                 ? `${totalBaseShear.toFixed(2)} kips`
@@ -195,25 +224,6 @@ const BaseShearApp = () => {
             }</p>
           </section>
         )}
-
-        {/* Side-by-side plots */}
-        <div className="w-full flex justify-center items-start gap-4 px-4 mt-6">
-            <h4 className="font-semibold text-center">Plots:</h4>
-                <div className="w-1/2 mt-2">
-                    <DisplacementPlot
-                        floors={updatedFloors}
-                        displacementType="horizontal"
-                        totalBaseShear={totalBaseShear}
-                    />
-                </div>
-                <div className="w-1/2 mt-2">
-                    <DisplacementPlot
-                        floors={updatedFloors}
-                        displacementType="vertical"
-                        totalBaseShear={totalBaseShear}
-                    />
-                </div>
-        </div>
       </BentoBox>
 
     </BentoContainer>

@@ -1,64 +1,64 @@
-// src/Plot.jsx
+// src/DisplacementPlot.jsx
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-const DisplacementPlot = () => {
-  const storyLabels = ['1', '2', '3']; // Bottom to top: Story 1 at base
+const DisplacementPlot = ({ floors, displacementType, totalBaseShear }) => {
+  // Build Y-axis story labels (Story 1 at bottom, Story N at top)
+  const storyLabels = floors.map((_, index) => `Story ${index + 1}`).reverse();
 
-  const redDisplacement = [0.176, 0.176, 0];   // Story 1 → 2 → 3
-  const blueDisplacement = [0.352, 0.176, 0];  // Story 1 → 2 → 3
-  const baseShear = 0.352;
+  // Extract displacement values from floor data
+  const displacements = floors
+    .map((floor) =>
+      
+      displacementType === 'horizontal'
+        ? floor.displacementX ?? 0
+        : floor.displacementY ?? 0
+    )
+    .reverse(); // Reverse so top story appears at top in plot
+
+  const titleText =
+    displacementType === 'horizontal'
+      ? 'Horizontal Displacement (in)'
+      : 'Vertical Displacement (in)';
+
+  const color = displacementType === 'horizontal' ? 'blue' : 'red';
+  const symbol = displacementType === 'horizontal' ? 'circle' : 'square';
 
   return (
     <Plot
       data={[
         {
-          x: redDisplacement,
+          x: displacements,
           y: storyLabels,
           type: 'scatter',
           mode: 'lines+markers',
-          marker: { color: 'red', symbol: 'square' },
-          name: 'Vertical Force Distribution (Fx)',
-        },
-        {
-          x: blueDisplacement,
-          y: storyLabels,
-          type: 'scatter',
-          mode: 'lines+markers',
-          marker: { color: 'blue', symbol: 'circle' },
-          name: 'Horizontal Force Distribution (Vx)',
-        },
-        {
-          x: [baseShear],
-          y: ['1'], // base only
-          type: 'scatter',
-          mode: 'markers',
-          marker: { color: 'green', size: 12, symbol: 'diamond' },
-          name: 'Base Shear (V)',
+          marker: { color, symbol },
+          line: { color },
+          name: titleText,
         },
       ]}
       layout={{
-        width: 500,
-        height: 600,
+        width: 400,
+        height: 400,
         title: {
-          text: '<i>Base Shear Plot</i>',
-          font: { size: 20 },
+          text: `<i>${titleText}</i>`,
+          font: { size: 18 },
         },
         xaxis: {
-          title: 'Displacement, in',
-          tickmode: 'array',
+          title: 'Displacement (in)',
           zeroline: false,
         },
         yaxis: {
-          title: 'Story level',
+          title: 'Story',
+          autorange: 'reversed', // Top story appears at top
           tickmode: 'array',
           tickvals: storyLabels,
-          ticktext: storyLabels.map((label) => `Story ${label}`),
-          zeroline: false,
-          autorange: 'reversed', // Stories from top to bottom
+          ticktext: storyLabels,
         },
+        margin: { l: 70, r: 30, b: 50, t: 50 },
         plot_bgcolor: '#f9f9f9',
       }}
+      config={{ responsive: true }}
     />
   );
 };

@@ -1,29 +1,35 @@
-import { DefaultInput, CounterInput, ListInput } from './BentoInputTypes';
+import { DefaultInput, ListInput } from './BentoInputTypes';
 import { EquationFormat } from './EquationFormat';
 
-export const BentoInput = ({ label, value, equation, listItems, onChange, inputType, trailingUnit }) => {
+export const BentoInput = ({ label, value, equation, listItems, onChange, inputType, trailingUnit, tooltip }) => {
     const renderInput = () => {
+        const inputProps = {
+            value,
+            onChange,
+            tooltip,
+        };
+
         switch (inputType) {
-            case 'counter':
-                return <CounterInput value={value} onChange={onChange} />;
             case 'list':
-                return <ListInput value={value} listItems={listItems} onChange={onChange} />;
+                return <ListInput {...inputProps} listItems={listItems} />;
             case 'default':
             default:
-                return <DefaultInput value={value} onChange={onChange} />;
+                return <DefaultInput {...inputProps} />;
         }
     };
 
     return (
         <div className="w-full flex justify-between items-center mb-1 text-xs">
-            {label && (
-                <div className="w-1/3 flex text-start">
-                    <label className="text-xs text-black">{label}</label>
-                </div>
-            )}
-            {equation && (
-                <EquationFormat value={equation} />
-            )}
+            <div className="w-1/3 flex items-center text-start">
+                {label && (
+                    <label className="text-xs text-black">
+                        {label}
+                    </label>
+                )}
+
+            </div>
+
+            {equation && <EquationFormat value={equation} />}
             {renderInput()}
             {trailingUnit && (
                 <span className="text-xs text-black">{trailingUnit}</span>
