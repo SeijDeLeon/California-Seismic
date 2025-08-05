@@ -289,6 +289,93 @@ const data = [
         solution:"ASCE 7-16 section 12.3.1.2 Rigid Diaphragm Condition. <br> Diaphragms of concrete slabs or concrete-filled metal deck with span-to-depth ratios of 3 or less in structures that have no horizontal irregularities are permitted to be idealized as rigid.",
         lectures:'12',
         difficulty:'easy'},
+        {key:'d4',
+        description:'Diaphragm Analysis #1',
+        question:"Determine the maximum unit diaphragm shear, the max chord force , and the chord force 50'-0\" from wall Line A. Please provide your answer in the stated order. ",
+        false1:'None of the choices are correct',
+        false2:'30 plf, 150 plf, 1,350 plf',
+        false3: '90 plf, 1,350 plf, 1,350 plf',
+        answer:'120 plf, 1,350 plf, 150 plf',
+        solution:` Variables: Shear (V), Unit Shear (v), Moment (M), Chord Force (C), Load (w), Span (L), Diaphragm Depth (d) <br> 
+        Shear Formula: \\(\\frac{w*L}{2}\\) <br> 
+        Unit Shear Formula: \\(\\frac{V}{D}\\) <br> 
+        Moment Formula: \\(\\frac{w*L^{2}}{8} \\) <br> 
+        Chord Force Formula: \\(\\frac{M}{d} \\) <br> <br> 
+
+        Given: w = 150 plf, \\(L_1\\) = 20 ft, \\(L_2 \\) = 60 ft d = 50 ft <br> <br> 
+
+        Find the shear and unit shear at each wall: <br> <br>
+        \\(V_a = \\frac{150 plf * 20 ft}{2} = 1500 lb\\) <br> <br>
+        \\(v_a = \\frac{1500 lb}{50 ft} = 30 plf\\) <br> <br>
+        \\(V_c = \\frac{150 plf * 60 ft}{2} = 4500 lb\\) <br><br>
+        \\(v_c = \\frac{4500 lb}{50 ft} = 90 plf\\) <br> <br>
+        Max Unit Diaphragm Shear:  <br>
+        \\(V_{b} = V_a + V_c = 1500 lb + 4500 lb = 6000 lb\\) <br><br>
+        \\(v_{b} = \\frac{6000 lb}{50 ft} = \\mathbf{120 plf}\\) <br> <br>
+        
+        Moment from A to B: <br>
+        \\(M_{ab} = \\frac{150 plf * 20 ft^{2}}{8} = 7500 plf\\) <br> <br>
+        
+      Moment from B to C: <br>
+        \\(M_{bc} = \\frac{150 plf * 60 ft^{2}}{8} = 67500 plf\\) <br> <br>
+
+        Chord Force on Wall A: <br>
+        \\(C_{ab} = \\frac{7500 plf}{50 ft} = \\mathbf{150 plf}\\) <br> <br>
+
+        Max Chord Force: <br>
+        \\(C_{bc} = \\frac{67500 plf}{50 ft} = \\mathbf{1350 plf}\\) <br> <br>
+
+        `,
+
+        lectures:'12',
+        difficulty:'easy'},
+        {key:'d5',
+        description:'Diaphragm Analysis #2',
+        question:"Determine the maximum chord force and the maximum collector force at wall Line A. Please provide your answer in the stated order.",
+        false1:'None of the choices are correct',
+        false2:'401.79 plf, \\(\\Omega\\)90plf',
+        false3: '301.79 plf, -\\(\\Omega\\)75plf',
+        answer:'401.79plf, -\\(\\Omega\\)75plf',
+        solution:`Variables: Shear (V), Unit Shear (v), Moment (M), Chord Force (C), Load (w), Span (L), Diaphragm Depth (d), Reaction Force (\\(R_x \\)), Unit Wall Shear (\\(v_{wall} \\)) <br> <br>
+        Shear Formula: \\(\\frac{w*L}{2}\\) <br> 
+        Unit Shear Formula: \\(\\frac{V}{D}\\) <br> 
+        Moment Formula: \\(\\frac{w*L^{2}}{8} \\) <br> 
+        Chord Force Formula: \\(\\frac{M}{d} \\) <br> 
+        Reaction Force Formula: V <br>
+        Unit Wall Shear Formula: \\(\\frac{R_x}{d}\\) <br> <br> 
+
+        Given: w = 100 plf, L = 30 ft, d = 28 ft <br> <br> 
+
+        
+
+        Chord Force Calculation: <br> 
+
+        \\(V = \\frac{100 plf * 30 ft}{2} = 1500 lb\\) <br> <br>
+        \\(v = \\frac{1500 lb}{28 ft} = 53.57 plf\\) <br> <br>
+        \\(M = \\frac{100 plf * 30 ft^{2}}{8} = 11250 plf\\) <br> <br>
+        \\(C = \\frac{11250 lb-ft}{28 ft} = 401.79 plf\\) <br> <br>
+        
+        Collection Force Calculation: <br>
+
+        \\(R_x = V = 1500 lb\\) <br> <br>
+        \\(v_{wall} = \\frac{R_x}{d} = \\frac{1500 lb}{16 ft} = 93.75 plf\\) <br> <br>
+
+        Take Net Unit Shear: <br>
+        \\(v_{net} = v_{wall} - w = 93.75 plf - 100 plf = -6.25 plf\\) <br> <br>
+
+        Take max of the collector forces: <br>
+
+        Collector Force on 4' segment = -6.25 * 4  = -\\(\\Omega\\)6.25 plf <br>
+        Collector Force on 12' segment = -6.25 * 12 = -\\(\\Omega\\)75 plf <br> <br>
+
+
+
+        `,
+        lectures:'12',
+        difficulty:'easy'},
+        
+        
+        
       ]
     },
     {
