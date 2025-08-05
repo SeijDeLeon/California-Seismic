@@ -2,7 +2,6 @@ import { useState, useEffect, Fragment } from "react";
 import questionData from "../../../assets/data/questionData.js";
 import { MathJax } from "better-react-mathjax";
 const images = require.context("../../../../public/images/questions", true);
-console.log("Available images:", images.keys());
 
 export default function QuestionDisplay({
   questionKey = "a1",
@@ -44,8 +43,9 @@ export default function QuestionDisplay({
     try {
       images(`./${key}Q.png`);
       return true;
-    } catch (err) {
-      console.log("false");
+    }
+    catch (err) {
+      console.log('false');
       return false;
     }
   };
@@ -169,6 +169,7 @@ export default function QuestionDisplay({
     setSolutionDisplay(false);
     setCheckedItem("");
     setDisplay("opacity-100");
+
   }, [questionKey]);
 
   const [display, setDisplay] = useState("opacity-0");
@@ -256,4 +257,5 @@ export default function QuestionDisplay({
       </section>
     </div>
   );
+
 }
