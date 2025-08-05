@@ -42,9 +42,9 @@ const DiaphragmInput = () => {
     };
 
     return (
-        <div className="flex h-screen">
-           <div className="w-1/2 bg-gray-100 p-6 flex flex-col gap-6 overflow-y-auto">
-           <h1 className="text-2xl font-semibold mb-2 text-gray-800">Diaphragm Input</h1>
+        <div className="flex h-fit w-full">
+            <div className="w-full bg-gray-100 p-6 flex flex-col gap-6 overflow-y-auto">
+                <h1 className="text-2xl font-semibold mb-2 text-gray-800">Diaphragm Input</h1>
                 <div className="bg-white px-20 py-4 rounded shadow">
                     <h2 className="text-lg font-medium mb-4">Inputs</h2>
                     <div className="space-y-4">
@@ -107,13 +107,6 @@ const DiaphragmInput = () => {
                         </div>
                         ))}
                     </div>
-                </div>
-           </div>
-
-           <div className="w-1/2 bg-gray-200 p-4 flex items-center justify-center">
-                <div className="w-full h-full border border-gray-400 bg-white rounded shadow p-4">
-                    <h1 className="text-center text-xl text-gray-700">Diaphragm Display Area</h1>
-
                 </div>
            </div>
         </div>

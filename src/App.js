@@ -21,6 +21,7 @@ import BaseShearApp from "./routes/BaseShearApp.jsx";
 import Demo from "./routes/Demo.jsx";
 import Solver from "./routes/SolverPage.jsx";
 import Output from "./components/features/DiaphragmAnalysis/Output.jsx";
+import DiaphragmApp from "./routes/DiaphragmApp.jsx";
 //Google Analytics
 import ReactGA from "react-ga4";
 import ExamsHistory from "./components/features/ExamSimulator/ExamsHistory.jsx";
@@ -63,6 +64,7 @@ function App() {
         <Route path="/demo" element={<Demo visible={true} />} />
         <Route path="/output" element={<Output />} />
         <Route path="*" element={<Error404 />} />
+        <Route path="/diaphragm" element={<DiaphragmApp />} />
       </Routes>
       {!hideHeaderFooter && <Footer />}
     </div>
