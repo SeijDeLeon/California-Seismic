@@ -3,9 +3,18 @@ import DiaphragmInput from "../components/features/DiaphragmApp/DiaphragmInput.j
 import CollectorForceCard from "../components/features/DiaphragmAnalysis/CollectorForceCard.jsx";
 import ChordForceCard from "../components/features/DiaphragmAnalysis/ChordForceCard.jsx";
 
+import { useDiaphragm } from "../components/features/DiaphragmApp/useDiaphragm.jsx";
 
 export default function DiaphragmApp() {
-  //state variables for input here
+  const {
+    inputs,
+    handleDeleteWall,
+    handleAddWall,
+    handleAddWallOpening,
+    handleEditInputs,
+    validateInputState,
+    solution
+  } = useDiaphragm();
 
   return (
     <>
