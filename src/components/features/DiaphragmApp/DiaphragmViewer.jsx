@@ -1,27 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import WallInputs from "./WallInputs";
 import SolutionChord from "../Solver/SolutionChord";
 import ChordPlots from "./ChordPlots";
 
-const useResizeObserver = () => {
-  const ref = useRef(null);
-  const [width, setWidth] = useState(1);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    const observer = new ResizeObserver(([entry]) => {
-      setWidth(entry.contentRect.width);
-    });
-
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, width };
-};
-
 export default function DiaphragmViewer() {
+  // usestates
   const [wTop, setwTop] = useState(100);
   const [showRightWall, setShowRightWall] = useState(false);
   const [showGhostWall, setShowGhostWall] = useState(false);
@@ -34,17 +17,29 @@ export default function DiaphragmViewer() {
     chord: 0,
     width: 1,
   });
+  const [wallGaps, setWallGaps] = useState({ A: 0, B: 0, C: 0 });
+  const [inputGapValue, setInputGapValue] = useState(0);
+  const [shearWalls, setShearWalls] = useState({
+    A: false,
+    B: false,
+    C: false,
+  });
+  const [wallSegments, setWallSegments] = useState({ A: 0, B: 0, C: 0 });
+  const [activeInputType, setActiveInputType] = useState(null); // "gap" | "segment" | null
 
-  const { ref } = useResizeObserver();
+  // For highlight hover & selected state
+  const [hoveredWall, setHoveredWall] = useState(null); // "A" | "B" | "C" | null
+  const [selectedWall, setSelectedWall] = useState(null); // same
 
+  // structure functions
   const ftToPx = (ft) => ft * 3;
   const heightPx = ftToPx(heightFt);
   const leftWidthPx = ftToPx(leftWidthFt);
   const rightWidthPx = ftToPx(rightWidthFt);
   const structureWidth =
-    leftWidthPx +
-    (showRightWall ? rightWidthPx : showGhostWall ? rightWidthPx : 0);
+    leftWidthPx + (showRightWall || showGhostWall ? rightWidthPx : 0);
 
+  //SVG constants
   const paddingX = 60;
   const basePaddingY = 80;
 
@@ -55,10 +50,12 @@ export default function DiaphragmViewer() {
   const viewBoxWidth = structureWidth + paddingX * 2;
   const viewBoxHeight = heightPx + paddingTop + basePaddingY;
 
+  //svg postions
   const structureStartX = paddingX;
   const structureEndX = structureStartX + structureWidth;
   const centerX = (structureStartX + structureEndX) / 2;
 
+  //top force arrows - positions and setup
   const topArrowBaseY = paddingTop - 10;
   const topArrowTipY = topArrowBaseY - arrowLength;
 
@@ -94,55 +91,167 @@ export default function DiaphragmViewer() {
     />
   );
 
-  const wallLabels = (
-    <>
-      <line
-        x1={structureStartX}
-        y1={topArrowTipY - 30}
-        x2={structureStartX}
-        y2={topArrowTipY}
-        stroke="gray"
-        strokeWidth="1"
-        strokeDasharray="4,4"
-      />
-      <text
-        x={structureStartX}
-        y={topArrowTipY - 35}
-        fontSize="12"
-        fill="gray"
-        textAnchor="middle"
-      >
-        Wall A
-      </text>
-      <line
-        x1={structureEndX}
-        y1={topArrowTipY - 30}
-        x2={structureEndX}
-        y2={topArrowTipY}
-        stroke="gray"
-        strokeWidth="1"
-        strokeDasharray="4,4"
-      />
-      <text
-        x={structureEndX}
-        y={topArrowTipY - 35}
-        fontSize="12"
-        fill="gray"
-        textAnchor="middle"
-      >
-        Wall B
-      </text>
-    </>
-  );
+  // wall labels render function - translucent for ghost mode
+  const renderWallLabels = (translucent = false) => {
+    const strokeOpacity = translucent ? 0.3 : 1;
+    const fillOpacity = translucent ? 0.4 : 1;
+    const strokeDasharray = "4,4";
+    const fillColor = `rgba(128, 128, 128, ${fillOpacity})`;
+    const strokeColor = `rgba(128, 128, 128, ${strokeOpacity})`;
+
+    return (
+      <>
+        {/* Left wall label */}
+        <line
+          x1={structureStartX}
+          y1={topArrowTipY - 30}
+          x2={structureStartX}
+          y2={topArrowTipY}
+          stroke={strokeColor}
+          strokeWidth="1"
+          strokeDasharray={strokeDasharray}
+        />
+        <text
+          x={structureStartX}
+          y={topArrowTipY - 35}
+          fontSize="12"
+          fill={fillColor}
+          textAnchor="middle"
+        >
+          Wall A
+        </text>
+
+        {showRightWall || translucent ? (
+          <>
+            {/* Middle label Wall B at end of left wall */}
+            <line
+              x1={structureStartX + leftWidthPx - 5}
+              y1={topArrowTipY - 30}
+              x2={structureStartX + leftWidthPx - 5}
+              y2={topArrowTipY}
+              stroke={strokeColor}
+              strokeWidth="1"
+              strokeDasharray={strokeDasharray}
+            />
+            <text
+              x={structureStartX + leftWidthPx - 5}
+              y={topArrowTipY - 35}
+              fontSize="12"
+              fill={fillColor}
+              textAnchor="middle"
+            >
+              Wall B
+            </text>
+
+            {/* Right wall label Wall C */}
+            <line
+              x1={structureEndX}
+              y1={topArrowTipY - 30}
+              x2={structureEndX}
+              y2={topArrowTipY}
+              stroke={strokeColor}
+              strokeWidth="1"
+              strokeDasharray={strokeDasharray}
+            />
+            <text
+              x={structureEndX}
+              y={topArrowTipY - 35}
+              fontSize="12"
+              fill={fillColor}
+              textAnchor="middle"
+            >
+              Wall C
+            </text>
+          </>
+        ) : (
+          <>
+            {/* Right wall label Wall B when right wall not shown */}
+            <line
+              x1={structureEndX}
+              y1={topArrowTipY - 30}
+              x2={structureEndX}
+              y2={topArrowTipY}
+              stroke={strokeColor}
+              strokeWidth="1"
+              strokeDasharray={strokeDasharray}
+            />
+            <text
+              x={structureEndX}
+              y={topArrowTipY - 35}
+              fontSize="12"
+              fill={fillColor}
+              textAnchor="middle"
+            >
+              Wall B
+            </text>
+          </>
+        )}
+      </>
+    );
+  };
 
   const bottomY = paddingTop + heightPx + 20;
 
   const handleToggleWall = () => {
     setShowRightWall((prev) => !prev);
+    setSelectedWall(null); // reset selection on toggle
+  };
+
+  // Highlight edges config
+  const highlightEdgeWidth = 8;
+
+  // X positions for edge highlights
+  const wallAEdgeX = structureStartX; // left edge of Wall A
+  const wallBEdgeX = structureStartX + leftWidthPx; // right edge of Wall A / left edge of Wall C or right edge Wall B
+  const wallCEdgeX = structureEndX; // right edge of Wall C
+
+  const edgeHighlightY = paddingTop;
+  const edgeHighlightHeight = heightPx;
+
+  // Render highlight for edges
+  const renderWallEdgeHighlight = (wall) => {
+    let x;
+    if (wall === "A") x = wallAEdgeX;
+    else if (wall === "B") x = wallBEdgeX;
+    else if (wall === "C") x = wallCEdgeX;
+    else return null;
+
+    const isActive = hoveredWall === wall || selectedWall === wall;
+    if (!isActive) return null;
+
+    const fillOpacity = selectedWall === wall ? 0.6 : 0.3;
+
+    return (
+      <rect
+        key={`highlight-${wall}`}
+        x={x - highlightEdgeWidth / 2}
+        y={edgeHighlightY}
+        width={highlightEdgeWidth}
+        height={edgeHighlightHeight}
+        fill="blue"
+        fillOpacity={fillOpacity}
+        pointerEvents="none"
+        rx={2}
+        ry={2}
+      />
+    );
+  };
+
+  // Button handlers
+  const onWallButtonClick = (wall) => {
+    setSelectedWall((prev) => (prev === wall ? null : wall));
+    setInputGapValue(wallGaps[wall] || 0);
+  };
+
+  const onWallButtonHover = (wall) => {
+    setHoveredWall(wall);
+  };
+  const onWallButtonLeave = () => {
+    setHoveredWall(null);
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-6">
+    <div className="flex flex-col justify-center items-center p-6 max-w-screen-lg mx-auto">
       <WallInputs
         leftWidthFt={leftWidthFt}
         setLeftWidthFt={setLeftWidthFt}
@@ -157,14 +266,138 @@ export default function DiaphragmViewer() {
 
       <button
         onClick={handleToggleWall}
-        onMouseEnter={() => setShowGhostWall(true)}
+        onMouseEnter={() => {
+          if (!showRightWall) setShowGhostWall(true);
+        }}
         onMouseLeave={() => setShowGhostWall(false)}
         className="mb-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
         {showRightWall ? "Remove Right Wall" : "Add Right Wall"}
       </button>
 
-      <div ref={ref} className="w-full mb-4">
+      <div className="flex gap-3 mb-6">
+        {/* Wall A */}
+        <button
+          onClick={() => onWallButtonClick("A")}
+          onMouseEnter={() => onWallButtonHover("A")}
+          onMouseLeave={onWallButtonLeave}
+          className={`px-4 py-2 rounded ${
+            selectedWall === "A"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 hover:bg-blue-300"
+          }`}
+        >
+          Wall A
+        </button>
+
+        {/* Wall B */}
+        <button
+          onClick={() => onWallButtonClick("B")}
+          onMouseEnter={() => onWallButtonHover("B")}
+          onMouseLeave={onWallButtonLeave}
+          className={`px-4 py-2 rounded ${
+            selectedWall === "B"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 hover:bg-blue-300"
+          }`}
+        >
+          Wall B
+        </button>
+
+        {/* Wall C only if right wall shown */}
+        {showRightWall && (
+          <button
+            onClick={() => onWallButtonClick("C")}
+            onMouseEnter={() => onWallButtonHover("C")}
+            onMouseLeave={onWallButtonLeave}
+            className={`px-4 py-2 rounded ${
+              selectedWall === "C"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 hover:bg-blue-300"
+            }`}
+          >
+            Wall C
+          </button>
+        )}
+      </div>
+
+      {selectedWall && !shearWalls[selectedWall] && (
+        <button
+          onClick={() =>
+            setShearWalls((prev) => ({ ...prev, [selectedWall]: true }))
+          }
+          className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700"
+        >
+          Make Shear Wall
+        </button>
+      )}
+
+      {selectedWall && shearWalls[selectedWall] && (
+        <div className="flex gap-4 mt-4">
+          <button
+            onClick={() => setActiveInputType("gap")}
+            className={`px-4 py-2 rounded ${
+              activeInputType === "gap"
+                ? "bg-orange-500 text-white"
+                : "bg-gray-200 hover:bg-orange-300"
+            }`}
+          >
+            + Gap
+          </button>
+          <button
+            onClick={() => setActiveInputType("segment")}
+            className={`px-4 py-2 rounded ${
+              activeInputType === "segment"
+                ? "bg-green-600 text-white"
+                : "bg-gray-200 hover:bg-green-400"
+            }`}
+          >
+            + Segment
+          </button>
+        </div>
+      )}
+
+      {selectedWall && shearWalls[selectedWall] && (
+        <div className="flex items-center gap-8 mt-4">
+          {/* Gap input */}
+          <label className="text-sm flex items-center gap-2">
+            <span>Gap Height (ft):</span>
+            <input
+              type="number"
+              min="0"
+              value={wallGaps[selectedWall] || 0}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                setWallGaps((prev) => ({
+                  ...prev,
+                  [selectedWall]: value,
+                }));
+              }}
+              className="p-1 border rounded w-20"
+            />
+          </label>
+
+          {/* Segment input */}
+          <label className="text-sm flex items-center gap-2">
+            <span>Segment Height (ft):</span>
+            <input
+              type="number"
+              min="0"
+              value={wallSegments[selectedWall] || 0}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                setWallSegments((prev) => ({
+                  ...prev,
+                  [selectedWall]: value,
+                }));
+              }}
+              className="p-1 border rounded w-20"
+            />
+          </label>
+        </div>
+      )}
+
+      <div className="w-full mb-4">
         <svg
           className="w-full h-auto bg-white pt-8"
           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
@@ -203,15 +436,23 @@ export default function DiaphragmViewer() {
             strokeWidth="2"
           />
 
-          {showRightWall && (
+          {(showRightWall || showGhostWall) && (
             <>
               <rect
                 x={structureStartX + leftWidthPx}
                 y={paddingTop}
                 width={rightWidthPx}
                 height={heightPx}
-                fill="none"
-                stroke="#000"
+                fill={
+                  showGhostWall && !showRightWall
+                    ? "rgba(128,128,128,0.3)"
+                    : "none"
+                }
+                stroke={
+                  showGhostWall && !showRightWall
+                    ? "rgba(128,128,128,0.5)"
+                    : "#000"
+                }
                 strokeWidth="2"
               />
               <rect
@@ -219,39 +460,51 @@ export default function DiaphragmViewer() {
                 y={paddingTop + 5}
                 width={rightWidthPx - 5}
                 height={heightPx - 10}
-                fill="none"
-                stroke="#000"
+                fill={
+                  showGhostWall && !showRightWall
+                    ? "rgba(128,128,128,0.2)"
+                    : "none"
+                }
+                stroke={
+                  showGhostWall && !showRightWall
+                    ? "rgba(128,128,128,0.4)"
+                    : "#000"
+                }
                 strokeWidth="2"
               />
             </>
           )}
 
-          {!showRightWall && showGhostWall && (
-            <>
+          {["A", "B", "C"].map((wall) => {
+            if (!shearWalls[wall] || (wall === "C" && !showRightWall))
+              return null;
+
+            const wallX =
+              wall === "A"
+                ? wallAEdgeX
+                : wall === "B"
+                ? wallBEdgeX
+                : wallCEdgeX;
+
+            return (
               <rect
-                x={structureStartX + leftWidthPx}
-                y={paddingTop}
-                width={rightWidthPx}
-                height={heightPx}
+                key={`shear-fill-${wall}`}
+                x={wallX - highlightEdgeWidth / 2}
+                y={paddingTop - 1}
+                width={highlightEdgeWidth}
+                height={heightPx + 2}
                 fill="gray"
-                stroke="#000"
-                strokeWidth="2"
-                opacity={0.2}
-                strokeDasharray="5,5"
+                pointerEvents="none"
+                rx={2}
+                ry={2}
               />
-              <rect
-                x={structureStartX + leftWidthPx}
-                y={paddingTop + 5}
-                width={rightWidthPx - 5}
-                height={heightPx - 10}
-                fill="gray"
-                stroke="#000"
-                strokeWidth="2"
-                opacity={0.3}
-                strokeDasharray="5,5"
-              />
-            </>
-          )}
+            );
+          })}
+
+          {/* Highlight edges */}
+          {renderWallEdgeHighlight("A")}
+          {renderWallEdgeHighlight("B")}
+          {showRightWall && renderWallEdgeHighlight("C")}
 
           {/* Dimension lines */}
           <line
@@ -273,7 +526,7 @@ export default function DiaphragmViewer() {
             {leftWidthFt} ft
           </text>
 
-          {showRightWall && (
+          {(showRightWall || showGhostWall) && (
             <>
               <line
                 x1={structureStartX + leftWidthPx + 5}
@@ -322,7 +575,7 @@ export default function DiaphragmViewer() {
           {/* Force arrows and labels */}
           {arrowConnectorLine}
           {topForceArrows}
-          {wallLabels}
+          {renderWallLabels(showGhostWall && !showRightWall)}
 
           <text
             x={centerX}
@@ -333,6 +586,49 @@ export default function DiaphragmViewer() {
           >
             W = {wTop} plf
           </text>
+
+          {/* Render wall gaps */}
+          {["A", "B", "C"].map((wall) => {
+            if ((wall === "C" && !showRightWall) || !shearWalls[wall])
+              return null;
+
+            const gapFt = wallGaps[wall];
+            const segmentFt = wallSegments[wall];
+            const gapPx = ftToPx(gapFt || 0);
+            const segmentPx = ftToPx(segmentFt || 0);
+            const wallX =
+              wall === "A"
+                ? wallAEdgeX
+                : wall === "B"
+                ? wallBEdgeX
+                : wallCEdgeX;
+
+            return (
+              <g key={`shear-detail-${wall}`}>
+                {/* White box for gap */}
+                {gapFt > 0 && (
+                  <rect
+                    x={wallX - 5}
+                    width={highlightEdgeWidth + 2}
+                    y={paddingTop + heightPx - gapPx - segmentPx - 6}
+                    height={gapPx}
+                    fill="white"
+                  />
+                )}
+
+                {/* Black box for segment (below gap) */}
+                {segmentFt > 0 && (
+                  <rect
+                    x={wallX - 4}
+                    width={highlightEdgeWidth}
+                    y={paddingTop + heightPx - segmentPx - 6}
+                    height={segmentPx}
+                    fill="gray"
+                  />
+                )}
+              </g>
+            );
+          })}
         </svg>
       </div>
 
