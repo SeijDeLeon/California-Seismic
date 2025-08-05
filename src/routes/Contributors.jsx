@@ -9,7 +9,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Evania Cheng",
       text: "Front End Intern 2025",
-      img: "images/contributors/placeholder_headshot.png",
+      img: "images/contributors/evania_cheng.jpg",
       alt: "headshot",
     },
     {
