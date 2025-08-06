@@ -1,7 +1,6 @@
 import DiaphragmViewer from "../components/features/DiaphragmApp/DiaphragmViewer.jsx";
 import DiaphragmInput from "../components/features/DiaphragmApp/DiaphragmInput.jsx";
-import CollectorForceCard from "../components/features/DiaphragmAnalysis/CollectorForceCard.jsx";
-import ChordForceCard from "../components/features/DiaphragmAnalysis/ChordForceCard.jsx";
+import Output from "../components/features/DiaphragmAnalysis/Output.jsx";
 
 import { useDiaphragm } from "../components/features/DiaphragmApp/useDiaphragm.jsx";
 
@@ -13,7 +12,8 @@ export default function DiaphragmApp() {
     handleAddWallOpening,
     handleEditInputs,
     validateInputState,
-    solution
+    solution,
+    setSolution
   } = useDiaphragm();
 
   return (
@@ -22,13 +22,12 @@ export default function DiaphragmApp() {
     {/* Output */}
     <div className="w-full flex">
       <div className="w-1/2 border border-sky-500 flex flex-col">
-          <DiaphragmInput />
-          <CollectorForceCard />
-          <ChordForceCard />
+          <DiaphragmInput inputs={inputs} handleEditInputs={handleEditInputs} handleDeleteWall={handleDeleteWall} handleAddWall={handleAddWall} handleAddWallOpening={handleAddWallOpening} />
+          <Output inputs={inputs} solution={solution} setSolution={setSolution}/>
       
       </div>
       <div className="w-1/2 border border-sky-500">
-          <DiaphragmViewer />
+          <DiaphragmViewer inputs={inputs} solution={solution}/>
       </div>
     </div>
     <div className="w-full flex">
