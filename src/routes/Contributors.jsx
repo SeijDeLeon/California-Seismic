@@ -3,7 +3,7 @@ export default function Contributors({ display = true }) {
     {
       title: "Jeriko Carrera",
       text: "Front End Intern 2025",
-      img: "images/contributors/placeholder_headshot.png",
+      img: "images/contributors/jeriko_carrera.jpg",
       alt: "headshot",
     },
     {
