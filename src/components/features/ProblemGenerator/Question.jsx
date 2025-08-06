@@ -16,11 +16,7 @@ const valuesEqual = (val1, val2) => {
 };
 
 const Question = ({ category, answeredCorrect, resetTimer }) => {
-  const [question, setQuestion] = useState({
-    question: ``,
-    choices: [],
-    answer: "",
-  });
+  const [question, setQuestion] = useState();
   const [viewSolution, setViewSolution] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [chosen, setChosen] = useState(null);
@@ -57,6 +53,8 @@ const Question = ({ category, answeredCorrect, resetTimer }) => {
     setViewSolution(false);
     resetTimer();
   }
+
+  if (!question) return <section className="h-screen" />;
 
   return (
     <section className="flex flex-col lg:flex-row gap-8">
