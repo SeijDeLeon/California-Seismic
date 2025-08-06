@@ -1,17 +1,6 @@
 import { Listbox } from "@headlessui/react"
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-
-const getRequiredFields = (value) => {
-  switch (value) {
-    case "Cs": return ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"];
-    case "V": return ["Cs", "weights"];
-    case "Cvx": return ["weights", "heights"];
-    case "Fvx": return ["Cvx", "V"];
-    case "stiffness": return ["E", "I", "h"];
-    case "fundamentalPeriod": return ["stiffness", "W"];
-    default: return []
-  }
-}
+import { requiredFields } from "./Solver";
 
 const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChange }) => {
   const getFieldLabel = (field) => {
@@ -73,7 +62,7 @@ const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChan
       </Listbox>
 
       <form className="mt-8 space-y-3">
-        {getRequiredFields(value).map(field => {
+        {requiredFields[value].map(field => {
           const { previewText, regex } = getFieldValidation(field);
           return (
             <div key={field} className="flex flex-col-reverse gap-y-2">

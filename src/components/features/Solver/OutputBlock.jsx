@@ -8,20 +8,9 @@ import SolutionCs from './SolutionCs';
 import SolutionV from './SolutionV';
 import SolutionCvx from './SolutionCvx';
 import SolutionFvx from './SolutionFvx';
+import { requiredFields } from './Solver';
 
-const getRequiredFields = (value) => {
-  switch (value) {
-    case "Cs": return ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"];
-    case "V": return ["Cs", "weights"];
-    case "Cvx": return ["weights", "heights"];
-    case "Fvx": return ["Cvx", "V"];
-    case "stiffness": return ["E", "I", "h"];
-    case "fundamentalPeriod": return ["stiffness", "W"];
-    default: return []
-  }
-}
-
-const OutputBlock = ({ value, valueLabel, inputs, isValueValidated }) => {
+const OutputBlock = ({ value, valueLabel, inputs, isValueValidated, useCases, applyUseCase }) => {
   const parseArrayInput = (input) => {
     try {
       return JSON.parse(input);
@@ -33,7 +22,7 @@ const OutputBlock = ({ value, valueLabel, inputs, isValueValidated }) => {
   const getResult = (value, inputs) => {
     if (!isValueValidated) return [null, null];
 
-    const parsedFields = getRequiredFields(value).map(field => {
+    const parsedFields = requiredFields[value].map(field => {
       if (field === 'weights' || field === 'heights')
         return parseArrayInput(inputs[field]);
       else if (field === "Cvx")
@@ -81,11 +70,25 @@ const OutputBlock = ({ value, valueLabel, inputs, isValueValidated }) => {
       <output className='text-3xl font-bold'>{formattedResult || "-"}</output>
       <div className='mt-8'>
         {solution}
-        <p className="text-gray-500 mb-2">Code Output</p>
+        <p className="text-gray-500 mt-8 mb-2">Code Output</p>
         <pre className="text-center border p-4 rounded whitespace-pre-wrap">
           {`{${value}: ${formattedResult}}`}
         </pre>
       </div>
+
+      {useCases && useCases.length > 0 &&
+        <div className='mt-8'>
+          <p className='text-gray-500 mb-2'>Uses of {valueLabel}</p>
+          {useCases.map(option => (
+            <button
+              key={option.id}
+              onClick={() => applyUseCase(value, formattedResult, option.id)}
+            >
+              Calculate {option.label} with this value
+            </button>
+          ))}
+        </div>
+      }
     </section>
   )
 }

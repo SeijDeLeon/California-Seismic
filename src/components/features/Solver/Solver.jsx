@@ -3,16 +3,13 @@ import InputBlock from './InputBlock';
 import OutputBlock from './OutputBlock';
 import solverIcon from "./solverIcon.png"
 
-const getRequiredFields = (value) => {
-  switch (value) {
-    case "Cs": return ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"];
-    case "V": return ["Cs", "weights"];
-    case "Cvx": return ["weights", "heights"];
-    case "Fvx": return ["Cvx", "V"];
-    case "stiffness": return ["E", "I", "h"];
-    case "fundamentalPeriod": return ["stiffness", "W"];
-    default: return []
-  }
+export const requiredFields = {
+  Cs: ["SDS", "SD1", "T", "Ie", "R", "T0", "TL"],
+  V: ["Cs", "weights"],
+  Cvx: ["weights", "heights"],
+  Fvx: ["Cvx", "V"],
+  stiffness: ["E", "I", "h"],
+  fundamentalPeriod: ["stiffness", "W"],
 }
 
 const Solver = () => {
@@ -67,7 +64,7 @@ const Solver = () => {
     Cs: '',
     weights: '',
     heights: '',
-    Cvx: [],
+    Cvx: '',
     V: '',
     E: '',
     I: '',
@@ -110,6 +107,19 @@ const Solver = () => {
     setInputsValidated({ ...inputsValidated, [name]: isValid });
   };
 
+  const getUseCases = (value) => {
+    const options = Object.values(tabOptions).flat();
+    return Object.keys(requiredFields)
+      .filter(key => requiredFields[key].includes(value))
+      .map(key => options.find(option => option.id === key))
+  }
+
+  const applyUseCase = (value, result, newValue) => {
+    setInputs({ ...defaultInputs, [value]: result || '' });
+    setInputsValidated({ ...defaultInputsValidated, [value]: !!result });
+    setValue(newValue);
+  }
+
   return (
     <main className="text-start px-4 mx-auto my-8 max-w-screen-xl min-h-[calc(92vh-120px)] flex flex-col">
       <h1 className="flex items-center gap-2 font-semibold text-2xl text-sky-800 mb-3">
@@ -142,7 +152,9 @@ const Solver = () => {
           value={value}
           valueLabel={tabOptions[activeTab].find(option => option.id === value).label}
           inputs={inputs}
-          isValueValidated={getRequiredFields(value).every(field => inputsValidated[field] === true)}
+          isValueValidated={requiredFields[value].every(field => inputsValidated[field] === true)}
+          useCases={getUseCases(value)}
+          applyUseCase={applyUseCase}
         />
       </div>
     </main>
