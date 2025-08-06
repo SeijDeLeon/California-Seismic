@@ -15,7 +15,7 @@ const randomValGen = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
 const randomValGenSmaller = (min, max) =>
-parseFloat((Math.random() * (max - min) + min).toFixed(2));
+  parseFloat((Math.random() * (max - min) + min).toFixed(2));
 
 export const fundamentalPeriod = () => {
   let height = randomValGen(8, 30); //ft
@@ -32,13 +32,20 @@ export const fundamentalPeriod = () => {
   let image = fundamentalPeriodImage;
   let stiffness = parseFloat(calculateStiffness(E, inertia, height).toFixed(2));
   let answer = parseFloat(calculateFundamentalPeriod(kips, stiffness).toFixed(2));
-  //right now, the answer is always the smallest. The randomValGenSmaller doesn't work correctly if we insert numbers smaller than 1
-  let choices = shuffleArray([
-    answer,
-    answer + randomValGenSmaller(0, 1),
-    answer + randomValGenSmaller(0, 1),
-    answer + randomValGenSmaller(0, 1),
-  ]);
+  //The randomValGenSmaller doesn't work correctly if we insert numbers smaller than 1?
+  let choices = [answer];
+  while (choices.length < 4) {
+    let randomChoice = Math.random() < 0.5 ?
+      answer + randomValGenSmaller(-0.2, 1) :
+      answer * randomValGenSmaller(0.1, 1.2)
+
+    randomChoice = parseFloat(randomChoice.toFixed(2));
+    if (!choices.includes(randomChoice) && randomChoice > 0) {
+      choices.push(randomChoice)
+    }
+  }
+  choices = shuffleArray(choices);
+
   let solution = (
     <FundamentalPeriodSolution
       height={height}
