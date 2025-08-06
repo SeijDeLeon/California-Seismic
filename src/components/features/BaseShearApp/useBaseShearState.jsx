@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { calculateBaseShearUnits } from '../../../assets/data/calculations/calculateBaseShearUnits';
 
 export const useBaseShearState = () => {
@@ -37,11 +37,14 @@ export const useBaseShearState = () => {
     { key: 'Cvx', value: [], label: 'C_{vx}' },
     { key: 'Fvx', value: [], label: 'F_{vx}' },
     { key: 'totalHeight', value: 0, label: 'h_{total}' },
-    { key: 'storyVs', value: [], label: 'V_{story}' },
+    { key: 'storyVs', value: [], label: 'Story_V' },
   ]);
 
   const parsedSiteClass = inputs.selectedSiteClass.charAt(0);
-  const updatedFloors = calculateBaseShearUnits.getFloorsFromBottom(inputs.floors);
+  const updatedFloors = useMemo(
+    () => calculateBaseShearUnits.getFloorsFromBottom(inputs.floors),
+    [inputs.floors]
+  );
 
   useEffect(() => {
     const heights = updatedFloors.map(f => f.bottom + f.height / 2);
@@ -93,7 +96,7 @@ export const useBaseShearState = () => {
       { key: 'Cvx', value: Cvx, label: 'C_{vx}' },
       { key: 'Fvx', value: Fvx, label: 'F_{vx}' },
       { key: 'totalHeight', value: totalHeight, label: 'h_{total}' },
-      { key: 'storyVs', value: storyVs, label: 'V_{story}' },
+      { key: 'storyVs', value: storyVs, label: 'Story_V' },
     ]);
   }, [inputs.shortPeriodSpectralAcceleration, inputs.longPeriodSpectralAcceleration, inputs.longPeriodTransitionPeriod, inputs.selectedRisk, inputs.selectedSiteClass, parsedSiteClass, inputs.T, inputs.R, inputs.Ie, updatedFloors]);
 
