@@ -1,9 +1,23 @@
 
 
-const calculateCollector = (load, unitWallShear ) => {
+const calculateCollector = (unitDiaphragmShear, unitWallShear, segments ) => {
+
+    let maxCollectorForce = null;
+    let maxAbsForce = -Infinity;
+    let maxSegment = 0;
 
 
-    netUnitWallShear = unitWallShear - load;
+    const netUnitWallShear = unitWallShear - unitDiaphragmShear;
+    for (const segment of segments) {
+        const product = netUnitWallShear * segment;
+        if (Math.abs(product) > maxAbsForce) {
+            maxAbsForce = Math.abs(product);
+            maxCollectorForce = product;
+            maxSegment = segment;
+        }
+    }
+
+    return {maxCollectorForce, maxSegment, netUnitWallShear};
 
 }
 
