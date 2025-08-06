@@ -35,10 +35,24 @@ const blankBuildingInputs = {
     ],
 };
 
+const solutionExample = {
+    wallLines: [
+        { wall: 'A', wallShear: 100, diaUnitShearLeft: null, diaUnitShearRight: 43 },
+        { wall: 'B', wallShear: 200, diaUnitShearLeft: 43, diaUnitShearRight: null },
+    ]
+}
+
+const blankSolution = {
+    wallLines: [
+        { wall: 'A', wallShear: 0, diaUnitShearLeft: null, diaUnitShearRight: null },
+        { wall: 'B', wallShear: 0, diaUnitShearLeft: null, diaUnitShearRight: null },
+    ]
+};
+
 export const useDiaphragm = () => {
     const [ inputs, setInputs ] = useState(blankBuildingInputs);
-    const [ solution, setSolution ] = useState({});
-
+    const [ solution, setSolution ] = useState(blankSolution);
+    
     const handleDeleteWall = (wallIndex) => {
         if (wallIndex < 0 || wallIndex >= inputs.wallLines.length) return;
         if (inputs.wallLines.length <= 2) {
@@ -87,6 +101,21 @@ export const useDiaphragm = () => {
                 wallLines: newWallLines,
             };
         });
+        // if (!validateWallOpening(wallIndex, opening)) {
+        //     console.error("Invalid wall opening");
+        //     return;
+        // }
+        // handleEditInputs({
+        //     wallLines: inputs.wallLines.map((wall, index) => {
+        //         if (index === wallIndex) {
+        //             return {
+        //                 ...wall,
+        //                 openings: [...(wall.openings || []), opening],
+        //             };
+        //         }
+        //         return wall;
+        //     }),
+        // });
     };
 
 
@@ -100,6 +129,7 @@ export const useDiaphragm = () => {
             ...prev,
             ...newInputState,
         }));
+        // updateSolution(newInputState);
     };
 
     const validateInputState = (inputState) => {
@@ -128,6 +158,7 @@ export const useDiaphragm = () => {
         return true;
     };
 
+
     return {
         inputs,
         handleDeleteWall,
@@ -135,6 +166,7 @@ export const useDiaphragm = () => {
         handleAddWallOpening,
         handleEditInputs,
         validateInputState,
-        solution
+        solution,
+        setSolution,
     };
 }
