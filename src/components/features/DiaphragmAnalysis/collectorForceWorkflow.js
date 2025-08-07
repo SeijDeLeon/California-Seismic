@@ -1,10 +1,10 @@
 import { MathJax } from "better-react-mathjax";
 import examineWall from "./chordForceWorkflow.js";
-import calculateRx from "../../../assets/data/calculations/diaphragmCalculations/calculateRx.js";
-import calculateVWall from "../../../assets/data/calculations/diaphragmCalculations/calculatevwall";
+import calculateRx from "../../../assets/data/calculations/diaphragmCalculations/calculateReactionForce.js";
+import calculateVWall from "../../../assets/data/calculations/diaphragmCalculations/calculateWallUnitShear.js";
 import calculateCollector from "../../../assets/data/calculations/diaphragmCalculations/calculateCollector.js";
 import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear.js";
-import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateuv.js";
+import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear.js";
 function hasGap(wallGap){
     
     for (const key in wallGap) {

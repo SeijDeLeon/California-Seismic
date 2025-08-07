@@ -7,7 +7,7 @@ import { MathJax } from "better-react-mathjax";
 import ChevronCard from "./ChevronCard";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-export default function ChordForceCard({load, diaphragmDepth, span}) {
+export default function ChordForceCard({ inputs, solution, setSolution }) {
 
   const formulas = [
     { formula: "\\( V=\\frac{wL}{2} \\)", label: "Total Shear" },

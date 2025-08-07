@@ -1,3 +1,4 @@
+import { update } from 'plotly.js';
 import { useState } from 'react';
 
 const squareBuildingInputsExample = {
@@ -52,6 +53,16 @@ const blankSolution = {
 export const useDiaphragm = () => {
     const [ inputs, setInputs ] = useState(blankBuildingInputs);
     const [ solution, setSolution ] = useState(blankSolution);
+
+
+
+    useEffect(()=> {
+        const newSolution = updateSolution(inputs);
+        setSolution(newSolution);
+    }, [inputs]); // Recalculate solution whenever inputs change
+
+    
+    
     
     const handleDeleteWall = (wallIndex) => {
         if (wallIndex < 0 || wallIndex >= inputs.wallLines.length) return;

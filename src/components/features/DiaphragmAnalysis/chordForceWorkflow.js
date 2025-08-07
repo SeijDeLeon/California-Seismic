@@ -1,7 +1,7 @@
 import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear";
-import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateuv";
+import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear";
 import calculateMaxMoment from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxMoment";
-import calculateChordForce from "../../../assets/data/calculations/diaphragmCalculations/calculateCF";
+import calculateChordForce from "../../../assets/data/calculations/diaphragmCalculations/calculateChordForce";
 import { MathJax } from "better-react-mathjax";
 export function examineWall(wall){
     let hasThreeWalls = false;
@@ -28,7 +28,7 @@ export function examineWall(wall){
     return { wallGaps, hasThreeWalls };
 };
 
-export function chordFWorkflow({input, wall}) {
+export function chordFWorkflow({input, solution}) {
     const { length, width, load } = input;
     const w = Number(load);
     const L = Number(width);

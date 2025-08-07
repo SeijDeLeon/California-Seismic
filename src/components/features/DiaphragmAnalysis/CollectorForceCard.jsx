@@ -6,7 +6,7 @@ import Workflow from "./Workflow";
 import { MathJax } from "better-react-mathjax";
 import ChevronCard from "./ChevronCard";
 
-export default function CollectorForceCard({ load, diaphragmDepth, span }) {
+export default function CollectorForceCard({ inputs, solution, setSolution }) {
   // array for object of walls
   const [isOpen, setIsOpen] = useState(false);
 
