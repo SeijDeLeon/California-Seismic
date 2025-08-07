@@ -74,8 +74,8 @@ export const useBaseShearState = () => {
     const SDC = calculateBaseShearUnits.getSDC(SDS, SD1, inputs.selectedRisk);
 
     const V = calculateBaseShearUnits.getV(Cs.Cs_final, weights);
-    const Cvx = calculateBaseShearUnits.getCvx(weights, heights, totalWeightHeight); // Vertical distribution factor
-    const Fvx = calculateBaseShearUnits.getFvx(Cvx, V); // Horizontal distribution factor
+    const Cvx = calculateBaseShearUnits.getCvx(weights, heights, totalWeightHeight);
+    const Fvx = calculateBaseShearUnits.getFvx(Cvx, V); // Vertical distribution factor
     const totalHeight = updatedFloors.reduce((sum, f) => sum + f.height, 0);
     const storyVs = Fvx.map((_, i) => Fvx.slice(i).reduce((sum, fx) => sum + fx, 0)); // storyV = cumulative sum from top down
 

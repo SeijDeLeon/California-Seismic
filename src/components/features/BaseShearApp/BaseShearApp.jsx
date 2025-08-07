@@ -158,13 +158,13 @@ const BaseShearApp = () => {
         floors={updatedFloors}
         forces={results.find(result => result.key === 'Fvx')?.value || []}
         storyVs={results.find(result => result.key === 'storyVs')?.value || []}
-        totalBaseShear={results.find(result => result.key === 'V')?.value || 0}
+        totalBaseShear={totalBaseShear}
         totalHeight={results.find(result => result.key === 'totalHeight')?.value || 0}
         />
       </BentoBox>
 
       <BentoBox title="SOLUTIONS:">
-        {/* {(
+        {(
           !inputs.shortPeriodSpectralAcceleration ||
           !inputs.longPeriodSpectralAcceleration ||
           !inputs.longPeriodTransitionPeriod
@@ -174,7 +174,7 @@ const BaseShearApp = () => {
           </p>
         ) : (
           <section className="flex gap-1 flex-col text-sm text-gray-700 justify-start items-start align-start pl-3">
-            {results
+            {/* {results
               .filter(({ key }) => keysToShow.includes(key))
               .map(({ key, value, label }) => (
                 <EquationFormat
@@ -189,31 +189,31 @@ const BaseShearApp = () => {
                 value={`Seismic Design Category (${key}) =`}
                 result={value || 'N/A'}
               />
-            ))}
+            ))} */}
             <p className="font-bold text-2xl">Total Base Shear (V): {
               typeof totalBaseShear === 'number' && !isNaN(totalBaseShear)
                 ? `${totalBaseShear.toFixed(2)} kips`
                 : 'N/A'
             }</p>
           </section>
-        )} */}
+        )}
 
         {/* Side-by-side plots */}
         <div className="w-full flex flex-col items-center px-4 mt-6">
           <h4 className="font-semibold mb-2 text-md">Plots:</h4>
-          <div className="w-full flex justify-center items-start gap-4">
+          <div className="w-full flex justify-center items-start gap-6">
             <div className="w-1/2">
               <DisplacementPlot
                 floors={updatedFloors}
+                results={results}
                 displacementType="horizontal"
-                totalBaseShear={totalBaseShear}
               />
             </div>
             <div className="w-1/2">
               <DisplacementPlot
                 floors={updatedFloors}
+                results={results}
                 displacementType="vertical"
-                totalBaseShear={totalBaseShear}
               />
             </div>
           </div>

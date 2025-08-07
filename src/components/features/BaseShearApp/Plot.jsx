@@ -2,27 +2,28 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-const DisplacementPlot = ({ floors, displacementType, totalBaseShear }) => {
-  // Build Y-axis story labels (Story 1 at bottom, Story N at top)
-  const storyLabels = floors.map((_, index) => `Story ${index + 1}`).reverse();
+const DisplacementPlot = ({ floors, results, displacementType }) => {
+  const floorsWithDisplacement = floors.map((floor, index) => {
+    const Fvx = results.find(r => r.key === 'Fvx')?.value[index] || 0;
 
-  // Extract displacement values from floor data
-  const displacements = floors
-    .map((floor) =>
-      
-      displacementType === 'horizontal'
-        ? floor.displacementX ?? 0
-        : floor.displacementY ?? 0
-    )
-    .reverse(); // Reverse so top story appears at top in plot
+    // cumulativeV = Fvx at this story + all stories above
+    const cumulativeV = results
+      .find(r => r.key === 'Fvx')
+      ?.value.slice(index)
+      .reduce((sum, v) => sum + v, 0) || 0;
+
+    return { ...floor, Fvx, cumulativeV };
+  });
+
+  const storyLabels = floorsWithDisplacement.map((_, index) => `Story ${index + 1}`);
+  const displacements = floorsWithDisplacement.map((floor) =>
+    displacementType === 'horizontal' ? floor.cumulativeV : floor.Fvx
+  );
 
   const titleText =
     displacementType === 'horizontal'
       ? 'Horizontal Displacement (in)'
       : 'Vertical Displacement (in)';
-
-  const color = displacementType === 'horizontal' ? 'blue' : 'red';
-  const symbol = displacementType === 'horizontal' ? 'circle' : 'square';
 
   return (
     <Plot
@@ -32,33 +33,34 @@ const DisplacementPlot = ({ floors, displacementType, totalBaseShear }) => {
           y: storyLabels,
           type: 'scatter',
           mode: 'lines+markers',
-          marker: { color, symbol },
-          line: { color },
+          marker: { color:'black', symbol:'circle' },
+          line: { color:'black' },
           name: titleText,
         },
       ]}
       layout={{
-        width: 400,
-        height: 400,
+        width: 375,
+        height: 500,
         title: {
           text: `<i>${titleText}</i>`,
           font: { size: 18 },
         },
         xaxis: {
           title: 'Displacement (in)',
-          zeroline: false,
         },
         yaxis: {
           title: 'Story',
-          autorange: 'reversed', // Top story appears at top
           tickmode: 'array',
           tickvals: storyLabels,
           ticktext: storyLabels,
         },
-        margin: { l: 70, r: 30, b: 50, t: 50 },
+        margin: { l: 60, r: 55, b: 50, t: 50 },
         plot_bgcolor: '#f9f9f9',
       }}
-      config={{ responsive: true }}
+      config={{ 
+        responsive: true, 
+        modeBarButtonsToRemove: ['toImage', 'sendDataToCloud', 'editInChartStudio', 'zoom2d', 'select2d', 'pan2d', 'lasso2d'],
+      }}
     />
   );
 };
