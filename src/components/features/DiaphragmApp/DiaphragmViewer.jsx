@@ -2,17 +2,30 @@ import React, { useState } from "react";
 import WallInputs from "./WallInputs";
 import SolutionChord from "../Solver/SolutionChord";
 import ChordPlots from "./ChordPlots";
-import { useDiaphragm } from "./useDiaphragm";
 
-export default function DiaphragmViewer() {
-  const { inputs, solution } = useDiaphragm();
-  // usestates
-  const [wTop, setwTop] = useState(100);
+export default function DiaphragmViewer({ inputs, solution }) {
+  const getWallByName = (name) => inputs.wallLines.find((w) => w.wall === name);
+
+  const wallA = getWallByName("A");
+  const wallB = getWallByName("B");
+  const wallC = getWallByName("C");
+
+  // or by index (and map this)
+  const firstWall = inputs.wallLines[0];
+
+  // old usestates
+  // const [wTop, setwTop] = useState(100);
+  // const [leftWidthFt, setLeftWidthFt] = useState(50);
+  // const [rightWidthFt, setRightWidthFt] = useState(25);
+  // const [heightFt, setHeightFt] = useState(40);
   const [showRightWall, setShowRightWall] = useState(false);
   const [showGhostWall, setShowGhostWall] = useState(false);
-  const [leftWidthFt, setLeftWidthFt] = useState(50);
-  const [rightWidthFt, setRightWidthFt] = useState(25);
-  const [heightFt, setHeightFt] = useState(40);
+
+  const wTop = inputs.uniformForces?.[0]?.startForce || 100;
+  const leftWidthFt = inputs.horizontalWallLengths[0] || 50;
+  const rightWidthFt = inputs.horizontalWallLengths[1] || 30;
+  const heightFt = inputs.wallLines?.[0]?.length || 40;
+
   const [calculations, setCalculations] = useState({
     Vmax: 0,
     moment: 0,
@@ -252,7 +265,7 @@ export default function DiaphragmViewer() {
 
   return (
     <div className="flex flex-col justify-center items-center p-6 max-w-screen-lg mx-auto">
-      <WallInputs
+      {/* <WallInputs
         leftWidthFt={leftWidthFt}
         setLeftWidthFt={setLeftWidthFt}
         rightWidthFt={rightWidthFt}
@@ -262,7 +275,7 @@ export default function DiaphragmViewer() {
         wTop={wTop}
         setwTop={setwTop}
         showRightWall={showRightWall}
-      />
+      /> */}
 
       <button
         onClick={handleToggleWall}
@@ -654,6 +667,46 @@ export default function DiaphragmViewer() {
               </g>
             );
           })}
+          {/* Horizontal labels on left side */}
+          <line
+            x1={structureStartX - 30}
+            y1={paddingTop}
+            x2={structureStartX}
+            y2={paddingTop}
+            stroke="rgba(128, 128, 128, 1)"
+            strokeWidth="1"
+            strokeDasharray="4,4"
+          />
+          <text
+            x={structureStartX - 35}
+            y={paddingTop}
+            fontSize="12"
+            fill="rgba(128, 128, 128, 1)"
+            textAnchor="end"
+            dominantBaseline="middle"
+          >
+            1
+          </text>
+
+          <line
+            x1={structureStartX - 30}
+            y1={paddingTop + heightPx}
+            x2={structureStartX}
+            y2={paddingTop + heightPx}
+            stroke="rgba(128, 128, 128, 1)"
+            strokeWidth="1"
+            strokeDasharray="4,4"
+          />
+          <text
+            x={structureStartX - 35}
+            y={paddingTop + heightPx}
+            fontSize="12"
+            fill="rgba(128, 128, 128, 1)"
+            textAnchor="end"
+            dominantBaseline="middle"
+          >
+            2
+          </text>
         </svg>
       </div>
 
@@ -672,7 +725,10 @@ export default function DiaphragmViewer() {
         chord={calculations.chord}
         width={calculations.width}
       />
-      {/*<pre className="text-xs">{JSON.stringify(inputs, null, 2)}</pre> */}
+      <pre className="text-xs">
+        {JSON.stringify(inputs, null, 2)}
+        {wallA.length}
+      </pre>
     </div>
   );
 }
