@@ -17,7 +17,7 @@ export default function SolutionChord({
   const moment = (wTop * totalWidth ** 2) / 8;
   const chord = heightFt !== 0 ? moment / heightFt : 0;
 
-  // ✅ Update parent with new values
+  //  Update parent with new values
   useEffect(() => {
     setCalculations({
       Vmax,

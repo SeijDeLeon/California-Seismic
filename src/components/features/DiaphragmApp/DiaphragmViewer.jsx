@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import WallInputs from "./WallInputs";
 import SolutionChord from "../Solver/SolutionChord";
 import ChordPlots from "./ChordPlots";
+import { useDiaphragm } from "./useDiaphragm";
 
 export default function DiaphragmViewer() {
+  const { inputs, solution } = useDiaphragm();
   // usestates
   const [wTop, setwTop] = useState(100);
   const [showRightWall, setShowRightWall] = useState(false);
@@ -201,12 +203,12 @@ export default function DiaphragmViewer() {
   const highlightEdgeWidth = 8;
 
   // X positions for edge highlights
-  const wallAEdgeX = structureStartX; // left edge of Wall A
-  const wallBEdgeX = structureStartX + leftWidthPx; // right edge of Wall A / left edge of Wall C or right edge Wall B
-  const wallCEdgeX = structureEndX; // right edge of Wall C
+  const wallAEdgeX = structureStartX + 3; // left edge of Wall A
+  const wallBEdgeX = structureStartX + leftWidthPx - 3; // right edge of Wall A / left edge of Wall C or right edge Wall B
+  const wallCEdgeX = structureEndX - 3; // right edge of Wall C
 
-  const edgeHighlightY = paddingTop;
-  const edgeHighlightHeight = heightPx;
+  const edgeHighlightY = paddingTop + 5;
+  const edgeHighlightHeight = heightPx - 10;
 
   // Render highlight for edges
   const renderWallEdgeHighlight = (wall) => {
@@ -231,8 +233,6 @@ export default function DiaphragmViewer() {
         fill="blue"
         fillOpacity={fillOpacity}
         pointerEvents="none"
-        rx={2}
-        ry={2}
       />
     );
   };
@@ -321,14 +321,28 @@ export default function DiaphragmViewer() {
         )}
       </div>
 
-      {selectedWall && !shearWalls[selectedWall] && (
+      {selectedWall && (
         <button
-          onClick={() =>
-            setShearWalls((prev) => ({ ...prev, [selectedWall]: true }))
-          }
-          className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700"
+          onClick={() => {
+            setShearWalls((prev) => ({
+              ...prev,
+              [selectedWall]: !prev[selectedWall], // Toggle shear wall status
+            }));
+
+            // Reset gap and segments if turning off
+            if (shearWalls[selectedWall]) {
+              setWallGaps((prev) => ({ ...prev, [selectedWall]: 0 }));
+              setWallSegments((prev) => ({ ...prev, [selectedWall]: 0 }));
+              setActiveInputType(null);
+            }
+          }}
+          className={`px-4 py-2 rounded ${
+            shearWalls[selectedWall]
+              ? "bg-red-600 hover:bg-red-700"
+              : "bg-gray-800 hover:bg-gray-700"
+          } text-white`}
         >
-          Make Shear Wall
+          {shearWalls[selectedWall] ? "Remove Shear Wall" : "Make Shear Wall"}
         </button>
       )}
 
@@ -365,12 +379,18 @@ export default function DiaphragmViewer() {
             <input
               type="number"
               min="0"
+              max={heightFt}
               value={wallGaps[selectedWall] || 0}
               onChange={(e) => {
                 const value = Number(e.target.value);
+                const segmentValue = wallSegments[selectedWall] || 0;
+                const total = value + segmentValue;
+                const clamped =
+                  total > heightFt ? heightFt - segmentValue : value;
+
                 setWallGaps((prev) => ({
                   ...prev,
-                  [selectedWall]: value,
+                  [selectedWall]: Math.max(0, clamped),
                 }));
               }}
               className="p-1 border rounded w-20"
@@ -383,12 +403,17 @@ export default function DiaphragmViewer() {
             <input
               type="number"
               min="0"
+              max={heightFt}
               value={wallSegments[selectedWall] || 0}
               onChange={(e) => {
                 const value = Number(e.target.value);
+                const gapValue = wallGaps[selectedWall] || 0;
+                const total = value + gapValue;
+                const clamped = total > heightFt ? heightFt - gapValue : value;
+
                 setWallSegments((prev) => ({
                   ...prev,
-                  [selectedWall]: value,
+                  [selectedWall]: Math.max(0, clamped),
                 }));
               }}
               className="p-1 border rounded w-20"
@@ -399,7 +424,7 @@ export default function DiaphragmViewer() {
 
       <div className="w-full mb-4">
         <svg
-          className="w-full h-auto bg-white pt-8"
+          className="w-full h-auto bg-white pt-8 max-h-[600px]"
           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
           preserveAspectRatio="xMidYMid meet"
         >
@@ -475,6 +500,11 @@ export default function DiaphragmViewer() {
             </>
           )}
 
+          {/* Highlight edges */}
+          {renderWallEdgeHighlight("A")}
+          {renderWallEdgeHighlight("B")}
+          {showRightWall && renderWallEdgeHighlight("C")}
+
           {["A", "B", "C"].map((wall) => {
             if (!shearWalls[wall] || (wall === "C" && !showRightWall))
               return null;
@@ -490,9 +520,9 @@ export default function DiaphragmViewer() {
               <rect
                 key={`shear-fill-${wall}`}
                 x={wallX - highlightEdgeWidth / 2}
-                y={paddingTop - 1}
+                y={edgeHighlightY}
                 width={highlightEdgeWidth}
-                height={heightPx + 2}
+                height={heightPx - 10}
                 fill="gray"
                 pointerEvents="none"
                 rx={2}
@@ -500,11 +530,6 @@ export default function DiaphragmViewer() {
               />
             );
           })}
-
-          {/* Highlight edges */}
-          {renderWallEdgeHighlight("A")}
-          {renderWallEdgeHighlight("B")}
-          {showRightWall && renderWallEdgeHighlight("C")}
 
           {/* Dimension lines */}
           <line
@@ -647,6 +672,7 @@ export default function DiaphragmViewer() {
         chord={calculations.chord}
         width={calculations.width}
       />
+      {/*<pre className="text-xs">{JSON.stringify(inputs, null, 2)}</pre> */}
     </div>
   );
 }
