@@ -54,7 +54,7 @@ const BaseShearApp = () => {
   //   'Fv', 'Fa', 'SMS', 'SM1', 'SDS', 'SD1', 'Ts',
   //   'Cs_initial', 'Cs_min', 'Cs_max', 'Cs_final'
   //   ]
-
+  
   return (
     <BentoContainer title="Base Shear Calculator">
       <BentoBox title="USER INPUTS:">

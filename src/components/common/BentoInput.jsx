@@ -10,10 +10,10 @@ export const BentoInput = ({ label, value, equation, listItems, onChange, inputT
         };
 
         switch (inputType) {
-        case 'list':
-            return <ListInput {...inputProps} listItems={listItems}/>;
-        default:
-            return <DefaultInput {...inputProps} />;
+          case 'list':
+              return <ListInput {...inputProps} listItems={listItems}/>;
+          default:
+              return <DefaultInput {...inputProps} />;
         }
     };
 

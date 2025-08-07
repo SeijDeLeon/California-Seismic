@@ -14,7 +14,6 @@ const interpolate = (value, valueArray, map, siteClass) => {
       return map[valueArray[i]][siteClass] + slope * (value - valueArray[i]);
     }
   }
-  
   return null;
 }
 

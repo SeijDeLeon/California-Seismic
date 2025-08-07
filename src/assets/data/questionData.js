@@ -289,6 +289,108 @@ const data = [
         solution:"ASCE 7-16 section 12.3.1.2 Rigid Diaphragm Condition. <br> Diaphragms of concrete slabs or concrete-filled metal deck with span-to-depth ratios of 3 or less in structures that have no horizontal irregularities are permitted to be idealized as rigid.",
         lectures:'12',
         difficulty:'easy'},
+        {key:'d4',
+        description:'Diaphragm Analysis #1',
+        question:"Determine the maximum unit diaphragm shear, the max chord force , and the chord force 50'-0\" from wall Line A. Please provide your answer in the stated order. ",
+        false1:'None of the choices are correct',
+        false2:'30 plf, 150 plf, 1,350 plf',
+        false3: '90 plf, 1,350 plf, 1,350 plf',
+        answer:'120 plf, 1,350 plf, 150 plf',
+        solution:` Variables: Shear (V), Unit Shear (v), Moment (M), Chord Force (C), Load (w), Span (L), Diaphragm Depth (d) <br> 
+        Shear Formula: \\(\\frac{w*L}{2}\\) <br> 
+        Unit Shear Formula: \\(\\frac{V}{D}\\) <br> 
+        Moment Formula: \\(\\frac{w*L^{2}}{8} \\) <br> 
+        Chord Force Formula: \\(\\frac{M}{d} \\) <br> <br> 
+
+        Given: w = 150 plf, \\(L_1\\) = 20 ft, \\(L_2 \\) = 60 ft d = 50 ft <br> <br> 
+
+        Find the shear and unit shear at each wall: <br> <br>
+        \\(V_a = \\frac{150 plf * 20 ft}{2} = 1500 lb\\) <br> <br>
+        \\(v_a = \\frac{1500 lb}{50 ft} = 30 plf\\) <br> <br>
+        \\(V_c = \\frac{150 plf * 60 ft}{2} = 4500 lb\\) <br><br>
+        \\(v_c = \\frac{4500 lb}{50 ft} = 90 plf\\) <br> <br>
+        Max Unit Diaphragm Shear:  <br>
+        \\(V_{b} = V_a + V_c = 1500 lb + 4500 lb = 6000 lb\\) <br><br>
+        \\(v_{b} = \\frac{6000 lb}{50 ft} = \\mathbf{120 plf}\\) <br> <br>
+        
+        Moment from A to B: <br>
+        \\(M_{ab} = \\frac{150 plf * 20 ft^{2}}{8} = 7500 plf\\) <br> <br>
+        
+      Moment from B to C: <br>
+        \\(M_{bc} = \\frac{150 plf * 60 ft^{2}}{8} = 67500 plf\\) <br> <br>
+
+        Chord Force on Wall A: <br>
+        \\(C_{ab} = \\frac{7500 plf}{50 ft} = \\mathbf{150 plf}\\) <br> <br>
+
+        Max Chord Force: <br>
+        \\(C_{bc} = \\frac{67500 plf}{50 ft} = \\mathbf{1350 plf}\\) <br> <br>
+
+        `,
+
+        lectures:'12',
+        difficulty:'easy'},
+        {key:'d5',
+        description:'Diaphragm Analysis #2',
+        question:"Determine the maximum chord force and the maximum collector force at wall Line A. Please provide your answer in the stated order.",
+        false1:'None of the choices are correct',
+        false2:'401.79 plf, \\(\\Omega\\)90plf',
+        false3: '301.79 plf, -\\(\\Omega\\)75plf',
+        answer:'401.79plf, -\\(\\Omega\\)75plf',
+        solution:`Variables: Shear (V), Unit Shear (v), Moment (M), Chord Force (C), Load (w), Span (L), Diaphragm Depth (d), Reaction Force (\\(R_x \\)), Unit Wall Shear (\\(v_{wall} \\)) <br> <br>
+        Shear Formula: \\(\\frac{w*L}{2}\\) <br> 
+        Unit Shear Formula: \\(\\frac{V}{D}\\) <br> 
+        Moment Formula: \\(\\frac{w*L^{2}}{8} \\) <br> 
+        Chord Force Formula: \\(\\frac{M}{d} \\) <br> 
+        Reaction Force Formula: V <br>
+        Unit Wall Shear Formula: \\(\\frac{R_x}{d}\\) <br> <br> 
+
+        Given: w = 100 plf, L = 30 ft, d = 28 ft <br> <br> 
+
+        
+
+        Chord Force Calculation: <br> 
+
+        \\(V = \\frac{100 plf * 30 ft}{2} = 1500 lb\\) <br> <br>
+        \\(v = \\frac{1500 lb}{28 ft} = 53.57 plf\\) <br> <br>
+        \\(M = \\frac{100 plf * 30 ft^{2}}{8} = 11250 plf\\) <br> <br>
+        \\(C = \\frac{11250 lb-ft}{28 ft} = 401.79 plf\\) <br> <br>
+        
+        Collection Force Calculation: <br>
+
+        \\(R_x = V = 1500 lb\\) <br> <br>
+        \\(v_{wall} = \\frac{R_x}{d} = \\frac{1500 lb}{16 ft} = 93.75 plf\\) <br> <br>
+
+        Take Net Unit Shear: <br>
+        \\(v_{net} = v_{wall} - w = 93.75 plf - 100 plf = -6.25 plf\\) <br> <br>
+
+        Take max of the collector forces: <br>
+
+        Collector Force on 4' segment = -6.25 * 4  = -\\(\\Omega\\)6.25 plf <br>
+        Collector Force on 12' segment = -6.25 * 12 = -\\(\\Omega\\)75 plf <br> <br>
+
+
+
+        `,
+        lectures:'12',
+        difficulty:'easy'},
+        
+        
+        
+      ]
+    },
+    {
+      title: 'Base Shear',
+      questions: [
+        {key:'e1',
+        description:'Calculate Base Shear',
+        question:"Calculate the base shear of a building with the following characteristics: <br> Ss = 2.106 <br> S1 = 0.811 <br> TL = 8s <br> Ie = 1.0 <br> R = 6.5 <br> Site Class = unknown <br> T = 0.3s <br>  W = 50kips",
+        false1:'13 kips',
+        false2:'7 kips',
+        false3: '8 kips',
+        answer:'11 kips',
+        solution:"Step 1: Determine Site Coefficients: <br> Since site class is unknown, assume site class D per 11.4.3. <br> Fa = 1.0 (Table 11.4-1)<br> Fv = 1.7 (Table 11.4-2) <br><br> Step 2: Determine Acceleration Properties: <br> SMS = Fa * Ss = 2.106 * 1.0 = 2.106  <br> SM1 = Fv * S1 = 1.7 * 0.811 = 1.38  <br> <br> SDS = 2/3 SMS = 2/3 * 2.106 = 1.404 <br> SD1 = 2/3 * Fv * S1 = 2/3 * 1.7 * 0.811 = 0.92 <br> <br> Step 3: Calculate base shear: <br> Ts = SD1/SDS = 0.92/1.4 = 0.66s <br> 1.5Ts = 1.5*0.66s = 0.98s <br> Since T < 1.5Ts: <br> We do not need to amplify equation 12.8-3 or 12.8-4 by 1.5 per Exception #2 of 11.4-8 <br><br>Check which equation applies between 12.8-2, 12.8-3 and 12.8-4 <br> TL = 8s <br> T = 0.3s <br> Since T < TL: <br> We only need equation 12.8-2 and the applicable minimums <br> Cs = SDS/(R/Ie) = 1.4/(6.5/1.0) = 0.22 <br> Cs_min1 = 0.044*SDS*Ie = 0.044*1.4*1.0 = 0.062 = 0.01 (equation 12.8-5) <br> Cs_min2 = 0.55/(R/Ie) = (0.5*0.811)/(6.5/1.0) = 0.062 (equation 12.8-6) <br><br>Cs = max(Cs, Cs_min1, Cs_min2) = 0.22 <br><br>Calculate Base Shear using the formula: <br> V = Cs * W = 0.22 * 50kips = 11kips",
+        lectures:'3',
+        difficulty:'hard'},
       ]
     },
     {
