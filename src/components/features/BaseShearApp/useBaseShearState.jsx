@@ -50,7 +50,6 @@ export const useBaseShearState = () => {
     const heights = updatedFloors.map(f => f.bottom + f.height / 2);
     const weights = updatedFloors.map(f => f.weight);
     const totalWeightHeight = weights.reduce((sum, w, i) => sum + w * heights[i], 0);
-
     const Fv = calculateBaseShearUnits.getFv(inputs.longPeriodSpectralAcceleration, parsedSiteClass);
     const Fa = calculateBaseShearUnits.getFa(inputs.shortPeriodSpectralAcceleration, parsedSiteClass);
 
@@ -72,7 +71,6 @@ export const useBaseShearState = () => {
     );
 
     const SDC = calculateBaseShearUnits.getSDC(SDS, SD1, inputs.selectedRisk);
-
     const V = calculateBaseShearUnits.getV(Cs.Cs_final, weights);
     const Cvx = calculateBaseShearUnits.getCvx(weights, heights, totalWeightHeight);
     const Fvx = calculateBaseShearUnits.getFvx(Cvx, V); // Vertical distribution factor
