@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/California-Seismic/static/css/main.e4f10b3c.css",
+    "main.js": "/California-Seismic/static/js/main.d55cca44.js",
+    "static/js/453.6dd300a5.chunk.js": "/California-Seismic/static/js/453.6dd300a5.chunk.js",
+    "static/media/seij_headshot.jpg": "/California-Seismic/static/media/seij_headshot.8876a75a5acfea182baa.jpg",
+    "static/media/page404.png": "/California-Seismic/static/media/page404.7d8f66b58e398d2d02de.png",
+    "static/media/b1Q.png": "/California-Seismic/static/media/b1Q.52029b101d01aca89fae.png",
+    "static/media/hero.jpg": "/California-Seismic/static/media/hero.28dc43bc6b893eb8f218.jpg",
+    "static/media/nonStructuralComponent.png": "/California-Seismic/static/media/nonStructuralComponent.5c460e6397694cc466f8.png",
+    "static/media/logo.png": "/California-Seismic/static/media/logo.11155d0dadf9c3108da1.png",
+    "static/media/fundmentalPeriod.png": "/California-Seismic/static/media/fundmentalPeriod.ee55a433d857c6081387.png",
+    "static/media/d4Q.png": "/California-Seismic/static/media/d4Q.9deb732df2ebee90dafb.png",
+    "static/media/d5Q.png": "/California-Seismic/static/media/d5Q.b4fc66e46dacbcad30fc.png",
+    "static/media/logo.svg": "/California-Seismic/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/California-Seismic/index.html",
+    "main.e4f10b3c.css.map": "/California-Seismic/static/css/main.e4f10b3c.css.map",
+    "main.d55cca44.js.map": "/California-Seismic/static/js/main.d55cca44.js.map",
+    "453.6dd300a5.chunk.js.map": "/California-Seismic/static/js/453.6dd300a5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e4f10b3c.css",
+    "static/js/main.d55cca44.js"
+  ]
+}
