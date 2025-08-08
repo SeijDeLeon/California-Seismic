@@ -6,9 +6,8 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
       <thead className="bg-gray-100">
         <tr>
           <th>Story</th>
-          <th>Height (ft)</th>
+          <th>Story height (ft)</th>
           <th>Weight (lb)</th>
-          <th>Bot (ft)</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -18,9 +17,6 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
             <td className="text-center">{i + 1}</td>
             <td><input type="number" value={floor.height} onChange={(e) => handleChange(i, 'height', e.target.value)} className="w-full p-1 border" /></td>
             <td><input type="number" value={floor.weight} onChange={(e) => handleChange(i, 'weight', e.target.value)} className="w-full p-1 border" /></td>
-            <td className="text-center">
-              {Number.isInteger(floor.bottom) ? floor.bottom : parseFloat(floor.bottom.toFixed(1))}
-            </td>
             <td className="text-center"><button onClick={() => deleteFloor(i)} className="text-red-600 hover:text-red-800">X</button></td>
           </tr>
         ))}

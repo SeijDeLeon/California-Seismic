@@ -129,8 +129,11 @@ const BaseShearApp = () => {
           label="Importance Factor"
           value={inputs.Ie}
           equation={<EquationFormat value={"\\(I_{e} =\\)"} />}
+          listItems={[
+            "1.0", "1.25", "1.50"
+          ]}
           onChange={handleInputChange("Ie")}
-          inputType="default"
+          inputType="list"
           tooltip="Amplifies seismic forces for critical facilities. 1.0 for most buildings; 1.25 or 1.5 for essential or hazardous structures."
         />
         <BentoInput

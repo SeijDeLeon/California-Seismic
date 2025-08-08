@@ -66,7 +66,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
                 const Fx = Math.round(forces[i]);
                 const Wx = Math.round(floor.weight);
                 const storyV = Math.round(storyVs[i]);
-                const formatted_height = Number.isInteger(floor.bottom) ? floor.bottom : parseFloat(floor.bottom.toFixed(1))
+                const formatted_story_height = Number.isInteger(floor.height) ? floor.height : parseFloat(floor.height.toFixed(1))
               
                 const group = (
                 <g key={i}>
@@ -128,7 +128,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
                     dominantBaseline="middle"
                     transform={`rotate(-270, ${rectX + rectWidth + 40}, ${yTop + h / 2 - 10})`}
                     >
-                    {formatted_height} ft
+                    {formatted_story_height} ft
                     </text>
                 </g>
                 );
