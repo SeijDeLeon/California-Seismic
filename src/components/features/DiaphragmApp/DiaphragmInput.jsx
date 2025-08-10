@@ -4,14 +4,20 @@ const DiaphragmInput = () => {
     const [inputs, setInputs] = useState({
         length: '',
         width: '',
-        loadMagnitude: '',
+        uniformWallForce: '',
     });
 
     const [activeWall, setActiveWall] = useState('A');
     const [walls, setWalls] = useState({
-        A: [''],
-        B: [''],
+        A: [{type: 'wall segment', value: ''}],
+        B: [{type: 'wall segment', value: ''}],
     });
+
+    const labels = {
+        length: 'Length',
+        width: 'Width',
+        uniformWallForce: 'Uniform Wall Force (w)'
+    };
 
     const handleInputChange = (e) => {
         const {name, value } = e.target;
@@ -19,27 +25,79 @@ const DiaphragmInput = () => {
             ...prev,
             [name]: value,
         }));
+
+        if (name === 'length') {
+            setWalls((prev) => {
+                const updated = { ...prev };
+                ['A', 'B']. forEach((wallKey) => {
+                    if (
+                        updated[wallKey].length > 0 && updated[wallKey][0].type === 'wall segment'
+                    ) {
+                        updated[wallKey][0].value = value;
+                    }
+                });
+                return updated;
+            });
+        }
     };
 
     const handleWallSegmentChange = (e, index) => {
         const newWalls = { ...walls };
-        newWalls[activeWall][index] = e.target.value;
+        newWalls[activeWall][index].value = e.target.value;
         setWalls(newWalls);
     };
 
-    const addSegment = () => {
+    const addWallItem = (type) => {
+        const wall = walls[activeWall];
+
+        const isValidAddition = () => {
+            if (wall.length === 0) return type === 'wall segment';
+            if (wall.length === 1) return wall[0].type === 'wall segment' && type === 'wall opening';
+            if (wall.length === 2) return wall[1].type === 'wall opening' && type === 'wall segment';
+            return false;
+        };
+
+        if (!isValidAddition()) return;
+
         setWalls((prev) => ({
             ...prev,
-            [activeWall]: [...prev[activeWall], '']
+            [activeWall]: [...prev[activeWall], { type, value: '' }],
         }));
     };
 
+    const wall = walls[activeWall];
+
+    const canAddSegment = () => {
+        if (wall.length === 0) return true;
+        if (wall.length === 2 && wall[1].type === 'wall opening') return true;
+        return false;
+    };
+
+    const canAddGap = () => {
+        if (wall.length === 1 && wall[0].type === 'wall segment') return true;
+        return false;
+    };
+
     const removeSegment = (index) => {
+        if (index === 0) return;
         setWalls((prev) => ({
             ...prev,
-            [activeWall]: prev[activeWall].filder((_, i) => i !== index),
+            [activeWall]: prev[activeWall].filter((_, i) => i !== index),
         }));
     };
+
+    const isWallItemOverLimit = (wallKey, index) => {
+        const total = walls[wallKey].reduce((sum, item, i) => {
+            const value = parseFloat(item.value);
+            if (!isNaN(value)) {
+                return sum + value;
+            }
+            return sum;
+        }, 0);
+
+        const max = parseFloat(inputs.length);
+        return !isNaN(max) && total > max;
+    }
 
     return (
         <div className="flex h-fit w-full">
@@ -48,11 +106,9 @@ const DiaphragmInput = () => {
                 <div className="bg-white px-20 py-4 rounded shadow">
                     <h2 className="text-lg font-medium mb-4">Inputs</h2>
                     <div className="space-y-4">
-                        {['length', 'width', 'loadMagnitude'].map((key) => (
+                        {['length', 'width', 'uniformWallForce'].map((key) => (
                             <div key={key} className="flex items-center justify-between">
-                                <label className="w-32 capitalize text-left">
-                                    {key.replace(/([A-Z])/g, ' $1')}:
-                                </label>
+                                <label className="w-40 text-left">{labels[key]}:</label>
                                 <div className="flex items-center gap-2">
                                 <input
                                     type="number"
@@ -62,11 +118,11 @@ const DiaphragmInput = () => {
                                     className="p-2 border border-gray-300 rounded w-32 text-right"
                                 />
                                 <span className="text-sm text-gray-600">
-                                    {key === 'loadMagnitude' ? 'plf' : 'ft'}
+                                    {key === 'uniformWallForce' ? 'plf' : 'ft'}
                                 </span>
+                                </div>
                             </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </div>
                 <div className="bg-white px-6 py-4 rounded shadow">
@@ -80,32 +136,52 @@ const DiaphragmInput = () => {
                                     activeWall === wall ? 'bg-gray-300' : 'bg-gray-100'
                                 }`}
                             >
-                                Wall {wall}
+                                Wall Line {wall}
                             </button>
                         ))}
-                        <button onClick={addSegment} className="ml-auto px-3 py-1 border rounded text-sm">
-                            + Segment
+                        <button
+                            onClick={() => addWallItem('wall segment')}
+                            disabled={!canAddSegment()}
+                            className={`ml-auto px-3 py-1 border rounded text-sm ${
+                                !canAddSegment() ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : ''
+                            }`}>
+                                + Wall Segment
+                        </button>
+                        <button
+                            onClick={() => addWallItem('wall opening')}
+                            disabled={!canAddGap()}
+                            className={`px-3 py-1 border rounded text-sm ${
+                                !canAddGap() ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : ''
+                            }`}>
+                                + Wall Opening
                         </button>
                     </div>
                     <div className="space-y-3">
-                        {walls[activeWall].map((value, index) => (
-                            <div key={index} className="flex items-center gap-2">
-                                <label className="w-20">Segment</label>
-                                <input
-                                    type="number"
-                                    value={value}
-                                    onChange={(e) => handleWallSegmentChange(e, index)}
-                                    className="p-2 border border-gray-300 rounded w-32 text-right"
-                                />
-                            <span className="text-sm">ft</span>
-                            <button
-                                onClick={() => removeSegment(index)}
-                                className="text-red-500 px-2 py-1 text-sm"
-                            >
-                                - Segment
-                            </button>
-                        </div>
-                        ))}
+                        {walls[activeWall].map((item, index) => {
+                            const overLimit = isWallItemOverLimit(activeWall, index);
+                            return (
+                                <div key={index} className="flex items-center gap-2">
+                                    <input
+                                        type="number"
+                                        value={item.value}
+                                        onChange={(e) => handleWallSegmentChange(e, index)}
+                                        className={`p-2 border rounded w-32 text-right ${
+                                        isWallItemOverLimit(activeWall, index) ? 'border-red-500 text-red-600' : 'border-gray-300'
+                                        }`}
+                                    />
+                                    <span className="text-sm">ft</span>
+                                    {index !== 0 && (
+                                        <button
+                                        onClick={() => removeSegment(index)}
+                                        className="text-red-500 px-2 py-1 text-sm"
+                                        >
+                                        - Remove
+                                        </button>
+                                    )}
+                                    </div>
+
+                            );
+                        })}
                     </div>
                 </div>
            </div>
