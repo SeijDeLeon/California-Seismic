@@ -1,5 +1,4 @@
-import React from 'react';
-import { MathJax, MathJaxContext } from 'better-react-mathjax';
+import { MathJax } from 'better-react-mathjax';
 
 const SolutionCs = ({ inputs, result }) => {
   const { SDS, SD1, T, Ie, R, T0, TL } = inputs;
@@ -57,71 +56,59 @@ const SolutionCs = ({ inputs, result }) => {
   const solution = `C_s = ${result}`;
 
   return (
-    <MathJaxContext>
-      <div>
-        <h2>Calculation of Seismic Response Coefficient (C<sub>s</sub>)</h2>
-        <p>{explanation}</p>
-        <ul>
-          {usedEquation === "12.8-2" && (
-            <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-                <MathJax>{`\\(C_s = \\frac{S_{DS} I_e}{R}\\)`}</MathJax>
-                &nbsp;(Equation 12.8-2)
-              </a>
-            </li>
-          )}
-          {usedEquation === "12.8-3" && (
-            <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-                <MathJax>{`\\(C_s = \\frac{S_{D1}}{T \\cdot \\frac{R}{I_e}}\\)`}</MathJax>
-                &nbsp;(Equation 12.8-3)
-              </a>
-            </li>
-          )}
-          {usedEquation === "12.8-4" && (
-            <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-                <MathJax>{`\\(C_s = 0.044 S_{DS} I_e\\)`}</MathJax>
-                &nbsp;(Equation 12.8-4)
-              </a>
-            </li>
-          )}
-          {usedEquation === "12.8-4-TL" && (
-            <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-                <MathJax>{`\\(C_s = \\frac{0.044 S_{DS} T_L}{T}\\)`}</MathJax>
-                &nbsp;(Equation 12.8-4)
-              </a>
-            </li>
-          )}
-          {usedEquation === "12.8-5" && (
-            <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-                <MathJax>{`\\(C_s = 0.5 \\cdot \\frac{S_{DS} I_e}{R}\\)`}</MathJax>
-                &nbsp;(Equation 12.8-5)
-              </a>
-            </li>
-          )}
-          {usedEquation === "12.8-6" && (
-            <li>
-              <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-                <MathJax>{`\\(C_s = 0.044 S_{DS} I_e\\)`}</MathJax>
-                &nbsp;(Equation 12.8-6)
-              </a>
-            </li>
-          )}
-        </ul>
-        <p>Substituting the provided values into the equation:</p>
-        <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
-        <p>After performing the calculations, the seismic response coefficient is found to be:</p>
-        <MathJax>{`\\(${solution}\\)`}</MathJax>
-      </div>
-    </MathJaxContext>
+    <>
+      <h2>Calculation of Seismic Response Coefficient (C<sub>s</sub>)</h2>
+      <p className="mb-2">{explanation}</p>
+      {usedEquation === "12.8-2" && (
+        <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+          <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+            {`\\[C_s = \\frac{S_{DS} I_e}{R} \\tag{12.8-2} \\]`}
+          </MathJax>
+        </a>
+      )}
+      {usedEquation === "12.8-3" && (
+        <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+          <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+            {`\\[C_s = \\frac{S_{D1}}{T \\cdot \\frac{R}{I_e}} \\tag{12.8-3} \\]`}
+          </MathJax>
+        </a>
+      )}
+      {usedEquation === "12.8-4" && (
+        <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+          <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+            {`\\[C_s = 0.044 S_{DS} I_e \\tag{12.8-4} \\]`}
+          </MathJax>
+        </a>
+      )}
+      {usedEquation === "12.8-4-TL" && (
+        <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+          <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+            {`\\[C_s = \\frac{0.044 S_{DS} T_L}{T} \\tag{12.8-4} \\]`}
+          </MathJax>
+        </a>
+      )}
+      {usedEquation === "12.8-5" && (
+        <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+          <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+            {`\\[C_s = 0.5 \\cdot \\frac{S_{DS} I_e}{R} \\tag{12.8-5} \\]`}
+          </MathJax>
+        </a>
+      )}
+      {usedEquation === "12.8-6" && (
+        <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+          <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+            {`\\[C_s = 0.044 S_{DS} I_e \\tag{12.8-6} \\]`}
+          </MathJax>
+        </a>
+      )}
+
+      <p className='mt-6'>Substituting the provided values into the equation:</p>
+      <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
+
+      <p className='mt-6'>After performing the calculations, the seismic response coefficient is found to be:</p>
+      <MathJax>{`\\(${solution}\\)`}</MathJax>
+    </>
   );
 };
 
 export default SolutionCs;
-
-
-
-
