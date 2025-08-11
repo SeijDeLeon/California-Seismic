@@ -1,3 +1,4 @@
+// for testing -- also should be deprecated soon
 import React, { useEffect } from "react";
 
 export default function SolutionChord({
@@ -10,10 +11,11 @@ export default function SolutionChord({
 }) {
   const totalWidth = leftWidthFt + (showRightWall ? rightWidthFt : 0);
 
-  const Vmax = (wTop * totalWidth) / 2;
+  const Vmax = (wTop * totalWidth) / 2; // this is calctotshear
+
   const Vdia = heightFt !== 0 ? Vmax / heightFt : 0;
   const v1 = leftWidthFt !== 0 ? Vmax / heightFt : 0; //this will need to change when the shear walls are added
-  const v2 = showRightWall && rightWidthFt !== 0 ? Vmax / rightWidthFt : 0;
+  const v2 = showRightWall && rightWidthFt !== 0 ? Vmax / heightFt : 0;
   const moment = (wTop * totalWidth ** 2) / 8;
   const chord = heightFt !== 0 ? moment / heightFt : 0;
 
