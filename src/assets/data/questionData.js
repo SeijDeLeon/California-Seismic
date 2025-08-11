@@ -392,6 +392,21 @@ const data = [
         lectures:'3',
         difficulty:'hard'},
       ]
+    },
+    {
+      title: 'Base Shear',
+      questions: [
+        {key:'e1',
+        description:'Calculate Base Shear',
+        question:"Calculate the base shear of a building with the following characteristics: <br> Ss = 2.106 <br> S1 = 0.811 <br> TL = 8s <br> Ie = 1.0 <br> R = 6.5 <br> Site Class = unknown <br> T = 0.3s <br>  W = 50kips",
+        false1:'13 kips',
+        false2:'7 kips',
+        false3: '8 kips',
+        answer:'11 kips',
+        solution:"Step 1: Determine Site Coefficients: <br> Since site class is unknown, assume site class D per 11.4.3. <br> Fa = 1.0 (Table 11.4-1)<br> Fv = 1.7 (Table 11.4-2) <br><br> Step 2: Determine Acceleration Properties: <br> SMS = Fa * Ss = 2.106 * 1.0 = 2.106  <br> SM1 = Fv * S1 = 1.7 * 0.811 = 1.38  <br> <br> SDS = 2/3 SMS = 2/3 * 2.106 = 1.404 <br> SD1 = 2/3 * Fv * S1 = 2/3 * 1.7 * 0.811 = 0.92 <br> <br> Step 3: Calculate base shear: <br> Ts = SD1/SDS = 0.92/1.4 = 0.66s <br> 1.5Ts = 1.5*0.66s = 0.98s <br> Since T < 1.5Ts: <br> We do not need to amplify equation 12.8-3 or 12.8-4 by 1.5 per Exception #2 of 11.4-8 <br><br>Check which equation applies between 12.8-2, 12.8-3 and 12.8-4 <br> TL = 8s <br> T = 0.3s <br> Since T < TL: <br> We only need equation 12.8-2 and the applicable minimums <br> Cs = SDS/(R/Ie) = 1.4/(6.5/1.0) = 0.22 <br> Cs_min1 = 0.044*SDS*Ie = 0.044*1.4*1.0 = 0.062 = 0.01 (equation 12.8-5) <br> Cs_min2 = 0.55/(R/Ie) = (0.5*0.811)/(6.5/1.0) = 0.062 (equation 12.8-6) <br><br>Cs = max(Cs, Cs_min1, Cs_min2) = 0.22 <br><br>Calculate Base Shear using the formula: <br> V = Cs * W = 0.22 * 50kips = 11kips",
+        lectures:'3',
+        difficulty:'hard'},
+      ]
     }
   ];
 
