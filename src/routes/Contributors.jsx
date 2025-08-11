@@ -1,6 +1,72 @@
 export default function Contributors({ display = true }) {
   const infoCards = [
     {
+      title: "Jeriko Carrera",
+      text: "Front End Intern 2025",
+      img: "images/contributors/jeriko_carrera.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Evania Cheng",
+      text: "Front End Intern 2025",
+      img: "images/contributors/evania_cheng.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Roy Cheung",
+      text: "Front End Intern 2025",
+      img: "images/contributors/roy_cheung.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Saumya Chourasia",
+      text: "Front End Intern 2025",
+      img: "images/contributors/saumya_chourasia.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Hayley Greenough",
+      text: "Front End Intern 2025",
+      img: "images/contributors/hayley_greenough.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Jason Zhao",
+      text: "Front End Intern 2025",
+      img: "images/contributors/jason_zhao.png",
+      alt: "headshot",
+    },
+    {
+      title: "Binh Nguyen",
+      text: "Front End Intern 2024",
+      img: "images/contributors/binh_nguyen.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Francis Nguyen",
+      text: "Front End Intern 2024",
+      img: "images/contributors/francis_nguyen.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Matt McIvor",
+      text: "Front End Intern 2024",
+      img: "images/contributors/matt_mcivor.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Frank Mundo",
+      text: "Front End Intern 2024",
+      img: "images/contributors/frankie_mundo.jpg",
+      alt: "headshot",
+    },
+    {
+      title: "Joel Zapana",
+      text: "Front End Intern 2024",
+      img: "images/contributors/joel_zapana.jpg",
+      alt: "headshot",
+    },
+    {
       title: "Andy Troung",
       text: "Front End Intern 2022",
       img: "images/contributors/andy_truong.jpeg",
@@ -129,7 +195,7 @@ export default function Contributors({ display = true }) {
                 <div className="p-4">
                   <figure>
                     <img
-                      className="w-60 rounded-full md:h-full flex m-auto pt-2"
+                      className="w-60 h-60 rounded-full object-cover mx-auto"
                       alt={item.alt}
                       src={item.img}
                     />
@@ -155,7 +221,7 @@ export default function Contributors({ display = true }) {
                 <img
                   src="/images/contributors/ann_do.jpg"
                   alt="headshot Annie"
-                  className="w-60 rounded-full md:h-80 md:w-80 flex m-auto pt-2"
+                  className="w-80 h-80 rounded-full object-cover mx-auto"
                 />
                 <div className="container rounded-md mx-auto mt-4 p-4">
                   <div className="p-4">
@@ -172,7 +238,7 @@ export default function Contributors({ display = true }) {
                 <img
                   src="/images/contributors/seij_de_leon.jpg"
                   alt="headshot Seij"
-                  className="w-60 rounded-full md:h-80 md:w-80 flex m-auto pt-2"
+                  className="w-80 h-80 rounded-full object-cover mx-auto"
                 />
                 <div className="container rounded-md mx-auto mt-4 p-4">
                   <div className="p-4">
