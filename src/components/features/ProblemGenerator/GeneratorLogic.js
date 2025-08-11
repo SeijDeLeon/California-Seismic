@@ -10,6 +10,10 @@ const generatorLogic = (category) => {
       return nonStructuralComponent();
     case "Base Shear":
       return baseShear();
+    case "Random":
+      const categories = [fundamentalPeriod, nonStructuralComponent, baseShear]
+      const rand = Math.floor(Math.random() * categories.length)
+      return categories[rand]()
     case "category4":
       break;
     default:
