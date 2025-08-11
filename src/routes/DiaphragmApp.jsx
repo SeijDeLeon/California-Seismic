@@ -13,39 +13,27 @@ export default function DiaphragmApp() {
     handleEditInputs,
     validateInputState,
     solution,
-    setSolution,
+    setSolution
   } = useDiaphragm();
 
   return (
     <>
-      {/* Input */}
-      {/* Output */}
-      <div className="w-full flex">
-        <div className="w-1/2 border border-sky-500 flex flex-col">
-          <DiaphragmInput
-            inputs={inputs}
-            handleEditInputs={handleEditInputs}
-            handleDeleteWall={handleDeleteWall}
-            handleAddWall={handleAddWall}
-            handleAddWallOpening={handleAddWallOpening}
-          />
-          <Output
-            inputs={inputs}
-            solution={solution}
-            setSolution={setSolution}
-          />
-        </div>
-        <div className="w-1/2 border border-sky-500">
-          <DiaphragmViewer
-            inputs={inputs}
-            solution={solution}
-            handleAddWall={handleAddWall}
-            handleAddWallOpening={handleAddWallOpening}
-            handleDeleteWall={handleDeleteWall}
-          />
-        </div>
+    {/* Input */}
+    {/* Output */}
+    <div className="w-full flex">
+      <div className="w-1/2 border border-sky-500 flex flex-col">
+          <DiaphragmInput inputs={inputs} handleEditInputs={handleEditInputs} handleDeleteWall={handleDeleteWall} handleAddWall={handleAddWall} handleAddWallOpening={handleAddWallOpening} />
+          <Output inputs={inputs} solution={solution} setSolution={setSolution}/>
+      
       </div>
-      <div className="w-full flex"></div>
+      <div className="w-1/2 border border-sky-500">
+          <DiaphragmViewer inputs={inputs} solution={solution}/>
+      </div>
+    </div>
+    <div className="w-full flex">
+    </div>
+
+
     </>
   );
 }

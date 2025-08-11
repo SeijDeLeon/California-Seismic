@@ -1,5 +1,4 @@
 // WallInputs.jsx
-// this used to live in the diaphragm viewer component but with the custom hook it should be deprecated soon
 import React from "react";
 
 const clampToZero = (val) => (isNaN(val) || val < 0 ? 0 : val);

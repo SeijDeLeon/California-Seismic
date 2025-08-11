@@ -1,18 +1,12 @@
 import React, { useState } from "react";
+import WallInputs from "./WallInputs";
 import SolutionChord from "../Solver/SolutionChord";
 import ChordPlots from "./ChordPlots";
-import CollectorPlots from "./CollectorPlots";
 
-export default function DiaphragmViewer({
-  inputs,
-  handleAddWall,
-  handleDeleteWall,
-  handleAddWallOpening,
-  solution,
-}) {
+export default function DiaphragmViewer({ inputs, solution }) {
   const getWallByName = (name) => inputs.wallLines.find((w) => w.wall === name);
 
-  const wallA = getWallByName("A"); //this was called for something earlier and isn't now - check later that it's still necessary
+  const wallA = getWallByName("A");
   const wallB = getWallByName("B");
   const wallC = getWallByName("C");
 
@@ -24,54 +18,28 @@ export default function DiaphragmViewer({
   // const [leftWidthFt, setLeftWidthFt] = useState(50);
   // const [rightWidthFt, setRightWidthFt] = useState(25);
   // const [heightFt, setHeightFt] = useState(40);
-  // const [showRightWall, setShowRightWall] = useState(false);
+  const [showRightWall, setShowRightWall] = useState(false);
   const [showGhostWall, setShowGhostWall] = useState(false);
 
   const wTop = inputs.uniformForces?.[0]?.startForce || 100;
   const leftWidthFt = inputs.horizontalWallLengths[0] || 50;
   const rightWidthFt = inputs.horizontalWallLengths[1] || 30;
   const heightFt = inputs.wallLines?.[0]?.length || 40;
-  const showRightWall = inputs.wallLines.some((w) => w.wall === "C");
-  const totalWidth = leftWidthFt + (showRightWall ? rightWidthFt : 0);
 
-  // const [wallGaps, setWallGaps] = useState({ A: 0, B: 0, C: 0 });
-  const wallGaps = inputs.wallLines.reduce(
-    (acc, wall) => {
-      acc[wall.wall] = wall.openings?.[0]
-        ? wall.openings[0][1] - wall.openings[0][0]
-        : 0;
-      return acc;
-    },
-    { A: 0, B: 0, C: 0 }
-  );
-
-  // const [calculations, setCalculations] = useState({
-  //   Vmax: 0,
-  //   moment: 0,
-  //   chord: 0,
-  //   width: 1,
-  // });
-
+  const [calculations, setCalculations] = useState({
+    Vmax: 0,
+    moment: 0,
+    chord: 0,
+    width: 1,
+  });
+  const [wallGaps, setWallGaps] = useState({ A: 0, B: 0, C: 0 });
+  const [inputGapValue, setInputGapValue] = useState(0);
   const [shearWalls, setShearWalls] = useState({
     A: false,
     B: false,
     C: false,
   });
   const [wallSegments, setWallSegments] = useState({ A: 0, B: 0, C: 0 });
-  // change to this code below when you have the rest figured out -- mess with the inputs tn
-  // const wallSegments = inputs.wallLines.reduce(
-  //   (acc, wall) => {
-  //     // If we treat "segments" as the solid length left after the first opening:
-  //     const openingLength = wall.openings?.[0]
-  //       ? wall.openings[0][1] - wall.openings[0][0]
-  //       : 0;
-
-  //     acc[wall.wall] = wall.length - openingLength; // remaining height as "segment"
-  //     return acc;
-  //   },
-  //   { A: 0, B: 0, C: 0 }
-  // );
-
   const [activeInputType, setActiveInputType] = useState(null); // "gap" | "segment" | null
 
   // For highlight hover & selected state
@@ -240,23 +208,8 @@ export default function DiaphragmViewer({
   const bottomY = paddingTop + heightPx + 20;
 
   const handleToggleWall = () => {
-    const rightWallIndex = inputs.wallLines.findIndex((w) => w.wall === "C");
-
-    if (rightWallIndex === -1) {
-      // Wall C not found → add it
-      handleAddWall(
-        inputs.wallLines.length, // insert at end
-        "C",
-        [], // no openings initially
-        inputs.wallLines[0].length, // match height of first wall
-        30 // horizontal wall length (example default)
-      );
-    } else {
-      // Wall C exists → remove it
-      handleDeleteWall(rightWallIndex);
-    }
-
-    setSelectedWall(null); // reset selection after toggle
+    setShowRightWall((prev) => !prev);
+    setSelectedWall(null); // reset selection on toggle
   };
 
   // Highlight edges config
@@ -300,6 +253,7 @@ export default function DiaphragmViewer({
   // Button handlers
   const onWallButtonClick = (wall) => {
     setSelectedWall((prev) => (prev === wall ? null : wall));
+    setInputGapValue(wallGaps[wall] || 0);
   };
 
   const onWallButtonHover = (wall) => {
@@ -322,6 +276,7 @@ export default function DiaphragmViewer({
         setwTop={setwTop}
         showRightWall={showRightWall}
       /> */}
+
       <button
         onClick={handleToggleWall}
         onMouseEnter={() => {
@@ -332,6 +287,7 @@ export default function DiaphragmViewer({
       >
         {showRightWall ? "Remove Right Wall" : "Add Right Wall"}
       </button>
+
       <div className="flex gap-3 mb-6">
         {/* Wall A */}
         <button
@@ -377,6 +333,7 @@ export default function DiaphragmViewer({
           </button>
         )}
       </div>
+
       {selectedWall && (
         <button
           onClick={() => {
@@ -387,7 +344,7 @@ export default function DiaphragmViewer({
 
             // Reset gap and segments if turning off
             if (shearWalls[selectedWall]) {
-              handleAddWallOpening(selectedWall, [0, 0]); // resets gap
+              setWallGaps((prev) => ({ ...prev, [selectedWall]: 0 }));
               setWallSegments((prev) => ({ ...prev, [selectedWall]: 0 }));
               setActiveInputType(null);
             }
@@ -401,6 +358,7 @@ export default function DiaphragmViewer({
           {shearWalls[selectedWall] ? "Remove Shear Wall" : "Make Shear Wall"}
         </button>
       )}
+
       {selectedWall && shearWalls[selectedWall] && (
         <div className="flex gap-4 mt-4">
           <button
@@ -425,6 +383,7 @@ export default function DiaphragmViewer({
           </button>
         </div>
       )}
+
       {selectedWall && shearWalls[selectedWall] && (
         <div className="flex items-center gap-8 mt-4">
           {/* Gap input */}
@@ -442,7 +401,10 @@ export default function DiaphragmViewer({
                 const clamped =
                   total > heightFt ? heightFt - segmentValue : value;
 
-                handleAddWallOpening(selectedWall, [0, Math.max(0, clamped)]);
+                setWallGaps((prev) => ({
+                  ...prev,
+                  [selectedWall]: Math.max(0, clamped),
+                }));
               }}
               className="p-1 border rounded w-20"
             />
@@ -472,6 +434,7 @@ export default function DiaphragmViewer({
           </label>
         </div>
       )}
+
       <div className="w-full mb-4">
         <svg
           className="w-full h-auto bg-white pt-8 max-h-[600px]"
@@ -682,25 +645,13 @@ export default function DiaphragmViewer({
               <g key={`shear-detail-${wall}`}>
                 {/* White box for gap */}
                 {gapFt > 0 && (
-                  <>
-                    {/* Gap box */}
-                    <rect
-                      x={wallX - 5}
-                      width={highlightEdgeWidth + 2}
-                      y={paddingTop + heightPx - gapPx - segmentPx - 6}
-                      height={gapPx}
-                      fill="white"
-                    />
-                    {/* Thin vertical black line through gap */}
-                    <line
-                      x1={wallX - 5 + (highlightEdgeWidth + 2) / 2}
-                      x2={wallX - 5 + (highlightEdgeWidth + 2) / 2}
-                      y1={paddingTop + heightPx - gapPx - segmentPx - 6}
-                      y2={paddingTop + heightPx - segmentPx - 6}
-                      stroke="black"
-                      strokeWidth="1"
-                    />
-                  </>
+                  <rect
+                    x={wallX - 5}
+                    width={highlightEdgeWidth + 2}
+                    y={paddingTop + heightPx - gapPx - segmentPx - 6}
+                    height={gapPx}
+                    fill="white"
+                  />
                 )}
 
                 {/* Black box for segment (below gap) */}
@@ -716,7 +667,6 @@ export default function DiaphragmViewer({
               </g>
             );
           })}
-
           {/* Horizontal labels on left side */}
           <line
             x1={structureStartX - 30}
@@ -759,24 +709,26 @@ export default function DiaphragmViewer({
           </text>
         </svg>
       </div>
-      {/* <SolutionChord
+
+      <SolutionChord
         leftWidthFt={leftWidthFt}
         rightWidthFt={rightWidthFt}
         heightFt={heightFt}
         wTop={wTop}
         showRightWall={showRightWall}
         setCalculations={setCalculations}
-      /> */}
-
-      <ChordPlots
-        leftWidthFt={leftWidthFt}
-        rightWidthFt={rightWidthFt}
-        wTop={wTop}
-        heightFt={heightFt}
-        showRightWall={showRightWall}
       />
 
-      <CollectorPlots />
+      <ChordPlots
+        Vmax={calculations.Vmax}
+        moment={calculations.moment}
+        chord={calculations.chord}
+        width={calculations.width}
+      />
+      <pre className="text-xs">
+        {JSON.stringify(inputs, null, 2)}
+        {wallA.length}
+      </pre>
     </div>
   );
 }
