@@ -12,6 +12,7 @@ const DiaphragmInput = () => {
   const [walls, setWalls] = useState({
     A: [{ type: "wall segment", value: "" }],
     B: [{ type: "wall segment", value: "" }],
+    // C will be added when showRightWall = true
   });
 
   const labels = {
@@ -32,7 +33,7 @@ const DiaphragmInput = () => {
         const updated = { ...prev };
         ["A", "B"].forEach((wallKey) => {
           if (
-            updated[wallKey].length > 0 &&
+            updated[wallKey]?.length > 0 &&
             updated[wallKey][0].type === "wall segment"
           ) {
             updated[wallKey][0].value = value;
@@ -40,6 +41,31 @@ const DiaphragmInput = () => {
         });
         return updated;
       });
+    }
+  };
+
+  const toggleRightWall = () => {
+    setInputs((prev) => ({
+      ...prev,
+      showRightWall: !prev.showRightWall,
+    }));
+
+    setWalls((prev) => {
+      if (inputs.showRightWall) {
+        // remove wall C
+        const { C, ...rest } = prev;
+        return rest;
+      } else {
+        // add wall C
+        return {
+          ...prev,
+          C: [{ type: "wall segment", value: "" }],
+        };
+      }
+    });
+
+    if (inputs.showRightWall && activeWall === "C") {
+      setActiveWall("A");
     }
   };
 
@@ -91,12 +117,9 @@ const DiaphragmInput = () => {
   };
 
   const isWallItemOverLimit = (wallKey, index) => {
-    const total = walls[wallKey].reduce((sum, item, i) => {
+    const total = walls[wallKey].reduce((sum, item) => {
       const value = parseFloat(item.value);
-      if (!isNaN(value)) {
-        return sum + value;
-      }
-      return sum;
+      return !isNaN(value) ? sum + value : sum;
     }, 0);
 
     const max = parseFloat(inputs.length);
@@ -129,12 +152,26 @@ const DiaphragmInput = () => {
                 </div>
               </div>
             ))}
+
+            {/* Show Right Wall Toggle */}
+            <label
+              htmlFor="showRightWall"
+              className="flex items-center gap-2 cursor-pointer select-none"
+            >
+              <input
+                type="checkbox"
+                id="showRightWall"
+                checked={inputs.showRightWall}
+                onChange={toggleRightWall}
+              />
+              <span className="text-md">Show Right Wall</span>
+            </label>
           </div>
         </div>
         <div className="bg-white px-6 py-4 rounded shadow">
           <h2 className="text-lg font-medium mb-4">Shear Wall</h2>
           <div className="flex gap-4 mb-4">
-            {["A", "B"].map((wall) => (
+            {Object.keys(walls).map((wall) => (
               <button
                 key={wall}
                 onClick={() => setActiveWall(wall)}
@@ -169,7 +206,7 @@ const DiaphragmInput = () => {
             </button>
           </div>
           <div className="space-y-3">
-            {walls[activeWall].map((item, index) => {
+            {walls[activeWall]?.map((item, index) => {
               const overLimit = isWallItemOverLimit(activeWall, index);
               return (
                 <div key={index} className="flex items-center gap-2">
@@ -178,7 +215,7 @@ const DiaphragmInput = () => {
                     value={item.value}
                     onChange={(e) => handleWallSegmentChange(e, index)}
                     className={`p-2 border rounded w-32 text-right ${
-                      isWallItemOverLimit(activeWall, index)
+                      overLimit
                         ? "border-red-500 text-red-600"
                         : "border-gray-300"
                     }`}
