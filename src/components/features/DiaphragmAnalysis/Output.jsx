@@ -1,6 +1,5 @@
 import ChordForceCard from "./ChordForceCard";
 import CollectorForceCard from "./CollectorForceCard";
-import Input from "./Input";
 //min-h-[calc(100vh-200px)]
 export default function Output({inputs, solution, setSolution}) {
   return (

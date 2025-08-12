@@ -5,106 +5,177 @@ import calculateVWall from "../../../assets/data/calculations/diaphragmCalculati
 import calculateCollector from "../../../assets/data/calculations/diaphragmCalculations/calculateCollector.js";
 import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear.js";
 import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear.js";
-function hasGap(wallGap){
-    
-    for (const key in wallGap) {
-        if (wallGap[key] != "noGap") {
-            return [true,key];
+
+// returns if diaphragm has gaps and list of the wall names with the gaps
+function hasGap(input){
+
+    let inputWallLines = input.wallLines; // list of wall objects [ {wall A}, {wallB}]
+    let hasWallGap = false;
+    let wallGaps = [];
+    for (const wall of inputWallLines) {
+        if (wall.openings && wall.openings.length > 0) {
+            hasWallGap = true;
+            const wallNameWithGap = wall.wall; // name of wall
+            wallGaps.push(wallNameWithGap);
         }
     }
-    return [false,null];
 
+    return { hasWallGap, wallGaps };
 
 }
 // calc total wall segment distance of a wall with an opening
-function wallDistanceCovered(wall, wallNameWithGap){
-    let distanceCovered = 0; // diaphragm depth of wall
-    let distList = [] // list of distances for each segment
-    for (const item in wall[wallNameWithGap]) {
-        if (item.type === "wall segment"){
-            distanceCovered += item.value;
-            distList.push(item.value);
-
-        }
-    return {distanceCovered, distList};
+function wallDistanceCovered(segmentList){
+    let distanceCovered = 0;
+    for (const segment of segmentList) {
+        distanceCovered += segment;
+    }
+    return distanceCovered;
 }
+
+function calculateWallSegments(inputWallLines, solution){
+    let segmentList = {};
+    //[0,10] // [10,40]
+    //possible rework for gap at beginning & bottom since opening lst could just be 1
+    
+    for (const wall of inputWallLines) {
+        if (wall.openings.length > 0) {
+            let segment = []
+            //gap at beginning of wall
+            if (wall.openings[0][0] === 0){
+
+                segment.push(wall.length-wall.openings[0][1]);
+            }
+            // gap at bottom of wall
+            else if (wall.openings[0][1] === wall.length){
+                segment.push(wall.openings[0][0]);
+            } 
+            //gap at middle of wall
+            else{
+                segment.push(wall.openings[0][0]);
+                segment.push(wall.length-wall.openings[0][1]);
+
+            }
+            const matchingWall = solution.wallLines.find(solWall => solWall.wall === wall.wall);
+            const reactionForce = matchingWall ? matchingWall.wallShear : 0;
+            const distCovered = wallDistanceCovered(segment)
+            const wallUnitShear = calculateVWall(reactionForce, distCovered);
+            // calculate collector force
+            // unit dia shear, unit wall Shear, segments
+            // need to print out wall unit shear, unit diaphragm shear, length of longest segment
+            let unitDiaShear;
+
+            unitDiaShear =
+                matchingWall.diaUnitShearLeft === null ? matchingWall.diaUnitShearRight :
+                matchingWall.diaUnitShearRight === null ? matchingWall.diaUnitShearLeft :
+                matchingWall.diaUnitShearLeft + matchingWall.diaUnitShearRight;
+
+            const {collectorForce, longestSeg, netShear} = calculateCollector(unitDiaShear,wallUnitShear,segment);
+
+
+
+
+            // contains all information for calculations of collector force within each file
+            segmentList[wall.wall] = {wallName: wall.wall, segments: segment, 
+                distanceCovered: distCovered, reactionForce: reactionForce, 
+                wallUnitShear: wallUnitShear,
+                collectorForce: collectorForce,
+                longestSeg: longestSeg,
+                netShear: netShear,
+                unitDiaShear: unitDiaShear
+            };
+    }
 }
-export default function collectorFWorkflow({wall, input}) {
-    const { length, width, load } = input;
-    const w = Number(load);
-    const L = Number(width);
-    const d = Number(length);
-
-    // Check if the wall has three walls and gaps
-    const { wallGaps, hasThreeWalls } = examineWall(wall);
-    const [hasWallGap, wallNameWithGap ] = hasGap(wallGaps);// identify walls with gap
-    const {distanceOfWall, segmentsOfWall} = wallDistanceCovered(wall, wallNameWithGap);
+    return segmentList; //dictionary of wall names only with gaps with value of segments and distcovered
+}
 
 
-    const CalculateReactionForce = {
-        title: "Calculate Reaction Force On Wall With Gap",
-        content: null,
-    };
-    const CalculateUnitWallShear = {
-        title: "Calculate and Find The Unit Wall Shear For Walls With a Gap",
-        content: null,
-    };
-    const CalculateCollectorForce= {
-        title: "Create Collector Force Diagram",
-        content: null,
-    };
-    let totShear, diaphragmShear, R, vWall;
-
-    if (!hasWallGap){
-        return {
+export default function collectorFWorkflow({ input, solution }) {
+    const load = input.uniformForces[0].startForce; // Assuming uniform load is the same for all walls
+    const wallCount = input.wallLines.length;
+    
+    // Check if the wall has gaps
+    const { hasWallGap, wallGaps } = hasGap(input); // [boolean, list of wallName with gaps]
+    
+    if (!hasWallGap) {
+        return [{
             title: "No Gaps Detected",
             content: (
                 <div>
                     <p>No Collector Force.</p>
                 </div>
             )
-        };
-    } else if (!hasThreeWalls){
-        totShear = calculateTotalShear(w, L);
-        diaphragmShear = calculateUnitShear(totShear, d);
-        R = calculateRx(L, w);
-        vWall = calculateVWall(R,wallDistanceCovered)
-        let {maxCollectorForce, longestSeg, netUnitWallShear} = calculateCollector(diaphragmShear, vWall, segmentsOfWall);
-        
-
-        CalculateReactionForce.content = (
-            <div className="font-mono text-sm">
-                <MathJax>{`\\(R_${wallNameWithGap}=\\frac{wL}{2}=\\frac{${w}\\times${L}}{2}=${R} lb\\)`}</MathJax>
-                <br />
-            </div>
-
-        );
-        CalculateUnitWallShear.content = (
-            <div className="font-mono text-sm">
-                <MathJax>{`\\(v_{${wallNameWithGap}}=\\frac{R}{d}=\\frac{${R}}{${distanceOfWall}}=${vWall} plf\\)`}</MathJax>
-            </div>
-        );
-        CalculateCollectorForce.content = (
-            <div className="font-mono text-sm">
-                <p>Net Unit Shear = Wall Unit Shear - uniform load = {vWall} - {L} = {netUnitWallShear}</p>
-                <MathJax>
-                    {`\\(\\text{Net Unit SHear} = \\text{Wall Unit Shear} - \\text{Uniform Load} = ${vWall} \\times ${L} = ${netUnitWallShear} plf\\)`}
-                </MathJax>
-                <br />
-                <MathJax>
-                {`\\(\\text{Max Collector}_${wallNameWithGap} = \\text{Net Unit Shear} \\times \\text{Max Segment Length} = ${netUnitWallShear} \\times ${longestSeg} = ${maxCollectorForce} \\text{ plf}\\)`}
-                </MathJax>
-                <br />
-                
-            </div>
-        );
-
-
-
+        }];
     }
 
+    const collectorObj = calculateWallSegments(input.wallLines, solution);
+
+    const CalculateReactionForce = {
+        title: "Calculate Reaction Force On Wall With Gap",
+        content: (
+            <div className="font-mono text-sm">
+                {Object.values(collectorObj).map((wall, index) => {
+                    const wallIndex = input.wallLines.findIndex(w => w.wall === wall.wallName);
+                    let formula;
+                    
+                    if (wallCount === 2) {
+                        formula = `\\frac{${load} \\times ${input.horizontalWallLengths[0]}}{2}`;
+                    } else if (wallCount === 3) {
+                        if (wallIndex === 1) { // Middle wall - gets sum of both end reactions
+                            formula = `\\frac{${load} \\times ${input.horizontalWallLengths[0]}}{2} + \\frac{${load} \\times ${input.horizontalWallLengths[1]}}{2}`;
+                        } else if (wallIndex === 0) { // Left wall - uses first span
+                            formula = `\\frac{${load} \\times ${input.horizontalWallLengths[0]}}{2}`;
+                        } else { // Right wall - uses second span
+                            formula = `\\frac{${load} \\times ${input.horizontalWallLengths[1]}}{2}`;
+                        }
+                    }
+                    
+                    return (
+                        <div key={index}>
+                            <MathJax>{`\\(R_{${wall.wallName}} = ${formula} = ${wall.reactionForce} \\text{ lb}\\)`}</MathJax>
+                            <br />
+                        </div>
+                    );
+                })}
+            </div>
+        )
+    };
+
+    const CalculateUnitWallShear = {
+        title: "Calculate and Find The Unit Wall Shear For Walls With a Gap",
+        content: (
+            <div className="font-mono text-sm">
+                {Object.values(collectorObj).map((wall, index) => (
+                    <div key={index}>
+                        <MathJax>{`\\(v_{${wall.wallName}} = \\frac{R_{${wall.wallName}}}{\\text{Effective Length}} = \\frac{${wall.reactionForce}}{${wall.distanceCovered}} = ${wall.wallUnitShear.toFixed(2)} \\text{ plf}\\)`}</MathJax>
+                        <br />
+                    </div>
+                ))}
+            </div>
+        )
+    };
+
+    const CalculateCollectorForce = {
+        title: "Calculate Collector Force",
+        content: (
+            <div className="font-mono text-sm">
+                {Object.values(collectorObj).map((wall, index) => (
+                    <div key={index} className="mb-4">
+                        <h4 className="font-semibold mb-2">Wall {wall.wallName}:</h4>
+                        <div className="mb-2">
+                            <strong>Wall segments:</strong> [{wall.segments.join(', ')}] ft
+                        </div>
+                        <div className="mb-2">
+                            <strong>Unit Diaphragm Shear:</strong> {wall.unitDiaShear.toFixed(2)} plf
+                        </div>
+                        <MathJax>{`\\(\\text{Net Unit Shear} = v_{${wall.wallName}} - v_{dia} = ${wall.wallUnitShear.toFixed(2)} - ${wall.unitDiaShear.toFixed(2)} = ${wall.netShear.toFixed(2)} \\text{ plf}\\)`}</MathJax>
+                        <br />
+                        <MathJax>{`\\(\\text{Max Collector}_{${wall.wallName}} = \\text{Net Unit Shear} \\times \\text{Longest Segment} = ${wall.netShear.toFixed(2)} \\times ${wall.longestSeg} = ${wall.collectorForce.toFixed(2)} \\text{ plf}\\)`}</MathJax>
+                        <br />
+                    </div>
+                ))}
+            </div>
+        )
+    };
+
     return [CalculateReactionForce, CalculateUnitWallShear, CalculateCollectorForce];
-
-    
-
 }

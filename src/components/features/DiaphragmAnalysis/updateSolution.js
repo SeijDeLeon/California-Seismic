@@ -23,34 +23,29 @@ const instantiateBlankTemplate = (inputs) =>{
 
 }
 
-const populateWallShear = (input,solution) => {
-    const inputWallLines  = input.wallLines;
+const populateWallShear = (input, solution) => {
+    const inputWallLines = input.wallLines;
     const outputWallLines = solution.wallLines;
     const uniformLoad = input.uniformForces[0].startForce; // Assuming uniform load is the same for all walls
     const wallCount = inputWallLines.length;
 
-    let spanIndex = 0;
-    
-    for (const wall of outputWallLines) {
-        if (wallCount === 2){
-            wall.wallShear = calculateTotalShear(inputWallLines.horizontalWallLengths[spanIndex], uniformLoad);
-        }
-        else if (wallCount === 3){
-            if (spanIndex !== 1){
-                wall.wallShear = calculateTotalShear(inputWallLines.horizontalWallLengths[spanIndex], uniformLoad);
-                spanIndex++;
-            } 
-
-        }
-    }
-
-    if (wallCount === 3){
+    if (wallCount === 2) {
+        // For 2 walls, each wall takes the shear from one span
+        outputWallLines[0].wallShear = calculateTotalShear(input.horizontalWallLengths[0], uniformLoad);
+        outputWallLines[1].wallShear = calculateTotalShear(input.horizontalWallLengths[0], uniformLoad);
+    } else if (wallCount === 3) {
+        // For 3 walls, exterior walls take shear from their adjacent spans
+        // Wall 0 (left): takes shear from span 0
+        outputWallLines[0].wallShear = calculateTotalShear(input.horizontalWallLengths[0], uniformLoad);
+        
+        // Wall 2 (right): takes shear from span 1
+        outputWallLines[2].wallShear = calculateTotalShear(input.horizontalWallLengths[1], uniformLoad);
+        
+        // Wall 1 (middle): takes combined shear from both spans
         outputWallLines[1].wallShear = outputWallLines[0].wallShear + outputWallLines[2].wallShear;
     }
+};
 
-
-    
-}
 
 const populateUnitDiaphragmShear = (input, solution) => {
 
@@ -76,7 +71,7 @@ const populateUnitDiaphragmShear = (input, solution) => {
     }
 }
 
-const updateSolution = (inputs) => {
+export const updateSolution = (inputs) => {
 
     let solution = instantiateBlankTemplate(inputs);
     populateWallShear(inputs, solution); //populate wall shear values

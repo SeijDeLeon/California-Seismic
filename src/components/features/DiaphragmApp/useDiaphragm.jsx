@@ -1,5 +1,6 @@
 import { update } from 'plotly.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { updateSolution } from '../DiaphragmAnalysis/updateSolution';
 
 const squareBuildingInputsExample = {
     wallLines: [
