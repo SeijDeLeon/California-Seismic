@@ -19,6 +19,11 @@ import {
   Squares2X2Icon,
   HomeIcon,
   MapPinIcon,
+  IdentificationIcon,
+  BookOpenIcon,
+  TableCellsIcon,
+  LightBulbIcon,
+  ComputerDesktopIcon
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import logo from '../../assets/images/logo.png';
@@ -143,6 +148,73 @@ const callsToAction = [
   { name: 'Show All Lectures', href: '/lectures', icon: Squares2X2Icon },
 ];
 
+const resources = [
+  {
+    name: "Exam Guide",
+    description: "General information about the exam and PE License",
+    href: "/exam-guide",
+    icon: IdentificationIcon,
+    hoverColor: 'text-blue-600'
+  },
+  {
+    name: "ASCE 7",
+    description: "Standard for minimum design loads on buildings",
+    href: "/ASCE7",
+    icon: BookOpenIcon,
+    hoverColor: 'text-amber-600'
+  },
+  {
+    name: "Calculator",
+    description: "Calculator for seismic values",
+    href: "/Solver",
+    icon: CalculatorIcon,
+    hoverColor: 'text-teal-600'
+  },
+  {
+    name: "USGS",
+    description: "Earthquake Acceleration Tool",
+    href: "/USGS",
+    icon: GlobeAmericasIcon,
+    hoverColor: 'text-blue-500'
+  }
+]
+
+const practices = [
+  {
+    name: "Essential Problems",
+    description: "Practice our featured list of problems with solutions",
+    href: "/practice",
+    icon: TableCellsIcon,
+    hoverColor: 'text-blue-600'
+  },
+  {
+    name: "Random Problems",
+    description: "Repeatedly work on a problem with randomized inputs",
+    href: "/practice/random",
+    icon: LightBulbIcon,
+    hoverColor: 'text-amber-600'
+  },
+  {
+    name: "Exams",
+    href: "/practice/exams",
+    description: "10 sample exams to simulate the actual testing experience",
+    icon: ComputerDesktopIcon,
+    hoverColor: 'text-teal-600'
+  },
+  {
+    name: "Base Shear",
+    href: "/baseshear",
+    icon: CalculatorIcon,
+    hoverColor: 'text-blue-500'
+  },
+  {
+    name: "Flexible Diaphragm",
+    href: "/diaphragm",
+    icon: HomeIcon,
+    hoverColor: 'text-amber-500'
+  }
+]
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -192,7 +264,7 @@ export default function Header() {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-scroll rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 max-h-[70vh]">
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-auto rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 max-h-[70vh]">
                   <div className="grid grid-cols-1 divide-x divide-gray-900/5 bg-gray-50">
                     {callsToAction.map((item) => (
                       <a
@@ -237,18 +309,86 @@ export default function Header() {
               </Transition>
             </Popover>
 
-            <NavLink
-              className="text-sm font-semibold leading-6 text-gray-900"
-              to="/practice"
-            >
-              Practice
-            </NavLink>
-            <NavLink
-              className="text-sm font-semibold leading-6 text-gray-900"
-              to="/exam-guide"
-            >
-              Exam Guide
-            </NavLink>
+            <Popover className="relative">
+              <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                Resources
+                <ChevronDownIcon
+                  className="h-5 w-5 flex-none text-gray-400"
+                  aria-hidden="true"
+                />
+              </Popover.Button>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-xs rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 text-sm leading-6 p-4">
+                  {resources.map((item) => (
+                    <NavLink
+                      key={item.name}
+                      to={item.href}
+                      className="group flex items-center gap-x-6 rounded-lg p-1 hover:bg-gray-50"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                        <item.icon
+                          className={`h-6 w-6 text-gray-600 group-hover:${item.hoverColor}`}
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className='text-start'>
+                        <p className="font-semibold text-gray-900">{item.name}</p>
+                        <p className=" text-gray-600">{item.description}</p>
+                      </div>
+                    </NavLink>
+                  ))}
+                </Popover.Panel>
+              </Transition>
+            </Popover>
+
+            <Popover className="relative">
+              <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                Practice
+                <ChevronDownIcon
+                  className="h-5 w-5 flex-none text-gray-400"
+                  aria-hidden="true"
+                />
+              </Popover.Button>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-xs rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 text-sm leading-6 p-4">
+                  {practices.map((item) => (
+                    <NavLink
+                      key={item.name}
+                      to={item.href}
+                      className="group flex items-center gap-x-6 rounded-lg p-1 hover:bg-gray-50"
+                    >
+                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                        <item.icon
+                          className={`h-6 w-6 text-gray-600 group-hover:${item.hoverColor}`}
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className='text-start'>
+                        <p className="font-semibold text-gray-900">{item.name}</p>
+                        <p className=" text-gray-600">{item.description}</p>
+                      </div>
+                    </NavLink>
+                  ))}
+                </Popover.Panel>
+              </Transition>
+            </Popover>
+
             <NavLink
               className="text-sm font-semibold leading-6 text-gray-900"
               to="/contributors"
@@ -334,20 +474,77 @@ export default function Header() {
                       </>
                     )}
                   </Disclosure>
-                  <NavLink
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    to="/practice"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Practice
-                  </NavLink>
-                  <NavLink
-                    className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    to="/exam-guide"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Exam Guide
-                  </NavLink>
+
+                  <Disclosure as="div" className="-mx-3">
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
+                          Resources
+                          <ChevronDownIcon
+                            className={classNames(
+                              open ? 'rotate-180' : '',
+                              'h-5 w-5 flex-none'
+                            )}
+                            aria-hidden="true"
+                          />
+                        </Disclosure.Button>
+
+                        <Disclosure.Panel className="mt-2 space-y-2">
+                          {[...resources].map(item => (
+                            <Link
+                              to={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              <Disclosure.Button
+                                key={item.name}
+                                as="a"
+                                className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                              >
+                                {item.name}
+                              </Disclosure.Button>
+                            </Link>
+                          )
+                          )}
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+
+                  <Disclosure as="div" className="-mx-3">
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
+                          Practice
+                          <ChevronDownIcon
+                            className={classNames(
+                              open ? 'rotate-180' : '',
+                              'h-5 w-5 flex-none'
+                            )}
+                            aria-hidden="true"
+                          />
+                        </Disclosure.Button>
+
+                        <Disclosure.Panel className="mt-2 space-y-2">
+                          {[...practices].map(item => (
+                            <Link
+                              to={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              <Disclosure.Button
+                                key={item.name}
+                                as="a"
+                                className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                              >
+                                {item.name}
+                              </Disclosure.Button>
+                            </Link>
+                          )
+                          )}
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+
                   <NavLink
                     className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     to="/contributors"
