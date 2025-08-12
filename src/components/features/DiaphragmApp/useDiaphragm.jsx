@@ -94,7 +94,7 @@ const blankSolution = {
 };
 
 export const useDiaphragm = () => {
-  const [inputs, setInputs] = useState(blankBuildingInputs3);
+  const [inputs, setInputs] = useState(blankBuildingInputs);
   const [solution, setSolution] = useState(blankSolution);
 
   useEffect(() => {
