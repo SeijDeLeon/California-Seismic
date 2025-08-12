@@ -2,7 +2,7 @@ import { MathJax } from "better-react-mathjax";
 import examineWall from "./chordForceWorkflow.js";
 import calculateRx from "../../../assets/data/calculations/diaphragmCalculations/calculateReactionForce.js";
 import calculateVWall from "../../../assets/data/calculations/diaphragmCalculations/calculateWallUnitShear.js";
-import calculateCollector from "../../../assets/data/calculations/diaphragmCalculations/calculateCollector.js";
+import calculateCollector from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxCollector.js";
 import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear.js";
 import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear.js";
 
@@ -42,6 +42,7 @@ function calculateWallSegments(inputWallLines, solution){
             let segment = []
             //gap at beginning of wall
             if (wall.openings[0][0] === 0){
+                
 
                 segment.push(wall.length-wall.openings[0][1]);
             }
@@ -51,8 +52,9 @@ function calculateWallSegments(inputWallLines, solution){
             } 
             //gap at middle of wall
             else{
+                console.log(wall.openings[0][1])
                 segment.push(wall.openings[0][0]);
-                segment.push(wall.length-wall.openings[0][1]);
+                segment.push(wall.length-wall.openings[0][1]-wall.openings[0][0]);
 
             }
             const matchingWall = solution.wallLines.find(solWall => solWall.wall === wall.wall);
@@ -69,7 +71,7 @@ function calculateWallSegments(inputWallLines, solution){
                 matchingWall.diaUnitShearRight === null ? matchingWall.diaUnitShearLeft :
                 matchingWall.diaUnitShearLeft + matchingWall.diaUnitShearRight;
 
-            const {collectorForce, longestSeg, netShear} = calculateCollector(unitDiaShear,wallUnitShear,segment);
+            const [collectorForce, longestSeg, netShear] = calculateCollector(unitDiaShear,wallUnitShear,segment);
 
 
 
@@ -146,7 +148,7 @@ export default function collectorFWorkflow({ input, solution }) {
             <div className="font-mono text-sm">
                 {Object.values(collectorObj).map((wall, index) => (
                     <div key={index}>
-                        <MathJax>{`\\(v_{${wall.wallName}} = \\frac{R_{${wall.wallName}}}{\\text{Effective Length}} = \\frac{${wall.reactionForce}}{${wall.distanceCovered}} = ${wall.wallUnitShear.toFixed(2)} \\text{ plf}\\)`}</MathJax>
+                        <MathJax>{`\\(v_{${wall.wallName}} = \\frac{R_{${wall.wallName}}}{\\text{Effective Length}} = \\frac{${wall.reactionForce}}{${wall.distanceCovered}} = ${(wall.wallUnitShear || 0).toFixed(2)} \\text{ plf}\\)`}</MathJax>
                         <br />
                     </div>
                 ))}
@@ -165,11 +167,19 @@ export default function collectorFWorkflow({ input, solution }) {
                             <strong>Wall segments:</strong> [{wall.segments.join(', ')}] ft
                         </div>
                         <div className="mb-2">
-                            <strong>Unit Diaphragm Shear:</strong> {wall.unitDiaShear.toFixed(2)} plf
+                            <strong>Unit Diaphragm Shear:</strong> {(wall.unitDiaShear || 0).toFixed(2)} plf
                         </div>
-                        <MathJax>{`\\(\\text{Net Unit Shear} = v_{${wall.wallName}} - v_{dia} = ${wall.wallUnitShear.toFixed(2)} - ${wall.unitDiaShear.toFixed(2)} = ${wall.netShear.toFixed(2)} \\text{ plf}\\)`}</MathJax>
+                        <MathJax>{`\\(\\text{Net Unit Shear} = v_{${wall.wallName}} - v_{dia} = ${(wall.wallUnitShear || 0).toFixed(2)} - ${(wall.unitDiaShear || 0).toFixed(2)} = ${(wall.netShear || 0).toFixed(2)} \\text{ plf}\\)`}</MathJax>
                         <br />
-                        <MathJax>{`\\(\\text{Max Collector}_{${wall.wallName}} = \\text{Net Unit Shear} \\times \\text{Longest Segment} = ${wall.netShear.toFixed(2)} \\times ${wall.longestSeg} = ${wall.collectorForce.toFixed(2)} \\text{ plf}\\)`}</MathJax>
+<MathJax>{`
+  \\[
+    \\begin{aligned}
+      \\text{Max Collector}_{${wall.wallName}} &= \\text{Net Unit Shear} \\times \\text{Longest Segment} \\\\
+      &= ${(wall.netShear || 0).toFixed(2)} \\times ${wall.longestSeg} \\\\
+      &= \\Omega${(wall.collectorForce || 0).toFixed(2)} \\text{ plf}
+    \\end{aligned}
+  \\]
+`}</MathJax>
                         <br />
                     </div>
                 ))}

@@ -15,9 +15,8 @@ export default function CollectorForceCard({ inputs, solution, setSolution }) {
     { formula: "\\( R_x=L/2*w \\)", label: "Reaction Force" },
     { formula: "\\( v=\\frac{R_x}{d_x} \\)", label: "Unit Wall Shear" },
   ];
-  
-  
-  const workflow = collectorFWorkflow(inputs, solution);
+
+  const workflow = collectorFWorkflow({ input: inputs, solution: solution });
 
   const description =
     "The collector force is a force that accumulates within a diaphragm and is transferred to vertical lateral force-resisting elements (like shear walls or frames) of a building during seismic or wind events";

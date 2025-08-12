@@ -3,7 +3,7 @@ import React from "react";
 import Plot from "react-plotly.js";
 import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear";
 import calculateMaxMoment from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxMoment";
-import calculateChordForce from "../../../assets/data/calculations/diaphragmCalculations/calculateCF";
+import calculateChordForce from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxChordForce";
 
 export default function ChordPlots({
   leftWidthFt,

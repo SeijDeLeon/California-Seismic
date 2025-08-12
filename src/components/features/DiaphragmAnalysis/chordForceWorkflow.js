@@ -1,7 +1,7 @@
 import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear";
 import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear";
 import calculateMaxMoment from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxMoment";
-import calculateChordForce from "../../../assets/data/calculations/diaphragmCalculations/calculateChordForce";
+import calculateChordForce from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxChordForce";
 import { MathJax } from "better-react-mathjax";
 
 function chordObject(input,solution){
@@ -73,10 +73,10 @@ export function chordFWorkflow({input, solution}) {
                     <div key={index}>
 
                        <MathJax>
-                    {`\\(V_${key}=\\frac{wL}{2}=\\frac{${load}\\times${value.horizontalLength}}{2}=${value.totShear} lb\\)`}
+                    {`\\(V_{${key}}=\\frac{wL}{2}=\\frac{${load}\\times${value.horizontalLength}}{2}=${value.totShear.toFixed(2)} \\text{lb}\\)`}
                 </MathJax>
                 <br />
-                <MathJax>{`\\(v_${key}=\\frac{V}{d}=\\frac{${value.totShear}}{${value.depth}}=${value.unitShear} plf\\)`}</MathJax>
+                <MathJax>{`\\(v_{${key}}=\\frac{V}{d}=\\frac{${value.totShear}}{${value.depth}}=${value.unitShear.toFixed(2)} \\text{plf}\\)`}</MathJax>
                         </div>
                 ))}
                 
@@ -89,7 +89,7 @@ export function chordFWorkflow({input, solution}) {
                 {Object.entries(chordObj).map(([key, value], index) => (
                     <div key={index}>
                         <MathJax>
-                            {`\\(M_${key}=\\frac{wL^2}{8}=\\frac{${load}\\times${value.horizontalLength}^2}{8}=${value.maxMoment} plf\\)`}
+                            {`\\(M_{${key}}=\\frac{wL^2}{8}=\\frac{${load}\\times${value.horizontalLength}^2}{8}=${value.maxMoment.toFixed(2)} \\text{plf}\\)`}
                         </MathJax>
                         <br />
                     </div>
@@ -115,7 +115,7 @@ export function chordFWorkflow({input, solution}) {
                     
                     <div key={index}> 
                         <MathJax>
-                            {`\\(C_{${key}}=\\frac{M}{d}=\\frac{${value.maxMoment}}{${value.depth}}=${value.chordForce} plf\\)`}
+                            {`\\(C_{${key}}=\\frac{M}{d}=\\frac{${value.maxMoment}}{${value.depth}}=${value.chordForce.toFixed(2)}\\text{plf}\\)`}
                         </MathJax>
                         <br />
 
@@ -125,7 +125,7 @@ export function chordFWorkflow({input, solution}) {
         ))}
         <div>
             <MathJax>
-                {`\\(C_max=${maxCF} plf\\)`}
+                {`\\(C_{max}={${maxCF.toFixed(2)}} \\text{plf}\\)`}
                 </MathJax>
         </div>
         

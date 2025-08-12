@@ -14,7 +14,6 @@ export default function DiaphragmApp() {
     solution,
     setSolution,
   } = useDiaphragm();
-
   return (
     <>
       {/* Input */}

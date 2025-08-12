@@ -17,7 +17,7 @@ const calculateCollector = (unitDiaphragmShear, unitWallShear, segments ) => {
         }
     }
 
-    return {maxCollectorForce, maxSegment, netUnitWallShear};
+    return [maxCollectorForce, maxSegment, netUnitWallShear];
 
 }
 
