@@ -14,7 +14,7 @@ export default function Output({inputs, solution, setSolution}) {
           <ChordForceCard inputs={inputs} solution={solution} setSolution={setSolution}/>
         </div>
       </div>
-    </div>
+      </div>
     </>
   );
 }
