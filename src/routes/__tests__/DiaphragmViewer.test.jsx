@@ -1,4 +1,4 @@
-// Test for Diaphragm viewer SVG component
+// Test for rendering Diaphragm viewer SVG component
 import { render, screen } from "@testing-library/react";
 import DiaphragmViewer from "../../components/features/DiaphragmApp/DiaphragmViewer";
 
@@ -66,10 +66,9 @@ describe("DiaphragmViewer SVG rendering", () => {
     );
   });
 
-  test("matches snapshot", () => {
-    const { asFragment } = render(
-      <DiaphragmViewer inputs={mockInputs} solution={mockSolution} />
-    );
-    expect(asFragment()).toMatchSnapshot();
+  test("SVG markup matches snapshot", () => {
+    render(<DiaphragmViewer inputs={mockInputs} solution={mockSolution} />);
+    const svg = screen.getByTestId("svg-plot"); // take only the svg bit
+    expect(svg).toMatchSnapshot(); // compare & store the snapshot of only the svg
   });
 });
