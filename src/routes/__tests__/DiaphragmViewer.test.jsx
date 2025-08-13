@@ -1,5 +1,5 @@
 // Test for rendering Diaphragm viewer SVG component
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import DiaphragmViewer from "../../components/features/DiaphragmApp/DiaphragmViewer";
 
 const mockInputs = {
@@ -71,4 +71,18 @@ describe("DiaphragmViewer SVG rendering", () => {
     const svg = screen.getByTestId("svg-plot"); // take only the svg bit
     expect(svg).toMatchSnapshot(); // compare & store the snapshot of only the svg
   });
+
+  // Add this -- once inputs are all figured out & tested & working smoothly for added wall and ghost wall
+  // test("clicking 'Add Right Wall' changes SVG", () => {
+  //   render(<DiaphragmViewer inputs={mockInputs} solution={mockSolution} />);
+
+  //   // Before click — C wall shouldn't be there
+  //   expect(screen.queryByText("Wall C")).not.toBeInTheDocument();
+
+  //   // Click the button
+  //   fireEvent.click(screen.getByRole("button", { name: /add right wall/i }));
+
+  //   // After click — C wall should appear in labels
+  //   expect(screen.getByText("Wall C")).toBeInTheDocument();
+  // });
 });
