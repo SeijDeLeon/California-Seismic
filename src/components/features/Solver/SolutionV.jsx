@@ -1,5 +1,4 @@
-import React from 'react';
-import { MathJax, MathJaxContext } from 'better-react-mathjax';
+import { MathJax } from 'better-react-mathjax';
 
 const SolutionV = ({ inputs, result }) => {
   const { weights, Cs } = inputs;
@@ -19,36 +18,21 @@ const SolutionV = ({ inputs, result }) => {
   const solution = `V = ${result}`;
 
   return (
-    <MathJaxContext>
-      <div>
-        <p>
-          The total design base shear, V, is calculated using Equation 12.8-1 from ASCE 7:
-        </p>
-        <ul>
-          <li>
-            <a href="/ASCE7/12.8.1" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">
-              <MathJax>{`\\(V = C_s W\\)`}</MathJax>
-              &nbsp;(Equation 12.8-1)
-            </a>
-          </li>
-        </ul>
-        <p>
-          Substituting the provided values into the equation:
-        </p>
-        <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
-        <p>
-          After performing the calculations, the total design base shear is found to be:
-        </p>
-        <MathJax>{`\\(${solution}\\)`}</MathJax>
-      </div>
-    </MathJaxContext>
+    <>
+      <p className='mb-2'>The total design base shear, V, is calculated using Equation 12.8-1 from ASCE 7:</p>
+      <a href="/ASCE7/12.8.1" target="_blank" rel="noopener noreferrer">
+        <MathJax className='bg-slate-200 p-1 pr-5 rounded'>
+          {`\\[V = C_s W \\tag{12.8-1} \\]`}
+        </MathJax>
+      </a>
+
+      <p className='mt-6'>Substituting the provided values into the equation:</p>
+      <MathJax>{`\\(${filledEquation}\\)`}</MathJax>
+
+      <p className='mt-6'>After performing the calculations, the total design base shear is found to be:</p>
+      <MathJax>{`\\(${solution}\\)`}</MathJax>
+    </>
   );
 };
 
 export default SolutionV;
-
-
-
-
-
-

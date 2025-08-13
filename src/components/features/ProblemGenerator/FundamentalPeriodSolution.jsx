@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { MathJax } from "better-react-mathjax";
-export default function FundamentalPeriodSolution({height, kips, E, inertia, G, stiffness, pounds, answer} ) {
+export default function FundamentalPeriodSolution({ height, kips, E, inertia, G, stiffness, pounds, answer }) {
     /*
     This is a cantilevered column SDOF structure, so we can first
     determine the stiffness of the SDOF and then plug the stiffness into
@@ -9,32 +9,37 @@ export default function FundamentalPeriodSolution({height, kips, E, inertia, G, 
     */
     return (
         <Fragment>
-            <p>
-                <MathJax>
-                    {`Provided Inputs: \\(h = ${height}\\ ft,\\ W = ${kips}\\ kips,\\ E = ${E}\\ ksi,\\ I = ${inertia}\\ in^{4}\\)`}
-                </MathJax>
-            </p>
-            <p>
-                <MathJax>
-                    {`Constants: \\(G = ${G}\\ in/s^{2}\\)`}
-                </MathJax>
-            </p>
-            <br />
+            <MathJax className='flex justify-self-start'>
+                {`Provided Inputs:
+                    \\begin{align}
+                        &h = ${height}\\ ft, \\\\
+                        &W = ${kips}\\ kips,\\\\ 
+                        &E = ${E}\\ ksi,\\\\ 
+                        &I = ${inertia}\\ in^{4}
+                    \\end{align}`}
+            </MathJax>
+            <MathJax className='mb-6'>
+                {`Constants: \\(G = ${G}\\ in/s^{2}\\)`}
+            </MathJax>
+
             <p>Step 1: Determine the stiffness of the system (cantilevered column)</p>
-            <br />
-            <p className="ml-40">
-                <MathJax>
-                    {`\\(k = \\frac{3(EI)}{h^{3}} = \\frac{3(${E}\\ ksi)(${inertia}\\ in^{4})}{(${height}\\ ft \\ \\times \\ 12\\ in/ft)^{3}} = ${stiffness}\\ lb/in\\)`}
-                </MathJax>
-            </p>
-            <br />
+            <MathJax className='flex justify-self-start mb-6'>
+                {`\\begin{align}
+                        k &= \\frac{3(EI)}{h^{3}} \\\\[5px] 
+                        &= \\frac{3(${E}\\ ksi)(${inertia}\\ in^{4})}{(${height}\\ ft \\ \\times \\ 12\\ in/ft)^{3}} \\\\[5px] 
+                        &= ${stiffness}\\ lb/in
+                    \\end{align}`}
+            </MathJax>
+
             <p>Step 2: Determine the fundamental period</p>
-            <br />
-            <p className="ml-40 mb-5">
-                <MathJax>
-                    {`\\(T = 2\\pi\\sqrt{\\frac{m}{k}} = 2\\pi\\sqrt{\\frac{W}{Gk}} = 2\\pi\\sqrt{\\frac{${pounds}\\ lb}{(${G}\\ in/s^{2})(${stiffness}\\ lb/in)}} = ${answer}\\ s\\)`}
-                </MathJax>
-            </p>
+            <MathJax className='flex justify-self-start'>
+                {`\\begin{align}
+                        T &= 2\\pi\\sqrt{\\frac{m}{k}} \\\\[5px] 
+                        &= 2\\pi\\sqrt{\\frac{W}{Gk}} \\\\[5px] 
+                        &= 2\\pi\\sqrt{\\frac{${pounds}\\ lb}{(${G}\\ in/s^{2})(${stiffness}\\ lb/in)}} \\\\[5px] 
+                        &= ${answer}\\ s
+                    \\end{align}`}
+            </MathJax>
         </Fragment>
     );
 }
