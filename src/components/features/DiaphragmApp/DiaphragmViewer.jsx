@@ -474,6 +474,7 @@ export default function DiaphragmViewer({
       )}
       <div className="w-full mb-4">
         <svg
+          data-testid="svg-plot"
           className="w-full h-auto bg-white pt-8 max-h-[600px]"
           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
           preserveAspectRatio="xMidYMid meet"
@@ -493,6 +494,7 @@ export default function DiaphragmViewer({
 
           {/* Walls */}
           <rect
+            data-testid="rect-A"
             x={structureStartX}
             y={paddingTop}
             width={leftWidthPx}
@@ -502,6 +504,7 @@ export default function DiaphragmViewer({
             strokeWidth="2"
           />
           <rect
+            data-testid="rect-B"
             x={structureStartX + 5}
             y={paddingTop + 5}
             width={leftWidthPx - 10}
