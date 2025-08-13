@@ -1,6 +1,6 @@
 import DiaphragmViewer from "../components/features/DiaphragmApp/DiaphragmViewer.jsx";
 import Output from "../components/features/DiaphragmAnalysis/Output.jsx";
-import DiaphragmInput from '../components/features/DiaphragmApp/DiaphragmInput';
+import DiaphragmInput from "../components/features/DiaphragmApp/DiaphragmInput";
 import { useDiaphragm } from "../components/features/DiaphragmApp/useDiaphragm.jsx";
 
 export default function DiaphragmApp() {

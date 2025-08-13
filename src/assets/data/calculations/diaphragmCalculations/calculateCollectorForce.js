@@ -1,4 +1,4 @@
-const calculateCollectorForce  = (xPosition, unitDiaShear, unitWallShear, openings, wallLength ) =>
+const calculateCollectorForceAtX  = (xPosition, unitDiaShear, unitWallShear, openings, wallLength ) =>
 {
     let y = 0
     let netShear = unitWallShear - unitDiaShear
@@ -19,4 +19,4 @@ const calculateCollectorForce  = (xPosition, unitDiaShear, unitWallShear, openin
     return y;
 }
 
-export default calculateCollectorForce;
+export default calculateCollectorForceAtX;

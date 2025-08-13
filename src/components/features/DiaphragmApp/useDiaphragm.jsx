@@ -59,6 +59,16 @@ const blankBuildingInputs3 = {
   horizontalWallLengths: [70,130],
   uniformForces: [{ startForce: 300, endForce: 300 }],
 };
+const blankBuildingInputs4 = {
+  wallLines: [
+    { wall: "A", openings: [[0,20]], length: 60 },
+    { wall: "B", openings: [[10,20]], length: 60 },
+    { wall: "C", openings: [], length: 60},
+
+  ],
+  horizontalWallLengths: [70,130],
+  uniformForces: [{ startForce: 300, endForce: 300 }],
+};
 const solutionExample = {
   wallLines: [
     {

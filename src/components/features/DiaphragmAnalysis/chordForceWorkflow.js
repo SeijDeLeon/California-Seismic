@@ -85,7 +85,6 @@ export function chordFWorkflow({input, solution}) {
 
         CalculateMaxMoment.content = ( 
             <div className="font-mono text-sm">
-                <p> Max bending occurs at <MathJax inline>{"\\(x=L/2 \\)"}</MathJax></p>
                 {Object.entries(chordObj).map(([key, value], index) => (
                     <div key={index}>
                         <MathJax>
