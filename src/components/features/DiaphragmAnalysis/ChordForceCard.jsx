@@ -6,15 +6,11 @@ import Workflow from "./Workflow";
 import { MathJax } from "better-react-mathjax";
 import ChevronCard from "./ChevronCard";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { chordFWorkflow } from "./chordForceWorkflow";
+import { chordFWorkflow } from "./diaUtilities/chordForceWorkflow";
+import { getChordFormulas } from "./diaUtilities/formulas";
 
 export default function ChordForceCard({ inputs, solution, setSolution }) {
-  const formulas = [
-    { formula: "\\( V=\\frac{wL}{2} \\)", label: "Total Shear" },
-    { formula: "\\( v=\\frac{V}{d} \\)", label: "Unit Shear" },
-    { formula: "\\( M=\\frac{wL^2}{8} \\)", label: "Max Moment" },
-    { formula: "\\( C=\\frac{M}{d} \\)", label: "Chord Force" },
-  ];
+  const formulas = getChordFormulas(inputs);
 
   const workflow = chordFWorkflow({ input: inputs, solution: solution });
   const description =

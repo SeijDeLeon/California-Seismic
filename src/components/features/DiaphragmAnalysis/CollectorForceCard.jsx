@@ -5,16 +5,14 @@ import Formulas from "./Formulas";
 import Workflow from "./Workflow";
 import { MathJax } from "better-react-mathjax";
 import ChevronCard from "./ChevronCard";
-import collectorFWorkflow from "./collectorForceWorkflow";
+import collectorFWorkflow from "./diaUtilities/collectorForceWorkflow";
+import { getCollectorFormulas } from "./diaUtilities/formulas";
 
 export default function CollectorForceCard({ inputs, solution, setSolution }) {
   // array for object of walls
   const [isOpen, setIsOpen] = useState(false);
 
-  const formulas = [
-    { formula: "\\( R_x=L/2*w \\)", label: "Reaction Force" },
-    { formula: "\\( v=\\frac{R_x}{d_x} \\)", label: "Unit Wall Shear" },
-  ];
+  const formulas = getCollectorFormulas(inputs);
 
   const workflow = collectorFWorkflow({ input: inputs, solution: solution });
 

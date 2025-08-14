@@ -1,10 +1,10 @@
 import { MathJax } from "better-react-mathjax";
 import examineWall from "./chordForceWorkflow.js";
-import calculateRx from "../../../assets/data/calculations/diaphragmCalculations/calculateReactionForce.js";
-import calculateVWall from "../../../assets/data/calculations/diaphragmCalculations/calculateWallUnitShear.js";
-import calculateCollector from "../../../assets/data/calculations/diaphragmCalculations/calculateMaxCollector.js";
-import calculateTotalShear from "../../../assets/data/calculations/diaphragmCalculations/calculateTotShear.js";
-import calculateUnitShear from "../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear.js";
+import calculateRx from "../../../../assets/data/calculations/diaphragmCalculations/calculateReactionForce.js";
+import calculateVWall from "../../../../assets/data/calculations/diaphragmCalculations/calculateWallUnitShear.js";
+import calculateCollector from "../../../../assets/data/calculations/diaphragmCalculations/calculateMaxCollector.js";
+import calculateTotalShear from "../../../../assets/data/calculations/diaphragmCalculations/calculateTotShear.js";
+import calculateUnitShear from "../../../../assets/data/calculations/diaphragmCalculations/calculateUnitShear.js";
 
 // returns if diaphragm has gaps and list of the wall names with the gaps
 function hasGap(input){
@@ -148,7 +148,7 @@ export default function collectorFWorkflow({ input, solution }) {
             <div className="font-mono text-sm">
                 {Object.values(collectorObj).map((wall, index) => (
                     <div key={index}>
-                        <MathJax>{`\\(v_{${wall.wallName}} = \\frac{R_{${wall.wallName}}}{\\text{Effective Length}} = \\frac{${wall.reactionForce}}{${wall.distanceCovered}} = ${(wall.wallUnitShear || 0).toFixed(2)} \\text{ plf}\\)`}</MathJax>
+                        <MathJax>{`\\(v_{${wall.wallName}} = \\frac{R_{${wall.wallName}}}{\\text{Wall Length}} = \\frac{${wall.reactionForce}}{${wall.distanceCovered}} = ${(wall.wallUnitShear || 0).toFixed(2)} \\text{ plf}\\)`}</MathJax>
                         <br />
                     </div>
                 ))}
