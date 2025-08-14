@@ -6,11 +6,10 @@ const DisplacementPlot = ({ floors, results, displacementType }) => {
 
   const floorsWithDisplacement = floors.map((floor, index) => {
     const Fvx = FvxArr[index] || 0;
-    const cumulativeV = (FvxArr.slice(index).reduce((sum, v) => sum + v, 0)) || 0;
+    const cumulativeV = FvxArr.slice(index).reduce((sum, v) => sum + v, 0) || 0;
     return { ...floor, Fvx, cumulativeV };
   });
 
-  // Level 1 + story labels
   const storyLabels = [
     'Level 1',
     ...floorsWithDisplacement.map((_, i) => `Level ${i + 2}`)
@@ -29,40 +28,43 @@ const DisplacementPlot = ({ floors, results, displacementType }) => {
       : 'Vertical Force Distribution';
 
   return (
-    <Plot
-      data={[
-        {
-          x: displacements,
-          y: storyLabels,
-          type: 'scatter',
-          mode: 'lines+markers',
-          marker: { color: 'black', symbol: 'circle' },
-          line: { color: 'black' },
-          name: titleText,
-        },
-      ]}
-      layout={{
-        width: 375,
-        height: 500,
-        title: { text: `<i>${titleText}</i>`, font: { size: 18 } },
-        xaxis: { title: 'Displacement (in)' },
-        yaxis: {
-          title: 'Levels',
-          tickmode: 'array',
-          tickvals: storyLabels,
-          ticktext: storyLabels,
-        },
-        margin: { l: 60, r: 55, b: 50, t: 50 },
-        plot_bgcolor: '#f9f9f9',
-      }}
-      config={{
-        responsive: true,
-        modeBarButtonsToRemove: [
-          'toImage','sendDataToCloud','editInChartStudio',
-          'zoom2d','select2d','pan2d','lasso2d'
-        ],
-      }}
-    />
+    <div style={{ width: '100%', height: '100%' }}>
+      <Plot
+        data={[
+          {
+            x: displacements,
+            y: storyLabels,
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: "#60A5FA", symbol: 'circle' },
+            line: { color: "#60A5FA" },
+            name: titleText,
+          },
+        ]}
+        layout={{
+          title: { text: `<i>${titleText}</i>`, font: { size: 18 } },
+          autosize: true,
+          xaxis: { title: 'Displacement (in)' },
+          yaxis: {
+            title: 'Levels',
+            tickmode: 'array',
+            tickvals: storyLabels,
+            ticktext: storyLabels,
+          },
+          margin: { l: 60, r: 55, b: 50, t: 50 },
+          plot_bgcolor: '#f9f9f9',
+        }}
+        config={{
+          responsive: true,
+          modeBarButtonsToRemove: [
+            'toImage','sendDataToCloud','editInChartStudio',
+            'zoom2d','select2d','pan2d','lasso2d'
+          ],
+        }}
+        useResizeHandler={true}
+        style={{ width: '100%', height: '100%' }}
+      />
+    </div>
   );
 };
 

@@ -26,7 +26,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
   const circleX = rectX + rectWidth + 150;
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-hidden">
       <svg
         width="800"
         height={`${totalHeight * scale + 100}px`}

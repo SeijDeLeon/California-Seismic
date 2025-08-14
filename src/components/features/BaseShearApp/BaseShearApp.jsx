@@ -168,14 +168,14 @@ const BaseShearApp = () => {
         <div className="w-full flex flex-col items-center px-2 sm:px-4 mt-6">
           <h4 className="font-semibold mb-2 text-sm sm:text-md">Plots:</h4>
           <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-6">
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 h-[400px]">
               <DisplacementPlot
                 floors={updatedFloors}
                 results={results}
                 displacementType="horizontal"
               />
             </div>
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 h-[400px]">
               <DisplacementPlot
                 floors={updatedFloors}
                 results={results}
