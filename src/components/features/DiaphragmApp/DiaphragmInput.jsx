@@ -138,8 +138,12 @@ const DiaphragmInput = () => {
         <div className="grid grid-cols-[20rem_minmax(12rem,1fr)_3rem] items-center gap-y-3 gap-x-3">
             {["length", "width", "uniformWallForce"].map((key) => (
                 <React.Fragment key={key}>
-                <label className="text-left whitespace-nowrap">{labels[key]}:</label>
+                {/* <label className="text-left whitespace-nowrap">{labels[key]}:</label> */}
+                <label htmlFor={`input-${key}`} className="text-left whitespace-nowrap">
+                    {labels[key]}:
+                </label>
                 <input
+                    id={`input-${key}`}
                     type="number"
                     name={key}
                     value={inputs[key]}
@@ -213,7 +217,8 @@ const DiaphragmInput = () => {
 
 
   {/* Items list with icon + type label */}
-  <div className="space-y-3">
+  {/* <div className="space-y-3"> */}
+  <div data-testid="shear-wall-list" className="space-y-3">
     {walls[activeWall]?.map((item, index) => {
       const overLimit = isWallItemOverLimit(activeWall, index);
       const isSegment = item.type === "wall segment";
