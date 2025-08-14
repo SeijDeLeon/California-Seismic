@@ -34,7 +34,12 @@ const BaseShearApp = () => {
 
   const handleChange = (index, key, value) => {
     const newFloors = [...inputs.floors];
-    newFloors[index][key] = parseFloat(value) || 0;
+    if (value === '' || value === null) {
+      newFloors[index][key] = '';
+    } else {
+      const num = parseFloat(value);
+      newFloors[index][key] = isNaN(num) ? '' : num;
+    }
     setInputs((prev) => ({ ...prev, floors: newFloors }));
   };
 

@@ -1,29 +1,32 @@
 // src/DisplacementPlot.jsx
-import React from 'react';
 import Plot from 'react-plotly.js';
 
 const DisplacementPlot = ({ floors, results, displacementType }) => {
+  const FvxArr = results.find(r => r.key === 'Fvx')?.value ?? [];
+
   const floorsWithDisplacement = floors.map((floor, index) => {
-    const Fvx = results.find(r => r.key === 'Fvx')?.value[index] || 0;
-
-    // cumulativeV = Fvx at this story + all stories above
-    const cumulativeV = results
-      .find(r => r.key === 'Fvx')
-      ?.value.slice(index)
-      .reduce((sum, v) => sum + v, 0) || 0;
-
+    const Fvx = FvxArr[index] || 0;
+    const cumulativeV = (FvxArr.slice(index).reduce((sum, v) => sum + v, 0)) || 0;
     return { ...floor, Fvx, cumulativeV };
   });
 
-  const storyLabels = floorsWithDisplacement.map((_, index) => `Story ${index + 1}`);
-  const displacements = floorsWithDisplacement.map((floor) =>
-    displacementType === 'horizontal' ? floor.cumulativeV : floor.Fvx
-  );
+  // Level 1 + story labels
+  const storyLabels = [
+    'Level 1',
+    ...floorsWithDisplacement.map((_, i) => `Level ${i + 2}`)
+  ];
+
+  const displacements = [
+    0,
+    ...floorsWithDisplacement.map(f =>
+      displacementType === 'horizontal' ? f.cumulativeV : f.Fvx
+    )
+  ];
 
   const titleText =
     displacementType === 'horizontal'
-      ? 'Horizontal Displacement (in)'
-      : 'Vertical Displacement (in)';
+      ? 'Horizontal Force Distribution'
+      : 'Vertical Force Distribution';
 
   return (
     <Plot
@@ -33,23 +36,18 @@ const DisplacementPlot = ({ floors, results, displacementType }) => {
           y: storyLabels,
           type: 'scatter',
           mode: 'lines+markers',
-          marker: { color:'black', symbol:'circle' },
-          line: { color:'black' },
+          marker: { color: 'black', symbol: 'circle' },
+          line: { color: 'black' },
           name: titleText,
         },
       ]}
       layout={{
         width: 375,
         height: 500,
-        title: {
-          text: `<i>${titleText}</i>`,
-          font: { size: 18 },
-        },
-        xaxis: {
-          title: 'Displacement (in)',
-        },
+        title: { text: `<i>${titleText}</i>`, font: { size: 18 } },
+        xaxis: { title: 'Displacement (in)' },
         yaxis: {
-          title: 'Story',
+          title: 'Levels',
           tickmode: 'array',
           tickvals: storyLabels,
           ticktext: storyLabels,
@@ -57,9 +55,12 @@ const DisplacementPlot = ({ floors, results, displacementType }) => {
         margin: { l: 60, r: 55, b: 50, t: 50 },
         plot_bgcolor: '#f9f9f9',
       }}
-      config={{ 
-        responsive: true, 
-        modeBarButtonsToRemove: ['toImage', 'sendDataToCloud', 'editInChartStudio', 'zoom2d', 'select2d', 'pan2d', 'lasso2d'],
+      config={{
+        responsive: true,
+        modeBarButtonsToRemove: [
+          'toImage','sendDataToCloud','editInChartStudio',
+          'zoom2d','select2d','pan2d','lasso2d'
+        ],
       }}
     />
   );
