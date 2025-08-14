@@ -1,4 +1,4 @@
-import calculateCs from '../../../assets/data/calculations/calculateCs';
+import calculateCs from '../../../assets/data/calculations/CalculateCsParameters';
 import calculateV from '../../../assets/data/calculations/calculateV';
 import calculateCvx from '../../../assets/data/calculations/calculateCvx';
 import calculateFvx from '../../../assets/data/calculations/calculateFvx';
