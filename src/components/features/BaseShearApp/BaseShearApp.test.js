@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import BaseShearApp from './BaseShearApp';
 
@@ -58,33 +58,36 @@ jest.mock('./Plot', () => {
   };
 });
 
+const mockState = {
+  inputs: {
+    selectedRisk: "II - Regular Building",
+    selectedSiteClass: "D - Default",
+    selectedSystem: "Shear Wall (R = 5.0)",
+    shortPeriodSpectralAcceleration: "1.50",
+    longPeriodSpectralAcceleration: "0.60",
+    longPeriodTransitionPeriod: "8.00",
+    Ie: "1.00",
+    R: "5.00",
+    T: "1.00",
+    floors: [{ height: 20, weight: 100000 }],
+  },
+  setInputs: jest.fn(),
+  results: [
+    { key: 'V', value: 24000 },
+    { key: 'Fvx', value: [24000] },
+    { key: 'storyVs', value: [24000] },
+    { key: 'totalHeight', value: 20 },
+  ],
+  updatedFloors: [{ height: 20, weight: 100000, bottom: 0 }],
+  isLoading: false,
+  resetInputs: jest.fn(),
+};
+
 jest.mock('./useBaseShearState', () => ({
-  useBaseShearState: () => ({
-    inputs: {
-      selectedRisk: "II - Regular Building",
-      selectedSiteClass: "D - Default",
-      selectedSystem: "Shear Wall (R = 5.0)",
-      shortPeriodSpectralAcceleration: "1.50",
-      longPeriodSpectralAcceleration: "0.60",
-      longPeriodTransitionPeriod: "8.00",
-      Ie: "1.00",
-      R: "5.00",
-      T: "1.00",
-      floors: [{ height: 20, weight: 100000 }],
-    },
-    setInputs: jest.fn(),
-    results: [
-      { key: 'V', value: 24000 },
-      { key: 'Fvx', value: [24000] },
-      { key: 'storyVs', value: [24000] },
-      { key: 'totalHeight', value: 20 },
-    ],
-    updatedFloors: [{ height: 20, weight: 100000, bottom: 0 }],
-    isLoading: false,
-    resetInputs: jest.fn(),
-  }),
+  useBaseShearState: () => mockState,
 }));
 
+// Globals
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),
@@ -107,6 +110,7 @@ Object.defineProperty(window, 'innerWidth', {
   value: 1920,
 });
 
+// Tests
 describe('BaseShearApp', () => {
   test('renders without crashing', () => {
     const { container } = render(<BaseShearApp />);
@@ -124,6 +128,50 @@ describe('BaseShearApp', () => {
     if (buttons.length > 0) {
       await user.click(buttons[0]);
     }
-
   });
+  
+  test('reset button calls resetInputs', async () => {
+    const user = userEvent.setup();
+    render(<BaseShearApp />);
+    const resetButton = screen.getByRole('button', { name: /reset all inputs/i });
+    await user.click(resetButton);
+    expect(mockState.resetInputs).toHaveBeenCalled();
+  });
+
+  test('opens and closes the solution toggle', async () => {
+    const user = userEvent.setup();
+    render(<BaseShearApp />);
+
+    const solutionButton = screen.getByRole('button', { name: /solutions/i });
+    await user.click(solutionButton);
+
+    // Wait for delayed content to appear
+    const resultsHeading = await screen.findByText(
+      /base shear analysis results/i,
+      {},
+      { timeout: 3000 }
+    );
+    expect(resultsHeading).toBeInTheDocument();
+
+    const panel = resultsHeading.closest('div');
+    const closeButton = within(panel).getByRole('button', { hidden: true });
+    await user.click(closeButton);
+    expect(screen.queryByText(/base shear analysis results/i)).not.toBeInTheDocument();
+  });
+
+  test('can add and delete floors', async () => {
+    const user = userEvent.setup();
+    render(<BaseShearApp />);
+
+    const addFloorButton = screen.getByRole('button', { name: /\+ add floor/i });
+    await user.click(addFloorButton);
+    expect(mockState.setInputs).toHaveBeenCalled();
+
+    const deleteButtons = screen.getAllByRole('button', { name: /x/i });
+    if (deleteButtons.length > 0) {
+      await user.click(deleteButtons[0]);
+      expect(mockState.setInputs).toHaveBeenCalled();
+    }
+  });
+
 });

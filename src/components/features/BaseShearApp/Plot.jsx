@@ -37,7 +37,7 @@ const DisplacementPlot = ({ floors, results, displacementType }) => {
             type: 'scatter',
             mode: 'lines+markers',
             marker: { color: "#60A5FA", symbol: 'circle' },
-            line: { color: "#60A5FA" },
+            line: { width: 2 },
             name: titleText,
           },
         ]}
