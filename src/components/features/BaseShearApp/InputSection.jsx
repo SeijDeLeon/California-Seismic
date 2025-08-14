@@ -36,7 +36,7 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
                 onClick={() => deleteFloor(i)}
                 className="text-red-600 hover:text-red-800 px-2 py-1 text-xs sm:text-sm"
               >
-                X
+                x
               </button>
             </td>
           </tr>
@@ -45,7 +45,7 @@ const InputTable = ({ floors, addFloor, deleteFloor, handleChange }) => (
     </table>
     <button
       onClick={addFloor}
-      className="px-3 sm:px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-800 text-xs sm:text-sm w-full sm:w-auto"
+      className="px-3 sm:px-4 py-2 text-white rounded text-xs sm:text-sm w-full sm:w-auto bg-blue-500 hover:bg-blue-600"
     >
       + Add Floor
     </button>
