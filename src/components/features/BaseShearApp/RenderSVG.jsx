@@ -15,8 +15,8 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
   const rectX = 150;
   const rectWidth = 200;
 
-  const fxScale = 100;          
-  const fxArrowTipX = 142;      
+  const fxScale = 100;
+  const fxArrowTipX = 142;
 
   const fxTailPts = [];
 
@@ -26,7 +26,7 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
   const circleX = rectX + rectWidth + 150;
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-hidden">
       <svg
         width="800"
         height={`${totalHeight * scale + 100}px`}
@@ -156,13 +156,13 @@ const RenderSVG = ({ floors, forces, storyVs, totalBaseShear, totalHeight }) => 
             label: `V = ${(Math.round(totalBaseShear)).toLocaleString()} lb`,
             direction: 'left',
             labelPosition: 'middle',
-            labelOffsetX: 100,    
+            labelOffsetX: 100,
             scaleFactor: 100,
           })}
 
           {/* Level 1 label */}
           <line x1={tickX1} y1={groundY} x2={tickX2} y2={groundY} stroke="#555" strokeWidth="1.5" />
-          <circle cx={circleX} cy={groundY} r="14" fill="none" stroke="#333" strokeWidth="1.5"/>
+          <circle cx={circleX} cy={groundY} r="14" fill="none" stroke="#333" strokeWidth="1.5" />
           <text x={circleX} y={groundY + 4} textAnchor="middle" fontSize="12" fontWeight="600" fill="#333"> 1 </text>
 
           {/* Total h_n */}

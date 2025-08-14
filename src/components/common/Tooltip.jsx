@@ -5,12 +5,10 @@ const Tooltip = ({ children, content, value, unit = "", reference }) => {
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    console.log("Tooltip hovered:", reference || value);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    console.log("Tooltip no longer hovered");
   };
 
   const isFiniteNumber = (n) => typeof n === "number" && Number.isFinite(n);
@@ -29,7 +27,7 @@ const Tooltip = ({ children, content, value, unit = "", reference }) => {
       {reference && <div className="font-semibold mb-0.5">{reference}</div>}
       {isFiniteNumber(value) && (
         <div>
-          Value: {value.toFixed(6)}
+          Value: {value.toFixed(5)}
           {unit ? ` ${unit}` : ""}
         </div>
       )}

@@ -1,27 +1,30 @@
+import React, { useMemo } from "react";
 import OutputTemplate from "../DiaphragmAnalysis/OutputTemplate";
 import Workflow from "../DiaphragmAnalysis/Workflow";
 import ChevronCard from "../DiaphragmAnalysis/ChevronCard";
 import Tooltip from "../../common/Tooltip";
 import { MathJax } from "better-react-mathjax";
 
-export default function BaseShearCard({ results, inputs }) {
-    const totalBaseShear = results.find(result => result.key === 'V')?.value || 0;
-    const sds = results.find(result => result.key === 'SDS')?.value || 0;
-    const sd1 = results.find(result => result.key === 'SD1')?.value || 0;
-    const cs_final = results.find(result => result.key === 'Cs_final')?.value || 0;
-    const ts = results.find(result => result.key === 'Ts')?.value || 0;
-    const fv = results.find(result => result.key === 'Fv')?.value || 0;
-    const fa = results.find(result => result.key === 'Fa')?.value || 0;
-    const sms = results.find(result => result.key === 'SMS')?.value || 0;
-    const sm1 = results.find(result => result.key === 'SM1')?.value || 0;
-    const cs_initial = results.find(result => result.key === 'Cs_initial')?.value || 0;
-    const cs_min = results.find(result => result.key === 'Cs_min')?.value || 0;
-    const cs_max = results.find(result => result.key === 'Cs_max')?.value || 0;
+const BaseShearCard = React.memo(function BaseShearCard({ results, inputs }) {
+    const calculatedValues = useMemo(() => ({
+        totalBaseShear: results.find(result => result.key === 'V')?.value || 0,
+        sds: results.find(result => result.key === 'SDS')?.value || 0,
+        sd1: results.find(result => result.key === 'SD1')?.value || 0,
+        cs_final: results.find(result => result.key === 'Cs_final')?.value || 0,
+        ts: results.find(result => result.key === 'Ts')?.value || 0,
+        fv: results.find(result => result.key === 'Fv')?.value || 0,
+        fa: results.find(result => result.key === 'Fa')?.value || 0,
+        sms: results.find(result => result.key === 'SMS')?.value || 0,
+        sm1: results.find(result => result.key === 'SM1')?.value || 0,
+        cs_initial: results.find(result => result.key === 'Cs_initial')?.value || 0,
+        cs_min: results.find(result => result.key === 'Cs_min')?.value || 0,
+        cs_max: results.find(result => result.key === 'Cs_max')?.value || 0,
+        totalWeight: inputs.floors ? inputs.floors.reduce((sum, floor) => sum + (floor.weight || 0), 0) : 0
+    }), [results, inputs.floors]);
 
-    // Calculate total weight from floors
-    const totalWeight = inputs.floors ? inputs.floors.reduce((sum, floor) => sum + (floor.weight || 0), 0) : 0;
+    const { totalBaseShear, sds, sd1, cs_final, ts, fv, fa, sms, sm1, cs_initial, cs_min, cs_max, totalWeight } = calculatedValues;
 
-    const workflow = [
+    const workflow = useMemo(() => [
         {
             title: "Calculate Site-Modified Spectral Acceleration Parameters",
             content: (
@@ -29,19 +32,19 @@ export default function BaseShearCard({ results, inputs }) {
                     <div className="font-mono text-xs sm:text-sm">
                         <MathJax inline>{"\\(S_{MS} = F_a \\times S_s = \\)"}</MathJax>
                         <span>
-                            <Tooltip value={fa} reference="ASCE 7-16 Table 11.4-1">
+                            <Tooltip value={fa} >
                                 {fa.toFixed(3)}
                             </Tooltip>
                         </span>
                         {" × "}
                         <span>
-                            <Tooltip value={parseFloat(inputs.shortPeriodSpectralAcceleration)} unit="g">
+                            <Tooltip value={parseFloat(inputs.shortPeriodSpectralAcceleration)} unit="g" reference="ASCE 7-16 Table 11.4-1">
                                 {parseFloat(inputs.shortPeriodSpectralAcceleration).toFixed(2)}
                             </Tooltip>
                         </span>
                         {" g = "}
                         <span>
-                            <Tooltip value={sms} unit="g" reference="ASCE 7-16 Equation 11.4-1">
+                            <Tooltip value={sms} unit="g" >
                                 {sms.toFixed(3)}
                             </Tooltip>
                         </span>
@@ -50,25 +53,25 @@ export default function BaseShearCard({ results, inputs }) {
                     <div className="font-mono text-xs sm:text-sm">
                         <MathJax inline>{"\\(S_{M1} = F_v \\times S_1 = \\)"}</MathJax>
                         <span>
-                            <Tooltip value={fv} reference="ASCE 7-16 Table 11.4-2">
+                            <Tooltip value={fv} >
                                 {fv.toFixed(3)}
                             </Tooltip>
                         </span>
                         {" × "}
                         <span>
-                            <Tooltip value={parseFloat(inputs.longPeriodSpectralAcceleration)} unit="g">
+                            <Tooltip value={parseFloat(inputs.longPeriodSpectralAcceleration)} unit="g" reference="ASCE 7-16 Equation 11.4-2">
                                 {parseFloat(inputs.longPeriodSpectralAcceleration).toFixed(2)}
                             </Tooltip>
                         </span>
                         {" g = "}
                         <span>
-                            <Tooltip value={sm1} unit="g" reference="ASCE 7-16 Equation 11.4-2">
+                            <Tooltip value={sm1} unit="g">
                                 {sm1.toFixed(3)}
                             </Tooltip>
                         </span>
                         {" g"}
                     </div>
-                </div>
+                </div >
             ),
         },
         {
@@ -146,13 +149,11 @@ export default function BaseShearCard({ results, inputs }) {
                                 </Tooltip>
                             </div>
                         </div>
-                        <div className="font-semibold">
-                            <MathJax inline>{`\\(C_{s,final} = C_{s,max} < C_{s} < C_{s,min} = ${cs_min.toFixed(4)} < ${cs_initial.toFixed(4)} < ${cs_max.toFixed(4)} = ${cs_final.toFixed(4)}\\)`}</MathJax>
-                            <div className="text-xs text-gray-600 mt-1">
-                                <Tooltip value={cs_final} reference="ASCE 7-16 Section 12.8.1">
-                                    Final seismic response coefficient
-                                </Tooltip>
-                            </div>
+                        <MathJax inline>{`\\(C_{s,final} = C_{s,max} < C_{s} < C_{s,min} = ${cs_min.toFixed(4)} < ${cs_initial.toFixed(4)} < ${cs_max.toFixed(4)} = ${cs_final.toFixed(4)}\\)`}</MathJax>
+                        <div className="text-xs text-gray-600 mt-1">
+                            <Tooltip value={cs_final} reference="ASCE 7-16 Section 12.8.1">
+                                Final seismic response coefficient
+                            </Tooltip>
                         </div>
                     </div>
                 </div>
@@ -189,11 +190,9 @@ export default function BaseShearCard({ results, inputs }) {
                 </div>
             ),
         },
-    ];
+    ], [fa, fv, sms, sm1, sds, sd1, cs_initial, cs_min, cs_max, cs_final, totalBaseShear, totalWeight, inputs.shortPeriodSpectralAcceleration, inputs.longPeriodSpectralAcceleration, inputs.R, inputs.Ie, inputs.T]);
 
-
-    // Key calculation results to display
-    const calculationResults = [
+    const calculationResults = useMemo(() => [
         { key: 'Fa', value: fa, label: 'F_a', unit: '', description: 'Site Coefficient (Short Period)', reference: 'ASCE 7-16 Table 11.4-1' },
         { key: 'Fv', value: fv, label: 'F_v', unit: '', description: 'Site Coefficient (1-Second Period)', reference: 'ASCE 7-16 Table 11.4-2' },
         { key: 'SMS', value: sms, label: 'S_{MS}', unit: 'g', description: 'Site-Modified Spectral Acceleration (Short Period)', reference: 'ASCE 7-16 Eq. 11.4-1' },
@@ -204,11 +203,11 @@ export default function BaseShearCard({ results, inputs }) {
         { key: 'Cs_initial', value: cs_initial, label: 'C_{s,initial}', unit: '', description: 'Initial Seismic Response Coefficient', reference: 'ASCE 7-16 Eq. 12.8-2' },
         { key: 'Cs_final', value: cs_final, label: 'C_s', unit: '', description: 'Final Seismic Response Coefficient', reference: 'ASCE 7-16 Section 12.8.1' },
         { key: 'V', value: totalBaseShear, label: 'V', unit: 'kips', description: 'Total Base Shear', reference: 'ASCE 7-16 Eq. 12.8-1' },
-    ];
+    ], [fa, fv, sms, sm1, sds, sd1, ts, cs_initial, cs_final, totalBaseShear]);
 
     return (
         <>
-            <ChevronCard title="Base Shear Calculation">
+            <ChevronCard title="Base Shear Calculation" alwaysOpen={true}>
                 <OutputTemplate
                     workflow={<Workflow steps={workflow} />}
                 />
@@ -247,4 +246,6 @@ export default function BaseShearCard({ results, inputs }) {
             </ChevronCard>
         </>
     );
-}
+});
+
+export default BaseShearCard;
