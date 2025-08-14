@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-export default function ChevronCard({ title, children }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function ChevronCard({ title, children, alwaysOpen = false }) {
+  const [isOpen, setIsOpen] = useState(alwaysOpen);
 
   return (
     <div>

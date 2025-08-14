@@ -1,38 +1,56 @@
-import { useEffect } from 'react';
+import React, { useEffect, useMemo, useCallback, useState } from 'react';
 import { EquationFormat } from '../../common/EquationFormat';
 import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
 import { BentoContainer } from '../../common/BentoContainer';
+import { Loader } from '../../common/Loader';
 import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
 import BaseShearOutput from './BaseShearOutput';
 import { useBaseShearState } from './useBaseShearState';
 
-const BaseShearApp = () => {
+const BaseShearApp = React.memo(() => {
   const {
-    inputs, setInputs, results, updatedFloors, resetInputs
+    inputs, setInputs, results, updatedFloors, isLoading, resetInputs
   } = useBaseShearState();
 
-  const handleInputChange = (key) => (valOrEvent) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isUltraWide, setIsUltraWide] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 2560;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsUltraWide(window.innerWidth >= 2560);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleInputChange = useCallback((key) => (valOrEvent) => {
     const value = valOrEvent?.target?.value ?? valOrEvent;
     setInputs((prev) => ({ ...prev, [key]: value }));
-  };
+  }, [setInputs]);
 
-  const addFloor = () => {
+  const addFloor = useCallback(() => {
     setInputs((prev) => ({
       ...prev,
       floors: [...prev.floors, { height: 20, weight: 1000 }]
     }));
-  };
+  }, [setInputs]);
 
-  const deleteFloor = (index) => {
+  const deleteFloor = useCallback((index) => {
     const newFloors = [...inputs.floors];
     newFloors.splice(index, 1);
     setInputs((prev) => ({ ...prev, floors: newFloors }));
-  };
+  }, [inputs.floors, setInputs]);
 
-  const handleChange = (index, key, value) => {
+  const handleChange = useCallback((index, key, value) => {
     const newFloors = [...inputs.floors];
     if (value === '' || value === null) {
       newFloors[index][key] = '';
@@ -41,7 +59,18 @@ const BaseShearApp = () => {
       newFloors[index][key] = isNaN(num) ? '' : num;
     }
     setInputs((prev) => ({ ...prev, floors: newFloors }));
-  };
+  }, [inputs.floors, setInputs]);
+
+  const totalBaseShear = useMemo(() =>
+    (results || []).find(result => result.key === 'V')?.value,
+    [results]
+  );
+
+  const forceResults = useMemo(() => ({
+    forces: results.find(result => result.key === 'Fvx')?.value || [],
+    storyVs: results.find(result => result.key === 'storyVs')?.value || [],
+    totalHeight: results.find(result => result.key === 'totalHeight')?.value || 0
+  }), [results]);
 
   useEffect(() => {
     const Ie_map = {
@@ -53,7 +82,16 @@ const BaseShearApp = () => {
     setInputs((prev) => ({ ...prev, Ie: Ie_map[prev.selectedRisk] }));
   }, [inputs.selectedRisk, setInputs]);
 
-  const totalBaseShear = (results || []).find(result => result.key === 'V')?.value;
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape' && isDrawerOpen && !isUltraWide) {
+        setIsDrawerOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [isDrawerOpen, isUltraWide]);
 
   return (
     <BentoContainer title="Base Shear Calculator">
@@ -91,6 +129,12 @@ const BaseShearApp = () => {
             "Concrete Moment Frame (R = 5.0)",
             "Steel Moment Frame (R = 5.5)",
             "Braced Frame (R = 6.0)",
+            "Special Steel Moment Frame (R = 8.0)",
+            "Special Reinforced Concrete Shear Wall (R = 8.0)",
+            "Special Steel Plate Shear Wall (R = 8.0)",
+            "Buckling-Restrained Braced Frame (R = 8.0)",
+            "Dual System (R = 8.0)",
+            "Base Isolation (R = 10.0)"
           ]}
           onChange={(val) => {
             const match = val.match(/\(R = ([\d.]+)\)/);
@@ -157,50 +201,93 @@ const BaseShearApp = () => {
       </BentoBox>
 
       <BentoBox title="DIAGRAM:">
-        <RenderSVG
-          floors={updatedFloors}
-          forces={results.find(result => result.key === 'Fvx')?.value || []}
-          storyVs={results.find(result => result.key === 'storyVs')?.value || []}
-          totalBaseShear={totalBaseShear}
-          totalHeight={results.find(result => result.key === 'totalHeight')?.value || 0}
-        />
-        {/* Side-by-side plots */}
-        <div className="w-full flex flex-col items-center px-2 sm:px-4 mt-6">
-          <h4 className="font-semibold mb-2 text-sm sm:text-md">Plots:</h4>
-          <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-6">
-            <div className="w-full lg:w-1/2 h-[400px]">
-              <DisplacementPlot
-                floors={updatedFloors}
-                results={results}
-                displacementType="horizontal"
-              />
+        <div className="relative">
+          {!isUltraWide && (
+            <div className="absolute top-0 -right-4 z-10">
+              <button
+                onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+                className={`bg-blue-500 hover:bg-blue-600 text-white p-2 shadow-lg text-sm font-medium flex flex-col items-center gap-2 transition-all duration-300 ease-in-out
+                  ${isDrawerOpen ? 'rounded-l-lg rounded-r-none bg-blue-600' : 'rounded-l-lg rounded-r-lg'}
+                  min-h-[120px]`}
+                style={{
+                  writingMode: 'vertical-rl',
+                  textOrientation: 'mixed'
+                }}
+              >
+                <span className="rotate-0 whitespace-nowrap tracking-wide">
+                  Solutions
+                </span>
+              </button>
             </div>
-            <div className="w-full lg:w-1/2 h-[400px]">
-              <DisplacementPlot
-                floors={updatedFloors}
-                results={results}
-                displacementType="vertical"
-              />
+          )}
+
+          {isLoading ? (
+            <div className="min-h-[50vh] flex items-center justify-center">
+              <Loader title={"Loading seismic diagrams..."} />
             </div>
-          </div>
+          ) : (
+            <>
+              <RenderSVG
+                floors={updatedFloors}
+                forces={forceResults.forces}
+                storyVs={forceResults.storyVs}
+                totalBaseShear={totalBaseShear}
+                totalHeight={forceResults.totalHeight}
+              />
+              {/* Side-by-side plots */}
+              <div className="w-full flex flex-col items-center px-2 sm:px-4 mt-6">
+                <h4 className="font-semibold mb-2 text-sm sm:text-md">Plots:</h4>
+                <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-6">
+                  <div className="w-full lg:w-1/2">
+                    <DisplacementPlot
+                      floors={updatedFloors}
+                      results={results}
+                      displacementType="horizontal"
+                    />
+                  </div>
+                  <div className="w-full lg:w-1/2">
+                    <DisplacementPlot
+                      floors={updatedFloors}
+                      results={results}
+                      displacementType="vertical"
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {!isUltraWide && isDrawerOpen && (
+            <div className={`absolute top-0 right-0 w-full max-w-4xl bg-white shadow-2xl z-20 transform transition-all duration-300 ease-in-out min-h-full ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'} border-2 border-blue-200 rounded-lg`}>
+              <div className="bg-blue-50 px-4 py-3 border-b border-blue-200 flex justify-between items-center">
+                <h3 className="text-blue-600 text-lg font-semibold">Base Shear Analysis Results</h3>
+                <button
+                  onClick={() => setIsDrawerOpen(false)}
+                  className="text-blue-600 hover:text-blue-800 p-1 rounded-full hover:bg-blue-100 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="overflow-y-auto bg-white">
+                <div className="p-4">
+                  <BaseShearOutput results={results} inputs={inputs} isLoading={isLoading} />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </BentoBox>
-      <BentoBox title="SOLUTIONS:">
-        {(
-          !inputs.shortPeriodSpectralAcceleration ||
-          !inputs.longPeriodSpectralAcceleration ||
-          !inputs.longPeriodTransitionPeriod
-        ) ? (
-          <p className="text-red-600 font-semibold">
-            Please provide Short Period Acceleration (Ss), Long Period Acceleration (S1), and Long Period Transition Period (TL) to see results.
-          </p>
-        ) : (
-          <BaseShearOutput results={results} inputs={inputs} />
-        )}
-      </BentoBox>
+
+      {isUltraWide && (
+        <BentoBox title="SOLUTIONS:">
+          <BaseShearOutput results={results} inputs={inputs} isLoading={isLoading} />
+        </BentoBox>
+      )}
 
     </BentoContainer>
   );
-};
+});
 
 export default BaseShearApp;
