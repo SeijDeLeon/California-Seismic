@@ -12,27 +12,22 @@ export const BentoInput = ({ label, value, equation, listItems, onChange, inputT
         switch (inputType) {
             case 'list':
                 return <ListInput {...inputProps} listItems={listItems} />;
-            case 'default':
             default:
                 return <DefaultInput {...inputProps} />;
         }
     };
 
     return (
-        <div className="w-full flex justify-between items-center mb-1 text-xs">
-            <div className="w-1/3 flex items-center text-start">
-                {label && (
-                    <label className="text-xs text-black">
-                        {label}
-                    </label>
-                )}
+        <div className="w-full grid grid-cols-3 gap-2 items-center mb-1 text-xs border-black border-opacity-20 border-b-2 pb-3">
+            <div className="text-black text-xs text-left">{label}</div>
 
+            <div className="flex justify-end">
+                {equation && <EquationFormat value={equation} />}
             </div>
 
-            {equation && <EquationFormat value={equation} />}
             {renderInput()}
             {trailingUnit && (
-                <span className="text-xs text-black">{trailingUnit}</span>
+                <span className="ml-1 text-xs text-black">{trailingUnit}</span>
             )}
         </div>
     );

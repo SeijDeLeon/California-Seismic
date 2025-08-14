@@ -1,4 +1,7 @@
 import calculateCs from '../../../assets/data/calculations/calculateCs';
+import calculateV from '../../../assets/data/calculations/calculateV';
+import calculateCvx from '../../../assets/data/calculations/calculateCvx';
+import calculateFvx from '../../../assets/data/calculations/calculateFvx';
 
 const interpolate = (value, valueArray, map, siteClass) => {
   if (value <= valueArray[0]) return map[valueArray[0]][siteClass];
@@ -11,8 +14,6 @@ const interpolate = (value, valueArray, map, siteClass) => {
       return map[valueArray[i]][siteClass] + slope * (value - valueArray[i]);
     }
   }
-  
-
   return null;
 }
 
@@ -78,8 +79,7 @@ const getCs = (SDS, SD1, T, Ie, R, S1, TL, siteClass) => {
 };
 
 const getV = (Cs, W) => {
-  const V = Cs * W
-  return V;
+  return calculateV(Cs, W);
 };
 
 const getSDC = (SDS, SD1, riskCategory) => {
@@ -127,6 +127,22 @@ const getSDC = (SDS, SD1, riskCategory) => {
   return SDC;
 };
 
+const getCvx = (weights, heights, totalWeightHeight) => {
+  return calculateCvx(weights, heights, totalWeightHeight);
+};
+
+const getFvx = (Cvx, V) => {
+  return calculateFvx(Cvx, V);
+};
+
+const getFloorsFromBottom = (floors) => {
+  let heightBottomToTop = 0;
+  return floors.map((floor) => {
+    const updated = { ...floor, bottom: heightBottomToTop };
+    heightBottomToTop += floor.height;
+    return updated;
+  });
+};
 
 export const calculateBaseShearUnits = {
   getFv,
@@ -139,4 +155,7 @@ export const calculateBaseShearUnits = {
   getCs,
   getV,
   getSDC,
+  getCvx,
+  getFvx,
+  getFloorsFromBottom,
 };

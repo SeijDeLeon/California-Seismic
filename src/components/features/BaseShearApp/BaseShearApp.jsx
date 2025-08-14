@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { EquationFormat } from '../../common/EquationFormat';
 import { BentoInput } from '../../common/BentoInput';
 import { BentoBox } from '../../common/BentoBox';
@@ -6,14 +6,12 @@ import { BentoContainer } from '../../common/BentoContainer';
 import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
+import BaseShearOutput from './BaseShearOutput';
 import { useBaseShearState } from './useBaseShearState';
 
 const BaseShearApp = () => {
-  const [showDiagramType, setShowDiagramType] = useState('svg');
   const {
-    inputs, setInputs, results,
-    updatedFloors, totalBaseShear,
-    totalHeight, forces, storyVs, resetInputs
+    inputs, setInputs, results, updatedFloors, resetInputs
   } = useBaseShearState();
 
   const handleInputChange = (key) => (valOrEvent) => {
@@ -49,6 +47,8 @@ const BaseShearApp = () => {
     };
     setInputs((prev) => ({ ...prev, Ie: Ie_map[prev.selectedRisk] }));
   }, [inputs.selectedRisk, setInputs]);
+
+  const totalBaseShear = (results || []).find(result => result.key === 'V')?.value;
 
   return (
     <BentoContainer title="Base Shear Calculator">
@@ -124,8 +124,11 @@ const BaseShearApp = () => {
           label="Importance Factor"
           value={inputs.Ie}
           equation={<EquationFormat value={"\\(I_{e} =\\)"} />}
+          listItems={[
+            "1.0", "1.25", "1.50"
+          ]}
           onChange={handleInputChange("Ie")}
-          inputType="default"
+          inputType="list"
           tooltip="Amplifies seismic forces for critical facilities. 1.0 for most buildings; 1.25 or 1.5 for essential or hazardous structures."
         />
         <BentoInput
@@ -136,10 +139,10 @@ const BaseShearApp = () => {
           inputType="default"
           tooltip="Estimated vibration period of the structure in seconds. Typical range is 0.1 to 3.0 seconds depending on height and stiffness."
         />
-        <button onClick={resetInputs} className="my-3 mb-5 font-bold w-auto rounded hover:text-red-700 text-sm self-end">
+        <button onClick={resetInputs} className="my-3 mb-5 font-bold w-auto rounded hover:text-red-700 text-xs sm:text-sm self-end px-2 py-1">
           Reset All Inputs
         </button>
-        <h5 className="font-semibold mb-2 text-md">Building Properties:</h5>
+        <h5 className="font-semibold mb-2 text-sm sm:text-md">Building Properties:</h5>
         <InputTable
           floors={updatedFloors}
           addFloor={addFloor}
@@ -149,44 +152,34 @@ const BaseShearApp = () => {
       </BentoBox>
 
       <BentoBox title="DIAGRAM:">
-        <div className="w-full flex justify-center mb-4">
-          <div className="relative flex items-center bg-gray-500 rounded-full w-28 h-10">
-            <div
-              className={`absolute inset-y-1 h-8 w-1/2 rounded-full transition-all duration-300 bg-gray-800 ${showDiagramType === 'plot' ? 'right-1' : 'left-1'
-                }`}
-            ></div>
-
-            <button
-              className="z-10 w-1/2 text-center text-white text-sm font-medium pl-1"
-              onClick={() => setShowDiagramType('svg')}
-            >
-              SVG
-            </button>
-
-            <button
-              className="z-10 w-1/2 text-center text-white text-sm font-medium pr-1"
-              onClick={() => setShowDiagramType('plot')}
-            >
-              Plot
-            </button>
+        <RenderSVG
+          floors={updatedFloors}
+          forces={results.find(result => result.key === 'Fvx')?.value || []}
+          storyVs={results.find(result => result.key === 'storyVs')?.value || []}
+          totalBaseShear={totalBaseShear}
+          totalHeight={results.find(result => result.key === 'totalHeight')?.value || 0}
+        />
+        {/* Side-by-side plots */}
+        <div className="w-full flex flex-col items-center px-2 sm:px-4 mt-6">
+          <h4 className="font-semibold mb-2 text-sm sm:text-md">Plots:</h4>
+          <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-6">
+            <div className="w-full lg:w-1/2">
+              <DisplacementPlot
+                floors={updatedFloors}
+                results={results}
+                displacementType="horizontal"
+              />
+            </div>
+            <div className="w-full lg:w-1/2">
+              <DisplacementPlot
+                floors={updatedFloors}
+                results={results}
+                displacementType="vertical"
+              />
+            </div>
           </div>
         </div>
-
-        <div className="w-full flex justify-center items-center">
-          {showDiagramType === 'svg' ? (
-            <RenderSVG
-              floors={updatedFloors}
-              forces={forces}
-              storyVs={storyVs}
-              totalBaseShear={totalBaseShear}
-              totalHeight={totalHeight}
-            />
-          ) : (
-            <DisplacementPlot />
-          )}
-        </div>
       </BentoBox>
-
       <BentoBox title="SOLUTIONS:">
         {(
           !inputs.shortPeriodSpectralAcceleration ||
@@ -197,30 +190,7 @@ const BaseShearApp = () => {
             Please provide Short Period Acceleration (Ss), Long Period Acceleration (S1), and Long Period Transition Period (TL) to see results.
           </p>
         ) : (
-          <section className="flex gap-1 flex-col text-sm text-gray-700 justify-start items-start align-start pl-3">
-            {results
-              .filter(({ key }) => key !== 'SDC')
-              .map(({ key, value, label }) => (
-                <EquationFormat
-                  key={key}
-                  value={`\\(${label} =\\)`}
-                  result={typeof value === 'number' ? value.toFixed(2) : value}
-                />
-              ))}
-            {results.filter(({ key }) => key === 'SDC').map(({ key, value }) => (
-              <EquationFormat
-                key={key}
-                value={`Seismic Design Category (SDC) =`}
-                result={value || 'N/A'}
-              />
-            ))}
-
-            <p className="font-bold text-2xl">Total Base Shear: {
-              typeof totalBaseShear === 'number' && !isNaN(totalBaseShear)
-                ? `${totalBaseShear.toFixed(2)} kips`
-                : 'N/A'
-            }</p>
-          </section>
+          <BaseShearOutput results={results} inputs={inputs} />
         )}
       </BentoBox>
 

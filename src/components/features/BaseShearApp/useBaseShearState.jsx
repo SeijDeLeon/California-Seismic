@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { getFloorsFromBottom, calculateForces } from './Calculations';
+import { useState, useEffect, useMemo } from 'react';
 import { calculateBaseShearUnits } from '../../../assets/data/calculations/calculateBaseShearUnits';
 
 export const useBaseShearState = () => {
@@ -24,22 +23,33 @@ export const useBaseShearState = () => {
   const [results, setResults] = useState([
     { key: 'Fv', value: 0, label: 'F_v' },
     { key: 'Fa', value: 0, label: 'F_a' },
-    { key: 'SMS', value: 0, label: 'SMS' },
-    { key: 'SM1', value: 0, label: 'SM1' },
-    { key: 'SDS', value: 0, label: 'SDS' },
-    { key: 'SD1', value: 0, label: 'SD1' },
+    { key: 'SMS', value: 0, label: 'S_{MS}' },
+    { key: 'SM1', value: 0, label: 'S_{M1}' },
+    { key: 'SDS', value: 0, label: 'S_{DS}' },
+    { key: 'SD1', value: 0, label: 'S_{D1}' },
     { key: 'Ts', value: 0, label: 'T_s' },
     { key: 'Cs_initial', value: 0, label: 'C_{s,\\initial}' },
     { key: 'Cs_min', value: 0, label: 'C_{s,\\min}' },
     { key: 'Cs_max', value: 0, label: 'C_{s,\\max}' },
     { key: 'Cs_final', value: 0, label: 'C_{s,\\final}' },
-    { key: 'SDC', value: '', label: '\\mathrm{SDC}' },
+    { key: 'SDC', value: '', label: 'S_{DC}' },
+    { key: 'V', value: 0, label: 'V'},
+    { key: 'Cvx', value: [], label: 'C_{vx}' },
+    { key: 'Fvx', value: [], label: 'F_{vx}' },
+    { key: 'totalHeight', value: 0, label: 'h_{total}' },
+    { key: 'storyVs', value: [], label: 'Story_V' },
   ]);
 
   const parsedSiteClass = inputs.selectedSiteClass.charAt(0);
-  const updatedFloors = getFloorsFromBottom(inputs.floors);
+  const updatedFloors = useMemo(
+    () => calculateBaseShearUnits.getFloorsFromBottom(inputs.floors),
+    [inputs.floors]
+  );
 
   useEffect(() => {
+    const heights = updatedFloors.map(f => f.bottom + f.height / 2);
+    const weights = updatedFloors.map(f => f.weight);
+    const totalWeightHeight = weights.reduce((sum, w, i) => sum + w * heights[i], 0);
     const Fv = calculateBaseShearUnits.getFv(inputs.longPeriodSpectralAcceleration, parsedSiteClass);
     const Fa = calculateBaseShearUnits.getFa(inputs.shortPeriodSpectralAcceleration, parsedSiteClass);
 
@@ -61,34 +71,32 @@ export const useBaseShearState = () => {
     );
 
     const SDC = calculateBaseShearUnits.getSDC(SDS, SD1, inputs.selectedRisk);
+    const V = calculateBaseShearUnits.getV(Cs.Cs_final, weights);
+    const Cvx = calculateBaseShearUnits.getCvx(weights, heights, totalWeightHeight);
+    const Fvx = calculateBaseShearUnits.getFvx(Cvx, V); // Vertical distribution factor
+    const totalHeight = updatedFloors.reduce((sum, f) => sum + f.height, 0);
+    const storyVs = Fvx.map((_, i) => Fvx.slice(i).reduce((sum, fx) => sum + fx, 0)); // storyV = cumulative sum from top down
 
     setResults([
-      { key: 'Fv', value: 0, label: 'F_v' },
-      { key: 'Fa', value: 0, label: 'F_a' },
-      { key: 'SMS', value: SMS, label: 'SMS' },
-      { key: 'SM1', value: SM1, label: 'SM1' },
-      { key: 'SDS', value: SDS, label: 'SDS' },
-      { key: 'SD1', value: SD1, label: 'SD1' },
+      { key: 'Fv', value: Fv, label: 'F_v' },
+      { key: 'Fa', value: Fa, label: 'F_a' },
+      { key: 'SMS', value: SMS, label: 'S_{MS}' },
+      { key: 'SM1', value: SM1, label: 'S_{M1}' },
+      { key: 'SDS', value: SDS, label: 'S_{DS}' },
+      { key: 'SD1', value: SD1, label: 'S_{D1}' },
       { key: 'Ts', value: Ts, label: 'T_s' },
       { key: 'Cs_initial', value: Cs.Cs_initial, label: 'C_{s,\\text{initial}}' },
       { key: 'Cs_min', value: Cs.Cs_min, label: 'C_{s,\\min}' },
       { key: 'Cs_max', value: Cs.Cs_max, label: 'C_{s,\\max}' },
       { key: 'Cs_final', value: Cs.Cs_final, label: 'C_{s,\\text{final}}' },
-      { key: 'SDC', value: SDC, label: '\\mathrm{SDC}' },
+      { key: 'SDC', value: SDC, label: 'S_{DC}' },
+      { key: 'V', value: V, label: 'V'},
+      { key: 'Cvx', value: Cvx, label: 'C_{vx}' },
+      { key: 'Fvx', value: Fvx, label: 'F_{vx}' },
+      { key: 'totalHeight', value: totalHeight, label: 'h_{total}' },
+      { key: 'storyVs', value: storyVs, label: 'Story_V' },
     ]);
-  }, [inputs.shortPeriodSpectralAcceleration, inputs.longPeriodSpectralAcceleration, inputs.longPeriodTransitionPeriod, inputs.selectedRisk, inputs.selectedSiteClass, parsedSiteClass, inputs.T, inputs.R, inputs.Ie]);
-
-
-  const seismicParams = {
-    SDS: results.SDS,
-    SD1: results.SD1,
-    T: parseFloat(inputs.T),
-    R: parseFloat(inputs.R),
-    T0: 0.12,
-    TL: inputs.longPeriodTransitionPeriod || 8.0,
-  };
-
-  const { totalBaseShear, totalHeight, forces, storyVs } = calculateForces(updatedFloors, seismicParams);
+  }, [inputs.shortPeriodSpectralAcceleration, inputs.longPeriodSpectralAcceleration, inputs.longPeriodTransitionPeriod, inputs.selectedRisk, inputs.selectedSiteClass, parsedSiteClass, inputs.T, inputs.R, inputs.Ie, updatedFloors]);
 
   const resetInputs = () => {
     const reset = {
@@ -107,11 +115,7 @@ export const useBaseShearState = () => {
     inputs,
     setInputs,
     results,
-    updatedFloors,
-    totalBaseShear,
-    totalHeight,
-    forces,
-    storyVs,
+    updatedFloors, 
     resetInputs,
   };
 };

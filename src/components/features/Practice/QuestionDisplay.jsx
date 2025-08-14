@@ -29,14 +29,14 @@ export default function QuestionDisplay({ questionKey = 'a1', setQuestionKey }) 
       console.log('false');
       return false;
     }
-  }
+  };
 
   //search for the question that contains this questionKey. for future use, this questionKey can be an ID used in a 'GET' request to a server that has a database which contains all questions.
   var primaryIndex = questionKey.charCodeAt(0) - 97; //ASCII code for letter 'a' is 97
   var secondaryIndex = Number(questionKey.slice(1)) - 1;
 
   var question = [];
-  var title = '';
+  var title = "";
   //var description='';
   var data = questionData.data;
 
@@ -44,9 +44,11 @@ export default function QuestionDisplay({ questionKey = 'a1', setQuestionKey }) 
     question = data[primaryIndex].questions[secondaryIndex] ? data[primaryIndex].questions[secondaryIndex] : data[0].questions[0];
     title = data[primaryIndex].title ? data[primaryIndex].title : data[0].title;
     //description = data[primaryIndex].questions[secondaryIndex].description ? data[primaryIndex].questions[secondaryIndex].description : data[0].questions[0].description
-
   } catch (error) {
-    console.log('unable to find question selected for display in QuestionDisplay.jsx using questionKey ' + questionKey);
+    console.log(
+      "unable to find question selected for display in QuestionDisplay.jsx using questionKey " +
+        questionKey
+    );
     question = data[0].questions[0];
     title = data[0].title;
   }
@@ -55,15 +57,14 @@ export default function QuestionDisplay({ questionKey = 'a1', setQuestionKey }) 
   const totalQuestions = data[primaryIndex].questions.length;
   const totalSections = data.length;
   //get keys for the next and previous question
-  var nextQuestionKey = 'a2'; //hardcode default if next is not found
-  var prevQuestionKey = 'a1'; //hardcode default if prev is not found
+  var nextQuestionKey = "a2"; //hardcode default if next is not found
+  var prevQuestionKey = "a1"; //hardcode default if prev is not found
 
   //set next key
   if (secondaryIndex + 1 < totalQuestions) {
     //same section, next question
     nextQuestionKey = data[primaryIndex].questions[secondaryIndex + 1].key;
-  }
-  else {
+  } else {
     //change section
     if (primaryIndex + 1 < totalSections) {
       //next section, first question
@@ -89,15 +90,17 @@ export default function QuestionDisplay({ questionKey = 'a1', setQuestionKey }) 
     }
   }
 
-
-
-  const [checkedItem, setCheckedItem] = useState('');
+  const [checkedItem, setCheckedItem] = useState("");
   const [solutionDisplay, setSolutionDisplay] = useState(false);
 
-  var answers = [question.answer, question.false1, question.false2, question.false3];
+  var answers = [
+    question.answer,
+    question.false1,
+    question.false2,
+    question.false3,
+  ];
 
   var randomizedAnswers = [];
-
 
   const getRandomBoolean = () => {
     var currentTime = new Date();
@@ -122,35 +125,34 @@ export default function QuestionDisplay({ questionKey = 'a1', setQuestionKey }) 
 
   const handleChange = (e) => {
     setCheckedItem(e.currentTarget.value);
-  }
+  };
 
   const toggleSolutionDisplay = () => {
     setSolutionDisplay(!solutionDisplay);
-  }
+  };
 
   const handleNextClick = () => {
     setSolutionDisplay(false);
-    setCheckedItem('');
+    setCheckedItem("");
     setQuestionKey(nextQuestionKey);
-  }
+  };
 
   const handlePrevClick = () => {
     setSolutionDisplay(false);
-    setCheckedItem('');
+    setCheckedItem("");
     setQuestionKey(prevQuestionKey);
-  }
+  };
 
   useEffect(() => {
-    setDisplay('opacity-0');
+    setDisplay("opacity-0");
     setSolutionDisplay(false);
     setCheckedItem('');
     setDisplay('opacity-100')
   }, [questionKey]);
-
-  const [display, setDisplay] = useState('opacity-0');
+  
+  const [display, setDisplay] = useState("opacity-0");
 
   return (
-
     <div className={`${display} max-w-3xl w-full px-16 bg-white border-solid border rounded-md m-auto py-4 transition-all duration-500`} id='QuestionDisplay'>
       <p className='text-lg font-bold underline-offset-2 underline'>{`${title} ${secondaryIndex + 1}/${totalQuestions}`}</p>
       <div className='flex justify-center fill-slate-400 text-slate-400 pb-4 text-sm'>
@@ -181,8 +183,5 @@ export default function QuestionDisplay({ questionKey = 'a1', setQuestionKey }) 
         <p className='hover:cursor-pointer' onClick={toggleSolutionDisplay}>{solutionDisplay ? '' : ''}</p>
       </section>
     </div>
-
-
-
-  )
+  );
 }

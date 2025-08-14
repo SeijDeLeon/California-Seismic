@@ -30,7 +30,7 @@ export const DefaultInput = ({ value, onChange, tooltip }) => {
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="Required"
-            className="rounded border-black px-2 w-1/3 border-b-4 bg-gray-100 text-end"
+            className="rounded border-black px-2 w-full border-b-4 bg-gray-100 text-end"
             type="number"
             min="0.01"
             max="100"
@@ -55,15 +55,18 @@ export const ListInput = ({ value, listItems, onChange, tooltip }) => {
     }, []);
 
     return (
-        <div ref={containerRef} className="relative w-1/3">
+        <div ref={containerRef} className="relative w-full">
             <button
                 type="button"
                 title={tooltip}
-                className="w-full border-b-1 bg-gray-100 px-2 text-left hover:bg-gray-300"
+                className="w-full border-b-1 bg-gray-100 px-2 text-left hover:bg-gray-300 pr-6" 
                 onClick={() => setShowList((prev) => !prev)}
             >
                 {value || "Select an option"}
             </button>
+            <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-black">
+                ▼
+            </span>
 
             {showList && (
                 <div className="absolute left-0 top-full mt-1 w-full bg-white rounded shadow z-10 overflow-y-auto text-xs">
