@@ -132,108 +132,129 @@ const DiaphragmInput = () => {
         <h1 className="text-2xl font-semibold mb-2 text-gray-800">
           Diaphragm Input
         </h1>
-        <div className="bg-white px-20 py-4 rounded shadow">
+        <div className="bg-white px-8 md:px-12 lg:px-16 py-6 rounded shadow w-full max-w-2xl mx-auto">
           <h2 className="text-lg font-medium mb-4">Inputs</h2>
-          <div className="space-y-4">
+        
+        <div className="grid grid-cols-[20rem_minmax(12rem,1fr)_3rem] items-center gap-y-3 gap-x-3">
             {["length", "width", "uniformWallForce"].map((key) => (
-              <div key={key} className="flex items-center justify-between">
-                <label className="w-40 text-left">{labels[key]}:</label>
-                <div className="flex items-center gap-2">
-                  <input
+                <React.Fragment key={key}>
+                <label className="text-left whitespace-nowrap">{labels[key]}:</label>
+                <input
                     type="number"
                     name={key}
                     value={inputs[key]}
                     onChange={handleInputChange}
-                    className="p-2 border border-gray-300 rounded w-32 text-right"
-                  />
-                  <span className="text-sm text-gray-600">
-                    {key === "uniformWallForce" ? "plf" : "ft"}
-                  </span>
-                </div>
-              </div>
+                    className="p-2 border border-gray-300 rounded text-right w-full"
+                />
+                <span className="text-sm text-gray-600">{key === "uniformWallForce" ? "plf" : "ft"}</span>
+                </React.Fragment>
             ))}
-
             {/* Show Right Wall Toggle */}
             <label
-              htmlFor="showRightWall"
-              className="flex items-center gap-2 cursor-pointer select-none"
+                htmlFor="showRightWall"
+                className="col-span-3 flex items-center gap-2 cursor-pointer select-none mt-1"
             >
-              <input
+                <input
                 type="checkbox"
                 id="showRightWall"
                 checked={inputs.showRightWall}
                 onChange={toggleRightWall}
-              />
-              <span className="text-md">Show Right Wall</span>
+                />
+                <span className="text-md">Show Right Wall</span>
             </label>
-          </div>
+        </div>
         </div>
         <div className="bg-white px-6 py-4 rounded shadow">
-          <h2 className="text-lg font-medium mb-4">Shear Wall</h2>
-          <div className="flex gap-4 mb-4">
-            {Object.keys(walls).map((wall) => (
-              <button
-                key={wall}
-                onClick={() => setActiveWall(wall)}
-                className={`px-4 py-2 border rounded ${
-                  activeWall === wall ? "bg-gray-300" : "bg-gray-100"
-                }`}
-              >
-                Wall Line {wall}
-              </button>
-            ))}
+  <h2 className="text-lg font-medium mb-3">Shear Wall</h2>
+
+  {/* Wall line tabs + add buttons */}
+  <div className="flex items-center gap-4 mb-4">
+  {/* Wall line tabs */}
+  <div className="flex items-center gap-4">
+    {Object.keys(walls).map((wallKey) => (
+      <button
+        key={wallKey}
+        onClick={() => setActiveWall(wallKey)}
+        className={`px-0 py-1 text-sm font-medium transition-colors underline-offset-8
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded-sm
+          ${
+            activeWall === wallKey
+              ? "text-gray-900 underline decoration-2"
+              : "text-gray-600 hover:text-gray-900 hover:underline"
+          }`}
+      >
+        Wall Line {wallKey}
+      </button>
+    ))}
+  </div>
+
+  {/* Add buttons on the right stay the same */}
+  <div className="ml-auto flex gap-2">
+    <button
+      onClick={() => addWallItem("wall segment")}
+      disabled={!canAddSegment()}
+      className={`px-3 py-1 border rounded text-sm ${
+        !canAddSegment() ? "bg-gray-200 text-gray-400 cursor-not-allowed" : ""
+      }`}
+    >
+      + Wall Segment
+    </button>
+    <button
+      onClick={() => addWallItem("wall opening")}
+      disabled={!canAddGap()}
+      className={`px-3 py-1 border rounded text-sm ${
+        !canAddGap() ? "bg-gray-200 text-gray-400 cursor-not-allowed" : ""
+      }`}
+    >
+      + Wall Opening
+    </button>
+  </div>
+</div>
+
+
+  {/* Items list with icon + type label */}
+  <div className="space-y-3">
+    {walls[activeWall]?.map((item, index) => {
+      const overLimit = isWallItemOverLimit(activeWall, index);
+      const isSegment = item.type === "wall segment";
+      return (
+        <div key={index} className="flex items-center gap-3">
+          {/* Icon */}
+         <span
+            className={`inline-block h-5 border-l-2 border-gray-800 ${item.type === "wall segment" ? "" : "border-dotted"}`}
+            aria-hidden
+        />
+          {/* Type label */}
+          <span className="text-xs text-gray-600 w-20 shrink-0">
+            {item.type === "wall segment" ? "Segment" : "Opening"}
+          </span>
+
+          {/* Value input */}
+          <input
+            type="number"
+            value={item.value}
+            onChange={(e) => handleWallSegmentChange(e, index)}
+            className={`p-2 border rounded w-32 text-right ${
+              overLimit ? "border-red-500 text-red-600" : "border-gray-300"
+            }`}
+          />
+          <span className="text-sm">ft</span>
+
+          {/* Remove */}
+          {index !== 0 && (
             <button
-              onClick={() => addWallItem("wall segment")}
-              disabled={!canAddSegment()}
-              className={`ml-auto px-3 py-1 border rounded text-sm ${
-                !canAddSegment()
-                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  : ""
-              }`}
+              onClick={() => removeSegment(index)}
+              className="text-red-500 px-2 py-1 text-sm"
             >
-              + Wall Segment
+              - Remove
             </button>
-            <button
-              onClick={() => addWallItem("wall opening")}
-              disabled={!canAddGap()}
-              className={`px-3 py-1 border rounded text-sm ${
-                !canAddGap()
-                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  : ""
-              }`}
-            >
-              + Wall Opening
-            </button>
-          </div>
-          <div className="space-y-3">
-            {walls[activeWall]?.map((item, index) => {
-              const overLimit = isWallItemOverLimit(activeWall, index);
-              return (
-                <div key={index} className="flex items-center gap-2">
-                  <input
-                    type="number"
-                    value={item.value}
-                    onChange={(e) => handleWallSegmentChange(e, index)}
-                    className={`p-2 border rounded w-32 text-right ${
-                      overLimit
-                        ? "border-red-500 text-red-600"
-                        : "border-gray-300"
-                    }`}
-                  />
-                  <span className="text-sm">ft</span>
-                  {index !== 0 && (
-                    <button
-                      onClick={() => removeSegment(index)}
-                      className="text-red-500 px-2 py-1 text-sm"
-                    >
-                      - Remove
-                    </button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          )}
         </div>
+      );
+    })}
+  </div>
+</div>
+
       </div>
     </div>
   );
