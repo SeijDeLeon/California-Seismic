@@ -6,6 +6,7 @@ import { BentoContainer } from '../../common/BentoContainer';
 import InputTable from './InputSection';
 import RenderSVG from './RenderSVG';
 import DisplacementPlot from './Plot';
+import BaseShearOutput from './BaseShearOutput';
 import { useBaseShearState } from './useBaseShearState';
 
 const BaseShearApp = () => {
@@ -48,13 +49,7 @@ const BaseShearApp = () => {
   }, [inputs.selectedRisk, setInputs]);
 
   const totalBaseShear = (results || []).find(result => result.key === 'V')?.value;
-  
-  // The values that would want to be shown in solutions bento
-  // const keysToShow = [
-  //   'Fv', 'Fa', 'SMS', 'SM1', 'SDS', 'SD1', 'Ts',
-  //   'Cs_initial', 'Cs_min', 'Cs_max', 'Cs_final'
-  //   ]
-  
+
   return (
     <BentoContainer title="Base Shear Calculator">
       <BentoBox title="USER INPUTS:">
@@ -144,10 +139,10 @@ const BaseShearApp = () => {
           inputType="default"
           tooltip="Estimated vibration period of the structure in seconds. Typical range is 0.1 to 3.0 seconds depending on height and stiffness."
         />
-        <button onClick={resetInputs} className="my-3 mb-5 font-bold w-auto rounded hover:text-red-700 text-sm self-end">
+        <button onClick={resetInputs} className="my-3 mb-5 font-bold w-auto rounded hover:text-red-700 text-xs sm:text-sm self-end px-2 py-1">
           Reset All Inputs
         </button>
-        <h5 className="font-semibold mb-2 text-md">Building Properties:</h5>
+        <h5 className="font-semibold mb-2 text-sm sm:text-md">Building Properties:</h5>
         <InputTable
           floors={updatedFloors}
           addFloor={addFloor}
@@ -158,14 +153,33 @@ const BaseShearApp = () => {
 
       <BentoBox title="DIAGRAM:">
         <RenderSVG
-        floors={updatedFloors}
-        forces={results.find(result => result.key === 'Fvx')?.value || []}
-        storyVs={results.find(result => result.key === 'storyVs')?.value || []}
-        totalBaseShear={totalBaseShear}
-        totalHeight={results.find(result => result.key === 'totalHeight')?.value || 0}
+          floors={updatedFloors}
+          forces={results.find(result => result.key === 'Fvx')?.value || []}
+          storyVs={results.find(result => result.key === 'storyVs')?.value || []}
+          totalBaseShear={totalBaseShear}
+          totalHeight={results.find(result => result.key === 'totalHeight')?.value || 0}
         />
+        {/* Side-by-side plots */}
+        <div className="w-full flex flex-col items-center px-2 sm:px-4 mt-6">
+          <h4 className="font-semibold mb-2 text-sm sm:text-md">Plots:</h4>
+          <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-6">
+            <div className="w-full lg:w-1/2">
+              <DisplacementPlot
+                floors={updatedFloors}
+                results={results}
+                displacementType="horizontal"
+              />
+            </div>
+            <div className="w-full lg:w-1/2">
+              <DisplacementPlot
+                floors={updatedFloors}
+                results={results}
+                displacementType="vertical"
+              />
+            </div>
+          </div>
+        </div>
       </BentoBox>
-
       <BentoBox title="SOLUTIONS:">
         {(
           !inputs.shortPeriodSpectralAcceleration ||
@@ -176,51 +190,8 @@ const BaseShearApp = () => {
             Please provide Short Period Acceleration (Ss), Long Period Acceleration (S1), and Long Period Transition Period (TL) to see results.
           </p>
         ) : (
-          <section className="flex gap-1 flex-col text-sm text-gray-700 justify-start items-start align-start pl-3">
-            {/* {results
-              .filter(({ key }) => keysToShow.includes(key))
-              .map(({ key, value, label }) => (
-                <EquationFormat
-                  key={key}
-                  value={`\\(${label} =\\)`}
-                  result={typeof value === 'number' ? value.toFixed(2) : value}
-                />
-              ))}
-            {results.filter(({ key }) => key === 'SDC').map(({ key, value }) => (
-              <EquationFormat
-                key={key}
-                value={`Seismic Design Category (${key}) =`}
-                result={value || 'N/A'}
-              />
-            ))} */}
-            <p className="font-bold text-2xl">Total Base Shear (V): {
-              typeof totalBaseShear === 'number' && !isNaN(totalBaseShear)
-                ? `${totalBaseShear.toFixed(2)} kips`
-                : 'N/A'
-            }</p>
-          </section>
+          <BaseShearOutput results={results} inputs={inputs} />
         )}
-
-        {/* Side-by-side plots */}
-        <div className="w-full flex flex-col items-center px-4 mt-6">
-          <h4 className="font-semibold mb-2 text-md">Plots:</h4>
-          <div className="w-full flex justify-center items-start gap-6">
-            <div className="w-1/2">
-              <DisplacementPlot
-                floors={updatedFloors}
-                results={results}
-                displacementType="horizontal"
-              />
-            </div>
-            <div className="w-1/2">
-              <DisplacementPlot
-                floors={updatedFloors}
-                results={results}
-                displacementType="vertical"
-              />
-            </div>
-          </div>
-        </div>
       </BentoBox>
 
     </BentoContainer>
