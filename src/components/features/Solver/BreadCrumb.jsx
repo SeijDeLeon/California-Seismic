@@ -4,10 +4,15 @@ import calculateCvx from '../../../assets/data/calculations/calculateCvx';
 import calculateFvx from '../../../assets/data/calculations/calculateFvx';
 import calculateStiffness from '../../../assets/data/calculations/calculateStiffness';
 import calculateFundamentalPeriod from '../../../assets/data/calculations/calculateFundamentalPeriod';
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { requiredFields } from './Solver';
 
 const BreadCrumb = ({ sequence, value, setValue, inputs, setInputs, isValueValidated }) => {
+  const [invalidStepIndexes, setinvalidStepIndexes] = useState([]);
+  const firstInvalid = invalidStepIndexes.length ?
+    Math.min(...invalidStepIndexes) :
+    null;
+
   const parseArrayInput = (input) => {
     try {
       return JSON.parse(input);
@@ -60,13 +65,22 @@ const BreadCrumb = ({ sequence, value, setValue, inputs, setInputs, isValueValid
     }
   }
 
+  useEffect(() => {
+    const index = sequence.indexOf(value);
+    if (index !== sequence.length - 1) {
+      isValueValidated ?
+        setinvalidStepIndexes(prev => prev.filter(idx => idx !== index)) :
+        setinvalidStepIndexes(prev => [...prev, index])
+    }
+  }, [isValueValidated])
+
   return (
     <div className='text-sm text-sky-800 mb-3'>
       Sequence:{" "}
       {sequence.map((step, idx) => (
         <Fragment key={step}>
           <button
-            disabled={!isValueValidated && idx > sequence.indexOf(value)}
+            disabled={firstInvalid !== null && idx > firstInvalid}
             onClick={() => changeStep(step)}
             className={step === value ? "font-bold" : "disabled:opacity-70"}
           >
