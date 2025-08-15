@@ -16,9 +16,6 @@ export default function DiaphragmViewer({
   const wallB = getWallByName("B");
   const wallC = getWallByName("C");
 
-  // or by index (and map this)
-  const firstWall = inputs.wallLines[0];
-
   // old usestates
   // const [wTop, setwTop] = useState(100);
   // const [leftWidthFt, setLeftWidthFt] = useState(50);
@@ -776,7 +773,13 @@ export default function DiaphragmViewer({
         showRightWall={showRightWall}
       />
 
-      <CollectorPlots />
+      <CollectorPlots
+        walls={inputs.wallLines}
+        uniformForce={wTop}
+        leftWidthFt={leftWidthFt}
+        rightWidthFt={rightWidthFt}
+        heightFt={heightFt}
+      />
     </div>
   );
 }
