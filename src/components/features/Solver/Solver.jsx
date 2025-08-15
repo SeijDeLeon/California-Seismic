@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BreadCrumb from './BreadCrumb';
 import InputBlock from './InputBlock';
 import OutputBlock from './OutputBlock';
 import solverIcon from "./solverIcon.png"
@@ -60,7 +61,7 @@ const Solver = () => {
     Ie: '',
     R: '',
     T0: '',
-    TL: '',
+    TL: '12',
     Cs: '',
     weights: '',
     heights: '',
@@ -77,34 +78,58 @@ const Solver = () => {
   for (const field in defaultInputs) {
     defaultInputsValidated[field] = false;
   }
+  defaultInputsValidated["TL"] = true;
+
   const [inputs, setInputs] = useState(defaultInputs);
   const [inputsValidated, setInputsValidated] = useState(defaultInputsValidated);
+  const [sequence, setSequence] = useState([value]);
 
-  const resetInputs = () => {
+  //restart everything
+  const hardReset = (newValue) => {
     setInputs(defaultInputs);
     setInputsValidated(defaultInputsValidated);
+    setValue(newValue);
+    setSequence([newValue]);
   }
 
   const handleTabChange = (tab) => {
     if (tab !== activeTab) {
       setActiveTab(tab);
-      setValue(tabOptions[tab][0].id);
-      resetInputs();
+      hardReset(tabOptions[tab][0].id);
     }
   }
 
   const handleValueChange = (newValue) => {
     if (newValue !== value) {
-      setValue(newValue);
-      resetInputs();
+      hardReset(newValue);
     }
   }
 
+  //restart everything, but don't wipe out the fields that are currently displayed
+  const softReset = (name, fieldValue, isValid) => {
+    const visibleInputs = requiredFields[value].reduce((acc, field) => {
+      acc[field] = inputs[field];
+      return acc;
+    }, {})
+    const visibleInputsValidated = requiredFields[value].reduce((acc, field) => {
+      acc[field] = inputsValidated[field];
+      return acc;
+    }, {})
+    setInputs({ ...defaultInputs, ...visibleInputs, [name]: fieldValue });
+    setInputsValidated({ ...defaultInputsValidated, ...visibleInputsValidated, [name]: isValid });
+    setSequence([value]);
+  }
+
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value: fieldValue } = e.target;
     const isValid = e.target.checkValidity();
-    setInputs({ ...inputs, [name]: value });
-    setInputsValidated({ ...inputsValidated, [name]: isValid });
+    if (!sequence.includes(name)) {
+      setInputs({ ...inputs, [name]: fieldValue });
+      setInputsValidated({ ...inputsValidated, [name]: isValid });
+    }
+    else { //result from previous calculation isn't used anymore, so reset
+      softReset(name, fieldValue, isValid);
+    }
   };
 
   const getUseCases = (value) => {
@@ -115,18 +140,28 @@ const Solver = () => {
   }
 
   const applyUseCase = (value, result, newValue) => {
-    setInputs({ ...defaultInputs, [value]: result || '' });
-    setInputsValidated({ ...defaultInputsValidated, [value]: !!result });
+    setInputs({ ...inputs, [value]: result || '' });
+    setInputsValidated({ ...inputsValidated, [value]: !!result });
     setValue(newValue);
+    if (!sequence.includes(newValue)) {
+      setSequence(prev => [...prev, newValue]);
+    }
   }
 
   return (
     <main className="text-start px-4 mx-auto my-8 max-w-screen-xl min-h-[calc(92vh-120px)] flex flex-col">
+      <BreadCrumb
+        sequence={sequence}
+        value={value}
+        setValue={setValue}
+        inputs={inputs}
+        setInputs={setInputs}
+        isValueValidated={requiredFields[value].every(field => inputsValidated[field] === true)}
+      />
       <h1 className="flex items-center gap-2 font-semibold text-2xl text-sky-800 mb-3">
         <img src={solverIcon} alt="solver icon" />
         Calculator
       </h1>
-
       <ul className="flex space-x-5">
         {Object.keys(tabOptions).map(tab =>
           <li key={tab}>

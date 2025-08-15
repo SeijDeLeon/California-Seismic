@@ -78,7 +78,7 @@ const OutputBlock = ({ value, valueLabel, inputs, isValueValidated, useCases, ap
         </pre>
       </div>
 
-      {useCases && useCases.length > 0 &&
+      {isValueValidated && useCases && useCases.length > 0 &&
         <div className='mt-8'>
           <p className='text-gray-500 mb-2'>Uses of {valueLabel}</p>
           {useCases.map(option => (
