@@ -3,11 +3,11 @@ import { MathJax } from 'better-react-mathjax';
 const SolutionCs = ({ inputs, result }) => {
   const { SDS, SD1, T, Ie, R, T0, TL } = inputs;
 
-  let filledEquation = '';
-  let explanation = '';
-  let usedEquation = '';
-
+  let filledEquation = `C_s = \\frac{${SDS} \\cdot ${Ie}}{${R}}`;
+  let explanation = 'Found using Equation 12.8-2:';
+  let usedEquation = '12.8-2';
   let Cs = SDS / (R / Ie);
+
   if (Cs < SD1 / (T * (R / Ie))) {
     Cs = SD1 / (T * (R / Ie));
     filledEquation = `C_s = \\frac{${SD1}}{${T} \\cdot \\frac{${R}}{${Ie}}}`;
