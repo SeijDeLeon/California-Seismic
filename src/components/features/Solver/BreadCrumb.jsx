@@ -45,7 +45,7 @@ const BreadCrumb = ({ sequence, value, setValue, inputs, setInputs, isValueValid
         return calculateStiffness(...parsedFields).toFixed(4);
       case "fundamentalPeriod":
         return calculateFundamentalPeriod(...parsedFields).toFixed(4);
-      default: return [null, null]
+      default: return null
     }
   }
 
