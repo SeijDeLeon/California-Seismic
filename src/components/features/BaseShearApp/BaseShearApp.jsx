@@ -130,10 +130,6 @@ const BaseShearApp = React.memo(() => {
             "Steel Moment Frame (R = 5.5)",
             "Braced Frame (R = 6.0)",
             "Special Steel Moment Frame (R = 8.0)",
-            "Special Reinforced Concrete Shear Wall (R = 8.0)",
-            "Special Steel Plate Shear Wall (R = 8.0)",
-            "Buckling-Restrained Braced Frame (R = 8.0)",
-            "Dual System (R = 8.0)",
             "Base Isolation (R = 10.0)"
           ]}
           onChange={(val) => {
@@ -201,9 +197,9 @@ const BaseShearApp = React.memo(() => {
       </BentoBox>
 
       <BentoBox title="DIAGRAM:">
-        <div className="relative">
+        <div className="relative overflow-hidden">
           {!isUltraWide && (
-            <div className="absolute top-0 -right-4 z-10">
+            <div className="absolute top-0 -right-2 z-10">
               <button
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
                 className={`bg-blue-500 hover:bg-blue-600 text-white p-2 shadow-lg text-sm font-medium flex flex-col items-center gap-2 transition-all duration-300 ease-in-out
@@ -238,14 +234,14 @@ const BaseShearApp = React.memo(() => {
               <div className="w-full flex flex-col items-center px-2 sm:px-4 mt-6">
                 <h4 className="font-semibold mb-2 text-sm sm:text-md">Plots:</h4>
                 <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-4 lg:gap-6">
-                  <div className="w-full lg:w-1/2">
+                  <div className="w-full h-full lg:w-1/2">
                     <DisplacementPlot
                       floors={updatedFloors}
                       results={results}
                       displacementType="horizontal"
                     />
                   </div>
-                  <div className="w-full lg:w-1/2">
+                  <div className="w-full h-full lg:w-1/2">
                     <DisplacementPlot
                       floors={updatedFloors}
                       results={results}
@@ -258,20 +254,22 @@ const BaseShearApp = React.memo(() => {
           )}
 
           {!isUltraWide && isDrawerOpen && (
-            <div className={`absolute top-0 right-0 w-full max-w-4xl bg-white shadow-2xl z-20 transform transition-all duration-300 ease-in-out min-h-full ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'} border-2 border-blue-200 rounded-lg`}>
-              <div className="bg-blue-50 px-4 py-3 border-b border-blue-200 flex justify-between items-center">
-                <h3 className="text-blue-600 text-lg font-semibold">Base Shear Analysis Results</h3>
-                <button
-                  onClick={() => setIsDrawerOpen(false)}
-                  className="text-blue-600 hover:text-blue-800 p-1 rounded-full hover:bg-blue-100 transition-colors"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <div className="overflow-y-auto bg-white">
-                <div className="p-4">
+            <div className="fixed inset-y-0 right-0 z-50 flex">
+              <div
+                className={`relative w-full max-w-2xl bg-white shadow-2xl border-2 border-blue-200 flex flex-col`}
+              >
+                <div className="bg-blue-50 px-4 py-3 border-b border-blue-200 flex justify-between items-center flex-shrink-0">
+                  <h3 className="text-blue-600 text-lg font-semibold">Base Shear Analysis Results</h3>
+                  <button
+                    onClick={() => setIsDrawerOpen(false)}
+                    className="text-blue-600 hover:text-blue-800 p-1 rounded-full hover:bg-blue-100 transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="flex-1 overflow-y-auto overscroll-y-contain touch-pan-y bg-white p-4">
                   <BaseShearOutput results={results} inputs={inputs} isLoading={isLoading} />
                 </div>
               </div>
