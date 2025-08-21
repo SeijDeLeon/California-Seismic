@@ -41,7 +41,10 @@ const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChan
         as="div"
         className="relative"
       >
-        <Listbox.Button className="text-3xl font-bold flex items-center justify-between w-full">
+        <Listbox.Button
+          data-testid="value-to-calculate"
+          className="text-3xl font-bold flex items-center justify-between w-full"
+        >
           {options.find(option => option.id === value).label}
           <ChevronDownIcon
             className="h-5 w-5 text-gray-400"
@@ -67,6 +70,7 @@ const InputBlock = ({ value, handleValueChange, options, inputs, handleInputChan
           return (
             <div key={field} className="flex flex-col-reverse gap-y-2">
               <input
+                role="textbox"
                 id={field}
                 name={field}
                 value={inputs[field]}
