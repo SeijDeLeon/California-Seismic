@@ -1,23 +1,27 @@
-import calculateCs from '../../../assets/data/calculations/calculateCs';
+import calculateCs from '../../../assets/data/calculations/CalculateCsParameters';
 import calculateV from '../../../assets/data/calculations/calculateV';
 import calculateCvx from '../../../assets/data/calculations/calculateCvx';
 import calculateFvx from '../../../assets/data/calculations/calculateFvx';
 
 const interpolate = (value, valueArray, map, siteClass) => {
-  if (value <= valueArray[0]) return map[valueArray[0]][siteClass];
-  if (value >= valueArray[valueArray.length - 1]) return map[valueArray[valueArray.length - 1]][siteClass];
+  const numValue = parseFloat(value);
+  if (isNaN(numValue)) return null;
+  
+  if (numValue <= valueArray[0]) return map[valueArray[0]][siteClass];
+  if (numValue >= valueArray[valueArray.length - 1]) return map[valueArray[valueArray.length - 1]][siteClass];
 
   for (let i = 0; i < valueArray.length - 1; i++) {
-    if (value > valueArray[i] && value < valueArray[i + 1]) {
+    if (numValue > valueArray[i] && numValue < valueArray[i + 1]) {
       const slope = (map[valueArray[i + 1]][siteClass] - map[valueArray[i]][siteClass]) / 
                     (valueArray[i + 1] - valueArray[i]);
-      return map[valueArray[i]][siteClass] + slope * (value - valueArray[i]);
+      return map[valueArray[i]][siteClass] + slope * (numValue - valueArray[i]);
     }
   }
   return null;
 }
 
 const getFv = (s1, siteClass) => {
+    const numS1 = parseFloat(s1);
     const s1Values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6];
     const FvMap = {
       0.1: { A: 0.8, B: 0.8, C: 1.5, D: 2.4, E: 4.2, F: null },
@@ -27,10 +31,11 @@ const getFv = (s1, siteClass) => {
       0.5: { A: 0.8, B: 0.8, C: 1.5, D: 1.8, E: null, F: null },
       0.6: { A: 0.8, B: 0.8, C: 1.4, D: 1.7, E: null, F: null },
     };
-    return FvMap[s1]?.[siteClass] ?? interpolate(s1, s1Values, FvMap, siteClass);
+    return FvMap[numS1]?.[siteClass] ?? interpolate(numS1, s1Values, FvMap, siteClass);
 }
 
 const getFa = (Ss, siteClass) => {
+    const numSs = parseFloat(Ss);
     const SsValues = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5];
     const FaMap = {
       0.25: { A: 0.8, B: 0.9, C: 1.3, D: 1.6, E: 2.4, F: null },
@@ -41,7 +46,7 @@ const getFa = (Ss, siteClass) => {
       1.5: { A: 0.8, B: 0.9, C: 1.2, D: 1.0, E: null, F: null },
     };
 
-    return FaMap[Ss]?.[siteClass] ?? interpolate(Ss, SsValues, FaMap, siteClass);
+    return FaMap[numSs]?.[siteClass] ?? interpolate(numSs, SsValues, FaMap, siteClass);
 }
 
 const getSMS = (Fa, Ss) => {

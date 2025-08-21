@@ -9,34 +9,35 @@ export const renderArrow = ({
   labelPosition = 'end',
   labelOffsetX = 0,
   scaleFactor = 100,
-  minLength = 15,
-  maxLength = 100
+  minLength = 10,
+  maxLength = 100,
+  onMetrics,             
 }) => {
   const rawLength = forceValue / scaleFactor;
   const arrowLength = Math.min(maxLength, Math.max(minLength, rawLength));
 
   const xStart = direction === 'left' ? xEnd + arrowLength : xEnd - arrowLength;
 
-  // Position label depending on alignment
+  // Label positioning
   const textOffset = 10;
   let labelX = xEnd;
   let anchor = 'start';
 
-   if (labelPosition === 'start') {
-        labelX = direction === 'left' ? xStart + textOffset : xStart - textOffset;
-        anchor = direction === 'left' ? 'start' : 'end';
-    } else if (labelPosition === 'end') {
-        labelX = direction === 'left' ? xEnd - textOffset : xEnd + textOffset;
-        anchor = direction === 'left' ? 'end' : 'start';
-    } else if (labelPosition === 'middle') {
-        if (direction === 'left') {
-            labelX += (labelOffsetX + arrowLength);
-        }
-        else {
-            labelX = (xStart + xEnd) / 2;
-        }
-        anchor = 'middle';
-    }
+  if (labelPosition === 'start') {
+    labelX = direction === 'left' ? xStart + textOffset : xStart - textOffset;
+    anchor = direction === 'left' ? 'start' : 'end';
+  } else if (labelPosition === 'end') {
+    labelX = direction === 'left' ? xEnd - textOffset : xEnd + textOffset;
+    anchor = direction === 'left' ? 'end' : 'start';
+  } else if (labelPosition === 'middle') {
+    labelX = (xStart + xEnd) / 2 + (direction === 'left' ? labelOffsetX : 0);
+    anchor = 'middle';
+  }
+
+  // Report metrics to caller if provided
+  if (typeof onMetrics === 'function') {
+    onMetrics({ xStart, xEnd, y, arrowLength, direction });
+  }
 
   return (
     <>
@@ -49,13 +50,7 @@ export const renderArrow = ({
         strokeWidth="2"
         markerEnd="url(#arrowhead)"
       />
-      <text
-        x={labelX}
-        y={y}
-        fontSize="11"
-        textAnchor={anchor}
-        dominantBaseline="middle"
-      >
+      <text x={labelX} y={y} fontSize="11" textAnchor={anchor} dominantBaseline="middle">
         {label}
       </text>
     </>
