@@ -2,13 +2,15 @@ import React from "react";
 
 function Step({ number, title, children }) {
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-4 border p-4 rounded-lg">
       <div className="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full text-sm font-semibold">
         {number}
       </div>
-      <div>
-        <h3 className="text-base font-medium">{title}</h3>
-        <div className="mt-1 text-sm text-muted-foreground">{children}</div>
+      <div className="flex-1">
+        <h3 className="text-base font-medium text-left">{title}</h3>
+        <div className="mt-1 text-sm text-muted-foreground text-left">
+          {children}
+        </div>
       </div>
     </div>
   );
