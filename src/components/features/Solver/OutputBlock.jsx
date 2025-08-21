@@ -67,7 +67,9 @@ const OutputBlock = ({ value, valueLabel, inputs, isValueValidated, useCases, ap
   return (
     <section className="py-6 lg:pl-6 xl:pl-12">
       <p className='text-gray-500'>{valueLabel} Output</p>
-      <output className='text-3xl font-bold'>{formattedResult || "-"}</output>
+      <output data-testid="output" className='text-3xl font-bold'>
+        {formattedResult || "-"}
+      </output>
       <div className='mt-8'>
         {solution}
         <p className="text-gray-500 mt-8 mb-2">Code Output</p>
@@ -76,7 +78,7 @@ const OutputBlock = ({ value, valueLabel, inputs, isValueValidated, useCases, ap
         </pre>
       </div>
 
-      {useCases && useCases.length > 0 &&
+      {isValueValidated && useCases && useCases.length > 0 &&
         <div className='mt-8'>
           <p className='text-gray-500 mb-2'>Uses of {valueLabel}</p>
           {useCases.map(option => (

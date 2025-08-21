@@ -1,7 +1,6 @@
 import DiaphragmViewer from "../components/features/DiaphragmApp/DiaphragmViewer.jsx";
-import DiaphragmInput from "../components/features/DiaphragmApp/DiaphragmInput.jsx";
 import Output from "../components/features/DiaphragmAnalysis/Output.jsx";
-
+import DiaphragmInput from "../components/features/DiaphragmApp/DiaphragmInput";
 import { useDiaphragm } from "../components/features/DiaphragmApp/useDiaphragm.jsx";
 
 export default function DiaphragmApp() {
@@ -15,7 +14,6 @@ export default function DiaphragmApp() {
     solution,
     setSolution,
   } = useDiaphragm();
-
   return (
     <>
       {/* Input */}

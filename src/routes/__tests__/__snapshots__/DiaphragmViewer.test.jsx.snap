@@ -1,0 +1,434 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DiaphragmViewer SVG rendering SVG markup matches snapshot 1`] = `
+<svg
+  class="w-full h-auto bg-white pt-8 max-h-[600px]"
+  data-testid="svg-plot"
+  preserveAspectRatio="xMidYMid meet"
+  viewBox="0 0 270 300"
+>
+  <defs>
+    <marker
+      id="arrow"
+      markerHeight="10"
+      markerWidth="10"
+      orient="auto-start-reverse"
+      refX="5"
+      refY="5"
+    >
+      <path
+        d="M0,0 L10,5 L0,10 z"
+        fill="black"
+      />
+    </marker>
+  </defs>
+  <rect
+    data-testid="rect-A"
+    fill="none"
+    height="90"
+    stroke="#000"
+    stroke-width="2"
+    width="150"
+    x="60"
+    y="130"
+  />
+  <rect
+    data-testid="rect-B"
+    fill="none"
+    height="80"
+    stroke="#000"
+    stroke-width="2"
+    width="140"
+    x="65"
+    y="135"
+  />
+  <line
+    marker-end="url(#arrow)"
+    marker-start="url(#arrow)"
+    stroke="gray"
+    x1="65"
+    x2="205"
+    y1="240"
+    y2="240"
+  />
+  <text
+    fill="gray"
+    font-size="12"
+    text-anchor="middle"
+    x="135"
+    y="255"
+  >
+    50
+     ft
+  </text>
+  <line
+    marker-end="url(#arrow)"
+    marker-start="url(#arrow)"
+    stroke="gray"
+    x1="230"
+    x2="230"
+    y1="135"
+    y2="215"
+  />
+  <text
+    fill="gray"
+    font-size="12"
+    text-anchor="middle"
+    transform="rotate(-90, 235, 175)"
+    x="235"
+    y="185"
+  >
+    30
+     ft
+  </text>
+  <line
+    stroke="black"
+    stroke-width="1"
+    x1="60"
+    x2="210"
+    y1="90"
+    y2="90"
+  />
+  <line
+    marker-end="url(#arrow)"
+    stroke="black"
+    x1="60"
+    x2="60"
+    y1="90"
+    y2="120"
+  />
+  <line
+    marker-end="url(#arrow)"
+    stroke="black"
+    x1="135"
+    x2="135"
+    y1="90"
+    y2="120"
+  />
+  <line
+    marker-end="url(#arrow)"
+    stroke="black"
+    x1="210"
+    x2="210"
+    y1="90"
+    y2="120"
+  />
+  <line
+    stroke="rgba(128, 128, 128, 1)"
+    stroke-dasharray="4,4"
+    stroke-width="1"
+    x1="60"
+    x2="60"
+    y1="60"
+    y2="90"
+  />
+  <text
+    fill="rgba(128, 128, 128, 1)"
+    font-size="12"
+    text-anchor="middle"
+    x="60"
+    y="55"
+  >
+    Wall A
+  </text>
+  <line
+    stroke="rgba(128, 128, 128, 1)"
+    stroke-dasharray="4,4"
+    stroke-width="1"
+    x1="210"
+    x2="210"
+    y1="60"
+    y2="90"
+  />
+  <text
+    fill="rgba(128, 128, 128, 1)"
+    font-size="12"
+    text-anchor="middle"
+    x="210"
+    y="55"
+  >
+    Wall B
+  </text>
+  <text
+    fill="black"
+    font-size="12"
+    text-anchor="middle"
+    x="135"
+    y="80"
+  >
+    W = 
+    200
+     plf
+  </text>
+  <line
+    stroke="rgba(128, 128, 128, 1)"
+    stroke-dasharray="4,4"
+    stroke-width="1"
+    x1="30"
+    x2="60"
+    y1="130"
+    y2="130"
+  />
+  <text
+    dominant-baseline="middle"
+    fill="rgba(128, 128, 128, 1)"
+    font-size="12"
+    text-anchor="end"
+    x="25"
+    y="130"
+  >
+    1
+  </text>
+  <line
+    stroke="rgba(128, 128, 128, 1)"
+    stroke-dasharray="4,4"
+    stroke-width="1"
+    x1="30"
+    x2="60"
+    y1="220"
+    y2="220"
+  />
+  <text
+    dominant-baseline="middle"
+    fill="rgba(128, 128, 128, 1)"
+    font-size="12"
+    text-anchor="end"
+    x="25"
+    y="220"
+  >
+    2
+  </text>
+</svg>
+`;
+
+exports[`DiaphragmViewer SVG rendering matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col justify-center items-center p-6 max-w-screen-lg mx-auto"
+  >
+    <button
+      class="mb-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+    >
+      Add Right Wall
+    </button>
+    <div
+      class="flex gap-3 mb-6"
+    >
+      <button
+        class="px-4 py-2 rounded bg-gray-200 hover:bg-blue-300"
+      >
+        Wall A
+      </button>
+      <button
+        class="px-4 py-2 rounded bg-gray-200 hover:bg-blue-300"
+      >
+        Wall B
+      </button>
+    </div>
+    <div
+      class="w-full mb-4"
+    >
+      <svg
+        class="w-full h-auto bg-white pt-8 max-h-[600px]"
+        data-testid="svg-plot"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 270 300"
+      >
+        <defs>
+          <marker
+            id="arrow"
+            markerHeight="10"
+            markerWidth="10"
+            orient="auto-start-reverse"
+            refX="5"
+            refY="5"
+          >
+            <path
+              d="M0,0 L10,5 L0,10 z"
+              fill="black"
+            />
+          </marker>
+        </defs>
+        <rect
+          data-testid="rect-A"
+          fill="none"
+          height="90"
+          stroke="#000"
+          stroke-width="2"
+          width="150"
+          x="60"
+          y="130"
+        />
+        <rect
+          data-testid="rect-B"
+          fill="none"
+          height="80"
+          stroke="#000"
+          stroke-width="2"
+          width="140"
+          x="65"
+          y="135"
+        />
+        <line
+          marker-end="url(#arrow)"
+          marker-start="url(#arrow)"
+          stroke="gray"
+          x1="65"
+          x2="205"
+          y1="240"
+          y2="240"
+        />
+        <text
+          fill="gray"
+          font-size="12"
+          text-anchor="middle"
+          x="135"
+          y="255"
+        >
+          50 ft
+        </text>
+        <line
+          marker-end="url(#arrow)"
+          marker-start="url(#arrow)"
+          stroke="gray"
+          x1="230"
+          x2="230"
+          y1="135"
+          y2="215"
+        />
+        <text
+          fill="gray"
+          font-size="12"
+          text-anchor="middle"
+          transform="rotate(-90, 235, 175)"
+          x="235"
+          y="185"
+        >
+          30 ft
+        </text>
+        <line
+          stroke="black"
+          stroke-width="1"
+          x1="60"
+          x2="210"
+          y1="90"
+          y2="90"
+        />
+        <line
+          marker-end="url(#arrow)"
+          stroke="black"
+          x1="60"
+          x2="60"
+          y1="90"
+          y2="120"
+        />
+        <line
+          marker-end="url(#arrow)"
+          stroke="black"
+          x1="135"
+          x2="135"
+          y1="90"
+          y2="120"
+        />
+        <line
+          marker-end="url(#arrow)"
+          stroke="black"
+          x1="210"
+          x2="210"
+          y1="90"
+          y2="120"
+        />
+        <line
+          stroke="rgba(128, 128, 128, 1)"
+          stroke-dasharray="4,4"
+          stroke-width="1"
+          x1="60"
+          x2="60"
+          y1="60"
+          y2="90"
+        />
+        <text
+          fill="rgba(128, 128, 128, 1)"
+          font-size="12"
+          text-anchor="middle"
+          x="60"
+          y="55"
+        >
+          Wall A
+        </text>
+        <line
+          stroke="rgba(128, 128, 128, 1)"
+          stroke-dasharray="4,4"
+          stroke-width="1"
+          x1="210"
+          x2="210"
+          y1="60"
+          y2="90"
+        />
+        <text
+          fill="rgba(128, 128, 128, 1)"
+          font-size="12"
+          text-anchor="middle"
+          x="210"
+          y="55"
+        >
+          Wall B
+        </text>
+        <text
+          fill="black"
+          font-size="12"
+          text-anchor="middle"
+          x="135"
+          y="80"
+        >
+          W = 200 plf
+        </text>
+        <line
+          stroke="rgba(128, 128, 128, 1)"
+          stroke-dasharray="4,4"
+          stroke-width="1"
+          x1="30"
+          x2="60"
+          y1="130"
+          y2="130"
+        />
+        <text
+          dominant-baseline="middle"
+          fill="rgba(128, 128, 128, 1)"
+          font-size="12"
+          text-anchor="end"
+          x="25"
+          y="130"
+        >
+          1
+        </text>
+        <line
+          stroke="rgba(128, 128, 128, 1)"
+          stroke-dasharray="4,4"
+          stroke-width="1"
+          x1="30"
+          x2="60"
+          y1="220"
+          y2="220"
+        />
+        <text
+          dominant-baseline="middle"
+          fill="rgba(128, 128, 128, 1)"
+          font-size="12"
+          text-anchor="end"
+          x="25"
+          y="220"
+        >
+          2
+        </text>
+      </svg>
+    </div>
+    <div
+      data-testid="mock-chordplots"
+    />
+    <div
+      data-testid="mock-collectorplots"
+    />
+  </div>
+</DocumentFragment>
+`;
